@@ -13,6 +13,16 @@ import run
 
 
 class RunnerTests(unittest.TestCase):
+    def test_chunked_add_handles_tail_and_oversized_block(self):
+        for block in (1, 2, 4, 16):
+            with self.subTest(block=block):
+                self.assertEqual(run.chunked_add([1, -2, 3], [4, 5, -6], block), [5, 3, -3])
+
+    def test_chunked_add_rejects_invalid_arguments(self):
+        for left, right, block in (([1], [2], 0), ([1], [2], -1), ([1], [], 4)):
+            with self.subTest(left=left, right=right, block=block), self.assertRaises(ValueError):
+                run.chunked_add(left, right, block)
+
     def test_tiled_matmul_handles_partial_tiles(self):
         rng = random.Random(41)
         for m, n, k in ((1, 1, 1), (2, 7, 3), (9, 5, 11)):

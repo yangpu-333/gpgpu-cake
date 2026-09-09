@@ -36,6 +36,7 @@ python3 experiments/basic_validation/run.py --mode gpu --operator matmul --devic
 | CAKE 的核心依据及限制 | [论文精读](research/notes/CAKE论文精读与核心要点.md) |
 | 项目目标与相关工作 | [初步调研](research/notes/项目与CAKE初步调研.md) |
 | 已实际完成的验证 | [本机验证记录](experiments/basic_validation/LOCAL_VALIDATION.md) |
+| CPU 实测结论与复现 | [CPU 基础验证结果](research/notes/CPU基础验证结果.md) |
 | 参考资料来源 | [资料索引](research/README.md) |
 
 ## 按需下载论文和参考源码

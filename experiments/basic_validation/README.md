@@ -10,7 +10,7 @@
 
 **尚未实现：** Halide IR 规范化、Poly 依赖分析/候选生成、智能体搜索、训练反向、生产可用的多形状分派。因此这里的分块枚举不能算作 Poly 优化已完成。
 
-文件：`run.py` 是运行入口，`triton_kernels.py` 是 GPU 候选，`test_runner.py` 是标准库自检测试。
+文件：`run.py` 是运行入口，`triton_kernels.py` 是 GPU 候选，`test_runner.py` 是标准库自检测试，`cpu_study.py` 是扩展 CPU 正确性实验。
 
 ## 环境
 
@@ -78,7 +78,15 @@ python -m unittest discover -s experiments/basic_validation -p "test_*.py" -v
 
 测试验证 CPU 分块尾部、错误值识别、失败候选不参与选优、报告状态及旧结果保护；不会 import Triton 或验证 GPU kernel。
 
-本次实际执行结果见[本机验证记录](LOCAL_VALIDATION.md)：7 项单元测试和 18 组 CPU 配置通过；本机缺少 PyTorch/Triton，GPU 验证尚未进行。
+最新 CPU 实测：9 项单元测试、18 个基础配置、900 个扩展配置和 6 项错误拦截/选优规则检查通过。另一个极端浮点例子展示了累加顺序改变结果的情况，单独报告，不计入配置通过数。详情见 [CPU 基础验证结果](../../research/notes/CPU基础验证结果.md)；早期环境记录见[本机验证记录](LOCAL_VALIDATION.md)。
+
+扩展实验仅需标准库，不测性能：
+
+```bash
+python experiments/basic_validation/cpu_study.py
+```
+
+覆盖多个尺寸、尾部、小整数与随机浮点分布，并使用固定精度标准。选优规则检查采用虚构耗时标签；它们不是实测速度。报告默认保存到 `results/`，也可通过 `--output` 指定新的文件名。
 
 拿到实际项目模块后，先用其规范化前后结果做语义对照，再将手工候选清单/启动函数替换成 Poly 和后端产生的实现，保留外部正确性参考与计时协议。项目级目标是验证三处真实代码改动，不能仅改变本脚本参数便认定 Halide/Poly 工作已完成。
 

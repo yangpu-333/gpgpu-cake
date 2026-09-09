@@ -56,6 +56,18 @@ def reference_matmul(a, b):
              for j in range(len(b[0]))] for i in range(len(a))]
 
 
+def chunked_add(a, b, block):
+    if block <= 0:
+        raise ValueError("block must be positive")
+    if len(a) != len(b):
+        raise ValueError("input lengths must match")
+    output = [math.nan] * len(a)
+    for begin in range(0, len(a), block):
+        for i in range(begin, min(begin + block, len(a))):
+            output[i] = a[i] + b[i]
+    return output
+
+
 def tiled_matmul(a, b, tile):
     if tile <= 0:
         raise ValueError("tile must be positive")
@@ -84,10 +96,7 @@ def cpu_check(args, report):
             b = [rng.uniform(-1, 1) for _ in range(length)]
             expected = [x + y for x, y in zip(a, b)]
             for block in (4, 16, 32):
-                actual = [math.nan] * length
-                for begin in range(0, length, block):
-                    for i in range(begin, min(begin + block, length)):
-                        actual[i] = a[i] + b[i]
+                actual = chunked_add(a, b, block)
                 records.append({"operator": "add", "shape": [length], "block": block,
                                 "correctness": compare_values(actual, expected)})
     if args.operator in ("matmul", "all"):

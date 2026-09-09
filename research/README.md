@@ -8,6 +8,8 @@
 
 后续工作：[基础验证实验计划](notes/基础验证实验计划.md)及[配套实验代码](../experiments/basic_validation/README.md)。
 
+已完成的 CPU 实测：[CPU 基础验证结果](notes/CPU基础验证结果.md)，含边界输入、错误拦截和浮点累加反例。
+
 ## 资料目录
 
 Git 仓库保存本索引、`notes/` 中的原创 Markdown 文档及 `sources/download-manifest.json`。下表中的论文、源码及提取文本是本地参考缓存，clone 不会自动带上。按需执行下面的命令下载公开资料并核对 SHA256：
