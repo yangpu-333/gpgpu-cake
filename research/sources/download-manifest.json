@@ -1,0 +1,51 @@
+{
+  "retrieved_date": "2026-09-08",
+  "commits": {
+    "cake-ir": "b0fc98aeff065e464e958c475fa607bdd8e3c686",
+    "atrex-kernel-agent": "d643fb5bc004ed021d1a60aa99bf9513204d3025"
+  },
+  "files": [
+    {
+      "path": "papers/CAKE-2608.12629.pdf",
+      "url": "https://arxiv.org/pdf/2608.12629",
+      "bytes": 1468028,
+      "sha256": "41c74b241c37cb259724d558002254bdc1c6d151665b5eb14235931a8738ea7c"
+    },
+    {
+      "path": "papers/ATREX-2607.14541.pdf",
+      "url": "https://arxiv.org/pdf/2607.14541",
+      "bytes": 10414906,
+      "sha256": "e937ef9b03cf88af2165ab9c5c40da47bf3645d468faef2432dc200af4a6bee3"
+    },
+    {
+      "path": "code/cake-ir.zip",
+      "url": "https://codeload.github.com/huangzhilin-hzl/cake-ir/zip/b0fc98aeff065e464e958c475fa607bdd8e3c686",
+      "bytes": 127564,
+      "sha256": "5deafe04a7d13b842a6934ffaa3f1774aec22ce4c24fc8d4f0ee47370071c752"
+    },
+    {
+      "path": "code/atrex-kernel-agent.zip",
+      "url": "https://codeload.github.com/alibaba/atrex-kernel-agent/zip/d643fb5bc004ed021d1a60aa99bf9513204d3025",
+      "bytes": 8389173,
+      "sha256": "df30c22bc1a42749d439b9b8e6bffc5b52a44386dc61dcd8e43562815b9d854c"
+    },
+    {
+      "path": "code/flashinfer-pr-4262.diff",
+      "url": "https://github.com/flashinfer-ai/flashinfer/pull/4262.diff",
+      "bytes": 488161,
+      "sha256": "34d9cd9806c5c9454ed7872a45ffbc0e8ad60050d88422211fd3f7cd86fafe5a"
+    },
+    {
+      "path": "code/flashinfer-pr-4274.diff",
+      "url": "https://github.com/flashinfer-ai/flashinfer/pull/4274.diff",
+      "bytes": 87668,
+      "sha256": "fd5e51e1d1041524682ad649c65f41c60cf69428763f2defdaaddccab2ad8d9c"
+    },
+    {
+      "path": "code/flashinfer-pr-4638.diff",
+      "url": "https://github.com/flashinfer-ai/flashinfer/pull/4638.diff",
+      "bytes": 299340,
+      "sha256": "bb5d65d0e0aa36cdddd523b95212aef1d0dc567eb94d468d9c6c669c9de10e4c"
+    }
+  ]
+}

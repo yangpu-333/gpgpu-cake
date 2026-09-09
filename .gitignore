@@ -1,0 +1,26 @@
+# Original project material and vendor attachments stay local.
+/自动化大模型训练算子编译优化/
+
+# Downloaded references, extracted text, and local research evidence.
+/research/papers/
+/research/code/
+/research/local/
+/research/sources/*
+!/research/sources/download-manifest.json
+
+# Generated experiment output and Python caches.
+**/results/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Local credentials and operating-system files.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+.DS_Store
+Thumbs.db
