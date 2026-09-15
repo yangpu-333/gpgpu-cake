@@ -95,6 +95,16 @@ cat "$LATEST/gpu-matmul.json"
 
 如果脚本中途停止，已经生成的 JSON 会保留。查看其中的 `status`、`error_type` 和 `error`，不要安装通用 CUDA、cuDNN 或 PyPI Triton 覆盖厂商环境。
 
+若 GPU 脚本在产生候选记录前失败，更新仓库后运行一次隔离诊断：
+
+```bash
+git pull --ff-only origin main
+bash experiments/megatron_ops/scripts/run_device_diagnostics.sh \
+  > /private/gpgpu-device-diagnostics.log 2>&1
+```
+
+诊断会在独立进程中依次测试设备信息、显存分配、CPU/GPU 双向拷贝、PyTorch 加法、GPU event、Triton target，以及 `num_warps=1/4` 的最小 Triton 加法。每项设置 `CUDA_LAUNCH_BLOCKING=1`，因此一项失败不会污染下一项，报告会给出精确阶段和 traceback。它只读取环境和执行小计算，不安装或切换编译器。
+
 ## 5. 下一轮需要的输入
 
 第一轮通过后，需要提供：

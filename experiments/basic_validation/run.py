@@ -15,6 +15,7 @@ import random
 import statistics
 import sys
 import time
+import traceback
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -165,6 +166,7 @@ def event_sample(torch, launch, launches):
 
 
 def gpu_experiments(args, report):
+    report["active_stage"] = "probe_environment"
     environment = report["environment"] = probe_environment(args.device)
     if not environment["ready_for_gpu_attempt"]:
         report["status"] = "gpu_unavailable"
@@ -173,10 +175,12 @@ def gpu_experiments(args, report):
     import triton
     import triton_kernels as kernels
 
+    report["active_stage"] = "set_device"
     torch.cuda.set_device(args.device)
     device = torch.device("cuda", args.device)
     # CUDA-compatible API is also used by the vendor's adapted PyTorch.
     # This does NOT assert the device is NVIDIA or that a vendor backend is installed.
+    report["active_stage"] = "create_cpu_generator"
     generator = torch.Generator(device="cpu").manual_seed(args.seed)
     try:
         report["triton_target"] = str(triton.runtime.driver.active.get_current_target())
@@ -199,6 +203,7 @@ def gpu_experiments(args, report):
     report["selections"] = []
     any_failure = False
     for operator, shape in jobs:
+        report["active_stage"] = f"prepare_cpu_inputs:{operator}:{shape}"
         dtype = torch.float32 if operator == "add" else torch.float16
         if operator == "add":
             left_shape, right_shape, out_shape = shape, shape, shape
@@ -209,17 +214,20 @@ def gpu_experiments(args, report):
             configs, atol, rtol = MATMUL_CONFIGS, 1e-2, 1e-2
         left_cpu = torch.randn(left_shape, generator=generator, dtype=torch.float32).to(dtype)
         right_cpu = torch.randn(right_shape, generator=generator, dtype=torch.float32).to(dtype)
+        report["active_stage"] = f"copy_inputs_to_device:{operator}:{shape}"
         left, right = left_cpu.to(device), right_cpu.to(device)
 
         def oracle(a_cpu, b_cpu):
             a64, b64 = a_cpu.to(torch.float64), b_cpu.to(torch.float64)
             return (a64 + b64 if operator == "add" else a64 @ b64).to(dtype)
 
+        report["active_stage"] = f"compute_cpu_reference:{operator}:{shape}"
         normal_expected = oracle(left_cpu, right_cpu)
         zero_expected = torch.zeros(out_shape, dtype=dtype)
         case_records, runnable = [], []
         routes = [("baseline", {})] + [("candidate", cfg) for cfg in configs]
         for kind, config in routes:
+            report["active_stage"] = f"validate_route:{operator}:{shape}:{kind}:{config}"
             record = {"operator": operator, "shape": list(shape), "kind": kind,
                       "shape_axes": "N" if operator == "add" else "M,N,K",
                       "dtype": str(dtype), "config": config, "status": "validating"}
@@ -302,6 +310,7 @@ def gpu_experiments(args, report):
             "speedup_vs_pytorch": winner["speedup_vs_pytorch"] if winner else None,
             "note": "Selection on the measured inputs only; not a validated general-purpose dispatcher",
         })
+    report["active_stage"] = "completed"
     report["status"] = "gpu_completed_with_failures" if any_failure else "gpu_check_passed"
     return 1 if any_failure else 0
 
@@ -347,7 +356,12 @@ def main(argv=None):
         else:
             code = gpu_experiments(args, report)
     except Exception as exc:
-        report.update(status="run_failed", error_type=type(exc).__name__, error=str(exc))
+        report.update(
+            status="run_failed",
+            error_type=type(exc).__name__,
+            error=str(exc),
+            traceback=traceback.format_exc(),
+        )
         code = 1
     report["wall_seconds"] = time.perf_counter() - started
     output.parent.mkdir(parents=True, exist_ok=True)

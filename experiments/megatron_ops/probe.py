@@ -6,9 +6,11 @@ This script is read-only: it does not install packages or modify Megatron-LM.
 import argparse
 import hashlib
 import importlib
+import importlib.util
 import json
 import os
 import platform
+import shutil
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -76,6 +78,7 @@ def inspect_accelerator(device):
         result["torch"] = {
             "imported": True,
             "version": getattr(torch, "__version__", None),
+            "module_file": getattr(torch, "__file__", None),
             "framework_cuda_version": getattr(torch.version, "cuda", None),
             "cuda_available": bool(torch.cuda.is_available()),
             "device_count": int(torch.cuda.device_count()),
@@ -96,13 +99,35 @@ def inspect_accelerator(device):
 
     try:
         triton = importlib.import_module("triton")
-        result["triton"] = {"imported": True, "version": getattr(triton, "__version__", None)}
+        result["triton"] = {
+            "imported": True,
+            "version": getattr(triton, "__version__", None),
+            "module_file": getattr(triton, "__file__", None),
+        }
         try:
             result["triton"]["target"] = str(triton.runtime.driver.active.get_current_target())
         except Exception as exc:
             result["triton"]["target_error"] = f"{type(exc).__name__}: {exc}"
     except Exception as exc:
         result["triton"] = {"imported": False, "error": f"{type(exc).__name__}: {exc}"}
+    return result
+
+
+def inspect_compiler_selector():
+    executable = shutil.which("compiler")
+    result = {"executable": executable}
+    if not executable:
+        result["available"] = False
+        return result
+    completed = subprocess.run(
+        [executable], check=False, capture_output=True, text=True, timeout=20
+    )
+    result.update(
+        available=True,
+        returncode=completed.returncode,
+        stdout=completed.stdout.strip(),
+        stderr=completed.stderr.strip(),
+    )
     return result
 
 
@@ -125,10 +150,12 @@ def main(argv=None):
         "environment": {
             "CUDA_VISIBLE_DEVICES": os.environ.get("CUDA_VISIBLE_DEVICES"),
             "IX_VISIBLE_DEVICES": os.environ.get("IX_VISIBLE_DEVICES"),
+            "COREX_ROOT": os.environ.get("COREX_ROOT"),
             "ILUVATAR_SOFTWARE_ROOT": os.environ.get("ILUVATAR_SOFTWARE_ROOT"),
         },
         "megatron": inspect_megatron(args.megatron_root),
         "accelerator": inspect_accelerator(args.device),
+        "compiler_selector": inspect_compiler_selector(),
         "source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
     }
     commit_ok = report["megatron"]["commit_matches"]
