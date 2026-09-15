@@ -6,6 +6,10 @@
 
 全部阶段工作先读：[阶段工作精要报告](research/notes/阶段工作精要报告.md)（2026-09-10 汇总）。
 
+用于提交：[CAKE 阶段调研与工作报告](research/notes/CAKE阶段调研与工作报告-杨璞.md)。
+
+当前专项计划：[Megatron-LM 五个训练算子实验计划](research/notes/五个训练算子实验计划.md)。
+
 ## 远程机器快速开始
 
 在已经配置 GitLab SSH 公钥的机器上执行：
