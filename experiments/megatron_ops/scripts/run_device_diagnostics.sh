@@ -8,8 +8,6 @@ RESULT_DIR="${PROJECT_ROOT}/experiments/megatron_ops/results/diagnostic-${STAMP}
 REPORT="${RESULT_DIR}/device-diagnostics.json"
 
 mkdir -p "${RESULT_DIR}"
-export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0}"
-export IX_VISIBLE_DEVICES="${IX_VISIBLE_DEVICES:-0}"
 
 cd "${PROJECT_ROOT}"
 python3 experiments/megatron_ops/device_diagnostics.py --device 0 --output "${REPORT}"

@@ -55,10 +55,10 @@ git -C "$MEGATRON_ROOT" rev-parse HEAD
 在项目根目录执行：
 
 ```bash
-export CUDA_VISIBLE_DEVICES=0
-export IX_VISIBLE_DEVICES=0
 bash experiments/megatron_ops/scripts/run_first_validation.sh "$MEGATRON_ROOT"
 ```
+
+脚本通过 `--device 0` 选择当前可见设备中的第一张卡，不会改写平台注入的 `IX_VISIBLE_DEVICES`。在专家环境或 Kubernetes Pod 中不要手工覆盖该变量；它可能承载宿主机设备到容器设备的映射。只有确认平台文档要求时才修改设备可见性。
 
 脚本按顺序执行环境检查、9 项 CPU 单元测试、GPU 环境探测、向量加法和小矩阵乘法。加法失败时会停止，不继续尝试矩阵乘法，以免在失效的设备上下文上产生误导结果。
 

@@ -117,7 +117,8 @@ def cpu_check(args, report):
 
 def probe_environment(device):
     result = {"python": sys.version, "platform": platform.platform(),
-              "corex_root": os.environ.get("ILUVATAR_SOFTWARE_ROOT"),
+              "corex_root": (os.environ.get("COREX_ROOT")
+                             or os.environ.get("ILUVATAR_SOFTWARE_ROOT")),
               "requested_device": device}
     for package in ("torch", "triton"):
         try:

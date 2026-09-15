@@ -18,9 +18,6 @@ if [[ -e "${RESULT_DIR}" ]]; then
 fi
 mkdir -p "${RESULT_DIR}"
 
-export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-0}"
-export IX_VISIBLE_DEVICES="${IX_VISIBLE_DEVICES:-0}"
-
 cd "${PROJECT_ROOT}"
 
 python3 experiments/megatron_ops/probe.py \
