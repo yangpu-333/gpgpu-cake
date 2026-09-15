@@ -10,6 +10,8 @@
 
 当前专项计划：[Megatron-LM 五个训练算子实验计划](research/notes/五个训练算子实验计划.md)。
 
+BI-V150 第一轮入口：[Megatron-LM 五算子实验入口](experiments/megatron_ops/README.md)。
+
 ## 远程机器快速开始
 
 在已经配置 GitLab SSH 公钥的机器上执行：

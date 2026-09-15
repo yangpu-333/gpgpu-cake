@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "framework": {
+    "name": "Megatron-LM",
+    "commit": "5be9626709af2722333bf54797c954c09edeada3"
+  },
+  "target": "Iluvatar BI-V150",
+  "operators": [
+    {
+      "id": "dense_fused_attention",
+      "display_name": "Dense Fused Attention",
+      "kind": "training",
+      "implementation_order": 3,
+      "minimum_gpus_for_local_smoke": 1,
+      "full_validation": "single GPU with real Megatron shapes; forward and backward"
+    },
+    {
+      "id": "vocab_parallel_cross_entropy",
+      "display_name": "Vocab-parallel Cross Entropy",
+      "kind": "training",
+      "implementation_order": 4,
+      "minimum_gpus_for_local_smoke": 1,
+      "full_validation": "TP=2 required in addition to TP=1 local-math smoke"
+    },
+    {
+      "id": "swiglu",
+      "display_name": "SwiGLU",
+      "kind": "training",
+      "implementation_order": 1,
+      "minimum_gpus_for_local_smoke": 1,
+      "full_validation": "single GPU; forward, input gradient and parameter gradient"
+    },
+    {
+      "id": "residual_add_rmsnorm",
+      "display_name": "Residual Add RMSNorm",
+      "kind": "training",
+      "implementation_order": 2,
+      "minimum_gpus_for_local_smoke": 1,
+      "full_validation": "single GPU; both normalized and residual outputs plus backward"
+    },
+    {
+      "id": "moe_grouped_gemm",
+      "display_name": "MoE Grouped GEMM",
+      "kind": "training",
+      "implementation_order": 5,
+      "minimum_gpus_for_local_smoke": 1,
+      "full_validation": "single-GPU grouped GEMM plus two-GPU expert-parallel path"
+    }
+  ],
+  "fine_tuning_slots": {
+    "required_count": 4,
+    "status": "names_not_selected"
+  }
+}
