@@ -76,6 +76,19 @@ experiments/megatron_ops/results/megatron-rmsnorm-capture-*/
 
 采集仅用于形状发现。记录的模块级 event 时间不应作为训练性能结论，因为采集会产生额外观测开销。若汇总状态为 `no_target_module_calls`，说明该训练命令没有命中目标类；若为 `no_capture_reports_found`，说明 Python 启动钩子未写出任何报告。前者常见原因是未启用 RMSNorm/Transformer Engine/`fused_residual_rmsnorm`，或远程定制代码使用了不同类名；这不是 GPU 或 Triton 失败。
 
+## 不知道训练启动命令时：先做 Megatron 模块预检
+
+没有已有训练命令时，不应直接运行仓库里的 GPT-3 175B、Mixtral 8×7B 等示例。先运行以下独立预检；它不读取数据集、不加载 checkpoint、不执行完整训练，也不修改 Megatron。它通过指定提交中实际的 `TENorm` 工厂尝试构造 `TEFusedResidualRMSNorm`，并同时复现全局开关 `fused_residual_rmsnorm=True` 与构建点开关 `has_residual=True`；随后对一个小的 `[8, 2, 1024]` FP16 张量运行一次前向和反向。
+
+```bash
+cd /private/gpgpu-cake
+git pull --ff-only origin main
+bash experiments/megatron_ops/scripts/run_megatron_rmsnorm_preflight.sh \
+  /private/atrex-megatron/src/megatron-lm
+```
+
+`module_smoke_passed` 表示当前容器的 Megatron、Transformer Engine 和 BI-V150 运行时确实能走到这个融合模块，下一步可继续构造小型 mock-data GPT 训练入口并采集真实形状。`transformer_engine_unavailable` 或 `fused_module_unavailable` 表示当前软件栈没有该上游融合路径；此时应依据实际本地 norm/BDA 路径设计集成，不把前面的合成微基准直接替换进去。
+
 ## 1. 更新项目
 
 如果项目仍在私有目录：
