@@ -98,7 +98,7 @@ bash experiments/megatron_ops/scripts/run_megatron_rmsnorm_route_probe.sh \
   /private/atrex-megatron/src/megatron-lm
 ```
 
-该探测会读取当前容器真正选择的 `TransformerBlock` 归一化工厂：Transformer Engine、Apex 或 PyTorch `WrappedTorchNorm`。只有结果为 `fallback_path_smoke_passed` 时，才证明当前路径能以 Megatron 自带的 Bias-Dropout-Add（固定 `bias=None`、`dropout=0`）接 PyTorch RMSNorm 并完成前向/反向。若结果为 `rmsnorm_not_available_on_selected_fallback`，说明当前选中的 Apex 后备工厂仅支持 LayerNorm；RMSNorm 需要显式模块规格或兼容后端，不能直接套用已有 LayerNorm 训练配置。
+该探测会构造当前提交中的 `get_gpt_layer_local_spec(normalization="RMSNorm")`，再读取它实际选中的 `input_layernorm` 与 `pre_mlp_layernorm` 工厂。这个路径比 `TransformerBlock` 的全局默认值更接近本项目的 GPT 训练规格：即使 Apex 可导入，本地 GPT RMSNorm 规格也应显式选择 PyTorch `WrappedTorchNorm`。只有结果为 `fallback_path_smoke_passed` 时，才证明当前路径能以 Megatron 自带的 Bias-Dropout-Add（固定 `bias=None`、`dropout=0`）接 PyTorch RMSNorm 并完成前向/反向。
 
 ## 1. 更新项目
 

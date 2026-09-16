@@ -1,12 +1,12 @@
-"""Identify and smoke-test Megatron's non-Transformer-Engine RMSNorm route.
+"""Identify and smoke-test the RMSNorm route selected by Megatron's local GPT spec.
 
-The pinned Megatron version selects its normalization factory at import time:
-Transformer Engine first, then Apex, then WrappedTorchNorm.  The Apex factory
-only supports LayerNorm, so an RMSNorm experiment without Transformer Engine
-must prove that the WrappedTorchNorm fallback is active before attempting an
-operator integration.  This probe also executes Megatron's own bias/dropout/add
-helper followed by that factory's RMSNorm once, with dropout and bias disabled.
-It is a path and correctness check, never a performance benchmark.
+``TransformerBlock`` has a process-wide default normalization factory, but it
+does not decide a local GPT RMSNorm experiment. In this pinned version,
+``get_gpt_layer_local_spec(normalization="RMSNorm")`` explicitly requests
+``WrappedTorchNorm`` even if Apex is importable. This probe builds that actual
+spec, then executes Megatron's bias/dropout/add helper followed by the selected
+RMSNorm once, with dropout and bias disabled. It is a path and correctness
+check, never a performance benchmark.
 """
 
 import argparse
@@ -46,30 +46,18 @@ def git_head(repository):
     }
 
 
-def select_route(transformer_engine_available, apex_available, factory_name):
-    """Describe the route selected by TransformerBlock at import time."""
-    if transformer_engine_available:
-        return {
-            "kind": "transformer_engine",
-            "rmsnorm_supported_by_selected_factory": True,
-            "next_action": "use the Transformer Engine preflight before native fallback probing",
-        }
-    if apex_available:
-        return {
-            "kind": "apex_fused_layernorm",
-            "rmsnorm_supported_by_selected_factory": False,
-            "next_action": "use an explicit WrappedTorchNorm spec or install a compatible RMSNorm backend",
-        }
+def select_route(factory_name):
+    """Describe the normalization factory selected by the local GPT spec."""
     if factory_name == "WrappedTorchNorm":
         return {
-            "kind": "wrapped_torch_rmsnorm",
+            "kind": "gpt_local_wrapped_torch_rmsnorm",
             "rmsnorm_supported_by_selected_factory": True,
-            "next_action": "run the native BDA-to-RMSNorm smoke test",
+            "next_action": "run the local GPT BDA-to-RMSNorm smoke test",
         }
     return {
-        "kind": "unknown",
+        "kind": "unexpected_gpt_local_rmsnorm_factory",
         "rmsnorm_supported_by_selected_factory": False,
-        "next_action": "inspect the locally modified TransformerBlock selection",
+        "next_action": "inspect the locally modified GPT layer specification",
     }
 
 
@@ -102,7 +90,7 @@ def run_probe(args, report):
         import torch
         from megatron.core.extensions.transformer_engine import HAVE_TE
         from megatron.core.fusions.fused_bias_dropout import get_bias_dropout_add
-        from megatron.core.transformer.torch_norm import WrappedTorchNorm
+        from megatron.core.models.gpt.gpt_layer_specs import get_gpt_layer_local_spec
         from megatron.core.transformer.transformer_block import HAVE_APEX, LayerNormImpl
         from megatron.core.transformer.transformer_config import TransformerConfig
     except Exception as exc:
@@ -112,8 +100,13 @@ def run_probe(args, report):
         if sys.path and sys.path[0] == str(root):
             sys.path.pop(0)
 
-    factory_name = getattr(LayerNormImpl, "__name__", type(LayerNormImpl).__name__)
-    route = select_route(bool(HAVE_TE), bool(HAVE_APEX), factory_name)
+    default_factory_name = getattr(LayerNormImpl, "__name__", type(LayerNormImpl).__name__)
+    report["active_stage"] = "build_gpt_local_rmsnorm_spec"
+    local_spec = get_gpt_layer_local_spec(normalization="RMSNorm")
+    input_norm_builder = local_spec.submodules.input_layernorm
+    pre_mlp_norm_builder = local_spec.submodules.pre_mlp_layernorm
+    factory_name = getattr(input_norm_builder, "__name__", type(input_norm_builder).__name__)
+    route = select_route(factory_name)
     report["environment"] = {
         "python": sys.version,
         "platform": platform.platform(),
@@ -122,7 +115,11 @@ def run_probe(args, report):
         "device_count": torch.cuda.device_count(),
         "transformer_engine_available": bool(HAVE_TE),
         "apex_available": bool(HAVE_APEX),
-        "transformer_block_factory": factory_name,
+        "transformer_block_default_factory": default_factory_name,
+        "gpt_local_input_layernorm_factory": factory_name,
+        "gpt_local_pre_mlp_layernorm_factory": getattr(
+            pre_mlp_norm_builder, "__name__", type(pre_mlp_norm_builder).__name__
+        ),
     }
     report["selected_route"] = route
     if not report["environment"]["cuda_available"]:
@@ -131,11 +128,8 @@ def run_probe(args, report):
     if args.device >= torch.cuda.device_count():
         report["status"] = "invalid_device"
         return 3
-    if route["kind"] == "transformer_engine":
-        report["status"] = "transformer_engine_route_selected"
-        return 0
-    if route["kind"] != "wrapped_torch_rmsnorm":
-        report["status"] = "rmsnorm_not_available_on_selected_fallback"
+    if route["kind"] != "gpt_local_wrapped_torch_rmsnorm":
+        report["status"] = "rmsnorm_not_available_in_gpt_local_spec"
         return 4
 
     torch.cuda.set_device(args.device)
@@ -150,9 +144,9 @@ def run_probe(args, report):
     )
     report["active_stage"] = "construct_wrapped_torch_rmsnorm"
     try:
-        norm = WrappedTorchNorm(config, args.hidden_size, args.epsilon).to(device)
+        norm = input_norm_builder(config, args.hidden_size, args.epsilon).to(device)
         if type(norm).__name__ != "RMSNorm":
-            report["status"] = "fallback_factory_did_not_construct_rmsnorm"
+            report["status"] = "gpt_local_factory_did_not_construct_rmsnorm"
             report["constructed_norm_class"] = type(norm).__name__
             return 4
         dtype = getattr(torch, args.dtype)
