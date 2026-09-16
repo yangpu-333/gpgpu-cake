@@ -189,8 +189,8 @@ def run_child(case, device):
             "active_stage": "child_process_timeout",
             "error_type": type(exc).__name__,
             "error": str(exc),
-            "child_stdout": exc.stdout or "",
-            "child_stderr": exc.stderr or "",
+            "child_stdout": exc.stdout.decode("utf-8", errors="replace") if isinstance(exc.stdout, bytes) else (exc.stdout or ""),
+            "child_stderr": exc.stderr.decode("utf-8", errors="replace") if isinstance(exc.stderr, bytes) else (exc.stderr or ""),
         }
     except OSError as exc:
         return {
@@ -205,7 +205,12 @@ def run_child(case, device):
     parsed = None
     for line in completed.stdout.splitlines():
         if line.startswith(MARKER):
-            parsed = json.loads(line[len(MARKER) :])
+            try:
+                candidate = json.loads(line[len(MARKER) :])
+            except json.JSONDecodeError:
+                continue
+            if isinstance(candidate, dict):
+                parsed = candidate
     if parsed is None:
         parsed = {
             "case": case,
@@ -214,6 +219,10 @@ def run_child(case, device):
             "error_type": "MissingDiagnosticResult",
             "error": "child process did not emit a diagnostic JSON record",
         }
+    if completed.returncode != 0:
+        parsed["passed"] = False
+        parsed.setdefault("error_type", "ChildProcessError")
+        parsed.setdefault("error", f"child process exited with code {completed.returncode}")
     parsed["child_returncode"] = completed.returncode
     parsed["child_stdout"] = completed.stdout
     parsed["child_stderr"] = completed.stderr

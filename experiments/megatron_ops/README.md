@@ -105,7 +105,46 @@ bash experiments/megatron_ops/scripts/run_device_diagnostics.sh \
 
 诊断会在独立进程中依次测试设备信息、显存分配、CPU/GPU 双向拷贝、PyTorch 加法、GPU event、Triton target，以及 `num_warps=1/4` 的最小 Triton 加法。每项设置 `CUDA_LAUNCH_BLOCKING=1`，因此一项失败不会污染下一项，报告会给出精确阶段和 traceback。它只读取环境和执行小计算，不安装或切换编译器。
 
-## 5. 下一轮需要的输入
+## 5. 显存分配失败时的一键重试
+
+若 `torch.empty(..., device="cuda")` 已经报 `operation not supported`，可以运行进一步的运行时对照。一次复制执行以下整段即可，任务在后台运行：
+
+```bash
+cd /private/gpgpu-cake &&
+git pull --ff-only origin main && {
+  LOG="/private/gpgpu-runtime-$(date -u +%Y%m%dT%H%M%SZ).log"
+  nohup bash experiments/megatron_ops/scripts/run_runtime_diagnostics.sh \
+    > "$LOG" 2>&1 < /dev/null &
+  echo "PID: $!"
+  echo "日志: $LOG"
+}
+```
+
+通常几分钟；每个最小测试最多等待 90 秒。日志持续输出 `Trying`、`PASS/FAIL` 和失败阶段；无需等整套结束才能查看。重新登录后查看最新日志：
+
+```bash
+LOG="$(ls -t /private/gpgpu-runtime-*.log | head -n 1)"
+cat "$LOG"
+```
+
+脚本自动比较：
+
+1. 当前配置（增加同步报错和 C++ 调用栈）；
+2. 普通分配器：`backend:native,expandable_segments:False`；
+3. 上述配置加 `PYTORCH_NO_CUDA_MEMORY_CACHING=1`；
+4. 如果存在已配置的 CoreX 目录或 `/usr/local/corex`，临时优先使用其中的运行库，再做以上三种对照。
+
+每次都启动新进程，测试显存分配、填充、加法、拷回 CPU 和数值检查。通过的设置会用另一个新进程复测。若有复测通过的设置，脚本会自动用该设置继续运行 PyTorch/Triton 的完整设备诊断。成功只表示对应测试通过，仍不代表五个训练算子完成或取得性能收益。
+
+所有设置只作用于测试子进程。脚本保留 `IX_VISIBLE_DEVICES`、`CUDA_VISIBLE_DEVICES` 和 `LD_PRELOAD`，不安装包、不写 shell 配置、不修改驱动。默认测试当前可见设备 0；脚本后加 `1` 可选择设备 1。
+
+结果保存在忽略提交的 `results/runtime-*/`，包括逐步更新的 `runtime-diagnostics.json`、简短的 `summary.log`，以及成功后生成的 `runtime-diagnostics-device.json`。JSON 记录分配器参数、真实加载的动态库、`ixsmi` 和 `ldd` 输出、失败阶段及 C++/Python 错误。退出码 0 只表示诊断流程完成；判断 GPU 是否可用要看 `confirmed_variants` 和后续 `diagnostics_passed`。
+
+判断原则：分配器对照通过，说明存在可行的进程配置，仍需确认具体不兼容接口；库路径对照通过，再结合实际加载路径分析。若全部失败，日志用于进一步定位。`ixsmi` 缺失符号说明该进程存在符号解析问题，不能单独证明它与 PyTorch 分配失败同源，也不能证明硬件损坏。环境变量 `COREX_ROOT` 未设置同样不等于 CoreX 未安装。
+
+依据：[PyTorch 2.7.1 分配器实现](https://github.com/pytorch/pytorch/blob/v2.7.1/c10/cuda/CUDACachingAllocator.cpp)中，不同分配模式调用的底层接口有差别，关闭缓存可直接走 `cudaMalloc`；[PyTorch 2.7 调试变量](https://docs.pytorch.org/docs/2.7/debugging_environment_variables.html)提供 C++ 栈开关；[FlagOS CoreX 4.4 基础镜像说明](https://flagos-ai.github.io/release-info/base/iluvatar-corex4.4.0/)提供默认库路径参考。FlagOS 镜像说明不是当前平台镜像的配置证明，具体以本次采集为准。
+
+## 6. 下一轮需要的输入
 
 第一轮通过后，需要提供：
 
