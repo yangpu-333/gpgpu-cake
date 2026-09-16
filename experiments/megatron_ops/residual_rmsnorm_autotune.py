@@ -25,10 +25,37 @@ import traceback
 from datetime import datetime, timezone
 from pathlib import Path
 
+try:
+    import triton
+    import triton.language as tl
+except Exception:  # CPU-plan mode must remain usable without the GPU runtime.
+    triton = None
+    tl = None
+
 
 ROOT = Path(__file__).resolve().parent
 IR_NORMALIZATION_VERSION = "residual-rmsnorm-v1"
 MAX_REDUCTION_BLOCK = 8192
+
+
+if triton is not None:
+    @triton.jit
+    def residual_add_rmsnorm_kernel(X, RESIDUAL, WEIGHT, OUTPUT, RESIDUAL_OUT,
+                                    ROWS: tl.constexpr, HIDDEN: tl.constexpr,
+                                    EPSILON: tl.constexpr, BLOCK: tl.constexpr):
+        row = tl.program_id(0)
+        columns = tl.arange(0, BLOCK)
+        valid = columns < HIDDEN
+        offset = row * HIDDEN + columns
+        values = tl.load(X + offset, mask=valid, other=0.0) + tl.load(RESIDUAL + offset, mask=valid, other=0.0)
+        values_fp32 = values.to(tl.float32)
+        sum_squares = tl.sum(values_fp32 * values_fp32, axis=0)
+        inverse_rms = tl.rsqrt(sum_squares / HIDDEN + EPSILON)
+        scale = tl.load(WEIGHT + columns, mask=valid, other=0.0).to(tl.float32)
+        tl.store(RESIDUAL_OUT + offset, values, mask=valid)
+        tl.store(OUTPUT + offset, values_fp32 * inverse_rms * scale, mask=valid)
+else:
+    residual_add_rmsnorm_kernel = None
 
 
 def positive_int(value):
@@ -205,31 +232,11 @@ def event_sample(torch, launch, launches):
 def load_gpu_dependencies():
     try:
         import torch
-        import triton
-        import triton.language as tl
     except Exception as exc:
-        raise RuntimeError("GPU mode requires the preinstalled PyTorch and Triton runtime") from exc
+        raise RuntimeError("GPU mode requires the preinstalled PyTorch runtime") from exc
+    if triton is None or tl is None or residual_add_rmsnorm_kernel is None:
+        raise RuntimeError("GPU mode requires the preinstalled Triton runtime")
     return torch, triton, tl
-
-
-def make_kernel(triton, tl):
-    @triton.jit
-    def residual_add_rmsnorm_kernel(X, RESIDUAL, WEIGHT, OUTPUT, RESIDUAL_OUT,
-                                    ROWS: tl.constexpr, HIDDEN: tl.constexpr,
-                                    EPSILON: tl.constexpr, BLOCK: tl.constexpr):
-        row = tl.program_id(0)
-        columns = tl.arange(0, BLOCK)
-        valid = columns < HIDDEN
-        offset = row * HIDDEN + columns
-        values = tl.load(X + offset, mask=valid, other=0.0) + tl.load(RESIDUAL + offset, mask=valid, other=0.0)
-        values_fp32 = values.to(tl.float32)
-        sum_squares = tl.sum(values_fp32 * values_fp32, axis=0)
-        inverse_rms = tl.rsqrt(sum_squares / HIDDEN + EPSILON)
-        scale = tl.load(WEIGHT + columns, mask=valid, other=0.0).to(tl.float32)
-        tl.store(RESIDUAL_OUT + offset, values, mask=valid)
-        tl.store(OUTPUT + offset, values_fp32 * inverse_rms * scale, mask=valid)
-
-    return residual_add_rmsnorm_kernel
 
 
 def make_autograd_function(torch, triton, kernel):
@@ -381,7 +388,7 @@ def gpu_autotune(args, report):
         "candidate_order": "rotated each sample",
         "backward_timing": "not included; this prototype validates gradients with an analytical PyTorch fallback",
     }
-    kernel = make_kernel(triton, tl)
+    kernel = residual_add_rmsnorm_kernel
     autograd_function = make_autograd_function(torch, triton, kernel)
     candidate_rejections = 0
     incomplete_workloads = 0
