@@ -9,7 +9,46 @@
 - 在 BI-V150 上尝试 Triton 加法和矩阵乘法，验证编译、正确性和计时链路；
 - 以 JSON 保存证据，不覆盖旧结果。
 
-这里的加法和矩阵乘法是工具链冒烟测试，不是五个训练算子的完成情况。目前尚未实现五个算子的候选内核、Halide IR 规范化或 Poly 候选生成。
+这里的加法和矩阵乘法是工具链冒烟测试，不是五个训练算子的完成情况。Residual Add RMSNorm 现已具备首个受限的自动调优原型；其余四个训练算子仍待实现。
+
+## Residual Add RMSNorm：首个自动调优闭环
+
+`residual_rmsnorm_autotune.py` 已实现一个可直接在单张 BI-V150 上运行的初版闭环：
+
+```text
+算子契约 → Halide 风格 IR 规范化 → Poly 风格行/归约调度候选
+        → 静态合法性检查 → Triton 编译
+        → 前向与 x/residual/weight 梯度验证 → GPU event 计时 → 选择或回退
+```
+
+执行前先进入仓库并更新：
+
+```bash
+cd /private/gpgpu-cake
+git pull --ff-only origin main
+nohup bash experiments/megatron_ops/scripts/run_residual_rmsnorm_autotune.sh \
+  > /private/gpgpu-rmsnorm-$(date -u +%Y%m%dT%H%M%SZ).log 2>&1 < /dev/null &
+echo "PID: $!"
+```
+
+脚本只为当前进程优先加入 `/usr/local/iluvatar/lib64` 与 `/usr/local/corex/lib64`，与此前已验证通过的 BI-V150 运行时设置一致。它不会安装包、修改驱动或改写 `IX_VISIBLE_DEVICES`。
+
+默认验证 `64x768`、`64x1024`、`64x4096` 的 FP16 输入。每种形状会保存：规范化 IR 与稳定 workload hash、每个调度候选的静态检查、前向输出/残差输出检查、`x`/`residual`/`weight` 梯度检查、逐样本 GPU event 时间及最终选择。结果在新的：
+
+```text
+experiments/megatron_ops/results/residual-rmsnorm-*/
+```
+
+目录中。查看日志和结果：
+
+```bash
+LOG="$(ls -t /private/gpgpu-rmsnorm-*.log | head -n 1)"
+cat "$LOG"
+RESULT="$(find experiments/megatron_ops/results -maxdepth 1 -type d -name 'residual-rmsnorm-*' | sort | tail -n 1)"
+cat "$RESULT/autotune.json"
+```
+
+这是一项初步实现，边界写入结果 JSON：IR 是稳定的 Halide 风格契约记录，Poly 部分是受限的仿射行/归约调度生成与检查，后端是手写 Triton 前向核。它还没有接到 Megatron 的实际调用点，也没有实现或计时 Triton 反向核，因此结果只能说明该形状上的前向候选表现，不能表述为完整训练算子或端到端训练收益。
 
 ## 1. 更新项目
 

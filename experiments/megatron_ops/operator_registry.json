@@ -36,7 +36,13 @@
       "kind": "training",
       "implementation_order": 2,
       "minimum_gpus_for_local_smoke": 1,
-      "full_validation": "single GPU; both normalized and residual outputs plus backward"
+      "full_validation": "single GPU; both normalized and residual outputs plus backward",
+      "prototype": {
+        "status": "initial_autotune_workflow_implemented",
+        "entrypoint": "experiments/megatron_ops/scripts/run_residual_rmsnorm_autotune.sh",
+        "scope": "Halide-style IR record, restricted Poly-style row/reduction candidates, Triton forward timing, and forward/backward validation",
+        "limitation": "not yet dispatched from Megatron and does not time an optimized backward kernel"
+      }
     },
     {
       "id": "moe_grouped_gemm",
