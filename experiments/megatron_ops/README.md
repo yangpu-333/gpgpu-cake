@@ -89,6 +89,17 @@ bash experiments/megatron_ops/scripts/run_megatron_rmsnorm_preflight.sh \
 
 `module_smoke_passed` 表示当前容器的 Megatron、Transformer Engine 和 BI-V150 运行时确实能走到这个融合模块，下一步可继续构造小型 mock-data GPT 训练入口并采集真实形状。`transformer_engine_unavailable` 或 `fused_module_unavailable` 表示当前软件栈没有该上游融合路径；此时应依据实际本地 norm/BDA 路径设计集成，不把前面的合成微基准直接替换进去。
 
+## Transformer Engine 不可用时：确认实际后备路径
+
+若预检给出 `transformer_engine_unavailable`，继续运行：
+
+```bash
+bash experiments/megatron_ops/scripts/run_megatron_rmsnorm_route_probe.sh \
+  /private/atrex-megatron/src/megatron-lm
+```
+
+该探测会读取当前容器真正选择的 `TransformerBlock` 归一化工厂：Transformer Engine、Apex 或 PyTorch `WrappedTorchNorm`。只有结果为 `fallback_path_smoke_passed` 时，才证明当前路径能以 Megatron 自带的 Bias-Dropout-Add（固定 `bias=None`、`dropout=0`）接 PyTorch RMSNorm 并完成前向/反向。若结果为 `rmsnorm_not_available_on_selected_fallback`，说明当前选中的 Apex 后备工厂仅支持 LayerNorm；RMSNorm 需要显式模块规格或兼容后端，不能直接套用已有 LayerNorm 训练配置。
+
 ## 1. 更新项目
 
 如果项目仍在私有目录：
