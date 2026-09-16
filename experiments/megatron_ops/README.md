@@ -50,6 +50,32 @@ cat "$RESULT/autotune.json"
 
 这是一项初步实现，边界写入结果 JSON：IR 是稳定的 Halide 风格契约记录，Poly 部分是受限的仿射行/归约调度生成与检查，后端是手写 Triton 前向核。它还没有接到 Megatron 的实际调用点，也没有实现或计时 Triton 反向核，因此结果只能说明该形状上的前向候选表现，不能表述为完整训练算子或端到端训练收益。
 
+## 真实 Megatron 形状采集（不修改 Megatron 源码）
+
+在指定提交中，`TEFusedResidualRMSNorm` 仅在 **Transformer Engine + RMSNorm + `fused_residual_rmsnorm=True`** 时被选中；它的接口是 `(normalized_output, residual_output)`。上游的残差加法通常由前一段 bias/dropout/add 形成，因此当前候选核不能直接替换这个模块。下一步先采集该模块实际接收到的形状、dtype、布局和出现次数，再确定跨边界融合的接入方式。
+
+以下包装器不改写 Megatron 文件：它通过进程级 `sitecustomize` 只观察具体类名为 `TEFusedResidualRMSNorm` 的模块调用，并在每个 rank 结束时写 JSON。将你**现有且已能运行**的 Megatron 启动命令原样放在 `--` 后：
+
+```bash
+cd /private/gpgpu-cake
+git pull --ff-only origin main
+
+bash experiments/megatron_ops/scripts/run_megatron_rmsnorm_capture.sh \
+  /private/atrex-megatron/src/megatron-lm -- \
+  bash /实际已有的Megatron启动脚本.sh
+```
+
+训练命令需要的参数也直接接在最后一行。脚本先检查固定 commit，再运行原命令；结束后生成：
+
+```text
+experiments/megatron_ops/results/megatron-rmsnorm-capture-*/
+├── environment.json
+├── rmsnorm-capture-*-rank*-pid*.json
+└── rmsnorm-capture-summary.json
+```
+
+采集仅用于形状发现。记录的模块级 event 时间不应作为训练性能结论，因为采集会产生额外观测开销。若汇总状态为 `no_target_module_calls`，说明该训练命令没有命中目标类；若为 `no_capture_reports_found`，说明 Python 启动钩子未写出任何报告。前者常见原因是未启用 RMSNorm/Transformer Engine/`fused_residual_rmsnorm`，或远程定制代码使用了不同类名；这不是 GPU 或 Triton 失败。
+
 ## 1. 更新项目
 
 如果项目仍在私有目录：
