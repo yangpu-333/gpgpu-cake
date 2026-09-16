@@ -1,0 +1,50 @@
+# KDA A100 复现入口
+
+当前目标是复现 Kernel Design Agents（KDA）的公开工作流，而不是继续扩展
+BI-V150 上的 CAKE/Megatron 原型。KDA 是一个“定义任务 → 实现候选 → 正确性验证
+→ 基准测试 → Nsight Compute 分析 → 记录晋级决定”的智能体工程循环。
+
+本目录不包含 KDA、FlashInfer 或 DeepGEMM 的第三方源码。它们体积大、更新频繁，
+且官方要求 KDA 工作流仓库、任务工作区、最终解答快照彼此隔离。`source-lock.json`
+记录本次准备时观察到的上游提交；`prepare_kda_sources.sh` 在 A100 容器的持久目录
+中按该提交下载源码。
+
+## 硬件边界
+
+- 先用一张 NVIDIA A100 跑通工作流、依赖、数据集、正确性验证和普通 CUDA/Triton
+  候选。
+- A100 的结果不能同 B200 竞赛成绩直接比较。官方竞赛复现指定 B200 兼容编译路径；
+  要对齐该结果，后续仍须在 B200 上重跑。
+- BI-V150 不适用，因为目标工作流依赖 NVIDIA CUDA、FlashInfer 和 DeepGEMM。
+
+## A100 容器首次执行
+
+先拉取本项目并执行主机检查：
+
+```bash
+cd /home/huids25/gpgpu-cake
+git pull --ff-only origin main
+bash experiments/kda_repro/scripts/check_nvidia_host.sh
+```
+
+检查输出应确认 NVIDIA GPU、驱动、CUDA 工具链与 `ncu` 是否可见。随后下载公开源代码到
+`/home/huids25/kda-repro`：
+
+```bash
+bash experiments/kda_repro/scripts/prepare_kda_sources.sh /home/huids25/kda-repro
+```
+
+脚本不会下载 `mlsys2026-flashinfer-contest-solution`。官方明确规定：该最终解答仓库
+仅用于最终结果验证，不能作为重新运行智能体优化流程的输入。
+
+## 后续顺序
+
+1. 在 `release/mlsys2026-flashinfer-contest` 中依照官方文档建立锁定的 Python 3.12、
+   PyTorch、Triton、FlashInfer 与 DeepGEMM 环境，并下载 trace 数据。
+2. 先运行 packed `solution.json` 的验证链路，确认 evaluator 可以工作。
+3. 在 `workspaces/flashinfer-bench-starter-kit` 中建立全新任务工作区；不要把最终
+   解答源码复制进去。
+4. 先选择 DSA 任务，再依次尝试 GDN 和 FP8 MoE。每个候选必须保存正确性、计时、
+   profile 和保留/淘汰原因。
+
+参考：[KDA 工作流](https://github.com/NVlabs/kda)、[官方竞赛复现说明](https://github.com/mit-han-lab/mlsys2026-flashinfer-contest/blob/main/docs/reproduction.md)。

@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "observed_at_utc": "2026-09-16T08:52:00Z",
+  "sources": [
+    {
+      "name": "kda",
+      "url": "https://github.com/NVlabs/kda.git",
+      "revision": "ef6ce617693ef0782b3ecb9f37e39bbf10226a90"
+    },
+    {
+      "name": "mlsys2026-flashinfer-contest",
+      "url": "https://github.com/mit-han-lab/mlsys2026-flashinfer-contest.git",
+      "revision": "d61573ffb2008b6e68fb32fe8e17703e4b2448c9"
+    },
+    {
+      "name": "flashinfer-bench",
+      "url": "https://github.com/flashinfer-ai/flashinfer-bench.git",
+      "revision": "40e6ca7844b514eb4b1c7edba6d6a7377df57870"
+    },
+    {
+      "name": "flashinfer-bench-starter-kit",
+      "url": "https://github.com/flashinfer-ai/flashinfer-bench-starter-kit.git",
+      "revision": "75ccd05cafceb0fd1f86be4cd0f2117249463c66"
+    },
+    {
+      "name": "DeepGEMM",
+      "url": "https://github.com/deepseek-ai/DeepGEMM.git",
+      "revision": "78b69000794d0937b47ae3387eff7663410264d1"
+    }
+  ]
+}
