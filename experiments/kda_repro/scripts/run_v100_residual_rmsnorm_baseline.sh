@@ -24,8 +24,8 @@ cd "${TASK_WORKSPACE}"
 mkdir -p runs
 RUN_ID="baseline-$(date -u +%Y%m%dT%H%M%SZ)"
 
-"${PYTHON}" validate.py | tee "runs/${RUN_ID}-validation.log"
-"${PYTHON}" benchmark.py | tee "runs/${RUN_ID}-benchmark.log"
+"${PYTHON}" validate.py --implementation baseline | tee "runs/${RUN_ID}-validation.log"
+"${PYTHON}" benchmark.py --implementation baseline | tee "runs/${RUN_ID}-benchmark.log"
 
 "${PYTHON}" - "${RUN_ID}" <<'PY'
 import json

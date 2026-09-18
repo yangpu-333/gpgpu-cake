@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import importlib
+import argparse
 import json
 from pathlib import Path
 
@@ -16,13 +17,15 @@ ATOL = 2e-3
 RTOL = 2e-3
 
 
-def implementation():
+def implementation(selection="candidate"):
+    if selection == "baseline":
+        return "baseline-pytorch", reference_forward
     try:
         candidate = importlib.import_module("src.candidate")
     except ModuleNotFoundError as error:
         if error.name != "src.candidate":
             raise
-        return "baseline-pytorch", reference_forward
+        raise RuntimeError("Requested candidate is missing; use --implementation baseline explicitly") from error
     return "candidate", candidate.forward
 
 
@@ -44,17 +47,26 @@ def validate_shape(shape: tuple[int, int], kernel) -> None:
     if not bool(torch.isfinite(output).all() and torch.isfinite(residual_out).all()):
         raise AssertionError("non-finite forward output")
 
-    (output.float().sum() + residual_out.float().sum()).backward()
-    for name, tensor in (("hidden", hidden), ("residual", residual), ("weight", weight)):
-        if tensor.grad is None or not bool(torch.isfinite(tensor.grad).all()):
-            raise AssertionError(f"missing or non-finite gradient for {name}")
+    inputs = (hidden, residual, weight)
+    # Random vector-Jacobian products check gradients, not just their finiteness.
+    # Exercise both outputs independently as well as their combined contribution.
+    for mode in ("normalized", "residual", "both"):
+        grad_y = torch.randn_like(output) if mode != "residual" else torch.zeros_like(output)
+        grad_r = torch.randn_like(residual_out) if mode != "normalized" else torch.zeros_like(residual_out)
+        actual = torch.autograd.grad((output, residual_out), inputs, (grad_y, grad_r), retain_graph=True)
+        expected = torch.autograd.grad((expected_output, expected_residual), inputs, (grad_y, grad_r), retain_graph=True)
+        for name, got, want in zip(("hidden", "residual", "weight"), actual, expected):
+            torch.testing.assert_close(got, want, atol=ATOL, rtol=RTOL, msg=f"{mode}/{name} gradient mismatch")
 
 
 def main() -> None:
     if not torch.cuda.is_available():
         raise SystemExit("CUDA is required")
     torch.manual_seed(20260918)
-    name, kernel = implementation()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--implementation", choices=("baseline", "candidate"), default="candidate")
+    args = parser.parse_args()
+    name, kernel = implementation(args.implementation)
     for shape in SHAPES:
         validate_shape(shape, kernel)
     print(json.dumps({"status": "validation_passed", "candidate": name, "shapes": SHAPES}))

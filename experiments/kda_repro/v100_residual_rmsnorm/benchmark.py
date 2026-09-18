@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import csv
+import argparse
 import importlib
 import statistics
 from pathlib import Path
@@ -17,13 +18,15 @@ WARMUP = 25
 ITERATIONS = 100
 
 
-def implementation():
+def implementation(selection="candidate"):
+    if selection == "baseline":
+        return "baseline-pytorch", reference_forward
     try:
         candidate = importlib.import_module("src.candidate")
     except ModuleNotFoundError as error:
         if error.name != "src.candidate":
             raise
-        return "baseline-pytorch", reference_forward
+        raise RuntimeError("Requested candidate is missing") from error
     return "candidate", candidate.forward
 
 
@@ -49,7 +52,14 @@ def median_ms(kernel, shape: tuple[int, int]) -> float:
 def main() -> None:
     if not torch.cuda.is_available():
         raise SystemExit("CUDA is required")
-    name, kernel = implementation()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--implementation", choices=("baseline", "candidate"), default="candidate")
+    args = parser.parse_args()
+    name, kernel = implementation(args.implementation)
+    from validate import validate_shape
+    torch.manual_seed(20260918)
+    for shape in SHAPES:
+        validate_shape(shape, kernel)
     csv_path = Path("benchmark.csv")
     rows = []
     for shape in SHAPES:
