@@ -1,5 +1,7 @@
 # KDA V100 复现入口
 
+最新严格复核见 [V100_STRICT_RESULT.md](V100_STRICT_RESULT.md)：修复旧梯度错误后，六种形状的前向及参考梯度比较已通过，原始重复计时数据已归档。ncu 计数器采集仍需平台授权。
+
 当前目标是复现 Kernel Design Agents（KDA）的公开工作流，而不是继续扩展
 BI-V150 上的 CAKE/Megatron 原型。KDA 是一个“定义任务 → 实现候选 → 正确性验证
 → 基准测试 → Nsight Compute 分析 → 记录晋级决定”的智能体工程循环。

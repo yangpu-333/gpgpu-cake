@@ -1,0 +1,13 @@
+{
+  "id": "triton-row-v2",
+  "parent": "candidate-triton-row",
+  "status": "accepted_for_tested_forward_microbenchmark",
+  "gradient_check": "reference VJP; backward uses reference graph",
+  "profiling": "blocked_ERR_NVGPUCTRPERM",
+  "evidence": "strict-v3.json",
+  "source_sha256": {
+    "v100_residual_rmsnorm\\src\\candidate.py": "d6dca4b13b0d40255b0c0390e1a9ff36fb35d1bf21ff42b89390417bdd193d68",
+    "v100_residual_rmsnorm\\reproduce.py": "9e710f552bb627779248c5dd4fa79f8c52fb16cf6e054d1804cee284760f7bc9",
+    "v100_residual_rmsnorm\\validate.py": "b91d5b107298d0403734d03ebea48e15fc4cbf7e90c33322cd0fce7ac5b75dd1"
+  }
+}

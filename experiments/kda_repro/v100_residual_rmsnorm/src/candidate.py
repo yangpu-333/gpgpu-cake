@@ -86,20 +86,19 @@ class _FusedResidualRMSNorm(torch.autograd.Function):
         if grad_residual_out is None:
             grad_residual_out = torch.zeros_like(residual_out)
 
-        x = residual_out.float()
-        grad_y = grad_output.float()
-        scale = torch.rsqrt(x.square().mean(dim=-1, keepdim=True) + ctx.eps)
-        weighted_grad = grad_y * weight.float()
-        projection = (weighted_grad * x).sum(dim=-1, keepdim=True)
-        grad_x = weighted_grad * scale - x * projection * scale.pow(3) / x.shape[-1]
-        grad_x = grad_x + grad_residual_out.float()
-        grad_weight = (grad_y * x * scale).sum(dim=0)
-        return (
-            grad_x.to(dtype=residual_out.dtype),
-            grad_x.to(dtype=residual_out.dtype),
-            grad_weight.to(dtype=weight.dtype),
-            None,
-        )
+        # Replay the reference graph to preserve each FP16 cast in its VJP.
+        # The old analytical FP32 formula omitted those rounding boundaries.
+        # Only the forward is optimized; backward is deliberately a reference path.
+        with torch.enable_grad():
+            x = residual_out.detach().requires_grad_(True)
+            w = weight.detach().requires_grad_(True)
+            scale = torch.rsqrt(x.float().square().mean(dim=-1, keepdim=True) + ctx.eps)
+            y = x * scale.to(x.dtype) * w
+            grad_x, grad_weight = torch.autograd.grad(
+                (y, x), (x, w), (grad_output, grad_residual_out)
+            )
+        return grad_x, grad_x, grad_weight, None
+
 
 
 def forward(
