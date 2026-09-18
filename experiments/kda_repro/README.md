@@ -1,4 +1,4 @@
-# KDA A100 复现入口
+# KDA V100 复现入口
 
 当前目标是复现 Kernel Design Agents（KDA）的公开工作流，而不是继续扩展
 BI-V150 上的 CAKE/Megatron 原型。KDA 是一个“定义任务 → 实现候选 → 正确性验证
@@ -6,18 +6,18 @@ BI-V150 上的 CAKE/Megatron 原型。KDA 是一个“定义任务 → 实现候
 
 本目录不包含 KDA、FlashInfer 或 DeepGEMM 的第三方源码。它们体积大、更新频繁，
 且官方要求 KDA 工作流仓库、任务工作区、最终解答快照彼此隔离。`source-lock.json`
-记录本次准备时观察到的上游提交；`prepare_kda_sources.sh` 在 A100 容器的持久目录
+记录本次准备时观察到的上游提交；`prepare_kda_sources.sh` 在 V100 容器的持久目录
 中按该提交下载源码。
 
 ## 硬件边界
 
-- 先用一张 NVIDIA A100 跑通工作流、依赖、数据集、正确性验证和普通 CUDA/Triton
+- 先用一张 NVIDIA V100 跑通工作流、依赖、数据集、正确性验证和普通 CUDA/Triton
   候选。
-- A100 的结果不能同 B200 竞赛成绩直接比较。官方竞赛复现指定 B200 兼容编译路径；
+- V100 的结果不能同 B200 竞赛成绩直接比较。官方竞赛复现指定 B200 兼容编译路径；
   要对齐该结果，后续仍须在 B200 上重跑。
 - BI-V150 不适用，因为目标工作流依赖 NVIDIA CUDA、FlashInfer 和 DeepGEMM。
 
-## A100 容器首次执行
+## V100 容器首次执行
 
 先拉取本项目并执行主机检查：
 
@@ -33,6 +33,23 @@ bash experiments/kda_repro/scripts/check_nvidia_host.sh
 ```bash
 bash experiments/kda_repro/scripts/prepare_kda_sources.sh /home/huids25/kda-repro
 ```
+
+当前容器若经由 Scholar Verify HTTPS 代理访问互联网，先设置 Git 专用 CA 包再运行：
+
+```bash
+export GIT_SSL_CAINFO="$HOME/.local/share/ca-certificates/scholar-git-ca-bundle.pem"
+bash experiments/kda_repro/scripts/prepare_kda_sources.sh /home/huids25/kda-repro
+```
+
+建立 V100 的通用 KDA PyTorch 运行时：
+
+```bash
+KDA_CA_BUNDLE="$HOME/.local/share/ca-certificates/scholar-git-ca-bundle.pem" \
+  bash experiments/kda_repro/scripts/setup_v100_torch.sh
+```
+
+脚本将 PyTorch 2.5.1 CUDA 12.1 wheel 安装到 `~/kda-repro/.venv`，并验证 V100
+的 CUDA 可见性。它不会安装 B200 专用的竞赛依赖。
 
 脚本不会下载 `mlsys2026-flashinfer-contest-solution`。官方明确规定：该最终解答仓库
 仅用于最终结果验证，不能作为重新运行智能体优化流程的输入。
