@@ -65,3 +65,5 @@ KDA_CA_BUNDLE="$HOME/.local/share/ca-certificates/scholar-git-ca-bundle.pem" \
    profile 和保留/淘汰原因。
 
 参考：[KDA 工作流](https://github.com/NVlabs/kda)、[官方竞赛复现说明](https://github.com/mit-han-lab/mlsys2026-flashinfer-contest/blob/main/docs/reproduction.md)。
+
+V100 上已完成的通用流程结果见 [V100_INITIAL_RESULT.md](V100_INITIAL_RESULT.md)。
