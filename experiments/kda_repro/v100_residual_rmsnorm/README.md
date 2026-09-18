@@ -14,6 +14,13 @@ cd ~/kda-repro/workspaces/v100-residual-rmsnorm
 ~/kda-repro/.venv/bin/python benchmark.py
 ```
 
+To run both commands and append the corresponding evidence record:
+
+```bash
+cd /home/huids25/gpgpu-cake
+bash experiments/kda_repro/scripts/run_v100_residual_rmsnorm_baseline.sh
+```
+
 The template follows KDA's required evidence loop.  `src/reference.py` is the
 baseline. A future candidate goes in `src/candidate.py` and exports a
 `forward(hidden, residual, weight, eps)` function returning `(output,
