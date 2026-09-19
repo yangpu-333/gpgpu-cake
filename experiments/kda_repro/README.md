@@ -1,5 +1,9 @@
 # KDA V100 复现入口
 
+官方 GDN Decode 的 V100 适配结果见 [OFFICIAL_V100_RESULT.md](OFFICIAL_V100_RESULT.md)：
+固定官方数据版本，54/54 个真实 workload 和 3 个额外分支通过，原始证据已归档。
+五项官方任务逐项硬件可行性见 [OFFICIAL_TASK_AUDIT.md](OFFICIAL_TASK_AUDIT.md)。
+
 最新严格复核见 [V100_STRICT_RESULT.md](V100_STRICT_RESULT.md)：修复旧梯度错误后，六种形状的前向及参考梯度比较已通过，原始重复计时数据已归档。ncu 计数器采集仍需平台授权。
 
 当前目标是复现 Kernel Design Agents（KDA）的公开工作流，而不是继续扩展
@@ -56,7 +60,19 @@ KDA_CA_BUNDLE="$HOME/.local/share/ca-certificates/scholar-git-ca-bundle.pem" \
 脚本不会下载 `mlsys2026-flashinfer-contest-solution`。官方明确规定：该最终解答仓库
 仅用于最终结果验证，不能作为重新运行智能体优化流程的输入。
 
-## 后续顺序
+## 官方 V100 适配复跑
+
+运行一次长脚本即可下载固定版本的 Decode/Prefill 输入，并顺序执行验证：
+
+```bash
+KDA_CA_BUNDLE="$HOME/.local/share/ca-certificates/scholar-git-ca-bundle.pem" \
+  bash experiments/kda_repro/scripts/run_official_v100.sh all
+```
+
+可以把最后一个参数改成 `decode` 或 `prefill` 只跑单项。结果默认保存在
+`$HOME/kda-repro/runs`，每次使用 UTC 时间戳命名，不覆盖已有结果。
+
+## B200 后续顺序
 
 1. 在 `release/mlsys2026-flashinfer-contest` 中依照官方文档建立锁定的 Python 3.12、
    PyTorch、Triton、FlashInfer 与 DeepGEMM 环境，并下载 trace 数据。
