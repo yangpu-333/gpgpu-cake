@@ -236,9 +236,14 @@ def materialize_proposal(proposal: dict, current_source: str) -> tuple[str, str]
 
 
 def run_evaluation(evaluator: Path, data: Path, candidate: Path, output: Path,
-                   indices: str | None, timeout: int) -> dict:
+                   indices: str | None, timeout: int, *, baseline: Path | None = None,
+                   timing_repeats: int = 7) -> dict:
     command = [sys.executable, str(evaluator), "--data", str(data), "--output", str(output),
                "--candidate-source", str(candidate)]
+    if baseline:
+        command.extend(["--baseline-source", str(baseline)])
+    if timing_repeats != 7:
+        command.extend(["--timing-repeats", str(timing_repeats)])
     if indices:
         command.extend(["--indices", indices])
     child_env = os.environ.copy()
@@ -260,14 +265,14 @@ def run_evaluation(evaluator: Path, data: Path, candidate: Path, output: Path,
     return report
 
 
-def candidate_score(report: dict, expected_workloads: int) -> float:
+def candidate_score(report: dict, expected_workloads: int, name: str = "candidate") -> float:
     if report.get("status") != "complete" or len(report.get("workloads", [])) != expected_workloads:
         raise ValueError("evaluation report is incomplete")
     values = []
     for workload in report["workloads"]:
-        candidate = workload["candidates"].get("candidate", {})
+        candidate = workload["candidates"].get(name, {})
         if candidate.get("status") != "correct" or "median_ms" not in candidate:
-            raise ValueError(f"candidate is not correct for {workload.get('uuid')}")
+            raise ValueError(f"{name} is not correct for {workload.get('uuid')}")
         values.append(float(candidate["median_ms"]))
     if not values or any(value <= 0 or not math.isfinite(value) for value in values):
         raise ValueError("candidate latencies are invalid")
@@ -317,8 +322,12 @@ def load_best(workspace: Path) -> tuple[str, float, Path] | None:
     ledger = workspace / "candidates.jsonl"
     if not ledger.exists():
         return None
-    promoted = [json.loads(line) for line in ledger.read_text().splitlines()
-                if json.loads(line).get("status") == "promoted"]
+    latest = {}
+    for line in ledger.read_text().splitlines():
+        record = json.loads(line)
+        if record.get("candidate_id"):
+            latest[record["candidate_id"]] = record
+    promoted = [record for record in latest.values() if record.get("status") == "promoted"]
     if not promoted:
         return None
     best = min(promoted, key=lambda item: item["score_ms"])
@@ -459,13 +468,17 @@ RECENT OUTCOMES
             candidate_score(smoke, 4)
             full_path = workspace / "runs" / f"{candidate_id}-full.json"
             full = run_evaluation(evaluator, args.data, source_path, full_path,
-                                  None, args.eval_timeout)
+                                  None, args.eval_timeout, baseline=best_source,
+                                  timing_repeats=21)
             score = candidate_score(full, 54)
-            threshold = best_score * (1.0 - args.min_improvement)
+            paired_baseline_score = candidate_score(full, 54, "baseline")
+            threshold = paired_baseline_score * (1.0 - args.min_improvement)
             promoted = score < threshold
             record = {"candidate_id": candidate_id, "parent_id": best_id,
                       "status": "promoted" if promoted else "rejected",
                       "score_ms": score, "previous_best_ms": best_score,
+                      "paired_baseline_ms": paired_baseline_score,
+                      "paired_speedup": paired_baseline_score / score,
                       "source_sha256": sha256(source_path), "rationale": rationale,
                       "reason": "meets promotion threshold" if promoted else
                                 f"requires score below {threshold:.9f} ms",

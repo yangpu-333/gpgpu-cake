@@ -77,6 +77,24 @@ class AgentControllerTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             controller.candidate_score({"status": "complete", "workloads": workloads}, 2)
 
+    def test_load_best_uses_latest_candidate_status(self):
+        with tempfile.TemporaryDirectory() as directory:
+            workspace = Path(directory)
+            (workspace / "candidates/seed").mkdir(parents=True)
+            (workspace / "candidates/agent").mkdir(parents=True)
+            (workspace / "candidates/seed/candidate.py").write_text("seed")
+            (workspace / "candidates/agent/candidate.py").write_text("agent")
+            records = [
+                {"candidate_id": "seed", "status": "promoted", "score_ms": 2.0},
+                {"candidate_id": "agent", "status": "promoted", "score_ms": 1.0},
+                {"candidate_id": "agent", "status": "demoted", "score_ms": 1.0},
+            ]
+            (workspace / "candidates.jsonl").write_text(
+                "".join(json.dumps(record) + "\n" for record in records))
+            candidate_id, score, path = controller.load_best(workspace)
+            self.assertEqual((candidate_id, score), ("seed", 2.0))
+            self.assertEqual(path, workspace / "candidates/seed/candidate.py")
+
     def test_openai_compatible_endpoint(self):
         with patch.dict(os.environ, {"KDA_LLM_BASE_URL": "https://example.test/v1"}, clear=True):
             self.assertEqual(controller.api_endpoint(),
