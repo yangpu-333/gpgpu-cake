@@ -178,7 +178,7 @@ def call_llm(messages: list[dict], json_mode: bool, *,
 
 def call_candidate_llm(messages: list[dict]) -> tuple[str, dict]:
     """Retry one empty response without JSON mode and retain both attempt records."""
-    limit = int(os.environ.get("KDA_LLM_CANDIDATE_MAX_TOKENS", "8000"))
+    limit = int(os.environ.get("KDA_LLM_CANDIDATE_MAX_TOKENS", "4000"))
     attempts = []
     last_error = None
     for attempt, json_mode in enumerate((True, False), start=1):
@@ -188,7 +188,7 @@ def call_candidate_llm(messages: list[dict]) -> tuple[str, dict]:
                 "role": "user",
                 "content": ("The previous request reached the provider output limit. Return only the "
                             "requested compact JSON object. Keep rationale under 600 characters and "
-                            "source under 6500 characters."),
+                            "all replacement text under 2500 characters."),
             }]
         try:
             content, metadata = call_llm(request_messages, json_mode=json_mode,
@@ -202,6 +202,37 @@ def call_candidate_llm(messages: list[dict]) -> tuple[str, dict]:
                              "status": "empty_content", "error": str(error),
                              **error.metadata})
     raise LLMResponseError(str(last_error), {"attempts": attempts})
+
+
+def materialize_proposal(proposal: dict, current_source: str) -> tuple[str, str]:
+    """Apply bounded exact replacements proposed by the model."""
+    rationale = proposal.get("rationale")
+    replacements = proposal.get("replacements")
+    if not isinstance(rationale, str) or not rationale.strip():
+        raise ValueError("response requires a non-empty string rationale")
+    if not isinstance(replacements, list) or not 1 <= len(replacements) <= 8:
+        raise ValueError("response requires 1 to 8 exact replacements")
+    result = current_source
+    total_chars = 0
+    for index, replacement in enumerate(replacements):
+        if not isinstance(replacement, dict):
+            raise ValueError(f"replacement {index} must be an object")
+        old, new = replacement.get("old"), replacement.get("new")
+        if not isinstance(old, str) or not old:
+            raise ValueError(f"replacement {index} requires non-empty old text")
+        if not isinstance(new, str):
+            raise ValueError(f"replacement {index} requires string new text")
+        total_chars += len(old) + len(new)
+        if total_chars > 20_000:
+            raise ValueError("replacement text exceeds 20000 characters")
+        occurrences = result.count(old)
+        if occurrences != 1:
+            raise ValueError(
+                f"replacement {index} old text must occur exactly once, found {occurrences}")
+        result = result.replace(old, new, 1)
+    if result == current_source:
+        raise ValueError("proposal makes no source change")
+    return result, rationale
 
 
 def run_evaluation(evaluator: Path, data: Path, candidate: Path, output: Path,
@@ -388,10 +419,9 @@ def main() -> None:
         candidate_dir = workspace / "candidates" / candidate_id
         candidate_dir.mkdir()
         current_source = best_source.read_text()
-        prompt = f"""Propose exactly one improved complete source module for the task below.
-Return one JSON object with string fields `rationale` and `source`. `source` must be the full Python module, not a diff.
-Do not claim success; the controller will validate it. Focus on a single evidence-based change.
-Keep `rationale` under 600 characters and the complete `source` under 6500 characters. Do not repeat the task or source outside the JSON object.
+        prompt = f"""Propose exactly one small improvement to the source module below.
+Return one compact JSON object with a string `rationale` and a `replacements` array. Each replacement is an object with exact string fields `old` and `new`; `old` must occur exactly once in CURRENT SOURCE. Do not return the complete module or a unified diff.
+Do not claim success; the controller will apply the replacements and validate the complete result. Keep `rationale` under 600 characters, use at most 3 replacements, and keep all replacement text under 2500 characters. Output nothing outside the JSON object.
 
 TASK CONTRACT
 {contract}
@@ -417,10 +447,7 @@ RECENT OUTCOMES
             (workspace / "api" / f"{candidate_id}.json").write_text(json.dumps(
                 {"metadata": metadata, "content": content}, indent=2, ensure_ascii=False))
             proposal = parse_json_content(content)
-            source = proposal.get("source")
-            rationale = proposal.get("rationale")
-            if not isinstance(source, str) or not isinstance(rationale, str):
-                raise ValueError("response requires string rationale and source")
+            source, rationale = materialize_proposal(proposal, current_source)
             validate_source(source)
             source_path = candidate_dir / "candidate.py"
             source_path.write_text(source)

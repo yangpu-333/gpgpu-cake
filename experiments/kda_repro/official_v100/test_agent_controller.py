@@ -47,6 +47,25 @@ class AgentControllerTests(unittest.TestCase):
         self.assertEqual(caught.exception.metadata["finish_reason"], "length")
         self.assertEqual(caught.exception.metadata["content_type"], "NoneType")
 
+    def test_exact_replacements_materialize_a_candidate(self):
+        original = "A = 1\ndef triton_candidate():\n    return A\n"
+        proposal = {"rationale": "test one bounded change",
+                    "replacements": [{"old": "A = 1", "new": "A = 2"}]}
+        source, rationale = controller.materialize_proposal(proposal, original)
+        self.assertIn("A = 2", source)
+        self.assertEqual(rationale, proposal["rationale"])
+
+    def test_replacements_must_be_unique_and_change_source(self):
+        original = "A = 1\nA = 1\ndef triton_candidate():\n    return A\n"
+        with self.assertRaisesRegex(ValueError, "exactly once"):
+            controller.materialize_proposal(
+                {"rationale": "x", "replacements": [{"old": "A = 1", "new": "A = 2"}]},
+                original)
+        with self.assertRaisesRegex(ValueError, "no source change"):
+            controller.materialize_proposal(
+                {"rationale": "x", "replacements": [{"old": "return A", "new": "return A"}]},
+                original)
+
     def test_candidate_score_requires_complete_correct_report(self):
         workloads = []
         for index in range(2):

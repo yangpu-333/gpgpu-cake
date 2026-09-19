@@ -23,8 +23,9 @@ export KDA_LLM_API_KEY="密钥"
 export SSL_CERT_FILE="$HOME/.local/share/ca-certificates/scholar-git-ca-bundle.pem"
 ```
 
-候选代码默认最多使用 8000 个输出 token，并要求源码少于 6500 字符。若兼容服务返回空内容，
-控制器会自动关闭 JSON mode 重试一次，并在 `api/` 中保存两次请求的结束原因和 token 用量。
+候选请求默认最多使用 4000 个输出 token。模型只返回少量精确代码替换，控制器将其应用到
+已审核源码，并重新检查完整源码。若兼容服务返回空内容，控制器会自动关闭 JSON mode
+重试一次，并在 `api/` 中保存两次请求的结束原因和 token 用量。
 可通过 `KDA_LLM_CANDIDATE_MAX_TOKENS` 调整上限。
 
 如果服务提供的是完整 Chat Completions 地址，可改用
