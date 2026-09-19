@@ -7,7 +7,7 @@
 | 任务 | workload | 官方输入范围 | V100 当前结论 |
 |---|---:|---|---|
 | GDN Decode | 54 | batch 1–64 | 已完整通过官方输入和 reference；有可重复性能证据 |
-| GDN Prefill | 100 | 总长度 6–8192，序列数 1–57 | 自编顺序递推 Triton 候选与完整 runner 已就绪，等待 V100 恢复后跑完 |
+| GDN Prefill | 100 | 总长度 6–8192，序列数 1–57 | 已完整通过官方输入和 reference；三种调度均正确并已保存计时 |
 | DSA TopK Indexer | 128 | batch 1–31，固定 11923 页 | FP8 E4M3 和 DeepGEMM 格式；V100 可做软件解码语义验证，不能代表原生 FP8 性能 |
 | DSA Sparse Attention | 23 | token 1–8，固定 8462 页，top-k 2048 | BF16 存储、FP32 参考可适配；约 624 MB KV 输入可放入 32 GB V100 |
 | FP8 MoE | 19 | token 1–14107，32 个本地 expert | 权重约 1.41 GB FP8，参考展开 FP32 约 5.64 GB；能做小规模语义检查，但官方 DeepGEMM 高性能路径不支持 V100 |
@@ -18,8 +18,8 @@ GDN Decode/Prefill 的核心是 128×128 FP32 state 递推，V100 虽无原生 B
 BF16 外部输入输出并用 FP32 完成内部计算。它不要求 SM90 Tensor Core 或原生 FP8，所以最适合
 用现有卡验证“读取契约—生成候选—正确性淘汰—调度选择—保存证据”的 KDA 闭环。
 
-Decode 已覆盖全部官方数据。Prefill 候选按时间维严格顺序更新，不把递推错误地并行化；ROWS
-只切分 V 维。完整验证还会覆盖空序列、无初始 state 和默认 scale。
+Decode 和 Prefill 均已覆盖全部官方数据。Prefill 候选按时间维严格顺序更新，不把递推错误地
+并行化；ROWS 只切分 V 维。验证同时覆盖空序列、无初始 state 和默认 scale。
 
 ## DSA 与 MoE 的边界
 
@@ -33,8 +33,8 @@ MoE 固定几何为 H=7168、I=2048、256 个全局 expert、32 个本地 expert
 
 ## 后续执行顺序
 
-1. V100 恢复后先运行 `run_official_v100.sh prefill`，完成全部 100 组 Prefill。
-2. 再实现 DSA Sparse Attention 的 V100 融合候选；它不需要 FP8，是第二个可信性能实验。
+1. 在已经完整验证的 GDN Decode 上运行 API Agent 自动优化闭环。
+2. 实现 DSA Sparse Attention 的 V100 融合候选；它不需要 FP8，是下一个可信性能实验。
 3. DSA TopK 仅做按位 FP8 解码和索引一致性验证。
 4. MoE 在 V100 上只跑路由和小规模语义检查；完整性能复现转到 B200/Hopper 及以上环境。
 
