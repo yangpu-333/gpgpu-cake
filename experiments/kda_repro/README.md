@@ -3,6 +3,8 @@
 官方 GDN Decode 的 V100 适配结果见 [OFFICIAL_V100_RESULT.md](OFFICIAL_V100_RESULT.md)：
 固定官方数据版本，54/54 个真实 workload 和 3 个额外分支通过，原始证据已归档。
 五项官方任务逐项硬件可行性见 [OFFICIAL_TASK_AUDIT.md](OFFICIAL_TASK_AUDIT.md)。
+自动优化 API 的配置与启动见 [AGENT_SETUP.md](AGENT_SETUP.md)。不需要额外安装独立 Agent；
+仓库内控制器负责候选生成、隔离验证、计时、晋级和证据记录。
 
 最新严格复核见 [V100_STRICT_RESULT.md](V100_STRICT_RESULT.md)：修复旧梯度错误后，六种形状的前向及参考梯度比较已通过，原始重复计时数据已归档。ncu 计数器采集仍需平台授权。
 

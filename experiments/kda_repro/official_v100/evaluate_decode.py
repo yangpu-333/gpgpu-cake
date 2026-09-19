@@ -2,6 +2,7 @@
 import argparse
 import functools
 import hashlib
+import importlib.util
 import json
 import statistics
 import time
@@ -13,6 +14,18 @@ from gdn_decode import vectorized, triton_candidate
 
 NAME = 'gdn_decode_qk4_v8_d128_k_last'
 ORDER = ('q','k','v','state','A_log','a','dt_bias','b','scale')
+
+
+def load_candidate(path):
+    spec = importlib.util.spec_from_file_location('kda_generated_candidate', path)
+    if spec is None or spec.loader is None:
+        raise RuntimeError(f'cannot load candidate: {path}')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    fn = getattr(module, 'triton_candidate', None)
+    if not callable(fn):
+        raise RuntimeError('candidate must export callable triton_candidate')
+    return fn
 
 
 def graph_for(fn, inputs, repetitions=10):
@@ -46,6 +59,8 @@ def main():
     p.add_argument('--data', required=True)
     p.add_argument('--output', required=True)
     p.add_argument('--limit', type=int, default=0)
+    p.add_argument('--indices', default='', help='comma-separated official workload indices')
+    p.add_argument('--candidate-source', help='isolated candidate module to validate')
     args = p.parse_args()
     data, output = Path(args.data), Path(args.output)
     if output.exists():
@@ -57,16 +72,27 @@ def main():
     exec(compile(definition['reference'], 'official_reference', 'exec'), namespace)
     reference = namespace['run']
     workloads = [json.loads(line)['workload'] for line in (data/f'workloads/gdn/{NAME}.jsonl').read_text().splitlines()]
-    if args.limit:
+    if args.indices:
+        indices = [int(value) for value in args.indices.split(',')]
+        if any(index < 0 or index >= len(workloads) for index in indices):
+            raise SystemExit('workload index out of range')
+        workloads = [workloads[index] for index in indices]
+    elif args.limit:
         workloads = workloads[:args.limit]
     functions = {'vectorized': vectorized}
-    for rows in (1, 4, 8, 16):
-        functions[f'triton-r{rows}-w4'] = functools.partial(triton_candidate, rows=rows, warps=4)
+    source_path = Path(__file__).with_name('gdn_decode.py')
+    if args.candidate_source:
+        source_path = Path(args.candidate_source).resolve()
+        functions['candidate'] = load_candidate(source_path)
+    else:
+        for rows in (1, 4, 8, 16):
+            functions[f'triton-r{rows}-w4'] = functools.partial(triton_candidate, rows=rows, warps=4)
     report = dict(scope='official inputs and reference; adapted V100 runner, not official FlashInfer acceptance',
                   dataset=json.loads((data/'dataset-lock.json').read_text()),
                   device=torch.cuda.get_device_name(0), torch=torch.__version__,
                   atol=0.01, rtol=0.01, workloads=[], branches=[], status='running',
-                  source_sha256=hashlib.sha256(Path(__file__).with_name('gdn_decode.py').read_bytes()).hexdigest())
+                  source_path=str(source_path),
+                  source_sha256=hashlib.sha256(source_path.read_bytes()).hexdigest())
     try:
         for workload in workloads:
             spec = workload['inputs']
@@ -94,6 +120,10 @@ def main():
                     item['candidates'][name] = dict(status='correct', max_abs=errors, peak_extra_bytes=peak_extra)
                 except Exception as error:
                     item['candidates'][name] = dict(status='rejected', reason=str(error))
+            if args.candidate_source and item['candidates']['candidate']['status'] != 'correct':
+                report['workloads'].append(item)
+                output.write_text(json.dumps(report,indent=2))
+                raise RuntimeError(f"candidate rejected on {workload['uuid']}: {item['candidates']['candidate']['reason']}")
             if not valid:
                 raise RuntimeError('No candidate passed')
             graphs = {n:graph_for(fn,inputs) for n,fn in valid.items()}
