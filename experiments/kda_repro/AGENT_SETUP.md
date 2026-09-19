@@ -86,5 +86,8 @@ echo "日志: $LOG"
 - `api/`：不含密钥的 API 返回内容和 token 用量；
 - `docs/draft.md`：Agent 的初始优化草案。
 
+已有候选完成三次独立配对复测后，可用 `review_paired_results.py` 汇总报告并把最终的
+`promoted` 或 `demoted` 决定追加到候选账本；重复执行同一组报告不会重复写入。
+
 该静态限制是工程护栏，不是强安全沙箱。若 API 属于不受信任的第三方，应在单独容器或独立普通
 用户下运行 Agent 工作区。验证器、官方 reference 和数据均不由模型修改。
