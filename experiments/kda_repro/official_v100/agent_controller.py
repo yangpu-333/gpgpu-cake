@@ -30,6 +30,14 @@ FORBIDDEN_TORCH_AREAS = {"distributed", "hub", "multiprocessing", "utils",
 SMOKE_INDICES = "0,10,25,53"
 
 
+class LLMResponseError(RuntimeError):
+    """An API response was received but did not contain usable text."""
+
+    def __init__(self, message: str, metadata: dict):
+        super().__init__(message)
+        self.metadata = metadata
+
+
 def sha256(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
@@ -89,6 +97,8 @@ def validate_source(source: str) -> None:
 
 
 def parse_json_content(content: str) -> dict:
+    if not isinstance(content, str) or not content.strip():
+        raise ValueError("API response content is empty")
     text = content.strip()
     if text.startswith("```"):
         first_newline = text.find("\n")
@@ -119,7 +129,8 @@ def api_endpoint() -> str:
     return base + "/chat/completions"
 
 
-def call_llm(messages: list[dict], json_mode: bool) -> tuple[str, dict]:
+def call_llm(messages: list[dict], json_mode: bool, *,
+             max_tokens: int | None = None) -> tuple[str, dict]:
     key = os.environ.get("KDA_LLM_API_KEY")
     model = os.environ.get("KDA_LLM_MODEL")
     if not key or not model:
@@ -128,7 +139,8 @@ def call_llm(messages: list[dict], json_mode: bool) -> tuple[str, dict]:
         "model": model,
         "messages": messages,
         "temperature": float(os.environ.get("KDA_LLM_TEMPERATURE", "0.2")),
-        "max_tokens": int(os.environ.get("KDA_LLM_MAX_TOKENS", "12000")),
+        "max_tokens": max_tokens if max_tokens is not None else
+                      int(os.environ.get("KDA_LLM_MAX_TOKENS", "8000")),
     }
     if json_mode and os.environ.get("KDA_LLM_JSON_MODE", "1") != "0":
         body["response_format"] = {"type": "json_object"}
@@ -144,12 +156,52 @@ def call_llm(messages: list[dict], json_mode: bool) -> tuple[str, dict]:
     with urllib.request.urlopen(request, context=context, timeout=timeout) as response:
         payload = json.loads(response.read())
     try:
-        content = payload["choices"][0]["message"]["content"]
+        choice = payload["choices"][0]
+        message = choice["message"]
+        content = message["content"]
     except (KeyError, IndexError, TypeError) as error:
         raise RuntimeError("unexpected OpenAI-compatible response shape") from error
     metadata = {"model": payload.get("model", model), "usage": payload.get("usage", {}),
-                "id": payload.get("id"), "created": payload.get("created")}
+                "id": payload.get("id"), "created": payload.get("created"),
+                "finish_reason": choice.get("finish_reason"),
+                "message_fields": sorted(message),
+                "content_type": type(content).__name__,
+                "content_chars": len(content) if isinstance(content, str) else None}
+    if not isinstance(content, str) or not content.strip():
+        completion_tokens = metadata["usage"].get("completion_tokens")
+        raise LLMResponseError(
+            "API returned empty content "
+            f"(finish_reason={metadata['finish_reason']!r}, completion_tokens={completion_tokens!r})",
+            metadata)
     return content, metadata
+
+
+def call_candidate_llm(messages: list[dict]) -> tuple[str, dict]:
+    """Retry one empty response without JSON mode and retain both attempt records."""
+    limit = int(os.environ.get("KDA_LLM_CANDIDATE_MAX_TOKENS", "8000"))
+    attempts = []
+    last_error = None
+    for attempt, json_mode in enumerate((True, False), start=1):
+        request_messages = messages
+        if attempt == 2:
+            request_messages = messages + [{
+                "role": "user",
+                "content": ("The previous request reached the provider output limit. Return only the "
+                            "requested compact JSON object. Keep rationale under 600 characters and "
+                            "source under 6500 characters."),
+            }]
+        try:
+            content, metadata = call_llm(request_messages, json_mode=json_mode,
+                                         max_tokens=limit)
+            attempts.append({"attempt": attempt, "json_mode": json_mode,
+                             "status": "content_received", **metadata})
+            return content, {**metadata, "attempts": attempts}
+        except LLMResponseError as error:
+            last_error = error
+            attempts.append({"attempt": attempt, "json_mode": json_mode,
+                             "status": "empty_content", "error": str(error),
+                             **error.metadata})
+    raise LLMResponseError(str(last_error), {"attempts": attempts})
 
 
 def run_evaluation(evaluator: Path, data: Path, candidate: Path, output: Path,
@@ -158,8 +210,12 @@ def run_evaluation(evaluator: Path, data: Path, candidate: Path, output: Path,
                "--candidate-source", str(candidate)]
     if indices:
         command.extend(["--indices", indices])
+    child_env = os.environ.copy()
+    for name in tuple(child_env):
+        if name.startswith("KDA_LLM_") or name in {"OPENAI_API_KEY", "ANTHROPIC_API_KEY"}:
+            child_env.pop(name, None)
     completed = subprocess.run(command, cwd=evaluator.parent, text=True, capture_output=True,
-                               timeout=timeout, check=False)
+                               timeout=timeout, check=False, env=child_env)
     process_record = {"returncode": completed.returncode,
                       "stdout_tail": completed.stdout[-8000:], "stderr_tail": completed.stderr[-8000:]}
     (output.parent / (output.stem + "-process.json")).write_text(json.dumps(process_record, indent=2))
@@ -260,7 +316,8 @@ source_sha256={sha256(best_source)}
 Cover the current baseline, V100 risks, ranked candidate directions, first steps, exact validation gates, and promotion evidence."""
     content, metadata = call_llm([
         {"role": "system", "content": "You are a CUDA/Triton kernel optimization planner. Stay within the supplied contract."},
-        {"role": "user", "content": prompt}], json_mode=False)
+        {"role": "user", "content": prompt}], json_mode=False,
+        max_tokens=int(os.environ.get("KDA_LLM_DRAFT_MAX_TOKENS", "8000")))
     docs = workspace / "docs"
     docs.mkdir(parents=True, exist_ok=True)
     (docs / "draft.md").write_text(content)
@@ -298,7 +355,7 @@ def main() -> None:
         content, metadata = call_llm([
             {"role": "system", "content": "Return JSON only."},
             {"role": "user", "content": "Return exactly this object: {\"status\":\"ok\"}"}],
-            json_mode=True)
+            json_mode=True, max_tokens=64)
         parsed = parse_json_content(content)
         if parsed.get("status") != "ok":
             raise SystemExit("API responded but did not follow the smoke-test contract")
@@ -334,6 +391,7 @@ def main() -> None:
         prompt = f"""Propose exactly one improved complete source module for the task below.
 Return one JSON object with string fields `rationale` and `source`. `source` must be the full Python module, not a diff.
 Do not claim success; the controller will validate it. Focus on a single evidence-based change.
+Keep `rationale` under 600 characters and the complete `source` under 6500 characters. Do not repeat the task or source outside the JSON object.
 
 TASK CONTRACT
 {contract}
@@ -353,9 +411,9 @@ RECENT OUTCOMES
 """
         started = time.time()
         try:
-            content, metadata = call_llm([
+            content, metadata = call_candidate_llm([
                 {"role": "system", "content": "You optimize Triton kernels for sm70 under a strict immutable validator. Output valid JSON only."},
-                {"role": "user", "content": prompt}], json_mode=True)
+                {"role": "user", "content": prompt}])
             (workspace / "api" / f"{candidate_id}.json").write_text(json.dumps(
                 {"metadata": metadata, "content": content}, indent=2, ensure_ascii=False))
             proposal = parse_json_content(content)
@@ -389,6 +447,10 @@ RECENT OUTCOMES
             if promoted:
                 best_id, best_score, best_source = candidate_id, score, source_path
         except Exception as error:
+            if isinstance(error, LLMResponseError):
+                (workspace / "api" / f"{candidate_id}.json").write_text(json.dumps(
+                    {"metadata": error.metadata, "content": None, "error": str(error)},
+                    indent=2, ensure_ascii=False))
             reason = f"{type(error).__name__}: {error}"
             append_jsonl(ledger, {"candidate_id": candidate_id, "parent_id": best_id,
                                   "status": "rejected", "reason": reason[-4000:],

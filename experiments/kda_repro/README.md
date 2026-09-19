@@ -1,5 +1,7 @@
 # KDA V100 复现入口
 
+当前计划：[Path4：KDA 复现与国产 GPU 迁移简要计划](PATH4_PLAN.md)。
+
 官方 GDN Decode 的 V100 适配结果见 [OFFICIAL_V100_RESULT.md](OFFICIAL_V100_RESULT.md)：
 固定官方数据版本，54/54 个真实 workload 和 3 个额外分支通过，原始证据已归档。
 官方 GDN Prefill 结果见 [PREFILL_V100_RESULT.md](PREFILL_V100_RESULT.md)：100/100 个真实
@@ -25,7 +27,8 @@ BI-V150 上的 CAKE/Megatron 原型。KDA 是一个“定义任务 → 实现候
   候选。
 - V100 的结果不能同 B200 竞赛成绩直接比较。官方竞赛复现指定 B200 兼容编译路径；
   要对齐该结果，后续仍须在 B200 上重跑。
-- BI-V150 不适用，因为目标工作流依赖 NVIDIA CUDA、FlashInfer 和 DeepGEMM。
+- BI-V150 可用于 KDA 通用工作流的国产适配；官方竞赛的 NVIDIA CUDA、FlashInfer 和
+  DeepGEMM 路径需另行处理，不能直接视为可在天数运行。
 
 ## V100 容器首次执行
 
