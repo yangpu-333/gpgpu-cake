@@ -16,8 +16,8 @@ NAME = 'gdn_decode_qk4_v8_d128_k_last'
 ORDER = ('q','k','v','state','A_log','a','dt_bias','b','scale')
 
 
-def load_candidate(path):
-    spec = importlib.util.spec_from_file_location('kda_generated_candidate', path)
+def load_candidate(path, module_name='kda_generated_candidate'):
+    spec = importlib.util.spec_from_file_location(module_name, path)
     if spec is None or spec.loader is None:
         raise RuntimeError(f'cannot load candidate: {path}')
     module = importlib.util.module_from_spec(spec)
@@ -60,7 +60,9 @@ def main():
     p.add_argument('--output', required=True)
     p.add_argument('--limit', type=int, default=0)
     p.add_argument('--indices', default='', help='comma-separated official workload indices')
+    p.add_argument('--baseline-source', help='reviewed candidate module for paired comparison')
     p.add_argument('--candidate-source', help='isolated candidate module to validate')
+    p.add_argument('--timing-repeats', type=int, default=7)
     args = p.parse_args()
     data, output = Path(args.data), Path(args.output)
     if output.exists():
@@ -79,11 +81,19 @@ def main():
         workloads = [workloads[index] for index in indices]
     elif args.limit:
         workloads = workloads[:args.limit]
-    functions = {'vectorized': vectorized}
+    if args.timing_repeats < 3:
+        raise SystemExit('timing repeats must be at least 3')
+    functions = {}
+    baseline_path = None
+    if args.baseline_source:
+        baseline_path = Path(args.baseline_source).resolve()
+        functions['baseline'] = load_candidate(baseline_path, 'kda_baseline_candidate')
+    else:
+        functions['vectorized'] = vectorized
     source_path = Path(__file__).with_name('gdn_decode.py')
     if args.candidate_source:
         source_path = Path(args.candidate_source).resolve()
-        functions['candidate'] = load_candidate(source_path)
+        functions['candidate'] = load_candidate(source_path, 'kda_generated_candidate')
     else:
         for rows in (1, 4, 8, 16):
             functions[f'triton-r{rows}-w4'] = functools.partial(triton_candidate, rows=rows, warps=4)
@@ -92,7 +102,11 @@ def main():
                   device=torch.cuda.get_device_name(0), torch=torch.__version__,
                   atol=0.01, rtol=0.01, workloads=[], branches=[], status='running',
                   source_path=str(source_path),
-                  source_sha256=hashlib.sha256(source_path.read_bytes()).hexdigest())
+                  source_sha256=hashlib.sha256(source_path.read_bytes()).hexdigest(),
+                  baseline_source_path=str(baseline_path) if baseline_path else None,
+                  baseline_source_sha256=(hashlib.sha256(baseline_path.read_bytes()).hexdigest()
+                                          if baseline_path else None),
+                  timing_repeats=args.timing_repeats)
     try:
         for workload in workloads:
             spec = workload['inputs']
@@ -124,12 +138,16 @@ def main():
                 report['workloads'].append(item)
                 output.write_text(json.dumps(report,indent=2))
                 raise RuntimeError(f"candidate rejected on {workload['uuid']}: {item['candidates']['candidate']['reason']}")
+            if baseline_path and item['candidates']['baseline']['status'] != 'correct':
+                report['workloads'].append(item)
+                output.write_text(json.dumps(report,indent=2))
+                raise RuntimeError(f"baseline rejected on {workload['uuid']}: {item['candidates']['baseline']['reason']}")
             if not valid:
                 raise RuntimeError('No candidate passed')
             graphs = {n:graph_for(fn,inputs) for n,fn in valid.items()}
             samples = {n:[] for n in graphs}
             names = list(graphs)
-            for repeat in range(7):
+            for repeat in range(args.timing_repeats):
                 for n in (names if repeat%2==0 else names[::-1]):
                     samples[n].append(measure(graphs[n][0]))
             for n in graphs:
