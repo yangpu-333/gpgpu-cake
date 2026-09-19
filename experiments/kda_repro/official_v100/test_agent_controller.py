@@ -13,12 +13,16 @@ class AgentControllerTests(unittest.TestCase):
     def test_reviewed_seed_passes_static_policy(self):
         source = Path(__file__).with_name("gdn_decode.py").read_text()
         controller.validate_source(source)
+        prefill_source = Path(__file__).with_name("gdn_prefill.py").read_text()
+        controller.validate_source(prefill_source)
 
     def test_forbidden_import_and_file_call_are_rejected(self):
         with self.assertRaises(ValueError):
             controller.validate_source("import os\ndef triton_candidate():\n    pass\n")
         with self.assertRaises(ValueError):
             controller.validate_source("def triton_candidate():\n    return open('x')\n")
+        with self.assertRaisesRegex(ValueError, "alias"):
+            controller.validate_source("import torch as safe\ndef triton_candidate():\n    pass\n")
 
     def test_json_fence_is_accepted(self):
         value = controller.parse_json_content('```json\n{"rationale":"x","source":"y"}\n```')

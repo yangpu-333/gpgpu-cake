@@ -75,6 +75,18 @@ echo "日志: $LOG"
 限制、4组冒烟验证和54组完整验证。完整验证在同一进程中对当前最佳与新候选各取21次交替样本，
 新候选相对同轮基线至少改善1%才晋级。中断后用同一命令可继续，已有候选与证据不会覆盖。
 
+GDN Prefill 使用相同控制器，但采用独立工作区、4组冒烟输入和100组完整输入。第一次先运行一轮：
+
+```bash
+LOG="$HOME/kda-repro/agent-prefill-$(date -u +%Y%m%dT%H%M%SZ).log"
+nohup bash experiments/kda_repro/scripts/run_gdn_prefill_agent.sh 1 \
+  > "$LOG" 2>&1 < /dev/null &
+echo "PID: $!"
+echo "日志: $LOG"
+```
+
+Prefill 结果默认保存到 `$HOME/kda-repro/agent-gdn-prefill`，不会和 Decode 候选混合。
+
 ## 保存位置
 
 默认工作区是 `$HOME/kda-repro/agent-gdn-decode`：

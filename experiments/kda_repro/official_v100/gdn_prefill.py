@@ -50,3 +50,8 @@ def candidate(q,k,v,state,A_log,a,dt_bias,b,cu_seqlens,scale,rows=8):
         SCALE=float(scale or 1/math.sqrt(128)),HAS_STATE=state is not None,ROWS=rows,
         num_warps=4,enable_fp_fusion=False)
     return out,ns
+
+
+def triton_candidate(q,k,v,state,A_log,a,dt_bias,b,cu_seqlens,scale,rows=8):
+    """Stable export used by the isolated KDA candidate evaluator."""
+    return candidate(q,k,v,state,A_log,a,dt_bias,b,cu_seqlens,scale,rows=rows)

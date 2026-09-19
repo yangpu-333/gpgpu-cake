@@ -22,6 +22,9 @@ from pathlib import Path
 
 
 ALLOWED_IMPORTS = {"math", "torch", "triton", "triton.language"}
+ALLOWED_IMPORT_ALIASES = {"math": None, "torch": None, "triton": None,
+                          "triton.language": "tl"}
+ALLOWED_FROM_IMPORTS = {("gdn_decode", ("bf16_load",))}
 FORBIDDEN_CALLS = {"eval", "exec", "open", "compile", "input", "__import__",
                    "globals", "locals", "vars", "getattr", "setattr", "delattr",
                    "exit", "quit", "breakpoint", "help"}
@@ -62,6 +65,15 @@ def validate_source(source: str) -> None:
         if isinstance(node, ast.Import):
             if any(alias.name not in ALLOWED_IMPORTS for alias in node.names):
                 raise ValueError("candidate imports a module outside the allowlist")
+            if any(alias.asname != ALLOWED_IMPORT_ALIASES[alias.name] for alias in node.names):
+                raise ValueError("candidate uses an unapproved import alias")
+            continue
+        if isinstance(node, ast.ImportFrom):
+            imported = tuple(alias.name for alias in node.names)
+            if node.level != 0 or (node.module, imported) not in ALLOWED_FROM_IMPORTS:
+                raise ValueError("candidate imports names outside the allowlist")
+            if any(alias.asname for alias in node.names):
+                raise ValueError("candidate from-import aliases are forbidden")
             continue
         if isinstance(node, ast.Assign):
             if not all(isinstance(target, ast.Name) and target.id.isupper() for target in node.targets):
@@ -296,7 +308,8 @@ def recent_ledger(path: Path, count: int = 4) -> str:
     return json.dumps(compact, indent=2)
 
 
-def initialize_seed(workspace: Path, seed: Path, evaluator: Path, data: Path, timeout: int) -> tuple[str, float, Path]:
+def initialize_seed(workspace: Path, seed: Path, evaluator: Path, data: Path, timeout: int,
+                    expected_workloads: int) -> tuple[str, float, Path]:
     candidates = workspace / "candidates"
     runs = workspace / "runs"
     ledger = workspace / "candidates.jsonl"
@@ -310,7 +323,7 @@ def initialize_seed(workspace: Path, seed: Path, evaluator: Path, data: Path, ti
         report = json.loads(report_path.read_text())
     else:
         report = run_evaluation(evaluator, data, seed_copy, report_path, None, timeout)
-    score = candidate_score(report, 54)
+    score = candidate_score(report, expected_workloads)
     if not ledger.exists():
         append_jsonl(ledger, {"candidate_id": "0000-seed", "parent_id": None,
                               "status": "promoted", "score_ms": score,
@@ -370,16 +383,26 @@ def main() -> None:
     here = Path(__file__).resolve().parent
     parser.add_argument("--data", required=True, type=Path)
     parser.add_argument("--workspace", required=True, type=Path)
+    parser.add_argument("--task", choices=("decode", "prefill"), default="decode")
     parser.add_argument("--iterations", type=int, default=10)
     parser.add_argument("--min-improvement", type=float, default=0.01)
     parser.add_argument("--eval-timeout", type=int, default=1800)
     parser.add_argument("--check-config", action="store_true")
     parser.add_argument("--check-api", action="store_true")
     args = parser.parse_args()
-    evaluator = here / "evaluate_decode.py"
-    seed = here / "gdn_decode.py"
-    contract_path = here / "agent" / "task_contract.md"
-    plan_path = here / "agent" / "docs" / "plan.md"
+    task_config = {
+        "decode": {"evaluator": "evaluate_decode.py", "seed": "gdn_decode.py",
+                   "agent_dir": "agent", "workloads": 54, "smoke": "0,10,25,53"},
+        "prefill": {"evaluator": "evaluate_prefill.py", "seed": "gdn_prefill.py",
+                    "agent_dir": "agent_prefill", "workloads": 100,
+                    "smoke": "0,25,60,99"},
+    }[args.task]
+    evaluator = here / task_config["evaluator"]
+    seed = here / task_config["seed"]
+    contract_path = here / task_config["agent_dir"] / "task_contract.md"
+    plan_path = here / task_config["agent_dir"] / "docs" / "plan.md"
+    expected_workloads = task_config["workloads"]
+    smoke_indices = task_config["smoke"]
     for required in (evaluator, seed, contract_path, plan_path,
                      args.data / "dataset-lock.json"):
         if not required.exists():
@@ -413,7 +436,7 @@ def main() -> None:
     existing = load_best(workspace)
     if existing is None:
         best_id, best_score, best_source = initialize_seed(
-            workspace, seed, evaluator, args.data, args.eval_timeout)
+            workspace, seed, evaluator, args.data, args.eval_timeout, expected_workloads)
     else:
         best_id, best_score, best_source = existing
     if not (workspace / "docs" / "draft.md").exists():
@@ -464,14 +487,14 @@ RECENT OUTCOMES
                 {"metadata": metadata, "rationale": rationale}, indent=2, ensure_ascii=False))
             smoke_path = workspace / "runs" / f"{candidate_id}-smoke.json"
             smoke = run_evaluation(evaluator, args.data, source_path, smoke_path,
-                                   SMOKE_INDICES, args.eval_timeout)
+                                   smoke_indices, args.eval_timeout)
             candidate_score(smoke, 4)
             full_path = workspace / "runs" / f"{candidate_id}-full.json"
             full = run_evaluation(evaluator, args.data, source_path, full_path,
                                   None, args.eval_timeout, baseline=best_source,
                                   timing_repeats=21)
-            score = candidate_score(full, 54)
-            paired_baseline_score = candidate_score(full, 54, "baseline")
+            score = candidate_score(full, expected_workloads)
+            paired_baseline_score = candidate_score(full, expected_workloads, "baseline")
             threshold = paired_baseline_score * (1.0 - args.min_improvement)
             promoted = score < threshold
             record = {"candidate_id": candidate_id, "parent_id": best_id,
