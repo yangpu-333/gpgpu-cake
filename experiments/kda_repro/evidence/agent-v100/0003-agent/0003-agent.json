@@ -1,0 +1,80 @@
+{
+  "metadata": {
+    "model": "Claude-Opus-4.8",
+    "usage": {
+      "completion_tokens": 1624,
+      "prompt_tokens": 2793,
+      "total_tokens": 4417,
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "text_tokens": 1624
+      },
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "text_tokens": 2793,
+        "cache_creation_tokens": 0,
+        "cache_creation_token_details": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        }
+      },
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "inference_geo": "not_available"
+    },
+    "id": "chatcmpl-4f8c6fcf-70d5-4b69-878c-60c7c9406b11",
+    "created": 1789802613,
+    "finish_reason": "stop",
+    "message_fields": [
+      "content",
+      "provider_specific_fields",
+      "reasoning_content",
+      "role",
+      "thinking_blocks"
+    ],
+    "content_type": "str",
+    "content_chars": 757,
+    "attempts": [
+      {
+        "attempt": 1,
+        "json_mode": true,
+        "status": "content_received",
+        "model": "Claude-Opus-4.8",
+        "usage": {
+          "completion_tokens": 1624,
+          "prompt_tokens": 2793,
+          "total_tokens": 4417,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "text_tokens": 1624
+          },
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "text_tokens": 2793,
+            "cache_creation_tokens": 0,
+            "cache_creation_token_details": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "not_available"
+        },
+        "id": "chatcmpl-4f8c6fcf-70d5-4b69-878c-60c7c9406b11",
+        "created": 1789802613,
+        "finish_reason": "stop",
+        "message_fields": [
+          "content",
+          "provider_specific_fields",
+          "reasoning_content",
+          "role",
+          "thinking_blocks"
+        ],
+        "content_type": "str",
+        "content_chars": 757
+      }
+    ]
+  },
+  "content": "{\"rationale\":\"Algebraically simplify the update: new_v-old_v = beta*(v-old_v), so updated = old + k*beta*(v-old_v). This eliminates one full (ROWS,128) matrix multiply-by-k and one add/subtract, plus the separate new_v vector op, reducing arithmetic per element while remaining mathematically exact (well within atol=rtol=0.01).\",\"replacements\":[{\"old\":\"    old_v = tl.sum(old * k[None, :], 1)\\n    new_v = beta * v + (1. - beta) * old_v\\n    updated = old - k[None, :] * old_v[:, None] + k[None, :] * new_v[:, None]\\n    output = tl.sum(updated * q[None, :], 1) * SCALE\",\"new\":\"    old_v = tl.sum(old * k[None, :], 1)\\n    delta = beta * (v - old_v)\\n    updated = old + k[None, :] * delta[:, None]\\n    output = tl.sum(updated * q[None, :], 1) * SCALE\"}]}"
+}

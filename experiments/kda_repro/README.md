@@ -2,6 +2,10 @@
 
 当前计划：[Path4：KDA 复现与国产 GPU 迁移简要计划](PATH4_PLAN.md)。
 
+首个模型生成候选已经完成 V100 全闭环，见
+[KDA Agent 首轮 V100 闭环结果](AGENT_V100_RESULT.md)。候选通过 54/54 组验证；约 1.10% 的
+单次测量改善仍需同进程交替复测后才能认定为稳定提升。
+
 官方 GDN Decode 的 V100 适配结果见 [OFFICIAL_V100_RESULT.md](OFFICIAL_V100_RESULT.md)：
 固定官方数据版本，54/54 个真实 workload 和 3 个额外分支通过，原始证据已归档。
 官方 GDN Prefill 结果见 [PREFILL_V100_RESULT.md](PREFILL_V100_RESULT.md)：100/100 个真实
