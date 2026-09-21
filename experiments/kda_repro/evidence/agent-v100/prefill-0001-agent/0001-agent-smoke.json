@@ -1,0 +1,149 @@
+{
+  "status": "complete",
+  "scope": "official data and reference; adapted V100 runner, not official evaluator",
+  "dataset": {
+    "repo": "flashinfer-ai/mlsys26-contest",
+    "revision": "5e832ce88dd1013032b22a0e942979d7d2769cc3"
+  },
+  "device": "Tesla V100-PCIE-32GB",
+  "torch": "2.5.1+cu121",
+  "atol": 0.01,
+  "rtol": 0.01,
+  "workloads": [
+    {
+      "uuid": "77daf91d-0660-4c4b-8c32-336a69281cd9",
+      "axes": {
+        "total_seq_len": 6,
+        "num_seqs": 1,
+        "len_cu_seqlens": 2
+      },
+      "candidates": {
+        "candidate": {
+          "status": "correct",
+          "max_abs": [
+            0.0,
+            1.6391277313232422e-07
+          ],
+          "peak_extra_bytes": 536576,
+          "raw_ms": [
+            0.017685333887736004,
+            0.016842667013406754,
+            0.0161920003592968,
+            0.0162773331006368,
+            0.016373333831628162,
+            0.015978666643301647,
+            0.01618133361140887
+          ],
+          "median_ms": 0.0162773331006368
+        }
+      },
+      "winner": "candidate"
+    },
+    {
+      "uuid": "9343fd82-a06d-493a-9918-1044b0c1cbd1",
+      "axes": {
+        "total_seq_len": 49,
+        "num_seqs": 1,
+        "len_cu_seqlens": 2
+      },
+      "candidates": {
+        "candidate": {
+          "status": "correct",
+          "max_abs": [
+            1.9073486328125e-06,
+            2.9802322387695312e-08
+          ],
+          "peak_extra_bytes": 624640,
+          "raw_ms": [
+            0.06971733272075653,
+            0.06818133095900218,
+            0.0678719977537791,
+            0.06779733300209045,
+            0.06782933572928111,
+            0.06788266698519389,
+            0.06783999999364217
+          ],
+          "median_ms": 0.0678719977537791
+        }
+      },
+      "winner": "candidate"
+    },
+    {
+      "uuid": "1aa8cf18-0fca-4e32-a7ff-7ed29d24a3d2",
+      "axes": {
+        "total_seq_len": 35,
+        "num_seqs": 2,
+        "len_cu_seqlens": 3
+      },
+      "candidates": {
+        "candidate": {
+          "status": "correct",
+          "max_abs": [
+            7.450580596923828e-09,
+            1.7881393432617188e-07
+          ],
+          "peak_extra_bytes": 1120256,
+          "raw_ms": [
+            0.03478399912516276,
+            0.03352533280849457,
+            0.03320533285538355,
+            0.03302400062481562,
+            0.03311999887228012,
+            0.032831999162832894,
+            0.03331200033426285
+          ],
+          "median_ms": 0.03320533285538355
+        }
+      },
+      "winner": "candidate"
+    },
+    {
+      "uuid": "cc241d2e-f8b7-448f-95ec-1d5d2809c068",
+      "axes": {
+        "total_seq_len": 23,
+        "num_seqs": 1,
+        "len_cu_seqlens": 2
+      },
+      "candidates": {
+        "candidate": {
+          "status": "correct",
+          "max_abs": [
+            2.9802322387695312e-08,
+            4.6193599700927734e-07
+          ],
+          "peak_extra_bytes": 571392,
+          "raw_ms": [
+            0.03869866579771042,
+            0.03697066754102707,
+            0.03681066632270813,
+            0.036831999818483986,
+            0.03682133307059606,
+            0.036874666810035706,
+            0.0367253323396047
+          ],
+          "median_ms": 0.036831999818483986
+        }
+      },
+      "winner": "candidate"
+    }
+  ],
+  "branches": [
+    {
+      "state_provided": false,
+      "empty_sequence": true,
+      "default_scale": true,
+      "status": "passed"
+    },
+    {
+      "state_provided": true,
+      "empty_sequence": true,
+      "default_scale": true,
+      "status": "passed"
+    }
+  ],
+  "source_path": "/home/huids25/kda-repro/agent-gdn-prefill/candidates/0001-agent/candidate.py",
+  "source_sha256": "5491375fc7a3bc331bd16910f8ae15ba0249ea3dd38cf276a631f31fba890e9b",
+  "baseline_source_path": null,
+  "baseline_source_sha256": null,
+  "timing_repeats": 7
+}

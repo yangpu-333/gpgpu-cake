@@ -5,7 +5,8 @@
 首个模型生成候选已经完成 V100 全闭环，见
 [KDA Agent 首轮 V100 闭环结果](AGENT_V100_RESULT.md)。候选通过 54/54 组验证；约 1.10% 的
 首次跨运行改善经三次同进程交替复测后修正为约 0.46%，低于1%晋级门槛。
-GDN Prefill 的独立 Agent 工作区、100组验证和配对晋级入口也已准备，启动方式见
+[KDA Agent GDN Prefill V100 结果](AGENT_PREFILL_V100_RESULT.md)完成100/100组验证；模型候选经
+三轮同进程配对复测取得1.454%综合改善，超过1%门槛并晋级。启动与复核方式见
 [Agent 接入说明](AGENT_SETUP.md)。
 
 官方 GDN Decode 的 V100 适配结果见 [OFFICIAL_V100_RESULT.md](OFFICIAL_V100_RESULT.md)：

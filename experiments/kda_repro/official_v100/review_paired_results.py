@@ -14,6 +14,17 @@ def geometric_mean(values: list[float]) -> float:
     return math.exp(sum(math.log(value) for value in values) / len(values))
 
 
+def select_best_record(records: list[dict]) -> dict | None:
+    """Return the fastest candidate whose latest ledger status is promoted."""
+    latest = {}
+    for record in records:
+        if record.get("candidate_id"):
+            latest[record["candidate_id"]] = record
+    promoted = [record for record in latest.values()
+                if record.get("status") == "promoted"]
+    return min(promoted, key=lambda record: float(record["score_ms"])) if promoted else None
+
+
 def review_reports(reports: list[tuple[Path, dict]], min_improvement: float) -> dict:
     if len(reports) < 3:
         raise ValueError("at least three paired reports are required")
@@ -125,6 +136,23 @@ def main() -> None:
     if not already_recorded:
         with ledger.open("a", encoding="utf-8") as handle:
             handle.write(json.dumps(decision, ensure_ascii=False) + "\n")
+        records.append(decision)
+
+    best = select_best_record(records)
+    if best is not None:
+        source = args.workspace.resolve() / "candidates" / best["candidate_id"] / "candidate.py"
+        if not source.exists():
+            raise SystemExit(f"best candidate source is missing: {source}")
+        snapshot = {
+            "candidate_id": best["candidate_id"],
+            "score_ms": float(best["score_ms"]),
+            "source": str(source),
+            "source_sha256": best.get("source_sha256") or hashlib.sha256(source.read_bytes()).hexdigest(),
+        }
+        best_path = args.workspace.resolve() / "best.json"
+        temporary = best_path.with_suffix(".json.tmp")
+        temporary.write_text(json.dumps(snapshot, indent=2) + "\n", encoding="utf-8")
+        temporary.replace(best_path)
     print(json.dumps({"status": "review_recorded" if not already_recorded else "review_already_recorded",
                       "decision": decision, "review": review}, ensure_ascii=False, indent=2))
 

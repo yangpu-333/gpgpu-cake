@@ -1,0 +1,80 @@
+{
+  "metadata": {
+    "model": "Claude-Opus-4.8",
+    "usage": {
+      "completion_tokens": 1406,
+      "prompt_tokens": 2031,
+      "total_tokens": 3437,
+      "completion_tokens_details": {
+        "reasoning_tokens": 0,
+        "text_tokens": 1406
+      },
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "text_tokens": 2031,
+        "cache_creation_tokens": 0,
+        "cache_creation_token_details": {
+          "ephemeral_5m_input_tokens": 0,
+          "ephemeral_1h_input_tokens": 0
+        }
+      },
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "inference_geo": "not_available"
+    },
+    "id": "chatcmpl-e69d9369-40c7-47fb-ae82-ec4ac20b3f27",
+    "created": 1789825313,
+    "finish_reason": "stop",
+    "message_fields": [
+      "content",
+      "provider_specific_fields",
+      "reasoning_content",
+      "role",
+      "thinking_blocks"
+    ],
+    "content_type": "str",
+    "content_chars": 583,
+    "attempts": [
+      {
+        "attempt": 1,
+        "json_mode": true,
+        "status": "content_received",
+        "model": "Claude-Opus-4.8",
+        "usage": {
+          "completion_tokens": 1406,
+          "prompt_tokens": 2031,
+          "total_tokens": 3437,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "text_tokens": 1406
+          },
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "text_tokens": 2031,
+            "cache_creation_tokens": 0,
+            "cache_creation_token_details": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "not_available"
+        },
+        "id": "chatcmpl-e69d9369-40c7-47fb-ae82-ec4ac20b3f27",
+        "created": 1789825313,
+        "finish_reason": "stop",
+        "message_fields": [
+          "content",
+          "provider_specific_fields",
+          "reasoning_content",
+          "role",
+          "thinking_blocks"
+        ],
+        "content_type": "str",
+        "content_chars": 583
+      }
+    ]
+  },
+  "rationale": "Algebraically simplify the recurrence: state = old - k*old_v + k*new_v with new_v = beta*v+(1-beta)*old_v equals old + k*beta*(v-old_v). This removes the new_v computation and one full (ROWS,128) fused multiply/subtract per timestep in the hot sequential loop, cutting arithmetic while staying identical up to fp32 rounding (well within atol=0.01)."
+}

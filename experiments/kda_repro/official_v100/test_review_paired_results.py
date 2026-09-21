@@ -39,6 +39,17 @@ class PairedReviewTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "same"):
             review.review_reports(reports, 0.01)
 
+    def test_latest_status_controls_best_snapshot(self):
+        records = [
+            {"candidate_id": "seed", "status": "promoted", "score_ms": 1.0},
+            {"candidate_id": "agent", "status": "promoted", "score_ms": 0.9},
+            {"candidate_id": "agent", "status": "demoted", "score_ms": 0.91},
+        ]
+        self.assertEqual(review.select_best_record(records)["candidate_id"], "seed")
+
+        records.append({"candidate_id": "agent", "status": "promoted", "score_ms": 0.89})
+        self.assertEqual(review.select_best_record(records)["candidate_id"], "agent")
+
 
 if __name__ == "__main__":
     unittest.main()

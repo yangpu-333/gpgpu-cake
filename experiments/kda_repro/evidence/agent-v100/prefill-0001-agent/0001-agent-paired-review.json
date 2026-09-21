@@ -1,0 +1,56 @@
+{
+  "status": "review_recorded",
+  "decision": {
+    "candidate_id": "0001-agent",
+    "parent_id": "0000-seed",
+    "status": "promoted",
+    "score_ms": 0.30833486369825386,
+    "paired_baseline_ms": 0.31288292607653506,
+    "paired_speedup": 1.0147503993668783,
+    "paired_improvement_percent": 1.4535987742484546,
+    "source_sha256": "5491375fc7a3bc331bd16910f8ae15ba0249ea3dd38cf276a631f31fba890e9b",
+    "reason": "repeated paired evidence meets promotion threshold",
+    "review_report_sha256": [
+      "145d02d98161ce33b24cb6812e363f02b1aae47f23a6752f6bc3f10fb1abd61d",
+      "094b81301ac2ba79ffcacea62a3ef52fc8f71176775c185a40441e27d5a267bf",
+      "1c92e4c7a06c94ef0ecc97222e30600810d81629171040fba90f69a429576b1e"
+    ]
+  },
+  "review": {
+    "reports": [
+      {
+        "path": "/home/huids25/kda-repro/agent-gdn-prefill/runs/0001-agent-full.json",
+        "workloads": 100,
+        "baseline_geomean_ms": 0.3128001048248122,
+        "candidate_geomean_ms": 0.3083590782459313,
+        "speedup": 1.0144021269104293
+      },
+      {
+        "path": "/home/huids25/kda-repro/agent-gdn-prefill/runs/0001-agent-paired-1.json",
+        "workloads": 100,
+        "baseline_geomean_ms": 0.3132589720931367,
+        "candidate_geomean_ms": 0.30865672426120105,
+        "speedup": 1.0149105704499117
+      },
+      {
+        "path": "/home/huids25/kda-repro/agent-gdn-prefill/runs/0001-agent-paired-2.json",
+        "workloads": 100,
+        "baseline_geomean_ms": 0.3125900752105418,
+        "candidate_geomean_ms": 0.3079891513667923,
+        "speedup": 1.0149385906072714
+      }
+    ],
+    "report_count": 3,
+    "workloads_per_report": 100,
+    "paired_measurements": 300,
+    "baseline_source_sha256": "cf0280e026100753f0b5d306faffa082d8a09e39b51bd53ab3908bb9b7eb2289",
+    "candidate_source_sha256": "5491375fc7a3bc331bd16910f8ae15ba0249ea3dd38cf276a631f31fba890e9b",
+    "baseline_geomean_ms": 0.31288292607653506,
+    "candidate_geomean_ms": 0.30833486369825386,
+    "paired_speedup": 1.0147503993668783,
+    "paired_improvement_percent": 1.4535987742484546,
+    "candidate_wins": 248,
+    "required_improvement_percent": 1.0,
+    "meets_threshold": true
+  }
+}
