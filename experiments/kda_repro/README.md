@@ -1,6 +1,8 @@
 # KDA V100 复现入口
 
 当前计划：[Path4：KDA 复现与国产 GPU 迁移简要计划](PATH4_PLAN.md)。
+当前环境、五项任务覆盖、Agent 结果、完成度计算和后续验收条件汇总在
+[KDA 复现工作详细进展报告](KDA_REPRODUCTION_PROGRESS_REPORT.md)。
 
 首个模型生成候选已经完成 V100 全闭环，见
 [KDA Agent 首轮 V100 闭环结果](AGENT_V100_RESULT.md)。候选通过 54/54 组验证；约 1.10% 的
