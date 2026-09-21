@@ -87,6 +87,18 @@ echo "日志: $LOG"
 
 Prefill 结果默认保存到 `$HOME/kda-repro/agent-gdn-prefill`，不会和 Decode 候选混合。
 
+单轮完整评测达到1%门槛后，再运行统一复核脚本。它把首次完整报告和两轮新的同进程交替测量
+合并为三轮证据，并将最终 `promoted` 或 `demoted` 决定追加到候选账本：
+
+```bash
+nohup bash experiments/kda_repro/scripts/run_paired_review.sh \
+  prefill 0001-agent 0000-seed 2 \
+  > "$HOME/kda-repro/prefill-0001-paired-review.log" 2>&1 < /dev/null &
+```
+
+将第一个参数改为 `decode` 可复核 Decode 候选。候选和基线 ID 必须来自同一工作区的
+`candidates.jsonl`；每轮固定使用21次交替计时，默认要求三轮合并后改善至少1%。
+
 ## 保存位置
 
 默认工作区是 `$HOME/kda-repro/agent-gdn-decode`：
