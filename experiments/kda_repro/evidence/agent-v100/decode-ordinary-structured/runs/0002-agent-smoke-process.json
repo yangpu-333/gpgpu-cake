@@ -1,0 +1,5 @@
+{
+  "returncode": 0,
+  "stdout_tail": "{\"uuid\": \"901e5104-dccb-4c3f-ae13-ef4d31a4d456\", \"batch\": 1, \"winner\": \"candidate\"}\n{\"uuid\": \"ec9d2340-6d13-40e4-a6fe-4483a1cacd0d\", \"batch\": 4, \"winner\": \"candidate\"}\n{\"uuid\": \"76eec66d-0ada-4c35-bf21-a07247ad7f05\", \"batch\": 16, \"winner\": \"candidate\"}\n{\"uuid\": \"42963acb-f2f5-4ada-9205-3931cd26fa44\", \"batch\": 64, \"winner\": \"candidate\"}\n",
+  "stderr_tail": ""
+}

@@ -1,0 +1,88 @@
+{
+  "metadata": {
+    "attempts": [
+      {
+        "attempt": 1,
+        "json_mode": true,
+        "status": "empty_content",
+        "error": "API returned empty content (finish_reason='length', completion_tokens=6000)",
+        "model": "Claude-Opus-4.8",
+        "usage": {
+          "completion_tokens": 6000,
+          "prompt_tokens": 1562,
+          "total_tokens": 7562,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "text_tokens": 6000
+          },
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "text_tokens": 1562,
+            "cache_creation_tokens": 0,
+            "cache_creation_token_details": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "not_available"
+        },
+        "id": "chatcmpl-cdced51e-b390-45f2-9044-7a29c63ceea3",
+        "created": 1790066352,
+        "finish_reason": "length",
+        "message_fields": [
+          "content",
+          "provider_specific_fields",
+          "reasoning_content",
+          "role",
+          "thinking_blocks"
+        ],
+        "content_type": "NoneType",
+        "content_chars": null
+      },
+      {
+        "attempt": 2,
+        "json_mode": false,
+        "status": "empty_content",
+        "error": "API returned empty content (finish_reason='length', completion_tokens=6000)",
+        "model": "Claude-Opus-4.8",
+        "usage": {
+          "completion_tokens": 6000,
+          "prompt_tokens": 1615,
+          "total_tokens": 7615,
+          "completion_tokens_details": {
+            "reasoning_tokens": 0,
+            "text_tokens": 6000
+          },
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "text_tokens": 1615,
+            "cache_creation_tokens": 0,
+            "cache_creation_token_details": {
+              "ephemeral_5m_input_tokens": 0,
+              "ephemeral_1h_input_tokens": 0
+            }
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "not_available"
+        },
+        "id": "chatcmpl-5ff4ea25-dab6-4564-aec1-e7f8af32d207",
+        "created": 1790066423,
+        "finish_reason": "length",
+        "message_fields": [
+          "content",
+          "provider_specific_fields",
+          "reasoning_content",
+          "role",
+          "thinking_blocks"
+        ],
+        "content_type": "NoneType",
+        "content_chars": null
+      }
+    ]
+  },
+  "content": null,
+  "error": "API returned empty content (finish_reason='length', completion_tokens=6000)"
+}

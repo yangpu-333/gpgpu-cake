@@ -13,6 +13,7 @@
 |---|---:|---:|
 | GDN Decode V100 适配 | 54/54 官方 workload + 3个边界分支 | 全部正确 |
 | GDN Prefill V100 适配 | 100/100 官方 workload + 2个边界分支 | 全部正确 |
+| 普通 PyTorch → 结构化 Agent | 54组同轮配对测量 | **10.985×，正式晋级** |
 | Decode Agent 候选 | 三轮、162组配对测量 | 改善0.46%，低于门槛，自动淘汰 |
 | Prefill Agent 候选 | 三轮、300组配对测量 | **改善1.454%，正式晋级** |
 | Residual Add RMSNorm | 6种形状，前向与参考梯度 | 全部通过严格复核 |
@@ -36,7 +37,7 @@ state = old + k * delta[:, None]
 
 ```mermaid
 flowchart LR
-    A[任务契约与当前最佳实现] --> B[LLM 生成精确代码替换]
+    A[任务契约与当前最佳实现] --> B[LLM 生成代码修改或结构化设计]
     B --> C[静态安全与语法检查]
     C --> D[小规模冒烟验证]
     D --> E[官方 workload 全量正确性]
@@ -56,10 +57,14 @@ flowchart LR
 
 | 实验 | 基线几何平均 | 候选几何平均 | 综合变化 | 候选胜出 |
 |---|---:|---:|---:|---:|
+| Decode 普通 PyTorch → 结构化 Agent | 0.256053 ms | 0.023308 ms | **10.985×** | 54/54 |
 | GDN Prefill | 0.312883 ms | 0.308335 ms | **提升1.454%** | 248/300 |
 | GDN Decode | 0.022807 ms | 0.022702 ms | 提升0.46% | 124/162 |
 
-Prefill 三轮独立改善分别为 `1.420%`、`1.469%` 和 `1.472%`，波动较小且均超过1%。Decode
+普通基线实验由模型选择融合策略、`ROWS=4`、4 warps 和递推化简，控制器将设计降为受限的
+sm70 Triton 模板并执行全量验证。该 `10.985×` 是相对 eager PyTorch 的流程内总收益；相对强
+Triton 基线的增量仍按下述配对复测报告。Prefill 三轮独立改善分别为 `1.420%`、`1.469%` 和
+`1.472%`，波动较小且均超过1%。Decode
 首次跨运行比较曾显示约1.10%改善，但同进程交替复测后只有0.46%，因此没有晋级。这说明配对
 复测可以过滤微秒级 kernel 的计时噪声。
 
@@ -118,6 +123,13 @@ nohup bash experiments/kda_repro/scripts/run_gdn_prefill_agent.sh 1 \
   > "$HOME/kda-repro/agent-prefill.log" 2>&1 < /dev/null &
 ```
 
+从普通 PyTorch 基线运行结构化 Decode Agent：
+
+```bash
+nohup bash experiments/kda_repro/scripts/run_gdn_decode_ordinary_agent.sh 1 \
+  > "$HOME/kda-repro/agent-decode-ordinary.log" 2>&1 < /dev/null &
+```
+
 模型服务配置、候选目录和三轮复核命令见
 [Agent 接入说明](experiments/kda_repro/AGENT_SETUP.md)。API 密钥必须保存在仓库之外。
 
@@ -127,6 +139,7 @@ nohup bash experiments/kda_repro/scripts/run_gdn_prefill_agent.sh 1 \
 |---|---|
 | 环境、任务覆盖、完成度与后续验收 | [KDA 复现详细进展报告](experiments/kda_repro/KDA_REPRODUCTION_PROGRESS_REPORT.md) |
 | Prefill Agent 晋级结果 | [GDN Prefill Agent 结果](experiments/kda_repro/AGENT_PREFILL_V100_RESULT.md) |
+| 普通基线结构化 Agent 结果 | [PyTorch 到 Triton 的10.985×实验](experiments/kda_repro/AGENT_ORDINARY_BASELINE_V100_RESULT.md) |
 | Decode Agent 淘汰结果 | [GDN Decode Agent 结果](experiments/kda_repro/AGENT_V100_RESULT.md) |
 | GDN Decode 全量结果 | [Decode V100 报告](experiments/kda_repro/OFFICIAL_V100_RESULT.md) |
 | GDN Prefill 全量结果 | [Prefill V100 报告](experiments/kda_repro/PREFILL_V100_RESULT.md) |

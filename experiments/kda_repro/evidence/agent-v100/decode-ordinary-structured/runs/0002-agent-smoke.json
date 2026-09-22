@@ -1,0 +1,208 @@
+{
+  "scope": "official inputs and reference; adapted V100 runner, not official FlashInfer acceptance",
+  "dataset": {
+    "repo": "flashinfer-ai/mlsys26-contest",
+    "revision": "5e832ce88dd1013032b22a0e942979d7d2769cc3"
+  },
+  "device": "Tesla V100-PCIE-32GB",
+  "torch": "2.5.1+cu121",
+  "atol": 0.01,
+  "rtol": 0.01,
+  "workloads": [
+    {
+      "uuid": "901e5104-dccb-4c3f-ae13-ef4d31a4d456",
+      "batch": 1,
+      "candidates": {
+        "vectorized": {
+          "status": "correct",
+          "max_abs": [
+            0.0,
+            1.4901161193847656e-08
+          ],
+          "peak_extra_bytes": 2118656,
+          "raw_ms": [
+            0.09837120175361633,
+            0.08419520258903504,
+            0.08079360127449035,
+            0.08267840147018432,
+            0.08094080090522766,
+            0.0827679991722107,
+            0.08058559894561768
+          ],
+          "median_ms": 0.08267840147018432
+        },
+        "candidate": {
+          "status": "correct",
+          "max_abs": [
+            0.0,
+            5.960464477539063e-08
+          ],
+          "peak_extra_bytes": 526336,
+          "raw_ms": [
+            0.006595200300216675,
+            0.00520000010728836,
+            0.005798399820923806,
+            0.005116799846291542,
+            0.005804799869656563,
+            0.005116799846291542,
+            0.005782400071620941
+          ],
+          "median_ms": 0.005782400071620941
+        }
+      },
+      "winner": "candidate"
+    },
+    {
+      "uuid": "ec9d2340-6d13-40e4-a6fe-4483a1cacd0d",
+      "batch": 4,
+      "candidates": {
+        "vectorized": {
+          "status": "correct",
+          "max_abs": [
+            0.0,
+            8.940696716308594e-08
+          ],
+          "peak_extra_bytes": 8471552,
+          "raw_ms": [
+            0.1302847981452942,
+            0.12670719623565674,
+            0.12719680070877076,
+            0.12613760232925414,
+            0.12665599584579468,
+            0.1261088013648987,
+            0.12682559490203857
+          ],
+          "median_ms": 0.12670719623565674
+        },
+        "candidate": {
+          "status": "correct",
+          "max_abs": [
+            9.313225746154785e-10,
+            1.1920928955078125e-07
+          ],
+          "peak_extra_bytes": 2105344,
+          "raw_ms": [
+            0.008723200112581254,
+            0.007561600208282471,
+            0.008579199761152267,
+            0.007472000271081925,
+            0.008406399935483932,
+            0.007411199808120728,
+            0.00841279998421669
+          ],
+          "median_ms": 0.008406399935483932
+        }
+      },
+      "winner": "candidate"
+    },
+    {
+      "uuid": "76eec66d-0ada-4c35-bf21-a07247ad7f05",
+      "batch": 16,
+      "candidates": {
+        "vectorized": {
+          "status": "correct",
+          "max_abs": [
+            0.0,
+            2.384185791015625e-07
+          ],
+          "peak_extra_bytes": 33883136,
+          "raw_ms": [
+            0.28582398891448973,
+            0.28162240982055664,
+            0.28176639080047605,
+            0.28101119995117185,
+            0.2809407949447632,
+            0.2807552099227905,
+            0.2809760093688965
+          ],
+          "median_ms": 0.28101119995117185
+        },
+        "candidate": {
+          "status": "correct",
+          "max_abs": [
+            7.450580596923828e-09,
+            2.384185791015625e-07
+          ],
+          "peak_extra_bytes": 8421376,
+          "raw_ms": [
+            0.028233599662780762,
+            0.026867198944091796,
+            0.027718400955200194,
+            0.026771199703216553,
+            0.027302399277687073,
+            0.0267551988363266,
+            0.027587199211120607
+          ],
+          "median_ms": 0.027302399277687073
+        }
+      },
+      "winner": "candidate"
+    },
+    {
+      "uuid": "42963acb-f2f5-4ada-9205-3931cd26fa44",
+      "batch": 64,
+      "candidates": {
+        "vectorized": {
+          "status": "correct",
+          "max_abs": [
+            7.62939453125e-06,
+            5.7220458984375e-06
+          ],
+          "peak_extra_bytes": 135532544,
+          "raw_ms": [
+            0.8161375999450684,
+            0.8115424156188965,
+            0.810547161102295,
+            0.8105183601379394,
+            0.8108287811279297,
+            0.8102527618408203,
+            0.8106080055236816
+          ],
+          "median_ms": 0.8106080055236816
+        },
+        "candidate": {
+          "status": "correct",
+          "max_abs": [
+            7.62939453125e-06,
+            5.7220458984375e-06
+          ],
+          "peak_extra_bytes": 33685504,
+          "raw_ms": [
+            0.09291520118713378,
+            0.09169920086860657,
+            0.09241600036621093,
+            0.09137600064277648,
+            0.09256640076637268,
+            0.09136319756507874,
+            0.09247040152549743
+          ],
+          "median_ms": 0.09241600036621093
+        }
+      },
+      "winner": "candidate"
+    }
+  ],
+  "branches": [
+    {
+      "state_none": true,
+      "scale": null,
+      "status": "passed"
+    },
+    {
+      "state_none": true,
+      "scale": 0.0,
+      "status": "passed"
+    },
+    {
+      "state_none": false,
+      "scale": 0.0,
+      "status": "passed"
+    }
+  ],
+  "status": "complete",
+  "source_path": "/home/huids25/kda-repro/agent-gdn-decode-ordinary/candidates/0002-agent/candidate.py",
+  "source_sha256": "be5fb6683d9404d53a9ed7378d557d06ef18e4a1ac8a8e3ddd310d687d52a028",
+  "baseline_source_path": null,
+  "baseline_source_sha256": null,
+  "timing_repeats": 7
+}

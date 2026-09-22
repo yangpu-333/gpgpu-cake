@@ -1,0 +1,36 @@
+{
+  "model": "Claude-Opus-4.8",
+  "usage": {
+    "completion_tokens": 7874,
+    "prompt_tokens": 1592,
+    "total_tokens": 9466,
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "text_tokens": 7874
+    },
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "text_tokens": 1592,
+      "cache_creation_tokens": 0,
+      "cache_creation_token_details": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      }
+    },
+    "cache_creation_input_tokens": 0,
+    "cache_read_input_tokens": 0,
+    "inference_geo": "not_available"
+  },
+  "id": "chatcmpl-758a2006-2468-4201-ac1c-d942f0af2b48",
+  "created": 1790066281,
+  "finish_reason": "stop",
+  "message_fields": [
+    "content",
+    "provider_specific_fields",
+    "reasoning_content",
+    "role",
+    "thinking_blocks"
+  ],
+  "content_type": "str",
+  "content_chars": 7225
+}
