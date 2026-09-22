@@ -1,78 +1,145 @@
-# GPGPU-CAKE
+# GPGPU 算子自动优化
 
-围绕 **自动化算子优化、Poly 模块优化、Halide IR 规范化**，准备在天数 GPU 上开展基础验证。CAKE 是方法参考；这里包含调研、实验计划和起步脚本。
+本项目构建并验证了一套面向 GPU 算子的自动优化闭环：**大模型生成 Triton 内核修改，系统自动
+完成静态检查、正确性验证、真实性能测试和候选晋级**。当前已在 NVIDIA V100 32GB 上完成 KDA
+（Kernel Design Agents）工作流适配，并产生首个经过三轮复测后稳定晋级的优化候选。
 
-## 当前目标：KDA 工作流复现
+> 当前成果的核心关键词是 **自动化算子优化**。Poly 调度和 Halide IR 规范化仍是后续接入方向，
+> 目前没有将参数搜索或 Triton 源码处理包装成已完成的 Poly/Halide 成果。
 
-实践目标现已切换为 KDA（Kernel Design Agents）公开工作流的复现。KDA 使用智能体完成
-任务定义、候选实现、正确性验证、基准测试、性能剖析和证据记录。A100 上的前期入口见
-[KDA A100 复现入口](experiments/kda_repro/README.md)；它用于跑通流程，不能代替 B200 上的
-官方竞赛性能复现。
+## 核心成果
 
-已完成 BI-V150 上的工具链实测：Triton 加法和矩阵乘法可正确执行、计时。Residual Add RMSNorm 已新增首个自动调优原型：生成 Halide 风格规范化算子契约、受限 Poly 风格行/归约调度候选，并在 GPU 上先验证前向和梯度、再进行前向计时。它尚未接入实际 Halide/Poly 源码模块或 Megatron 调用点，不能视为完整训练优化成果。
+| 成果 | 验证范围 | 结果 |
+|---|---:|---:|
+| GDN Decode V100 适配 | 54/54 官方 workload + 3个边界分支 | 全部正确 |
+| GDN Prefill V100 适配 | 100/100 官方 workload + 2个边界分支 | 全部正确 |
+| Decode Agent 候选 | 三轮、162组配对测量 | 改善0.46%，低于门槛，自动淘汰 |
+| Prefill Agent 候选 | 三轮、300组配对测量 | **改善1.454%，正式晋级** |
+| Residual Add RMSNorm | 6种形状，前向与参考梯度 | 全部通过严格复核 |
 
-全部阶段工作先读：[阶段工作精要报告](research/notes/阶段工作精要报告.md)（2026-09-10 汇总）。
+模型对 Prefill 热循环中的状态更新做了等价代数化简：
 
-用于提交：[CAKE 阶段调研与工作报告](research/notes/CAKE阶段调研与工作报告-杨璞.md)。
+```python
+# 修改前
+new_v = beta * v + (1. - beta) * old_v
+state = old - k * old_v[:, None] + k * new_v[:, None]
 
-当前专项计划：[Megatron-LM 五个训练算子实验计划](research/notes/五个训练算子实验计划.md)。
-
-BI-V150 第一轮入口：[Megatron-LM 五算子实验入口](experiments/megatron_ops/README.md)。
-
-## 远程机器快速开始
-
-在已经配置 GitLab SSH 公钥的机器上执行：
-
-```bash
-git clone ssh://git@gitlab.ci-lab.net:5997/yangpu/gpgpu-cake.git
-cd gpgpu-cake
-python3 -m unittest discover -s experiments/basic_validation -p 'test_*.py' -v
-python3 experiments/basic_validation/run.py --mode cpu
-python3 experiments/basic_validation/run.py --mode probe
+# Agent 修改后
+delta = beta * (v - old_v)
+state = old + k * delta[:, None]
 ```
 
-CPU 自检只需要 Python 3.9+。GPU 实验使用天数服务器已有的 Linux、COREX 及配套 PyTorch/Triton 环境。先激活厂商环境，再检查 `probe` 生成的报告；这里不提供可能覆盖厂商组件的通用安装命令。
+新形式减少了循环内中间结果和逐元素运算。候选不是因为“看起来更简单”而晋级，而是在全部输入
+正确、三轮配对结果方向一致且综合改善超过1%后才进入最佳候选账本。
 
-确认环境后，先运行向量加法，再运行矩阵乘法：
+## 自动优化闭环
 
-```bash
-python3 experiments/basic_validation/run.py --mode gpu --operator add --device 0
-python3 experiments/basic_validation/run.py --mode gpu --operator matmul --device 0
+```mermaid
+flowchart LR
+    A[任务契约与当前最佳实现] --> B[LLM 生成精确代码替换]
+    B --> C[静态安全与语法检查]
+    C --> D[小规模冒烟验证]
+    D --> E[官方 workload 全量正确性]
+    E --> F[基线与候选交替计时]
+    F --> G[三轮独立配对复测]
+    G --> H{改善至少 1%?}
+    H -->|是| I[晋级并更新最佳候选]
+    H -->|否| J[淘汰并保留证据]
 ```
 
-结果自动保存到 `experiments/basic_validation/results/`，每次生成新 JSON。只有正确候选才参与计时和选优；具体容差、计时口径和退出状态见[实验代码说明](experiments/basic_validation/README.md)。
+整个过程保存模型响应元数据、候选源码和哈希、逐 workload 误差、21次原始计时、边界分支结果
+以及不可变决策账本。验证子进程不会继承模型 API 密钥。
 
-## 先读哪些内容
+## 性能分析
 
-| 内容 | 入口 |
+### Agent 优化结果
+
+| 实验 | 基线几何平均 | 候选几何平均 | 综合变化 | 候选胜出 |
+|---|---:|---:|---:|---:|
+| GDN Prefill | 0.312883 ms | 0.308335 ms | **提升1.454%** | 248/300 |
+| GDN Decode | 0.022807 ms | 0.022702 ms | 提升0.46% | 124/162 |
+
+Prefill 三轮独立改善分别为 `1.420%`、`1.469%` 和 `1.472%`，波动较小且均超过1%。Decode
+首次跨运行比较曾显示约1.10%改善，但同进程交替复测后只有0.46%，因此没有晋级。这说明配对
+复测可以过滤微秒级 kernel 的计时噪声。
+
+### V100 调度与融合结果
+
+- **GDN Decode：** ROWS=1/4/8/16 均正确；最终 ROWS=8 赢47组、ROWS=4赢7组。逐 workload
+  获胜调度相对批量 PyTorch 表达式的几何平均加速为 `11.68x`。主要收益来自减少中间张量和
+  kernel 启动；该基线不是 B200 上的 FlashInfer 优化实现。
+- **GDN Prefill：** ROWS=4/8/16 共300次正确性验证全部通过。固定 ROWS=8 的几何平均延迟为
+  `0.3179 ms`，逐 workload 选择最快调度后为 `0.3096 ms`，进一步降低约 `2.67%`。
+- **Residual Add RMSNorm：** 融合 Triton 候选在6种形状上相对未融合 PyTorch 表达式取得
+  `5.60x–10.13x` 加速，并通过严格的前向和参考梯度比较。该数字是 CUDA Graph 微基准结果，
+  不代表端到端训练加速或相对厂商融合库的优势。
+
+`nvcc` 和 `ncu` 已安装，但当前平台未开放 NVIDIA GPU 性能计数器，采集会返回
+`ERR_NVGPUCTRPERM`。因此现阶段可以确认延迟改善，尚不能用硬件计数器进一步归因到带宽、指令、
+占用率或寄存器压力。
+
+## 官方任务覆盖
+
+| KDA 任务 | workload | 当前状态 |
+|---|---:|---|
+| GDN Decode | 54 | 全量验证、计时和 Agent 优化完成 |
+| GDN Prefill | 100 | 全量验证、计时和 Agent 晋级完成 |
+| DSA TopK Indexer | 128 | 已审计任务定义；V100 尚未完成 FP8 软件解码验证 |
+| DSA Sparse Attention | 23 | 已审计任务定义；尚未实现 V100 候选 |
+| FP8 MoE | 19 | 已审计任务定义；V100 只能进行有限语义验证 |
+
+当前完成2/5项官方任务。V100 上的核心 Agent 闭环已跑通；B200 官方环境、其余三项任务、ncu
+性能剖析和 BI-V150 迁移尚未完成。
+
+## 环境与可复现性
+
+| 项目 | 固定环境 |
 |---|---|
-| 最直接、通俗的建议 | [三个关键词的实施建议](research/notes/围绕三个关键词的直接建议.md) |
-| 接下来怎么做实验 | [基础验证实验计划](research/notes/基础验证实验计划.md) |
-| CAKE 的核心依据及限制 | [论文精读](research/notes/CAKE论文精读与核心要点.md) |
-| 项目目标与相关工作 | [初步调研](research/notes/项目与CAKE初步调研.md) |
-| 已实际完成的验证 | [本机验证记录](experiments/basic_validation/LOCAL_VALIDATION.md) |
-| CPU 实测结论与复现 | [CPU 基础验证结果](research/notes/CPU基础验证结果.md) |
-| 参考资料来源 | [资料索引](research/README.md) |
+| GPU | Tesla V100-PCIE-32GB，SM70 |
+| Python | 3.10.12 |
+| PyTorch | 2.5.1+cu121 |
+| Triton | 3.1.0 |
+| 官方数据修订 | `5e832ce88dd1013032b22a0e942979d7d2769cc3` |
+| 当前模型标识 | `Claude-Opus-4.8`（学校兼容 API 返回标识） |
 
-## 按需下载论文和参考源码
-
-运行基础实验不需要下载这些资料。需要阅读 CAKE 论文和第三方 `cake-ir` 源码时：
+一次性复跑 GDN Decode 和 Prefill：
 
 ```bash
-python3 scripts/fetch_references.py --group cake
-python3 -m zipfile -e research/code/cake-ir.zip research/code/
+cd "$HOME/gpgpu-cake"
+git pull --ff-only origin main
+KDA_CA_BUNDLE="$HOME/.local/share/ca-certificates/scholar-git-ca-bundle.pem" \
+  bash experiments/kda_repro/scripts/run_official_v100.sh all
 ```
 
-还可用 `--group atrex`、`--group flashinfer` 或 `--group all`。脚本按照[下载清单](research/sources/download-manifest.json)核对大小和 SHA256，已有且校验一致的文件直接复用；发现不一致会报错，保留原文件。`--verify-only` 仅检查本地文件，不联网。历史链接内容若发生变化，校验会失败，需要先复核来源，不能直接跳过校验。
+运行 Prefill Agent：
 
-源码 ZIP 固定到具体提交，解压后保留上游许可证。`cake-ir` 是第三方实现；FlashInfer diff 只是阅读材料，不能单独编译。
+```bash
+nohup bash experiments/kda_repro/scripts/run_gdn_prefill_agent.sh 1 \
+  > "$HOME/kda-repro/agent-prefill.log" 2>&1 < /dev/null &
+```
 
-## 文件整理约定
+模型服务配置、候选目录和三轮复核命令见
+[Agent 接入说明](experiments/kda_repro/AGENT_SETUP.md)。API 密钥必须保存在仓库之外。
 
-- Git 中保存实验源码、原创文档、下载工具及来源清单。
-- `research/papers/`、`research/code/` 保存可重新下载的参考资料；`research/sources/` 中除清单外的提取文本和元数据仅在本地保留。
-- `research/local/` 保存论文检查截图和临时验证日志；`experiments/basic_validation/results/` 保存本机运行结果。这些目录不上传 Git。
-- 原始项目说明及厂商软件栈附件仍保留在本地 `自动化大模型训练算子编译优化/`，不随本次仓库发布。理解目标可先读仓库内的初步调研。
+## 报告与证据
 
-不要提交账号凭据或厂商安装包。后续可将适合分享的实验结论写成文档提交；原始运行记录留在执行实验的机器上。
+| 内容 | 文档 |
+|---|---|
+| 环境、任务覆盖、完成度与后续验收 | [KDA 复现详细进展报告](experiments/kda_repro/KDA_REPRODUCTION_PROGRESS_REPORT.md) |
+| Prefill Agent 晋级结果 | [GDN Prefill Agent 结果](experiments/kda_repro/AGENT_PREFILL_V100_RESULT.md) |
+| Decode Agent 淘汰结果 | [GDN Decode Agent 结果](experiments/kda_repro/AGENT_V100_RESULT.md) |
+| GDN Decode 全量结果 | [Decode V100 报告](experiments/kda_repro/OFFICIAL_V100_RESULT.md) |
+| GDN Prefill 全量结果 | [Prefill V100 报告](experiments/kda_repro/PREFILL_V100_RESULT.md) |
+| 五项任务硬件可行性 | [官方任务审计](experiments/kda_repro/OFFICIAL_TASK_AUDIT.md) |
+| Residual Add RMSNorm 严格复核 | [V100 严格结果](experiments/kda_repro/V100_STRICT_RESULT.md) |
+| CAKE、Poly 与 Halide IR 前期调研 | [研究资料索引](research/README.md) |
 
+原始 JSON、候选源码和 API 元数据位于 `experiments/kda_repro/evidence/`。上游 KDA、竞赛、
+FlashInfer Bench 和 DeepGEMM 提交记录在
+[`source-lock.json`](experiments/kda_repro/source-lock.json)。
+
+## 结果边界
+
+本项目使用公开数据与 reference，在 V100 上复现 KDA 的工程思想和验证闭环。当前结果不是
+NVLabs 官方 Agent 工具链输出，不是 B200 官方 evaluator 成绩，也不能直接代表端到端模型性能。
+这些边界均保留在结果报告和原始证据中。
