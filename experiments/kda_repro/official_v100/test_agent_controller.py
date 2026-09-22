@@ -72,6 +72,23 @@ class AgentControllerTests(unittest.TestCase):
                 {"rationale": "x", "replacements": [{"old": "return A", "new": "return A"}]},
                 original)
 
+    def test_structured_decode_design_lowers_to_reviewed_template(self):
+        template = Path(__file__).with_name("gdn_decode.py").read_text()
+        source, rationale = controller.materialize_structured_decode(
+            {"rationale": "fuse state traffic", "implementation": "fused_triton",
+             "rows": 8, "warps": 4, "simplify_recurrence": True}, template)
+        controller.validate_source(source)
+        self.assertIn("rows=8, warps=4", source)
+        self.assertIn("delta = beta * (v - old_v)", source)
+        self.assertEqual(rationale, "fuse state traffic")
+
+    def test_structured_decode_design_rejects_unknown_schedule(self):
+        template = Path(__file__).with_name("gdn_decode.py").read_text()
+        with self.assertRaisesRegex(ValueError, "unsupported"):
+            controller.materialize_structured_decode(
+                {"rationale": "x", "implementation": "fused_triton",
+                 "rows": 3, "warps": 4, "simplify_recurrence": False}, template)
+
     def test_candidate_score_requires_complete_correct_report(self):
         workloads = []
         for index in range(2):

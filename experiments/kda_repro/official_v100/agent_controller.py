@@ -247,6 +247,41 @@ def materialize_proposal(proposal: dict, current_source: str) -> tuple[str, str]
     return result, rationale
 
 
+def materialize_structured_decode(proposal: dict, template_source: str) -> tuple[str, str]:
+    """Lower a compact Agent schedule decision into the reviewed decode template."""
+    rationale = proposal.get("rationale")
+    if not isinstance(rationale, str) or not rationale.strip():
+        raise ValueError("structured design requires a non-empty rationale")
+    if proposal.get("implementation") != "fused_triton":
+        raise ValueError("structured design requires implementation=fused_triton")
+    rows, warps = proposal.get("rows"), proposal.get("warps")
+    simplify = proposal.get("simplify_recurrence")
+    if rows not in (1, 2, 4, 8, 16) or warps not in (4, 8):
+        raise ValueError("structured design selected an unsupported schedule")
+    if not isinstance(simplify, bool):
+        raise ValueError("simplify_recurrence must be boolean")
+    old_signature = (
+        "def triton_candidate(q, k, v, state, A_log, a, dt_bias, b, scale, "
+        "rows=4, warps=4):")
+    new_signature = (
+        "def triton_candidate(q, k, v, state, A_log, a, dt_bias, b, scale, "
+        f"rows={rows}, warps={warps}):")
+    if template_source.count(old_signature) != 1:
+        raise ValueError("reviewed template signature is missing or ambiguous")
+    source = template_source.replace(old_signature, new_signature)
+    if simplify:
+        old_update = """    new_v = beta * v + (1. - beta) * old_v
+    updated = old - k[None, :] * old_v[:, None] + k[None, :] * new_v[:, None]
+"""
+        new_update = """    delta = beta * (v - old_v)
+    updated = old + k[None, :] * delta[:, None]
+"""
+        if source.count(old_update) != 1:
+            raise ValueError("reviewed recurrence template is missing or ambiguous")
+        source = source.replace(old_update, new_update)
+    return source, rationale
+
+
 def run_evaluation(evaluator: Path, data: Path, candidate: Path, output: Path,
                    indices: str | None, timeout: int, *, baseline: Path | None = None,
                    timing_repeats: int = 7) -> dict:
@@ -390,6 +425,9 @@ def main() -> None:
     parser.add_argument(
         "--structural-rewrite", action="store_true",
         help="tell the model that a bounded whole-kernel rewrite is allowed")
+    parser.add_argument(
+        "--structured-design", action="store_true",
+        help="have the model select a normalized decode design lowered by the controller")
     parser.add_argument("--iterations", type=int, default=10)
     parser.add_argument("--min-improvement", type=float, default=0.01)
     parser.add_argument("--eval-timeout", type=int, default=1800)
@@ -415,6 +453,8 @@ def main() -> None:
             raise SystemExit(f"missing required path: {required}")
     if args.iterations < 1 or not 0 < args.min_improvement < 1:
         raise SystemExit("invalid iteration or promotion budget")
+    if args.structured_design and args.task != "decode":
+        raise SystemExit("structured design is currently implemented for decode only")
     if args.check_config:
         print(json.dumps({"status": "config_valid", "endpoint": api_endpoint(),
                           "model": os.environ.get("KDA_LLM_MODEL"),
@@ -464,7 +504,30 @@ kernels and replace the Python wrapper. A replacement may insert helper function
 immediately before the wrapper. Keep the exact external signature and semantics.
 Prefer a complete executable fusion over a cosmetic algebraic change.
 """ if args.structural_rewrite else ""
-        prompt = f"""Propose exactly one improvement to the source module below.
+        if args.structured_design:
+            prompt = f"""Select exactly one normalized hardware design for the ordinary baseline.
+Return only a compact JSON object with exactly these fields:
+`rationale` (string under 600 characters), `implementation` (must be `fused_triton`),
+`rows` (one of 1,2,4,8,16), `warps` (one of 4,8), and
+`simplify_recurrence` (boolean). Do not return source code, Markdown, or extra keys.
+The controller will lower the decision into a reviewed sm70 Triton template and will
+independently reject it unless all correctness and performance gates pass.
+
+TASK CONTRACT
+{contract}
+
+CURRENT ORDINARY BASELINE
+candidate_id={best_id}
+geometric_mean_ms={best_score:.9f}
+```python
+{current_source}
+```
+
+RECENT OUTCOMES
+{recent_ledger(ledger)}
+"""
+        else:
+            prompt = f"""Propose exactly one improvement to the source module below.
 Return one compact JSON object with a string `rationale` and a `replacements` array. Each replacement is an object with exact string fields `old` and `new`; `old` must occur exactly once in CURRENT SOURCE. Do not return the complete module or a unified diff.
 Do not claim success; the controller will apply the replacements and validate the complete result. Keep `rationale` under 600 characters, use at most 3 replacements, and keep all replacement text under 9000 characters. Output nothing outside the JSON object.
 
@@ -494,7 +557,11 @@ RECENT OUTCOMES
             (workspace / "api" / f"{candidate_id}.json").write_text(json.dumps(
                 {"metadata": metadata, "content": content}, indent=2, ensure_ascii=False))
             proposal = parse_json_content(content)
-            source, rationale = materialize_proposal(proposal, current_source)
+            if args.structured_design:
+                source, rationale = materialize_structured_decode(
+                    proposal, (here / "gdn_decode.py").read_text())
+            else:
+                source, rationale = materialize_proposal(proposal, current_source)
             validate_source(source)
             source_path = candidate_dir / "candidate.py"
             source_path.write_text(source)
