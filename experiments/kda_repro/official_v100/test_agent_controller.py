@@ -15,6 +15,8 @@ class AgentControllerTests(unittest.TestCase):
         controller.validate_source(source)
         prefill_source = Path(__file__).with_name("gdn_prefill.py").read_text()
         controller.validate_source(prefill_source)
+        torch_seed = Path(__file__).with_name("gdn_decode_torch_seed.py").read_text()
+        controller.validate_source(torch_seed)
 
     def test_forbidden_import_and_file_call_are_rejected(self):
         with self.assertRaises(ValueError):

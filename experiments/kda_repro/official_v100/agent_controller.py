@@ -384,6 +384,12 @@ def main() -> None:
     parser.add_argument("--data", required=True, type=Path)
     parser.add_argument("--workspace", required=True, type=Path)
     parser.add_argument("--task", choices=("decode", "prefill"), default="decode")
+    parser.add_argument(
+        "--seed-source", type=Path,
+        help="reviewed starting implementation; defaults to the task Triton seed")
+    parser.add_argument(
+        "--structural-rewrite", action="store_true",
+        help="tell the model that a bounded whole-kernel rewrite is allowed")
     parser.add_argument("--iterations", type=int, default=10)
     parser.add_argument("--min-improvement", type=float, default=0.01)
     parser.add_argument("--eval-timeout", type=int, default=1800)
@@ -398,7 +404,7 @@ def main() -> None:
                     "smoke": "0,25,60,99"},
     }[args.task]
     evaluator = here / task_config["evaluator"]
-    seed = here / task_config["seed"]
+    seed = args.seed_source.resolve() if args.seed_source else here / task_config["seed"]
     contract_path = here / task_config["agent_dir"] / "task_contract.md"
     plan_path = here / task_config["agent_dir"] / "docs" / "plan.md"
     expected_workloads = task_config["workloads"]
@@ -451,9 +457,18 @@ def main() -> None:
         candidate_dir = workspace / "candidates" / candidate_id
         candidate_dir.mkdir()
         current_source = best_source.read_text()
-        prompt = f"""Propose exactly one small improvement to the source module below.
+        rewrite_guidance = """
+The current implementation is a correctness-first ordinary baseline. You may make a
+structural optimization: fuse its tensor expressions into one or more @triton.jit
+kernels and replace the Python wrapper. A replacement may insert helper functions
+immediately before the wrapper. Keep the exact external signature and semantics.
+Prefer a complete executable fusion over a cosmetic algebraic change.
+""" if args.structural_rewrite else ""
+        prompt = f"""Propose exactly one improvement to the source module below.
 Return one compact JSON object with a string `rationale` and a `replacements` array. Each replacement is an object with exact string fields `old` and `new`; `old` must occur exactly once in CURRENT SOURCE. Do not return the complete module or a unified diff.
-Do not claim success; the controller will apply the replacements and validate the complete result. Keep `rationale` under 600 characters, use at most 3 replacements, and keep all replacement text under 2500 characters. Output nothing outside the JSON object.
+Do not claim success; the controller will apply the replacements and validate the complete result. Keep `rationale` under 600 characters, use at most 3 replacements, and keep all replacement text under 9000 characters. Output nothing outside the JSON object.
+
+{rewrite_guidance}
 
 TASK CONTRACT
 {contract}
