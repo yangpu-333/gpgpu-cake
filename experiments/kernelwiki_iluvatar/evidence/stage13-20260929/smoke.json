@@ -1,0 +1,74 @@
+{
+  "created_utc": "2026-09-29T07:43:36.417028+00:00",
+  "status": "passed",
+  "gpu": "Iluvatar BI-V150",
+  "torch": "2.4.1",
+  "triton": "2.1.0",
+  "script_sha256": "f66635f1ca777d787ca9121ee9f97baa3b9b8a645f976e9ecd2d2512f0584fbf",
+  "epsilon": 1e-06,
+  "tolerance": {
+    "atol": 0.03,
+    "rtol": 0.03
+  },
+  "baseline": "stage3 analytical PyTorch backward; backward-only warm GPU event",
+  "arguments": {
+    "shapes": "64x1024",
+    "dtypes": "float16",
+    "modes": "present",
+    "seed": 13001,
+    "num_warps": 4,
+    "warmup": 2,
+    "samples": 3,
+    "launches": 5,
+    "output": "/private/kda-biv150-stage3/evidence/stage13-20260929/smoke.json"
+  },
+  "cases": [
+    {
+      "shape": [
+        64,
+        1024
+      ],
+      "dtype": "float16",
+      "grad_residual_out": "present",
+      "seed": 13001,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.0009765625,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.0009765625,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.01832076907157898,
+          0.01800000071525574,
+          0.01800000071525574
+        ],
+        "analytical_pytorch": [
+          0.2587461471557617,
+          0.260404634475708,
+          0.26040000915527345
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.01800000071525574,
+        "analytical_pytorch": 0.26040000915527345
+      },
+      "speedup_vs_analytical_pytorch": 14.466666600439286
+    }
+  ]
+}

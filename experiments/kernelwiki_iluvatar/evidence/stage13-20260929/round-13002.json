@@ -1,0 +1,1851 @@
+{
+  "created_utc": "2026-09-29T07:44:54.413051+00:00",
+  "status": "passed",
+  "gpu": "Iluvatar BI-V150",
+  "torch": "2.4.1",
+  "triton": "2.1.0",
+  "script_sha256": "faf19f985bda69e0584905e97f8c0e81baf0e6e9403e2bbde9e9d26eef7c209d",
+  "epsilon": 1e-06,
+  "tolerance": {
+    "atol": 0.03,
+    "rtol": 0.03
+  },
+  "baseline": "stage3 analytical PyTorch backward; backward-only warm GPU event",
+  "arguments": {
+    "shapes": "64x768,64x1024,64x4096,7x769,16x4099,17x1537",
+    "dtypes": "float16,bfloat16",
+    "modes": "present,absent",
+    "seed": 13002,
+    "num_warps": 4,
+    "warmup": 5,
+    "samples": 9,
+    "launches": 20,
+    "output": "/private/kda-biv150-stage3/evidence/stage13-20260929/round-13002.json"
+  },
+  "cases": [
+    {
+      "shape": [
+        64,
+        768
+      ],
+      "dtype": "float16",
+      "grad_residual_out": "present",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.000244140625,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.000244140625,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 3.814697265625e-06,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.00390625,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.00390625,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 1.52587890625e-05,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.017387115955352785,
+          0.016830000281333923,
+          0.016900768876075743,
+          0.10355576276779174,
+          0.017176154255867004,
+          0.017038077116012573,
+          0.01745365411043167,
+          0.01696923077106476,
+          0.06894749999046326
+        ],
+        "analytical_pytorch": [
+          0.25387749671936033,
+          0.25380749702453614,
+          0.2551907777786255,
+          0.25360076427459716,
+          0.25332443714141845,
+          0.25408480167388914,
+          0.2547759532928467,
+          0.25477614402771,
+          0.25470633506774903
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.017176154255867004,
+        "analytical_pytorch": 0.25408480167388914
+      },
+      "speedup_vs_analytical_pytorch": 14.792880751353247
+    },
+    {
+      "shape": [
+        64,
+        1024
+      ],
+      "dtype": "float16",
+      "grad_residual_out": "present",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.0009765625,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.0009765625,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 1.52587890625e-05,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.00390625,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.00390625,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 1.52587890625e-05,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.017314423620700837,
+          0.14882346391677856,
+          0.017452499270439147,
+          0.03880442380905151,
+          0.01745346188545227,
+          0.016362500190734864,
+          0.10602211952209473,
+          0.016426922380924226,
+          0.01638749986886978
+        ],
+        "analytical_pytorch": [
+          0.25899171829223633,
+          0.25905961990356446,
+          0.25850672721862794,
+          0.2583684682846069,
+          0.25587942600250246,
+          0.250319242477417,
+          0.25096635818481444,
+          0.25083653926849364,
+          0.2507721185684204
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.017452499270439147,
+        "analytical_pytorch": 0.25587942600250246
+      },
+      "speedup_vs_analytical_pytorch": 14.661477536109011
+    },
+    {
+      "shape": [
+        64,
+        4096
+      ],
+      "dtype": "float16",
+      "grad_residual_out": "present",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.00390625,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.00390625,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 1.52587890625e-05,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 1.52587890625e-05,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.019798077642917633,
+          0.019730769097805023,
+          0.01998942345380783,
+          0.01998942345380783,
+          0.019730769097805023,
+          0.01992499977350235,
+          0.019859614968299865,
+          0.01998942345380783,
+          0.01966538429260254
+        ],
+        "analytical_pytorch": [
+          0.28575384616851807,
+          0.28646728992462156,
+          0.28601346015930174,
+          0.2858432769775391,
+          0.2865317344665527,
+          0.28610193729400635,
+          0.286077880859375,
+          0.28750386238098147,
+          0.28724422454833987
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.019859614968299865,
+        "analytical_pytorch": 0.28610193729400635
+      },
+      "speedup_vs_analytical_pytorch": 14.406217731345013
+    },
+    {
+      "shape": [
+        7,
+        769
+      ],
+      "dtype": "float16",
+      "grad_residual_out": "present",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 3.0517578125e-05,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 3.0517578125e-05,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.00390625,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.00390625,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.014806731045246125,
+          0.014806731045246125,
+          0.014806731045246125,
+          0.014872115850448609,
+          0.014872115850448609,
+          0.03265769183635712,
+          0.01493653804063797,
+          0.015130768716335296,
+          0.014872115850448609
+        ],
+        "analytical_pytorch": [
+          0.19717307090759278,
+          0.19625096321105956,
+          0.19683269262313843,
+          0.1967509627342224,
+          0.1968230724334717,
+          0.1969355821609497,
+          0.19658365249633789,
+          0.197171151638031,
+          0.19844231605529786
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.014872115850448609,
+        "analytical_pytorch": 0.19683269262313843
+      },
+      "speedup_vs_analytical_pytorch": 13.235016093369195
+    },
+    {
+      "shape": [
+        16,
+        4099
+      ],
+      "dtype": "float16",
+      "grad_residual_out": "present",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.000244140625,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.000244140625,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.00390625,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.00390625,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.00390625,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 6.103515625e-05,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.024005769193172453,
+          0.023941345512866974,
+          0.17173365354537964,
+          0.023941345512866974,
+          0.08429903984069824,
+          0.02387692332267761,
+          0.024005769193172453,
+          0.024005769193172453,
+          0.02387692332267761
+        ],
+        "analytical_pytorch": [
+          0.26398749351501466,
+          0.2630807638168335,
+          0.2637932777404785,
+          0.26262693405151366,
+          0.26385865211486814,
+          0.263470196723938,
+          0.26301538944244385,
+          0.2629509687423706,
+          0.2637923002243042
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.024005769193172453,
+        "analytical_pytorch": 0.263470196723938
+      },
+      "speedup_vs_analytical_pytorch": 10.97528659064473
+    },
+    {
+      "shape": [
+        17,
+        1537
+      ],
+      "dtype": "float16",
+      "grad_residual_out": "present",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.0001220703125,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.0001220703125,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.00390625,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.00390625,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.01830576956272125,
+          0.01856442242860794,
+          0.03360576927661896,
+          0.018370191752910613,
+          0.018694230914115907,
+          0.01836923062801361,
+          0.01824134588241577,
+          0.018758653104305266,
+          0.018629807233810424
+        ],
+        "analytical_pytorch": [
+          0.2420269250869751,
+          0.24241538047790528,
+          0.2428692102432251,
+          0.24306344985961914,
+          0.24315288066864013,
+          0.24254517555236815,
+          0.24209229946136473,
+          0.24209229946136473,
+          0.24280383586883544
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.01856442242860794,
+        "analytical_pytorch": 0.24254517555236815
+      },
+      "speedup_vs_analytical_pytorch": 13.065053679160192
+    },
+    {
+      "shape": [
+        64,
+        768
+      ],
+      "dtype": "float16",
+      "grad_residual_out": "absent",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.0009765625,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.0009765625,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 3.814697265625e-06,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.0009765625,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.0009765625,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 1.52587890625e-05,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.016362500190734864,
+          0.01636153906583786,
+          0.016297115385532378,
+          0.01636153906583786,
+          0.016362500190734864,
+          0.01638749986886978,
+          0.016426922380924226,
+          0.016297115385532378,
+          0.02772211730480194
+        ],
+        "analytical_pytorch": [
+          0.2292577028274536,
+          0.22859904766082764,
+          0.22971057891845703,
+          0.2296461582183838,
+          0.2295163631439209,
+          0.22906250953674318,
+          0.2292567491531372,
+          0.2291269063949585,
+          0.2292577028274536
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.016362500190734864,
+        "analytical_pytorch": 0.2292577028274536
+      },
+      "speedup_vs_analytical_pytorch": 14.011165784876138
+    },
+    {
+      "shape": [
+        64,
+        1024
+      ],
+      "dtype": "float16",
+      "grad_residual_out": "absent",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.001953125,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.001953125,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 1.52587890625e-05,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 1.52587890625e-05,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.11366922855377197,
+          0.016297115385532378,
+          0.016231730580329895,
+          0.01636153906583786,
+          0.01636153906583786,
+          0.016362500190734864,
+          0.016232691705226898,
+          0.01636153906583786,
+          0.016426922380924226
+        ],
+        "analytical_pytorch": [
+          0.2318490266799927,
+          0.23275480270385743,
+          0.2320423126220703,
+          0.23204326629638672,
+          0.23041729927062987,
+          0.23184807300567628,
+          0.23113558292388917,
+          0.23109230995178223,
+          0.23210768699645995
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.01636153906583786,
+        "analytical_pytorch": 0.2318490266799927
+      },
+      "speedup_vs_analytical_pytorch": 14.170367820963907
+    },
+    {
+      "shape": [
+        64,
+        4096
+      ],
+      "dtype": "float16",
+      "grad_residual_out": "absent",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.0009765625,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.0009765625,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 1.52587890625e-05,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.0009765625,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.0009765625,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 1.52587890625e-05,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.019017307460308074,
+          0.018952885270118715,
+          0.018953846395015718,
+          0.018953846395015718,
+          0.018952885270118715,
+          0.019017307460308074,
+          0.019148077070713043,
+          0.01908269226551056,
+          0.019212499260902405
+        ],
+        "analytical_pytorch": [
+          0.2651461362838745,
+          0.26501634120941164,
+          0.26449806690216066,
+          0.2659884452819824,
+          0.2651461362838745,
+          0.26617982387542727,
+          0.2661817312240601,
+          0.26414711475372316,
+          0.2661826848983765
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.019017307460308074,
+        "analytical_pytorch": 0.2651461362838745
+      },
+      "speedup_vs_analytical_pytorch": 13.942359444799093
+    },
+    {
+      "shape": [
+        7,
+        769
+      ],
+      "dtype": "float16",
+      "grad_residual_out": "absent",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.0001220703125,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.0001220703125,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.0001220703125,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.0001220703125,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.014872115850448609,
+          0.08638365268707275,
+          0.014872115850448609,
+          0.014872115850448609,
+          0.014806731045246125,
+          0.014742307364940643,
+          0.014872115850448609,
+          0.014612500369548798,
+          0.014548076689243317
+        ],
+        "analytical_pytorch": [
+          0.18339231014251708,
+          0.18300384283065796,
+          0.183198082447052,
+          0.18313268423080445,
+          0.1917221188545227,
+          0.183198082447052,
+          0.18394423723220826,
+          0.19759422540664673,
+          0.18261442184448243
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.014872115850448609,
+        "analytical_pytorch": 0.183198082447052
+      },
+      "speedup_vs_analytical_pytorch": 12.318225885896789
+    },
+    {
+      "shape": [
+        16,
+        4099
+      ],
+      "dtype": "float16",
+      "grad_residual_out": "absent",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.001953125,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.001953125,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.00390625,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 6.103515625e-05,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.022775961458683013,
+          0.02303461581468582,
+          0.022969231009483337,
+          0.14787404537200927,
+          0.022904807329177858,
+          0.022929807007312775,
+          0.022904807329177858,
+          0.02290576994419098,
+          0.07532499432563781
+        ],
+        "analytical_pytorch": [
+          0.24279615879058838,
+          0.24383366107940674,
+          0.2455817461013794,
+          0.24409134387969972,
+          0.2435086488723755,
+          0.24428653717041016,
+          0.24486920833587647,
+          0.24480481147766114,
+          0.24499905109405518
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.022929807007312775,
+        "analytical_pytorch": 0.24428653717041016
+      },
+      "speedup_vs_analytical_pytorch": 10.653667389895705
+    },
+    {
+      "shape": [
+        17,
+        1537
+      ],
+      "dtype": "float16",
+      "grad_residual_out": "absent",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.0001220703125,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.0001220703125,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.0001220703125,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.0001220703125,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.17836250066757203,
+          0.018370191752910613,
+          0.01832980811595917,
+          0.018111538887023926,
+          0.017916345596313478,
+          0.018174999952316286,
+          0.018434615433216096,
+          0.01830576956272125,
+          0.018499039113521576
+        ],
+        "analytical_pytorch": [
+          0.22860865592956542,
+          0.22906250953674318,
+          0.22886826992034912,
+          0.22666633129119873,
+          0.22821922302246095,
+          0.22893366813659669,
+          0.22783172130584717,
+          0.22730576992034912,
+          0.2282855987548828
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.01832980811595917,
+        "analytical_pytorch": 0.2282855987548828
+      },
+      "speedup_vs_analytical_pytorch": 12.454336527185024
+    },
+    {
+      "shape": [
+        64,
+        768
+      ],
+      "dtype": "bfloat16",
+      "grad_residual_out": "present",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.0009765625,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.0009765625,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.016426922380924226,
+          0.01636153906583786,
+          0.016362500190734864,
+          0.01636153906583786,
+          0.01636153906583786,
+          0.016362500190734864,
+          0.016426922380924226,
+          0.016362500190734864,
+          0.01636153906583786
+        ],
+        "analytical_pytorch": [
+          0.24837403297424315,
+          0.24850480556488036,
+          0.24720866680145265,
+          0.24837594032287597,
+          0.24779229164123534,
+          0.24665000438690185,
+          0.24805190563201904,
+          0.2467557668685913,
+          0.2482461452484131
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.016362500190734864,
+        "analytical_pytorch": 0.24805190563201904
+      },
+      "speedup_vs_analytical_pytorch": 15.159780152209041
+    },
+    {
+      "shape": [
+        64,
+        1024
+      ],
+      "dtype": "bfloat16",
+      "grad_residual_out": "present",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 4.76837158203125e-07,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 4.76837158203125e-07,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.016232691705226898,
+          0.01636153906583786,
+          0.016426922380924226,
+          0.01636153906583786,
+          0.016362500190734864,
+          0.01636153906583786,
+          0.016426922380924226,
+          0.083400958776474,
+          0.01636153906583786
+        ],
+        "analytical_pytorch": [
+          0.2522624969482422,
+          0.25193846225738525,
+          0.25245673656463624,
+          0.25163846015930175,
+          0.2509019374847412,
+          0.2525211572647095,
+          0.25232691764831544,
+          0.2521327018737793,
+          0.25278077125549314
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.01636153906583786,
+        "analytical_pytorch": 0.2522624969482422
+      },
+      "speedup_vs_analytical_pytorch": 15.418017579712576
+    },
+    {
+      "shape": [
+        64,
+        4096
+      ],
+      "dtype": "bfloat16",
+      "grad_residual_out": "present",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.0078125,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.0078125,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.019666345417499544,
+          0.019795192778110503,
+          0.019990384578704834,
+          0.01966538429260254,
+          0.019795192778110503,
+          0.01992499977350235,
+          0.019730769097805023,
+          0.020054808259010314,
+          0.01972980797290802
+        ],
+        "analytical_pytorch": [
+          0.28726921081542967,
+          0.28724422454833987,
+          0.2875019311904907,
+          0.2880211353302002,
+          0.2869201898574829,
+          0.28646633625030515,
+          0.2871788501739502,
+          0.28795671463012695,
+          0.28724422454833987
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.019795192778110503,
+        "analytical_pytorch": 0.28724422454833987
+      },
+      "speedup_vs_analytical_pytorch": 14.51080713222324
+    },
+    {
+      "shape": [
+        7,
+        769
+      ],
+      "dtype": "bfloat16",
+      "grad_residual_out": "present",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.014833654463291168,
+          0.014937500655651092,
+          0.01493653804063797,
+          0.014872115850448609,
+          0.014742307364940643,
+          0.15363750457763672,
+          0.014807692170143128,
+          0.014872115850448609,
+          0.09194519519805908
+        ],
+        "analytical_pytorch": [
+          0.19746249914169312,
+          0.19707404375076293,
+          0.19743268489837645,
+          0.20628461837768555,
+          0.19711923599243164,
+          0.1969538450241089,
+          0.1971384644508362,
+          0.1971384644508362,
+          0.1969163417816162
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.014872115850448609,
+        "analytical_pytorch": 0.1971384644508362
+      },
+      "speedup_vs_analytical_pytorch": 13.255576169068748
+    },
+    {
+      "shape": [
+        16,
+        4099
+      ],
+      "dtype": "bfloat16",
+      "grad_residual_out": "present",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.0009765625,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.0009765625,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0001220703125,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.023812499642372132,
+          0.14262692928314208,
+          0.02381153851747513,
+          0.04854134917259216,
+          0.02381153851747513,
+          0.02355288416147232,
+          0.16937692165374757,
+          0.023618268966674804,
+          0.0784788429737091
+        ],
+        "analytical_pytorch": [
+          0.2636634588241577,
+          0.262951922416687,
+          0.26392307281494143,
+          0.26424710750579833,
+          0.26372787952423093,
+          0.2641817331314087,
+          0.26340479850769044,
+          0.2627567291259766,
+          0.2628211498260498
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.023812499642372132,
+        "analytical_pytorch": 0.2636634588241577
+      },
+      "speedup_vs_analytical_pytorch": 11.0724813767553
+    },
+    {
+      "shape": [
+        17,
+        1537
+      ],
+      "dtype": "bfloat16",
+      "grad_residual_out": "present",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.0184355765581131,
+          0.1056288480758667,
+          0.018370191752910613,
+          0.018694230914115907,
+          0.15476154088973998,
+          0.018434615433216096,
+          0.01884903907775879,
+          0.018629807233810424,
+          0.018370191752910613
+        ],
+        "analytical_pytorch": [
+          0.24403557777404786,
+          0.24338653087615966,
+          0.24416441917419435,
+          0.24384136199951173,
+          0.24461729526519777,
+          0.2445528745651245,
+          0.24319326877593994,
+          0.24513559341430663,
+          0.24474713802337647
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.018629807233810424,
+        "analytical_pytorch": 0.24416441917419435
+      },
+      "speedup_vs_analytical_pytorch": 13.106116242097825
+    },
+    {
+      "shape": [
+        64,
+        768
+      ],
+      "dtype": "bfloat16",
+      "grad_residual_out": "absent",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.00390625,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.00390625,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.00390625,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.00390625,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.029791349172592164,
+          0.016362500190734864,
+          0.01636153906583786,
+          0.016426922380924226,
+          0.016297115385532378,
+          0.016426922380924226,
+          0.016362500190734864,
+          0.01636153906583786,
+          0.016362500190734864
+        ],
+        "analytical_pytorch": [
+          0.22990481853485106,
+          0.23068268299102784,
+          0.23016057014465333,
+          0.23016443252563476,
+          0.23009903430938722,
+          0.22987308502197265,
+          0.23074712753295898,
+          0.23029327392578125,
+          0.23081154823303224
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.016362500190734864,
+        "analytical_pytorch": 0.23016443252563476
+      },
+      "speedup_vs_analytical_pytorch": 14.066580891834828
+    },
+    {
+      "shape": [
+        64,
+        1024
+      ],
+      "dtype": "bfloat16",
+      "grad_residual_out": "absent",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.001953125,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.001953125,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.016362500190734864,
+          0.016362500190734864,
+          0.016362500190734864,
+          0.04624807834625244,
+          0.016297115385532378,
+          0.016362500190734864,
+          0.05967307686805725,
+          0.01636153906583786,
+          0.01636153906583786
+        ],
+        "analytical_pytorch": [
+          0.23366250991821289,
+          0.23431057929992677,
+          0.23307981491088867,
+          0.2339865446090698,
+          0.23379230499267578,
+          0.23418078422546387,
+          0.23346827030181885,
+          0.23418078422546387,
+          0.23557596206665038
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.016362500190734864,
+        "analytical_pytorch": 0.2339865446090698
+      },
+      "speedup_vs_analytical_pytorch": 14.300170626831395
+    },
+    {
+      "shape": [
+        64,
+        4096
+      ],
+      "dtype": "bfloat16",
+      "grad_residual_out": "absent",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.0009765625,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.0009765625,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.0009765625,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.0009765625,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.019341346621513367,
+          0.024152883887290956,
+          0.019212499260902405,
+          0.018952885270118715,
+          0.12254327535629272,
+          0.018952885270118715,
+          0.03327403664588928,
+          0.01908269226551056,
+          0.018953846395015718
+        ],
+        "analytical_pytorch": [
+          0.26559998989105227,
+          0.2669595956802368,
+          0.26741347312927244,
+          0.26715383529663084,
+          0.26773653030395506,
+          0.271976900100708,
+          0.26773653030395506,
+          0.26670098304748535,
+          0.2672096252441406
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.019212499260902405,
+        "analytical_pytorch": 0.2672096252441406
+      },
+      "speedup_vs_analytical_pytorch": 13.90811375529442
+    },
+    {
+      "shape": [
+        7,
+        769
+      ],
+      "dtype": "bfloat16",
+      "grad_residual_out": "absent",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.014612500369548798,
+          0.014806731045246125,
+          0.015066346526145935,
+          0.014806731045246125,
+          0.014352884888648988,
+          0.015000961720943451,
+          0.014872115850448609,
+          0.01519615352153778,
+          0.01493653804063797
+        ],
+        "analytical_pytorch": [
+          0.1838278889656067,
+          0.18293845653533936,
+          0.18369808197021484,
+          0.18319711685180665,
+          0.183198082447052,
+          0.18352115154266357,
+          0.18332691192626954,
+          0.18280864953994752,
+          0.18326250314712525
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.014872115850448609,
+        "analytical_pytorch": 0.18326250314712525
+      },
+      "speedup_vs_analytical_pytorch": 12.322557529135791
+    },
+    {
+      "shape": [
+        16,
+        4099
+      ],
+      "dtype": "bfloat16",
+      "grad_residual_out": "absent",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 2.9802322387695312e-08,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 2.9802322387695312e-08,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 2.9802322387695312e-08,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 2.9802322387695312e-08,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0001220703125,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.02303461581468582,
+          0.035525962710380554,
+          0.02329326868057251,
+          0.023163461685180665,
+          0.08955576419830322,
+          0.023163461685180665,
+          0.022969231009483337,
+          0.02303461581468582,
+          0.023099038004875182
+        ],
+        "analytical_pytorch": [
+          0.2457115411758423,
+          0.2450634479522705,
+          0.2451932907104492,
+          0.2457115411758423,
+          0.24473941326141357,
+          0.2458413600921631,
+          0.24586730003356932,
+          0.2457115411758423,
+          0.24655001163482665
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.023163461685180665,
+        "analytical_pytorch": 0.2457115411758423
+      },
+      "speedup_vs_analytical_pytorch": 10.607721096067504
+    },
+    {
+      "shape": [
+        17,
+        1537
+      ],
+      "dtype": "bfloat16",
+      "grad_residual_out": "absent",
+      "seed": 13002,
+      "num_warps": 4,
+      "checks": {
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 0.0078125,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 0.0078125,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "autograd": {
+          "grad_x": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "bad_elements": 0
+          },
+          "grad_residual": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "bad_elements": 0
+          },
+          "grad_weight": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "bad_elements": 0
+          }
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      },
+      "passed": true,
+      "timings_ms_per_call": {
+        "candidate": [
+          0.01817596107721329,
+          0.01824038475751877,
+          0.018370191752910613,
+          0.018629807233810424,
+          0.01830576956272125,
+          0.01850000023841858,
+          0.018370191752910613,
+          0.018434615433216096,
+          0.01817596107721329
+        ],
+        "analytical_pytorch": [
+          0.2281557559967041,
+          0.2284144163131714,
+          0.22828459739685059,
+          0.22893269062042237,
+          0.22906250953674318,
+          0.22750000953674315,
+          0.2296461582183838,
+          0.228674054145813,
+          0.22984039783477783
+        ]
+      },
+      "median_ms": {
+        "candidate": 0.018370191752910613,
+        "analytical_pytorch": 0.228674054145813
+      },
+      "speedup_vs_analytical_pytorch": 12.448103820668141
+    }
+  ]
+}
