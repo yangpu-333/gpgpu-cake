@@ -34,6 +34,9 @@ python -m unittest discover -s /path/to/kernelwiki-iluvatar/tests
 ```
 
 构建所需的上游源码由脚本拉取；仓库保留本项目补丁、实验脚本和原始证据，不复制第三方完整语料。
+在 Windows 的 KDA/Claude Code 环境中，可用
+[`link_kda_skills.ps1`](experiments/kernelwiki_iluvatar/link_kda_skills.ps1)
+将 KDA 固定的 `KernelWiki` 与新 `kernelwiki-iluvatar` 分别接入 `~/.claude/skills/`；原子模块保持原样。
 
 ## 核心成果
 

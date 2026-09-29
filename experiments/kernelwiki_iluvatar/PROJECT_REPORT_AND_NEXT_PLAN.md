@@ -51,6 +51,10 @@
 
 Windows 验证器最初用字符串 `/` 判断资产目录归属，误报 411 个孤立文件；改为 `Path.parents` 后全库复验通过。阶段 1 与阶段 11 重建版的完整上游 160 项测试均通过。**2026-09-29 报告收口后的补丁又在 BI-V150 Pod 的全新 Linux 目录从固定上游归档重建，验证器通过、160/160 项测试通过；本机重新查询的 BI-V150/SM90/SM100 完整路径集合与阶段 11 原始清单逐项相同（14/286/379）。** 新增实验不更改原 SM90/SM100 页面及性能数字的适用范围。
 
+### KDA 的 skill 加载入口
+
+KDA 原仓库的加载方式是把固定的 `skills/KernelWiki` 子模块链接到 `~/.claude/skills/KernelWiki`。本机已按该路径保留原 NVIDIA skill，并把已安装的适配版另行链接到 `~/.claude/skills/kernelwiki-iluvatar`；未修改 KDA 的第三方子模块或将其资产复制进 KDA 仓库。Windows 可用 [`link_kda_skills.ps1`](link_kda_skills.ps1) 重建这两个 junction，参数为 KDA checkout 和已组装的适配 skill 目录。直读检索已从两个入口分别返回 `kernel-flash-attention-4` 与 `kernel-residual-rmsnorm-bi-v150`，适配版 BI-V150 完整架构检索仍为 14 页。本轮只验证本地加载路径和离线查询，尚未启动外部模型会话。
+
 ## 5. 未完成项与外部依赖
 
 1. **真实 KDA/Megatron 负载。** 本地没有实际 Megatron 形状采集结果，也未完成训练 step 的调用点接入、优化后向或模型吞吐对照。Pod 上保存的旧 preflight 状态为 `transformer_engine_unavailable`，另有 fallback route smoke；这些不是有效的真实模型形状证明。需在固定 Megatron 版本与可用运行时上重新采集。
