@@ -31,12 +31,15 @@
 | 11 | 扩到 BF16 和 64×64×32 tile；两形状、两 dtype、两 tile、三阶段数、三轮 | 72 次候选数值检查全部通过；BF16 长 K、32 tile 的 stage 2 为 1.0162×，BF16 1024³、64 tile 的 stage 2/3 仅为 0.9152×/0.7484×；阶段数须与 dtype、shape、tile 联合选择 |
 | 13 | 依据 skill 的融合页和迁移账本，实现 Residual Add RMSNorm 两核反向；FP16/BF16、两种 residual 输出梯度模式、六形状、三次独立进程 | 72/72 case-round 同时通过分析式 PyTorch 与独立 autograd 梯度检查；后向微基准相对分析式 PyTorch 序列的 24 组几何平均为 10.379–15.405×，包含基线的多次 launch 与临时张量开销，不是完整训练吞吐 |
 | 14 | 将阶段 3 前向与阶段 13 反向接入自定义 `torch.autograd.Function`；合成 loss 使用两个输出并执行一次 SGD 权重更新；探测固定提交的 Megatron 路径 | FP16/BF16、三种 3D 形状、三轮独立进程共 18/18 case-round 通过输出、loss、三组梯度和更新后权重对照；真实 Megatron 导入受包解析冲突及当前 Transformer Engine stub 缺 `__version__` 阻断，尚无真实训练结果 |
+| 15 | 在独立进程中临时指定固定 Megatron 命名空间，并把厂商 `te_version()` 映射到该 Megatron 期望的 `__version__`；未改动安装包和 checkout | 导入继续推进后仍因当前 CoreX Transformer Engine 缺 `transformer_engine.pytorch.float8_tensor` 停止；仅补版本字段不能形成兼容运行时，未进入真实模型 step |
 
 以上除阶段 13 外的性能数字属于**单卡预热正向微基准**。阶段 3 的大幅比值包含消除 PyTorch 多次 launch 的收益，阶段 4 的 epilogue 比值包含消除独立 bias launch 的收益；两者不能直接解释为模型吞吐、训练反向或对其它优化内核的加速。
 
 阶段 13 是独立的**仅反向微基准**，不属于上段正向数字。两核实现先按行计算 `grad_x`、`grad_residual` 和 FP32 权重梯度部分和，再跨行归约；保留 residual 输出的可选梯度。三轮原始事件样本、六形状（含未见过的 17×1537 尾块）、误差统计和 SHA256 见[阶段 13 manifest](evidence/stage13-20260929/manifest.json)，可运行源码为 [`stage13_backward.py`](stage13_backward.py)。例如 BI-V150、BF16、64×1024、residual 输出梯度存在时，三轮后向几何平均相对分析式 PyTorch 序列为 **15.405392×**，来源为 `exp-bi-v150-corex42-stage13` 的 `manifest.json#summary[10]`。该基线包含多次 PyTorch kernel launch 和临时张量，尚未与另一个优化反向实现或真实训练 step 比较。
 
 阶段 14 将两个已验证内核连成合成前后向路径，并检查一次 SGD 更新；三轮共 18/18 用例通过。最大绝对误差分别为输出 0.000977、输入梯度 3.05e-5、权重梯度 5.96e-8、更新后权重 0；原始逐例结果及哈希见[阶段 14 manifest](evidence/stage14-20260929/manifest.json)，源码见[`stage14_autograd_integration.py`](stage14_autograd_integration.py)。这证明所测形状的接口组合与梯度传播可行，不含真实模型 step 或吞吐计时。固定 Megatron 提交 `5be9626709af2722333bf54797c954c09edeada3` 的导入探针先受到 CoreX 自带同名 `megatron` 包覆盖；只在临时 overlay 中指定固定 checkout 后，又因当前 `transformer_engine` stub 缺 `__version__` 而停止。两份失败证据分别保留在[探针 JSON](evidence/stage14-20260929/megatron-route-probe-final.json)和[overlay 日志](evidence/stage14-20260929/megatron-import-overlay.log)。
+
+阶段 15 为定位阻断深度，只在探针进程内隔离同名包并映射厂商 `te_version()`（1.6.0）到 `__version__`。固定 checkout 的 detached HEAD 与预期提交一致；越过版本检查后，导入又停在缺少 `transformer_engine.pytorch.float8_tensor`。此模块被固定 Megatron 的若干路径引用，不能据此宣称当前厂商运行时与该 Megatron 提交兼容；也未通过伪造 FP8 类来推进训练。探针源码、两轮原始 JSON 与哈希见[阶段 15 证据目录](evidence/stage15-20260929/manifest.json)。
 
 阶段 11 的完整留出集如下，数值为三轮配对中位数比值的几何平均；`>1` 才表示比相同 tile 的 stage 1 更快。每轮 8 个 case × 3 个阶段数均通过 CPU FP64 参考后的 dtype 舍入检查，FP16 使用 `atol=rtol=0.03`，BF16 使用 `0.05`；逐轮样本与哈希在 [`evidence/stage11-20260928/`](evidence/stage11-20260928/)。
 
@@ -75,7 +78,7 @@ Claude Code 用户配置现已指向 Paratera，旧配置备份留在用户目�
 
 ## 5. 未完成项与外部依赖
 
-1. **真实 KDA/Megatron 负载。** 本地没有实际 Megatron 形状采集结果，也未完成训练 step 的调用点接入或模型吞吐对照。阶段 14 的合成前后向与一次更新通过，但固定提交 Megatron 的导入同时暴露包解析冲突和 Transformer Engine stub 不完整；这些不是有效的真实模型形状证明。需在固定 Megatron 版本与兼容运行时上重新采集。
+1. **真实 KDA/Megatron 负载。** 本地没有实际 Megatron 形状采集结果，也未完成训练 step 的调用点接入或模型吞吐对照。阶段 14 的合成前后向与一次更新通过，但固定提交 Megatron 的导入同时暴露包解析冲突和 Transformer Engine 缺失的 API/模块；阶段 15 的进程内版本映射仍止于缺失 `float8_tensor`。这些不是有效的真实模型形状证明。需在固定 Megatron 版本与真正兼容的运行时上重新采集。
 2. **ixSYS 可视化。** CLI V4.2.0 与 NVTX 短脚本可用，但 Pod 缺少 tracefs/debugfs 的 `tracing_on` 控制节点，容器内挂载因只读限制失败。2026-09-29 再测确认内核列出 tracefs/debugfs，而容器无 `CAP_SYS_ADMIN`、`/sys` 为只读；`mount` 返回 32，ixSYS 最窄的 `cuda_kernel` 模式仍在采集前退出，未生成 `.ptrace`。原始诊断见 [`evidence/stage12-20260929/tracefs-probe.log`](evidence/stage12-20260929/tracefs-probe.log)。JSON/日志不能代替 trace。平台需在宿主机或 Pod 创建配置中提供可访问的 tracefs/debugfs 节点，再按第 8 节采集、拷回和导入。
 3. **硬件机制对应关系。** 尚未取得可读最终机器指令、计算/搬运重叠 trace、shared bank 冲突或 warp 角色拆分证据。原 NVIDIA TMA、mbarrier、TMEM、`tcgen05`、CLC、NVFP4 等仍限定原架构；当前目标端相似算法只按所测证据等级描述。
 4. **FP8/软件版本。** 当前 CoreX 4.2 的 FP8 `tl.dot` 编译失败；不能推出 BI-V150 硬件不支持。新 CoreX/Triton 构建须作为独立环境版本重新探测，不与现有性能样本合并。
@@ -86,7 +89,7 @@ Claude Code 用户配置现已指向 Paratera，旧配置备份留在用户目�
 | 优先级 | 任务与依赖 | 具体执行 | 完成门槛与产物 |
 |---|---|---|---|
 | P0 | 接入 KDA 的仓库级可发布入口；本机项目入口已验证 | 使用阶段 14 已通过 160 项测试、全库验证和来源证据哈希核验的固定补丁；核对 KDA 当前旧子模块版本、加载路径与第三方资产许可；准备集成变更和回退方案 | KDA 仓库可从固定 SHA + 补丁复建并加载 BI-V150 skill；CI 跑全库验证、160 项测试及三架构查询；不混入未授权第三方资产 |
-| P1 | 取得真实训练负载；依赖 Megatron 固定提交及可用 Transformer Engine/替代运行时 | 先隔离 CoreX 同名 `megatron` 包并配齐与固定提交匹配的 Transformer Engine，重跑阶段 14 导入探针；再用已有 `experiments/megatron_ops` 工具在真实短训练 step 记录 Residual Add RMSNorm 的 rows/hidden、dtype、stride、调用次数、前/反向耗时；固定训练配置后划分调参集与留出集 | 保存原始 capture、环境指纹和哈希；至少一个真实 step 的调用点与可重跑命令；明确哪些现有合成形状覆盖真实分布 |
+| P1 | 取得真实训练负载；依赖 Megatron 固定提交及兼容 Transformer Engine/替代运行时 | 先隔离 CoreX 同名 `megatron` 包，并取得包含固定提交所需模块/API 的目标端运行时；重跑导入与阶段 14 路由探针。之后用已有 `experiments/megatron_ops` 工具在真实短训练 step 记录 Residual Add RMSNorm 的 rows/hidden、dtype、stride、调用次数、前/反向耗时；固定训练配置后划分调参集与留出集 | 保存原始 capture、环境指纹和哈希；至少一个真实 step 的调用点与可重跑命令；明确哪些现有合成形状覆盖真实分布 |
 | P1 | 算子接入与端到端验收；依赖上项 | 将阶段 13 两核反向与已验证前向接入真实调用点；对真实形状复测尾块和 fallback，并与既有目标实现及训练 step 基线比较 loss、吞吐、峰值显存 | 三次独立复测、留出形状不退化或有明确 fallback；前/反向语义及短 step loss 通过；报告单核与端到端收益及退化尾部 |
 | P2 | 目标端流水机制；依赖平台 tracefs/debugfs 挂载或厂商最终指令工具 | 用已准备的 ixSYS NVTX 脚本生成 `.ptrace`，在网站检查 kernel/stream 时间线；对 `num_stages` 的最终代码、屏障与搬运重叠做证据对照 | trace 可打开且来源、版本和 workload 可追溯；只在观察到对应机制后提升迁移账本的硬件映射等级 |
 | P2 | 低精度与其他热点；依赖新工具链或真实模型热点排序 | 在新 CoreX 构建重新测 FP8/FP4 表示、缩放与 `tl.dot`；按真实热点顺序扩至 SwiGLU、Attention、Cross Entropy 或 MoE Grouped GEMM | 每项独立环境指纹、数值与性能闭环；FP8 编译失败/成功均保留日志；不跨版本借用旧结论 |

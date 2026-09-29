@@ -1,0 +1,27 @@
+{
+  "stage": "stage15-megatron-process-local-compatibility-probe",
+  "date": "2026-09-29",
+  "gpu": "Iluvatar BI-V150",
+  "pinned_megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
+  "vendor_transformer_engine": {
+    "ixte_version": "0.2.4",
+    "te_version": "1.6.0",
+    "missing": "transformer_engine.pytorch.float8_tensor"
+  },
+  "scope": "process-local megatron namespace and __version__ mapping; no vendor or checkout files modified; no real Megatron training step",
+  "results": [
+    {
+      "file": "stage15_megatron_compat_probe.py",
+      "sha256": "0a50504797d1372c24f165b9a3cc5a8874ccae4d7b7272b066d08ee073c54959"
+    },
+    {
+      "file": "stage15-route-gitcheck.json",
+      "sha256": "6b7d29844d86fbfc40305c8c365cf551bff3f1c581e13965e27d2b0965ff41af"
+    },
+    {
+      "file": "stage15-route-tecompat.json",
+      "sha256": "0b57bec8908a27ae9479c6674461681e4130ba8a41b05770ae3bac86f09cb37c"
+    }
+  ],
+  "provenance_note": "stage15-route-gitcheck.json came from an earlier temporary-global-Git-config script iteration; the final retained script produced stage15-route-tecompat.json after exact detached-HEAD verification. The first result is kept as a failed setup attempt, not as a GPU result."
+}
