@@ -30,10 +30,13 @@
 | 10 | 两个更大 FP16 GEMM 形状上的 stages 1/2/3 三轮配对复测 | 32×32×32 tile 中，stage 2 为 1.0154×/1.0018×，stage 3 为 0.7724×/0.9166×（均相对 stage 1） |
 | 11 | 扩到 BF16 和 64×64×32 tile；两形状、两 dtype、两 tile、三阶段数、三轮 | 72 次候选数值检查全部通过；BF16 长 K、32 tile 的 stage 2 为 1.0162×，BF16 1024³、64 tile 的 stage 2/3 仅为 0.9152×/0.7484×；阶段数须与 dtype、shape、tile 联合选择 |
 | 13 | 依据 skill 的融合页和迁移账本，实现 Residual Add RMSNorm 两核反向；FP16/BF16、两种 residual 输出梯度模式、六形状、三次独立进程 | 72/72 case-round 同时通过分析式 PyTorch 与独立 autograd 梯度检查；后向微基准相对分析式 PyTorch 序列的 24 组几何平均为 10.379–15.405×，包含基线的多次 launch 与临时张量开销，不是完整训练吞吐 |
+| 14 | 将阶段 3 前向与阶段 13 反向接入自定义 `torch.autograd.Function`；合成 loss 使用两个输出并执行一次 SGD 权重更新；探测固定提交的 Megatron 路径 | FP16/BF16、三种 3D 形状、三轮独立进程共 18/18 case-round 通过输出、loss、三组梯度和更新后权重对照；真实 Megatron 导入受包解析冲突及当前 Transformer Engine stub 缺 `__version__` 阻断，尚无真实训练结果 |
 
 以上除阶段 13 外的性能数字属于**单卡预热正向微基准**。阶段 3 的大幅比值包含消除 PyTorch 多次 launch 的收益，阶段 4 的 epilogue 比值包含消除独立 bias launch 的收益；两者不能直接解释为模型吞吐、训练反向或对其它优化内核的加速。
 
 阶段 13 是独立的**仅反向微基准**，不属于上段正向数字。两核实现先按行计算 `grad_x`、`grad_residual` 和 FP32 权重梯度部分和，再跨行归约；保留 residual 输出的可选梯度。三轮原始事件样本、六形状（含未见过的 17×1537 尾块）、误差统计和 SHA256 见[阶段 13 manifest](evidence/stage13-20260929/manifest.json)，可运行源码为 [`stage13_backward.py`](stage13_backward.py)。例如 BI-V150、BF16、64×1024、residual 输出梯度存在时，三轮后向几何平均相对分析式 PyTorch 序列为 **15.405392×**，来源为 `exp-bi-v150-corex42-stage13` 的 `manifest.json#summary[10]`。该基线包含多次 PyTorch kernel launch 和临时张量，尚未与另一个优化反向实现或真实训练 step 比较。
+
+阶段 14 将两个已验证内核连成合成前后向路径，并检查一次 SGD 更新；三轮共 18/18 用例通过。最大绝对误差分别为输出 0.000977、输入梯度 3.05e-5、权重梯度 5.96e-8、更新后权重 0；原始逐例结果及哈希见[阶段 14 manifest](evidence/stage14-20260929/manifest.json)，源码见[`stage14_autograd_integration.py`](stage14_autograd_integration.py)。这证明所测形状的接口组合与梯度传播可行，不含真实模型 step 或吞吐计时。固定 Megatron 提交 `5be9626709af2722333bf54797c954c09edeada3` 的导入探针先受到 CoreX 自带同名 `megatron` 包覆盖；只在临时 overlay 中指定固定 checkout 后，又因当前 `transformer_engine` stub 缺 `__version__` 而停止。两份失败证据分别保留在[探针 JSON](evidence/stage14-20260929/megatron-route-probe-final.json)和[overlay 日志](evidence/stage14-20260929/megatron-import-overlay.log)。
 
 阶段 11 的完整留出集如下，数值为三轮配对中位数比值的几何平均；`>1` 才表示比相同 tile 的 stage 1 更快。每轮 8 个 case × 3 个阶段数均通过 CPU FP64 参考后的 dtype 舍入检查，FP16 使用 `atol=rtol=0.03`，BF16 使用 `0.05`；逐轮样本与哈希在 [`evidence/stage11-20260928/`](evidence/stage11-20260928/)。
 
@@ -56,19 +59,23 @@ Windows 验证器最初用字符串 `/` 判断资产目录归属，误报 411 �
 
 阶段 13 将上述反向证据回写到独立来源页与算子页。新补丁从固定上游提交重新构建后，**1756 个文件与已测试版逐项哈希一致**；整库验证为 **1057 页、996 个 source ID、37 个 asset bundle、14 个 ledger、0 个孤立源文件**，BI-V150/SM90/SM100 精确查询为 **16/286/379** 条，SM90/SM100 路径集合不变。BI-V150 Pod Linux 的完整 unittest **160/160 通过**，原始日志见[阶段 13 测试记录](evidence/stage13-20260929/kernelwiki-unittest.log)。Windows 直接运行 unittest 会受本机 GBK 默认编码和 `python3` 执行别名影响，故以同一重建版的 Linux 全量测试为验收。
 
+阶段 14 的新来源和合成前后向结论已加入同一补丁与算子页。从固定上游 SHA 再重建后，**1766 个非缓存文件逐项哈希一致**；整库验证为 **1058 页、997 个 source ID、37 个 asset bundle、14 个 ledger、0 个孤立源文件**。BI-V150 精确查询增至 **17** 条；SM90/SM100 仍为 **286/379** 条，完整路径集合不变。Pod Linux 完整 unittest **160/160 通过**，见[阶段 14 测试日志](evidence/stage14-20260929/kernelwiki-unittest.log)。
+
 ### KDA 的 skill 加载入口
 
-KDA 原仓库的加载方式是把固定的 `skills/KernelWiki` 子模块链接到 `~/.claude/skills/KernelWiki`。本机已按该路径保留原 NVIDIA skill，并把已安装的适配版另行链接到 `~/.claude/skills/kernelwiki-iluvatar`；未修改 KDA 的第三方子模块或将其资产复制进 KDA 仓库。Windows 可用 [`link_kda_skills.ps1`](link_kda_skills.ps1) 重建这两个 junction，参数为 KDA checkout 和已组装的适配 skill 目录。直读检索已从两个入口分别返回 `kernel-flash-attention-4` 与 `kernel-residual-rmsnorm-bi-v150`，适配版 BI-V150 完整架构检索仍为 14 页。
+KDA 原仓库的加载方式是把固定的 `skills/KernelWiki` 子模块链接到 `~/.claude/skills/KernelWiki`。本机已按该路径保留原 NVIDIA skill，并把已安装的适配版另行链接到 `~/.claude/skills/kernelwiki-iluvatar`；未修改 KDA 的第三方子模块或将其资产复制进 KDA 仓库。Windows 可用 [`link_kda_skills.ps1`](link_kda_skills.ps1) 重建这两个 junction，参数为 KDA checkout 和已组装的适配 skill 目录。直读检索已从两个入口分别返回 `kernel-flash-attention-4` 与 `kernel-residual-rmsnorm-bi-v150`，阶段 14 适配版的 BI-V150 完整架构检索为 17 页。
 
 2026-09-29 经用户授权，使用 [`claude_paratera_smoke.ps1`](claude_paratera_smoke.ps1) 在 KDA checkout 的项目级 `.claude/skills/` 入口运行一次只读 Claude Code 验证。服务地址为 `https://llmapi.paratera.com`，模型 ID 为 `Claude-Opus-4.8`；Key 由用户在本机配置，未写入仓库或输出日志。会话 2 轮、退出码 0，Claude 的 `Read` 工具实际读取适配版 `wiki/hardware/bi-v150-stack.md`，返回 `hw-bi-v150-stack`、`BI-V150 observed kernel toolchain`、`experimental`、首个来源 `doc-flagtree-iluvatar`，与页面 frontmatter 一致。原始响应见[Claude Code smoke JSON](evidence/claude-paratera-smoke-20260929-153202.json)，工具调用路径和本机会话记录哈希见[精简 trace](evidence/claude-paratera-smoke-20260929-153202-trace.json)。这证明当前机器上的适配 skill 可由 Claude Code 调用并读页；KDA 仓库正式集成、真实算子选择与训练收益仍按第 5–6 节验收。
 
 阶段 13 安装版同步后，Claude Code 又从同一入口实读新的 `kernel-residual-rmsnorm-backward-bi-v150` 页面，返回来源 `exp-bi-v150-corex42-stage13`、BF16 64×1024 的 **15.405392×** 后向微基准值和“非完整训练吞吐”的边界；原始响应见[反向页实读记录](evidence/claude-paratera-backward-page-20260929.json)，本机会话的[精简 trace](evidence/claude-paratera-backward-page-20260929-trace.json)记录了实际 `Read` 路径和 transcript 哈希。模型规划阶段的只读输出见[规划响应](evidence/claude-paratera-backward-plan-20260929.json)，其中公式与来源经本次 GPU 实验独立检验；这仍是个人及项目级 skill 入口的闭环，尚非 KDA 上游仓库的发布或 CI 集成。
 
+阶段 14 安装版同步后，Claude Code 从 KDA 项目级入口实读新增来源页与反向算子页，准确返回 `exp-bi-v150-corex42-stage14`、**18 个合成 case-round**、Megatron/Transformer Engine 导入阻断和阶段 13 微基准的适用边界；会话退出码 0、3 轮，原始响应见[阶段 14 实读记录](evidence/stage14-20260929/claude-stage14-read.json)，[精简 trace](evidence/stage14-20260929/claude-stage14-read-trace.json)保留了两个实际 `Read` 路径和会话哈希。由此形成“skill 指导 → BI-V150 实验 → 证据回写 → 从正式项目入口再读取”的本机闭环，真实训练路径仍按下节处理。
+
 Claude Code 用户配置现已指向 Paratera，旧配置备份留在用户目录；API Key 只在本机用户配置与环境变量中。清除当前进程旧代理变量后，普通 `claude -p` 对 `Claude-Opus-4.8` 的最小调用返回 `OK`，见[默认配置验证 JSON](evidence/claude-paratera-global-config-20260929.json)。密钥不在本仓库及这些响应文件中。
 
 ## 5. 未完成项与外部依赖
 
-1. **真实 KDA/Megatron 负载。** 本地没有实际 Megatron 形状采集结果，也未完成训练 step 的调用点接入或模型吞吐对照。阶段 13 已有独立优化反向原型，但尚未接到真实训练图。Pod 上保存的旧 preflight 状态为 `transformer_engine_unavailable`，另有 fallback route smoke；这些不是有效的真实模型形状证明。需在固定 Megatron 版本与可用运行时上重新采集。
+1. **真实 KDA/Megatron 负载。** 本地没有实际 Megatron 形状采集结果，也未完成训练 step 的调用点接入或模型吞吐对照。阶段 14 的合成前后向与一次更新通过，但固定提交 Megatron 的导入同时暴露包解析冲突和 Transformer Engine stub 不完整；这些不是有效的真实模型形状证明。需在固定 Megatron 版本与兼容运行时上重新采集。
 2. **ixSYS 可视化。** CLI V4.2.0 与 NVTX 短脚本可用，但 Pod 缺少 tracefs/debugfs 的 `tracing_on` 控制节点，容器内挂载因只读限制失败。2026-09-29 再测确认内核列出 tracefs/debugfs，而容器无 `CAP_SYS_ADMIN`、`/sys` 为只读；`mount` 返回 32，ixSYS 最窄的 `cuda_kernel` 模式仍在采集前退出，未生成 `.ptrace`。原始诊断见 [`evidence/stage12-20260929/tracefs-probe.log`](evidence/stage12-20260929/tracefs-probe.log)。JSON/日志不能代替 trace。平台需在宿主机或 Pod 创建配置中提供可访问的 tracefs/debugfs 节点，再按第 8 节采集、拷回和导入。
 3. **硬件机制对应关系。** 尚未取得可读最终机器指令、计算/搬运重叠 trace、shared bank 冲突或 warp 角色拆分证据。原 NVIDIA TMA、mbarrier、TMEM、`tcgen05`、CLC、NVFP4 等仍限定原架构；当前目标端相似算法只按所测证据等级描述。
 4. **FP8/软件版本。** 当前 CoreX 4.2 的 FP8 `tl.dot` 编译失败；不能推出 BI-V150 硬件不支持。新 CoreX/Triton 构建须作为独立环境版本重新探测，不与现有性能样本合并。
@@ -78,8 +85,8 @@ Claude Code 用户配置现已指向 Paratera，旧配置备份留在用户目�
 
 | 优先级 | 任务与依赖 | 具体执行 | 完成门槛与产物 |
 |---|---|---|---|
-| P0 | 接入 KDA 的正式 skill 入口；基础验收已完成 | 使用已通过 160 项测试、全库验证和 50 件调度证据哈希核验的固定补丁；核对 KDA 当前旧子模块版本、加载路径与第三方资产许可；准备集成变更和回退方案 | KDA 仓库可从固定 SHA + 补丁复建并加载 BI-V150 skill；CI 跑全库验证、160 项测试及三架构查询；不混入未授权第三方资产 |
-| P1 | 取得真实训练负载；依赖 Megatron 固定提交及可用 Transformer Engine/替代运行时 | 用已有 `experiments/megatron_ops` 采集工具，在真实短训练 step 记录 Residual Add RMSNorm 的 rows/hidden、dtype、stride、调用次数、前/反向耗时；先固定训练配置，再划分调参集与留出集 | 保存原始 capture、环境指纹和哈希；至少一个真实 step 的调用点与可重跑命令；明确哪些现有合成形状覆盖真实分布 |
+| P0 | 接入 KDA 的仓库级可发布入口；本机项目入口已验证 | 使用阶段 14 已通过 160 项测试、全库验证和来源证据哈希核验的固定补丁；核对 KDA 当前旧子模块版本、加载路径与第三方资产许可；准备集成变更和回退方案 | KDA 仓库可从固定 SHA + 补丁复建并加载 BI-V150 skill；CI 跑全库验证、160 项测试及三架构查询；不混入未授权第三方资产 |
+| P1 | 取得真实训练负载；依赖 Megatron 固定提交及可用 Transformer Engine/替代运行时 | 先隔离 CoreX 同名 `megatron` 包并配齐与固定提交匹配的 Transformer Engine，重跑阶段 14 导入探针；再用已有 `experiments/megatron_ops` 工具在真实短训练 step 记录 Residual Add RMSNorm 的 rows/hidden、dtype、stride、调用次数、前/反向耗时；固定训练配置后划分调参集与留出集 | 保存原始 capture、环境指纹和哈希；至少一个真实 step 的调用点与可重跑命令；明确哪些现有合成形状覆盖真实分布 |
 | P1 | 算子接入与端到端验收；依赖上项 | 将阶段 13 两核反向与已验证前向接入真实调用点；对真实形状复测尾块和 fallback，并与既有目标实现及训练 step 基线比较 loss、吞吐、峰值显存 | 三次独立复测、留出形状不退化或有明确 fallback；前/反向语义及短 step loss 通过；报告单核与端到端收益及退化尾部 |
 | P2 | 目标端流水机制；依赖平台 tracefs/debugfs 挂载或厂商最终指令工具 | 用已准备的 ixSYS NVTX 脚本生成 `.ptrace`，在网站检查 kernel/stream 时间线；对 `num_stages` 的最终代码、屏障与搬运重叠做证据对照 | trace 可打开且来源、版本和 workload 可追溯；只在观察到对应机制后提升迁移账本的硬件映射等级 |
 | P2 | 低精度与其他热点；依赖新工具链或真实模型热点排序 | 在新 CoreX 构建重新测 FP8/FP4 表示、缩放与 `tl.dot`；按真实热点顺序扩至 SwiGLU、Attention、Cross Entropy 或 MoE Grouped GEMM | 每项独立环境指纹、数值与性能闭环；FP8 编译失败/成功均保留日志；不跨版本借用旧结论 |
@@ -90,7 +97,7 @@ Claude Code 用户配置现已指向 Paratera，旧配置备份留在用户目�
 
 | 上游技术页 | 可迁移的思路 | BI-V150 当前证据 | 下一项验证 |
 |---|---|---|---|
-| `technique-kernel-fusion` | 合并相邻算子以减少中间张量和 launch | Residual Add RMSNorm 前向在 FP16/BF16、5 个形状上通过三次独立进程复测；阶段 13 的两核反向在六形状、两 dtype、两 residual 梯度模式共 72 个 case-round 通过检查，独立结果见 `kernel-residual-rmsnorm-backward-bi-v150` | 与其它目标端优化反向比较，并在真实训练 step 验证模型吞吐 |
+| `technique-kernel-fusion` | 合并相邻算子以减少中间张量和 launch | Residual Add RMSNorm 前向在 FP16/BF16、5 个形状上通过三次独立进程复测；阶段 13 的两核反向在六形状、两 dtype、两 residual 梯度模式共 72 个 case-round 通过检查；阶段 14 的合成前后向及一次更新共 18/18 case-round 正确 | 与其它目标端优化反向比较，取得兼容 Megatron 运行时后在真实训练 step 验证模型吞吐 |
 | `technique-epilogue-fusion` | 在结果写回前合并缩放、加法或激活 | FP16/BF16 GEMM+bias 三形状、四配置、三轮均正确；相同 tile 相对单独 bias launch 加速 1.33–3.94× | 对比厂商高性能 GEMM 与完整模型调用路径 |
 | `technique-tile-scheduling` | 按形状调 tile 和 launch 布局 | GEMM+bias 四配置三轮复测：127/256 方阵偏向 32×64×32/8，512 方阵偏向 64×64×32/4；仅限所测形状 | 扩大 K/N 和布局，再查编译资源与性能稳定性 |
 | `technique-register-budgeting` | 控制每程序资源占用 | CoreX 编译对象可报告 n_regs/n_spills/shared；访问核 block 256/1024/4096 分别为 3/8/26 个寄存器、零 spill，耗时非单调 | 取得 occupancy 和生成代码后再推导资源阈值 |

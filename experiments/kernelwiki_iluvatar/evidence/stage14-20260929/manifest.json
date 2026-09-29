@@ -1,0 +1,42 @@
+{
+  "gpu": "Iluvatar BI-V150",
+  "torch": "2.4.1",
+  "triton": "2.1.0",
+  "script_sha256": "7e01868e53f07fbdcdc66a32c1c1bb739036456aec548b4f8027e880d0c27955",
+  "case_count": 18,
+  "all_correct": true,
+  "rounds": [
+    {
+      "seed": 14001,
+      "file": "stage14-round-14001.json",
+      "sha256": "4ec3aeaeba29e2c93c895759dccf2a8830e33a7a14307981136e9a046ce529ca"
+    },
+    {
+      "seed": 14002,
+      "file": "stage14-round-14002.json",
+      "sha256": "7966f908d8e382ef67f799b24903ca5fd036c5e07d7a3d4fed01b4e76182cefc"
+    },
+    {
+      "seed": 14003,
+      "file": "stage14-round-14003.json",
+      "sha256": "4e2be19f87afd95a14278eba8114e3f1297a6d131e0c20d105b513b1afabab9a"
+    }
+  ],
+  "max_abs_errors": {
+    "output": 0.0009765625,
+    "residual_out": 0.0,
+    "loss": 3.5762786865234375e-07,
+    "grad_x": 3.0517578125e-05,
+    "grad_residual": 3.0517578125e-05,
+    "grad_weight": 5.960464477539063e-08,
+    "weight_after_sgd": 0.0
+  },
+  "scope": "synthetic autograd forward/backward and one SGD weight update; no real Megatron training",
+  "megatron_route": {
+    "status": "megatron_import_failed",
+    "error_type": "ModuleNotFoundError",
+    "error": "No module named 'megatron.core.extensions'",
+    "route_json_sha256": "fd39a551b7817f23ba485d81f4b17c1e95c30100d9e3ee30046b93cd96345bd9",
+    "overlay_import_log_sha256": "8502326c8f4733d5ec8b8e8782434152512431bfe7f9a94480a5a9c1ad27f2ca"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "session_id": "72f1937a-97f4-418f-b9eb-3112f09fc4a8",
+  "model": "Claude-Opus-4.8",
+  "transcript_sha256": "c7d5e167b2ea7147b6290009b43f1edb4b3d8dedfef0d5ea40d786db72aa6d65",
+  "tool_calls": [
+    {
+      "tool": "Read",
+      "file_path": "E:\\code\\GPGPU\\experiments\\kernelwiki_iluvatar\\upstream-kda\\.claude\\skills\\kernelwiki-iluvatar\\sources\\experiments\\bi-v150-corex42-stage14.md"
+    },
+    {
+      "tool": "Read",
+      "file_path": "E:\\code\\GPGPU\\experiments\\kernelwiki_iluvatar\\upstream-kda\\.claude\\skills\\kernelwiki-iluvatar\\wiki\\kernels\\residual-rmsnorm-backward-bi-v150.md"
+    }
+  ],
+  "answer": "**Source ID:** `exp-bi-v150-corex42-stage14`\n\n**Synthetic case count:** 18 case-rounds passed (3 seeds 14001–14003 × FP16/BF16 × 3 shapes `[8,2,1024]`, `[7,1,769]`, `[4,4,4099]`), covering output, residual, loss, both input gradients, weight gradient, and updated-weight checks.\n\n**Still unverified:** Real Megatron integration — import resolved the CoreX `megatron` package instead of the pinned checkout, then failed because the `transformer_engine` stub lacked `__version__`. No Megatron model step, performance timing, training-throughput claim, end-to-end speedup, or real workload shape has been demonstrated.\n\n**Stage13 backward speedup boundary:** 10.379×–15.405× (3-run geometric mean, backward-only, bf16/fp16, vs analytical PyTorch) — max 15.405392× at bf16 64×1024 with `grad_residual_out` present; min 10.378645× at bf16 16×4099 with `grad_residual_out` absent. This range includes launch and temporary-tensor savings in the multi-op baseline and does not reflect an optimized-backward comparison or full-training throughput."
+}

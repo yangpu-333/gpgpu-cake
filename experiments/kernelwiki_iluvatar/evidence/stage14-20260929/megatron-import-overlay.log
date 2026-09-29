@@ -1,0 +1,25 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/private/atrex-megatron/src/megatron-lm/megatron/core/__init__.py", line 5, in <module>
+    import megatron.core.tensor_parallel
+  File "/private/atrex-megatron/src/megatron-lm/megatron/core/tensor_parallel/__init__.py", line 4, in <module>
+    from .inference_layers import (
+  File "/private/atrex-megatron/src/megatron-lm/megatron/core/tensor_parallel/inference_layers.py", line 7, in <module>
+    from megatron.core.extensions.transformer_engine import (
+  File "/private/atrex-megatron/src/megatron-lm/megatron/core/extensions/transformer_engine.py", line 39, in <module>
+    from megatron.core.tensor_parallel.layers import (
+  File "/private/atrex-megatron/src/megatron-lm/megatron/core/tensor_parallel/layers.py", line 37, in <module>
+    from ..transformer.utils import make_sharded_tensors_for_checkpoint
+  File "/private/atrex-megatron/src/megatron-lm/megatron/core/transformer/__init__.py", line 6, in <module>
+    from .transformer_layer import TransformerLayer, TransformerLayerSubmodules
+  File "/private/atrex-megatron/src/megatron-lm/megatron/core/transformer/transformer_layer.py", line 21, in <module>
+    from megatron.core.transformer.cuda_graphs import is_graph_capturing
+  File "/private/atrex-megatron/src/megatron-lm/megatron/core/transformer/cuda_graphs.py", line 61, in <module>
+    from megatron.core.tensor_parallel.gtp_api import HAVE_GTP
+  File "/private/atrex-megatron/src/megatron-lm/megatron/core/tensor_parallel/gtp_api.py", line 14, in <module>
+    from megatron.core.tensor_parallel.generalized_tensor_parallelism import (
+  File "/private/atrex-megatron/src/megatron-lm/megatron/core/tensor_parallel/generalized_tensor_parallelism.py", line 48, in <module>
+    _te_version = Version(te.__version__)
+AttributeError: module 'transformer_engine' has no attribute '__version__'. Did you mean: '_te_version'?
+/root/miniconda3/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmpsj1qzzn3'>
+  _warnings.warn(warn_message, ResourceWarning)

@@ -1,0 +1,306 @@
+{
+  "created_utc": "2026-09-29T08:14:58.369960+00:00",
+  "status": "passed",
+  "scope": "synthetic custom-autograd forward/backward and one SGD weight update; not Megatron training",
+  "gpu": "Iluvatar BI-V150",
+  "torch": "2.4.1",
+  "triton": "2.1.0",
+  "seed": 14003,
+  "script_sha256": "7e01868e53f07fbdcdc66a32c1c1bb739036456aec548b4f8027e880d0c27955",
+  "cases": [
+    {
+      "shape": [
+        8,
+        2,
+        1024
+      ],
+      "dtype": "float16",
+      "seed": 14003,
+      "passed": true,
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs_error": 0.00048828125,
+          "bad_elements": 0
+        },
+        "residual_out": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "loss": {
+          "passed": true,
+          "max_abs_error": 1.1920928955078125e-07,
+          "bad_elements": 0
+        },
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 9.5367431640625e-07,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 9.5367431640625e-07,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "weight_after_sgd": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      }
+    },
+    {
+      "shape": [
+        7,
+        1,
+        769
+      ],
+      "dtype": "float16",
+      "seed": 14003,
+      "passed": true,
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs_error": 0.0001220703125,
+          "bad_elements": 0
+        },
+        "residual_out": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "loss": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 3.814697265625e-06,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 3.814697265625e-06,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "weight_after_sgd": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      }
+    },
+    {
+      "shape": [
+        4,
+        4,
+        4099
+      ],
+      "dtype": "float16",
+      "seed": 14003,
+      "passed": true,
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs_error": 0.0009765625,
+          "bad_elements": 0
+        },
+        "residual_out": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "loss": {
+          "passed": true,
+          "max_abs_error": 5.960464477539063e-08,
+          "bad_elements": 0
+        },
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 4.76837158203125e-07,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 4.76837158203125e-07,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 5.960464477539063e-08,
+          "bad_elements": 0
+        },
+        "weight_after_sgd": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      }
+    },
+    {
+      "shape": [
+        8,
+        2,
+        1024
+      ],
+      "dtype": "bfloat16",
+      "seed": 14003,
+      "passed": true,
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "residual_out": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "loss": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 1.52587890625e-05,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 1.52587890625e-05,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "weight_after_sgd": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      }
+    },
+    {
+      "shape": [
+        7,
+        1,
+        769
+      ],
+      "dtype": "bfloat16",
+      "seed": 14003,
+      "passed": true,
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "residual_out": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "loss": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 3.0517578125e-05,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 3.0517578125e-05,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "weight_after_sgd": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      }
+    },
+    {
+      "shape": [
+        4,
+        4,
+        4099
+      ],
+      "dtype": "bfloat16",
+      "seed": 14003,
+      "passed": true,
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "residual_out": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "loss": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_x": {
+          "passed": true,
+          "max_abs_error": 1.9073486328125e-06,
+          "bad_elements": 0
+        },
+        "grad_residual": {
+          "passed": true,
+          "max_abs_error": 1.9073486328125e-06,
+          "bad_elements": 0
+        },
+        "grad_weight": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "weight_after_sgd": {
+          "passed": true,
+          "max_abs_error": 0.0,
+          "bad_elements": 0
+        },
+        "grad_x_equals_grad_residual": true,
+        "inputs_unchanged": true
+      }
+    }
+  ]
+}
