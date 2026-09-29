@@ -1,0 +1,41 @@
+{
+  "stage": "stage10-pipeline-scaling",
+  "date": "2026-09-28",
+  "files": [
+    {
+      "path": "stage10_pipeline_scaling.py",
+      "sha256": "df6d6f20b48ab370e1e414a975f42fb184fe43cbf609b06be101c8b6bd33a679",
+      "bytes": 4480
+    },
+    {
+      "path": "evidence/stage10-20260928/round1.json",
+      "sha256": "058c6558209d258618c5af92fbb06a134d94c48fdb5bca16eca3cd3818b15789",
+      "bytes": 6622
+    },
+    {
+      "path": "evidence/stage10-20260928/round2.json",
+      "sha256": "809d099d352f3d1a8f52de9ce705b7e003810e1a1baff5031a72c89d853aea1d",
+      "bytes": 6634
+    },
+    {
+      "path": "evidence/stage10-20260928/round3.json",
+      "sha256": "5ce4f5193149553617a8b708e397d344193b48a19bb485007fd820a44b4775c0",
+      "bytes": 6621
+    },
+    {
+      "path": "evidence/stage10-20260928/round1.log",
+      "sha256": "9c88e2b774183ef22d493b479c2599bda3d90d1afd985fad4da91276a39564a6",
+      "bytes": 128
+    },
+    {
+      "path": "evidence/stage10-20260928/round2.log",
+      "sha256": "9c88e2b774183ef22d493b479c2599bda3d90d1afd985fad4da91276a39564a6",
+      "bytes": 128
+    },
+    {
+      "path": "evidence/stage10-20260928/round3.log",
+      "sha256": "9c88e2b774183ef22d493b479c2599bda3d90d1afd985fad4da91276a39564a6",
+      "bytes": 128
+    }
+  ]
+}

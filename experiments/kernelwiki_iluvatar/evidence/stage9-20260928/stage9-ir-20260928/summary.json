@@ -1,0 +1,180 @@
+{
+  "gpu": "Iluvatar BI-V150",
+  "torch": "2.4.1",
+  "triton": "2.1.0",
+  "source_sha256": "45fba9543d23b61bc783a1075d6b066219165d1a51031fcbb7eaad74b4b25c90",
+  "language_symbols": {
+    "swizzle2d": {
+      "present": true,
+      "signature": "(*args, **kwargs)"
+    },
+    "make_block_ptr": {
+      "present": true,
+      "signature": "(base: 'tensor', shape, strides, offsets, block_shape, order, _builder=None)"
+    },
+    "debug_barrier": {
+      "present": true,
+      "signature": "(_builder=None)"
+    },
+    "async_copy": {
+      "present": false
+    },
+    "atomic_add": {
+      "present": true,
+      "signature": "(pointer, val, mask=None, sem=None, _builder=None)"
+    },
+    "cumsum": {
+      "present": true,
+      "signature": "(*args, **kwargs)"
+    },
+    "exp2": {
+      "present": false
+    }
+  },
+  "kernels": [
+    {
+      "num_stages": 1,
+      "n_regs": 35,
+      "n_spills": 0,
+      "shared": 4096,
+      "files": [
+        {
+          "kind": "ast",
+          "available": true,
+          "path": "stages1-ast.txt",
+          "bytes": 43,
+          "sha256": "a05b38ab5377c34be35da2cf9ad685ff1438dfdf67159b97049218697efcfb47"
+        },
+        {
+          "kind": "ttir",
+          "available": true,
+          "path": "stages1-ttir.txt",
+          "bytes": 5534,
+          "sha256": "3ecffc2214dd32372e7b8979d6f5288841acc92d719c4fc8152b66847974a853"
+        },
+        {
+          "kind": "ttgir",
+          "available": true,
+          "path": "stages1-ttgir.txt",
+          "bytes": 9757,
+          "sha256": "e0f4662ca1135d65284764d541f5e7fd67589d7d7063cd004bd9d8b348d58aaa"
+        },
+        {
+          "kind": "llir",
+          "available": true,
+          "path": "stages1-llir.txt",
+          "bytes": 18536,
+          "sha256": "d527de348a8234246d1ae79d8be92e36d163d14ba69c48e3bfb6cec58fad49b7"
+        },
+        {
+          "kind": "cubin",
+          "available": true,
+          "path": "stages1-cubin.bin",
+          "bytes": 10624,
+          "sha256": "66e8e6d0256de047a712e8de446e92c784b202643a9e0b240ce21142f583b4d8"
+        },
+        {
+          "kind": "sass",
+          "available": false,
+          "value_type": "function"
+        }
+      ]
+    },
+    {
+      "num_stages": 2,
+      "n_regs": 35,
+      "n_spills": 0,
+      "shared": 8192,
+      "files": [
+        {
+          "kind": "ast",
+          "available": true,
+          "path": "stages2-ast.txt",
+          "bytes": 43,
+          "sha256": "a05b38ab5377c34be35da2cf9ad685ff1438dfdf67159b97049218697efcfb47"
+        },
+        {
+          "kind": "ttir",
+          "available": true,
+          "path": "stages2-ttir.txt",
+          "bytes": 5534,
+          "sha256": "3ecffc2214dd32372e7b8979d6f5288841acc92d719c4fc8152b66847974a853"
+        },
+        {
+          "kind": "ttgir",
+          "available": true,
+          "path": "stages2-ttgir.txt",
+          "bytes": 13605,
+          "sha256": "7b5196e90f3ff042bc90b997424d665bb2e18064d37f3f4198b8df1be0af44cf"
+        },
+        {
+          "kind": "llir",
+          "available": true,
+          "path": "stages2-llir.txt",
+          "bytes": 24758,
+          "sha256": "f249226e022db032ae551a775376b03fce2279c6947958eb57e35e3420e9c55e"
+        },
+        {
+          "kind": "cubin",
+          "available": true,
+          "path": "stages2-cubin.bin",
+          "bytes": 11176,
+          "sha256": "d72d0f28b60db9a8c980e40b13a27d392a53174024013c2b3a3afbc60c2bc9d9"
+        },
+        {
+          "kind": "sass",
+          "available": false,
+          "value_type": "function"
+        }
+      ]
+    },
+    {
+      "num_stages": 3,
+      "n_regs": 34,
+      "n_spills": 0,
+      "shared": 12288,
+      "files": [
+        {
+          "kind": "ast",
+          "available": true,
+          "path": "stages3-ast.txt",
+          "bytes": 43,
+          "sha256": "a05b38ab5377c34be35da2cf9ad685ff1438dfdf67159b97049218697efcfb47"
+        },
+        {
+          "kind": "ttir",
+          "available": true,
+          "path": "stages3-ttir.txt",
+          "bytes": 5534,
+          "sha256": "3ecffc2214dd32372e7b8979d6f5288841acc92d719c4fc8152b66847974a853"
+        },
+        {
+          "kind": "ttgir",
+          "available": true,
+          "path": "stages3-ttgir.txt",
+          "bytes": 16157,
+          "sha256": "d07c6210558382c9a11dfb1a49b1b7265b18728d824558231b1cf988a67eeb91"
+        },
+        {
+          "kind": "llir",
+          "available": true,
+          "path": "stages3-llir.txt",
+          "bytes": 29324,
+          "sha256": "dcc39d78ad7708fab1914efc371539a24722c54c6673bc977d4bfd75c9fa6d5f"
+        },
+        {
+          "kind": "cubin",
+          "available": true,
+          "path": "stages3-cubin.bin",
+          "bytes": 11456,
+          "sha256": "fc8fd36a97fb1dfaa5cdcd93cf36a436580c7a72545c096b5d2336c232edfeb8"
+        },
+        {
+          "kind": "sass",
+          "available": false,
+          "value_type": "function"
+        }
+      ]
+    }
+  ]
+}

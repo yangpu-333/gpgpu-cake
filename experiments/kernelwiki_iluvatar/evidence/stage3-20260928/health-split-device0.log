@@ -1,0 +1,13 @@
+BEGIN import_torch
+END import_torch seconds= 1.72 value= <module 'torch' from '/usr/local/corex/lib64/python3/dist-packages/torch/__init__.py'>
+BEGIN torch_version
+END torch_version seconds= 0.0 value= 2.4.1
+BEGIN cuda_available
+END cuda_available seconds= 0.005 value= True
+BEGIN device_count
+END device_count seconds= 0.001 value= 2
+BEGIN device_name
+END device_name seconds= 0.001 value= Iluvatar BI-V150
+BEGIN set_device
+END set_device seconds= 0.0 value= None
+BEGIN allocate_empty

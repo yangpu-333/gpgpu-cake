@@ -1,0 +1,3 @@
+bfloat16 127x65x33 [({'bm': 32, 'bn': 32, 'bk': 32, 'warps': 4}, 'measured'), ({'bm': 32, 'bn': 64, 'bk': 32, 'warps': 4}, 'measured'), ({'bm': 64, 'bn': 64, 'bk': 32, 'warps': 4}, 'measured'), ({'bm': 32, 'bn': 64, 'bk': 32, 'warps': 8}, 'measured')]
+bfloat16 256x256x256 [({'bm': 32, 'bn': 32, 'bk': 32, 'warps': 4}, 'measured'), ({'bm': 32, 'bn': 64, 'bk': 32, 'warps': 4}, 'measured'), ({'bm': 64, 'bn': 64, 'bk': 32, 'warps': 4}, 'measured'), ({'bm': 32, 'bn': 64, 'bk': 32, 'warps': 8}, 'measured')]
+bfloat16 512x512x512 [({'bm': 32, 'bn': 32, 'bk': 32, 'warps': 4}, 'measured'), ({'bm': 32, 'bn': 64, 'bk': 32, 'warps': 4}, 'measured'), ({'bm': 64, 'bn': 64, 'bk': 32, 'warps': 4}, 'measured'), ({'bm': 32, 'bn': 64, 'bk': 32, 'warps': 8}, 'measured')]

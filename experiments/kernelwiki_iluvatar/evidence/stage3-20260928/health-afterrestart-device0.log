@@ -1,0 +1,28 @@
+BEGIN import_torch
+END import_torch seconds= 1.406 value= <module 'torch' from '/usr/local/corex/lib64/python3/dist-packages/torch/__init__.py'>
+BEGIN torch_version
+END torch_version seconds= 0.0 value= 2.4.1
+BEGIN cuda_available
+END cuda_available seconds= 0.004 value= True
+BEGIN device_count
+END device_count seconds= 0.001 value= 2
+BEGIN device_name
+END device_name seconds= 0.001 value= Iluvatar BI-V150
+BEGIN set_device
+END set_device seconds= 0.0 value= None
+BEGIN allocate_empty
+END allocate_empty seconds= 0.003 value= tensor([ 1.3403e-03,  4.6647e-10, -4.2671e-04,  3.5138e-04,  4.2339e-03,
+        -2.1849e-01, -1.0418e-07, -1.1426e-05, -3.2277e-04,  1.2888e-05,
+        -5.4894e-05, -2.1049e-04, -1.1250e-05,  2.0171e-02, -8.0438e-09,
+        -3.5210e-03], device='cuda:0')
+BEGIN zero
+END zero seconds= 0.004 value= tensor([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.],
+       device='cuda:0')
+BEGIN add
+END add seconds= 0.024 value= tensor([1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.],
+       device='cuda:0')
+BEGIN synchronize
+END synchronize seconds= 0.0 value= None
+BEGIN copy_to_cpu
+END copy_to_cpu seconds= 0.0 value= [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+HEALTH_PASS

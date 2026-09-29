@@ -1,0 +1,4 @@
+status: gpu_autotune_passed
+report: /mnt/kda-biv150-stage3/replicates-20260928-holdout/float16-round3.json
+shape: [7, 769] best: {'schedule_kind': 'poly_row_reduction_schedule', 'row_tile': 1, 'reduction_tile': 1024, 'reduction_order': 'row_then_full_hidden_reduction_then_scale', 'vector_width': 1, 'num_warps': 4, 'num_stages': 1} speedup: 13.547671591885761
+shape: [16, 4099] best: {'schedule_kind': 'poly_row_reduction_schedule', 'row_tile': 1, 'reduction_tile': 8192, 'reduction_order': 'row_then_full_hidden_reduction_then_scale', 'vector_width': 1, 'num_warps': 8, 'num_stages': 1} speedup: 10.108971228654895

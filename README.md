@@ -25,6 +25,16 @@ CoreX 4.2.0、厂商 Triton 2.1.0；所有候选保留正确性检查、逐轮�
 适配版 skill 已完成本地安装与重建验证；下一步是接入 KDA 正式仓库，并用真实 Megatron 形状
 验证前后向和训练 step。
 
+从仓库根目录重建 skill（脚本固定上游提交并应用本项目补丁，目标目录须尚不存在）：
+
+```bash
+python experiments/kernelwiki_iluvatar/build_skill.py --output /path/to/kernelwiki-iluvatar
+python /path/to/kernelwiki-iluvatar/scripts/validate.py
+python -m unittest discover -s /path/to/kernelwiki-iluvatar/tests
+```
+
+构建所需的上游源码由脚本拉取；仓库保留本项目补丁、实验脚本和原始证据，不复制第三方完整语料。
+
 ## 核心成果
 
 | 成果 | 验证范围 | 结果 |
@@ -156,14 +166,8 @@ nohup bash experiments/kda_repro/scripts/run_gdn_decode_ordinary_agent.sh 1 \
 
 | 内容 | 文档 |
 |---|---|
-| 环境、任务覆盖、完成度与后续验收 | [KDA 复现详细进展报告](experiments/kda_repro/KDA_REPRODUCTION_PROGRESS_REPORT.md) |
-| Prefill Agent 晋级结果 | [GDN Prefill Agent 结果](experiments/kda_repro/AGENT_PREFILL_V100_RESULT.md) |
-| 普通基线结构化 Agent 结果 | [PyTorch 到 Triton 的10.985×实验](experiments/kda_repro/AGENT_ORDINARY_BASELINE_V100_RESULT.md) |
-| Decode Agent 淘汰结果 | [GDN Decode Agent 结果](experiments/kda_repro/AGENT_V100_RESULT.md) |
-| GDN Decode 全量结果 | [Decode V100 报告](experiments/kda_repro/OFFICIAL_V100_RESULT.md) |
-| GDN Prefill 全量结果 | [Prefill V100 报告](experiments/kda_repro/PREFILL_V100_RESULT.md) |
-| 五项任务硬件可行性 | [官方任务审计](experiments/kda_repro/OFFICIAL_TASK_AUDIT.md) |
-| Residual Add RMSNorm 严格复核 | [V100 严格结果](experiments/kda_repro/V100_STRICT_RESULT.md) |
+| 上周 Agent/Triton：任务覆盖、晋级判定与复跑 | [Agent/Triton 自动优化实验总报告](experiments/kda_repro/AGENT_TRITON_REPORT.md) |
+| 本周 KernelWiki/BI-V150：17 项迁移、实测、局限与 ixSYS 步骤 | [KernelWiki 天数适配总报告](experiments/kernelwiki_iluvatar/PROJECT_REPORT_AND_NEXT_PLAN.md) |
 | CAKE、Poly 与 Halide IR 前期调研 | [研究资料索引](research/README.md) |
 
 原始 JSON、候选源码和 API 元数据位于 `experiments/kda_repro/evidence/`。上游 KDA、竞赛、

@@ -1,0 +1,632 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-26T04:28:10.662717+00:00",
+  "mode": "gpu",
+  "seed": 0,
+  "operator": "add",
+  "records": [
+    {
+      "operator": "add",
+      "shape": [
+        1
+      ],
+      "kind": "baseline",
+      "shape_axes": "N",
+      "dtype": "torch.float32",
+      "config": {},
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.005380769073963165,
+        0.0053624998778104786,
+        0.0053624998778104786,
+        0.0053624998778104786,
+        0.005362307652831078
+      ],
+      "median_ms": 0.0053624998778104786,
+      "min_ms": 0.005362307652831078,
+      "max_ms": 0.005380769073963165,
+      "speedup_vs_pytorch": 1.0
+    },
+    {
+      "operator": "add",
+      "shape": [
+        1
+      ],
+      "kind": "candidate",
+      "shape_axes": "N",
+      "dtype": "torch.float32",
+      "config": {
+        "block": 128,
+        "warps": 4
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.0053624998778104786,
+        0.0053624998778104786,
+        0.0053624998778104786,
+        0.0053624998778104786,
+        0.0053624998778104786
+      ],
+      "median_ms": 0.0053624998778104786,
+      "min_ms": 0.0053624998778104786,
+      "max_ms": 0.0053624998778104786,
+      "speedup_vs_pytorch": 1.0
+    },
+    {
+      "operator": "add",
+      "shape": [
+        1
+      ],
+      "kind": "candidate",
+      "shape_axes": "N",
+      "dtype": "torch.float32",
+      "config": {
+        "block": 256,
+        "warps": 4
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.0053624998778104786,
+        0.0053624998778104786,
+        0.0053624998778104786,
+        0.0053624998778104786,
+        0.0053624998778104786
+      ],
+      "median_ms": 0.0053624998778104786,
+      "min_ms": 0.0053624998778104786,
+      "max_ms": 0.0053624998778104786,
+      "speedup_vs_pytorch": 1.0
+    },
+    {
+      "operator": "add",
+      "shape": [
+        1
+      ],
+      "kind": "candidate",
+      "shape_axes": "N",
+      "dtype": "torch.float32",
+      "config": {
+        "block": 512,
+        "warps": 8
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.0053624998778104786,
+        0.005388269200921059,
+        0.0053624998778104786,
+        0.0053624998778104786,
+        0.0053624998778104786
+      ],
+      "median_ms": 0.0053624998778104786,
+      "min_ms": 0.0053624998778104786,
+      "max_ms": 0.005388269200921059,
+      "speedup_vs_pytorch": 1.0
+    },
+    {
+      "operator": "add",
+      "shape": [
+        4099
+      ],
+      "kind": "baseline",
+      "shape_axes": "N",
+      "dtype": "torch.float32",
+      "config": {},
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.00502692312002182,
+        0.00502692312002182,
+        0.00502692312002182,
+        0.00502692312002182,
+        0.00502692312002182
+      ],
+      "median_ms": 0.00502692312002182,
+      "min_ms": 0.00502692312002182,
+      "max_ms": 0.00502692312002182,
+      "speedup_vs_pytorch": 1.0
+    },
+    {
+      "operator": "add",
+      "shape": [
+        4099
+      ],
+      "kind": "candidate",
+      "shape_axes": "N",
+      "dtype": "torch.float32",
+      "config": {
+        "block": 128,
+        "warps": 4
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.0052865386009216305,
+        0.006194230914115906,
+        0.006128846108913422,
+        0.006257691979408264,
+        0.006257691979408264
+      ],
+      "median_ms": 0.006194230914115906,
+      "min_ms": 0.0052865386009216305,
+      "max_ms": 0.006257691979408264,
+      "speedup_vs_pytorch": 0.811549196295874
+    },
+    {
+      "operator": "add",
+      "shape": [
+        4099
+      ],
+      "kind": "candidate",
+      "shape_axes": "N",
+      "dtype": "torch.float32",
+      "config": {
+        "block": 256,
+        "warps": 4
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.005480769276618958,
+        0.027578845620155334,
+        0.006193269416689873,
+        0.006258653849363327,
+        0.006193269416689873
+      ],
+      "median_ms": 0.006193269416689873,
+      "min_ms": 0.005480769276618958,
+      "max_ms": 0.027578845620155334,
+      "speedup_vs_pytorch": 0.8116751883060446
+    },
+    {
+      "operator": "add",
+      "shape": [
+        4099
+      ],
+      "kind": "candidate",
+      "shape_axes": "N",
+      "dtype": "torch.float32",
+      "config": {
+        "block": 512,
+        "warps": 8
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.005027884617447853,
+        0.005027884617447853,
+        0.005027884617447853,
+        0.00502692312002182,
+        0.00502692312002182
+      ],
+      "median_ms": 0.005027884617447853,
+      "min_ms": 0.00502692312002182,
+      "max_ms": 0.005027884617447853,
+      "speedup_vs_pytorch": 0.9998087670065664
+    },
+    {
+      "operator": "add",
+      "shape": [
+        1048576
+      ],
+      "kind": "baseline",
+      "shape_axes": "N",
+      "dtype": "torch.float32",
+      "config": {},
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.012479807436466216,
+        0.012023077160120011,
+        0.012347115576267243,
+        0.011894230544567109,
+        0.012088461220264435
+      ],
+      "median_ms": 0.012088461220264435,
+      "min_ms": 0.011894230544567109,
+      "max_ms": 0.012479807436466216,
+      "speedup_vs_pytorch": 1.0
+    },
+    {
+      "operator": "add",
+      "shape": [
+        1048576
+      ],
+      "kind": "candidate",
+      "shape_axes": "N",
+      "dtype": "torch.float32",
+      "config": {
+        "block": 128,
+        "warps": 4
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.029644230008125307,
+        0.029644230008125307,
+        0.029644230008125307,
+        0.029644230008125307,
+        0.029644230008125307
+      ],
+      "median_ms": 0.029644230008125307,
+      "min_ms": 0.029644230008125307,
+      "max_ms": 0.029644230008125307,
+      "speedup_vs_pytorch": 0.40778462510077207
+    },
+    {
+      "operator": "add",
+      "shape": [
+        1048576
+      ],
+      "kind": "candidate",
+      "shape_axes": "N",
+      "dtype": "torch.float32",
+      "config": {
+        "block": 256,
+        "warps": 4
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.017400962114334107,
+        0.016817307472229003,
+        0.016687500476837158,
+        0.016752885282039644,
+        0.016752885282039644
+      ],
+      "median_ms": 0.016752885282039644,
+      "min_ms": 0.016687500476837158,
+      "max_ms": 0.017400962114334107,
+      "speedup_vs_pytorch": 0.7215748819831159
+    },
+    {
+      "operator": "add",
+      "shape": [
+        1048576
+      ],
+      "kind": "candidate",
+      "shape_axes": "N",
+      "dtype": "torch.float32",
+      "config": {
+        "block": 512,
+        "warps": 8
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 1e-06,
+            "rtol": 1e-06,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.016128845512866974,
+        0.015521153807640076,
+        0.01558653861284256,
+        0.01558653861284256,
+        0.015716345608234407
+      ],
+      "median_ms": 0.01558653861284256,
+      "min_ms": 0.015521153807640076,
+      "max_ms": 0.016128845512866974,
+      "speedup_vs_pytorch": 0.775570607466633
+    }
+  ],
+  "implementation": "fixed candidates; no agent calls, Halide passes, or Poly integration",
+  "source_sha256": {
+    "run.py": "478dc06e28b33ea18a170e50c45e743ff2a02876770e2b2311710b613055f8ef",
+    "triton_kernels.py": "593cb485aeeaa658194e9b3353053dc55b25d3228a15bd8e1d3843601757b98c"
+  },
+  "active_stage": "completed",
+  "environment": {
+    "python": "3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]",
+    "platform": "Linux-5.4.0-144-generic-x86_64-with-glibc2.31",
+    "corex_root": null,
+    "requested_device": 0,
+    "torch": {
+      "imported": true,
+      "version": "2.4.1"
+    },
+    "triton": {
+      "imported": true,
+      "version": "2.1.0"
+    },
+    "gpu_available": true,
+    "framework_cuda_version": "10.2",
+    "device_count": 2,
+    "device_name": "Iluvatar BI-V150",
+    "total_memory_bytes": 34359738368,
+    "ready_for_gpu_attempt": true
+  },
+  "triton_target_probe_error": "'CudaDriver' object has no attribute 'active'",
+  "timing_protocol": {
+    "method": "GPU stream events, repeated launches, median of batch means",
+    "warmup_launches": 5,
+    "samples": 5,
+    "launches_per_sample": 20,
+    "preallocated_output": true,
+    "compilation_and_validation_timed": false,
+    "l2_flushed": false,
+    "cuda_graph": false,
+    "order": "rotated per round",
+    "scope": "warm-buffer event interval; may include launch gaps; not isolated kernel profiling"
+  },
+  "scope": "Fixed handwritten Triton candidate sweep; no Halide/Poly or training integration",
+  "selections": [
+    {
+      "operator": "add",
+      "shape": [
+        1
+      ],
+      "best_observed_config": {
+        "block": 128,
+        "warps": 4
+      },
+      "speedup_vs_pytorch": 1.0,
+      "note": "Selection on the measured inputs only; not a validated general-purpose dispatcher"
+    },
+    {
+      "operator": "add",
+      "shape": [
+        4099
+      ],
+      "best_observed_config": {
+        "block": 512,
+        "warps": 8
+      },
+      "speedup_vs_pytorch": 0.9998087670065664,
+      "note": "Selection on the measured inputs only; not a validated general-purpose dispatcher"
+    },
+    {
+      "operator": "add",
+      "shape": [
+        1048576
+      ],
+      "best_observed_config": {
+        "block": 512,
+        "warps": 8
+      },
+      "speedup_vs_pytorch": 0.775570607466633,
+      "note": "Selection on the measured inputs only; not a validated general-purpose dispatcher"
+    }
+  ],
+  "status": "gpu_check_passed",
+  "wall_seconds": 3.902141571044922
+}

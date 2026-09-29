@@ -1,0 +1,873 @@
+{
+  "runner_sha256": "7c24b138769ece89f4317f1724af9d72a3e2a79cbb646e3b94ed188a214631b1",
+  "kernel_script_sha256": "308063fe9674f7542b1be8de2a734b74a708b05c2ed3c4ef4273878c42eb6eaa",
+  "shapes": "7x769,16x4099",
+  "device": 0,
+  "runs": [
+    {
+      "round": 1,
+      "dtype": "float16",
+      "seed": 20260928,
+      "command": [
+        "/root/miniconda3/bin/python",
+        "/mnt/kda-biv150-stage3/stage3_residual_rmsnorm.py",
+        "--mode",
+        "gpu",
+        "--device",
+        "0",
+        "--shapes",
+        "7x769,16x4099",
+        "--dtype",
+        "float16",
+        "--seed",
+        "20260928",
+        "--atol",
+        "0.03",
+        "--rtol",
+        "0.03",
+        "--warmup",
+        "10",
+        "--samples",
+        "9",
+        "--launches",
+        "30",
+        "--output",
+        "replicates-20260928-holdout/float16-round1.json"
+      ],
+      "exit_code": 0,
+      "log": "float16-round1.log",
+      "log_sha256": "fa366cdf81ba333cea2471e38d05663b19faa0a9a8e61a9cf4fa65b882fb1b23",
+      "report": "float16-round1.json",
+      "report_sha256": "301653245924fcbc53a1ea9a3a52dc16d3c0b23e4e25dd74bdd970822d0f5f33",
+      "status": "gpu_autotune_passed"
+    },
+    {
+      "round": 1,
+      "dtype": "bfloat16",
+      "seed": 20260928,
+      "command": [
+        "/root/miniconda3/bin/python",
+        "/mnt/kda-biv150-stage3/stage3_residual_rmsnorm.py",
+        "--mode",
+        "gpu",
+        "--device",
+        "0",
+        "--shapes",
+        "7x769,16x4099",
+        "--dtype",
+        "bfloat16",
+        "--seed",
+        "20260928",
+        "--atol",
+        "0.04",
+        "--rtol",
+        "0.04",
+        "--warmup",
+        "10",
+        "--samples",
+        "9",
+        "--launches",
+        "30",
+        "--output",
+        "replicates-20260928-holdout/bfloat16-round1.json"
+      ],
+      "exit_code": 0,
+      "log": "bfloat16-round1.log",
+      "log_sha256": "9a9b3ecd7960d8188e811b856b422a2f3ecbcb0e85bcfa443cb27bf747eea68e",
+      "report": "bfloat16-round1.json",
+      "report_sha256": "8ebc631aa02059552e446345526e71813f9b29ab9d8f7827142c3193e151f98f",
+      "status": "gpu_autotune_passed"
+    },
+    {
+      "round": 2,
+      "dtype": "bfloat16",
+      "seed": 20261029,
+      "command": [
+        "/root/miniconda3/bin/python",
+        "/mnt/kda-biv150-stage3/stage3_residual_rmsnorm.py",
+        "--mode",
+        "gpu",
+        "--device",
+        "0",
+        "--shapes",
+        "7x769,16x4099",
+        "--dtype",
+        "bfloat16",
+        "--seed",
+        "20261029",
+        "--atol",
+        "0.04",
+        "--rtol",
+        "0.04",
+        "--warmup",
+        "10",
+        "--samples",
+        "9",
+        "--launches",
+        "30",
+        "--output",
+        "replicates-20260928-holdout/bfloat16-round2.json"
+      ],
+      "exit_code": 0,
+      "log": "bfloat16-round2.log",
+      "log_sha256": "50cc88f9dcbac017d95e45cb9715b7c3461b8ed6816a314d6ab2599619c4862c",
+      "report": "bfloat16-round2.json",
+      "report_sha256": "030fcb34d97f2715a529356b36a2731e0e43bc181b233ecf0fd7d5f7503062c0",
+      "status": "gpu_autotune_passed"
+    },
+    {
+      "round": 2,
+      "dtype": "float16",
+      "seed": 20261029,
+      "command": [
+        "/root/miniconda3/bin/python",
+        "/mnt/kda-biv150-stage3/stage3_residual_rmsnorm.py",
+        "--mode",
+        "gpu",
+        "--device",
+        "0",
+        "--shapes",
+        "7x769,16x4099",
+        "--dtype",
+        "float16",
+        "--seed",
+        "20261029",
+        "--atol",
+        "0.03",
+        "--rtol",
+        "0.03",
+        "--warmup",
+        "10",
+        "--samples",
+        "9",
+        "--launches",
+        "30",
+        "--output",
+        "replicates-20260928-holdout/float16-round2.json"
+      ],
+      "exit_code": 0,
+      "log": "float16-round2.log",
+      "log_sha256": "2e3eda251b5398c8adaafe341345f4ebfe02aa2e57e6bd16ec037ca4418c566b",
+      "report": "float16-round2.json",
+      "report_sha256": "d8678f818675ca64196a738fffbbcc3bc1f5d8fb1b59973ccf5d2f61a06dd909",
+      "status": "gpu_autotune_passed"
+    },
+    {
+      "round": 3,
+      "dtype": "float16",
+      "seed": 20261130,
+      "command": [
+        "/root/miniconda3/bin/python",
+        "/mnt/kda-biv150-stage3/stage3_residual_rmsnorm.py",
+        "--mode",
+        "gpu",
+        "--device",
+        "0",
+        "--shapes",
+        "7x769,16x4099",
+        "--dtype",
+        "float16",
+        "--seed",
+        "20261130",
+        "--atol",
+        "0.03",
+        "--rtol",
+        "0.03",
+        "--warmup",
+        "10",
+        "--samples",
+        "9",
+        "--launches",
+        "30",
+        "--output",
+        "replicates-20260928-holdout/float16-round3.json"
+      ],
+      "exit_code": 0,
+      "log": "float16-round3.log",
+      "log_sha256": "0bf0d9f2f473a0c4d4396365c7698becfd7be6eb770188b2b39f4e99cbc59a85",
+      "report": "float16-round3.json",
+      "report_sha256": "b6633768bebe673843f878a191bc8caa41d683e117e348da659ecde5491be59a",
+      "status": "gpu_autotune_passed"
+    },
+    {
+      "round": 3,
+      "dtype": "bfloat16",
+      "seed": 20261130,
+      "command": [
+        "/root/miniconda3/bin/python",
+        "/mnt/kda-biv150-stage3/stage3_residual_rmsnorm.py",
+        "--mode",
+        "gpu",
+        "--device",
+        "0",
+        "--shapes",
+        "7x769,16x4099",
+        "--dtype",
+        "bfloat16",
+        "--seed",
+        "20261130",
+        "--atol",
+        "0.04",
+        "--rtol",
+        "0.04",
+        "--warmup",
+        "10",
+        "--samples",
+        "9",
+        "--launches",
+        "30",
+        "--output",
+        "replicates-20260928-holdout/bfloat16-round3.json"
+      ],
+      "exit_code": 0,
+      "log": "bfloat16-round3.log",
+      "log_sha256": "b278dd79f0505980b735bd415413a398a800fa649899d729aa97a1801fa8b8ec",
+      "report": "bfloat16-round3.json",
+      "report_sha256": "b7db9ec6e913f5d4b4cea2db5a61b8e902241d2ee214a458fc6a3ce81f9e91d5",
+      "status": "gpu_autotune_passed"
+    }
+  ],
+  "summary": [
+    {
+      "dtype": "bfloat16",
+      "shape": "16x4099",
+      "candidates": [
+        {
+          "name": "warps2-block8192",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 8192,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 2,
+            "num_stages": 1
+          },
+          "rounds": [
+            {
+              "round": 1,
+              "seed": 20260928,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.10294102827707927,
+              "candidate_median_ms": 0.017408974965413413,
+              "speedup": 5.913101057448428
+            },
+            {
+              "round": 2,
+              "seed": 20261029,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.1036314090092977,
+              "candidate_median_ms": 0.017467947800954182,
+              "speedup": 5.932660790504357
+            },
+            {
+              "round": 3,
+              "seed": 20261130,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.10328653653462729,
+              "candidate_median_ms": 0.01753846208254496,
+              "speedup": 5.889144444279554
+            }
+          ],
+          "all_rounds_valid": true,
+          "geomean_speedup": 5.911608639030261,
+          "min_speedup": 5.889144444279554,
+          "consistently_faster_than_baseline": true
+        },
+        {
+          "name": "warps4-block8192",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 8192,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 4,
+            "num_stages": 1
+          },
+          "rounds": [
+            {
+              "round": 1,
+              "seed": 20260928,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.10294102827707927,
+              "candidate_median_ms": 0.017536536852518717,
+              "speedup": 5.870088783367406
+            },
+            {
+              "round": 2,
+              "seed": 20261029,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.1036314090092977,
+              "candidate_median_ms": 0.013435256481170655,
+              "speedup": 7.713392681005817
+            },
+            {
+              "round": 3,
+              "seed": 20261130,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.10328653653462729,
+              "candidate_median_ms": 0.013132692376772562,
+              "speedup": 7.864840930661513
+            }
+          ],
+          "all_rounds_valid": true,
+          "geomean_speedup": 7.088048570281855,
+          "min_speedup": 5.870088783367406,
+          "consistently_faster_than_baseline": true
+        },
+        {
+          "name": "warps8-block8192",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 8192,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 8,
+            "num_stages": 1
+          },
+          "rounds": [
+            {
+              "round": 1,
+              "seed": 20260928,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.10294102827707927,
+              "candidate_median_ms": 0.010153205196062724,
+              "speedup": 10.13877157894912
+            },
+            {
+              "round": 2,
+              "seed": 20261029,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.1036314090092977,
+              "candidate_median_ms": 0.010153205196062724,
+              "speedup": 10.206767913001952
+            },
+            {
+              "round": 3,
+              "seed": 20261130,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.10328653653462729,
+              "candidate_median_ms": 0.010153205196062724,
+              "speedup": 10.17280105544212
+            }
+          ],
+          "all_rounds_valid": true,
+          "geomean_speedup": 10.172742307457355,
+          "min_speedup": 10.13877157894912,
+          "consistently_faster_than_baseline": true
+        }
+      ],
+      "selected_config": {
+        "schedule_kind": "poly_row_reduction_schedule",
+        "row_tile": 1,
+        "reduction_tile": 8192,
+        "reduction_order": "row_then_full_hidden_reduction_then_scale",
+        "vector_width": 1,
+        "num_warps": 8,
+        "num_stages": 1
+      },
+      "selection_rule": "highest geometric mean speedup among candidates faster in all 3 independent rounds"
+    },
+    {
+      "dtype": "bfloat16",
+      "shape": "7x769",
+      "candidates": [
+        {
+          "name": "warps1-block1024",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 1024,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 1,
+            "num_stages": 1
+          },
+          "rounds": [
+            {
+              "round": 1,
+              "seed": 20260928,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.09086064497629802,
+              "candidate_median_ms": 0.009447949131329854,
+              "speedup": 9.616970171335888
+            },
+            {
+              "round": 2,
+              "seed": 20261029,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.09254295031229655,
+              "candidate_median_ms": 0.009447820981343587,
+              "speedup": 9.795163402761247
+            },
+            {
+              "round": 3,
+              "seed": 20261130,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.08937000433603923,
+              "candidate_median_ms": 0.009447949131329854,
+              "speedup": 9.459196180437084
+            }
+          ],
+          "all_rounds_valid": true,
+          "geomean_speedup": 9.622798584893538,
+          "min_speedup": 9.459196180437084,
+          "consistently_faster_than_baseline": true
+        },
+        {
+          "name": "warps2-block1024",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 1024,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 2,
+            "num_stages": 1
+          },
+          "rounds": [
+            {
+              "round": 1,
+              "seed": 20260928,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.09086064497629802,
+              "candidate_median_ms": 0.00806576907634735,
+              "speedup": 11.26496978976802
+            },
+            {
+              "round": 2,
+              "seed": 20261029,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.09254295031229655,
+              "candidate_median_ms": 0.008066282172997792,
+              "speedup": 11.472813413605568
+            },
+            {
+              "round": 3,
+              "seed": 20261130,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.08937000433603923,
+              "candidate_median_ms": 0.00806641032298406,
+              "speedup": 11.079278236242512
+            }
+          ],
+          "all_rounds_valid": true,
+          "geomean_speedup": 11.271208327517241,
+          "min_speedup": 11.079278236242512,
+          "consistently_faster_than_baseline": true
+        },
+        {
+          "name": "warps4-block1024",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 1024,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 4,
+            "num_stages": 1
+          },
+          "rounds": [
+            {
+              "round": 1,
+              "seed": 20260928,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.09086064497629802,
+              "candidate_median_ms": 0.006684358914693197,
+              "speedup": 13.593023076090821
+            },
+            {
+              "round": 2,
+              "seed": 20261029,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.09254295031229655,
+              "candidate_median_ms": 0.00668423076470693,
+              "speedup": 13.844966394776183
+            },
+            {
+              "round": 3,
+              "seed": 20261130,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.08937000433603923,
+              "candidate_median_ms": 0.00668423076470693,
+              "speedup": 13.370275126932674
+            }
+          ],
+          "all_rounds_valid": true,
+          "geomean_speedup": 13.601373542320337,
+          "min_speedup": 13.370275126932674,
+          "consistently_faster_than_baseline": true
+        }
+      ],
+      "selected_config": {
+        "schedule_kind": "poly_row_reduction_schedule",
+        "row_tile": 1,
+        "reduction_tile": 1024,
+        "reduction_order": "row_then_full_hidden_reduction_then_scale",
+        "vector_width": 1,
+        "num_warps": 4,
+        "num_stages": 1
+      },
+      "selection_rule": "highest geometric mean speedup among candidates faster in all 3 independent rounds"
+    },
+    {
+      "dtype": "float16",
+      "shape": "16x4099",
+      "candidates": [
+        {
+          "name": "warps2-block8192",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 8192,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 2,
+            "num_stages": 1
+          },
+          "rounds": [
+            {
+              "round": 1,
+              "seed": 20260928,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.11689102649688721,
+              "candidate_median_ms": 0.018704487880071004,
+              "speedup": 6.249357226263896
+            },
+            {
+              "round": 2,
+              "seed": 20261029,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.10230448246002197,
+              "candidate_median_ms": 0.016976922750473022,
+              "speedup": 6.0260910627735225
+            },
+            {
+              "round": 3,
+              "seed": 20261130,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.10263845920562745,
+              "candidate_median_ms": 0.01719294786453247,
+              "speedup": 5.969799944392404
+            }
+          ],
+          "all_rounds_valid": true,
+          "geomean_speedup": 6.0805603903565535,
+          "min_speedup": 5.969799944392404,
+          "consistently_faster_than_baseline": true
+        },
+        {
+          "name": "warps4-block8192",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 8192,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 4,
+            "num_stages": 1
+          },
+          "rounds": [
+            {
+              "round": 1,
+              "seed": 20260928,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.11689102649688721,
+              "candidate_median_ms": 0.014731410145759582,
+              "speedup": 7.9348158350294895
+            },
+            {
+              "round": 2,
+              "seed": 20261029,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.10230448246002197,
+              "candidate_median_ms": 0.01291730801264445,
+              "speedup": 7.919953782930508
+            },
+            {
+              "round": 3,
+              "seed": 20261130,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.10263845920562745,
+              "candidate_median_ms": 0.013133333126703898,
+              "speedup": 7.815111229984224
+            }
+          ],
+          "all_rounds_valid": true,
+          "geomean_speedup": 7.889779890259377,
+          "min_speedup": 7.815111229984224,
+          "consistently_faster_than_baseline": true
+        },
+        {
+          "name": "warps8-block8192",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 8192,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 8,
+            "num_stages": 1
+          },
+          "rounds": [
+            {
+              "round": 1,
+              "seed": 20260928,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.11689102649688721,
+              "candidate_median_ms": 0.011492307980855305,
+              "speedup": 10.171240336720222
+            },
+            {
+              "round": 2,
+              "seed": 20261029,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.10230448246002197,
+              "candidate_median_ms": 0.010153205196062724,
+              "speedup": 10.076077503062212
+            },
+            {
+              "round": 3,
+              "seed": 20261130,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.10263845920562745,
+              "candidate_median_ms": 0.010153205196062724,
+              "speedup": 10.108971228654895
+            }
+          ],
+          "all_rounds_valid": true,
+          "geomean_speedup": 10.118686144155163,
+          "min_speedup": 10.076077503062212,
+          "consistently_faster_than_baseline": true
+        }
+      ],
+      "selected_config": {
+        "schedule_kind": "poly_row_reduction_schedule",
+        "row_tile": 1,
+        "reduction_tile": 8192,
+        "reduction_order": "row_then_full_hidden_reduction_then_scale",
+        "vector_width": 1,
+        "num_warps": 8,
+        "num_stages": 1
+      },
+      "selection_rule": "highest geometric mean speedup among candidates faster in all 3 independent rounds"
+    },
+    {
+      "dtype": "float16",
+      "shape": "7x769",
+      "candidates": [
+        {
+          "name": "warps1-block1024",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 1024,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 1,
+            "num_stages": 1
+          },
+          "rounds": [
+            {
+              "round": 1,
+              "seed": 20260928,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.09099231561024984,
+              "candidate_median_ms": 0.00885769228140513,
+              "speedup": 10.272688722915916
+            },
+            {
+              "round": 2,
+              "seed": 20261029,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.09011217753092447,
+              "candidate_median_ms": 0.009447820981343587,
+              "speedup": 9.537879444251441
+            },
+            {
+              "round": 3,
+              "seed": 20261130,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.09055576324462891,
+              "candidate_median_ms": 0.00944858988126119,
+              "speedup": 9.584050570786507
+            }
+          ],
+          "all_rounds_valid": true,
+          "geomean_speedup": 9.792532419156581,
+          "min_speedup": 9.537879444251441,
+          "consistently_faster_than_baseline": true
+        },
+        {
+          "name": "warps2-block1024",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 1024,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 2,
+            "num_stages": 1
+          },
+          "rounds": [
+            {
+              "round": 1,
+              "seed": 20260928,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.09099231561024984,
+              "candidate_median_ms": 0.0076487178603808085,
+              "speedup": 11.896414179633446
+            },
+            {
+              "round": 2,
+              "seed": 20261029,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.09011217753092447,
+              "candidate_median_ms": 0.00806641032298406,
+              "speedup": 11.171286101596266
+            },
+            {
+              "round": 3,
+              "seed": 20261130,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.09055576324462891,
+              "candidate_median_ms": 0.00806641032298406,
+              "speedup": 11.226277813639541
+            }
+          ],
+          "all_rounds_valid": true,
+          "geomean_speedup": 11.42663474439869,
+          "min_speedup": 11.171286101596266,
+          "consistently_faster_than_baseline": true
+        },
+        {
+          "name": "warps4-block1024",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 1024,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 4,
+            "num_stages": 1
+          },
+          "rounds": [
+            {
+              "round": 1,
+              "seed": 20260928,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.09099231561024984,
+              "candidate_median_ms": 0.007562179366747538,
+              "speedup": 12.032551887140077
+            },
+            {
+              "round": 2,
+              "seed": 20261029,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.09011217753092447,
+              "candidate_median_ms": 0.006684358914693197,
+              "speedup": 13.481050117288698
+            },
+            {
+              "round": 3,
+              "seed": 20261130,
+              "status": "measured",
+              "forward_passed": true,
+              "backward_passed": true,
+              "baseline_median_ms": 0.09055576324462891,
+              "candidate_median_ms": 0.00668423076470693,
+              "speedup": 13.547671591885761
+            }
+          ],
+          "all_rounds_valid": true,
+          "geomean_speedup": 13.001158181284936,
+          "min_speedup": 12.032551887140077,
+          "consistently_faster_than_baseline": true
+        }
+      ],
+      "selected_config": {
+        "schedule_kind": "poly_row_reduction_schedule",
+        "row_tile": 1,
+        "reduction_tile": 1024,
+        "reduction_order": "row_then_full_hidden_reduction_then_scale",
+        "vector_width": 1,
+        "num_warps": 4,
+        "num_stages": 1
+      },
+      "selection_rule": "highest geometric mean speedup among candidates faster in all 3 independent rounds"
+    }
+  ],
+  "complete": true
+}

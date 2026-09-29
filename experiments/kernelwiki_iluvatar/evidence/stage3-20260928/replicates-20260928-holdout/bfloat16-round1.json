@@ -1,0 +1,779 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-28T03:42:30.176606+00:00",
+  "operator": "residual_add_rmsnorm",
+  "mode": "gpu",
+  "implementation_boundary": {
+    "halide_ir": "stable Halide-style normalized contract record; not integrated with the project's Halide source tree yet",
+    "poly_module": "explicit affine row/reduction schedule generator and legality filter; not a full external Poly runtime",
+    "automated_flow": "generate -> filter -> compile -> forward/backward validate -> event-time -> select/fallback",
+    "backend": "handwritten Triton forward kernel for the preinstalled BI-V150-compatible runtime"
+  },
+  "source_sha256": {
+    "stage3_residual_rmsnorm.py": "308063fe9674f7542b1be8de2a734b74a708b05c2ed3c4ef4273878c42eb6eaa"
+  },
+  "active_stage": "completed",
+  "triton_target_probe_error": "'CudaDriver' object has no attribute 'active'",
+  "environment": {
+    "python": "3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]",
+    "platform": "Linux-5.4.0-144-generic-x86_64-with-glibc2.31",
+    "torch_version": "2.4.1",
+    "triton_version": "2.1.0",
+    "device_index": 0,
+    "device_name": "Iluvatar BI-V150",
+    "total_memory_bytes": 34359738368,
+    "triton_target": null,
+    "ld_library_path": "/usr/local/corex/lib64:/usr/local/openmpi/lib:"
+  },
+  "timing_protocol": {
+    "scope": "forward only, warm-buffer GPU-event intervals",
+    "warmup_launches": 10,
+    "samples": 9,
+    "launches_per_sample": 30,
+    "compilation_and_correctness_timed": false,
+    "candidate_order": "rotated each sample",
+    "backward_timing": "not included; this prototype validates gradients with an analytical PyTorch fallback"
+  },
+  "workloads": [
+    {
+      "shape": [
+        7,
+        769
+      ],
+      "canonical_ir": {
+        "ir_kind": "halide_style_tensor_ir",
+        "normalization_version": "residual-rmsnorm-v1",
+        "operator": "residual_add_rmsnorm",
+        "domain": {
+          "rows": 7,
+          "hidden": 769
+        },
+        "dtype": "bfloat16",
+        "constants": {
+          "epsilon": 1e-06,
+          "reduction_extent": 769
+        },
+        "buffers": [
+          {
+            "name": "x",
+            "shape": [
+              7,
+              769
+            ],
+            "access": "read",
+            "layout": "row_major_contiguous"
+          },
+          {
+            "name": "residual",
+            "shape": [
+              7,
+              769
+            ],
+            "access": "read",
+            "layout": "row_major_contiguous"
+          },
+          {
+            "name": "weight",
+            "shape": [
+              769
+            ],
+            "access": "read",
+            "layout": "contiguous"
+          },
+          {
+            "name": "output",
+            "shape": [
+              7,
+              769
+            ],
+            "access": "write",
+            "layout": "row_major_contiguous"
+          },
+          {
+            "name": "residual_out",
+            "shape": [
+              7,
+              769
+            ],
+            "access": "write",
+            "layout": "row_major_contiguous"
+          }
+        ],
+        "statements": [
+          {
+            "id": "residual_add",
+            "domain": [
+              "row",
+              "col"
+            ],
+            "expr": "residual_out[row,col] = x[row,col] + residual[row,col]"
+          },
+          {
+            "id": "sum_squares",
+            "domain": [
+              "row"
+            ],
+            "reduction": "col",
+            "expr": "sum(residual_out[row,col]^2)"
+          },
+          {
+            "id": "inverse_rms",
+            "domain": [
+              "row"
+            ],
+            "expr": "rsqrt(sum_squares[row] / hidden + epsilon)"
+          },
+          {
+            "id": "scale",
+            "domain": [
+              "row",
+              "col"
+            ],
+            "expr": "output[row,col] = residual_out[row,col] * inverse_rms[row] * weight[col]"
+          }
+        ],
+        "semantics": {
+          "residual_out_is_observable": true,
+          "reduction_precision": "fp32_accumulate",
+          "reduction_reassociation": "not_assumed_legal",
+          "input_mutation": "forbidden"
+        }
+      },
+      "workload_hash": "48fb0b66986c8fc681bfb5203968758ffc2fbeabf0a68085ccbabaa5e54060c8",
+      "candidate_records": [
+        {
+          "kind": "baseline",
+          "implementation": "unfused PyTorch residual add, fp32 RMS reduction, scale",
+          "forward_correctness": {
+            "passed": true
+          },
+          "backward_correctness": {
+            "passed": true,
+            "implementation": "PyTorch autograd reference"
+          },
+          "status": "measured",
+          "samples_ms": [
+            0.0919450044631958,
+            0.0909264087677002,
+            0.09032859007517496,
+            0.09086064497629802,
+            0.09139923254648845,
+            0.09136423269907633,
+            0.09078141053517659,
+            0.09065358638763428,
+            0.08906423250834147
+          ],
+          "median_ms": 0.09086064497629802,
+          "min_ms": 0.08906423250834147,
+          "max_ms": 0.0919450044631958,
+          "speedup_vs_unfused_pytorch_forward": 1.0
+        },
+        {
+          "kind": "candidate",
+          "implementation": "Triton fused forward kernel generated from the row/reduction schedule",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 1024,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 1,
+            "num_stages": 1
+          },
+          "static_legality": {
+            "passed": true,
+            "reason": null
+          },
+          "status": "measured",
+          "forward_correctness": {
+            "passed": true,
+            "output": {
+              "passed": true,
+              "max_abs_error": 0.0,
+              "atol": 0.04,
+              "rtol": 0.04
+            },
+            "residual_out": {
+              "passed": true,
+              "max_abs_error": 0.0,
+              "atol": 0.04,
+              "rtol": 0.04
+            },
+            "inputs_unchanged": true
+          },
+          "backward_correctness": {
+            "passed": true,
+            "gradients": {
+              "x": {
+                "passed": true,
+                "max_abs_error": 0.03125,
+                "atol": 0.04,
+                "rtol": 0.04
+              },
+              "residual": {
+                "passed": true,
+                "max_abs_error": 0.03125,
+                "atol": 0.04,
+                "rtol": 0.04
+              },
+              "weight": {
+                "passed": true,
+                "max_abs_error": 0.0,
+                "atol": 0.04,
+                "rtol": 0.04
+              }
+            },
+            "implementation": "analytical PyTorch backward for validation; not timed or selected as an optimized backward kernel"
+          },
+          "samples_ms": [
+            0.056304999192555744,
+            0.009448461731274923,
+            0.00944858988126119,
+            0.009447949131329854,
+            0.009356282154719035,
+            0.009448461731274923,
+            0.009402820467948913,
+            0.009402179718017578,
+            0.009402051568031311
+          ],
+          "median_ms": 0.009447949131329854,
+          "min_ms": 0.009356282154719035,
+          "max_ms": 0.056304999192555744,
+          "speedup_vs_unfused_pytorch_forward": 9.616970171335888
+        },
+        {
+          "kind": "candidate",
+          "implementation": "Triton fused forward kernel generated from the row/reduction schedule",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 1024,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 2,
+            "num_stages": 1
+          },
+          "static_legality": {
+            "passed": true,
+            "reason": null
+          },
+          "status": "measured",
+          "forward_correctness": {
+            "passed": true,
+            "output": {
+              "passed": true,
+              "max_abs_error": 0.0,
+              "atol": 0.04,
+              "rtol": 0.04
+            },
+            "residual_out": {
+              "passed": true,
+              "max_abs_error": 0.0,
+              "atol": 0.04,
+              "rtol": 0.04
+            },
+            "inputs_unchanged": true
+          },
+          "backward_correctness": {
+            "passed": true,
+            "gradients": {
+              "x": {
+                "passed": true,
+                "max_abs_error": 0.03125,
+                "atol": 0.04,
+                "rtol": 0.04
+              },
+              "residual": {
+                "passed": true,
+                "max_abs_error": 0.03125,
+                "atol": 0.04,
+                "rtol": 0.04
+              },
+              "weight": {
+                "passed": true,
+                "max_abs_error": 0.0,
+                "atol": 0.04,
+                "rtol": 0.04
+              }
+            },
+            "implementation": "analytical PyTorch backward for validation; not timed or selected as an optimized backward kernel"
+          },
+          "samples_ms": [
+            0.008020000159740448,
+            0.008066282172997792,
+            0.06744935512542724,
+            0.08311653931935628,
+            0.00806576907634735,
+            0.008020000159740448,
+            0.008020000159740448,
+            0.008065640926361084,
+            0.008066538472970326
+          ],
+          "median_ms": 0.00806576907634735,
+          "min_ms": 0.008020000159740448,
+          "max_ms": 0.08311653931935628,
+          "speedup_vs_unfused_pytorch_forward": 11.26496978976802
+        },
+        {
+          "kind": "candidate",
+          "implementation": "Triton fused forward kernel generated from the row/reduction schedule",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 1024,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 4,
+            "num_stages": 1
+          },
+          "static_legality": {
+            "passed": true,
+            "reason": null
+          },
+          "status": "measured",
+          "forward_correctness": {
+            "passed": true,
+            "output": {
+              "passed": true,
+              "max_abs_error": 0.0,
+              "atol": 0.04,
+              "rtol": 0.04
+            },
+            "residual_out": {
+              "passed": true,
+              "max_abs_error": 0.0,
+              "atol": 0.04,
+              "rtol": 0.04
+            },
+            "inputs_unchanged": true
+          },
+          "backward_correctness": {
+            "passed": true,
+            "gradients": {
+              "x": {
+                "passed": true,
+                "max_abs_error": 0.03125,
+                "atol": 0.04,
+                "rtol": 0.04
+              },
+              "residual": {
+                "passed": true,
+                "max_abs_error": 0.03125,
+                "atol": 0.04,
+                "rtol": 0.04
+              },
+              "weight": {
+                "passed": true,
+                "max_abs_error": 0.0,
+                "atol": 0.04,
+                "rtol": 0.04
+              }
+            },
+            "implementation": "analytical PyTorch backward for validation; not timed or selected as an optimized backward kernel"
+          },
+          "samples_ms": [
+            0.006683589518070221,
+            0.006683461368083954,
+            0.006684358914693197,
+            0.006683718164761861,
+            0.006822179257869721,
+            0.09109999338785807,
+            0.006684358914693197,
+            0.006701538463433584,
+            0.013954231142997741
+          ],
+          "median_ms": 0.006684358914693197,
+          "min_ms": 0.006683461368083954,
+          "max_ms": 0.09109999338785807,
+          "speedup_vs_unfused_pytorch_forward": 13.593023076090821
+        }
+      ],
+      "selection": {
+        "best_observed_config": {
+          "schedule_kind": "poly_row_reduction_schedule",
+          "row_tile": 1,
+          "reduction_tile": 1024,
+          "reduction_order": "row_then_full_hidden_reduction_then_scale",
+          "vector_width": 1,
+          "num_warps": 4,
+          "num_stages": 1
+        },
+        "speedup_vs_unfused_pytorch_forward": 13.593023076090821,
+        "dispatch_scope": "this exact normalized workload hash only",
+        "fallback": "unfused PyTorch reference when no candidate is both correct and timed"
+      }
+    },
+    {
+      "shape": [
+        16,
+        4099
+      ],
+      "canonical_ir": {
+        "ir_kind": "halide_style_tensor_ir",
+        "normalization_version": "residual-rmsnorm-v1",
+        "operator": "residual_add_rmsnorm",
+        "domain": {
+          "rows": 16,
+          "hidden": 4099
+        },
+        "dtype": "bfloat16",
+        "constants": {
+          "epsilon": 1e-06,
+          "reduction_extent": 4099
+        },
+        "buffers": [
+          {
+            "name": "x",
+            "shape": [
+              16,
+              4099
+            ],
+            "access": "read",
+            "layout": "row_major_contiguous"
+          },
+          {
+            "name": "residual",
+            "shape": [
+              16,
+              4099
+            ],
+            "access": "read",
+            "layout": "row_major_contiguous"
+          },
+          {
+            "name": "weight",
+            "shape": [
+              4099
+            ],
+            "access": "read",
+            "layout": "contiguous"
+          },
+          {
+            "name": "output",
+            "shape": [
+              16,
+              4099
+            ],
+            "access": "write",
+            "layout": "row_major_contiguous"
+          },
+          {
+            "name": "residual_out",
+            "shape": [
+              16,
+              4099
+            ],
+            "access": "write",
+            "layout": "row_major_contiguous"
+          }
+        ],
+        "statements": [
+          {
+            "id": "residual_add",
+            "domain": [
+              "row",
+              "col"
+            ],
+            "expr": "residual_out[row,col] = x[row,col] + residual[row,col]"
+          },
+          {
+            "id": "sum_squares",
+            "domain": [
+              "row"
+            ],
+            "reduction": "col",
+            "expr": "sum(residual_out[row,col]^2)"
+          },
+          {
+            "id": "inverse_rms",
+            "domain": [
+              "row"
+            ],
+            "expr": "rsqrt(sum_squares[row] / hidden + epsilon)"
+          },
+          {
+            "id": "scale",
+            "domain": [
+              "row",
+              "col"
+            ],
+            "expr": "output[row,col] = residual_out[row,col] * inverse_rms[row] * weight[col]"
+          }
+        ],
+        "semantics": {
+          "residual_out_is_observable": true,
+          "reduction_precision": "fp32_accumulate",
+          "reduction_reassociation": "not_assumed_legal",
+          "input_mutation": "forbidden"
+        }
+      },
+      "workload_hash": "1c23e18e99f90f351fa0370f91ed70750a182d1a8f050a442fd44ec80f8f9062",
+      "candidate_records": [
+        {
+          "kind": "baseline",
+          "implementation": "unfused PyTorch residual add, fp32 RMS reduction, scale",
+          "forward_correctness": {
+            "passed": true
+          },
+          "backward_correctness": {
+            "passed": true,
+            "implementation": "PyTorch autograd reference"
+          },
+          "status": "measured",
+          "samples_ms": [
+            0.10315897464752197,
+            0.10276795228322347,
+            0.1030275583267212,
+            0.10285513401031494,
+            0.10272499720255533,
+            0.10315705140431722,
+            0.10294102827707927,
+            0.1030275583267212,
+            0.10242243607838948
+          ],
+          "median_ms": 0.10294102827707927,
+          "min_ms": 0.10242243607838948,
+          "max_ms": 0.10315897464752197,
+          "speedup_vs_unfused_pytorch_forward": 1.0
+        },
+        {
+          "kind": "candidate",
+          "implementation": "Triton fused forward kernel generated from the row/reduction schedule",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 8192,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 2,
+            "num_stages": 1
+          },
+          "static_legality": {
+            "passed": true,
+            "reason": null
+          },
+          "status": "measured",
+          "forward_correctness": {
+            "passed": true,
+            "output": {
+              "passed": true,
+              "max_abs_error": 0.0,
+              "atol": 0.04,
+              "rtol": 0.04
+            },
+            "residual_out": {
+              "passed": true,
+              "max_abs_error": 0.0,
+              "atol": 0.04,
+              "rtol": 0.04
+            },
+            "inputs_unchanged": true
+          },
+          "backward_correctness": {
+            "passed": true,
+            "gradients": {
+              "x": {
+                "passed": true,
+                "max_abs_error": 0.03125,
+                "atol": 0.04,
+                "rtol": 0.04
+              },
+              "residual": {
+                "passed": true,
+                "max_abs_error": 0.03125,
+                "atol": 0.04,
+                "rtol": 0.04
+              },
+              "weight": {
+                "passed": true,
+                "max_abs_error": 0.0,
+                "atol": 0.04,
+                "rtol": 0.04
+              }
+            },
+            "implementation": "analytical PyTorch backward for validation; not timed or selected as an optimized backward kernel"
+          },
+          "samples_ms": [
+            0.017495510975519817,
+            0.017408974965413413,
+            0.017408974965413413,
+            0.017495510975519817,
+            0.017408974965413413,
+            0.017322436968485514,
+            0.017107051610946656,
+            0.017581411202748618,
+            0.01762500007947286
+          ],
+          "median_ms": 0.017408974965413413,
+          "min_ms": 0.017107051610946656,
+          "max_ms": 0.01762500007947286,
+          "speedup_vs_unfused_pytorch_forward": 5.913101057448428
+        },
+        {
+          "kind": "candidate",
+          "implementation": "Triton fused forward kernel generated from the row/reduction schedule",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 8192,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 4,
+            "num_stages": 1
+          },
+          "static_legality": {
+            "passed": true,
+            "reason": null
+          },
+          "status": "measured",
+          "forward_correctness": {
+            "passed": true,
+            "output": {
+              "passed": true,
+              "max_abs_error": 0.0,
+              "atol": 0.04,
+              "rtol": 0.04
+            },
+            "residual_out": {
+              "passed": true,
+              "max_abs_error": 0.0,
+              "atol": 0.04,
+              "rtol": 0.04
+            },
+            "inputs_unchanged": true
+          },
+          "backward_correctness": {
+            "passed": true,
+            "gradients": {
+              "x": {
+                "passed": true,
+                "max_abs_error": 0.03125,
+                "atol": 0.04,
+                "rtol": 0.04
+              },
+              "residual": {
+                "passed": true,
+                "max_abs_error": 0.03125,
+                "atol": 0.04,
+                "rtol": 0.04
+              },
+              "weight": {
+                "passed": true,
+                "max_abs_error": 0.0,
+                "atol": 0.04,
+                "rtol": 0.04
+              }
+            },
+            "implementation": "analytical PyTorch backward for validation; not timed or selected as an optimized backward kernel"
+          },
+          "samples_ms": [
+            0.08483525911966959,
+            0.01343589723110199,
+            0.02118589679400126,
+            0.0794205109278361,
+            0.012874358892440796,
+            0.017536536852518717,
+            0.013306410113970438,
+            0.01326282024383545,
+            0.028474358717600505
+          ],
+          "median_ms": 0.017536536852518717,
+          "min_ms": 0.012874358892440796,
+          "max_ms": 0.08483525911966959,
+          "speedup_vs_unfused_pytorch_forward": 5.870088783367406
+        },
+        {
+          "kind": "candidate",
+          "implementation": "Triton fused forward kernel generated from the row/reduction schedule",
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 8192,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 8,
+            "num_stages": 1
+          },
+          "static_legality": {
+            "passed": true,
+            "reason": null
+          },
+          "status": "measured",
+          "forward_correctness": {
+            "passed": true,
+            "output": {
+              "passed": true,
+              "max_abs_error": 0.0,
+              "atol": 0.04,
+              "rtol": 0.04
+            },
+            "residual_out": {
+              "passed": true,
+              "max_abs_error": 0.0,
+              "atol": 0.04,
+              "rtol": 0.04
+            },
+            "inputs_unchanged": true
+          },
+          "backward_correctness": {
+            "passed": true,
+            "gradients": {
+              "x": {
+                "passed": true,
+                "max_abs_error": 0.03125,
+                "atol": 0.04,
+                "rtol": 0.04
+              },
+              "residual": {
+                "passed": true,
+                "max_abs_error": 0.03125,
+                "atol": 0.04,
+                "rtol": 0.04
+              },
+              "weight": {
+                "passed": true,
+                "max_abs_error": 0.0,
+                "atol": 0.04,
+                "rtol": 0.04
+              }
+            },
+            "implementation": "analytical PyTorch backward for validation; not timed or selected as an optimized backward kernel"
+          },
+          "samples_ms": [
+            0.010153205196062724,
+            0.010153205196062724,
+            0.010153845945994059,
+            0.010153205196062724,
+            0.010153205196062724,
+            0.010153205196062724,
+            0.010153205196062724,
+            0.06982243061065674,
+            0.010153205196062724
+          ],
+          "median_ms": 0.010153205196062724,
+          "min_ms": 0.010153205196062724,
+          "max_ms": 0.06982243061065674,
+          "speedup_vs_unfused_pytorch_forward": 10.13877157894912
+        }
+      ],
+      "selection": {
+        "best_observed_config": {
+          "schedule_kind": "poly_row_reduction_schedule",
+          "row_tile": 1,
+          "reduction_tile": 8192,
+          "reduction_order": "row_then_full_hidden_reduction_then_scale",
+          "vector_width": 1,
+          "num_warps": 8,
+          "num_stages": 1
+        },
+        "speedup_vs_unfused_pytorch_forward": 10.13877157894912,
+        "dispatch_scope": "this exact normalized workload hash only",
+        "fallback": "unfused PyTorch reference when no candidate is both correct and timed"
+      }
+    }
+  ],
+  "candidate_rejections": 0,
+  "incomplete_workloads": 0,
+  "status": "gpu_autotune_passed",
+  "wall_seconds": 2.366085445508361
+}

@@ -1,0 +1,5 @@
+Cannot access ftrace control node under /sys/kernel/tracing or /sys/kernel/debug/tracing.
+Please check your environment!
+Try: mount -t tracefs nodev /sys/kernel/tracing
+     mount -t debugfs nodev /sys/kernel/debug
+If these do not work, the kernel may not support ftrace.

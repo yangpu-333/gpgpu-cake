@@ -1,0 +1,58 @@
+{
+  "gpu": "Iluvatar BI-V150",
+  "torch": "2.4.1",
+  "triton": "2.1.0",
+  "source_sha256": "249e07173681565b5d57baf4302f325cd0345127e3289a6d55f5de9996e08c05",
+  "variants": [
+    {
+      "name": "default",
+      "kwargs": {},
+      "correct": true,
+      "n_regs": 35,
+      "shared": 8192,
+      "asm": {
+        "ttgir": {
+          "path": "stage9-ws-default-ttgir.txt",
+          "sha256": "7b5196e90f3ff042bc90b997424d665bb2e18064d37f3f4198b8df1be0af44cf",
+          "bytes": 13605
+        },
+        "llir": {
+          "path": "stage9-ws-default-llir.txt",
+          "sha256": "f249226e022db032ae551a775376b03fce2279c6947958eb57e35e3420e9c55e",
+          "bytes": 24758
+        }
+      },
+      "status": "compiled"
+    },
+    {
+      "name": "enable_warp_specialization",
+      "kwargs": {
+        "enable_warp_specialization": true
+      },
+      "correct": true,
+      "n_regs": 35,
+      "shared": 8192,
+      "asm": {
+        "ttgir": {
+          "path": "stage9-ws-enable_warp_specialization-ttgir.txt",
+          "sha256": "7b5196e90f3ff042bc90b997424d665bb2e18064d37f3f4198b8df1be0af44cf",
+          "bytes": 13605
+        },
+        "llir": {
+          "path": "stage9-ws-enable_warp_specialization-llir.txt",
+          "sha256": "f249226e022db032ae551a775376b03fce2279c6947958eb57e35e3420e9c55e",
+          "bytes": 24758
+        }
+      },
+      "status": "compiled"
+    },
+    {
+      "name": "enable_persistent",
+      "kwargs": {
+        "enable_persistent": true
+      },
+      "status": "error",
+      "error": "TypeError(\"gemm_bias() got an unexpected keyword argument 'enable_persistent'\")"
+    }
+  ]
+}

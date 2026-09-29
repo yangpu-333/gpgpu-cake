@@ -1,0 +1,258 @@
+{
+  "environment": {
+    "gpu": "Iluvatar BI-V150",
+    "device_index": 0,
+    "torch": "2.4.1",
+    "triton": "2.1.0",
+    "python": "3.10.16"
+  },
+  "source_sha256": "b86da4074076af3fee917d7f670887271a9b76ed4d05fb11c25f052845d0c816",
+  "dtype": "float16",
+  "seed": 20260928,
+  "timing": {
+    "scope": "forward, warm-buffer GPU events",
+    "warmup": 10,
+    "samples": 9,
+    "launches_per_sample": 30,
+    "baseline": "same Triton GEMM tile plus separate torch.add(out=)"
+  },
+  "shapes": [
+    {
+      "mnk": [
+        127,
+        65,
+        33
+      ],
+      "configs": [
+        {
+          "config": {
+            "bm": 32,
+            "bn": 32,
+            "bk": 32,
+            "warps": 4
+          },
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              32.38641023635864,
+              29.834232727686565,
+              29.919360081354778,
+              29.938461383183796,
+              27.787051598231,
+              29.74141041437785,
+              29.584358135859173,
+              29.544230302174885,
+              33.46782128016154
+            ],
+            "fused_us": [
+              73.36499691009521,
+              6.684230764706929,
+              6.683718164761861,
+              6.684358914693196,
+              6.684230764706929,
+              6.684358914693196,
+              6.684230764706929,
+              6.684358914693196,
+              6.684230764706929
+            ],
+            "unfused_median_us": 29.834232727686565,
+            "fused_median_us": 6.684230764706929,
+            "speedup": 4.463375634068889
+          },
+          "status": "measured"
+        },
+        {
+          "config": {
+            "bm": 32,
+            "bn": 64,
+            "bk": 32,
+            "warps": 4
+          },
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              30.36781946818034,
+              29.682821035385132,
+              29.721538225809734,
+              29.662948846817017,
+              29.662948846817017,
+              29.64294950167338,
+              29.42576805750529,
+              29.307820399602253,
+              29.62346275647481
+            ],
+            "fused_us": [
+              19.922178983688354,
+              7.8814104199409485,
+              7.927948733170827,
+              7.973461349805196,
+              39.06794786453247,
+              7.927948733170827,
+              7.882051169872284,
+              7.881282269954681,
+              56.79769515991211
+            ],
+            "unfused_median_us": 29.662948846817017,
+            "fused_median_us": 7.927948733170827,
+            "speedup": 3.7415666832841836
+          },
+          "status": "measured"
+        },
+        {
+          "config": {
+            "bm": 64,
+            "bn": 64,
+            "bk": 32,
+            "warps": 4
+          },
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              29.998717705408733,
+              29.437180360158283,
+              29.76346214612325,
+              36.49615446726481,
+              29.548078775405884,
+              29.708331823349,
+              29.375640551249187,
+              57.38654136657715,
+              29.5230766137441
+            ],
+            "fused_us": [
+              8.814102411270142,
+              8.037179708480835,
+              7.734615604082744,
+              7.950641214847565,
+              7.950641214847565,
+              7.864102721214294,
+              7.864102721214294,
+              8.037179708480835,
+              7.86474347114563
+            ],
+            "unfused_median_us": 29.708331823349,
+            "fused_median_us": 7.950641214847565,
+            "speedup": 3.736595706000373
+          },
+          "status": "measured"
+        },
+        {
+          "config": {
+            "bm": 32,
+            "bn": 64,
+            "bk": 32,
+            "warps": 8
+          },
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              31.037179629007976,
+              30.126923322677612,
+              29.984615246454876,
+              29.776283105214436,
+              29.412180185317993,
+              29.905128479003906,
+              29.49871818224589,
+              29.639742771784466,
+              29.82500195503235
+            ],
+            "fused_us": [
+              7.475640873114268,
+              7.5621793667475385,
+              7.432051499684651,
+              50.20256439844767,
+              7.475640873114268,
+              7.518589496612549,
+              7.448717951774597,
+              7.518589496612549,
+              7.475640873114268
+            ],
+            "unfused_median_us": 29.82500195503235,
+            "fused_median_us": 7.475640873114268,
+            "speedup": 3.9896247641183953
+          },
+          "status": "measured"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+float8_e4m3fn (32, 32, 32) error
+float8_e4m3fn (64, 64, 64) error
+float8_e5m2 (32, 32, 32) error
+float8_e5m2 (64, 64, 64) error

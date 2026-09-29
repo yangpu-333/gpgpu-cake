@@ -1,0 +1,48 @@
+{
+  "gpu": "Iluvatar BI-V150",
+  "torch": "2.4.1",
+  "triton": "2.1.0",
+  "source_sha256": "036627ca374248dd612f30c2ee019735353b1a8d267ad328bd14709229effcb3",
+  "cases": [
+    {
+      "dtype": "float8_e4m3fn",
+      "mnk": [
+        32,
+        32,
+        32
+      ],
+      "status": "error",
+      "error": "CompilationError('at 1:58:def fp8_dot(A, B, C, M: tl.constexpr, N: tl.constexpr, K: tl.constexpr):\\n                                                          ^\\nAttributeError(\"\\'triton._C.libtriton.triton.ir.builder\\' object has no attribute \\'get_fp8e4nv_ty\\'\")')"
+    },
+    {
+      "dtype": "float8_e4m3fn",
+      "mnk": [
+        64,
+        64,
+        64
+      ],
+      "status": "error",
+      "error": "CompilationError('at 1:58:def fp8_dot(A, B, C, M: tl.constexpr, N: tl.constexpr, K: tl.constexpr):\\n                                                          ^\\nAttributeError(\"\\'triton._C.libtriton.triton.ir.builder\\' object has no attribute \\'get_fp8e4nv_ty\\'\")')"
+    },
+    {
+      "dtype": "float8_e5m2",
+      "mnk": [
+        32,
+        32,
+        32
+      ],
+      "status": "error",
+      "error": "CompilationError(\"at 8:53:def fp8_dot(A, B, C, M: tl.constexpr, N: tl.constexpr, K: tl.constexpr):\\n    rows = tl.program_id(0) * 32 + tl.arange(0, 32)\\n    cols = tl.program_id(1) * 32 + tl.arange(0, 32)\\n    inner = tl.arange(0, 32)\\n    acc = tl.zeros((32, 32), tl.float32)\\n    for chunk in range((K + 31) // 32):\\n        ks = chunk * 32 + inner\\n        a = tl.load(A + rows[:, None] * K + ks[None, :],\\n                                                     ^\\nAssertionError('cannot cast int32[constexpr[32], constexpr[32]] to <[32, 32], fp8e5>')\")"
+    },
+    {
+      "dtype": "float8_e5m2",
+      "mnk": [
+        64,
+        64,
+        64
+      ],
+      "status": "error",
+      "error": "CompilationError(\"at 8:53:def fp8_dot(A, B, C, M: tl.constexpr, N: tl.constexpr, K: tl.constexpr):\\n    rows = tl.program_id(0) * 32 + tl.arange(0, 32)\\n    cols = tl.program_id(1) * 32 + tl.arange(0, 32)\\n    inner = tl.arange(0, 32)\\n    acc = tl.zeros((32, 32), tl.float32)\\n    for chunk in range((K + 31) // 32):\\n        ks = chunk * 32 + inner\\n        a = tl.load(A + rows[:, None] * K + ks[None, :],\\n                                                     ^\\nAssertionError('cannot cast int32[constexpr[32], constexpr[32]] to <[32, 32], fp8e5>')\")"
+    }
+  ]
+}

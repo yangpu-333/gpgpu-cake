@@ -1,0 +1,18 @@
+test_bi_v150_filter_and_alias_do_not_import_nvidia_pages (test_iluvatar_extension.IluvatarExtensionTests) ... ok
+test_experiment_evidence_is_present_and_tampering_is_rejected (test_iluvatar_extension.IluvatarExtensionTests) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 5.727s
+
+OK
+test_blackwell_query_is_family_hierarchy (test_architecture_query_index.QueryIndexConsistencyTests) ... ok
+test_documented_architecture_aliases_match_family_and_product_semantics (test_architecture_query_index.QueryIndexConsistencyTests) ... ok
+test_exact_query_discloses_excluded_family_and_unknown_counts (test_architecture_query_index.QueryIndexConsistencyTests) ... ok
+test_exact_query_has_no_family_false_positive (test_architecture_query_index.QueryIndexConsistencyTests) ... ok
+test_index_membership_equals_declared_metadata_sets (test_architecture_query_index.QueryIndexConsistencyTests) ... ok
+test_unknown_query_exposes_every_validated_unknown (test_architecture_query_index.QueryIndexConsistencyTests) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.013s
+
+OK

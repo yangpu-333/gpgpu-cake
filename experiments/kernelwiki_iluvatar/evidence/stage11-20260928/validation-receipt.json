@@ -1,0 +1,35 @@
+{
+  "reconstruction": "pinned upstream b6b4301f15e8ce6955a56776690643ce5db369e6 + kernelwiki-iluvatar.patch",
+  "files": [
+    {
+      "name": "validate-stage11-final.log",
+      "sha256": "c4b50930da58d67681a3e6b9a8ba4dd0a2b7f0916165b9c1c9c82d5eb2e5d11a",
+      "bytes": 184
+    },
+    {
+      "name": "test-stage11-final.log",
+      "sha256": "38951d61e4444dbe5ead108b4cc2f18cde1f76426de0c95cd17589a532347aa8",
+      "bytes": 1147
+    },
+    {
+      "name": "test-stage11-full.log",
+      "sha256": "a3bb169f56e1ffa947fe0ceca7b2931f920f4200079dc1f4856d6567fc7a02ca",
+      "bytes": 101
+    },
+    {
+      "name": "query-bi-v150-stage11.txt",
+      "sha256": "a33cf887b970c35ae54e7829aca8d68d5d3b02c1b3b014595abf7707c65a50a0",
+      "bytes": 562
+    },
+    {
+      "name": "query-sm100-stage11.txt",
+      "sha256": "0798fcdb6b99cd9b03f5a94021dc1c6e51903728c5c606087322e74d045e1493",
+      "bytes": 12827
+    },
+    {
+      "name": "query-sm90-stage11.txt",
+      "sha256": "4d32a283dff366a3f7a3cfbaeb3ed0214babf5e776d8802e00eeba12609cac2b",
+      "bytes": 9257
+    }
+  ]
+}

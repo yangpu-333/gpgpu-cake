@@ -1,0 +1,35 @@
+        pm.add_cse_pass()
+    if num_stages == 0 and is_hip() and gpu_matrix_core_version() != 0:
+        pm.add_tritongpu_stream_pipeline_pass()
+        pm.add_canonicalizer_pass()
+    ws_enabled = False
+    # `num_warps` does not mean the total number of warps of a CTA when
+    # warp specialization is enabled.
+    # it's the responsibility of the compiler to figure out the exact
+    # `num_warps` to use.
+    # TODO: support the case where `num_warps` from user is not 4.
+    if is_cuda and capability // 10 >= 9 and enable_warp_specialization and num_warps == 4:
+        pm.add_tritongpu_ws_feasibility_checking_pass(capability)
+        pm.run(mod)
+        ws_enabled = ir.is_ws_supported(mod)
+        pm = ir.pass_manager(mod.context)
+        pm.enable_debug()
+    if ws_enabled:
+        pm.add_tritongpu_wsdecomposing_pass(capability)
+        pm.add_tritongpu_wspipeline_pass(num_stages, num_warps, capability)
+        pm.add_tritongpu_wsmutex_pass(capability)
+        pm.add_tritongpu_wsmaterialization_pass(capability)
+        pm.add_cse_pass()
+    else:
+        if is_hip():
+            pm.add_tritongpu_pipeline_pass(
+                num_stages, num_warps, num_ctas, 0)
+        else:
+            pm.add_tritongpu_pipeline_pass(
+                num_stages, num_warps, num_ctas, capability)
+    if is_hip():
+        pm.add_tritongpu_materialize_load_store_pass(num_warps, 0)
+    else:
+        pm.add_tritongpu_materialize_load_store_pass(num_warps, capability)
+    if not is_corex():
+      if is_cuda and capability // 10 <= 8:

@@ -1,0 +1,30 @@
+{
+  "reconstruction": "pinned upstream b6b4301f15e8ce6955a56776690643ce5db369e6 + kernelwiki-iluvatar.patch",
+  "files": [
+    {
+      "name": "validate-stage10-final.log",
+      "sha256": "c4b50930da58d67681a3e6b9a8ba4dd0a2b7f0916165b9c1c9c82d5eb2e5d11a",
+      "bytes": 184
+    },
+    {
+      "name": "test-stage10-final.log",
+      "sha256": "47e4928752f2ad1ea0be09634474b9aedd54ac9afa22b9b4bc25d188065060d0",
+      "bytes": 1147
+    },
+    {
+      "name": "query-bi-v150-stage10.txt",
+      "sha256": "a33cf887b970c35ae54e7829aca8d68d5d3b02c1b3b014595abf7707c65a50a0",
+      "bytes": 562
+    },
+    {
+      "name": "query-sm100-stage10.txt",
+      "sha256": "0798fcdb6b99cd9b03f5a94021dc1c6e51903728c5c606087322e74d045e1493",
+      "bytes": 12827
+    },
+    {
+      "name": "query-sm90-stage10.txt",
+      "sha256": "4d32a283dff366a3f7a3cfbaeb3ed0214babf5e776d8802e00eeba12609cac2b",
+      "bytes": 9257
+    }
+  ]
+}

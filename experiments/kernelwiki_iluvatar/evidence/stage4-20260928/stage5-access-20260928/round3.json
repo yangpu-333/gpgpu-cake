@@ -1,0 +1,722 @@
+{
+  "environment": {
+    "gpu": "Iluvatar BI-V150",
+    "torch": "2.4.1",
+    "triton": "2.1.0",
+    "python": "3.10.16"
+  },
+  "source_sha256": "598682374cd61515da7ee92721454e031330f8d4eec46b4e5ff853eee2e028b2",
+  "seed": 20291231,
+  "timing": {
+    "warmup": 10,
+    "samples": 9,
+    "launches_per_sample": 30,
+    "scope": "warm-buffer GPU event, one affine elementwise launch"
+  },
+  "cases": [
+    {
+      "n": 1048576,
+      "stride": 1,
+      "block": 256,
+      "warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 3,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "e6231d6507411e5a1f5f3881ca537342ee0d09ddebc4654b98ad7eaea81e7f4f",
+          "ttgir": "f02240a5b1a30f2c0bd176a9a6d6040d7a4dd7edb07c2609a682f2e741c4324c",
+          "llir": "aa4e4e255d215c5653efa2602252d810ec01df21f70e06d9f7542a4ddd599824",
+          "cubin": "2f25ea72f49774ca4f215dfddf42418f0c49a9e13f35adcbc9621fb8bf376407"
+        }
+      },
+      "samples_us": [
+        18.473972876866657,
+        18.54987144470215,
+        18.63935987154643,
+        62.558587392171226,
+        18.37192177772522,
+        18.19320519765218,
+        18.05936098098755,
+        18.281924724578857,
+        18.326665957768757
+      ],
+      "median_us": 18.37192177772522,
+      "status": "measured"
+    },
+    {
+      "n": 1048576,
+      "stride": 1,
+      "block": 1024,
+      "warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 8,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "08e1ae278155a2746348c8ffb4eab637e12bb2c3a01282bb24b7807bd61a619d",
+          "ttgir": "cfc98132db4f82c7f8c5b87f3b2739bf6cc99d5e3a49a2efbc2f5c31995f21aa",
+          "llir": "5013a244589bf11bf4c06b3590434c7f8bb61b2840f0660ecbce8cd8ab4c0ce2",
+          "cubin": "bff67d6fd3962c612c69857e5f63f44525f50684820009add39c6ad5644f3c1c"
+        }
+      },
+      "samples_us": [
+        9.09871757030487,
+        9.18794870376587,
+        9.143974383672079,
+        9.232691923777262,
+        9.232563773790995,
+        9.232691923777262,
+        9.188076853752136,
+        19.714103142420452,
+        9.277307987213135
+      ],
+      "median_us": 9.232563773790995,
+      "status": "measured"
+    },
+    {
+      "n": 1048576,
+      "stride": 1,
+      "block": 4096,
+      "warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 26,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "1d85d21075e33f99803518acda71f2438226ad131e0058b1df0185fc62ded0fc",
+          "ttgir": "2062466af41ffcdfdffeb0b02036963cb473617489b284fd8b8ed71980128011",
+          "llir": "c3b994111b4699fec7ad1da15ae58ce57d84ea46f2a6959676ecc43c2dab5353",
+          "cubin": "04c7f62b100e29ef95ba159e8c63021ebd9e5df17f87ecd7ab34cc0f0634e070"
+        }
+      },
+      "samples_us": [
+        9.232051173845926,
+        9.276666243871054,
+        9.232051173845926,
+        9.276666243871054,
+        9.32192305723826,
+        38.859359423319496,
+        9.365897377332052,
+        9.32192305723826,
+        9.411282340685526
+      ],
+      "median_us": 9.32192305723826,
+      "status": "measured"
+    },
+    {
+      "n": 1048576,
+      "stride": 1,
+      "block": 1024,
+      "warps": 8,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 4,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 8,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "08e1ae278155a2746348c8ffb4eab637e12bb2c3a01282bb24b7807bd61a619d",
+          "ttgir": "b185bb0c81e4ed2db9638e49f44e837c7d8297202c1ed1e89ae35d2a7b4c84ae",
+          "llir": "19f07c4e015fd6f305af00973875545e271349af6f61c90727936768127de226",
+          "cubin": "2b99df3c25bd5cdf091bd1c893933a00a3a1528b8772d2f2ad6b5774200b81c1"
+        }
+      },
+      "samples_us": [
+        11.104615529378256,
+        11.060000459353128,
+        11.193974812825521,
+        25.490641593933105,
+        11.060641209284464,
+        11.060513059298197,
+        10.971281925837198,
+        11.28333310286204,
+        11.238718032836914
+      ],
+      "median_us": 11.104615529378256,
+      "status": "measured"
+    },
+    {
+      "n": 1048576,
+      "stride": 2,
+      "block": 256,
+      "warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 5,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "bb213b42e470819b1ac672d2698316d4fc38f3dd689727b01118d4ae1b773893",
+          "ttgir": "e5fd36d24295eb888479b65cd21d8d000802b85ce2f106d4845194208272f7c1",
+          "llir": "923fee051826a442103408dd55e4c13a3ef02f4952d25a76d655e8f0780224aa",
+          "cubin": "39861ff6e9687dc1cd15a08622a2bb0c9b4a0371fa5359acddc781022c870674"
+        }
+      },
+      "samples_us": [
+        18.237308661142986,
+        45.44858932495117,
+        18.326665957768757,
+        18.19269259770711,
+        18.193332354227703,
+        18.148718277613323,
+        18.193332354227703,
+        18.32730571428935,
+        18.237308661142986
+      ],
+      "median_us": 18.237308661142986,
+      "status": "measured"
+    },
+    {
+      "n": 1048576,
+      "stride": 2,
+      "block": 1024,
+      "warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 10,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "a211576941f2ff29dd7d5529956c4d4ea7bb54cec47b5626958cb6638cd2fb2b",
+          "ttgir": "3e35faf21f70fc9df57c7bffc9bd0f4fb707baede96ac95329e457b2affa8385",
+          "llir": "d1bc6a5664cb8335eeb6c00df1f6ee42bc03f7ebc72735b177cd536309d9a13d",
+          "cubin": "f242fc02c6afa8c3c2b813afc7cf5655d9629bf33a951eb5d7397bf670ce3800"
+        }
+      },
+      "samples_us": [
+        10.392050941785177,
+        10.481410225232443,
+        10.525384545326233,
+        10.436025261878967,
+        10.436667005221048,
+        10.659230748812357,
+        10.48064132531484,
+        10.525384545326233,
+        66.29140774408977
+      ],
+      "median_us": 10.481410225232443,
+      "status": "measured"
+    },
+    {
+      "n": 1048576,
+      "stride": 2,
+      "block": 4096,
+      "warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 22,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "1a7883d843d48f4de26e2e8023871da2ec1814a8ed6bc18b769b03dcdeeb88ad",
+          "ttgir": "7ec8276a2a2e5049213bf47cecd6b5de3635fed33a7fe6c4c923e24cb8c2a187",
+          "llir": "33983ad9cd332cb4f34590522660730b61768edb9371b2db8831a81a93de893d",
+          "cubin": "4ddf63abf80351f7673c21d7b96c7997192479a1c91c3afaeac75b5d40f560e4"
+        }
+      },
+      "samples_us": [
+        10.703973968823751,
+        10.837948322296143,
+        10.658718148867289,
+        10.837307572364807,
+        10.56948701540629,
+        10.748076438903809,
+        59.95256503423055,
+        10.748590032259623,
+        10.569999615351358
+      ],
+      "median_us": 10.748076438903809,
+      "status": "measured"
+    },
+    {
+      "n": 1048576,
+      "stride": 2,
+      "block": 1024,
+      "warps": 8,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 7,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 8,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "a211576941f2ff29dd7d5529956c4d4ea7bb54cec47b5626958cb6638cd2fb2b",
+          "ttgir": "7dc670e0f6a90efb5f04c4f2bc023f9e88809baffec2b1d5bcd444f7b60a85eb",
+          "llir": "2ac9d7b27d26ba228b4604e0ee3a0dc07748490dec8a88615bbd82fe75b74074",
+          "cubin": "46d716e25601449e9263fc03594ee37360c00a2e666b190450fe7f572ff37441"
+        }
+      },
+      "samples_us": [
+        11.640000343322754,
+        11.550641059875488,
+        11.416666706403097,
+        11.506025989850363,
+        48.50935935974121,
+        11.506025989850363,
+        11.461281776428223,
+        11.684102813402811,
+        11.595384279886881
+      ],
+      "median_us": 11.550641059875488,
+      "status": "measured"
+    },
+    {
+      "n": 4194304,
+      "stride": 1,
+      "block": 256,
+      "warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 3,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "a741f8c6629c34d6c57da79a2324017c1d3741bd7f266d550eb4e50bb4b8ffa5",
+          "ttgir": "c3b424f5bca84d9d0cb043dbf96c75568371f05588603825d8b053f071957f66",
+          "llir": "eefbf6e5abbc15d8b4e582fe82c293605d024839fc7baf6ff3c13ce135190862",
+          "cubin": "b7d859f25238b0f783a6771259f2d9f8b5605b7d60dfe849b0c1a831c900a649"
+        }
+      },
+      "samples_us": [
+        58.00602833429972,
+        56.25551144282023,
+        56.493588288625084,
+        56.364103158315025,
+        56.32051229476929,
+        56.27756118774414,
+        56.27756118774414,
+        56.363463401794434,
+        56.27756118774414
+      ],
+      "median_us": 56.32051229476929,
+      "status": "measured"
+    },
+    {
+      "n": 4194304,
+      "stride": 1,
+      "block": 1024,
+      "warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 8,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "ea478da8bde20f154229975abc208a31d27a8e966017872cc9275290add86fb1",
+          "ttgir": "08745fba1f685634e849c1a7436515264979b5e3e8ebf24ed3c938afca3bbd54",
+          "llir": "572f16fa3fe92203df906dc81f420cfdda1da4a41b24f736aac06320b5e4b121",
+          "cubin": "525336712187cb6c09e85f5f68cba077ac6df4dbc07b8149aea369972b05c256"
+        }
+      },
+      "samples_us": [
+        18.532051642735798,
+        18.358973662058514,
+        18.591026465098064,
+        18.574998776117962,
+        18.53140989939372,
+        18.617947896321613,
+        18.488460779190063,
+        18.44487190246582,
+        18.53140989939372
+      ],
+      "median_us": 18.53140989939372,
+      "status": "measured"
+    },
+    {
+      "n": 4194304,
+      "stride": 1,
+      "block": 4096,
+      "warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 26,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "a2378ce6c1295b021627d9c24b8145a6f209fbf53aa651e9ba294726e8a0f87d",
+          "ttgir": "bb59391667871e76fbe8e9da1c24c53a7a3ec780c56886257ca4ccdbcff2b205",
+          "llir": "8373b051ca009f1ef2a6fa2d949126630b27c303fe2c68e63b59284c0dbc5bc7",
+          "cubin": "4074be58cf7f5811220c9e22f0df4197da29b28f4239bc1ccbfc080e29314856"
+        }
+      },
+      "samples_us": [
+        14.903846383094788,
+        14.817307392756144,
+        14.774359265963236,
+        14.817949136098227,
+        14.903846383094788,
+        14.990384380022684,
+        14.860897262891134,
+        15.03333350022634,
+        14.833974838256836
+      ],
+      "median_us": 14.860897262891134,
+      "status": "measured"
+    },
+    {
+      "n": 4194304,
+      "stride": 1,
+      "block": 1024,
+      "warps": 8,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 4,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 8,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "ea478da8bde20f154229975abc208a31d27a8e966017872cc9275290add86fb1",
+          "ttgir": "5ef09523e2f167f44472ce5cc0311568c9fe256686b3f0f445153514e41ea394",
+          "llir": "72b5577bd1425a4e1c34b78d1c57cbf8ef13d540cbffe343c1532e884699ffaa",
+          "cubin": "fde564347cc421d4dc8a733680a108085dc50b57bd364e414a8d28152f56df46"
+        }
+      },
+      "samples_us": [
+        28.29166849454244,
+        27.989743153254192,
+        28.162821133931477,
+        28.162821133931477,
+        28.076283137003582,
+        54.70064083735148,
+        28.33525737126668,
+        28.20576826731364,
+        28.162821133931477
+      ],
+      "median_us": 28.162821133931477,
+      "status": "measured"
+    },
+    {
+      "n": 4194304,
+      "stride": 2,
+      "block": 256,
+      "warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 5,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "b212ab37eec61f3d353a161d67a9233a85ad555381300d336a5c6d2a593d37f0",
+          "ttgir": "94c5d12be292ef56ae9e4a20d469cbe6b4d46e84bb5458ea4317af1fbb8dba15",
+          "llir": "ac8ace2bb4772435a62c0380876be79fe123e76dec9b544f7ebb4a8deef24daf",
+          "cubin": "6144fccc970216e5c7c678db6311866cba560301891ca0d945307c019b95f11a"
+        }
+      },
+      "samples_us": [
+        56.882051626841225,
+        85.40449142456055,
+        56.79551362991333,
+        56.83910051981608,
+        56.92500273386637,
+        56.882051626841225,
+        56.92500273386637,
+        56.92564249038696,
+        56.96858962376913
+      ],
+      "median_us": 56.92500273386637,
+      "status": "measured"
+    },
+    {
+      "n": 4194304,
+      "stride": 2,
+      "block": 1024,
+      "warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 10,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "15348b3c066f8d6dfa3fa010c26875481b1104c5440e2f0bc4761928dc444cf0",
+          "ttgir": "7513d17159e55c0fcc21c1e37cc6e0285dc8c53f4bbd1f64201e9d2bb2e07f96",
+          "llir": "fe63d4192907be1aa3813d41d9fbd636e6dfc1a8b2957d0feb92e6901877a1b5",
+          "cubin": "b24f86e848554c82c1bc508aaee4865f342d2a9ba4ccfcf556489a945b5519e5"
+        }
+      },
+      "samples_us": [
+        52.3474375406901,
+        52.174997329711914,
+        103.83076667785645,
+        52.390384674072266,
+        52.131410439809166,
+        52.21794843673706,
+        52.174997329711914,
+        52.3474375406901,
+        52.00256506601969
+      ],
+      "median_us": 52.21794843673706,
+      "status": "measured"
+    },
+    {
+      "n": 4194304,
+      "stride": 2,
+      "block": 4096,
+      "warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 22,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "b4d1c877d5feb2cac461ec4081e51557ba4cc71c51076d892f1eb04ca500348b",
+          "ttgir": "a18bc245f07b2803000d1bbf98efd9ffca26bd3414f855e93d99e8fb993c3cb2",
+          "llir": "35485f0411ac3ca1d5a56d14ff2ad28886b093cde2c60f7afca677427ab94545",
+          "cubin": "3c49cc7722d30d8a4d1d8d0d4819cff8b84965f57ce8046e0258797949582385"
+        }
+      },
+      "samples_us": [
+        54.5929471651713,
+        54.464101791381836,
+        54.59359089533488,
+        98.6108938852946,
+        54.54999605814616,
+        54.98205025990804,
+        54.54999605814616,
+        54.59359089533488,
+        54.63589827219645
+      ],
+      "median_us": 54.59359089533488,
+      "status": "measured"
+    },
+    {
+      "n": 4194304,
+      "stride": 2,
+      "block": 1024,
+      "warps": 8,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125
+      },
+      "compiler": {
+        "n_regs": 7,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 8,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ],
+        "assembly_sha256": {
+          "ast": "e574a4944c8ae7c04e7bfa8eccdae9ca51fd0775f4fda3b9061820f9cfcf6480",
+          "ttir": "15348b3c066f8d6dfa3fa010c26875481b1104c5440e2f0bc4761928dc444cf0",
+          "ttgir": "2eb648946ac6e187064c05fd822de79d33e0ee0f45b06a17d2fe5967e2cbae93",
+          "llir": "db2b68b2e0b2f0dcb1a359897a4b7d6eb771d1eac63b5bd0a1d016368ad9e79d",
+          "cubin": "d1cfafa23df735469be894618e374538f419464841364b725268cc7a8d7eb8c6"
+        }
+      },
+      "samples_us": [
+        51.699999968210854,
+        51.35384798049927,
+        51.397434870402016,
+        51.182051499684654,
+        80.36986986796062,
+        51.526923974355064,
+        51.526923974355064,
+        51.742951075236,
+        51.483333110809326
+      ],
+      "median_us": 51.526923974355064,
+      "status": "measured"
+    }
+  ]
+}

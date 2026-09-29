@@ -1,25 +1,6 @@
 # KDA V100 复现入口
 
-当前计划：[Path4：KDA 复现与国产 GPU 迁移简要计划](PATH4_PLAN.md)。
-当前环境、五项任务覆盖、Agent 结果、完成度计算和后续验收条件汇总在
-[KDA 复现工作详细进展报告](KDA_REPRODUCTION_PROGRESS_REPORT.md)。
-
-首个模型生成候选已经完成 V100 全闭环，见
-[KDA Agent 首轮 V100 闭环结果](AGENT_V100_RESULT.md)。候选通过 54/54 组验证；约 1.10% 的
-首次跨运行改善经三次同进程交替复测后修正为约 0.46%，低于1%晋级门槛。
-[KDA Agent GDN Prefill V100 结果](AGENT_PREFILL_V100_RESULT.md)完成100/100组验证；模型候选经
-三轮同进程配对复测取得1.454%综合改善，超过1%门槛并晋级。启动与复核方式见
-[Agent 接入说明](AGENT_SETUP.md)。
-
-官方 GDN Decode 的 V100 适配结果见 [OFFICIAL_V100_RESULT.md](OFFICIAL_V100_RESULT.md)：
-固定官方数据版本，54/54 个真实 workload 和 3 个额外分支通过，原始证据已归档。
-官方 GDN Prefill 结果见 [PREFILL_V100_RESULT.md](PREFILL_V100_RESULT.md)：100/100 个真实
-workload、三种调度和两个额外分支全部通过。
-五项官方任务逐项硬件可行性见 [OFFICIAL_TASK_AUDIT.md](OFFICIAL_TASK_AUDIT.md)。
-自动优化 API 的配置与启动见 [AGENT_SETUP.md](AGENT_SETUP.md)。不需要额外安装独立 Agent；
-仓库内控制器负责候选生成、隔离验证、计时、晋级和证据记录。
-
-最新严格复核见 [V100_STRICT_RESULT.md](V100_STRICT_RESULT.md)：修复旧梯度错误后，六种形状的前向及参考梯度比较已通过，原始重复计时数据已归档。ncu 计数器采集仍需平台授权。
+当前环境、五项任务覆盖、普通 PyTorch 到结构化 Agent/Triton、Decode/Prefill 候选的晋级判定、Residual Add RMSNorm 严格复核及后续验收条件，统一见 [Agent/Triton 自动优化实验总报告](AGENT_TRITON_REPORT.md)。原始数据和失败候选保留在 [`evidence/`](evidence/)；启动与复核方式见 [Agent 接入说明](AGENT_SETUP.md)。不需要额外安装独立 Agent；仓库内控制器负责候选生成、隔离验证、计时、晋级和证据记录。
 
 当前目标是复现 Kernel Design Agents（KDA）的公开工作流，而不是继续扩展
 BI-V150 上的 CAKE/Megatron 原型。KDA 是一个“定义任务 → 实现候选 → 正确性验证
@@ -100,4 +81,4 @@ KDA_CA_BUNDLE="$HOME/.local/share/ca-certificates/scholar-git-ca-bundle.pem" \
 
 参考：[KDA 工作流](https://github.com/NVlabs/kda)、[官方竞赛复现说明](https://github.com/mit-han-lab/mlsys2026-flashinfer-contest/blob/main/docs/reproduction.md)。
 
-V100 上已完成的通用流程结果见 [V100_INITIAL_RESULT.md](V100_INITIAL_RESULT.md)。
+V100 上已完成的通用流程和结果见 [Agent/Triton 自动优化实验总报告](AGENT_TRITON_REPORT.md)。

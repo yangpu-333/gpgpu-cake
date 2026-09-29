@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-26T04:28:25.382226+00:00",
+  "mode": "gpu",
+  "seed": 0,
+  "operator": "matmul",
+  "records": [
+    {
+      "operator": "matmul",
+      "shape": [
+        64,
+        64,
+        64
+      ],
+      "kind": "baseline",
+      "shape_axes": "M,N,K",
+      "dtype": "torch.float16",
+      "config": {},
+      "status": "correct",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0009765625,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      }
+    },
+    {
+      "operator": "matmul",
+      "shape": [
+        64,
+        64,
+        64
+      ],
+      "kind": "candidate",
+      "shape_axes": "M,N,K",
+      "dtype": "torch.float16",
+      "config": {
+        "bm": 16,
+        "bn": 16,
+        "bk": 16,
+        "warps": 4
+      },
+      "status": "execution_error",
+      "error_type": "CompilationError",
+      "error": "at 8:38:def matrix_multiply(A, B, C, M: tl.constexpr, N: tl.constexpr, K: tl.constexpr,\n                    BM: tl.constexpr, BN: tl.constexpr, BK: tl.constexpr):\n    # The runner supplies contiguous FP16 inputs and a preallocated FP16 output.\n    rows = tl.program_id(0) * BM + tl.arange(0, BM)\n    cols = tl.program_id(1) * BN + tl.arange(0, BN)\n    inner = tl.arange(0, BK)\n    accumulator = tl.zeros((BM, BN), dtype=tl.float32)\n    for chunk in range(triton.cdiv(K, BK)):\n                                      ^\nAttributeError(\"'int' object has no attribute 'value'\")"
+    }
+  ],
+  "implementation": "fixed candidates; no agent calls, Halide passes, or Poly integration",
+  "source_sha256": {
+    "run.py": "478dc06e28b33ea18a170e50c45e743ff2a02876770e2b2311710b613055f8ef",
+    "triton_kernels.py": "593cb485aeeaa658194e9b3353053dc55b25d3228a15bd8e1d3843601757b98c"
+  },
+  "active_stage": "validate_route:matmul:(64, 64, 64):candidate:{'bm': 16, 'bn': 16, 'bk': 16, 'warps': 4}",
+  "environment": {
+    "python": "3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]",
+    "platform": "Linux-5.4.0-144-generic-x86_64-with-glibc2.31",
+    "corex_root": null,
+    "requested_device": 0,
+    "torch": {
+      "imported": true,
+      "version": "2.4.1"
+    },
+    "triton": {
+      "imported": true,
+      "version": "2.1.0"
+    },
+    "gpu_available": true,
+    "framework_cuda_version": "10.2",
+    "device_count": 2,
+    "device_name": "Iluvatar BI-V150",
+    "total_memory_bytes": 34359738368,
+    "ready_for_gpu_attempt": true
+  },
+  "triton_target_probe_error": "'CudaDriver' object has no attribute 'active'",
+  "timing_protocol": {
+    "method": "GPU stream events, repeated launches, median of batch means",
+    "warmup_launches": 5,
+    "samples": 5,
+    "launches_per_sample": 20,
+    "preallocated_output": true,
+    "compilation_and_validation_timed": false,
+    "l2_flushed": false,
+    "cuda_graph": false,
+    "order": "rotated per round",
+    "scope": "warm-buffer event interval; may include launch gaps; not isolated kernel profiling"
+  },
+  "scope": "Fixed handwritten Triton candidate sweep; no Halide/Poly or training integration",
+  "selections": [],
+  "status": "run_failed",
+  "error_type": "CompilationError",
+  "error": "at 8:38:def matrix_multiply(A, B, C, M: tl.constexpr, N: tl.constexpr, K: tl.constexpr,\n                    BM: tl.constexpr, BN: tl.constexpr, BK: tl.constexpr):\n    # The runner supplies contiguous FP16 inputs and a preallocated FP16 output.\n    rows = tl.program_id(0) * BM + tl.arange(0, BM)\n    cols = tl.program_id(1) * BN + tl.arange(0, BN)\n    inner = tl.arange(0, BK)\n    accumulator = tl.zeros((BM, BN), dtype=tl.float32)\n    for chunk in range(triton.cdiv(K, BK)):\n                                      ^\nAttributeError(\"'int' object has no attribute 'value'\")",
+  "traceback": "Traceback (most recent call last):\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/compiler/code_generator.py\", line 1142, in ast_to_ttir\n    generator.visit(fn.parse())\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/compiler/code_generator.py\", line 1025, in visit\n    ret = super().visit(node)\n  File \"/root/miniconda3/lib/python3.10/ast.py\", line 418, in visit\n    return visitor(node)\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/compiler/code_generator.py\", line 292, in visit_Module\n    ast.NodeVisitor.generic_visit(self, node)\n  File \"/root/miniconda3/lib/python3.10/ast.py\", line 426, in generic_visit\n    self.visit(item)\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/compiler/code_generator.py\", line 1025, in visit\n    ret = super().visit(node)\n  File \"/root/miniconda3/lib/python3.10/ast.py\", line 418, in visit\n    return visitor(node)\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/compiler/code_generator.py\", line 362, in visit_FunctionDef\n    self.visit_compound_statement(node.body)\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/compiler/code_generator.py\", line 287, in visit_compound_statement\n    ret_type = self.visit(stmt)\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/compiler/code_generator.py\", line 1025, in visit\n    ret = super().visit(node)\n  File \"/root/miniconda3/lib/python3.10/ast.py\", line 418, in visit\n    return visitor(node)\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/compiler/code_generator.py\", line 753, in visit_For\n    iter_args = [self.visit(arg) for arg in node.iter.args]\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/compiler/code_generator.py\", line 753, in <listcomp>\n    iter_args = [self.visit(arg) for arg in node.iter.args]\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/compiler/code_generator.py\", line 1025, in visit\n    ret = super().visit(node)\n  File \"/root/miniconda3/lib/python3.10/ast.py\", line 418, in visit\n    return visitor(node)\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/compiler/code_generator.py\", line 957, in visit_Call\n    return fn(*args, **kws)\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/__init__.py\", line 55, in cdiv\n    return (x + y - 1) // y\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/language/core.py\", line 451, in __sub__\n    return constexpr(self.value - other.value)\nAttributeError: 'int' object has no attribute 'value'\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/mnt/gpgpu-cake/experiments/basic_validation/run.py\", line 358, in main\n    code = gpu_experiments(args, report)\n  File \"/mnt/gpgpu-cake/experiments/basic_validation/run.py\", line 266, in gpu_experiments\n    launch()  # JIT compilation, allocation and copies are outside timing.\n  File \"/mnt/gpgpu-cake/experiments/basic_validation/run.py\", line 250, in launch\n    kernels.matrix_multiply[(triton.cdiv(m, config[\"bm\"]), triton.cdiv(n, config[\"bn\"]))](\n  File \"<string>\", line 4, in matrix_multiply\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py\", line 487, in launcher_body\n    bin = compile(self, signature=signature, device=device, constants=constants, num_warps=num_warps, num_ctas=num_ctas, num_stages=num_stages, waves_per_eu=waves_per_eu, num_vgpr=num_vgpr, matrix_instr_nonkdim=matrix_instr_nonkdim, enable_warp_specialization=enable_warp_specialization, extern_libs=extern_libs, configs=configs, debug=self.debug, device_type=device_type, use_sme=use_sme, shape_info=shape_info)\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py\", line 624, in compile\n    next_module = compile_kernel(module)\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py\", line 482, in <lambda>\n    lambda src: optimize_ttir(ast_to_ttir(src, signature, configs[0], constants, debug=debug, target=target), target))\n  File \"/usr/local/corex/lib64/python3/dist-packages/triton/compiler/code_generator.py\", line 1151, in ast_to_ttir\n    raise CompilationError(fn.src, node, repr(e)) from e\ntriton.compiler.errors.CompilationError: at 8:38:def matrix_multiply(A, B, C, M: tl.constexpr, N: tl.constexpr, K: tl.constexpr,\n                    BM: tl.constexpr, BN: tl.constexpr, BK: tl.constexpr):\n    # The runner supplies contiguous FP16 inputs and a preallocated FP16 output.\n    rows = tl.program_id(0) * BM + tl.arange(0, BM)\n    cols = tl.program_id(1) * BN + tl.arange(0, BN)\n    inner = tl.arange(0, BK)\n    accumulator = tl.zeros((BM, BN), dtype=tl.float32)\n    for chunk in range(triton.cdiv(K, BK)):\n                                      ^\nAttributeError(\"'int' object has no attribute 'value'\")\n",
+  "wall_seconds": 1.627404909580946
+}

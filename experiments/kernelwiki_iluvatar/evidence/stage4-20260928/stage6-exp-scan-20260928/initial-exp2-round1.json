@@ -1,0 +1,128 @@
+{
+  "environment": {
+    "gpu": "Iluvatar BI-V150",
+    "torch": "2.4.1",
+    "triton": "2.1.0",
+    "python": "3.10.16"
+  },
+  "source_sha256": "c0f1d27fcd52ac39365bfabb51f49e68e3b0d0e01229a0abcaa905f023c30676",
+  "seed": 20260928,
+  "exp": [
+    {
+      "n": 1048576,
+      "domain": "uniform[-8,0]",
+      "variants": [
+        {
+          "implementation": "tl.exp",
+          "status": "error",
+          "error": "AttributeError(\"module 'triton.language' has no attribute 'exp2'\")"
+        },
+        {
+          "implementation": "exp2_log2e",
+          "status": "error",
+          "error": "AttributeError(\"module 'triton.language' has no attribute 'exp2'\")"
+        }
+      ]
+    },
+    {
+      "n": 4194304,
+      "domain": "uniform[-8,0]",
+      "variants": [
+        {
+          "implementation": "tl.exp",
+          "status": "error",
+          "error": "AttributeError(\"module 'triton.language' has no attribute 'exp2'\")"
+        },
+        {
+          "implementation": "exp2_log2e",
+          "status": "error",
+          "error": "AttributeError(\"module 'triton.language' has no attribute 'exp2'\")"
+        }
+      ]
+    }
+  ],
+  "scan": [
+    {
+      "n": 4099,
+      "block": 1024,
+      "chunks": 5,
+      "check": {
+        "passed": true,
+        "max_abs_error": 1.9073486328125e-05,
+        "failed_elements": 0,
+        "atol": 0.01,
+        "rtol": 0.001
+      },
+      "candidate_samples_us": [
+        45.91359297434489,
+        43.81641149520874,
+        43.519230683644615,
+        43.585642178853355,
+        101.7634630203247,
+        43.81564060846964,
+        43.40128103892008,
+        43.427821000417076,
+        43.38153998057047
+      ],
+      "baseline_samples_us": [
+        14.491410056749979,
+        14.599999785423279,
+        14.554230372111002,
+        14.41576878229777,
+        14.554358522097269,
+        14.554358522097269,
+        14.553589622179667,
+        14.553589622179667,
+        14.415640632311503
+      ],
+      "candidate_median_us": 43.585642178853355,
+      "baseline_median_us": 14.553589622179667,
+      "speedup": 0.33390788559358886,
+      "status": "measured"
+    },
+    {
+      "n": 65537,
+      "block": 1024,
+      "chunks": 65,
+      "check": {
+        "passed": true,
+        "max_abs_error": 6.103515625e-05,
+        "failed_elements": 0,
+        "atol": 0.01,
+        "rtol": 0.001
+      },
+      "candidate_samples_us": [
+        44.12243763605753,
+        43.65448554356893,
+        43.29615434010824,
+        43.51794719696045,
+        120.69679896036784,
+        43.481409549713135,
+        43.44487190246582,
+        46.71538273493449,
+        43.07499726613363
+      ],
+      "baseline_samples_us": [
+        13.816666603088379,
+        13.946794470151266,
+        13.990384340286255,
+        14.033333460489908,
+        13.946794470151266,
+        14.033333460489908,
+        14.033333460489908,
+        14.205769697825113,
+        13.860256473223368
+      ],
+      "candidate_median_us": 43.51794719696045,
+      "baseline_median_us": 13.990384340286255,
+      "speedup": 0.32148539261207215,
+      "status": "measured"
+    }
+  ],
+  "timing": {
+    "warmup": 10,
+    "samples": 9,
+    "launches_per_sample": 30,
+    "scope": "forward warm-buffer GPU event"
+  }
+}

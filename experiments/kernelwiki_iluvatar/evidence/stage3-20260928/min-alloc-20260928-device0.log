@@ -1,0 +1,4 @@
+BEGIN import_torch
+END import_torch 2.4.1
+BEGIN allocate_empty cuda:0
+ALLOC_OK (16,) seconds 1.389

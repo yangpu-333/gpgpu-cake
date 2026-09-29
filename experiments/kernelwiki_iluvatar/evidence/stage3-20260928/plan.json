@@ -1,0 +1,479 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-28T02:49:35.818132+00:00",
+  "operator": "residual_add_rmsnorm",
+  "mode": "cpu-plan",
+  "implementation_boundary": {
+    "halide_ir": "stable Halide-style normalized contract record; not integrated with the project's Halide source tree yet",
+    "poly_module": "explicit affine row/reduction schedule generator and legality filter; not a full external Poly runtime",
+    "automated_flow": "generate -> filter -> compile -> forward/backward validate -> event-time -> select/fallback",
+    "backend": "handwritten Triton forward kernel for the preinstalled BI-V150-compatible runtime"
+  },
+  "source_sha256": {
+    "stage3_residual_rmsnorm.py": "308063fe9674f7542b1be8de2a734b74a708b05c2ed3c4ef4273878c42eb6eaa"
+  },
+  "scope": "Static IR normalization and Poly-style schedule validation only; no GPU execution.",
+  "shapes": [
+    {
+      "shape": [
+        64,
+        768
+      ],
+      "canonical_ir": {
+        "ir_kind": "halide_style_tensor_ir",
+        "normalization_version": "residual-rmsnorm-v1",
+        "operator": "residual_add_rmsnorm",
+        "domain": {
+          "rows": 64,
+          "hidden": 768
+        },
+        "dtype": "float16",
+        "constants": {
+          "epsilon": 1e-06,
+          "reduction_extent": 768
+        },
+        "buffers": [
+          {
+            "name": "x",
+            "shape": [
+              64,
+              768
+            ],
+            "access": "read",
+            "layout": "row_major_contiguous"
+          },
+          {
+            "name": "residual",
+            "shape": [
+              64,
+              768
+            ],
+            "access": "read",
+            "layout": "row_major_contiguous"
+          },
+          {
+            "name": "weight",
+            "shape": [
+              768
+            ],
+            "access": "read",
+            "layout": "contiguous"
+          },
+          {
+            "name": "output",
+            "shape": [
+              64,
+              768
+            ],
+            "access": "write",
+            "layout": "row_major_contiguous"
+          },
+          {
+            "name": "residual_out",
+            "shape": [
+              64,
+              768
+            ],
+            "access": "write",
+            "layout": "row_major_contiguous"
+          }
+        ],
+        "statements": [
+          {
+            "id": "residual_add",
+            "domain": [
+              "row",
+              "col"
+            ],
+            "expr": "residual_out[row,col] = x[row,col] + residual[row,col]"
+          },
+          {
+            "id": "sum_squares",
+            "domain": [
+              "row"
+            ],
+            "reduction": "col",
+            "expr": "sum(residual_out[row,col]^2)"
+          },
+          {
+            "id": "inverse_rms",
+            "domain": [
+              "row"
+            ],
+            "expr": "rsqrt(sum_squares[row] / hidden + epsilon)"
+          },
+          {
+            "id": "scale",
+            "domain": [
+              "row",
+              "col"
+            ],
+            "expr": "output[row,col] = residual_out[row,col] * inverse_rms[row] * weight[col]"
+          }
+        ],
+        "semantics": {
+          "residual_out_is_observable": true,
+          "reduction_precision": "fp32_accumulate",
+          "reduction_reassociation": "not_assumed_legal",
+          "input_mutation": "forbidden"
+        }
+      },
+      "workload_hash": "0bfa30be69495d90e15c48130ca69ab0f70693b1413ce33c6325f1be302e26ce",
+      "candidates": [
+        {
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 1024,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 1,
+            "num_stages": 1
+          },
+          "static_legality": {
+            "passed": true,
+            "reason": null
+          }
+        },
+        {
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 1024,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 2,
+            "num_stages": 1
+          },
+          "static_legality": {
+            "passed": true,
+            "reason": null
+          }
+        },
+        {
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 1024,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 4,
+            "num_stages": 1
+          },
+          "static_legality": {
+            "passed": true,
+            "reason": null
+          }
+        }
+      ]
+    },
+    {
+      "shape": [
+        64,
+        1024
+      ],
+      "canonical_ir": {
+        "ir_kind": "halide_style_tensor_ir",
+        "normalization_version": "residual-rmsnorm-v1",
+        "operator": "residual_add_rmsnorm",
+        "domain": {
+          "rows": 64,
+          "hidden": 1024
+        },
+        "dtype": "float16",
+        "constants": {
+          "epsilon": 1e-06,
+          "reduction_extent": 1024
+        },
+        "buffers": [
+          {
+            "name": "x",
+            "shape": [
+              64,
+              1024
+            ],
+            "access": "read",
+            "layout": "row_major_contiguous"
+          },
+          {
+            "name": "residual",
+            "shape": [
+              64,
+              1024
+            ],
+            "access": "read",
+            "layout": "row_major_contiguous"
+          },
+          {
+            "name": "weight",
+            "shape": [
+              1024
+            ],
+            "access": "read",
+            "layout": "contiguous"
+          },
+          {
+            "name": "output",
+            "shape": [
+              64,
+              1024
+            ],
+            "access": "write",
+            "layout": "row_major_contiguous"
+          },
+          {
+            "name": "residual_out",
+            "shape": [
+              64,
+              1024
+            ],
+            "access": "write",
+            "layout": "row_major_contiguous"
+          }
+        ],
+        "statements": [
+          {
+            "id": "residual_add",
+            "domain": [
+              "row",
+              "col"
+            ],
+            "expr": "residual_out[row,col] = x[row,col] + residual[row,col]"
+          },
+          {
+            "id": "sum_squares",
+            "domain": [
+              "row"
+            ],
+            "reduction": "col",
+            "expr": "sum(residual_out[row,col]^2)"
+          },
+          {
+            "id": "inverse_rms",
+            "domain": [
+              "row"
+            ],
+            "expr": "rsqrt(sum_squares[row] / hidden + epsilon)"
+          },
+          {
+            "id": "scale",
+            "domain": [
+              "row",
+              "col"
+            ],
+            "expr": "output[row,col] = residual_out[row,col] * inverse_rms[row] * weight[col]"
+          }
+        ],
+        "semantics": {
+          "residual_out_is_observable": true,
+          "reduction_precision": "fp32_accumulate",
+          "reduction_reassociation": "not_assumed_legal",
+          "input_mutation": "forbidden"
+        }
+      },
+      "workload_hash": "8a51e93a9c0934a0e0cbdf648b3aad0fe26576ca712958159d5542b380f3d996",
+      "candidates": [
+        {
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 1024,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 1,
+            "num_stages": 1
+          },
+          "static_legality": {
+            "passed": true,
+            "reason": null
+          }
+        },
+        {
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 1024,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 2,
+            "num_stages": 1
+          },
+          "static_legality": {
+            "passed": true,
+            "reason": null
+          }
+        },
+        {
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 1024,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 4,
+            "num_stages": 1
+          },
+          "static_legality": {
+            "passed": true,
+            "reason": null
+          }
+        }
+      ]
+    },
+    {
+      "shape": [
+        64,
+        4096
+      ],
+      "canonical_ir": {
+        "ir_kind": "halide_style_tensor_ir",
+        "normalization_version": "residual-rmsnorm-v1",
+        "operator": "residual_add_rmsnorm",
+        "domain": {
+          "rows": 64,
+          "hidden": 4096
+        },
+        "dtype": "float16",
+        "constants": {
+          "epsilon": 1e-06,
+          "reduction_extent": 4096
+        },
+        "buffers": [
+          {
+            "name": "x",
+            "shape": [
+              64,
+              4096
+            ],
+            "access": "read",
+            "layout": "row_major_contiguous"
+          },
+          {
+            "name": "residual",
+            "shape": [
+              64,
+              4096
+            ],
+            "access": "read",
+            "layout": "row_major_contiguous"
+          },
+          {
+            "name": "weight",
+            "shape": [
+              4096
+            ],
+            "access": "read",
+            "layout": "contiguous"
+          },
+          {
+            "name": "output",
+            "shape": [
+              64,
+              4096
+            ],
+            "access": "write",
+            "layout": "row_major_contiguous"
+          },
+          {
+            "name": "residual_out",
+            "shape": [
+              64,
+              4096
+            ],
+            "access": "write",
+            "layout": "row_major_contiguous"
+          }
+        ],
+        "statements": [
+          {
+            "id": "residual_add",
+            "domain": [
+              "row",
+              "col"
+            ],
+            "expr": "residual_out[row,col] = x[row,col] + residual[row,col]"
+          },
+          {
+            "id": "sum_squares",
+            "domain": [
+              "row"
+            ],
+            "reduction": "col",
+            "expr": "sum(residual_out[row,col]^2)"
+          },
+          {
+            "id": "inverse_rms",
+            "domain": [
+              "row"
+            ],
+            "expr": "rsqrt(sum_squares[row] / hidden + epsilon)"
+          },
+          {
+            "id": "scale",
+            "domain": [
+              "row",
+              "col"
+            ],
+            "expr": "output[row,col] = residual_out[row,col] * inverse_rms[row] * weight[col]"
+          }
+        ],
+        "semantics": {
+          "residual_out_is_observable": true,
+          "reduction_precision": "fp32_accumulate",
+          "reduction_reassociation": "not_assumed_legal",
+          "input_mutation": "forbidden"
+        }
+      },
+      "workload_hash": "87c165ca3055e391603f50870c7a7b911a5988fcd7c6f0f9900c9d91af764ac7",
+      "candidates": [
+        {
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 4096,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 2,
+            "num_stages": 1
+          },
+          "static_legality": {
+            "passed": true,
+            "reason": null
+          }
+        },
+        {
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 4096,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 4,
+            "num_stages": 1
+          },
+          "static_legality": {
+            "passed": true,
+            "reason": null
+          }
+        },
+        {
+          "config": {
+            "schedule_kind": "poly_row_reduction_schedule",
+            "row_tile": 1,
+            "reduction_tile": 4096,
+            "reduction_order": "row_then_full_hidden_reduction_then_scale",
+            "vector_width": 1,
+            "num_warps": 8,
+            "num_stages": 1
+          },
+          "static_legality": {
+            "passed": true,
+            "reason": null
+          }
+        }
+      ]
+    }
+  ],
+  "status": "cpu_plan_complete",
+  "wall_seconds": 0.00016439999990325305
+}

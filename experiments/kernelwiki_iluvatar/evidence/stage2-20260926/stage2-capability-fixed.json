@@ -1,0 +1,234 @@
+{
+  "environment": {
+    "device": "Iluvatar BI-V150",
+    "device_index": 0,
+    "torch": "2.4.1",
+    "triton": "2.1.0",
+    "python": "3.10.16"
+  },
+  "source_sha256": "26c656168163ed92fd37113bd61149eedc07aa7a95af1a81b7f0facc4ba1ecf9",
+  "cases": [
+    {
+      "operator": "bf16_gemm",
+      "shape": [
+        64,
+        64,
+        64
+      ],
+      "num_warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.0,
+        "max_allowed": 1.209999918937683,
+        "fail_count": 0,
+        "atol": 0.04,
+        "rtol": 0.04
+      },
+      "event_us_per_launch": [
+        62.3784601688385,
+        8.126730471849442,
+        8.125769346952438,
+        8.125577121973038,
+        8.057115226984024
+      ]
+    },
+    {
+      "operator": "bf16_gemm",
+      "shape": [
+        127,
+        65,
+        33
+      ],
+      "num_warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.0,
+        "max_allowed": 0.8799999952316284,
+        "fail_count": 0,
+        "atol": 0.04,
+        "rtol": 0.04
+      },
+      "event_us_per_launch": [
+        8.33442285656929,
+        8.403269201517105,
+        8.47192332148552,
+        8.403269201517105,
+        42.13384687900543
+      ]
+    },
+    {
+      "operator": "bf16_gemm",
+      "shape": [
+        256,
+        256,
+        256
+      ],
+      "num_warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.0001220703125,
+        "max_allowed": 2.919999837875366,
+        "fail_count": 0,
+        "atol": 0.04,
+        "rtol": 0.04
+      },
+      "event_us_per_launch": [
+        13.174231350421906,
+        13.58538419008255,
+        13.58519196510315,
+        13.585768640041351,
+        13.584999740123749
+      ]
+    },
+    {
+      "operator": "rmsnorm",
+      "shape": [
+        3,
+        768
+      ],
+      "dtype": "torch.float16",
+      "block": 1024,
+      "num_warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.0,
+        "max_allowed": 0.15140624344348907,
+        "fail_count": 0,
+        "atol": 0.02,
+        "rtol": 0.02
+      },
+      "event_us_per_launch": [
+        6.323076784610748,
+        6.323076784610748,
+        40.85961580276489,
+        6.323076784610748,
+        6.322115659713745
+      ]
+    },
+    {
+      "operator": "rmsnorm",
+      "shape": [
+        7,
+        1024
+      ],
+      "dtype": "torch.float16",
+      "block": 1024,
+      "num_warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.0,
+        "max_allowed": 0.15398436784744263,
+        "fail_count": 0,
+        "atol": 0.02,
+        "rtol": 0.02
+      },
+      "event_us_per_launch": [
+        6.517307460308075,
+        6.388461589813232,
+        6.4519234001636505,
+        6.581731140613556,
+        6.323076784610748
+      ]
+    },
+    {
+      "operator": "rmsnorm",
+      "shape": [
+        16,
+        4099
+      ],
+      "dtype": "torch.float16",
+      "block": 8192,
+      "num_warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.001953125,
+        "max_allowed": 0.23374998569488525,
+        "fail_count": 0,
+        "atol": 0.02,
+        "rtol": 0.02
+      },
+      "event_us_per_launch": [
+        10.342307388782501,
+        10.27500033378601,
+        10.274038463830948,
+        10.403846204280853,
+        10.27500033378601
+      ]
+    },
+    {
+      "operator": "rmsnorm",
+      "shape": [
+        3,
+        768
+      ],
+      "dtype": "torch.bfloat16",
+      "block": 1024,
+      "num_warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.0,
+        "max_allowed": 0.2549999952316284,
+        "fail_count": 0,
+        "atol": 0.04,
+        "rtol": 0.04
+      },
+      "event_us_per_launch": [
+        6.323076784610748,
+        6.323076784610748,
+        6.323076784610748,
+        6.323076784610748,
+        6.282692402601242
+      ]
+    },
+    {
+      "operator": "rmsnorm",
+      "shape": [
+        7,
+        1024
+      ],
+      "dtype": "torch.bfloat16",
+      "block": 1024,
+      "num_warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.0,
+        "max_allowed": 0.3099999725818634,
+        "fail_count": 0,
+        "atol": 0.04,
+        "rtol": 0.04
+      },
+      "event_us_per_launch": [
+        6.517307460308075,
+        6.452884525060654,
+        6.905769556760788,
+        6.841345876455307,
+        6.841345876455307
+      ]
+    },
+    {
+      "operator": "rmsnorm",
+      "shape": [
+        16,
+        4099
+      ],
+      "dtype": "torch.bfloat16",
+      "block": 8192,
+      "num_warps": 4,
+      "check": {
+        "passed": true,
+        "max_abs_error": 0.0078125,
+        "max_allowed": 0.45749998092651367,
+        "fail_count": 0,
+        "atol": 0.04,
+        "rtol": 0.04
+      },
+      "event_us_per_launch": [
+        10.675961524248123,
+        10.73903813958168,
+        10.740000009536743,
+        10.740000009536743,
+        18.794038891792297
+      ]
+    }
+  ]
+}

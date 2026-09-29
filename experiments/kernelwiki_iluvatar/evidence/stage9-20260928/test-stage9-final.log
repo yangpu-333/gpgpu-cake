@@ -1,0 +1,7 @@
+test_bi_v150_filter_and_alias_do_not_import_nvidia_pages (test_iluvatar_extension.IluvatarExtensionTests) ... ok
+test_experiment_evidence_is_present_and_tampering_is_rejected (test_iluvatar_extension.IluvatarExtensionTests) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 5.596s
+
+OK

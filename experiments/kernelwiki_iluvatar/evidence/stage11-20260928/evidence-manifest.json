@@ -1,0 +1,41 @@
+{
+  "stage": "stage11-pipeline-holdout",
+  "date": "2026-09-28",
+  "files": [
+    {
+      "path": "stage11_pipeline_holdout.py",
+      "sha256": "9313bc0afcea15937962d65cb037f30c66736361babbe605480f96dd823bda80",
+      "bytes": 4811
+    },
+    {
+      "path": "evidence/stage11-20260928/round1.json",
+      "sha256": "e179c64195601590af0f98f7f8c6f85e86764486df0809bd2085ff75526d53f4",
+      "bytes": 26260
+    },
+    {
+      "path": "evidence/stage11-20260928/round2.json",
+      "sha256": "ade32d3513287b49fbdd24b16d0d7b9f7873a5bdd34bb09152c50e276de516f6",
+      "bytes": 26272
+    },
+    {
+      "path": "evidence/stage11-20260928/round3.json",
+      "sha256": "61353ec0752cb0d2cfbc73138a71cf4cc564c177b23add3252ac10db27e45461",
+      "bytes": 26268
+    },
+    {
+      "path": "evidence/stage11-20260928/round1.log",
+      "sha256": "b1fc3518c81e3497489536809879a7de2237d3d6c337ad77951d391878ee3cf3",
+      "bytes": 564
+    },
+    {
+      "path": "evidence/stage11-20260928/round2.log",
+      "sha256": "b1fc3518c81e3497489536809879a7de2237d3d6c337ad77951d391878ee3cf3",
+      "bytes": 564
+    },
+    {
+      "path": "evidence/stage11-20260928/round3.log",
+      "sha256": "b1fc3518c81e3497489536809879a7de2237d3d6c337ad77951d391878ee3cf3",
+      "bytes": 564
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+float16 [512, 512, 2048] [32, 32, 32] ['passed', 'passed', 'passed']
+float16 [512, 512, 2048] [64, 64, 32] ['passed', 'passed', 'passed']
+float16 [1024, 1024, 1024] [32, 32, 32] ['passed', 'passed', 'passed']
+float16 [1024, 1024, 1024] [64, 64, 32] ['passed', 'passed', 'passed']
+bfloat16 [512, 512, 2048] [32, 32, 32] ['passed', 'passed', 'passed']
+bfloat16 [512, 512, 2048] [64, 64, 32] ['passed', 'passed', 'passed']
+bfloat16 [1024, 1024, 1024] [32, 32, 32] ['passed', 'passed', 'passed']
+bfloat16 [1024, 1024, 1024] [64, 64, 32] ['passed', 'passed', 'passed']

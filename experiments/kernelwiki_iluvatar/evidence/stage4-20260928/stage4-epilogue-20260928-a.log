@@ -1,0 +1,6 @@
+float16-round1 exit 0
+bfloat16-round1 exit 0
+bfloat16-round2 exit 0
+float16-round2 exit 0
+float16-round3 exit 0
+bfloat16-round3 exit 0

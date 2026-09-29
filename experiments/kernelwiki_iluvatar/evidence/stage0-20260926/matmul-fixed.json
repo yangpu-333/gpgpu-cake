@@ -1,0 +1,686 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-26T04:29:19.733913+00:00",
+  "mode": "gpu",
+  "seed": 0,
+  "operator": "matmul",
+  "records": [
+    {
+      "operator": "matmul",
+      "shape": [
+        64,
+        64,
+        64
+      ],
+      "kind": "baseline",
+      "shape_axes": "M,N,K",
+      "dtype": "torch.float16",
+      "config": {},
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0009765625,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.008480384945869446,
+        0.008122500032186508,
+        0.008123461902141572,
+        0.008123461902141572,
+        0.008122500032186508
+      ],
+      "median_ms": 0.008123461902141572,
+      "min_ms": 0.008122500032186508,
+      "max_ms": 0.008480384945869446,
+      "speedup_vs_pytorch": 1.0
+    },
+    {
+      "operator": "matmul",
+      "shape": [
+        64,
+        64,
+        64
+      ],
+      "kind": "candidate",
+      "shape_axes": "M,N,K",
+      "dtype": "torch.float16",
+      "config": {
+        "bm": 16,
+        "bn": 16,
+        "bk": 16,
+        "warps": 4
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0009765625,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.008126730471849442,
+        0.007367115467786789,
+        0.007159230858087539,
+        0.007159230858087539,
+        0.007159230858087539
+      ],
+      "median_ms": 0.007159230858087539,
+      "min_ms": 0.007159230858087539,
+      "max_ms": 0.008126730471849442,
+      "speedup_vs_pytorch": 1.1346836082209548
+    },
+    {
+      "operator": "matmul",
+      "shape": [
+        64,
+        64,
+        64
+      ],
+      "kind": "candidate",
+      "shape_axes": "M,N,K",
+      "dtype": "torch.float16",
+      "config": {
+        "bm": 32,
+        "bn": 32,
+        "bk": 32,
+        "warps": 4
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0009765625,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.006952500343322754,
+        0.006744615733623505,
+        0.04503326714038849,
+        0.006744807958602906,
+        0.006744615733623505
+      ],
+      "median_ms": 0.006744807958602906,
+      "min_ms": 0.006744615733623505,
+      "max_ms": 0.04503326714038849,
+      "speedup_vs_pytorch": 1.2044022531108856
+    },
+    {
+      "operator": "matmul",
+      "shape": [
+        64,
+        64,
+        64
+      ],
+      "kind": "candidate",
+      "shape_axes": "M,N,K",
+      "dtype": "torch.float16",
+      "config": {
+        "bm": 64,
+        "bn": 32,
+        "bk": 32,
+        "warps": 4
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0009765625,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.007573845982551575,
+        0.006814230978488922,
+        0.006744807958602906,
+        0.006744615733623505,
+        0.006743653863668442
+      ],
+      "median_ms": 0.006744807958602906,
+      "min_ms": 0.006743653863668442,
+      "max_ms": 0.007573845982551575,
+      "speedup_vs_pytorch": 1.2044022531108856
+    },
+    {
+      "operator": "matmul",
+      "shape": [
+        127,
+        65,
+        33
+      ],
+      "kind": "baseline",
+      "shape_axes": "M,N,K",
+      "dtype": "torch.float16",
+      "config": {},
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.00390625,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.013926346600055695,
+        0.013719423115253449,
+        0.013788269460201263,
+        0.013719807565212249,
+        0.013788269460201263
+      ],
+      "median_ms": 0.013788269460201263,
+      "min_ms": 0.013719423115253449,
+      "max_ms": 0.013926346600055695,
+      "speedup_vs_pytorch": 1.0
+    },
+    {
+      "operator": "matmul",
+      "shape": [
+        127,
+        65,
+        33
+      ],
+      "kind": "candidate",
+      "shape_axes": "M,N,K",
+      "dtype": "torch.float16",
+      "config": {
+        "bm": 16,
+        "bn": 16,
+        "bk": 16,
+        "warps": 4
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.00390625,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.008126923441886902,
+        0.007020961493253708,
+        0.006744807958602906,
+        0.006744422763586044,
+        0.038789999485015866
+      ],
+      "median_ms": 0.007020961493253708,
+      "min_ms": 0.006744422763586044,
+      "max_ms": 0.038789999485015866,
+      "speedup_vs_pytorch": 1.9638719673153195
+    },
+    {
+      "operator": "matmul",
+      "shape": [
+        127,
+        65,
+        33
+      ],
+      "kind": "candidate",
+      "shape_axes": "M,N,K",
+      "dtype": "torch.float16",
+      "config": {
+        "bm": 32,
+        "bn": 32,
+        "bk": 32,
+        "warps": 4
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.00390625,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.008126923441886902,
+        0.006744615733623505,
+        0.006744615733623505,
+        0.006744615733623505,
+        0.006744615733623505
+      ],
+      "median_ms": 0.006744615733623505,
+      "min_ms": 0.006744615733623505,
+      "max_ms": 0.008126923441886902,
+      "speedup_vs_pytorch": 2.044337291369096
+    },
+    {
+      "operator": "matmul",
+      "shape": [
+        127,
+        65,
+        33
+      ],
+      "kind": "candidate",
+      "shape_axes": "M,N,K",
+      "dtype": "torch.float16",
+      "config": {
+        "bm": 64,
+        "bn": 32,
+        "bk": 32,
+        "warps": 4
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.00390625,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.008264999836683273,
+        0.008126730471849442,
+        0.008126730471849442,
+        0.008126730471849442,
+        0.008126923441886902
+      ],
+      "median_ms": 0.008126730471849442,
+      "min_ms": 0.008126730471849442,
+      "max_ms": 0.008264999836683273,
+      "speedup_vs_pytorch": 1.6966564238795772
+    },
+    {
+      "operator": "matmul",
+      "shape": [
+        256,
+        256,
+        256
+      ],
+      "kind": "baseline",
+      "shape_axes": "M,N,K",
+      "dtype": "torch.float16",
+      "config": {},
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0078125,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.010613461583852768,
+        0.010611346364021302,
+        0.01074865385890007,
+        0.010471922904253006,
+        0.01074846163392067
+      ],
+      "median_ms": 0.010613461583852768,
+      "min_ms": 0.010471922904253006,
+      "max_ms": 0.01074865385890007,
+      "speedup_vs_pytorch": 1.0
+    },
+    {
+      "operator": "matmul",
+      "shape": [
+        256,
+        256,
+        256
+      ],
+      "kind": "candidate",
+      "shape_axes": "M,N,K",
+      "dtype": "torch.float16",
+      "config": {
+        "bm": 16,
+        "bn": 16,
+        "bk": 16,
+        "warps": 4
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0078125,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.01641846150159836,
+        0.016418653726577758,
+        0.01669500023126602,
+        0.016514039039611815,
+        0.01655673086643219
+      ],
+      "median_ms": 0.016514039039611815,
+      "min_ms": 0.01641846150159836,
+      "max_ms": 0.01669500023126602,
+      "speedup_vs_pytorch": 0.642693259861777
+    },
+    {
+      "operator": "matmul",
+      "shape": [
+        256,
+        256,
+        256
+      ],
+      "kind": "candidate",
+      "shape_axes": "M,N,K",
+      "dtype": "torch.float16",
+      "config": {
+        "bm": 32,
+        "bn": 32,
+        "bk": 32,
+        "warps": 4
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0078125,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.013515961170196534,
+        0.013308268785476685,
+        0.013515961170196534,
+        0.01344749927520752,
+        0.013517308235168456
+      ],
+      "median_ms": 0.013515961170196534,
+      "min_ms": 0.013308268785476685,
+      "max_ms": 0.013517308235168456,
+      "speedup_vs_pytorch": 0.7852539268354852
+    },
+    {
+      "operator": "matmul",
+      "shape": [
+        256,
+        256,
+        256
+      ],
+      "kind": "candidate",
+      "shape_axes": "M,N,K",
+      "dtype": "torch.float16",
+      "config": {
+        "bm": 64,
+        "bn": 32,
+        "bk": 32,
+        "warps": 4
+      },
+      "status": "measured",
+      "correctness": {
+        "passed": true,
+        "checks": [
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0078125,
+            "distribution": "normal",
+            "inputs_unchanged": true
+          },
+          {
+            "passed": true,
+            "atol": 0.01,
+            "rtol": 0.01,
+            "max_abs_error": 0.0,
+            "distribution": "zeros",
+            "inputs_unchanged": true
+          }
+        ]
+      },
+      "samples_ms": [
+        0.014069999754428863,
+        0.013862115144729615,
+        0.013723845779895782,
+        0.01386096179485321,
+        0.013861922919750214
+      ],
+      "median_ms": 0.013861922919750214,
+      "min_ms": 0.013723845779895782,
+      "max_ms": 0.014069999754428863,
+      "speedup_vs_pytorch": 0.7656557928720626
+    }
+  ],
+  "implementation": "fixed candidates; no agent calls, Halide passes, or Poly integration",
+  "source_sha256": {
+    "run.py": "478dc06e28b33ea18a170e50c45e743ff2a02876770e2b2311710b613055f8ef",
+    "triton_kernels.py": "ccf025cef2d6c8f2635a4cdc565f04a1930476158db1ef694754ef197eab3a9e"
+  },
+  "active_stage": "completed",
+  "environment": {
+    "python": "3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]",
+    "platform": "Linux-5.4.0-144-generic-x86_64-with-glibc2.31",
+    "corex_root": null,
+    "requested_device": 0,
+    "torch": {
+      "imported": true,
+      "version": "2.4.1"
+    },
+    "triton": {
+      "imported": true,
+      "version": "2.1.0"
+    },
+    "gpu_available": true,
+    "framework_cuda_version": "10.2",
+    "device_count": 2,
+    "device_name": "Iluvatar BI-V150",
+    "total_memory_bytes": 34359738368,
+    "ready_for_gpu_attempt": true
+  },
+  "triton_target_probe_error": "'CudaDriver' object has no attribute 'active'",
+  "timing_protocol": {
+    "method": "GPU stream events, repeated launches, median of batch means",
+    "warmup_launches": 5,
+    "samples": 5,
+    "launches_per_sample": 20,
+    "preallocated_output": true,
+    "compilation_and_validation_timed": false,
+    "l2_flushed": false,
+    "cuda_graph": false,
+    "order": "rotated per round",
+    "scope": "warm-buffer event interval; may include launch gaps; not isolated kernel profiling"
+  },
+  "scope": "Fixed handwritten Triton candidate sweep; no Halide/Poly or training integration",
+  "selections": [
+    {
+      "operator": "matmul",
+      "shape": [
+        64,
+        64,
+        64
+      ],
+      "best_observed_config": {
+        "bm": 32,
+        "bn": 32,
+        "bk": 32,
+        "warps": 4
+      },
+      "speedup_vs_pytorch": 1.2044022531108856,
+      "note": "Selection on the measured inputs only; not a validated general-purpose dispatcher"
+    },
+    {
+      "operator": "matmul",
+      "shape": [
+        127,
+        65,
+        33
+      ],
+      "best_observed_config": {
+        "bm": 32,
+        "bn": 32,
+        "bk": 32,
+        "warps": 4
+      },
+      "speedup_vs_pytorch": 2.044337291369096,
+      "note": "Selection on the measured inputs only; not a validated general-purpose dispatcher"
+    },
+    {
+      "operator": "matmul",
+      "shape": [
+        256,
+        256,
+        256
+      ],
+      "best_observed_config": {
+        "bm": 32,
+        "bn": 32,
+        "bk": 32,
+        "warps": 4
+      },
+      "speedup_vs_pytorch": 0.7852539268354852,
+      "note": "Selection on the measured inputs only; not a validated general-purpose dispatcher"
+    }
+  ],
+  "status": "gpu_check_passed",
+  "wall_seconds": 4.196586629375815
+}

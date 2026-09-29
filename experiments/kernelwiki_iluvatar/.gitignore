@@ -1,0 +1,8 @@
+/upstream-kda/
+/upstream-latest/
+/KernelWiki-built/
+/kernelwiki-iluvatar/
+/kernelwiki-iluvatar-next/
+/kernelwiki-iluvatar-stage*/
+/baseline-validation*.log
+/upstream-latest-*.tar.gz

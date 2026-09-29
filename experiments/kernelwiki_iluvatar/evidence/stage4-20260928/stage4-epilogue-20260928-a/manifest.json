@@ -1,0 +1,4427 @@
+{
+  "runner_sha256": "b3ebe13c7e5b1df7e14f4a49af4386c1fda32f332aa06f7ed73eaac9108c3698",
+  "kernel_sha256": "b86da4074076af3fee917d7f670887271a9b76ed4d05fb11c25f052845d0c816",
+  "shapes": "127x65x33,256x256x256,512x512x512",
+  "device": 0,
+  "runs": [
+    {
+      "round": 1,
+      "dtype": "float16",
+      "seed": 20260928,
+      "command": [
+        "/root/miniconda3/bin/python",
+        "/mnt/kda-biv150-stage3/stage4_gemm_epilogue.py",
+        "--dtype",
+        "float16",
+        "--shapes",
+        "127x65x33,256x256x256,512x512x512",
+        "--seed",
+        "20260928",
+        "--device",
+        "0",
+        "--output",
+        "stage4-epilogue-20260928-a/float16-round1.json"
+      ],
+      "exit_code": 0,
+      "log": "float16-round1.log",
+      "log_sha256": "b5f750279023c069d546f48cd88c5e4e6b41f3acb07b123fa62005ac0441dd37",
+      "report": "float16-round1.json",
+      "report_sha256": "a15fb78f9daf64e2a8ea09e1db299e751d225ab3f99e6a6ea89441215114ccea"
+    },
+    {
+      "round": 1,
+      "dtype": "bfloat16",
+      "seed": 20260928,
+      "command": [
+        "/root/miniconda3/bin/python",
+        "/mnt/kda-biv150-stage3/stage4_gemm_epilogue.py",
+        "--dtype",
+        "bfloat16",
+        "--shapes",
+        "127x65x33,256x256x256,512x512x512",
+        "--seed",
+        "20260928",
+        "--device",
+        "0",
+        "--output",
+        "stage4-epilogue-20260928-a/bfloat16-round1.json"
+      ],
+      "exit_code": 0,
+      "log": "bfloat16-round1.log",
+      "log_sha256": "30470089011eb8893d461a30d814c1fc23428f712a4039c755cd40d3c54a508c",
+      "report": "bfloat16-round1.json",
+      "report_sha256": "2eab57add3481e539e8f8bb74110a6b80cb8cb6f8f415271bcf9c3cf9644206c"
+    },
+    {
+      "round": 2,
+      "dtype": "bfloat16",
+      "seed": 20271029,
+      "command": [
+        "/root/miniconda3/bin/python",
+        "/mnt/kda-biv150-stage3/stage4_gemm_epilogue.py",
+        "--dtype",
+        "bfloat16",
+        "--shapes",
+        "127x65x33,256x256x256,512x512x512",
+        "--seed",
+        "20271029",
+        "--device",
+        "0",
+        "--output",
+        "stage4-epilogue-20260928-a/bfloat16-round2.json"
+      ],
+      "exit_code": 0,
+      "log": "bfloat16-round2.log",
+      "log_sha256": "30470089011eb8893d461a30d814c1fc23428f712a4039c755cd40d3c54a508c",
+      "report": "bfloat16-round2.json",
+      "report_sha256": "0e794a0ad7247ea1bff5e06107af7e7974fee57a532c53202345697ef71bbfef"
+    },
+    {
+      "round": 2,
+      "dtype": "float16",
+      "seed": 20271029,
+      "command": [
+        "/root/miniconda3/bin/python",
+        "/mnt/kda-biv150-stage3/stage4_gemm_epilogue.py",
+        "--dtype",
+        "float16",
+        "--shapes",
+        "127x65x33,256x256x256,512x512x512",
+        "--seed",
+        "20271029",
+        "--device",
+        "0",
+        "--output",
+        "stage4-epilogue-20260928-a/float16-round2.json"
+      ],
+      "exit_code": 0,
+      "log": "float16-round2.log",
+      "log_sha256": "b5f750279023c069d546f48cd88c5e4e6b41f3acb07b123fa62005ac0441dd37",
+      "report": "float16-round2.json",
+      "report_sha256": "991bc797b3c32852a567373dddd56b9249117df2249530618ade2387c0255ef4"
+    },
+    {
+      "round": 3,
+      "dtype": "float16",
+      "seed": 20281130,
+      "command": [
+        "/root/miniconda3/bin/python",
+        "/mnt/kda-biv150-stage3/stage4_gemm_epilogue.py",
+        "--dtype",
+        "float16",
+        "--shapes",
+        "127x65x33,256x256x256,512x512x512",
+        "--seed",
+        "20281130",
+        "--device",
+        "0",
+        "--output",
+        "stage4-epilogue-20260928-a/float16-round3.json"
+      ],
+      "exit_code": 0,
+      "log": "float16-round3.log",
+      "log_sha256": "b5f750279023c069d546f48cd88c5e4e6b41f3acb07b123fa62005ac0441dd37",
+      "report": "float16-round3.json",
+      "report_sha256": "de2e40bb13baf78dfe75a7084b55db66f656b5b541cf15c44185ea484c59c28a"
+    },
+    {
+      "round": 3,
+      "dtype": "bfloat16",
+      "seed": 20281130,
+      "command": [
+        "/root/miniconda3/bin/python",
+        "/mnt/kda-biv150-stage3/stage4_gemm_epilogue.py",
+        "--dtype",
+        "bfloat16",
+        "--shapes",
+        "127x65x33,256x256x256,512x512x512",
+        "--seed",
+        "20281130",
+        "--device",
+        "0",
+        "--output",
+        "stage4-epilogue-20260928-a/bfloat16-round3.json"
+      ],
+      "exit_code": 0,
+      "log": "bfloat16-round3.log",
+      "log_sha256": "30470089011eb8893d461a30d814c1fc23428f712a4039c755cd40d3c54a508c",
+      "report": "bfloat16-round3.json",
+      "report_sha256": "e7793ecb049087a64e0fb7486cf153e4a12da7c636fc3ac5976999e00503d63c"
+    }
+  ],
+  "summary": [
+    {
+      "dtype": "float16",
+      "mnk": [
+        127,
+        65,
+        33
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 32,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              32.53999948501587,
+              30.362051725387573,
+              30.644359191258747,
+              31.13718032836914,
+              30.36781946818034,
+              30.47282099723816,
+              30.42076826095581,
+              30.427052577336628,
+              38.87064059575399
+            ],
+            "fused_us": [
+              55.23922840754191,
+              8.158589899539948,
+              8.20435881614685,
+              8.06641032298406,
+              8.20435881614685,
+              8.25000007947286,
+              8.25000007947286,
+              8.112051089604696,
+              8.25000007947286
+            ],
+            "unfused_median_us": 30.47282099723816,
+            "fused_median_us": 8.20435881614685,
+            "speedup": 3.714223339094476
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              31.806025902430218,
+              68.32590103149414,
+              29.9992303053538,
+              30.374614397684734,
+              30.324103434880573,
+              29.99333341916402,
+              29.942564169565838,
+              29.942564169565838,
+              29.87871766090393
+            ],
+            "fused_us": [
+              8.876025676727295,
+              8.251282076040903,
+              8.296666542689005,
+              8.385385076204935,
+              8.385897676150003,
+              8.38602582613627,
+              8.340640862782797,
+              8.162692189216614,
+              8.340640862782797
+            ],
+            "unfused_median_us": 29.9992303053538,
+            "fused_median_us": 8.340640862782797,
+            "speedup": 3.5967536306730232
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              31.806667645772297,
+              28.993332386016846,
+              30.342692136764526,
+              30.972435077031452,
+              29.968078931172688,
+              54.441281159718834,
+              29.853334029515583,
+              29.846666256586712,
+              29.65000073115031
+            ],
+            "fused_us": [
+              8.92064074675242,
+              8.340640862782797,
+              8.519359429677328,
+              8.340640862782797,
+              8.474743366241455,
+              8.430000146230062,
+              8.430769046147665,
+              8.29602579275767,
+              8.340640862782797
+            ],
+            "unfused_median_us": 29.968078931172688,
+            "fused_median_us": 8.430000146230062,
+            "speedup": 3.5549321958878686
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 3.6213458977068824,
+      "median_fused_us": 8.340640862782797
+    },
+    {
+      "dtype": "float16",
+      "mnk": [
+        127,
+        65,
+        33
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 64,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              30.702950557072956,
+              31.2749981880188,
+              30.407820145289104,
+              30.15064199765523,
+              30.32846252123515,
+              30.13153870900472,
+              30.16422986984253,
+              29.97359037399292,
+              29.95358904202779
+            ],
+            "fused_us": [
+              8.06641032298406,
+              8.06641032298406,
+              8.112179239590963,
+              8.065769076347351,
+              23.785640796025593,
+              8.06641032298406,
+              8.065769076347351,
+              8.06641032298406,
+              45.72422901789347
+            ],
+            "unfused_median_us": 30.16422986984253,
+            "fused_median_us": 8.06641032298406,
+            "speedup": 3.7394861731610596
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              29.84000047047933,
+              29.712692896525066,
+              81.40333493550618,
+              29.681281248728435,
+              29.6173095703125,
+              26.733972628911335,
+              30.03666599591573,
+              29.242050647735596,
+              29.273972908655804
+            ],
+            "fused_us": [
+              7.806025445461273,
+              7.939871648947398,
+              7.939999798933665,
+              7.8506410121917725,
+              7.806025445461273,
+              7.895384728908539,
+              7.9846153656641645,
+              8.029230932394663,
+              7.939999798933665
+            ],
+            "unfused_median_us": 29.681281248728435,
+            "fused_median_us": 7.939871648947398,
+            "speedup": 3.7382570601960965
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              30.28525511423747,
+              29.84602650006612,
+              42.83667008082072,
+              29.40794825553894,
+              29.693206151326496,
+              30.374101797739666,
+              66.3866678873698,
+              29.3119211991628,
+              29.483334223429363
+            ],
+            "fused_us": [
+              7.8506410121917725,
+              7.895384728908539,
+              7.8506410121917725,
+              7.806025445461273,
+              7.8946153322855634,
+              7.8507691621780396,
+              7.8506410121917725,
+              8.073461552460989,
+              7.939999798933665
+            ],
+            "unfused_median_us": 29.84602650006612,
+            "fused_median_us": 7.8507691621780396,
+            "speedup": 3.801669095539415
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 3.7596879642927723,
+      "median_fused_us": 7.939871648947398
+    },
+    {
+      "dtype": "float16",
+      "mnk": [
+        127,
+        65,
+        33
+      ],
+      "config": {
+        "bm": 64,
+        "bn": 64,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              30.098589261372883,
+              29.874998331069946,
+              29.894232749938965,
+              30.073076486587524,
+              29.863462845484417,
+              30.01153866449992,
+              30.633334318796795,
+              29.709617296854656,
+              30.097434918085735
+            ],
+            "fused_us": [
+              9.447949131329855,
+              9.355769554773966,
+              8.85769228140513,
+              8.85769228140513,
+              8.85769228140513,
+              22.756409645080566,
+              8.85769228140513,
+              8.85769228140513,
+              10.911538203557333
+            ],
+            "unfused_median_us": 30.01153866449992,
+            "fused_median_us": 8.85769228140513,
+            "speedup": 3.388189351249293
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              29.33128277460734,
+              38.19474379221598,
+              29.21077013015747,
+              29.160000880559284,
+              29.115257660547893,
+              53.08051109313965,
+              29.142308235168457,
+              29.444871346155804,
+              29.494231939315796
+            ],
+            "fused_us": [
+              9.143205483754477,
+              9.143205483754477,
+              9.143333633740744,
+              9.143974383672079,
+              9.143333633740744,
+              9.143333633740744,
+              8.85769228140513,
+              8.85769228140513,
+              8.85769228140513
+            ],
+            "unfused_median_us": 29.33128277460734,
+            "fused_median_us": 9.143205483754477,
+            "speedup": 3.2079868298621057
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              29.719231526056927,
+              29.502691825230915,
+              29.541281859079998,
+              45.76807816823324,
+              29.140639305114746,
+              29.681410392125446,
+              26.0639746983846,
+              29.77602481842041,
+              29.43333387374878
+            ],
+            "fused_us": [
+              9.143333633740744,
+              9.143333633740744,
+              30.072051286697388,
+              9.143333633740744,
+              9.143974383672079,
+              9.143333633740744,
+              9.098589420318604,
+              9.143333633740744,
+              9.143333633740744
+            ],
+            "unfused_median_us": 29.541281859079998,
+            "fused_median_us": 9.143333633740744,
+            "speedup": 3.2309093206515747
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 3.274726289549695,
+      "median_fused_us": 9.143205483754477
+    },
+    {
+      "dtype": "float16",
+      "mnk": [
+        127,
+        65,
+        33
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 64,
+        "bk": 32,
+        "warps": 8
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.001953125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              29.985896746317547,
+              65.64871867497762,
+              30.37499984105428,
+              29.973719517389934,
+              30.08461594581604,
+              84.76795355478923,
+              29.930768410364788,
+              30.19615411758423,
+              29.930768410364788
+            ],
+            "fused_us": [
+              7.561538616816203,
+              7.5621793667475385,
+              7.5621793667475385,
+              7.5621793667475385,
+              7.561538616816203,
+              7.561538616816203,
+              7.5621793667475385,
+              7.5621793667475385,
+              7.5621793667475385
+            ],
+            "unfused_median_us": 30.08461594581604,
+            "fused_median_us": 7.5621793667475385,
+            "speedup": 3.97829970525485
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              29.536537329355877,
+              29.234615961710613,
+              26.448718706766766,
+              29.42628065745036,
+              29.499999682108562,
+              29.586539665857952,
+              26.27628246943156,
+              29.542948802312214,
+              29.592947165171307
+            ],
+            "fused_us": [
+              7.5621793667475385,
+              7.5621793667475385,
+              7.5621793667475385,
+              7.5621793667475385,
+              7.561538616816203,
+              7.561538616816203,
+              7.5621793667475385,
+              7.5621793667475385,
+              7.5621793667475385
+            ],
+            "unfused_median_us": 29.499999682108562,
+            "fused_median_us": 7.5621793667475385,
+            "speedup": 3.9009917976590374
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              29.721152782440186,
+              29.66666618982951,
+              26.812179883321125,
+              29.81987198193868,
+              30.26987115542094,
+              29.874998331069946,
+              29.65192198753357,
+              29.653845230738323,
+              29.832051197687786
+            ],
+            "fused_us": [
+              7.5621793667475385,
+              7.561538616816203,
+              7.5621793667475385,
+              7.5621793667475385,
+              7.5621793667475385,
+              7.5621793667475385,
+              7.5621793667475385,
+              7.5621793667475385,
+              7.5621793667475385
+            ],
+            "unfused_median_us": 29.721152782440186,
+            "fused_median_us": 7.5621793667475385,
+            "speedup": 3.930236422734195
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 3.9363804867606076,
+      "median_fused_us": 7.5621793667475385
+    },
+    {
+      "dtype": "float16",
+      "mnk": [
+        256,
+        256,
+        256
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 32,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.015625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.015625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              32.675641775131226,
+              31.699999173482258,
+              73.80256652832031,
+              31.60192370414734,
+              31.56474232673645,
+              37.57756153742472,
+              31.7064106464386,
+              31.571155786514282,
+              33.776283264160156
+            ],
+            "fused_us": [
+              12.485256791114807,
+              12.571794788042704,
+              12.399358550707499,
+              12.269871433575949,
+              12.485256791114807,
+              12.528204917907715,
+              12.18333343664805,
+              12.571794788042704,
+              12.571794788042704
+            ],
+            "unfused_median_us": 31.7064106464386,
+            "fused_median_us": 12.485256791114807,
+            "speedup": 2.539508091575867
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              32.33397404352824,
+              31.888461112976074,
+              31.519230206807453,
+              31.62948687871297,
+              31.863462924957275,
+              31.666666269302368,
+              32.27692246437073,
+              33.52051178614298,
+              46.311541398366295
+            ],
+            "fused_us": [
+              35.638463497161865,
+              13.997435569763184,
+              14.040384689966837,
+              14.039743940035502,
+              77.71603266398112,
+              14.039743940035502,
+              14.039743940035502,
+              13.996794819831848,
+              13.7807697057724
+            ],
+            "unfused_median_us": 31.888461112976074,
+            "fused_median_us": 14.039743940035502,
+            "speedup": 2.271299337735318
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              32.13013013203939,
+              32.10448821385702,
+              32.44294921557108,
+              32.59038329124451,
+              53.93461386362711,
+              32.214744885762535,
+              32.12884465853373,
+              28.997435172398884,
+              32.01153874397278
+            ],
+            "fused_us": [
+              83.41346581776936,
+              13.953845699628195,
+              13.953845699628195,
+              14.040384689966837,
+              14.040384689966837,
+              14.040384689966837,
+              13.996794819831848,
+              14.040384689966837,
+              14.040384689966837
+            ],
+            "unfused_median_us": 32.13013013203939,
+            "fused_median_us": 14.040384689966837,
+            "speedup": 2.2884081057265733
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 2.363301610230109,
+      "median_fused_us": 14.039743940035502
+    },
+    {
+      "dtype": "float16",
+      "mnk": [
+        256,
+        256,
+        256
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 64,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.015625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.015625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              31.920512517293293,
+              32.4179490407308,
+              32.02948768933614,
+              31.930768489837646,
+              31.969231367111206,
+              32.23205208778381,
+              32.68141150474548,
+              32.041025161743164,
+              31.85064196586609
+            ],
+            "fused_us": [
+              14.040384689966837,
+              13.953845699628195,
+              13.996794819831848,
+              14.040384689966837,
+              13.996794819831848,
+              14.039743940035502,
+              14.040384689966837,
+              69.2275603612264,
+              13.953845699628195
+            ],
+            "unfused_median_us": 32.02948768933614,
+            "fused_median_us": 14.039743940035502,
+            "speedup": 2.2813441488773445
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              31.94102644920349,
+              31.96410338083903,
+              31.921152273813885,
+              31.901923815409344,
+              31.71730836232503,
+              31.896154085795086,
+              32.03782240549723,
+              32.032050689061485,
+              31.809616088867188
+            ],
+            "fused_us": [
+              15.076923370361328,
+              15.119871497154236,
+              15.119871497154236,
+              15.16282061735789,
+              15.20641048749288,
+              15.119871497154236,
+              15.076281627019247,
+              48.348077138264976,
+              15.16282061735789
+            ],
+            "unfused_median_us": 31.921152273813885,
+            "fused_median_us": 15.119871497154236,
+            "speedup": 2.1112052625461715
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              31.860897938410442,
+              31.803204615910847,
+              32.64743685722351,
+              83.72692267100017,
+              32.0314089457194,
+              31.994231541951496,
+              32.01858798662821,
+              32.14807709058126,
+              32.0064107577006
+            ],
+            "fused_us": [
+              14.817949136098227,
+              14.903846383094788,
+              14.817307392756144,
+              14.946794509887695,
+              14.774359265963236,
+              14.860897262891134,
+              14.644872148831686,
+              37.33333349227905,
+              14.903846383094788
+            ],
+            "unfused_median_us": 32.01858798662821,
+            "fused_median_us": 14.860897262891134,
+            "speedup": 2.154552812001549
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 2.1811865093941454,
+      "median_fused_us": 14.860897262891134
+    },
+    {
+      "dtype": "float16",
+      "mnk": [
+        256,
+        256,
+        256
+      ],
+      "config": {
+        "bm": 64,
+        "bn": 64,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.015625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.015625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              38.40935627619425,
+              33.21333328882853,
+              33.009231090545654,
+              32.81858960787455,
+              32.88205067316691,
+              32.84397522608439,
+              33.403333028157554,
+              33.205896615982056,
+              33.02807807922363
+            ],
+            "fused_us": [
+              17.1233336130778,
+              17.1233336130778,
+              17.167949676513672,
+              19.09064253171285,
+              17.1233336130778,
+              17.167949676513672,
+              17.167949676513672,
+              17.167949676513672,
+              17.1233336130778
+            ],
+            "unfused_median_us": 33.02807807922363,
+            "fused_median_us": 17.167949676513672,
+            "speedup": 1.9238219299073986
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              32.225000858306885,
+              31.78589741388957,
+              32.12500015894572,
+              32.00769225756327,
+              32.57435957590739,
+              32.21089641253153,
+              30.251282453536987,
+              32.032050689061485,
+              31.890384356180828
+            ],
+            "fused_us": [
+              15.810896952946981,
+              15.85448682308197,
+              60.29936075210571,
+              16.113461057345074,
+              16.06987218062083,
+              15.897435943285624,
+              15.810896952946981,
+              16.02628231048584,
+              15.983973940213522
+            ],
+            "unfused_median_us": 32.032050689061485,
+            "fused_median_us": 15.983973940213522,
+            "speedup": 2.0040104425141214
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              32.39166736602783,
+              32.488461335500084,
+              32.78397520383199,
+              32.59294827779134,
+              32.22948710123698,
+              32.51858949661255,
+              32.40769306818644,
+              32.17435876528422,
+              32.47628211975098
+            ],
+            "fused_us": [
+              16.28589729468028,
+              16.15576942761739,
+              15.999999642372131,
+              16.06987218062083,
+              16.19935929775238,
+              16.156410177548725,
+              79.1737159093221,
+              16.19935929775238,
+              16.112820307413738
+            ],
+            "unfused_median_us": 32.47628211975098,
+            "fused_median_us": 16.156410177548725,
+            "speedup": 2.0101174557254478
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 1.9789223892108765,
+      "median_fused_us": 16.156410177548725
+    },
+    {
+      "dtype": "float16",
+      "mnk": [
+        256,
+        256,
+        256
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 64,
+        "bk": 32,
+        "warps": 8
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.015625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.015625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              37.11922963460287,
+              31.8256417910258,
+              32.19487269719442,
+              32.090383768081665,
+              31.665384769439697,
+              32.065385580062866,
+              31.751283009847004,
+              31.855769952138264,
+              32.16410279273987
+            ],
+            "fused_us": [
+              13.694871465365091,
+              13.737820585568747,
+              13.867948452631632,
+              56.451920668284096,
+              13.781410455703735,
+              13.651281595230103,
+              13.754487037658691,
+              13.7807697057724,
+              13.694230715433756
+            ],
+            "unfused_median_us": 32.065385580062866,
+            "fused_median_us": 13.754487037658691,
+            "speedup": 2.3312672797080976
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              31.433333953221638,
+              31.382052103678387,
+              31.44358992576599,
+              31.671794255574543,
+              31.721152861913044,
+              53.113460540771484,
+              31.375640630722046,
+              31.47499958674113,
+              31.33974273999532
+            ],
+            "fused_us": [
+              13.737820585568747,
+              13.781410455703735,
+              13.824358582496643,
+              13.781410455703735,
+              13.694871465365091,
+              13.7807697057724,
+              13.824358582496643,
+              13.7807697057724,
+              13.522436221440634
+            ],
+            "unfused_median_us": 31.44358992576599,
+            "fused_median_us": 13.7807697057724,
+            "speedup": 2.2817005578864804
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              32.178846995035805,
+              31.936538219451904,
+              29.1692316532135,
+              31.511539220809937,
+              31.34487271308899,
+              31.46859010060628,
+              72.50833511352539,
+              31.548078854878742,
+              31.535897652308147
+            ],
+            "fused_us": [
+              13.694871465365091,
+              13.867307702700296,
+              13.694230715433756,
+              13.824358582496643,
+              13.823717832565308,
+              13.60769271850586,
+              13.43589723110199,
+              13.435256481170654,
+              13.737820585568747
+            ],
+            "unfused_median_us": 31.535897652308147,
+            "fused_median_us": 13.694871465365091,
+            "speedup": 2.302752364785881
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 2.305150674125785,
+      "median_fused_us": 13.754487037658691
+    },
+    {
+      "dtype": "float16",
+      "mnk": [
+        512,
+        512,
+        512
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 32,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              48.71474504470825,
+              49.01538292566935,
+              49.058334032694496,
+              49.058334032694496,
+              97.86858558654785,
+              49.3173082669576,
+              49.10128513971964,
+              49.014743169148765,
+              49.14486805597941
+            ],
+            "fused_us": [
+              38.657049338022865,
+              92.34679539998372,
+              38.70000044504801,
+              38.74359130859375,
+              38.82948954900106,
+              38.74359130859375,
+              38.74359130859375,
+              104.56154346466064,
+              38.82948954900106
+            ],
+            "unfused_median_us": 49.058334032694496,
+            "fused_median_us": 38.74359130859375,
+            "speedup": 1.2662309397686844
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              49.5352586110433,
+              49.4038462638855,
+              49.360899130503334,
+              49.36025540033976,
+              49.447433153788246,
+              49.532691637674965,
+              49.187819163004555,
+              49.49038426081339,
+              49.36025540033976
+            ],
+            "fused_us": [
+              38.70000044504801,
+              38.786538441975914,
+              38.87307643890381,
+              38.70000044504801,
+              38.87307643890381,
+              38.70000044504801,
+              38.74295155207316,
+              38.74359130859375,
+              38.74359130859375
+            ],
+            "unfused_median_us": 49.4038462638855,
+            "fused_median_us": 38.74359130859375,
+            "speedup": 1.2751488593399236
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              49.18974240620931,
+              49.2307702700297,
+              49.3173082669576,
+              49.27435715993246,
+              49.27435715993246,
+              49.187819163004555,
+              48.928844928741455,
+              49.4038462638855,
+              49.23141002655029
+            ],
+            "fused_us": [
+              38.786538441975914,
+              38.70000044504801,
+              38.87307643890381,
+              38.7006402015686,
+              38.82948954900106,
+              38.830129305521645,
+              38.74359130859375,
+              38.74359130859375,
+              38.74359130859375
+            ],
+            "unfused_median_us": 49.23141002655029,
+            "fused_median_us": 38.74359130859375,
+            "speedup": 1.2706981558426214
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 1.2706874359877032,
+      "median_fused_us": 38.74359130859375
+    },
+    {
+      "dtype": "float16",
+      "mnk": [
+        512,
+        512,
+        512
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 64,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              45.119873682657875,
+              93.21281909942627,
+              44.091665744781494,
+              44.091665744781494,
+              44.17820771535238,
+              44.17820771535238,
+              44.13461287816366,
+              44.32435830434164,
+              44.22115087509155
+            ],
+            "fused_us": [
+              34.12243525187174,
+              34.208973248799644,
+              34.16538635889689,
+              34.29487148920695,
+              49.655771255493164,
+              34.38140948613485,
+              34.42500034968058,
+              34.424360593159996,
+              34.51089461644491
+            ],
+            "unfused_median_us": 44.17820771535238,
+            "fused_median_us": 34.38140948613485,
+            "speedup": 1.2849446365242336
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              44.26666498184204,
+              44.39423084259033,
+              44.739743073781334,
+              45.98269065221151,
+              44.437177975972496,
+              44.30769284566244,
+              44.26474173863729,
+              44.56666707992554,
+              44.39423084259033
+            ],
+            "fused_us": [
+              84.17179584503174,
+              34.208973248799644,
+              34.29487148920695,
+              34.38140948613485,
+              34.338462352752686,
+              34.38140948613485,
+              34.467947483062744,
+              34.2519203821818,
+              34.29487148920695
+            ],
+            "unfused_median_us": 44.39423084259033,
+            "fused_median_us": 34.338462352752686,
+            "speedup": 1.292842713413798
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              44.22307809193929,
+              44.2641019821167,
+              44.30769284566244,
+              44.2641019821167,
+              44.237820307413735,
+              44.13461287816366,
+              44.2641019821167,
+              44.048078854878746,
+              44.22115087509155
+            ],
+            "fused_us": [
+              34.208973248799644,
+              80.33974170684814,
+              34.2519203821818,
+              33.90641212463379,
+              34.337822596232094,
+              34.078848361968994,
+              33.9929461479187,
+              34.078848361968994,
+              34.16538635889689
+            ],
+            "unfused_median_us": 44.237820307413735,
+            "fused_median_us": 34.16538635889689,
+            "speedup": 1.294813992229124
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 1.2908600608603262,
+      "median_fused_us": 34.338462352752686
+    },
+    {
+      "dtype": "float16",
+      "mnk": [
+        512,
+        512,
+        512
+      ],
+      "config": {
+        "bm": 64,
+        "bn": 64,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              73.02948633829753,
+              39.98910188674927,
+              39.98910188674927,
+              40.07564385732015,
+              39.90256388982137,
+              40.07500012715658,
+              39.94551499684652,
+              40.20448923110962,
+              40.117947260538735
+            ],
+            "fused_us": [
+              29.84679341316223,
+              29.760257403055828,
+              29.84679341316223,
+              29.890384276707966,
+              29.93333339691162,
+              29.84679341316223,
+              67.7185853322347,
+              30.01987338066101,
+              29.889744520187378
+            ],
+            "unfused_median_us": 40.07500012715658,
+            "fused_median_us": 29.889744520187378,
+            "speedup": 1.3407608787050733
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              39.64487314224243,
+              39.599998792012535,
+              39.68654076258341,
+              39.988462130228676,
+              39.64294989903768,
+              39.599998792012535,
+              39.98910188674927,
+              39.859612782796226,
+              39.859612782796226
+            ],
+            "fused_us": [
+              29.67371940612793,
+              29.630768299102783,
+              29.544230302174885,
+              29.414745171864826,
+              29.37179406483968,
+              37.825000286102295,
+              29.501281181971233,
+              29.328844944636028,
+              63.80064090092977
+            ],
+            "unfused_median_us": 39.68654076258341,
+            "fused_median_us": 29.544230302174885,
+            "speedup": 1.3432924248380878
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              39.860900243123375,
+              39.98910188674927,
+              40.005127588907875,
+              39.81602589289347,
+              39.94551499684652,
+              87.61795361836751,
+              39.98910188674927,
+              39.81666564941406,
+              39.94551499684652
+            ],
+            "fused_us": [
+              29.976282517115276,
+              29.760257403055828,
+              29.67371940612793,
+              29.84679341316223,
+              29.717308282852173,
+              29.80320453643799,
+              29.80384627978007,
+              29.80320453643799,
+              29.733973741531372
+            ],
+            "unfused_median_us": 39.94551499684652,
+            "fused_median_us": 29.80320453643799,
+            "speedup": 1.340309393508619
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 1.3414535902397413,
+      "median_fused_us": 29.80320453643799
+    },
+    {
+      "dtype": "float16",
+      "mnk": [
+        512,
+        512,
+        512
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 64,
+        "bk": 32,
+        "warps": 8
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              112.87500063578288,
+              44.0051277478536,
+              44.0051277478536,
+              43.96217664082845,
+              44.04871861139933,
+              44.091665744781494,
+              45.772433280944824,
+              43.96217664082845,
+              44.0051277478536
+            ],
+            "fused_us": [
+              33.517309029897056,
+              33.474997679392494,
+              33.474997679392494,
+              81.25704924265544,
+              33.474997679392494,
+              33.47435792287191,
+              33.474997679392494,
+              33.517309029897056,
+              33.474997679392494
+            ],
+            "unfused_median_us": 44.0051277478536,
+            "fused_median_us": 33.474997679392494,
+            "speedup": 1.3145670141433212
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              44.05064185460409,
+              44.26474173863729,
+              44.22115087509155,
+              87.24935849507649,
+              44.13461287816366,
+              44.437177975972496,
+              44.13461287816366,
+              44.091665744781494,
+              44.0051277478536
+            ],
+            "fused_us": [
+              33.474997679392494,
+              33.47435792287191,
+              33.47435792287191,
+              33.47435792287191,
+              33.47435792287191,
+              33.47435792287191,
+              33.533974488576256,
+              33.47435792287191,
+              33.47435792287191
+            ],
+            "unfused_median_us": 44.13461287816366,
+            "fused_median_us": 33.47435792287191,
+            "speedup": 1.3184603265536559
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0625,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.03,
+            "rtol": 0.03
+          },
+          "timing": {
+            "unfused_us": [
+              43.964103857676186,
+              44.091665744781494,
+              43.9185897509257,
+              44.10833120346069,
+              44.13461287816366,
+              44.22115087509155,
+              43.91922950744629,
+              44.048078854878746,
+              44.0051277478536
+            ],
+            "fused_us": [
+              69.78140672047932,
+              33.474997679392494,
+              33.47435792287191,
+              33.47435792287191,
+              33.47435792287191,
+              33.47435792287191,
+              33.51794878641764,
+              33.51794878641764,
+              33.56089989344279
+            ],
+            "unfused_median_us": 44.048078854878746,
+            "fused_median_us": 33.474997679392494,
+            "speedup": 1.3158500943525124
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 1.3162914818656415,
+      "median_fused_us": 33.474997679392494
+    },
+    {
+      "dtype": "bfloat16",
+      "mnk": [
+        127,
+        65,
+        33
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 32,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              32.52461552619934,
+              30.629358688990276,
+              80.66064516703288,
+              30.750000476837158,
+              30.09474476178487,
+              28.853972752888996,
+              30.22192319234212,
+              30.037949482599895,
+              29.935256640116375
+            ],
+            "fused_us": [
+              9.053974350293478,
+              8.430000146230062,
+              8.38602582613627,
+              8.207307755947113,
+              8.430000146230062,
+              8.430640896161398,
+              8.430000146230062,
+              8.29602579275767,
+              8.519359429677328
+            ],
+            "unfused_median_us": 30.22192319234212,
+            "fused_median_us": 8.430000146230062,
+            "speedup": 3.5850442073666526
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              32.657949129740395,
+              82.09141095479329,
+              30.34333388010661,
+              30.558717250823975,
+              30.190000931421917,
+              30.152050654093426,
+              30.260000626246136,
+              29.87269361813863,
+              30.10730743408203
+            ],
+            "fused_us": [
+              9.00935928026835,
+              8.25141022602717,
+              8.207307755947113,
+              8.207307755947113,
+              8.38602582613627,
+              20.46935757001241,
+              8.56410264968872,
+              8.296794692675272,
+              8.295897642771402
+            ],
+            "unfused_median_us": 30.260000626246136,
+            "fused_median_us": 8.296794692675272,
+            "speedup": 3.647191686322047
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              32.620769739151,
+              30.577949682871502,
+              30.559229850769043,
+              30.852051575978596,
+              30.343204736709595,
+              34.54615275065104,
+              32.04730749130249,
+              32.95666575431824,
+              30.507948001225788
+            ],
+            "fused_us": [
+              8.96538496017456,
+              41.59936110178629,
+              8.340640862782797,
+              8.385897676150003,
+              8.385385076204935,
+              91.69602394104004,
+              8.073974152406057,
+              8.385385076204935,
+              77.71461804707845
+            ],
+            "unfused_median_us": 30.852051575978596,
+            "fused_median_us": 8.385897676150003,
+            "speedup": 3.6790398318028235
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 3.6368818969819663,
+      "median_fused_us": 8.385897676150003
+    },
+    {
+      "dtype": "bfloat16",
+      "mnk": [
+        127,
+        65,
+        33
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 64,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              30.21000027656555,
+              30.072180430094402,
+              29.95358904202779,
+              30.032821496327717,
+              28.303589423497517,
+              30.01282016436259,
+              30.545641978581745,
+              30.32846252123515,
+              47.208591302235924
+            ],
+            "fused_us": [
+              78.72718175252278,
+              8.112179239590963,
+              8.065640926361084,
+              8.065769076347351,
+              8.06641032298406,
+              8.066538472970327,
+              8.065769076347351,
+              8.06641032298406,
+              8.066282172997793
+            ],
+            "unfused_median_us": 30.072180430094402,
+            "fused_median_us": 8.06641032298406,
+            "speedup": 3.728074722954287
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              30.018075307210285,
+              27.611281474431355,
+              29.941924413045246,
+              30.24666706720988,
+              29.94807759920756,
+              45.00141143798828,
+              30.075385173161823,
+              29.586027065912884,
+              30.266026655832928
+            ],
+            "fused_us": [
+              7.8507691621780396,
+              7.850128412246704,
+              7.849999765555064,
+              7.849999765555064,
+              7.895256578922272,
+              7.806154092152913,
+              7.850128412246704,
+              7.8506410121917725,
+              7.895384728908539
+            ],
+            "unfused_median_us": 30.018075307210285,
+            "fused_median_us": 7.850128412246704,
+            "speedup": 3.823896085620735
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              30.221281449000042,
+              30.1701287428538,
+              30.018075307210285,
+              30.131922165552776,
+              30.055383841196697,
+              29.979999860127766,
+              30.418717861175537,
+              30.037178595860798,
+              29.636025428771973
+            ],
+            "fused_us": [
+              7.895384728908539,
+              34.01256402333578,
+              7.805897295475006,
+              7.806025445461273,
+              7.805897295475006,
+              62.179998556772865,
+              7.805769145488739,
+              7.983974119027455,
+              7.8506410121917725
+            ],
+            "unfused_median_us": 30.055383841196697,
+            "fused_median_us": 7.8506410121917725,
+            "speedup": 3.8283986994847594
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 3.7931727047951527,
+      "median_fused_us": 7.8506410121917725
+    },
+    {
+      "dtype": "bfloat16",
+      "mnk": [
+        127,
+        65,
+        33
+      ],
+      "config": {
+        "bm": 64,
+        "bn": 64,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              29.86871798833211,
+              29.757050673166912,
+              67.56705443064372,
+              30.47294815381368,
+              29.802821079889934,
+              28.4728209177653,
+              30.644359191258747,
+              29.802950223286945,
+              30.078460772832234
+            ],
+            "fused_us": [
+              9.448718031247457,
+              9.44858988126119,
+              9.448461731274923,
+              9.447949131329855,
+              9.44858988126119,
+              9.447949131329855,
+              9.448461731274923,
+              9.448718031247457,
+              9.44858988126119
+            ],
+            "unfused_median_us": 29.86871798833211,
+            "fused_median_us": 9.44858988126119,
+            "speedup": 3.1611826064722006
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              29.903332392374676,
+              29.979230960210163,
+              34.04397567113241,
+              29.693206151326496,
+              29.585514465967815,
+              66.0260279973348,
+              29.452051719029743,
+              29.496665795644123,
+              29.40192421277364
+            ],
+            "fused_us": [
+              9.143974383672079,
+              9.143205483754477,
+              9.143333633740744,
+              9.143333633740744,
+              9.143333633740744,
+              9.143333633740744,
+              9.143205483754477,
+              9.143333633740744,
+              9.143333633740744
+            ],
+            "unfused_median_us": 29.693206151326496,
+            "fused_median_us": 9.143333633740744,
+            "speedup": 3.24752517416105
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              29.801281293233234,
+              57.32333262761434,
+              29.687307278315227,
+              29.802052179972332,
+              30.145384867986042,
+              29.47807510693868,
+              29.51602538426717,
+              29.795897006988525,
+              29.617949326833088
+            ],
+            "fused_us": [
+              9.143333633740744,
+              9.143333633740744,
+              9.143333633740744,
+              9.143333633740744,
+              9.143333633740744,
+              77.53128210703532,
+              9.143333633740744,
+              9.14346178372701,
+              17.729870478312176
+            ],
+            "unfused_median_us": 29.795897006988525,
+            "fused_median_us": 9.143333633740744,
+            "speedup": 3.2587564011703196
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 3.2221914116401673,
+      "median_fused_us": 9.143333633740744
+    },
+    {
+      "dtype": "bfloat16",
+      "mnk": [
+        127,
+        65,
+        33
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 64,
+        "bk": 32,
+        "warps": 8
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              29.746152957280476,
+              29.838460683822632,
+              66.13589922587077,
+              29.81410225232442,
+              30.085255702336628,
+              29.95577057202657,
+              86.65576775868733,
+              29.85064188639323,
+              29.906409978866577
+            ],
+            "fused_us": [
+              7.5621793667475385,
+              7.5621793667475385,
+              7.5621793667475385,
+              7.5621793667475385,
+              7.561538616816203,
+              7.5621793667475385,
+              7.5621793667475385,
+              7.5621793667475385,
+              7.561538616816203
+            ],
+            "unfused_median_us": 29.906409978866577,
+            "fused_median_us": 7.5621793667475385,
+            "speedup": 3.9547342807512904
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              29.464614391326904,
+              29.604615767796833,
+              68.98538271586101,
+              29.515256484349568,
+              29.553333918253582,
+              29.51538364092509,
+              84.5033327738444,
+              30.450000365575153,
+              29.746152957280476
+            ],
+            "fused_us": [
+              7.805769145488739,
+              7.806025445461273,
+              7.806025445461273,
+              7.805897295475006,
+              7.71666665871938,
+              7.806025445461273,
+              7.806025445461273,
+              7.71666665871938,
+              7.5621793667475385
+            ],
+            "unfused_median_us": 29.604615767796833,
+            "fused_median_us": 7.805897295475006,
+            "speedup": 3.7925961163950115
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              30.36076823870341,
+              87.50999768575032,
+              30.01282016436259,
+              30.078460772832234,
+              29.8093577226003,
+              29.986409346262615,
+              29.782178004582722,
+              31.050769488016766,
+              29.842178026835125
+            ],
+            "fused_us": [
+              8.066538472970327,
+              8.066538472970327,
+              8.065769076347351,
+              8.066282172997793,
+              8.06641032298406,
+              16.455769538879395,
+              8.066282172997793,
+              8.066538472970327,
+              8.08346172173818
+            ],
+            "unfused_median_us": 30.01282016436259,
+            "fused_median_us": 8.066538472970327,
+            "speedup": 3.720656668895924
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 3.8214176074896193,
+      "median_fused_us": 7.805897295475006
+    },
+    {
+      "dtype": "bfloat16",
+      "mnk": [
+        256,
+        256,
+        256
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 32,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              37.432050704956055,
+              31.453845898310345,
+              31.638461351394653,
+              31.614102919896443,
+              31.19551142056783,
+              31.343589226404827,
+              52.29294697443644,
+              31.25705122947693,
+              31.43525719642639
+            ],
+            "fused_us": [
+              12.658333778381348,
+              12.615384658177694,
+              12.658333778381348,
+              12.701281905174255,
+              12.701281905174255,
+              12.614743908246359,
+              12.658333778381348,
+              12.658333778381348,
+              12.615384658177694
+            ],
+            "unfused_median_us": 31.453845898310345,
+            "fused_median_us": 12.658333778381348,
+            "speedup": 2.4848330316608562
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              31.93333347638448,
+              31.98076883951823,
+              31.78333242734273,
+              54.16795015335083,
+              31.88205162684123,
+              31.61153793334961,
+              31.783976157506306,
+              31.70897364616394,
+              32.16538429260254
+            ],
+            "fused_us": [
+              14.040384689966837,
+              14.039743940035502,
+              14.039743940035502,
+              14.040384689966837,
+              13.953845699628195,
+              14.040384689966837,
+              14.039743940035502,
+              14.039743940035502,
+              14.040384689966837
+            ],
+            "unfused_median_us": 31.88205162684123,
+            "fused_median_us": 14.039743940035502,
+            "speedup": 2.270842813302805
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              32.67499804496765,
+              32.17923045158386,
+              32.10141062736511,
+              75.57423114776611,
+              32.08781878153483,
+              32.417050997416176,
+              32.02128211657206,
+              32.18653996785482,
+              32.488590478897095
+            ],
+            "fused_us": [
+              14.746538798014322,
+              14.837820331255594,
+              14.837820331255594,
+              14.700000484784445,
+              14.837948481241861,
+              14.653717478116354,
+              14.792179067929586,
+              34.834229946136475,
+              14.653589328130087
+            ],
+            "unfused_median_us": 32.18653996785482,
+            "fused_median_us": 14.792179067929586,
+            "speedup": 2.175916058076754
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 2.3069710298094246,
+      "median_fused_us": 14.039743940035502
+    },
+    {
+      "dtype": "bfloat16",
+      "mnk": [
+        256,
+        256,
+        256
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 64,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              37.586537996927895,
+              32.066027323404946,
+              31.78205092748006,
+              31.758334239323933,
+              31.826281547546387,
+              31.597435474395752,
+              56.08268976211548,
+              32.0230762163798,
+              31.73974355061849
+            ],
+            "fused_us": [
+              14.169871807098389,
+              14.040384689966837,
+              14.25576905409495,
+              14.040384689966837,
+              14.040384689966837,
+              14.040384689966837,
+              14.040384689966837,
+              14.040384689966837,
+              14.039743940035502
+            ],
+            "unfused_median_us": 31.826281547546387,
+            "fused_median_us": 14.040384689966837,
+            "speedup": 2.2667670616097313
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              32.70512819290161,
+              32.549357414245605,
+              32.007052501042686,
+              32.3519229888916,
+              32.025001446406044,
+              31.908331314722698,
+              32.46923089027405,
+              32.53140846888224,
+              32.16089804967245
+            ],
+            "fused_us": [
+              15.20641048749288,
+              15.249358614285788,
+              15.33589760462443,
+              48.46538702646891,
+              15.16282061735789,
+              15.20641048749288,
+              15.249358614285788,
+              15.292307734489441,
+              15.163461367289225
+            ],
+            "unfused_median_us": 32.3519229888916,
+            "fused_median_us": 15.249358614285788,
+            "speedup": 2.1215268003851597
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              33.32794904708862,
+              33.29936067263285,
+              32.44500160217285,
+              32.90500044822693,
+              32.75435964266459,
+              32.60358969370524,
+              32.73435831069946,
+              32.65576958656311,
+              32.891408602396645
+            ],
+            "fused_us": [
+              16.266538699467976,
+              16.312179962793987,
+              16.357948382695515,
+              16.312179962793987,
+              16.35846197605133,
+              16.26641054948171,
+              70.0670560201009,
+              16.357820232709248,
+              16.266538699467976
+            ],
+            "unfused_median_us": 32.75435964266459,
+            "fused_median_us": 16.312179962793987,
+            "speedup": 2.0079694876695284
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 2.129466643730638,
+      "median_fused_us": 15.249358614285788
+    },
+    {
+      "dtype": "bfloat16",
+      "mnk": [
+        256,
+        256,
+        256
+      ],
+      "config": {
+        "bm": 64,
+        "bn": 64,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              38.45192193984985,
+              32.41346081097921,
+              32.432051499684654,
+              32.44487245877584,
+              32.29743639628092,
+              32.30320413907369,
+              39.93525902430216,
+              32.31538534164429,
+              32.4756403764089
+            ],
+            "fused_us": [
+              15.378845731417337,
+              15.33589760462443,
+              69.46987311045329,
+              15.33589760462443,
+              15.33589760462443,
+              15.33589760462443,
+              15.335256854693094,
+              15.33589760462443,
+              15.33589760462443
+            ],
+            "unfused_median_us": 32.432051499684654,
+            "fused_median_us": 15.33589760462443,
+            "speedup": 2.114780128024916
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              32.49615430831909,
+              32.38333264986674,
+              32.241666316986084,
+              32.192947467168175,
+              32.20448891321818,
+              32.19230771064758,
+              65.6038482983907,
+              32.27884769439697,
+              32.14935859044393
+            ],
+            "fused_us": [
+              16.631410519282024,
+              16.631410519282024,
+              88.76794974009196,
+              16.631410519282024,
+              16.631410519282024,
+              16.631410519282024,
+              16.631410519282024,
+              16.631410519282024,
+              16.631410519282024
+            ],
+            "unfused_median_us": 32.241666316986084,
+            "fused_median_us": 16.631410519282024,
+            "speedup": 1.9386008348243184
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              32.66076842943827,
+              32.35833446184794,
+              65.73333342870076,
+              32.685256004333496,
+              32.37756292025248,
+              47.173078854878746,
+              32.488461335500084,
+              32.376923163731895,
+              32.42051204045614
+            ],
+            "fused_us": [
+              16.631410519282024,
+              16.631410519282024,
+              16.631410519282024,
+              16.631410519282024,
+              16.631410519282024,
+              16.631410519282024,
+              16.631410519282024,
+              16.631410519282024,
+              16.631410519282024
+            ],
+            "unfused_median_us": 32.488461335500084,
+            "fused_median_us": 16.631410519282024,
+            "speedup": 1.953439926086474
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 2.000711915904901,
+      "median_fused_us": 16.631410519282024
+    },
+    {
+      "dtype": "bfloat16",
+      "mnk": [
+        256,
+        256,
+        256
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 64,
+        "bk": 32,
+        "warps": 8
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.03125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              37.00512647628784,
+              31.176282962163288,
+              30.997435251871746,
+              31.268590688705444,
+              31.243590513865154,
+              31.342307726542156,
+              31.107691923777264,
+              31.212820609410603,
+              31.076924006144207
+            ],
+            "fused_us": [
+              11.578205227851868,
+              11.491666237513224,
+              11.491666237513224,
+              30.934615929921467,
+              11.449358860651651,
+              11.449358860651651,
+              11.448718110720316,
+              69.35256322224934,
+              11.448718110720316
+            ],
+            "unfused_median_us": 31.212820609410603,
+            "fused_median_us": 11.491666237513224,
+            "speedup": 2.7161266229191323
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              31.93269371986389,
+              30.14935851097107,
+              31.647435824076336,
+              31.65961503982544,
+              31.814102331797283,
+              73.42627843221028,
+              31.856409708658855,
+              32.041664918263756,
+              31.844230492909748
+            ],
+            "fused_us": [
+              13.997435569763184,
+              13.910897572835287,
+              13.867307702700296,
+              14.040384689966837,
+              13.996794819831848,
+              14.040384689966837,
+              13.823717832565308,
+              13.996794819831848,
+              13.781410455703735
+            ],
+            "unfused_median_us": 31.844230492909748,
+            "fused_median_us": 13.996794819831848,
+            "speedup": 2.2751087590274692
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.0078125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              32.09294676780701,
+              31.9493571917216,
+              32.37371842066447,
+              32.11538394292196,
+              31.751922766367596,
+              31.95512890815735,
+              31.73397382100423,
+              32.21410314242045,
+              32.386539379755654
+            ],
+            "fused_us": [
+              13.997435569763184,
+              13.953845699628195,
+              13.823717832565308,
+              13.910256822903952,
+              13.996794819831848,
+              54.92435693740845,
+              13.867307702700296,
+              13.953845699628195,
+              13.969871401786804
+            ],
+            "unfused_median_us": 32.09294676780701,
+            "fused_median_us": 13.953845699628195,
+            "speedup": 2.2999356205194483
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 2.422270377470568,
+      "median_fused_us": 13.953845699628195
+    },
+    {
+      "dtype": "bfloat16",
+      "mnk": [
+        512,
+        512,
+        512
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 32,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              46.59872055053711,
+              46.078201134999595,
+              46.078201134999595,
+              46.596153577168785,
+              46.03461821873983,
+              45.90576887130737,
+              46.03461821873983,
+              94.5512851079305,
+              46.20769421259562
+            ],
+            "fused_us": [
+              37.44807640711466,
+              37.36153841018677,
+              37.31858730316162,
+              37.36153841018677,
+              102.06474463144939,
+              37.31858730316162,
+              37.36153841018677,
+              37.36153841018677,
+              37.36153841018677
+            ],
+            "unfused_median_us": 46.078201134999595,
+            "fused_median_us": 37.36153841018677,
+            "speedup": 1.233305776360542
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              49.18974240620931,
+              49.49038426081339,
+              49.144228299458824,
+              49.49038426081339,
+              49.4038462638855,
+              49.46281909942627,
+              49.662816524505615,
+              49.61987336476644,
+              49.44679339726766
+            ],
+            "fused_us": [
+              38.95897467931112,
+              38.9596144358317,
+              39.00256554285685,
+              38.87307643890381,
+              38.830129305521645,
+              38.87307643890381,
+              38.87307643890381,
+              38.95897467931112,
+              39.045512676239014
+            ],
+            "unfused_median_us": 49.46281909942627,
+            "fused_median_us": 38.95897467931112,
+            "speedup": 1.2696129584152824
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              49.36282237370809,
+              49.44679339726766,
+              49.2307702700297,
+              49.27435715993246,
+              49.4038462638855,
+              49.27435715993246,
+              48.9717960357666,
+              49.36025540033976,
+              49.576922257741295
+            ],
+            "fused_us": [
+              38.70000044504801,
+              38.830129305521645,
+              38.74295155207316,
+              38.7006402015686,
+              38.74295155207316,
+              38.74295155207316,
+              38.70000044504801,
+              38.786538441975914,
+              38.74359130859375
+            ],
+            "unfused_median_us": 49.36025540033976,
+            "fused_median_us": 38.74295155207316,
+            "speedup": 1.274044785513985
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 1.2588546899565405,
+      "median_fused_us": 38.74295155207316
+    },
+    {
+      "dtype": "bfloat16",
+      "mnk": [
+        512,
+        512,
+        512
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 64,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              44.03269290924072,
+              40.93846082687378,
+              41.025002797444664,
+              40.89615742365519,
+              40.93910058339437,
+              40.89615742365519,
+              40.89615742365519,
+              40.912818908691406,
+              40.93846082687378
+            ],
+            "fused_us": [
+              32.82692233721415,
+              32.35128124554952,
+              32.3519229888916,
+              32.30833212534586,
+              66.05961322784424,
+              32.3519229888916,
+              32.26538499196371,
+              32.26538499196371,
+              32.22243785858154
+            ],
+            "unfused_median_us": 40.93846082687378,
+            "fused_median_us": 32.35128124554952,
+            "speedup": 1.2654355330209857
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              44.352567195892334,
+              44.436538219451904,
+              44.437177975972496,
+              84.56666469573975,
+              44.48012908299764,
+              44.52371597290039,
+              44.350643952687584,
+              44.48077281316122,
+              44.30769284566244
+            ],
+            "fused_us": [
+              106.09935919443767,
+              34.51089461644491,
+              34.597436587015785,
+              34.51089461644491,
+              34.597436587015785,
+              34.64038372039795,
+              34.71538623174032,
+              34.726925690968834,
+              34.467947483062744
+            ],
+            "unfused_median_us": 44.437177975972496,
+            "fused_median_us": 34.597436587015785,
+            "speedup": 1.2844066601353208
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              96.64743741353352,
+              44.13525660832723,
+              44.30769284566244,
+              44.350643952687584,
+              44.17820771535238,
+              44.26474173863729,
+              44.15064255396525,
+              43.96217664082845,
+              44.091665744781494
+            ],
+            "fused_us": [
+              34.078848361968994,
+              34.16538635889689,
+              33.9929461479187,
+              60.67820390065511,
+              34.03589725494385,
+              34.03653701146444,
+              34.03589725494385,
+              33.90641212463379,
+              33.9929461479187
+            ],
+            "unfused_median_us": 44.17820771535238,
+            "fused_median_us": 34.03589725494385,
+            "speedup": 1.2979886319563771
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 1.2825406953794265,
+      "median_fused_us": 34.03589725494385
+    },
+    {
+      "dtype": "bfloat16",
+      "mnk": [
+        512,
+        512,
+        512
+      ],
+      "config": {
+        "bm": 64,
+        "bn": 64,
+        "bk": 32,
+        "warps": 4
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              42.82435973485311,
+              36.98205153147379,
+              88.8153870900472,
+              36.9942307472229,
+              36.74166599909464,
+              37.20961809158325,
+              36.69230937957764,
+              36.69807513554891,
+              36.88397407531738
+            ],
+            "fused_us": [
+              28.42179536819458,
+              28.29166849454244,
+              28.29166849454244,
+              28.29230825106303,
+              28.29230825106303,
+              28.248717387517292,
+              28.29230825106303,
+              28.29230825106303,
+              39.7205114364624
+            ],
+            "unfused_median_us": 36.98205153147379,
+            "fused_median_us": 28.29230825106303,
+            "speedup": 1.3071415454440436
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              39.25640980402628,
+              84.22628243764241,
+              39.125001430511475,
+              39.643589655558266,
+              39.03846343358358,
+              39.34102455774943,
+              39.039103190104164,
+              39.16795253753662,
+              67.76666641235352
+            ],
+            "fused_us": [
+              28.939743836720783,
+              28.982690970102947,
+              29.24230694770813,
+              28.853845596313477,
+              28.896796703338623,
+              29.11218007405599,
+              28.896796703338623,
+              28.896796703338623,
+              29.069230953852337
+            ],
+            "unfused_median_us": 39.25640980402628,
+            "fused_median_us": 28.939743836720783,
+            "speedup": 1.3564878122457666
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              39.860900243123375,
+              40.16153812408447,
+              39.94551499684652,
+              40.07500012715658,
+              40.117947260538735,
+              40.291027228037514,
+              40.291666984558105,
+              72.47691949208577,
+              40.291027228037514
+            ],
+            "fused_us": [
+              30.01987338066101,
+              64.9596134821574,
+              29.84679341316223,
+              30.192307631174724,
+              30.019231637318928,
+              30.105767647425335,
+              30.01987338066101,
+              29.93333339691162,
+              29.889744520187378
+            ],
+            "unfused_median_us": 40.16153812408447,
+            "fused_median_us": 30.01987338066101,
+            "speedup": 1.3378316961841945
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 1.3336647273763433,
+      "median_fused_us": 28.939743836720783
+    },
+    {
+      "dtype": "bfloat16",
+      "mnk": [
+        512,
+        512,
+        512
+      ],
+      "config": {
+        "bm": 32,
+        "bn": 64,
+        "bk": 32,
+        "warps": 8
+      },
+      "rounds": [
+        {
+          "round": 1,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              45.04230419794718,
+              40.63653548558553,
+              90.188463528951,
+              41.284616788228355,
+              40.89615742365519,
+              40.680126349131264,
+              40.85256258646647,
+              40.80961545308431,
+              40.76602856318156
+            ],
+            "fused_us": [
+              32.13589787483215,
+              32.178846995035805,
+              32.178846995035805,
+              32.178846995035805,
+              32.092307011286415,
+              34.47179396947225,
+              32.09294676780701,
+              32.178846995035805,
+              86.54615084330241
+            ],
+            "unfused_median_us": 40.85256258646647,
+            "fused_median_us": 32.178846995035805,
+            "speedup": 1.2695471218334438
+          },
+          "error": null
+        },
+        {
+          "round": 2,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.25,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              44.050002098083496,
+              44.30769284566244,
+              44.350643952687584,
+              44.2641019821167,
+              44.0051277478536,
+              44.30769284566244,
+              44.10833120346069,
+              44.350643952687584,
+              43.87564261754354
+            ],
+            "fused_us": [
+              33.47435792287191,
+              33.474997679392494,
+              33.517309029897056,
+              59.85833406448364,
+              33.47435792287191,
+              33.47435792287191,
+              33.47435792287191,
+              33.56089989344279,
+              33.474997679392494
+            ],
+            "unfused_median_us": 44.2641019821167,
+            "fused_median_us": 33.474997679392494,
+            "speedup": 1.3223033622304348
+          },
+          "error": null
+        },
+        {
+          "round": 3,
+          "status": "measured",
+          "unfused_check": {
+            "passed": true,
+            "max_abs_error": 0.125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "fused_check": {
+            "passed": true,
+            "max_abs_error": 0.125,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "pair_check": {
+            "passed": true,
+            "max_abs_error": 0.0,
+            "failed_elements": 0,
+            "atol": 0.05,
+            "rtol": 0.05
+          },
+          "timing": {
+            "unfused_us": [
+              43.83461872736613,
+              44.22115087509155,
+              44.39423084259033,
+              44.13525660832723,
+              44.30769284566244,
+              80.09551366170247,
+              44.26474173863729,
+              44.35128370920817,
+              43.832691510518394
+            ],
+            "fused_us": [
+              33.51794878641764,
+              33.474997679392494,
+              98.66474469502766,
+              33.474997679392494,
+              33.47435792287191,
+              33.47435792287191,
+              33.51794878641764,
+              33.47435792287191,
+              33.49102735519409
+            ],
+            "unfused_median_us": 44.26474173863729,
+            "fused_median_us": 33.474997679392494,
+            "speedup": 1.322322473703622
+          },
+          "error": null
+        }
+      ],
+      "valid_and_faster_all_rounds": true,
+      "geomean_speedup": 1.3044850377993429,
+      "median_fused_us": 33.474997679392494
+    }
+  ],
+  "complete": true
+}

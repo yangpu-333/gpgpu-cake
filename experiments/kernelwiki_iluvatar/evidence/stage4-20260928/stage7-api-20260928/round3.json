@@ -1,0 +1,243 @@
+{
+  "environment": {
+    "gpu": "Iluvatar BI-V150",
+    "torch": "2.4.1",
+    "triton": "2.1.0",
+    "python": "3.10.16"
+  },
+  "source_sha256": "4a80a5083805de56d0303462d980d9ec4c68c3dd13d044f10581d52e22272f10",
+  "seed": 20291231,
+  "language_symbol_present": {
+    "exp2": false,
+    "cumsum": true,
+    "swizzle2d": true,
+    "make_block_ptr": true,
+    "debug_barrier": true,
+    "async_copy": false,
+    "atomic_add": true
+  },
+  "float8_types": {
+    "float8_e4m3fn": {
+      "attribute_present": true,
+      "allocation_passed": true
+    },
+    "float8_e5m2": {
+      "attribute_present": true,
+      "allocation_passed": true
+    }
+  },
+  "stages": [
+    {
+      "num_stages": 1,
+      "tile": [
+        32,
+        32,
+        32
+      ],
+      "warps": 4,
+      "check_passed": true,
+      "compiler": {
+        "n_regs": 35,
+        "n_spills": 0,
+        "shared": 4096,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ]
+      },
+      "samples_us": [
+        13.698077201843262,
+        14.047435919443766,
+        13.958332935969034,
+        14.091794689496359,
+        42.713590463002525,
+        13.868846495946249,
+        14.047307769457499,
+        13.958332935969034,
+        14.225384593009949
+      ],
+      "median_us": 14.047307769457499,
+      "status": "measured"
+    },
+    {
+      "num_stages": 2,
+      "tile": [
+        32,
+        32,
+        32
+      ],
+      "warps": 4,
+      "check_passed": true,
+      "compiler": {
+        "n_regs": 35,
+        "n_spills": 0,
+        "shared": 8192,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ]
+      },
+      "samples_us": [
+        51.22859080632528,
+        14.403974016507467,
+        14.31538462638855,
+        13.958461085955301,
+        14.091538389523825,
+        14.136667052904764,
+        14.091922839482626,
+        14.225384593009949,
+        14.181410272916159
+      ],
+      "median_us": 14.181410272916159,
+      "status": "measured"
+    },
+    {
+      "num_stages": 3,
+      "tile": [
+        32,
+        32,
+        32
+      ],
+      "warps": 4,
+      "check_passed": true,
+      "compiler": {
+        "n_regs": 34,
+        "n_spills": 0,
+        "shared": 12288,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ]
+      },
+      "samples_us": [
+        14.36102588971456,
+        14.002948999404907,
+        14.315256476402283,
+        14.623333017031351,
+        14.700000484784445,
+        14.469231168429056,
+        14.700000484784445,
+        14.700000484784445,
+        14.745640754699707
+      ],
+      "median_us": 14.623333017031351,
+      "status": "measured"
+    }
+  ],
+  "cache": [
+    {
+      "cache_modifier": "",
+      "check_passed": true,
+      "compiler": {
+        "n_regs": 8,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ]
+      },
+      "samples_us": [
+        9.081538518269857,
+        9.125769138336182,
+        8.895769715309143,
+        9.079230825106302,
+        9.356410304705301,
+        9.31000014146169,
+        40.57435989379883,
+        9.31000014146169,
+        9.079999725023905
+      ],
+      "median_us": 9.125769138336182,
+      "status": "measured"
+    },
+    {
+      "cache_modifier": ".ca",
+      "check_passed": true,
+      "compiler": {
+        "n_regs": 8,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ]
+      },
+      "samples_us": [
+        9.033589561780294,
+        9.079230825106302,
+        8.987179398536682,
+        9.171410401662191,
+        9.31000014146169,
+        9.217820564905802,
+        9.07935897509257,
+        9.171282251675924,
+        9.264358878135681
+      ],
+      "median_us": 9.171282251675924,
+      "status": "measured"
+    },
+    {
+      "cache_modifier": ".cg",
+      "check_passed": true,
+      "compiler": {
+        "n_regs": 8,
+        "n_spills": 0,
+        "shared": 0,
+        "num_warps": 4,
+        "assembly_kinds": [
+          "ast",
+          "cubin",
+          "llir",
+          "sass",
+          "ttgir",
+          "ttir"
+        ]
+      },
+      "samples_us": [
+        9.263589978218079,
+        9.033589561780294,
+        9.033461411794027,
+        14.917179942131042,
+        9.125769138336182,
+        9.172179301579794,
+        9.033461411794027,
+        9.263589978218079,
+        9.171410401662191
+      ],
+      "median_us": 9.171410401662191,
+      "status": "measured"
+    }
+  ],
+  "timing": {
+    "warmup": 10,
+    "samples": 9,
+    "launches_per_sample": 30,
+    "scope": "warm-buffer GPU event"
+  }
+}

@@ -1,0 +1,22 @@
+...............F.................................................................................................F..............................................
+======================================================================
+FAIL: test_architecture_vocabulary_matches_supported_ampere_spellings (test_pr_policy.ArchitecturePolicyTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/kda-biv150/kernelwiki-upstream-baseline/tests/test_pr_policy.py", line 142, in test_architecture_vocabulary_matches_supported_ampere_spellings
+    self.assertEqual(set(SUPPORTED_EXACT_ARCHITECTURES), architectures - {
+AssertionError: Items in the second set but not the first:
+'bi-v150'
+
+======================================================================
+FAIL: test_current_audit_receipts_match_discovered_tests_and_bundles (test_validate_factual_contracts.ShippedDocumentationContractTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/kda-biv150/kernelwiki-upstream-baseline/tests/test_validate_factual_contracts.py", line 517, in test_current_audit_receipts_match_discovered_tests_and_bundles
+    self.assertEqual(158, discovered_tests)
+AssertionError: 158 != 160
+
+----------------------------------------------------------------------
+Ran 160 tests in 173.177s
+
+FAILED (failures=2)

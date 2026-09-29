@@ -1,0 +1,14 @@
+sources/docs/flagtree-iluvatar.md
+sources/experiments/bi-v150-corex42-migration-batch1.md
+sources/experiments/bi-v150-corex42-scheduling-audit.md
+sources/experiments/bi-v150-corex42-stage0.md
+sources/experiments/bi-v150-corex42-stage2.md
+sources/experiments/bi-v150-corex42-stage3.md
+wiki/hardware/bi-v150-stack.md
+wiki/kernels/affine-access-bi-v150.md
+wiki/kernels/gemm-bias-bi-v150.md
+wiki/kernels/residual-rmsnorm-bi-v150.md
+wiki/kernels/rmsnorm-bi-v150.md
+wiki/kernels/scan-bi-v150.md
+wiki/languages/triton-iluvatar.md
+wiki/migration/blackwell-to-bi-v150.md

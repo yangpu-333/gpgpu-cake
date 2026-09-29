@@ -1,0 +1,3 @@
+(127, 65, 33) [('swizzle2d_group2', 'measured'), ('dual_accumulator', 'measured')]
+(256, 256, 256) [('swizzle2d_group2', 'measured'), ('dual_accumulator', 'measured')]
+(512, 512, 512) [('swizzle2d_group2', 'measured'), ('dual_accumulator', 'measured')]

@@ -1,0 +1,4 @@
+exp 1048576 ['error', 'error']
+exp 4194304 ['error', 'error']
+scan 4099 measured
+scan 65537 measured
