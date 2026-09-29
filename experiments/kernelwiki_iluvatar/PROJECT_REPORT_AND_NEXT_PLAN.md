@@ -54,7 +54,7 @@ Windows 验证器最初用字符串 `/` 判断资产目录归属，误报 411 �
 ## 5. 未完成项与外部依赖
 
 1. **真实 KDA/Megatron 负载。** 本地没有实际 Megatron 形状采集结果，也未完成训练 step 的调用点接入、优化后向或模型吞吐对照。Pod 上保存的旧 preflight 状态为 `transformer_engine_unavailable`，另有 fallback route smoke；这些不是有效的真实模型形状证明。需在固定 Megatron 版本与可用运行时上重新采集。
-2. **ixSYS 可视化。** CLI V4.2.0 与 NVTX 短脚本可用，但 Pod 缺少 tracefs/debugfs 的 `tracing_on` 控制节点，容器内挂载因只读限制失败，故没有可上传的 `.ptrace`。JSON/日志不能代替 trace。恢复挂载后的采集、拷回和网站导入步骤见本报告第 8 节。
+2. **ixSYS 可视化。** CLI V4.2.0 与 NVTX 短脚本可用，但 Pod 缺少 tracefs/debugfs 的 `tracing_on` 控制节点，容器内挂载因只读限制失败。2026-09-29 再测确认内核列出 tracefs/debugfs，而容器无 `CAP_SYS_ADMIN`、`/sys` 为只读；`mount` 返回 32，ixSYS 最窄的 `cuda_kernel` 模式仍在采集前退出，未生成 `.ptrace`。原始诊断见 [`evidence/stage12-20260929/tracefs-probe.log`](evidence/stage12-20260929/tracefs-probe.log)。JSON/日志不能代替 trace。平台需在宿主机或 Pod 创建配置中提供可访问的 tracefs/debugfs 节点，再按第 8 节采集、拷回和导入。
 3. **硬件机制对应关系。** 尚未取得可读最终机器指令、计算/搬运重叠 trace、shared bank 冲突或 warp 角色拆分证据。原 NVIDIA TMA、mbarrier、TMEM、`tcgen05`、CLC、NVFP4 等仍限定原架构；当前目标端相似算法只按所测证据等级描述。
 4. **FP8/软件版本。** 当前 CoreX 4.2 的 FP8 `tl.dot` 编译失败；不能推出 BI-V150 硬件不支持。新 CoreX/Triton 构建须作为独立环境版本重新探测，不与现有性能样本合并。
 5. **KDA 正式集成。** 本机安装版及本仓库补丁已就绪；尚未形成将该补丁/构建流程接入 KDA 实际仓库、发布入口及持续集成的提交或 PR。阶段 1 记录的 KDA 旧子模块提交为 `76d27b56f804e7e7295d4c570e1e5d7eef4b0a75`，与本项目使用的新上游提交不同，集成时需明确版本和第三方资产来源。
@@ -103,7 +103,7 @@ Windows 验证器最初用字符串 `/` 判断资产目录归属，误报 411 �
 
 ### 当前 Pod 状态
 
-`/usr/local/corex/bin/ixsys --version` 为 V4.2.0，短时工作负载 [`stage4_trace_case.py`](stage4_trace_case.py) 可直接运行。但 `ixsys -t cuda,nvtx` 提示无法访问 ftrace 控制节点，`/sys/kernel/tracing/tracing_on` 与 `/sys/kernel/debug/tracing/tracing_on` 均不存在；在容器内挂载 tracefs/debugfs 被只读挂载拒绝。故 **目前没有 `.ptrace` 文件**。需在平台创建/配置 Pod 时授予 tracefs/debugfs 的可读写挂载，或由平台管理员按文档完成宿主机挂载与容器映射；仅在容器内重试 ixsys 无法解决。
+`/usr/local/corex/bin/ixsys --version` 为 V4.2.0，短时工作负载 [`stage4_trace_case.py`](stage4_trace_case.py) 可直接运行。但 `ixsys -t cuda,nvtx` 和更窄的 `-t cuda_kernel` 均提示无法访问 ftrace 控制节点，`/sys/kernel/tracing/tracing_on` 与 `/sys/kernel/debug/tracing/tracing_on` 均不存在；容器无 `CAP_SYS_ADMIN`，`/sys` 只读，实际挂载尝试失败。故 **目前没有 `.ptrace` 文件**。需在平台创建/配置 Pod 时提供可访问的 tracefs/debugfs 挂载，或由平台管理员按文档完成宿主机挂载与容器映射；仅在容器内重试 ixSYS 无法解决。
 
 ### 平台挂载恢复后采集
 

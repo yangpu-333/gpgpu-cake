@@ -1,0 +1,17 @@
+Tue Sep 29 02:33:47 UTC 2026
+uid=0(root) gid=0(root) groups=0(root)
+CapEff:	00000000a80425fb
+CapBnd:	00000000a80425fb
+NoNewPrivs:	0
+nodev	debugfs
+nodev	tracefs
+sysfs on /sys type sysfs (ro,nosuid,nodev,noexec,relatime)
+mount: /sys/kernel/tracing: cannot mount tracefs read-only.
+mount_exit=32
+Cannot access ftrace control node under /sys/kernel/tracing or /sys/kernel/debug/tracing.
+Please check your environment!
+Try: mount -t tracefs nodev /sys/kernel/tracing
+     mount -t debugfs nodev /sys/kernel/debug
+If these do not work, the kernel may not support ftrace.
+ixsys_exit=1
+ptrace_absent
