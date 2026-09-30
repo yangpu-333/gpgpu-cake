@@ -1,0 +1,105 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-30T01:14:43.329067+00:00",
+  "operator": "megatron_residual_add_rmsnorm_route_probe",
+  "source_sha256": "b448bb480d379358eb77235cb5493bcd19b13cea29b762279385e83e28366411",
+  "megatron": {
+    "root": "/mnt/atrex-megatron/src/megatron-lm",
+    "expected_commit": "5be9626709af2722333bf54797c954c09edeada3",
+    "head": {
+      "returncode": 0,
+      "stdout": "5be9626709af2722333bf54797c954c09edeada3",
+      "stderr": ""
+    }
+  },
+  "environment": {
+    "python": "3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]",
+    "platform": "Linux-5.4.0-144-generic-x86_64-with-glibc2.31",
+    "torch_version": "2.4.1",
+    "cuda_available": true,
+    "device_count": 2,
+    "transformer_engine_available": false,
+    "apex_available": true,
+    "transformer_block_default_factory": "FusedLayerNorm",
+    "gpt_local_input_layernorm_factory": "WrappedTorchNorm",
+    "gpt_local_pre_mlp_layernorm_factory": "WrappedTorchNorm"
+  },
+  "selected_route": {
+    "kind": "gpt_local_wrapped_torch_rmsnorm",
+    "rmsnorm_supported_by_selected_factory": true,
+    "next_action": "run the local GPT BDA-to-RMSNorm smoke test"
+  },
+  "forward": {
+    "passed": true,
+    "branch_output": {
+      "shape": [
+        8,
+        2,
+        1024
+      ],
+      "stride": [
+        2048,
+        1024,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "device": "cuda:0",
+      "requires_grad": true
+    },
+    "residual": {
+      "shape": [
+        8,
+        2,
+        1024
+      ],
+      "stride": [
+        2048,
+        1024,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "device": "cuda:0",
+      "requires_grad": true
+    },
+    "residual_added_output": {
+      "shape": [
+        8,
+        2,
+        1024
+      ],
+      "stride": [
+        2048,
+        1024,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "device": "cuda:0",
+      "requires_grad": true
+    },
+    "normalized_output": {
+      "shape": [
+        8,
+        2,
+        1024
+      ],
+      "stride": [
+        2048,
+        1024,
+        1
+      ],
+      "dtype": "torch.float32",
+      "device": "cuda:0",
+      "requires_grad": true
+    },
+    "bias": null,
+    "dropout_probability": 0.0,
+    "bias_dropout_fusion_requested": false
+  },
+  "backward": {
+    "passed": true,
+    "branch_output_grad_finite": true,
+    "residual_grad_finite": true,
+    "weight_grad_finite": true
+  },
+  "status": "fallback_path_smoke_passed"
+}

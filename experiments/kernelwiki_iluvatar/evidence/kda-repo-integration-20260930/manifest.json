@@ -1,0 +1,25 @@
+{
+  "generated_utc": "2026-09-30T01:55:53.332195+00:00",
+  "files": [
+    {
+      "path": "claude-stage21-read.json",
+      "sha256": "dcffcecf654d356816cbe5c6d6de47e2bf9ad28c13f61b4d35974e9795da1464",
+      "bytes": 2208
+    },
+    {
+      "path": "git-status.log",
+      "sha256": "65c7b6b57266a4041a501fb72758f7764ddcf249ca7c573ef95e69815396d085",
+      "bytes": 74
+    },
+    {
+      "path": "loader-tests.log",
+      "sha256": "258663c40cdfd170a33722300367e9aa5e3bddbd226dac076df6b13bf52203b8",
+      "bytes": 385
+    },
+    {
+      "path": "verify.log",
+      "sha256": "2c587d5fe24dc7fd9967d6a66c6bf70adeb26f7428125a6ab9483248aed3e95a",
+      "bytes": 417
+    }
+  ]
+}

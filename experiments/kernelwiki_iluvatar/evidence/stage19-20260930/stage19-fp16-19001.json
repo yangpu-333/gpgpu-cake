@@ -1,0 +1,54 @@
+{
+  "created_utc": "2026-09-30T01:17:36.914182+00:00",
+  "script_sha256": "ed3a730cd4a5c52f1023e403a3021a3aa4ded7fc7b68316f760be933f3e90eee",
+  "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
+  "torch": "2.4.1",
+  "triton": "2.1.0",
+  "seed": 19001,
+  "scope": "pinned Megatron local BDA/RMSNorm operator path with synthetic inputs and one SGD weight update; not a full GPT training step",
+  "route": {
+    "factory": "WrappedTorchNorm",
+    "shape": [
+      8,
+      2,
+      1024
+    ],
+    "dtype": "float16",
+    "bias": null,
+    "dropout": 0.0,
+    "fused_bda": false,
+    "reference_output_dtype": "torch.float32",
+    "candidate_output_dtype": "torch.float32"
+  },
+  "checks": {
+    "output": {
+      "passed": true,
+      "max_abs_error": 0.0018658638000488281
+    },
+    "residual_out": {
+      "passed": true,
+      "max_abs_error": 0.0
+    },
+    "loss": {
+      "passed": true,
+      "max_abs_error": 8.106231689453125e-05
+    },
+    "grad_x": {
+      "passed": true,
+      "max_abs_error": 5.960464477539062e-07
+    },
+    "grad_residual": {
+      "passed": true,
+      "max_abs_error": 5.960464477539062e-07
+    },
+    "grad_weight": {
+      "passed": true,
+      "max_abs_error": 2.2829044610261917e-06
+    },
+    "weight_after_sgd": {
+      "passed": true,
+      "max_abs_error": 5.960464477539063e-08
+    }
+  },
+  "status": "passed"
+}

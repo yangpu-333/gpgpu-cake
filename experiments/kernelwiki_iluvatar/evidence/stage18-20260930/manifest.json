@@ -1,0 +1,30 @@
+{
+  "generated_utc": "2026-09-30T01:52:48.816107+00:00",
+  "files": [
+    {
+      "path": "route-dtensor.json",
+      "sha256": "3d4bf82ba219c5552c7c48271232670e888cbbf6fdb173bad101e2cd354687e3",
+      "bytes": 718
+    },
+    {
+      "path": "route-no-shim.json",
+      "sha256": "8fb257123c8fbef39fce18b868cf0282b80edc8103b5f9c32432275cff5e1d18",
+      "bytes": 716
+    },
+    {
+      "path": "route-passed-bf16.json",
+      "sha256": "f866e1b087c1cbc47305be19256344240193852e7e5754e2a4a660258fe75c27",
+      "bytes": 2467
+    },
+    {
+      "path": "route-passed-fp16.json",
+      "sha256": "66f96e4b453755143662e5b0a8d5c8c955ce5d62bacbd84e93f9a1a699006358",
+      "bytes": 2464
+    },
+    {
+      "path": "route-placements.json",
+      "sha256": "2022cf244e11c51afd20b6a964658c33d2d9c3cf0ad90a9ec07c5d0a650e03af",
+      "bytes": 638
+    }
+  ]
+}

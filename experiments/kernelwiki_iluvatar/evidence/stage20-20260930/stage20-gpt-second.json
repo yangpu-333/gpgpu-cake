@@ -1,0 +1,72 @@
+{
+  "created_utc": "2026-09-30T01:24:38.450255+00:00",
+  "script_sha256": "8bd947e1ba96edc39f4e9f6d778e3379f87e641c96e38dea7fc89aa1dd51966c",
+  "torch": "2.4.1",
+  "scope": "one-layer pinned Megatron GPT local-spec step with synthetic token IDs; first step includes initialization/warmup",
+  "model": {
+    "class": "GPTModel",
+    "parameter_count": 1053696,
+    "layer_spec": "<class 'megatron.core.transformer.transformer_layer.TransformerLayer'>"
+  },
+  "step": {
+    "input_shape": [
+      2,
+      8
+    ],
+    "output_shape": [
+      2,
+      8
+    ],
+    "loss": 6.386183738708496,
+    "elapsed_ms_first_step": 504.8514099121094,
+    "finite": true,
+    "norm_calls": [
+      {
+        "module": "RMSNorm",
+        "shape": [
+          8,
+          2,
+          256
+        ],
+        "dtype": "torch.float32",
+        "stride": [
+          512,
+          256,
+          1
+        ],
+        "contiguous": true
+      },
+      {
+        "module": "RMSNorm",
+        "shape": [
+          8,
+          2,
+          256
+        ],
+        "dtype": "torch.float32",
+        "stride": [
+          512,
+          256,
+          1
+        ],
+        "contiguous": true
+      },
+      {
+        "module": "RMSNorm",
+        "shape": [
+          8,
+          2,
+          256
+        ],
+        "dtype": "torch.float32",
+        "stride": [
+          512,
+          256,
+          1
+        ],
+        "contiguous": true
+      }
+    ]
+  },
+  "status": "passed"
+}

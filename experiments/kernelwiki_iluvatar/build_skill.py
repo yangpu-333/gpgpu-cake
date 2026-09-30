@@ -38,8 +38,8 @@ def main():
     run("git", "-C", str(target), "remote", "add", "origin", source)
     run("git", "-C", str(target), "fetch", "--depth", "1", "origin", UPSTREAM_SHA)
     run("git", "-C", str(target), "checkout", "--detach", "FETCH_HEAD")
-    run("git", "-C", str(target), "apply", "--check", str(PATCH))
-    run("git", "-C", str(target), "apply", str(PATCH))
+    run("git", "-C", str(target), "apply", "--whitespace=nowarn", "--check", str(PATCH))
+    run("git", "-C", str(target), "apply", "--whitespace=nowarn", str(PATCH))
     if not (target / "SKILL.md").is_file():
         raise RuntimeError("assembled skill has no SKILL.md")
     print(target)

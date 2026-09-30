@@ -1,0 +1,59 @@
+{
+  "created_utc": "2026-09-30T01:31:45.459923+00:00",
+  "script_sha256": "0bdea5ea1b2a3504fcd127f9586d58aa158f6860c015fab33beb021894854972",
+  "torch": "2.4.1",
+  "seed": 21006,
+  "scope": "one-layer pinned Megatron GPT local-spec step; synthetic tokens; one attention BDA->pre-MLP RMSNorm fusion; no Transformer Engine; no production throughput claim",
+  "configuration": {
+    "sequence_length": 8,
+    "micro_batch_size": 2,
+    "hidden_size": 256,
+    "warmup": 3,
+    "repetitions": 12
+  },
+  "correctness": {
+    "output_max_abs": 0.0008482933044433594,
+    "output_allclose": true,
+    "loss_abs": 0.00014209747314453125,
+    "loss_allclose": true,
+    "parameter_max_abs_after_sgd": 6.614252924919128e-06,
+    "finite": true,
+    "candidate_fused_calls": 1,
+    "passed": true
+  },
+  "timing": {
+    "reference_ms": [
+      4.219115257263184,
+      3.806307792663574,
+      3.7761921882629395,
+      3.688307762145996,
+      3.7593653202056885,
+      3.785980701446533,
+      3.7915191650390625,
+      3.7406346797943115,
+      3.7615959644317627,
+      3.7733075618743896,
+      3.744788408279419,
+      3.784865379333496
+    ],
+    "candidate_ms": [
+      3.684576988220215,
+      3.716750144958496,
+      3.689730644226074,
+      3.686980724334717,
+      3.7211732864379883,
+      3.6978845596313477,
+      3.684403896331787,
+      3.6684999465942383,
+      3.6991732120513916,
+      3.6803460121154785,
+      3.6912307739257812,
+      3.692884683609009
+    ],
+    "reference_median_ms": 3.7747498750686646,
+    "candidate_median_ms": 3.6904807090759277,
+    "candidate_over_reference_speedup": 1.0228341976657662,
+    "tokens_per_step": 16
+  },
+  "status": "passed"
+}

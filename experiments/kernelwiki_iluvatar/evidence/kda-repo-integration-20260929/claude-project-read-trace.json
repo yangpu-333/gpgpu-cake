@@ -1,0 +1,11 @@
+{
+  "session_id": "b64e4efd-625b-4ffc-b031-d3381cc2e953",
+  "transcript_sha256": "c1df52d28d63da65a6b30ceb0111fa34ada264159df1c8196d47d3937eb6fe74",
+  "tool_calls": [
+    {
+      "tool": "Read",
+      "file_path": "E:\\code\\GPGPU\\experiments\\kernelwiki_iluvatar\\upstream-kda\\.claude\\skills\\kernelwiki-iluvatar\\sources\\experiments\\bi-v150-corex42-stage14.md"
+    }
+  ],
+  "answer": "From `sources/experiments/bi-v150-corex42-stage14.md`:\n\n- **Source ID:** `exp-bi-v150-corex42-stage14`\n- **Synthetic case count:** 18 case-rounds (3 seeds × FP16/BF16 × 3 shapes), all passed\n- **Real Megatron training verified:** No — import failed on two distinct errors (missing `megatron.core.extensions`, then a `transformer_engine` stub lacking `__version__`); it remains unverified until a compatible runtime is available."
+}

@@ -1,0 +1,10 @@
+{
+  "created_utc": "2026-09-30T01:23:47.279214+00:00",
+  "script_sha256": "3b88ef280f7348d89a30e23d105c56b610cd9f8fae8ee0452d6a05ffe1ee308f",
+  "torch": "2.4.1",
+  "scope": "one-layer pinned Megatron GPT local-spec step with synthetic token IDs; first step includes initialization/warmup",
+  "status": "error",
+  "error_type": "Exception",
+  "error": "cuda rng state model-parallel-rng is not added",
+  "traceback": "Traceback (most recent call last):\n  File \"/mnt/kda-biv150-stage3/stage20_megatron_gpt_step.py\", line 124, in main\n    run(args, report)\n  File \"/mnt/kda-biv150-stage3/stage20_megatron_gpt_step.py\", line 42, in run\n    model = GPTModel(\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/core/models/gpt/gpt_model.py\", line 168, in __init__\n    self.embedding = LanguageModelEmbedding(\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/core/models/common/embeddings/language_model_embedding.py\", line 56, in __init__\n    self.word_embeddings = tensor_parallel.VocabParallelEmbedding(\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/core/tensor_parallel/layers.py\", line 310, in __init__\n    _initialize_affine_weight_gpu(self.weight, init_method, partition_dim=0, stride=1)\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/core/tensor_parallel/layers.py\", line 177, in _initialize_affine_weight_gpu\n    with get_cuda_rng_tracker().fork():\n  File \"/root/miniconda3/lib/python3.10/contextlib.py\", line 135, in __enter__\n    return next(self.gen)\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/core/tensor_parallel/random.py\", line 316, in fork\n    raise Exception('cuda rng state {} is not added'.format(name))\nException: cuda rng state model-parallel-rng is not added\n"
+}

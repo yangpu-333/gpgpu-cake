@@ -1,0 +1,18 @@
+{
+  "created_utc": "2026-09-30T01:28:16.405167+00:00",
+  "script_sha256": "63f90db6daee397a89bea292b9ce91295ed5494f6d6435fbdd04ea52370ff88c",
+  "torch": "2.4.1",
+  "seed": 21001,
+  "scope": "one-layer pinned Megatron GPT local-spec step; synthetic tokens; one attention BDA->pre-MLP RMSNorm fusion; no Transformer Engine; no production throughput claim",
+  "configuration": {
+    "sequence_length": 8,
+    "micro_batch_size": 2,
+    "hidden_size": 256,
+    "warmup": 2,
+    "repetitions": 5
+  },
+  "status": "error",
+  "error_type": "TypeError",
+  "error": "cannot pickle 'torch._C._distributed_c10d.ProcessGroup' object",
+  "traceback": "Traceback (most recent call last):\n  File \"/mnt/kda-biv150-stage3/stage21_megatron_gpt_fusion.py\", line 185, in main\n    run(args, report)\n  File \"/mnt/kda-biv150-stage3/stage21_megatron_gpt_fusion.py\", line 102, in run\n    candidate = copy.deepcopy(reference)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 172, in deepcopy\n    y = _reconstruct(x, memo, *rv)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 271, in _reconstruct\n    state = deepcopy(state, memo)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 146, in deepcopy\n    y = copier(x, memo)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 231, in _deepcopy_dict\n    y[deepcopy(key, memo)] = deepcopy(value, memo)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 172, in deepcopy\n    y = _reconstruct(x, memo, *rv)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 297, in _reconstruct\n    value = deepcopy(value, memo)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 172, in deepcopy\n    y = _reconstruct(x, memo, *rv)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 271, in _reconstruct\n    state = deepcopy(state, memo)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 146, in deepcopy\n    y = copier(x, memo)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 231, in _deepcopy_dict\n    y[deepcopy(key, memo)] = deepcopy(value, memo)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 172, in deepcopy\n    y = _reconstruct(x, memo, *rv)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 297, in _reconstruct\n    value = deepcopy(value, memo)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 172, in deepcopy\n    y = _reconstruct(x, memo, *rv)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 271, in _reconstruct\n    state = deepcopy(state, memo)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 146, in deepcopy\n    y = copier(x, memo)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 231, in _deepcopy_dict\n    y[deepcopy(key, memo)] = deepcopy(value, memo)\n  File \"/root/miniconda3/lib/python3.10/copy.py\", line 161, in deepcopy\n    rv = reductor(4)\nTypeError: cannot pickle 'torch._C._distributed_c10d.ProcessGroup' object\n"
+}

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-30T01:09:46.602296+00:00",
+  "operator": "megatron_residual_add_rmsnorm_route_probe",
+  "source_sha256": "b448bb480d379358eb77235cb5493bcd19b13cea29b762279385e83e28366411",
+  "megatron": {
+    "root": "/mnt/atrex-megatron/src/megatron-lm",
+    "expected_commit": "5be9626709af2722333bf54797c954c09edeada3",
+    "head": {
+      "returncode": 0,
+      "stdout": "5be9626709af2722333bf54797c954c09edeada3",
+      "stderr": ""
+    }
+  },
+  "status": "megatron_import_failed",
+  "error_type": "ImportError",
+  "error": "cannot import name 'DTensor' from 'torch.distributed.tensor' (/usr/local/corex/lib64/python3/dist-packages/torch/distributed/tensor/__init__.py)"
+}

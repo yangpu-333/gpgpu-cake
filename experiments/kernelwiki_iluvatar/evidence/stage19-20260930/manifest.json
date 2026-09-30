@@ -1,0 +1,20 @@
+{
+  "generated_utc": "2026-09-30T01:52:48.822012+00:00",
+  "files": [
+    {
+      "path": "stage19-bf16-19001.json",
+      "sha256": "06c9f7bafacb4ca8d9c3dbbe972c1319bbac36efce7a24d8b0b57183b0dae76a",
+      "bytes": 1371
+    },
+    {
+      "path": "stage19-fp16-19001.json",
+      "sha256": "898b59cc3c6ba4a2928e95ff6ecf87ac582db27eb67d4a9340b30df5f144238e",
+      "bytes": 1368
+    },
+    {
+      "path": "stage19-fp32-realshape.json",
+      "sha256": "afe4a6bab2eed20daa821e025cd8a6fcbd9ebcc5b6e6b1fe041627645ee4b768",
+      "bytes": 1333
+    }
+  ]
+}

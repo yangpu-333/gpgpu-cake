@@ -1,0 +1,36 @@
+name: KernelWiki BI-V150 KDA integration
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/kernelwiki-iluvatar-kda.yml"
+      - "experiments/kernelwiki_iluvatar/**"
+  push:
+    paths:
+      - ".github/workflows/kernelwiki-iluvatar-kda.yml"
+      - "experiments/kernelwiki_iluvatar/**"
+
+permissions:
+  contents: read
+
+jobs:
+  rebuild-and-load:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - name: Rebuild KDA loader from pinned KDA commit
+        run: python experiments/kernelwiki_iluvatar/build_kda_integration.py --output "$RUNNER_TEMP/kda"
+      - name: Test KDA project-level loader
+        run: python -m unittest discover -s "$RUNNER_TEMP/kda/tests" -p test_load_external_skill.py -v
+      - name: Rebuild BI-V150 skill from pinned KernelWiki commit
+        run: python experiments/kernelwiki_iluvatar/build_skill.py --output "$RUNNER_TEMP/kernelwiki-iluvatar"
+      - name: Validate BI-V150 corpus
+        run: python "$RUNNER_TEMP/kernelwiki-iluvatar/scripts/validate.py"
+      - name: Run KernelWiki full test suite
+        run: python -m unittest discover -s "$RUNNER_TEMP/kernelwiki-iluvatar/tests" -p "test_*.py" -q
+      - name: Load skill into KDA checkout and verify architecture paths
+        run: python experiments/kernelwiki_iluvatar/verify_kda_integration.py --kda "$RUNNER_TEMP/kda" --skill "$RUNNER_TEMP/kernelwiki-iluvatar"

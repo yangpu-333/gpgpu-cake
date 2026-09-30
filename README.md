@@ -16,14 +16,14 @@ CoreX 4.2.0、厂商 Triton 2.1.0；所有候选保留正确性检查、逐轮�
 | 已验证内容 | BI-V150 实测结果 |
 |---|---|
 | Residual Add RMSNorm 融合 | FP16/BF16、5 个形状、各 3 轮通过前向与参考梯度检查；前向相对**未融合 PyTorch 算子序列**为 10.12–14.65× |
+| Megatron 小模型训练 | 固定提交的单层 GPT 本地路径完成前向、反向和 SGD；融合一对 attention 残差加法与 RMSNorm 后，三次独立 FP32、合成 token 复测通过，完整 step 中位耗时比为 1.018–1.023× |
 | GEMM+bias epilogue | FP16/BF16、3 个形状、4 种 tile、各 3 轮通过；同 tile 相对**单独执行 bias 加法**为 1.33–3.94× |
 | 流水阶段数 | FP16/BF16、两种形状与两种 tile 的留出复测全部数值通过；BF16 1024³、64×64×32 tile 上，`num_stages=2/3` 相对 1 仅为 0.915×/0.748× |
-| 知识库回归 | 完整上游测试 160 项通过；BI-V150 精确检索 14 页，原 SM90/SM100 的 286/379 条检索路径保持不变 |
+| 知识库回归 | Linux 完整测试 160/160、整库验证通过；BI-V150 精确检索 18 页，原 SM90/SM100 的 286/379 条检索路径保持不变 |
 
-以上是单卡、预热后的算子微基准，**不代表端到端训练加速**。FP8 `tl.dot` 在当前软件栈
+表中的大幅加速为单卡算子微基准，**不代表端到端训练加速**；Megatron 的约 2% 比值单独来自 FP32 单层合成 token 模型，不能外推到生产训练。FP8 `tl.dot` 在当前软件栈
 编译失败；TMA、TMEM、warp specialization 等 NVIDIA 机制没有被改标为 BI-V150 的硬件等价能力。
-适配版 skill 已完成本地安装与重建验证；下一步是接入 KDA 正式仓库，并用真实 Megatron 形状
-验证前后向和训练 step。
+适配版 skill 已完成固定版本重建验证，并准备了 KDA 仓库级通用加载器与 CI。下一步是让两端线上 CI 运行并取得生产配置与兼容 Transformer Engine，采集生产形状和多层训练结果。
 
 从仓库根目录重建 skill（脚本固定上游提交并应用本项目补丁，目标目录须尚不存在）：
 
@@ -34,9 +34,7 @@ python -m unittest discover -s /path/to/kernelwiki-iluvatar/tests
 ```
 
 构建所需的上游源码由脚本拉取；仓库保留本项目补丁、实验脚本和原始证据，不复制第三方完整语料。
-在 Windows 的 KDA/Claude Code 环境中，可用
-[`link_kda_skills.ps1`](experiments/kernelwiki_iluvatar/link_kda_skills.ps1)
-将 KDA 固定的 `KernelWiki` 与新 `kernelwiki-iluvatar` 分别接入 `~/.claude/skills/`；原子模块保持原样。
+KDA 项目级加载器由[`build_kda_integration.py`](experiments/kernelwiki_iluvatar/build_kda_integration.py)从固定提交和补丁构建，并由[`verify_kda_integration.py`](experiments/kernelwiki_iluvatar/verify_kda_integration.py)把准备好的 skill 加载到该 checkout 的 `.claude/skills/`。这一路径无需个人安装，原 KernelWiki 子模块保持原样。完整证据、边界和计划见[工作总报告](experiments/kernelwiki_iluvatar/PROJECT_REPORT_AND_NEXT_PLAN.md)。
 
 ## 核心成果
 

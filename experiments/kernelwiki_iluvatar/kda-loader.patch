@@ -1,0 +1,290 @@
+diff --git a/.github/workflows/external-skill-loader.yml b/.github/workflows/external-skill-loader.yml
+new file mode 100644
+index 0000000..43ab222
+--- /dev/null
++++ b/.github/workflows/external-skill-loader.yml
+@@ -0,0 +1,30 @@
++name: External skill loader
++
++on:
++  pull_request:
++    paths:
++      - ".gitignore"
++      - "README.md"
++      - "tools/load_external_skill.py"
++      - "tests/test_load_external_skill.py"
++      - ".github/workflows/external-skill-loader.yml"
++  push:
++    paths:
++      - ".gitignore"
++      - "README.md"
++      - "tools/load_external_skill.py"
++      - "tests/test_load_external_skill.py"
++      - ".github/workflows/external-skill-loader.yml"
++
++jobs:
++  portable-install:
++    runs-on: ${{ matrix.os }}
++    strategy:
++      matrix:
++        os: [ubuntu-latest, windows-latest]
++    steps:
++      - uses: actions/checkout@v7
++      - uses: actions/setup-python@v7
++        with:
++          python-version: "3.11"
++      - run: python -m unittest discover -s tests -p "test_load_external_skill.py" -v
+diff --git a/.gitignore b/.gitignore
+index 57b40c4..9c92c09 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -9,6 +9,7 @@ __pycache__/
+ *.py[cod]
+ .venv/
+ .cache/
++.claude/skills/
+ build/
+ dist/
+ *.egg-info/
+diff --git a/README.md b/README.md
+index 19a7592..322f62d 100644
+--- a/README.md
++++ b/README.md
+@@ -43,6 +43,25 @@ Use KernelWiki from this repository's pinned submodule. A direct upstream
+ checkout may contain artifact snapshots governed by additional terms that are
+ omitted from this distribution.
+ 
++### Optional project-level external skills
++
++A downstream project can prepare a skill in its own workspace and load it into
++this KDA checkout without installing anything under the user's home directory:
++
++```bash
++python3 tools/load_external_skill.py --source /absolute/path/to/prepared-skill --name my-skill
++python3 tools/load_external_skill.py --source /absolute/path/to/prepared-skill --name my-skill --check
++```
++
++The loader copies the prepared skill to the local `.claude/skills/my-skill`
++directory, verifies every copied file by SHA256, and skips Git metadata. This
++generated directory is ignored by Git so external assets are not staged. A
++later update requires `--replace` and only works for a copy previously made by
++this loader. Existing links and unmanaged directories are never replaced. The
++external skill's source, license review, build, and domain tests remain the
++downstream project's responsibility; KDA's pinned `skills/KernelWiki` submodule
++is unchanged.
++
+ ## Submodules
+ 
+ The following third-party projects are included as Git submodules. The source URLs and revisions below are intentional and match the gitlinks recorded in this repository.
+diff --git a/tests/test_load_external_skill.py b/tests/test_load_external_skill.py
+new file mode 100644
+index 0000000..77a9789
+--- /dev/null
++++ b/tests/test_load_external_skill.py
+@@ -0,0 +1,57 @@
++"""Safety checks for checkout-local external skill installation."""
++
++import subprocess
++import sys
++import tempfile
++import unittest
++from pathlib import Path
++
++
++SCRIPT = Path(__file__).resolve().parents[1] / "tools" / "load_external_skill.py"
++
++
++class ExternalSkillLoaderTests(unittest.TestCase):
++    def setUp(self):
++        self.temp = tempfile.TemporaryDirectory()
++        self.addCleanup(self.temp.cleanup)
++        root = Path(self.temp.name)
++        self.source = root / "source"
++        self.destination = root / "project" / ".claude" / "skills"
++        self.source.mkdir()
++        (self.source / "SKILL.md").write_text("---\nname: fixture\n---\n", encoding="utf-8")
++        (self.source / "wiki").mkdir()
++        (self.source / "wiki" / "page.md").write_text("first\n", encoding="utf-8")
++        (self.source / ".git").mkdir()
++        (self.source / ".git" / "config").write_text("local metadata\n", encoding="utf-8")
++
++    def command(self, *extra):
++        return subprocess.run(
++            [sys.executable, str(SCRIPT), "--source", str(self.source),
++             "--name", "fixture", "--destination", str(self.destination), *extra],
++            capture_output=True, text=True,
++        )
++
++    def test_install_check_and_managed_update(self):
++        self.assertEqual(self.command().returncode, 0)
++        target = self.destination / "fixture"
++        self.assertTrue((target / "SKILL.md").is_file())
++        self.assertFalse((target / ".git").exists())
++        self.assertEqual(self.command("--check").returncode, 0)
++        (self.source / "wiki" / "page.md").write_text("second\n", encoding="utf-8")
++        self.assertNotEqual(self.command("--check").returncode, 0)
++        self.assertNotEqual(self.command().returncode, 0)
++        self.assertEqual(self.command("--replace").returncode, 0)
++        self.assertEqual(self.command("--check").returncode, 0)
++        self.assertEqual((target / "wiki" / "page.md").read_text(), "second\n")
++
++    def test_unmanaged_directory_is_never_replaced(self):
++        target = self.destination / "fixture"
++        target.mkdir(parents=True)
++        sentinel = target / "keep.txt"
++        sentinel.write_text("user content", encoding="utf-8")
++        self.assertNotEqual(self.command("--replace").returncode, 0)
++        self.assertEqual(sentinel.read_text(), "user content")
++
++
++if __name__ == "__main__":
++    unittest.main()
+diff --git a/tools/load_external_skill.py b/tools/load_external_skill.py
+new file mode 100644
+index 0000000..538a693
+--- /dev/null
++++ b/tools/load_external_skill.py
+@@ -0,0 +1,143 @@
++#!/usr/bin/env python3
++"""Install an external skill into this checkout's project-level Claude path.
++
++The skill content stays in its own repository. This command copies a prepared
++skill tree, excluding Git metadata, into ``.claude/skills``. It never writes to
++the user's global skill directory or changes KDA's pinned submodules.
++"""
++
++import argparse
++import hashlib
++import json
++import os
++import re
++import shutil
++import stat
++import uuid
++from pathlib import Path
++
++
++REPO_ROOT = Path(__file__).resolve().parents[1]
++MARKER = ".kda-managed-skill.json"
++SKIP_NAMES = {".git", "__pycache__"}
++
++
++def source_files(root):
++    for path in sorted(root.rglob("*")):
++        relative = path.relative_to(root)
++        if any(part in SKIP_NAMES for part in relative.parts) or path.suffix == ".pyc":
++            continue
++        if path.is_symlink():
++            raise ValueError(f"skill source contains a symlink: {relative}")
++        if path.is_file():
++            yield relative
++
++
++def digest_tree(root):
++    checksums = {}
++    for relative in source_files(root):
++        if relative.as_posix() == MARKER:
++            continue
++        checksums[relative.as_posix()] = hashlib.sha256((root / relative).read_bytes()).hexdigest()
++    return checksums
++
++
++def is_reparse_point(path):
++    info = path.lstat()
++    reparse_flag = getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0)
++    return path.is_symlink() or bool(getattr(info, "st_file_attributes", 0) & reparse_flag)
++
++
++def require_managed_directory(path, destination, name):
++    if is_reparse_point(path) or not path.is_dir():
++        raise ValueError(f"refusing to replace a link or non-directory: {path}")
++    if path.parent.resolve() != destination.resolve():
++        raise ValueError(f"target is outside destination: {path}")
++    marker = path / MARKER
++    if not marker.is_file():
++        raise ValueError(f"refusing to replace an unmanaged skill: {path}")
++    metadata = json.loads(marker.read_text(encoding="utf-8"))
++    if metadata.get("name") != name:
++        raise ValueError(f"invalid managed-skill marker: {path}")
++
++
++def main():
++    parser = argparse.ArgumentParser(description=__doc__)
++    parser.add_argument("--source", type=Path, required=True, help="prepared skill directory")
++    parser.add_argument("--name", required=True, help="project skill name")
++    parser.add_argument("--destination", type=Path, default=REPO_ROOT / ".claude" / "skills")
++    parser.add_argument("--check", action="store_true", help="verify an existing installation")
++    parser.add_argument("--replace", action="store_true", help="update a previously managed copy")
++    args = parser.parse_args()
++    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]*", args.name):
++        parser.error("name must be a simple skill directory name")
++    if args.check and args.replace:
++        parser.error("--check and --replace cannot be combined")
++
++    source = args.source.resolve(strict=True)
++    if not source.is_dir() or not (source / "SKILL.md").is_file():
++        parser.error("source must be a prepared skill containing SKILL.md")
++    expected = digest_tree(source)
++    destination = args.destination.resolve()
++    target = destination / args.name
++
++    if args.check:
++        if not target.exists() or is_reparse_point(target):
++            raise ValueError(f"missing or linked project skill: {target}")
++        require_managed_directory(target, destination, args.name)
++        if digest_tree(target) != expected:
++            raise ValueError(f"skill content differs from source: {target}")
++        print(f"verified {args.name}: {len(expected)} files at {target}")
++        return
++
++    destination.mkdir(parents=True, exist_ok=True)
++    if target.exists() or target.is_symlink():
++        if is_reparse_point(target):
++            raise ValueError(f"refusing to overwrite an existing link: {target}")
++        require_managed_directory(target, destination, args.name)
++        if digest_tree(target) == expected:
++            print(f"already current: {target}")
++            return
++        if not args.replace:
++            raise ValueError(f"managed skill differs; pass --replace: {target}")
++
++    # Inherit destination ACLs. Windows tempfile.mkdtemp creates a private ACL
++    # that can prevent another local account (including Claude Code) from
++    # reading the installed skill after the directory is renamed into place.
++    temp = destination / f".{args.name}-{uuid.uuid4().hex}"
++    temp.mkdir()
++    backup = None
++    try:
++        for relative in expected:
++            output = temp / relative
++            output.parent.mkdir(parents=True, exist_ok=True)
++            shutil.copy2(source / relative, output)
++        (temp / MARKER).write_text(
++            json.dumps({"name": args.name, "file_count": len(expected)}, sort_keys=True) + "\n",
++            encoding="utf-8",
++        )
++        if digest_tree(temp) != expected:
++            raise RuntimeError("copied skill failed its hash check")
++        if target.exists():
++            backup = destination / f".{args.name}-previous-{os.getpid()}"
++            if backup.exists():
++                raise ValueError(f"backup path already exists: {backup}")
++            target.rename(backup)
++        try:
++            temp.rename(target)
++        except BaseException:
++            if backup is not None:
++                backup.rename(target)
++                backup = None
++            raise
++        if backup is not None:
++            require_managed_directory(backup, destination, args.name)
++            shutil.rmtree(backup)
++        print(f"installed {args.name}: {len(expected)} files at {target}")
++    finally:
++        if temp.exists():
++            shutil.rmtree(temp)
++
++
++if __name__ == "__main__":
++    main()
