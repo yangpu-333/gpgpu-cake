@@ -75,13 +75,13 @@ Windows 验证器最初用字符串 `/` 判断资产目录归属，误报 411 �
 
 ### KDA 的 skill 加载入口
 
-KDA 原仓库的加载方式是把固定的 `skills/KernelWiki` 子模块链接到 `~/.claude/skills/KernelWiki`。本机已按该路径保留原 NVIDIA skill，并把已安装的适配版另行链接到 `~/.claude/skills/kernelwiki-iluvatar`；未修改 KDA 的第三方子模块或将其资产复制进 KDA 仓库。Windows 可用 [`link_kda_skills.ps1`](link_kda_skills.ps1) 重建这两个 junction，参数为 KDA checkout 和已组装的适配 skill 目录。直读检索已从两个入口分别返回 `kernel-flash-attention-4` 与 `kernel-residual-rmsnorm-bi-v150`，阶段 14 适配版的 BI-V150 完整架构检索为 17 页。
+KDA 原仓库的加载方式是把固定的 `skills/KernelWiki` 子模块链接到 `~/.claude/skills/KernelWiki`。阶段 14 曾另用 [`link_kda_skills.ps1`](link_kda_skills.ps1)把适配版链接到本机 `~/.claude/skills/kernelwiki-iluvatar`，直读检索分别返回原 NVIDIA 的 `kernel-flash-attention-4` 和目标端的 `kernel-residual-rmsnorm-bi-v150`；当时适配版 BI-V150 检索为 17 页。当前 KDA checkout 已改为下述仓库级加载器复制的托管副本，BI-V150 检索为 18 页，原第三方子模块没有改动。
 
 2026-09-29 经用户授权，使用 [`claude_paratera_smoke.ps1`](claude_paratera_smoke.ps1) 在 KDA checkout 的项目级 `.claude/skills/` 入口运行一次只读 Claude Code 验证。服务地址为 `https://llmapi.paratera.com`，模型 ID 为 `Claude-Opus-4.8`；Key 由用户在本机配置，未写入仓库或输出日志。会话 2 轮、退出码 0，Claude 的 `Read` 工具实际读取适配版 `wiki/hardware/bi-v150-stack.md`，返回 `hw-bi-v150-stack`、`BI-V150 observed kernel toolchain`、`experimental`、首个来源 `doc-flagtree-iluvatar`，与页面 frontmatter 一致。原始响应见[Claude Code smoke JSON](evidence/claude-paratera-smoke-20260929-153202.json)，工具调用路径和本机会话记录哈希见[精简 trace](evidence/claude-paratera-smoke-20260929-153202-trace.json)。这证明当前机器上的适配 skill 可由 Claude Code 调用并读页；KDA 仓库正式集成、真实算子选择与训练收益仍按第 5–6 节验收。
 
 阶段 13 安装版同步后，Claude Code 又从同一入口实读新的 `kernel-residual-rmsnorm-backward-bi-v150` 页面，返回来源 `exp-bi-v150-corex42-stage13`、BF16 64×1024 的 **15.405392×** 后向微基准值和“非完整训练吞吐”的边界；原始响应见[反向页实读记录](evidence/claude-paratera-backward-page-20260929.json)，本机会话的[精简 trace](evidence/claude-paratera-backward-page-20260929-trace.json)记录了实际 `Read` 路径和 transcript 哈希。模型规划阶段的只读输出见[规划响应](evidence/claude-paratera-backward-plan-20260929.json)，其中公式与来源经本次 GPU 实验独立检验；这仍是个人及项目级 skill 入口的闭环，尚非 KDA 上游仓库的发布或 CI 集成。
 
-阶段 14 安装版同步后，Claude Code 从 KDA 项目级入口实读新增来源页与反向算子页，准确返回 `exp-bi-v150-corex42-stage14`、**18 个合成 case-round**、Megatron/Transformer Engine 导入阻断和阶段 13 微基准的适用边界；会话退出码 0、3 轮，原始响应见[阶段 14 实读记录](evidence/stage14-20260929/claude-stage14-read.json)，[精简 trace](evidence/stage14-20260929/claude-stage14-read-trace.json)保留了两个实际 `Read` 路径和会话哈希。由此形成“skill 指导 → BI-V150 实验 → 证据回写 → 从正式项目入口再读取”的本机闭环，真实训练路径仍按下节处理。
+阶段 14 安装版同步后，Claude Code 从 KDA 项目级入口实读新增来源页与反向算子页，准确返回 `exp-bi-v150-corex42-stage14`、**18 个合成 case-round**、当时的 Megatron/Transformer Engine 导入阻断和阶段 13 微基准的适用边界；会话退出码 0、3 轮，原始响应见[阶段 14 实读记录](evidence/stage14-20260929/claude-stage14-read.json)，[精简 trace](evidence/stage14-20260929/claude-stage14-read-trace.json)保留了两个实际 `Read` 路径和会话哈希。此后阶段 21 已补充小模型完整 step 的实验，见上节。
 
 Claude Code 用户配置现已指向 Paratera，旧配置备份留在用户目录；API Key 只在本机用户配置与环境变量中。清除当前进程旧代理变量后，普通 `claude -p` 对 `Claude-Opus-4.8` 的最小调用返回 `OK`，见[默认配置验证 JSON](evidence/claude-paratera-global-config-20260929.json)。密钥不在本仓库及这些响应文件中。
 
