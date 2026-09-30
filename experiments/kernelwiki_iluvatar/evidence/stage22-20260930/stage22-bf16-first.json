@@ -1,0 +1,47 @@
+{
+  "created_utc": "2026-09-30T02:05:33.673838+00:00",
+  "script_sha256": "0bdea5ea1b2a3504fcd127f9586d58aa158f6860c015fab33beb021894854972",
+  "torch": "2.4.1",
+  "seed": 22001,
+  "scope": "one-layer pinned Megatron GPT local-spec step; synthetic tokens; one attention BDA->pre-MLP RMSNorm fusion; no Transformer Engine; no production throughput claim; BF16 autocast around each training step",
+  "configuration": {
+    "sequence_length": 8,
+    "micro_batch_size": 2,
+    "hidden_size": 256,
+    "warmup": 2,
+    "repetitions": 5
+  },
+  "correctness": {
+    "output_max_abs": 0.003971099853515625,
+    "output_allclose": true,
+    "loss_abs": 0.00014543533325195312,
+    "loss_allclose": true,
+    "parameter_max_abs_after_sgd": 1.8472783267498016e-05,
+    "finite": true,
+    "candidate_fused_calls": 1,
+    "passed": true
+  },
+  "timing": {
+    "reference_ms": [
+      4.775057792663574,
+      4.715423107147217,
+      4.753442287445068,
+      4.735153675079346,
+      4.719269275665283
+    ],
+    "candidate_ms": [
+      5.163846015930176,
+      5.085826873779297,
+      5.188211917877197,
+      5.127980709075928,
+      5.20394229888916
+    ],
+    "reference_median_ms": 4.735153675079346,
+    "candidate_median_ms": 5.163846015930176,
+    "candidate_over_reference_speedup": 0.9169819666333314,
+    "tokens_per_step": 16
+  },
+  "status": "passed",
+  "autocast_dtype": "torch.bfloat16",
+  "wrapper_sha256": "a36e045958e1e728beffad45b50c96d968a8f29f0ebf093baaeecf1e5e648690"
+}

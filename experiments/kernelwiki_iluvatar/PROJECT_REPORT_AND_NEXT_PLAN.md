@@ -35,6 +35,7 @@
 | 18–19 | 在进程内屏蔽不兼容的 Transformer Engine stub，映射 CoreX PyTorch 2.4 的旧 DTensor 导出路径，调用固定 Megatron 的 local BDA/RMSNorm 路径，并用融合前后反向与一次 SGD 更新对照 | FP16/BF16 合成 `[8,2,1024]` 算子路径及 FP32 `[8,2,256]` 模型观测形状通过；仅为算子路径，不是完整 GPT step |
 | 20 | 固定 Megatron 提交的单层 GPT 以合成 token 完成前向、反向、SGD 更新，并通过 hook 捕获输入 | 真实模型调用观测到三次连续 FP32 RMSNorm 输入 `[8,2,256]`、stride `[512,256,1]`；首步 504.85 ms 含初始化与编译，不用于吞吐结论 |
 | 21 | 将单层 GPT 中的一对 attention BDA→pre-MLP RMSNorm 接成 BI-V150 前向加两核反向；与同权重本地 Megatron 基线交替计时 | 三次独立进程均通过模型输出、loss 和更新后参数检查；12 对稳态 step 的进程内中位耗时比为 1.0183–1.0228，17-token 留出序列也通过。仅限 FP32、单层、合成 token、本地后备路径，不代表生产训练收益 |
+| 22 | 在同一单层 GPT 的每个训练 step 外加 BF16 autocast，记录融合点真实 dtype 并三次独立交替计时 | 数值检查均通过，但融合点的输入、residual、weight 和输出都仍为 FP32；完整 step 中位耗时比仅 0.9188–0.9279。这是 BF16 autocast 上下文中的退化，不是 BF16 融合内核验证 |
 
 阶段 3、4 等较早性能数字属于**单卡预热算子微基准**；阶段 13 单独测反向，阶段 21 单独测一个小 GPT 的完整 step。阶段 3 的大幅比值包含消除 PyTorch 多次 launch 的收益，阶段 4 的 epilogue 比值包含消除独立 bias launch 的收益；两者不能直接解释为模型吞吐、训练反向或对其它优化内核的加速。
 
@@ -47,6 +48,8 @@
 阶段 18–21 改用固定 Megatron 自带的 **local PyTorch 层规范**：只在探针进程内屏蔽不兼容的 Transformer Engine stub，并把 PyTorch 2.4 已存在的 DTensor 类映射到固定提交期待的导入路径；没有修改厂商包或 Megatron checkout。阶段 19 的真实选中算子路径通过 FP16/BF16 `[8,2,1024]` 及 FP32 `[8,2,256]` 的输出、loss、梯度和权重更新对照。阶段 20 的单层 GPT 以合成 token 完成完整训练 step，hook 捕获到三次连续 FP32 RMSNorm 输入 `[8,2,256]`，stride `[512,256,1]`。这是真实模型代码在**小测试配置**里的调用形状，不是生产工作负载形状；原始 JSON 见[阶段 19](evidence/stage19-20260930/)和[阶段 20](evidence/stage20-20260930/)。
 
 阶段 21 在该单层模型中仅融合 **attention BDA→pre-MLP RMSNorm 一对**；其它层保持固定 Megatron 本地实现。种子 21005–21007 各自独立进程运行一次正确性 step、3 次预热和 12 对交替顺序的 GPU event 计时。三轮均通过输出、loss、更新后参数检查；三个基线/候选中位数分别为 3.7784/3.6944、3.7747/3.6905、3.7748/3.7071 ms，倍率为 **1.0227、1.0228、1.0183×**。17-token 留出形状亦通过，3.8171/3.7328 ms。详细误差、逐次样本和早期探索失败均在[阶段 21 原始数据](evidence/stage21-20260930/)；固定版脚本与 SHA256 回执已进入 skill 的 `exp-bi-v150-corex42-stage21` 来源页。约 2% 的改善很小，仅证明此 FP32 小模型、本地后备路径、单个融合点可工作；不推断生产模型、FP16/BF16 全模型或 Transformer Engine 性能。
+
+阶段 22 把同一模型 step 置于 BF16 autocast 环境，以种子 22002–22004 各做 3 次预热和 12 对交替顺序计时。探针直接记录到融合点输入、residual、权重和归一化输出**全部仍为 FP32**。三轮输出、loss、更新后参数均通过检查，但基线/候选中位数分别为 4.7095/5.1258、4.7275/5.0951、4.6780/5.0646 ms，倍率 **0.9188、0.9279、0.9237×**。这说明阶段 21 的小幅正收益不能推广到这个 autocast 上下文；该实验也不能算实际 BF16 融合点。原始 JSON、stderr 和 SHA256 见[阶段 22 证据目录](evidence/stage22-20260930/)；来源页已纳入这组负面结果。
 
 阶段 11 的完整留出集如下，数值为三轮配对中位数比值的几何平均；`>1` 才表示比相同 tile 的 stage 1 更快。每轮 8 个 case × 3 个阶段数均通过 CPU FP64 参考后的 dtype 舍入检查，FP16 使用 `atol=rtol=0.03`，BF16 使用 `0.05`；逐轮样本与哈希在 [`evidence/stage11-20260928/`](evidence/stage11-20260928/)。
 
@@ -71,7 +74,7 @@ Windows 验证器最初用字符串 `/` 判断资产目录归属，误报 411 �
 
 阶段 14 的新来源和合成前后向结论已加入同一补丁与算子页。从固定上游 SHA 再重建后，**1766 个非缓存文件逐项哈希一致**；整库验证为 **1058 页、997 个 source ID、37 个 asset bundle、14 个 ledger、0 个孤立源文件**。BI-V150 精确查询增至 **17** 条；SM90/SM100 仍为 **286/379** 条，完整路径集合不变。Pod Linux 完整 unittest **160/160 通过**，见[阶段 14 测试日志](evidence/stage14-20260929/kernelwiki-unittest.log)。
 
-阶段 21 将完整模型证据回写为新来源页，固定上游与补丁在本机和 BI-V150 Pod 的 Linux 环境中干净重建成功：**1059 页、998 个 source ID、37 个 asset bundle、14 个 ledger、0 个孤立源文件**，KDA 加载器复制并校验 **1779 个文件**；BI-V150/SM90/SM100 查询路径为 **18/286/379**。Windows 重建版整库校验通过，KDA 加载器 2 项测试通过，项目级安装与三架构查询通过。Linux Pod 的整库校验与完整 unittest **160/160 通过**，原始[校验和测试日志](evidence/stage21-20260930/linux-rebuild/)已取回。
+阶段 21 将完整模型证据回写为新来源页，固定上游与补丁在本机和 BI-V150 Pod 的 Linux 环境中干净重建成功：**1059 页、998 个 source ID、37 个 asset bundle、14 个 ledger、0 个孤立源文件**，当时 KDA 加载器复制并校验 **1779 个文件**；BI-V150/SM90/SM100 查询路径为 **18/286/379**。Windows 重建版整库校验通过，KDA 加载器 2 项测试通过，项目级安装与三架构查询通过。Linux Pod 的整库校验与完整 unittest **160/160 通过**，原始[校验和测试日志](evidence/stage21-20260930/linux-rebuild/)已取回。阶段 22 在同一来源页补入 BF16 autocast 负面结果和 4 件证据文件；更新版从固定上游和补丁干净重建、整库校验通过，KDA 项目级加载 **1783 个文件**并复查 18/286/379 三架构路径。完整 160 项测试由下述 CI 在推送后再次运行。
 
 ### KDA 的 skill 加载入口
 
@@ -91,29 +94,29 @@ Claude Code 用户配置现已指向 Paratera，旧配置备份留在用户目�
 
 ## 5. 未完成项与外部依赖
 
-1. **生产配置与兼容运行时。** 固定 Megatron 的一层本地 GPT 后备路径已实测，但输入是合成 token、仅 FP32，且只融合一对 BDA→RMSNorm；捕获的 `[8,2,256]` 属于测试配置。当前 Pod 的 Transformer Engine stub 仍与固定提交不兼容。需要生产训练配置或其可公开的最小代表配置、兼容运行时，再采集真实形状分布，比较多层、实际精度、loss 曲线、吞吐和显存。
+1. **生产配置与兼容运行时。** 固定 Megatron 的一层本地 GPT 后备路径已实测，但输入是合成 token，融合点实际为 FP32，且只融合一对 BDA→RMSNorm；捕获的 `[8,2,256]` 属于测试配置。当前 Pod 的 Transformer Engine stub 仍与固定提交不兼容。用户目前没有生产训练配置，因此无法采集生产形状分布或评估多层实际精度、loss 曲线、吞吐和显存；待配置与兼容运行时可用后再做。
 2. **ixSYS 可视化。** CLI V4.2.0 与 NVTX 短脚本可用，但 Pod 缺少 tracefs/debugfs 的 `tracing_on` 控制节点，容器内挂载因只读限制失败。2026-09-29 再测确认内核列出 tracefs/debugfs，而容器无 `CAP_SYS_ADMIN`、`/sys` 为只读；`mount` 返回 32，ixSYS 最窄的 `cuda_kernel` 模式仍在采集前退出，未生成 `.ptrace`。原始诊断见 [`evidence/stage12-20260929/tracefs-probe.log`](evidence/stage12-20260929/tracefs-probe.log)。JSON/日志不能代替 trace。平台需在宿主机或 Pod 创建配置中提供可访问的 tracefs/debugfs 节点，再按第 8 节采集、拷回和导入。
 3. **硬件机制对应关系。** 尚未取得可读最终机器指令、计算/搬运重叠 trace、shared bank 冲突或 warp 角色拆分证据。原 NVIDIA TMA、mbarrier、TMEM、`tcgen05`、CLC、NVFP4 等仍限定原架构；当前目标端相似算法只按所测证据等级描述。
 4. **FP8/软件版本。** 当前 CoreX 4.2 的 FP8 `tl.dot` 编译失败；不能推出 BI-V150 硬件不支持。新 CoreX/Triton 构建须作为独立环境版本重新探测，不与现有性能样本合并。
-5. **KDA 上游发布。** KDA checkout 的通用加载器、Ubuntu/Windows CI 定义和 GPGPU 的重建/全库 CI 定义已准备并本地验收；KDA 上游尚未有 PR/合并。KDA 旧子模块提交 `76d27b56f804e7e7295d4c570e1e5d7eef4b0a75` 保持原样，BI-V150 扩充由外部固定提交加补丁生成。正式上游提交需符合 KDA 的 DCO 签署与贡献流程。
+5. **自有仓库交付边界。** KDA checkout 的通用加载器及 Ubuntu/Windows CI 定义以补丁保存在本 GPGPU 仓库，GPGPU 的固定版本重建/全库 CI 已上线并通过；KDA 旧子模块提交 `76d27b56f804e7e7295d4c570e1e5d7eef4b0a75` 保持原样。用户明确选择只保留自己的成果，不向 NVlabs/kda 提交 PR；KDA 上游合并不属于当前交付目标。
 
 ## 6. 下一步执行计划
 
 | 优先级 | 任务与依赖 | 具体执行 | 完成门槛与产物 |
 |---|---|---|---|
-| P0 | KDA 上游发布与 CI 绿灯 | 审阅已准备的通用加载器补丁和 DCO 要求；发布可审阅分支/PR，并观察 GPGPU 与 KDA 的 CI 真正跑通 | 上游接受或明确反馈；两端 CI 日志可追溯，旧第三方子模块不变 |
+| P0 | 自有仓库 CI 维护 | GPGPU 工作流持续从固定 KDA 和 KernelWiki 提交构建，并验证加载器、整库、160 项测试及三架构查询；更新时核对原 NVIDIA 子模块及来源边界 | GitHub Actions 保持绿色，GitLab 与 GitHub 同一提交；不向 KDA 上游发 PR |
 | P1 | 生产形状与兼容 Transformer Engine | 取得实际训练配置及目标端兼容运行时；在多层训练中捕获每个 Residual Add RMSNorm 的 rows/hidden、dtype、stride、调用次数、前/反向耗时与显存；固定调参/留出形状 | 原始 capture、环境指纹和哈希；明确阶段 21 小模型形状的覆盖范围 |
 | P1 | 扩展端到端验收 | 将阶段 21 的单对融合扩到所有合法调用点，比较实际精度和多层模型的 loss、吞吐、显存；对回退和尾块复测 | 三次独立复测、留出形状正确；短训练 loss 通过；明确净收益与退化尾部 |
 | P2 | 目标端流水机制；依赖平台 tracefs/debugfs 挂载或厂商最终指令工具 | 用已准备的 ixSYS NVTX 脚本生成 `.ptrace`，在网站检查 kernel/stream 时间线；对 `num_stages` 的最终代码、屏障与搬运重叠做证据对照 | trace 可打开且来源、版本和 workload 可追溯；只在观察到对应机制后提升迁移账本的硬件映射等级 |
 | P2 | 低精度与其他热点；依赖新工具链或真实模型热点排序 | 在新 CoreX 构建重新测 FP8/FP4 表示、缩放与 `tl.dot`；按真实热点顺序扩至 SwiGLU、Attention、Cross Entropy 或 MoE Grouped GEMM | 每项独立环境指纹、数值与性能闭环；FP8 编译失败/成功均保留日志；不跨版本借用旧结论 |
 
-**执行顺序：** 最新补丁验收已完成，先推进 P0 的 KDA 仓库集成和 P1 的真实形状采集，再做训练接入。P2 的 ixSYS 和低精度任务可在相应平台条件具备后并行启动；条件未具备时继续保持“未验证”，不补写推测。所有新结果必须回写下列迁移账本、skill 来源页及原始证据目录，并复查 SM90/SM100 查询路径集合。
+**执行顺序：** 自有仓库的加载器和 CI 已接入。生产训练配置与兼容运行时目前缺失，P1 等条件具备后再采集真实形状和扩展训练接入。P2 的 ixSYS 和低精度任务可在相应平台条件具备后启动；条件未具备时继续保持“未验证”，不补写推测。所有新结果必须回写下列迁移账本、skill 来源页及原始证据目录，并复查 SM90/SM100 查询路径集合。
 
 ## 7. Hopper/Blackwell → BI-V150 逐项迁移账本
 
 | 上游技术页 | 可迁移的思路 | BI-V150 当前证据 | 下一项验证 |
 |---|---|---|---|
-| `technique-kernel-fusion` | 合并相邻算子以减少中间张量和 launch | Residual Add RMSNorm 前向在 FP16/BF16、5 个形状上通过三次独立进程复测；阶段 13 两核反向 72 个 case-round 通过；阶段 14 合成前后向及更新 18/18 正确；阶段 21 固定 Megatron 的单层 FP32 GPT 完整 step 融合一对 BDA→RMSNorm，三次独立模型对照通过且中位耗时比 1.0183–1.0228，仅限合成 token 小模型 | 捕获生产形状和精度；与兼容优化运行时、多层完整训练及其它目标端优化反向比较 |
+| `technique-kernel-fusion` | 合并相邻算子以减少中间张量和 launch | Residual Add RMSNorm 前向 FP16/BF16 五形状三轮通过；阶段 13 两核反向 72 个 case-round、阶段 14 合成更新 18/18 正确；阶段 21 单层 FP32 GPT 一对融合的完整 step 比值 1.0183–1.0228；阶段 22 BF16 autocast 环境中的该融合点仍为 FP32，完整 step 比值 0.9188–0.9279，均限合成 token 小模型 | 捕获生产形状和真实精度；与兼容优化运行时、多层完整训练及其它目标端优化反向比较 |
 | `technique-epilogue-fusion` | 在结果写回前合并缩放、加法或激活 | FP16/BF16 GEMM+bias 三形状、四配置、三轮均正确；相同 tile 相对单独 bias launch 加速 1.33–3.94× | 对比厂商高性能 GEMM 与完整模型调用路径 |
 | `technique-tile-scheduling` | 按形状调 tile 和 launch 布局 | GEMM+bias 四配置三轮复测：127/256 方阵偏向 32×64×32/8，512 方阵偏向 64×64×32/4；仅限所测形状 | 扩大 K/N 和布局，再查编译资源与性能稳定性 |
 | `technique-register-budgeting` | 控制每程序资源占用 | CoreX 编译对象可报告 n_regs/n_spills/shared；访问核 block 256/1024/4096 分别为 3/8/26 个寄存器、零 spill，耗时非单调 | 取得 occupancy 和生成代码后再推导资源阈值 |

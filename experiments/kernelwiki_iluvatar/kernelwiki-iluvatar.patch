@@ -35608,18 +35608,18 @@ index 0000000..76beb06
 +    raise SystemExit(main())
 diff --git a/evidence/bi-v150-corex42-stage21/manifest.json b/evidence/bi-v150-corex42-stage21/manifest.json
 new file mode 100644
-index 0000000..b29ac97
+index 0000000..cce32a7
 --- /dev/null
 +++ b/evidence/bi-v150-corex42-stage21/manifest.json
-@@ -0,0 +1,66 @@
+@@ -0,0 +1,86 @@
 +{
-+  "recorded_utc": "2026-09-30T01:34:50.008138+00:00",
++  "recorded_utc": "2026-09-30T02:08:54.630720+00:00",
 +  "gpu": "Iluvatar BI-V150",
 +  "corex": "4.2.0",
 +  "torch": "2.4.1",
 +  "triton": "2.1.0 CoreX vendor build",
 +  "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
-+  "scope": "one-layer GPT local spec, synthetic token IDs, one BDA-to-pre-MLP RMSNorm fusion",
++  "scope": "one-layer GPT local spec, synthetic token IDs, one BDA-to-pre-MLP RMSNorm fusion; FP32 and BF16-autocast contexts",
 +  "files": [
 +    {
 +      "path": "stage13_backward.py",
@@ -35670,6 +35670,26 @@ index 0000000..b29ac97
 +      "path": "stage21_megatron_gpt_fusion.py",
 +      "sha256": "0bdea5ea1b2a3504fcd127f9586d58aa158f6860c015fab33beb021894854972",
 +      "bytes": 9355
++    },
++    {
++      "path": "stage22-bf16-22002.json",
++      "sha256": "f3329ee07239a1471c06defa2687b1efaf1b5346266664d3d8767e411786f909",
++      "bytes": 2074
++    },
++    {
++      "path": "stage22-bf16-22003.json",
++      "sha256": "9955878e0880e4269960443ad70ce452778c62a549683814440ea8e70ab43d15",
++      "bytes": 2077
++    },
++    {
++      "path": "stage22-bf16-22004.json",
++      "sha256": "a743467322eabd4509bfb2e0f5c7ad925bc620e9a70196390ca67b0602719251",
++      "bytes": 2079
++    },
++    {
++      "path": "stage22_megatron_autocast_probe.py",
++      "sha256": "4321d2e50202a25545797d0e1440023e003db0c5508559960bebadc59dcb7010",
++      "bytes": 2102
 +    },
 +    {
 +      "path": "stage3_residual_rmsnorm.py",
@@ -36870,6 +36890,305 @@ index 0000000..8bdab07
 +    args.output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 +    print(report["status"], args.output)
 +    return 0 if report["status"] == "passed" else 1
++
++
++if __name__ == "__main__":
++    sys.exit(main())
+diff --git a/evidence/bi-v150-corex42-stage21/stage22-bf16-22002.json b/evidence/bi-v150-corex42-stage21/stage22-bf16-22002.json
+new file mode 100644
+index 0000000..f0c9694
+--- /dev/null
++++ b/evidence/bi-v150-corex42-stage21/stage22-bf16-22002.json
+@@ -0,0 +1,72 @@
++{
++  "created_utc": "2026-09-30T02:06:55.591417+00:00",
++  "script_sha256": "0bdea5ea1b2a3504fcd127f9586d58aa158f6860c015fab33beb021894854972",
++  "torch": "2.4.1",
++  "seed": 22002,
++  "scope": "one-layer pinned Megatron GPT local-spec step; synthetic tokens; one attention BDA->pre-MLP RMSNorm fusion; no Transformer Engine; no production throughput claim; BF16 autocast around each training step",
++  "configuration": {
++    "sequence_length": 8,
++    "micro_batch_size": 2,
++    "hidden_size": 256,
++    "warmup": 3,
++    "repetitions": 12
++  },
++  "correctness": {
++    "output_max_abs": 0.004981040954589844,
++    "output_allclose": true,
++    "loss_abs": 0.0002570152282714844,
++    "loss_allclose": true,
++    "parameter_max_abs_after_sgd": 1.7002923414111137e-05,
++    "finite": true,
++    "candidate_fused_calls": 1,
++    "passed": true
++  },
++  "timing": {
++    "reference_ms": [
++      4.7114996910095215,
++      4.726480960845947,
++      4.699865818023682,
++      4.742730617523193,
++      4.696519374847412,
++      4.738480567932129,
++      4.685057640075684,
++      4.74563455581665,
++      4.763942241668701,
++      4.707442283630371,
++      4.677826881408691,
++      4.693192481994629
++    ],
++    "candidate_ms": [
++      5.1180195808410645,
++      5.040481090545654,
++      5.1353654861450195,
++      4.969461441040039,
++      5.128096103668213,
++      5.137019157409668,
++      5.135134696960449,
++      5.144057750701904,
++      5.123538494110107,
++      5.087307929992676,
++      5.1281538009643555,
++      5.119461536407471
++    ],
++    "reference_median_ms": 4.709470987319946,
++    "candidate_median_ms": 5.12581729888916,
++    "candidate_over_reference_speedup": 0.918774648550302,
++    "tokens_per_step": 16
++  },
++  "status": "passed",
++  "autocast_dtype": "torch.bfloat16",
++  "wrapper_sha256": "4321d2e50202a25545797d0e1440023e003db0c5508559960bebadc59dcb7010",
++  "candidate_observed": {
++    "shape": [
++      8,
++      2,
++      256
++    ],
++    "input_dtype": "torch.float32",
++    "residual_dtype": "torch.float32",
++    "weight_dtype": "torch.float32",
++    "normalized_output_dtype": "torch.float32"
++  }
++}
+diff --git a/evidence/bi-v150-corex42-stage21/stage22-bf16-22003.json b/evidence/bi-v150-corex42-stage21/stage22-bf16-22003.json
+new file mode 100644
+index 0000000..c706b8a
+--- /dev/null
++++ b/evidence/bi-v150-corex42-stage21/stage22-bf16-22003.json
+@@ -0,0 +1,72 @@
++{
++  "created_utc": "2026-09-30T02:07:08.301136+00:00",
++  "script_sha256": "0bdea5ea1b2a3504fcd127f9586d58aa158f6860c015fab33beb021894854972",
++  "torch": "2.4.1",
++  "seed": 22003,
++  "scope": "one-layer pinned Megatron GPT local-spec step; synthetic tokens; one attention BDA->pre-MLP RMSNorm fusion; no Transformer Engine; no production throughput claim; BF16 autocast around each training step",
++  "configuration": {
++    "sequence_length": 8,
++    "micro_batch_size": 2,
++    "hidden_size": 256,
++    "warmup": 3,
++    "repetitions": 12
++  },
++  "correctness": {
++    "output_max_abs": 0.002669811248779297,
++    "output_allclose": true,
++    "loss_abs": 9.250640869140625e-05,
++    "loss_allclose": true,
++    "parameter_max_abs_after_sgd": 1.9529834389686584e-05,
++    "finite": true,
++    "candidate_fused_calls": 1,
++    "passed": true
++  },
++  "timing": {
++    "reference_ms": [
++      4.776727199554443,
++      4.79925012588501,
++      4.729608058929443,
++      4.724699974060059,
++      4.701188564300537,
++      4.729211807250977,
++      4.714415073394775,
++      4.707130432128906,
++      4.731365203857422,
++      4.737646102905273,
++      4.7258076667785645,
++      4.725230693817139
++    ],
++    "candidate_ms": [
++      5.114338397979736,
++      5.103280544281006,
++      5.126957893371582,
++      5.0265655517578125,
++      5.0877156257629395,
++      5.180657863616943,
++      5.079215049743652,
++      5.094238758087158,
++      5.0960001945495605,
++      5.110199928283691,
++      5.093038082122803,
++      5.047519207000732
++    ],
++    "reference_median_ms": 4.7275097370147705,
++    "candidate_median_ms": 5.095119476318359,
++    "candidate_over_reference_speedup": 0.9278506144925149,
++    "tokens_per_step": 16
++  },
++  "status": "passed",
++  "autocast_dtype": "torch.bfloat16",
++  "wrapper_sha256": "4321d2e50202a25545797d0e1440023e003db0c5508559960bebadc59dcb7010",
++  "candidate_observed": {
++    "shape": [
++      8,
++      2,
++      256
++    ],
++    "input_dtype": "torch.float32",
++    "residual_dtype": "torch.float32",
++    "weight_dtype": "torch.float32",
++    "normalized_output_dtype": "torch.float32"
++  }
++}
+diff --git a/evidence/bi-v150-corex42-stage21/stage22-bf16-22004.json b/evidence/bi-v150-corex42-stage21/stage22-bf16-22004.json
+new file mode 100644
+index 0000000..a404d68
+--- /dev/null
++++ b/evidence/bi-v150-corex42-stage21/stage22-bf16-22004.json
+@@ -0,0 +1,72 @@
++{
++  "created_utc": "2026-09-30T02:07:21.218711+00:00",
++  "script_sha256": "0bdea5ea1b2a3504fcd127f9586d58aa158f6860c015fab33beb021894854972",
++  "torch": "2.4.1",
++  "seed": 22004,
++  "scope": "one-layer pinned Megatron GPT local-spec step; synthetic tokens; one attention BDA->pre-MLP RMSNorm fusion; no Transformer Engine; no production throughput claim; BF16 autocast around each training step",
++  "configuration": {
++    "sequence_length": 8,
++    "micro_batch_size": 2,
++    "hidden_size": 256,
++    "warmup": 3,
++    "repetitions": 12
++  },
++  "correctness": {
++    "output_max_abs": 0.0028409957885742188,
++    "output_allclose": true,
++    "loss_abs": 0.00040149688720703125,
++    "loss_allclose": true,
++    "parameter_max_abs_after_sgd": 1.9531697034835815e-05,
++    "finite": true,
++    "candidate_fused_calls": 1,
++    "passed": true
++  },
++  "timing": {
++    "reference_ms": [
++      4.7084808349609375,
++      4.673830986022949,
++      5.079023361206055,
++      4.682076930999756,
++      4.719615459442139,
++      4.671230792999268,
++      4.676154136657715,
++      4.934769153594971,
++      4.6509809494018555,
++      4.671518802642822,
++      4.651750087738037,
++      4.679826736450195
++    ],
++    "candidate_ms": [
++      5.119673252105713,
++      5.046900272369385,
++      5.220188617706299,
++      5.072915077209473,
++      5.049961566925049,
++      5.0330963134765625,
++      5.036673069000244,
++      5.0562310218811035,
++      5.082673072814941,
++      4.989461898803711,
++      5.424903869628906,
++      5.136768817901611
++    ],
++    "reference_median_ms": 4.677990436553955,
++    "candidate_median_ms": 5.064573049545288,
++    "candidate_over_reference_speedup": 0.9236692591439586,
++    "tokens_per_step": 16
++  },
++  "status": "passed",
++  "autocast_dtype": "torch.bfloat16",
++  "wrapper_sha256": "4321d2e50202a25545797d0e1440023e003db0c5508559960bebadc59dcb7010",
++  "candidate_observed": {
++    "shape": [
++      8,
++      2,
++      256
++    ],
++    "input_dtype": "torch.float32",
++    "residual_dtype": "torch.float32",
++    "weight_dtype": "torch.float32",
++    "normalized_output_dtype": "torch.float32"
++  }
++}
+diff --git a/evidence/bi-v150-corex42-stage21/stage22_megatron_autocast_probe.py b/evidence/bi-v150-corex42-stage21/stage22_megatron_autocast_probe.py
+new file mode 100644
+index 0000000..7f88829
+--- /dev/null
++++ b/evidence/bi-v150-corex42-stage21/stage22_megatron_autocast_probe.py
+@@ -0,0 +1,59 @@
++"""Run the stage21 full GPT comparison under BI-V150 BF16 autocast.
++
++This exploratory wrapper changes only the process-local forward precision.
++The stage21 model and candidate code remain the benchmark implementation.
++"""
++
++import argparse
++import hashlib
++import json
++import sys
++from pathlib import Path
++
++import torch
++
++import stage21_megatron_gpt_fusion as stage21
++
++
++def main():
++    parser = argparse.ArgumentParser(add_help=False)
++    parser.add_argument("--output", type=Path, required=True)
++    args, _ = parser.parse_known_args()
++    original_run_step = stage21.run_step
++    original_forward = stage21.FusedResidualRMSNorm.forward
++    observed = []
++
++    def observed_forward(ctx, x, residual, weight):
++        result = original_forward(ctx, x, residual, weight)
++        if not observed:
++            observed.append({
++                "shape": list(x.shape),
++                "input_dtype": str(x.dtype),
++                "residual_dtype": str(residual.dtype),
++                "weight_dtype": str(weight.dtype),
++                "normalized_output_dtype": str(result[0].dtype),
++            })
++        return result
++
++    def bf16_run_step(model, inputs, optimizer, *, timed=False):
++        with torch.autocast(device_type="cuda", dtype=torch.bfloat16):
++            return original_run_step(model, inputs, optimizer, timed=timed)
++
++    stage21.run_step = bf16_run_step
++    stage21.FusedResidualRMSNorm.forward = staticmethod(observed_forward)
++    try:
++        code = stage21.main()
++    finally:
++        stage21.run_step = original_run_step
++        stage21.FusedResidualRMSNorm.forward = original_forward
++    result = json.loads(args.output.read_text(encoding="utf-8"))
++    result["autocast_dtype"] = "torch.bfloat16"
++    result["wrapper_sha256"] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
++    result["candidate_observed"] = observed[0] if observed else None
++    result["scope"] += "; BF16 autocast around each training step"
++    args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
++    return code
 +
 +
 +if __name__ == "__main__":
@@ -57358,7 +57677,7 @@ index ce6386c..f6f6747 100644
 +| [Wide Vectorized Loads and Cache Policies](../wiki/techniques/vectorized-loads.md) | vectorized-loads, cache-policy, register-budgeting | sm100, sm90 | source-reported | snippet | 4 |
 diff --git a/references/iluvatar-migration-ledger.md b/references/iluvatar-migration-ledger.md
 new file mode 100644
-index 0000000..ba9163b
+index 0000000..7c84890
 --- /dev/null
 +++ b/references/iluvatar-migration-ledger.md
 @@ -0,0 +1,43 @@
@@ -57368,7 +57687,7 @@ index 0000000..ba9163b
 +
 +| 上游技术页 | 可迁移的思路 | BI-V150 当前证据 | 下一项验证 |
 +|---|---|---|---|
-+| `technique-kernel-fusion` | 合并相邻算子以减少中间张量和 launch | Residual Add RMSNorm 前向在 FP16/BF16、5 个形状上通过三次独立进程复测；两核反向在 FP16/BF16、两种 residual 输出梯度模式、6 个形状共 72 个 case-round 中通过检查；合成 autograd 与更新 18/18 正确。固定 Megatron 的单层 GPT FP32 本地路径完成一步训练，捕获 RMSNorm 输入 `[8,2,256]`；融合其中一对 BDA→RMSNorm，三次独立完整 step 对照通过，稳态中位耗时比为 1.0183–1.0228，仅限合成 token 小模型，见 `exp-bi-v150-corex42-stage21` | 捕获生产配置的形状和精度，对比兼容的优化运行时；验证更多融合调用点和长训练稳定性 |
++| `technique-kernel-fusion` | 合并相邻算子以减少中间张量和 launch | Residual Add RMSNorm 前向在 FP16/BF16、5 个形状上三轮通过；两核反向 72 个 case-round、合成 autograd 与更新 18/18 正确。固定 Megatron 单层 GPT 捕获 RMSNorm 输入 `[8,2,256]`；融合一对 BDA→RMSNorm 后，FP32 小模型三轮完整 step 中位耗时比为 1.0183–1.0228。另在 BF16 autocast 上下文中，该融合点实际仍是 FP32，三轮完整 step 比值为 0.9188–0.9279，不能称为 BF16 融合验证，见 `exp-bi-v150-corex42-stage21` | 捕获生产配置的形状和精度，对比兼容运行时；验证更多融合调用点和长训练稳定性 |
 +| `technique-epilogue-fusion` | 在结果写回前合并缩放、加法或激活 | FP16/BF16 GEMM+bias 三形状、四配置、三轮均正确；相同 tile 相对单独 bias launch 加速 1.33–3.94× | 对比厂商高性能 GEMM 与完整模型调用路径 |
 +| `technique-tile-scheduling` | 按形状调 tile 和 launch 布局 | GEMM+bias 四配置三轮复测：127/256 方阵偏向 32×64×32/8，512 方阵偏向 64×64×32/4；仅限所测形状 | 扩大 K/N 和布局，再查编译资源与性能稳定性 |
 +| `technique-register-budgeting` | 控制每程序资源占用 | CoreX 编译对象可报告 n_regs/n_spills/shared；访问核 block 256/1024/4096 分别为 3/8/26 个寄存器、零 spill，耗时非单调 | 取得 occupancy 和生成代码后再推导资源阈值 |
@@ -58017,10 +58336,10 @@ index 0000000..5123857
 +source hash.
 diff --git a/sources/experiments/bi-v150-corex42-stage21.md b/sources/experiments/bi-v150-corex42-stage21.md
 new file mode 100644
-index 0000000..dbbfd96
+index 0000000..cdcb537
 --- /dev/null
 +++ b/sources/experiments/bi-v150-corex42-stage21.md
-@@ -0,0 +1,75 @@
+@@ -0,0 +1,93 @@
 +---
 +id: exp-bi-v150-corex42-stage21
 +title: "BI-V150 CoreX 4.2 pinned Megatron GPT local-route fusion, 2026-09-30"
@@ -58036,7 +58355,7 @@ index 0000000..dbbfd96
 +  megatron: "5be9626709af2722333bf54797c954c09edeada3"
 +evidence_files:
 +  - path: evidence/bi-v150-corex42-stage21/manifest.json
-+    sha256: 9138e15f807b964126f762521918c6f3c6471d0ce848ba1f234070c8accd13eb
++    sha256: 58d1341f838325d44828545459967a9af242e176015cd93f0c962a8718cbda6c
 +  - path: evidence/bi-v150-corex42-stage21/stage3_residual_rmsnorm.py
 +    sha256: 308063fe9674f7542b1be8de2a734b74a708b05c2ed3c4ef4273878c42eb6eaa
 +  - path: evidence/bi-v150-corex42-stage21/stage13_backward.py
@@ -58059,6 +58378,14 @@ index 0000000..dbbfd96
 +    sha256: 53dd0cfe01f96fc9d9546015cd94662ba7d44902806c3d02bc8a7ec3f6de73f1
 +  - path: evidence/bi-v150-corex42-stage21/stage21-final-21008-s17.json
 +    sha256: 2d8d03640345485029e02553cceb1f5050c279c5fec18a3b631b1b52b9c953c1
++  - path: evidence/bi-v150-corex42-stage21/stage22_megatron_autocast_probe.py
++    sha256: 4321d2e50202a25545797d0e1440023e003db0c5508559960bebadc59dcb7010
++  - path: evidence/bi-v150-corex42-stage21/stage22-bf16-22002.json
++    sha256: f3329ee07239a1471c06defa2687b1efaf1b5346266664d3d8767e411786f909
++  - path: evidence/bi-v150-corex42-stage21/stage22-bf16-22003.json
++    sha256: 9955878e0880e4269960443ad70ce452778c62a549683814440ea8e70ab43d15
++  - path: evidence/bi-v150-corex42-stage21/stage22-bf16-22004.json
++    sha256: a743467322eabd4509bfb2e0f5c7ad925bc620e9a70196390ca67b0602719251
 +---
 +
 +# What ran
@@ -58090,12 +58417,22 @@ index 0000000..dbbfd96
 +and measured 3.8171/3.7328 ms (1.0226 ratio). Each step processed two
 +sequences on one BI-V150; all timings use synchronized GPU events.
 +
-+These small ratios apply only to the tested single-layer FP32 local fallback
-+with synthetic tokens. They do not establish a production model speedup,
-+FP16/BF16 full-model behavior, Transformer Engine behavior, or a general
-+Hopper/Blackwell instruction equivalent. The full JSON samples, script hashes,
-+and environment are in the bundle manifest. Earlier exploratory failures and
-+their JSONs remain in the downstream experiment repository.
++An additional three-process test placed the same model step under PyTorch BF16
++autocast (seeds 22002–22004; three warmups and 12 alternated timed pairs per
++process). All output, loss, and post-SGD parameter checks passed. However, the
++captured candidate inputs, residuals, weight, and normalized output were **all
++FP32**, despite the surrounding BF16 autocast context. Reference/candidate
++step medians were 4.7095/5.1258, 4.7275/5.0951, and 4.6780/5.0646 ms:
++ratios 0.9188, 0.9279, and 0.9237. This is a reproducible slowdown for this
++autocast context and is **not** a BF16 fused-kernel result. Avoid selecting the
++candidate here based only on the FP32 no-autocast result.
++
++All ratios apply only to the tested single-layer local fallback with synthetic
++tokens. They do not establish a production model speedup, FP16/BF16 fused model
++behavior, Transformer Engine behavior, or a general Hopper/Blackwell
++instruction equivalent. The full JSON samples, script hashes, and environment
++are in the bundle manifest. Earlier exploratory failures and their JSONs
++remain in the downstream experiment repository.
 diff --git a/sources/experiments/bi-v150-corex42-stage3.md b/sources/experiments/bi-v150-corex42-stage3.md
 new file mode 100644
 index 0000000..02a7eb6
@@ -58423,7 +58760,7 @@ index 0000000..44718d5
 +The full source also includes `tl.dot`, masks, launch grid, correctness, and paired GPU-event timing. For 127 and 256 cases, 32×64×32 with 8 warps had the lowest median fused time among the tested candidates; for 512 it was 64×64×32 with 4 warps. This is a **shape-specific shortlist**, not a general tile recommendation. The 1.334–3.936× gains include removing a PyTorch bias launch and do not compare against a vendor optimized GEMM or measure end-to-end model latency. The [source record](../../sources/experiments/bi-v150-corex42-migration-batch1.md) hashes all raw runs and logs.
 diff --git a/wiki/kernels/residual-rmsnorm-backward-bi-v150.md b/wiki/kernels/residual-rmsnorm-backward-bi-v150.md
 new file mode 100644
-index 0000000..6a0aa27
+index 0000000..804d6ed
 --- /dev/null
 +++ b/wiki/kernels/residual-rmsnorm-backward-bi-v150.md
 @@ -0,0 +1,71 @@
@@ -58497,10 +58834,10 @@ index 0000000..6a0aa27
 +
 +This is a backward-only microbenchmark against a multi-op analytical PyTorch sequence. Its 10.379–15.405× range includes launch and temporary-tensor savings in that baseline. It does not demonstrate full-training throughput, an optimized backward comparison, or NVIDIA-specific instruction behavior. Keep the previous [forward page](residual-rmsnorm-bi-v150.md) scoped to forward measurements.
 +
-+The separate [synthetic autograd integration](../../sources/experiments/bi-v150-corex42-stage14.md) connected this backward to the stage-3 forward and one SGD weight update. All 18 FP16/BF16 case-rounds passed comparison with PyTorch, including both observable outputs and all three gradients. Subsequently, a [pinned Megatron GPT local-route test](../../sources/experiments/bi-v150-corex42-stage21.md) used process-local compatibility mappings to run one complete one-layer FP32 model step and fused a single attention BDA-to-pre-MLP RMSNorm pair. Three independent processes passed the model output, loss, and post-SGD parameter checks, with 1.0183–1.0228 full-step median ratios on synthetic tokens. The installed Transformer Engine remains incompatible; these figures do not cover its optimized route, a production model, or FP16/BF16 full-model training.
++The separate [synthetic autograd integration](../../sources/experiments/bi-v150-corex42-stage14.md) connected this backward to the stage-3 forward and one SGD weight update. All 18 FP16/BF16 case-rounds passed comparison with PyTorch, including both observable outputs and all three gradients. Subsequently, a [pinned Megatron GPT local-route test](../../sources/experiments/bi-v150-corex42-stage21.md) used process-local compatibility mappings to run one complete one-layer FP32 model step and fused a single attention BDA-to-pre-MLP RMSNorm pair. Three independent processes passed the model output, loss, and post-SGD parameter checks, with 1.0183–1.0228 full-step median ratios on synthetic tokens. A BF16-autocast context still fed FP32 tensors to this fusion point and slowed the whole step to 0.9188–0.9279 of the local baseline in three repeats. The installed Transformer Engine remains incompatible; these figures do not cover its optimized route, a production model, or FP16/BF16 fused full-model training.
 diff --git a/wiki/kernels/residual-rmsnorm-bi-v150.md b/wiki/kernels/residual-rmsnorm-bi-v150.md
 new file mode 100644
-index 0000000..97f745d
+index 0000000..ecbd236
 --- /dev/null
 +++ b/wiki/kernels/residual-rmsnorm-bi-v150.md
 @@ -0,0 +1,107 @@
@@ -58608,7 +58945,7 @@ index 0000000..97f745d
 +
 +The full source contains indexing, launch configuration, correctness checks, and the analytical PyTorch backward fallback; the fragment alone is not runnable. `1.0 / tl.sqrt` was required because `tl.rsqrt` was absent from the tested vendor Triton build.
 +
-+A separate [BI-V150 backward page](residual-rmsnorm-backward-bi-v150.md) records a two-kernel target implementation and its backward-only measurements. The forward numbers above remain forward-only and should not be combined into a training-throughput claim. A later [pinned Megatron GPT experiment](../../sources/experiments/bi-v150-corex42-stage21.md) fused one attention BDA-to-pre-MLP RMSNorm pair inside a complete one-layer FP32 model step with synthetic tokens; three independent processes passed correctness, with full-step median ratios of 1.0183–1.0228 relative to that local model baseline. This is a separately measured, small-model result and does not change the scope of the forward microbenchmarks.
++A separate [BI-V150 backward page](residual-rmsnorm-backward-bi-v150.md) records a two-kernel target implementation and its backward-only measurements. The forward numbers above remain forward-only and should not be combined into a training-throughput claim. A later [pinned Megatron GPT experiment](../../sources/experiments/bi-v150-corex42-stage21.md) fused one attention BDA-to-pre-MLP RMSNorm pair inside a complete one-layer FP32 model step with synthetic tokens; three independent processes passed correctness, with full-step median ratios of 1.0183–1.0228 relative to that local model baseline. In a separate BF16-autocast context, the fused inputs remained FP32 and the full-step ratios fell to 0.9188–0.9279. Select by the actual model context; these are small-model results and do not change the scope of the forward microbenchmarks.
 +
 +For 64×768 and 64×1024, `num_warps=1` failed the normalized-output check in all three runs for both dtypes and was excluded from timing and selection. It passed at 7×769. Choose warp count only after correctness checks on the target shape. The [`source record`](../../sources/experiments/bi-v150-corex42-stage3.md) links every raw JSON and log with SHA256 receipts.
 diff --git a/wiki/kernels/rmsnorm-bi-v150.md b/wiki/kernels/rmsnorm-bi-v150.md
@@ -58753,7 +59090,7 @@ index 0000000..cd2b8c2
 +the short timing samples do not establish an optimal implementation.
 diff --git a/wiki/migration/blackwell-to-bi-v150.md b/wiki/migration/blackwell-to-bi-v150.md
 new file mode 100644
-index 0000000..3a26b96
+index 0000000..74c03b5
 --- /dev/null
 +++ b/wiki/migration/blackwell-to-bi-v150.md
 @@ -0,0 +1,51 @@
@@ -58790,7 +59127,7 @@ index 0000000..3a26b96
 +
 +| NVIDIA knowledge | Portable hypothesis | BI-V150 status | Next evidence needed |
 +|---|---|---|---|
-+| [Kernel fusion](../techniques/kernel-fusion.md) | Fuse residual add and RMSNorm, then reduce weight-gradient partials without target-end atomics | [Forward](../kernels/residual-rmsnorm-bi-v150.md) passed FP16/BF16 checks on five shapes; the separate [two-kernel backward](../kernels/residual-rmsnorm-backward-bi-v150.md) passed 72 case-rounds across six shapes and both observable-gradient modes. Their synthetic autograd composition passed 18 case-rounds. A later one-layer pinned Megatron GPT FP32 local-route test fused one BDA-to-norm pair; three independent full-step comparisons passed, with only 1.0183–1.0228 median ratios on synthetic tokens. See [source](../../sources/experiments/bi-v150-corex42-stage21.md) for shapes and limits | Capture production model shapes and compare a compatible optimized runtime and realistic precision; test more than one fused pair |
++| [Kernel fusion](../techniques/kernel-fusion.md) | Fuse residual add and RMSNorm, then reduce weight-gradient partials without target-end atomics | [Forward](../kernels/residual-rmsnorm-bi-v150.md) passed FP16/BF16 checks on five shapes; the separate [two-kernel backward](../kernels/residual-rmsnorm-backward-bi-v150.md) passed 72 case-rounds across six shapes and both observable-gradient modes. Their synthetic autograd composition passed 18 case-rounds. A one-layer pinned Megatron GPT FP32 local-route test fused one BDA-to-norm pair: three full-step ratios 1.0183–1.0228 on synthetic tokens. Under BF16 autocast, this fusion point remained FP32 and three full-step ratios were 0.9188–0.9279. See [source](../../sources/experiments/bi-v150-corex42-stage21.md) | Capture production model shapes and compare a compatible optimized runtime and realistic precision; test more than one fused pair |
 +| [Epilogue fusion](../techniques/epilogue-fusion.md) | Apply scaling or an elementwise operation before a result is written | [FP16/BF16 GEMM+bias](../kernels/gemm-bias-bi-v150.md) passed three-process target checks and same-tile paired timing; the benefit includes removal of a PyTorch bias launch | Compare with vendor-optimized GEMM and model-level calls |
 +| [Tile scheduling](../techniques/tile-scheduling.md) | Search tile and warp settings for a fixed workload | Four target configurations were compared on three GEMM shapes; the best candidate changed at 512×512×512 | Expand shape/layout coverage and inspect compiled resources |
 +

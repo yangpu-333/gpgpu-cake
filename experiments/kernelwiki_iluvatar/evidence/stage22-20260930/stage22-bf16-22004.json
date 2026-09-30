@@ -1,0 +1,72 @@
+{
+  "created_utc": "2026-09-30T02:07:21.218711+00:00",
+  "script_sha256": "0bdea5ea1b2a3504fcd127f9586d58aa158f6860c015fab33beb021894854972",
+  "torch": "2.4.1",
+  "seed": 22004,
+  "scope": "one-layer pinned Megatron GPT local-spec step; synthetic tokens; one attention BDA->pre-MLP RMSNorm fusion; no Transformer Engine; no production throughput claim; BF16 autocast around each training step",
+  "configuration": {
+    "sequence_length": 8,
+    "micro_batch_size": 2,
+    "hidden_size": 256,
+    "warmup": 3,
+    "repetitions": 12
+  },
+  "correctness": {
+    "output_max_abs": 0.0028409957885742188,
+    "output_allclose": true,
+    "loss_abs": 0.00040149688720703125,
+    "loss_allclose": true,
+    "parameter_max_abs_after_sgd": 1.9531697034835815e-05,
+    "finite": true,
+    "candidate_fused_calls": 1,
+    "passed": true
+  },
+  "timing": {
+    "reference_ms": [
+      4.7084808349609375,
+      4.673830986022949,
+      5.079023361206055,
+      4.682076930999756,
+      4.719615459442139,
+      4.671230792999268,
+      4.676154136657715,
+      4.934769153594971,
+      4.6509809494018555,
+      4.671518802642822,
+      4.651750087738037,
+      4.679826736450195
+    ],
+    "candidate_ms": [
+      5.119673252105713,
+      5.046900272369385,
+      5.220188617706299,
+      5.072915077209473,
+      5.049961566925049,
+      5.0330963134765625,
+      5.036673069000244,
+      5.0562310218811035,
+      5.082673072814941,
+      4.989461898803711,
+      5.424903869628906,
+      5.136768817901611
+    ],
+    "reference_median_ms": 4.677990436553955,
+    "candidate_median_ms": 5.064573049545288,
+    "candidate_over_reference_speedup": 0.9236692591439586,
+    "tokens_per_step": 16
+  },
+  "status": "passed",
+  "autocast_dtype": "torch.bfloat16",
+  "wrapper_sha256": "4321d2e50202a25545797d0e1440023e003db0c5508559960bebadc59dcb7010",
+  "candidate_observed": {
+    "shape": [
+      8,
+      2,
+      256
+    ],
+    "input_dtype": "torch.float32",
+    "residual_dtype": "torch.float32",
+    "weight_dtype": "torch.float32",
+    "normalized_output_dtype": "torch.float32"
+  }
+}

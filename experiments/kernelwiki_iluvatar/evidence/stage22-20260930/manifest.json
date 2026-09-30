@@ -1,0 +1,47 @@
+{
+  "generated_utc": "2026-09-30T02:11:09.836046+00:00",
+  "scope": "BF16 autocast context, observed FP32 fusion inputs, synthetic one-layer GPT",
+  "script": "../../stage22_megatron_autocast_probe.py",
+  "files": [
+    {
+      "path": "stage22-bf16-22002.json",
+      "sha256": "f3329ee07239a1471c06defa2687b1efaf1b5346266664d3d8767e411786f909",
+      "bytes": 2074
+    },
+    {
+      "path": "stage22-bf16-22002.stderr",
+      "sha256": "7efbd9b6346de213b23c10db487134783f0c9b50670a941487709a4946e4175e",
+      "bytes": 2396
+    },
+    {
+      "path": "stage22-bf16-22003.json",
+      "sha256": "9955878e0880e4269960443ad70ce452778c62a549683814440ea8e70ab43d15",
+      "bytes": 2077
+    },
+    {
+      "path": "stage22-bf16-22003.stderr",
+      "sha256": "b4cec4b43f2d8483b95a78e3c3673d0fada98e24cc26866d5ebea00ab79b2738",
+      "bytes": 2396
+    },
+    {
+      "path": "stage22-bf16-22004.json",
+      "sha256": "a743467322eabd4509bfb2e0f5c7ad925bc620e9a70196390ca67b0602719251",
+      "bytes": 2079
+    },
+    {
+      "path": "stage22-bf16-22004.stderr",
+      "sha256": "0b3142393af2b608809feddb8a5c09dfb106df0b8f3f42c172ff110e991d658e",
+      "bytes": 2396
+    },
+    {
+      "path": "stage22-bf16-first.json",
+      "sha256": "4203f85055536cbc4bae7c6d4f0c384a7c08ce778a40cd9534c5b61e255a97d4",
+      "bytes": 1482
+    },
+    {
+      "path": "stage22-bf16-first.stderr",
+      "sha256": "f556df26cb793a28a7d64c356b3c4fa2a25df962584f54b217cb461b003c1940",
+      "bytes": 2396
+    }
+  ]
+}
