@@ -1,0 +1,16 @@
+Use /kernelwiki-iluvatar and KDA basic-flow to draft a higher-throughput experiment plan. Read only these task files and the project-managed skill:
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/higher_gain/contract.json
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/higher_gain/references/native_cross_entropy.py
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/higher_gain/references/native_language_loss.py
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/evidence/higher-gain-native-profile.json
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/candidates/0003/candidate.py
+- .claude/skills/kernelwiki-iluvatar/wiki/kernels/residual-rmsnorm-megatron-bi-v150.md
+- .claude/skills/kernelwiki-iluvatar/wiki/languages/triton-iluvatar.md
+
+The user wants higher complete-step improvement using the same Claude Code/API/BI-V150 flow. Keep pinned native Megatron baseline, 4-layer H512 seq128 mb2 vocab1024 FP32 model, SGD, data, tolerance and wall-clock timing unchanged. Parent 0003 already improved native by ~1.08%; further residual-only micro-tuning has limited scope. Extend ONLY the optimized model instance's compute_language_model_loss with TP=1 zero-smoothing fused cross entropy, retaining parent residual/RMSNorm exactly. Frozen external adapter/verifier will own TP/config/layout fallback and all checks, not generated code.
+
+Warm profile recorded 9 native RMSNorm forward calls and 3 all_reduce calls per step. CUDA legacy profiler inserted ~19540 cudaEventRecord calls for 5 steps, has large overhead and even negative self-device aggregates; use call patterns as diagnostic clues, never as promotion throughput or precise exclusive GPU fractions. Do not reuse the old cold cProfile total as a hot-path timing claim.
+
+Native CE is subtle: FP32 input logits are overwritten into probabilities, low-precision logits convert to FP32 and original input remains unchanged. Stable loss is log(sum(exp(logits-max))) minus the shifted target logit. Out-of-range targets (-100 included) are NOT ignored: predicted term=0, gradient softmax*dloss. Loss is FP32; backward returns gradients cast to original input dtype by autograd. Only TP=1 is in the optimized contract; TP>1 and unsupported layouts use captured actual native fallback. No distributed speedup claims. Preserve the two-resident-model temporary memory gate; allocating an extra FP32 probabilities matrix unnecessarily may fail it.
+
+Return ONLY JSON with plan_markdown and source_ids. Plan should state conservative one-kernel row-wise CE forward saving probabilities and one-kernel backward, compiler/launch-cache reuse without cached tensors/results, native semantic tests including boundary labels/extreme logits/nonuniform gradients, and complete-step gates. A materially higher result requires three new primary native ratios each >1, geomean >=1.05, and normalized independent current-best control >=1.02; holdout/autocast >=.98 and memory <=5%. Correct rejection is allowed. No code yet, no shell, no edits, no unrelated files or credentials.

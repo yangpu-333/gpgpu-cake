@@ -1,0 +1,49 @@
+{
+  "candidate_id": "0004",
+  "phase": "smoke",
+  "started_utc": "2026-10-02T10:00:55.155215+00:00",
+  "runs": [
+    {
+      "name": "residual-smoke",
+      "command": [
+        "/root/miniconda3/bin/python",
+        "-u",
+        "/mnt/kda-biv150-stage3/megatron_cc/benchmark.py",
+        "--megatron-root",
+        "/private/atrex-megatron/src/megatron-lm",
+        "--candidate",
+        "/mnt/kda-biv150-stage3/megatron_cc/higher_gain/candidates/0004/candidate.py",
+        "--mode",
+        "operator",
+        "--smoke",
+        "--output",
+        "/mnt/kda-biv150-stage3/megatron_cc/higher_gain/evidence/0004-smoke/residual-smoke.json"
+      ],
+      "started_utc": "2026-10-02T10:00:55.165845+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T10:01:08.454213+00:00"
+    },
+    {
+      "name": "ce-smoke",
+      "command": [
+        "/root/miniconda3/bin/python",
+        "-u",
+        "/mnt/kda-biv150-stage3/megatron_cc/higher_gain/driver.py",
+        "--megatron-root",
+        "/private/atrex-megatron/src/megatron-lm",
+        "--candidate",
+        "/mnt/kda-biv150-stage3/megatron_cc/higher_gain/candidates/0004/candidate.py",
+        "--variant",
+        "extended",
+        "--mode",
+        "cross-entropy",
+        "--smoke",
+        "--output",
+        "/mnt/kda-biv150-stage3/megatron_cc/higher_gain/evidence/0004-smoke/ce-smoke.json"
+      ],
+      "started_utc": "2026-10-02T10:01:08.455917+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T10:01:22.595129+00:00"
+    }
+  ]
+}

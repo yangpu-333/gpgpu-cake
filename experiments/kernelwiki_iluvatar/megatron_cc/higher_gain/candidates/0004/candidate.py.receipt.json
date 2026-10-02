@@ -1,0 +1,19 @@
+{
+  "response": "experiments\\kernelwiki_iluvatar\\megatron_cc\\higher_gain\\evidence\\cc-candidate-0004.json",
+  "response_sha256": "636f8afb62a7b5d4eccbacbe209d64a9e784f906aa5a92efec8c9d8db3241f15",
+  "output_sha256": "790321e2187e73b8e9390e5f204837fc95f92ee1c51c9ee60ff7f3e89d305352",
+  "cli_model": [
+    "Claude-Opus-4.8"
+  ],
+  "source_ids": [
+    "higher_gain/contract.json#cross_entropy_contract",
+    "higher_gain/docs/draft.md#native-ce-semantics-and-conservative-kernel-design",
+    "higher_gain/driver.py#fusion_reason-and-cross_entropy_cases",
+    "higher_gain/references/native_cross_entropy.py#VocabParallelCrossEntropy",
+    "candidates/0003/candidate.py#fused-residual-rmsnorm-parent",
+    "references/compiled-launch-api.txt#CompiledKernel-repeated-launch",
+    "wiki/languages/triton-iluvatar.md#corex42-triton21-compat"
+  ],
+  "rationale": "Keeps parent 0003's residual-add + RMSNorm source byte-identical (same math, epsilon, two-kernel backward, process-local _COMPILED_KERNELS cache, autocast native fallback, num_warps=4, supported range) and appends a TP=1 fused cross entropy so the incremental effect is attributable. Forward: one row-wise Triton kernel over S*B rows with BLOCK=next_power_of_2(V) and a col<V mask for non-power-of-two V. Per row it loads logits into FP32 (masked lanes = -inf so they never win the max or contribute to sumexp), computes the row max M, Z=logits-M, exp(Z), sumexp, and loss = log(sumexp) - predicted, where predicted = Z at the target column guarded by (col==target)&mask so out-of-range labels (target<0 or target>=V, including -100 and lanes landing in [V,BLOCK)) contribute a zero predicted term and get loss=log(sumexp); they are NOT treated as ignore_index. It then overwrites the FP32 buffer in place with softmax P=exp(Z)/sumexp. Input mutation is explicit and native-exact: logits.float() returns the SAME tensor for FP32 input, so the observable forward mutation (input becomes P) is reproduced, while for float16/bfloat16 it allocates a separate FP32 copy and the original low-precision input stays exactly unchanged. No mark_dirty, exactly as native mutates its FP32 buffer in place without it; the autograd.Function saves P after the mutation so the saved-tensor version check passes, and the final-logits consumption scope is the same narrow one as native. Backward: one row-wise kernel reuses the saved probability storage as the gradient buffer (no extra [S,B,V] temporary, as native does), computing (P - onehot)*grad_output where onehot is set only at a valid in-range target ((col==target)&mask); out-of-range rows get plain softmax*grad_output with no class -1. The FP32 gradient is returned and autograd casts it back to the logits input dtype, matching native. V=1 degenerates correctly (loss 0, zero gradient at a correct single-class target). Both launchers reuse compiled code via the vendor CompiledKernel[(gx,gy,gz)] repeated-launch API keyed on device/V/block/pointer-alignment, pass only non-constexpr runtime args in order, and run on the current stream; the grid (rows) is a launch parameter so differing shapes reuse the same compiled kernel. No reshape/view/contiguous copies beyond a single contiguous() on the loss gradient, no tensor caching, no synchronization, and no imports beyond torch/triton. Performance is unverified; the CE fusion may remove many small aten launches, but the loop can correctly end in rejection if the complete-step wall-clock, current-best-normalized, no-regression or memory gates are not met.",
+  "parent": "0003"
+}

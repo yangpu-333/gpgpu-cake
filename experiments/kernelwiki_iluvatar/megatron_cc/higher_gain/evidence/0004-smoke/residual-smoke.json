@@ -1,0 +1,149 @@
+{
+  "utc": "2026-10-02T10:00:55.218573+00:00",
+  "mode": "operator",
+  "candidate_sha256": "790321e2187e73b8e9390e5f204837fc95f92ee1c51c9ee60ff7f3e89d305352",
+  "harness_sha256": "360e57d1d1baa9d2ddc477224576a7ce87864ff9c3e0aefde546fbf4266cc96a",
+  "contract_sha256": "13f71ba192ea8fdf474e89729d2c19fa1a17e9aee3b125a7966abca83941a883",
+  "seed": 23001,
+  "baseline": "pinned Megatron native local PyTorch backend",
+  "status": "passed",
+  "environment": {
+    "torch": "2.4.1",
+    "triton": "2.1.0",
+    "gpu": "Iluvatar BI-V150",
+    "memory_bytes": 34359738368,
+    "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3"
+  },
+  "native_sources_sha256": {
+    "megatron/core/transformer/torch_norm.py": "98259df6a9f8ad565160731e322c7b7b4f9b222fac2e459cd3610c0cbdad34dc",
+    "megatron/core/fusions/fused_bias_dropout.py": "897e60739d918ec917f7a8bfc578ac82a5a413f3bb80314a747a18d69c7b95df"
+  },
+  "cases": [
+    {
+      "shape": [
+        16,
+        256
+      ],
+      "dtype": "torch.float32",
+      "residual_dtype": "torch.float32",
+      "epsilon": 1e-05,
+      "scale": 1,
+      "residual_grad_present": true,
+      "checks": {
+        "normalized": {
+          "passed": true,
+          "max_abs": 4.76837158203125e-07,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 6.6499152183532715
+        },
+        "residual": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0,
+          "rtol": 0,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 5.637975692749023
+        },
+        "dx": {
+          "passed": true,
+          "max_abs": 4.76837158203125e-07,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 5.899708271026611
+        },
+        "dresidual": {
+          "passed": true,
+          "max_abs": 4.76837158203125e-07,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 5.899708271026611
+        },
+        "dweight": {
+          "passed": true,
+          "max_abs": 1.430511474609375e-06,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 13.273606300354004
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true,
+      "baseline_valid": true,
+      "forward": {
+        "metric": "GPU event us per call",
+        "samples": {
+          "native": [
+            58.21231007575989,
+            53.12923192977905,
+            52.851539850234985
+          ],
+          "candidate": [
+            7.289999723434448,
+            7.289230823516846,
+            7.289999723434448
+          ]
+        },
+        "medians": {
+          "native": 53.12923192977905,
+          "candidate": 7.289999723434448
+        },
+        "speedup": 7.287960760682846,
+        "warmup": 10,
+        "launches_per_sample": 5
+      },
+      "forward_backward": {
+        "metric": "GPU event us per call",
+        "samples": {
+          "native": [
+            286.2430810928345,
+            282.4976921081543,
+            284.74230766296387
+          ],
+          "candidate": [
+            21.24461531639099,
+            93.0899977684021,
+            20.970000326633453
+          ]
+        },
+        "medians": {
+          "native": 284.74230766296387,
+          "candidate": 21.24461531639099
+        },
+        "speedup": 13.403034294684304,
+        "warmup": 10,
+        "launches_per_sample": 5
+      }
+    }
+  ],
+  "case_summary": {
+    "finite_native_cases": 1,
+    "finite_correctness_passed": 1,
+    "native_invalid_cases": 0,
+    "native_invalid_compatibility_passed": 0
+  }
+}

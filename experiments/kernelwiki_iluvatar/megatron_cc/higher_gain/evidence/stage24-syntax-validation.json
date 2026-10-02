@@ -1,0 +1,5 @@
+{
+  "command": "AST parse all owned higher_gain Python source files (no execution)",
+  "python_files": 14,
+  "passed": true
+}

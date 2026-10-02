@@ -1,0 +1,11 @@
+{
+  "candidate_sha256": "790321e2187e73b8e9390e5f204837fc95f92ee1c51c9ee60ff7f3e89d305352",
+  "parent_normalized_source_verbatim_prefix": true,
+  "static_imports": [
+    "torch",
+    "triton",
+    "triton.language"
+  ],
+  "baseline_and_timing_unchanged": true,
+  "scope_caveat": "CE target casts to int32; the frozen matrix uses only int32-representable labels. Wider int64 out-of-range values require additional validation or code repair before broad semantic claims."
+}

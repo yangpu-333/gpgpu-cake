@@ -1,0 +1,645 @@
+{
+  "utc": "2026-10-02T10:01:08.507961+00:00",
+  "mode": "ce",
+  "requested_mode": "cross-entropy",
+  "variant": "extended",
+  "seed": 24001,
+  "base_harness_sha256": "360e57d1d1baa9d2ddc477224576a7ce87864ff9c3e0aefde546fbf4266cc96a",
+  "base_contract_sha256": "13f71ba192ea8fdf474e89729d2c19fa1a17e9aee3b125a7966abca83941a883",
+  "extension_harness_sha256": "1a4c71b0ac6e892f7c9e4acc4c76d571178f38f56d56a17bf7256f8ff21d6508",
+  "contract_sha256": "1ae25ce8341540929a90115f812de5a59e80c24312a4c3626184a32a702fef28",
+  "candidate_sha256": "790321e2187e73b8e9390e5f204837fc95f92ee1c51c9ee60ff7f3e89d305352",
+  "baseline": "pinned Megatron native local PyTorch backend",
+  "status": "passed",
+  "environment": {
+    "torch": "2.4.1",
+    "triton": "2.1.0",
+    "gpu": "Iluvatar BI-V150",
+    "memory_bytes": 34359738368,
+    "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3"
+  },
+  "native_sources_sha256": {
+    "megatron/core/transformer/torch_norm.py": "98259df6a9f8ad565160731e322c7b7b4f9b222fac2e459cd3610c0cbdad34dc",
+    "megatron/core/fusions/fused_bias_dropout.py": "897e60739d918ec917f7a8bfc578ac82a5a413f3bb80314a747a18d69c7b95df",
+    "megatron/core/tensor_parallel/cross_entropy.py": "136feeeb3234d3d9d0e8b4fb91d82e88d4cb951e50f2a4d85ee6a5e0974b7f5d",
+    "megatron/core/models/common/language_module/language_module.py": "8426efb81706bf6669bce97d35a582ea40d13d33b6c491d9cf8af29b2861baaf",
+    "megatron/core/models/gpt/gpt_model.py": "f42663bf44c39273ae4febfac9ce9e567c5d4b31bf60aa3c6df99372eff45cc1"
+  },
+  "cases": [
+    {
+      "shape": [
+        128,
+        2,
+        1024
+      ],
+      "dtype": "torch.float32",
+      "distribution": "random-0.001",
+      "labels": "valid-boundaries",
+      "layout": "contiguous",
+      "route": "optimized",
+      "fallback_reason": null,
+      "logits": {
+        "shape": [
+          128,
+          2,
+          1024
+        ],
+        "stride": [
+          2048,
+          1024,
+          1
+        ],
+        "dtype": "torch.float32",
+        "device": "cuda:0"
+      },
+      "label_values": [
+        0,
+        1023
+      ],
+      "timing": "none; correctness only",
+      "checks": {
+        "forward_input_matches_native_probabilities": {
+          "passed": true,
+          "max_abs": 2.3283064365386963e-10,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 0.0009810776682570577
+        },
+        "native_targets_exactly_unchanged": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.int64",
+          "reference_dtype": "torch.int64",
+          "atol": 0,
+          "rtol": 0,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 1023.0
+        },
+        "candidate_targets_exactly_unchanged": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.int64",
+          "reference_dtype": "torch.int64",
+          "atol": 0,
+          "rtol": 0,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 1023.0
+        },
+        "loss": {
+          "passed": true,
+          "max_abs": 4.76837158203125e-07,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 6.934473514556885
+        },
+        "dlogits": {
+          "passed": true,
+          "max_abs": 2.3283064365386963e-10,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 1.7365375757217407
+        }
+      },
+      "native_error": null,
+      "candidate_error": null,
+      "loss": {
+        "shape": [
+          128,
+          2
+        ],
+        "stride": [
+          2,
+          1
+        ],
+        "dtype": "torch.float32",
+        "device": "cuda:0"
+      },
+      "baseline_valid": true,
+      "passed": true
+    },
+    {
+      "shape": [
+        128,
+        2,
+        1024
+      ],
+      "dtype": "torch.float32",
+      "distribution": "random-0.001",
+      "labels": "valid-boundaries",
+      "layout": "last-stride-2",
+      "route": "native-fallback",
+      "fallback_reason": "layout",
+      "logits": {
+        "shape": [
+          128,
+          2,
+          1024
+        ],
+        "stride": [
+          4096,
+          2048,
+          2
+        ],
+        "dtype": "torch.float32",
+        "device": "cuda:0"
+      },
+      "label_values": [
+        0,
+        1023
+      ],
+      "timing": "none; correctness only",
+      "checks": {
+        "forward_input_matches_native_probabilities": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 0.000981222139671445
+        },
+        "native_targets_exactly_unchanged": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.int64",
+          "reference_dtype": "torch.int64",
+          "atol": 0,
+          "rtol": 0,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 1023.0
+        },
+        "candidate_targets_exactly_unchanged": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.int64",
+          "reference_dtype": "torch.int64",
+          "atol": 0,
+          "rtol": 0,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 1023.0
+        },
+        "loss": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 6.933812141418457
+        },
+        "dlogits": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 1.7365365028381348
+        }
+      },
+      "native_error": null,
+      "candidate_error": null,
+      "loss": {
+        "shape": [
+          128,
+          2
+        ],
+        "stride": [
+          2,
+          1
+        ],
+        "dtype": "torch.float32",
+        "device": "cuda:0"
+      },
+      "baseline_valid": true,
+      "passed": true
+    },
+    {
+      "shape": [
+        128,
+        2,
+        1024
+      ],
+      "dtype": "torch.float32",
+      "distribution": "random-0.001",
+      "labels": "valid-boundaries",
+      "layout": "transpose-first-two",
+      "route": "native-fallback",
+      "fallback_reason": "layout",
+      "logits": {
+        "shape": [
+          128,
+          2,
+          1024
+        ],
+        "stride": [
+          1024,
+          131072,
+          1
+        ],
+        "dtype": "torch.float32",
+        "device": "cuda:0"
+      },
+      "label_values": [
+        0,
+        1023
+      ],
+      "timing": "none; correctness only",
+      "checks": {},
+      "native_error": {
+        "type": "RuntimeError",
+        "message": "view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead."
+      },
+      "candidate_error": {
+        "type": "RuntimeError",
+        "message": "view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead."
+      },
+      "baseline_valid": false,
+      "passed": false,
+      "compatibility_passed": true,
+      "compatibility_scope": "native layout error; not finite correctness"
+    },
+    {
+      "shape": [
+        128,
+        2,
+        1024
+      ],
+      "dtype": "torch.float32",
+      "distribution": "random-0.001",
+      "labels": "outside-and-boundaries",
+      "layout": "contiguous",
+      "route": "optimized",
+      "fallback_reason": null,
+      "logits": {
+        "shape": [
+          128,
+          2,
+          1024
+        ],
+        "stride": [
+          2048,
+          1024,
+          1
+        ],
+        "dtype": "torch.float32",
+        "device": "cuda:0"
+      },
+      "label_values": [
+        -100,
+        -1,
+        0,
+        1023,
+        1024,
+        1025
+      ],
+      "timing": "none; correctness only",
+      "checks": {
+        "forward_input_matches_native_probabilities": {
+          "passed": true,
+          "max_abs": 2.3283064365386963e-10,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 0.0009810191113501787
+        },
+        "native_targets_exactly_unchanged": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.int64",
+          "reference_dtype": "torch.int64",
+          "atol": 0,
+          "rtol": 0,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 1025.0
+        },
+        "candidate_targets_exactly_unchanged": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.int64",
+          "reference_dtype": "torch.int64",
+          "atol": 0,
+          "rtol": 0,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 1025.0
+        },
+        "loss": {
+          "passed": true,
+          "max_abs": 4.76837158203125e-07,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 6.933751106262207
+        },
+        "dlogits": {
+          "passed": true,
+          "max_abs": 2.3283064365386963e-10,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 1.7012791633605957
+        }
+      },
+      "native_error": null,
+      "candidate_error": null,
+      "loss": {
+        "shape": [
+          128,
+          2
+        ],
+        "stride": [
+          2,
+          1
+        ],
+        "dtype": "torch.float32",
+        "device": "cuda:0"
+      },
+      "baseline_valid": true,
+      "passed": true
+    },
+    {
+      "shape": [
+        128,
+        2,
+        1024
+      ],
+      "dtype": "torch.float32",
+      "distribution": "random-0.001",
+      "labels": "outside-and-boundaries",
+      "layout": "last-stride-2",
+      "route": "native-fallback",
+      "fallback_reason": "layout",
+      "logits": {
+        "shape": [
+          128,
+          2,
+          1024
+        ],
+        "stride": [
+          4096,
+          2048,
+          2
+        ],
+        "dtype": "torch.float32",
+        "device": "cuda:0"
+      },
+      "label_values": [
+        -100,
+        -1,
+        0,
+        1023,
+        1024,
+        1025
+      ],
+      "timing": "none; correctness only",
+      "checks": {
+        "forward_input_matches_native_probabilities": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 0.00098128872923553
+        },
+        "native_targets_exactly_unchanged": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.int64",
+          "reference_dtype": "torch.int64",
+          "atol": 0,
+          "rtol": 0,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 1025.0
+        },
+        "candidate_targets_exactly_unchanged": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.int64",
+          "reference_dtype": "torch.int64",
+          "atol": 0,
+          "rtol": 0,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 1025.0
+        },
+        "loss": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 6.933090686798096
+        },
+        "dlogits": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 1.7012760639190674
+        }
+      },
+      "native_error": null,
+      "candidate_error": null,
+      "loss": {
+        "shape": [
+          128,
+          2
+        ],
+        "stride": [
+          2,
+          1
+        ],
+        "dtype": "torch.float32",
+        "device": "cuda:0"
+      },
+      "baseline_valid": true,
+      "passed": true
+    },
+    {
+      "shape": [
+        128,
+        2,
+        1024
+      ],
+      "dtype": "torch.float32",
+      "distribution": "random-0.001",
+      "labels": "outside-and-boundaries",
+      "layout": "transpose-first-two",
+      "route": "native-fallback",
+      "fallback_reason": "layout",
+      "logits": {
+        "shape": [
+          128,
+          2,
+          1024
+        ],
+        "stride": [
+          1024,
+          131072,
+          1
+        ],
+        "dtype": "torch.float32",
+        "device": "cuda:0"
+      },
+      "label_values": [
+        -100,
+        -1,
+        0,
+        1023,
+        1024,
+        1025
+      ],
+      "timing": "none; correctness only",
+      "checks": {},
+      "native_error": {
+        "type": "RuntimeError",
+        "message": "view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead."
+      },
+      "candidate_error": {
+        "type": "RuntimeError",
+        "message": "view size is not compatible with input tensor's size and stride (at least one dimension spans across two contiguous subspaces). Use .reshape(...) instead."
+      },
+      "baseline_valid": false,
+      "passed": false,
+      "compatibility_passed": true,
+      "compatibility_scope": "native layout error; not finite correctness"
+    }
+  ],
+  "case_summary": {
+    "expected_cases": 6,
+    "observed_cases": 6,
+    "finite_native_cases": 4,
+    "finite_correctness_passed": 4,
+    "native_invalid_cases": 2,
+    "native_invalid_compatibility_passed": 2
+  },
+  "cross_entropy_dispatch": {
+    "optimized": 2,
+    "fallback": 4,
+    "fallback_reasons": {
+      "layout": 4
+    }
+  },
+  "compiled_kernel_inventory": {
+    "scope": "process-local compiled-kernel cache and code-format metadata only; no tensor/result values or assembly contents; presence does not establish particular hardware instructions or per-call kernel execution",
+    "compiled_objects": 2,
+    "caches": [
+      {
+        "cache_name": "_COMPILED_KERNELS",
+        "compiled_entries": [
+          {
+            "cache_key": [
+              "ce_forward",
+              0,
+              1024,
+              1024,
+              [
+                true,
+                true,
+                true
+              ]
+            ],
+            "compiled_type": "triton.compiler.compiler.CompiledKernel",
+            "available_asm_keys": [
+              "ast",
+              "cubin",
+              "llir",
+              "sass",
+              "ttgir",
+              "ttir"
+            ],
+            "metadata_type": "builtins.dict"
+          },
+          {
+            "cache_key": [
+              "ce_backward",
+              0,
+              1024,
+              1024,
+              [
+                true,
+                true,
+                true,
+                true
+              ]
+            ],
+            "compiled_type": "triton.compiler.compiler.CompiledKernel",
+            "available_asm_keys": [
+              "ast",
+              "cubin",
+              "llir",
+              "sass",
+              "ttgir",
+              "ttir"
+            ],
+            "metadata_type": "builtins.dict"
+          }
+        ]
+      }
+    ]
+  }
+}

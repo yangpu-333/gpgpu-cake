@@ -1,0 +1,26 @@
+{
+  "recorded_at": "2026-10-02",
+  "freeze_point": "Before first candidate GPU evaluation; base v3 harness and contract remain exact unchanged",
+  "contract_sha256": "1ae25ce8341540929a90115f812de5a59e80c24312a4c3626184a32a702fef28",
+  "base_harness_sha256": "360e57d1d1baa9d2ddc477224576a7ce87864ff9c3e0aefde546fbf4266cc96a",
+  "extension_harness_sha256": "1a4c71b0ac6e892f7c9e4acc4c76d571178f38f56d56a17bf7256f8ff21d6508",
+  "preflight_validity_fixes": [
+    "One-row CE case must keep a nonzero upstream gradient; applied before any candidate evaluation.",
+    "Require exact variant/model configuration/128 CE dispatches and base-contract hash in final decision."
+  ],
+  "draft_corrections": [
+    "Raw CLI plan says CE uses autocast fallback. Actual contract/adapter allow CE in supported autocast inputs, subject to unchanged full model correctness; only parent residual/RMSNorm has mandatory native autocast fallback.",
+    "Low-precision CE probabilities require a separate FP32 buffer just as native .float() does; only FP32 CE can reuse original storage.",
+    "Profiler records operation counts as hotspot clues and is excluded from throughput evidence."
+  ],
+  "sequence": [
+    "CLI plan",
+    "CLI child 0004",
+    "residual and CE smoke",
+    "CE full matrix and primary screen",
+    "if necessary feedback and distinct child",
+    "three residual + three CE + three primary + three current-best + holdout/autocast",
+    "independent compiled CE runner audit",
+    "fixed gate decision"
+  ]
+}

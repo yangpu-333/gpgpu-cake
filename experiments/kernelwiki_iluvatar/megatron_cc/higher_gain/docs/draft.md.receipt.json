@@ -1,0 +1,20 @@
+{
+  "response": "experiments\\kernelwiki_iluvatar\\megatron_cc\\higher_gain\\evidence\\cc-plan.json",
+  "response_sha256": "10e194313944f93bdd20af60284f4b20eb37b9258ff7c80118939c4dd55aed0e",
+  "output_sha256": "a3c7dcc206b0edf48014d599f76ec78ae2ed7efec688ece54299c4ec72c67322",
+  "cli_model": [
+    "Claude-Opus-4.8"
+  ],
+  "source_ids": [
+    "E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/higher_gain/contract.json",
+    "E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/higher_gain/references/native_cross_entropy.py",
+    "E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/higher_gain/references/native_language_loss.py",
+    "E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/evidence/higher-gain-native-profile.json",
+    "E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/candidates/0003/candidate.py",
+    "kernel-residual-rmsnorm-megatron-bi-v150",
+    "lang-triton-iluvatar",
+    "exp-bi-v150-corex42-stage23"
+  ],
+  "rationale": null,
+  "parent": null
+}

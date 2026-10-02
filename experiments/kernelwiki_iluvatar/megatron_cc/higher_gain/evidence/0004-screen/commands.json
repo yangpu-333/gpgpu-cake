@@ -1,0 +1,53 @@
+{
+  "candidate_id": "0004",
+  "phase": "screen",
+  "started_utc": "2026-10-02T10:03:16.593499+00:00",
+  "runs": [
+    {
+      "name": "ce-24001",
+      "command": [
+        "/root/miniconda3/bin/python",
+        "-u",
+        "/mnt/kda-biv150-stage3/megatron_cc/higher_gain/driver.py",
+        "--megatron-root",
+        "/private/atrex-megatron/src/megatron-lm",
+        "--candidate",
+        "/mnt/kda-biv150-stage3/megatron_cc/higher_gain/candidates/0004/candidate.py",
+        "--variant",
+        "extended",
+        "--mode",
+        "cross-entropy",
+        "--seed",
+        "24001",
+        "--output",
+        "/mnt/kda-biv150-stage3/megatron_cc/higher_gain/evidence/0004-screen/ce-24001.json"
+      ],
+      "started_utc": "2026-10-02T10:03:16.599092+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T10:03:35.245570+00:00"
+    },
+    {
+      "name": "primary-24001",
+      "command": [
+        "/root/miniconda3/bin/python",
+        "-u",
+        "/mnt/kda-biv150-stage3/megatron_cc/higher_gain/driver.py",
+        "--megatron-root",
+        "/private/atrex-megatron/src/megatron-lm",
+        "--candidate",
+        "/mnt/kda-biv150-stage3/megatron_cc/higher_gain/candidates/0004/candidate.py",
+        "--variant",
+        "extended",
+        "--mode",
+        "model",
+        "--seed",
+        "24001",
+        "--output",
+        "/mnt/kda-biv150-stage3/megatron_cc/higher_gain/evidence/0004-screen/primary-24001.json"
+      ],
+      "started_utc": "2026-10-02T10:03:35.248157+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T10:03:52.441034+00:00"
+    }
+  ]
+}

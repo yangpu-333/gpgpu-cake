@@ -1,0 +1,443 @@
+{
+  "candidate_id": "0006",
+  "contract": "megatron-native-biv150-cc-v4-ce-extension",
+  "candidate_sha256": "4a5c2180114396412b1c99907837ab970b2a9efdffe85e0a46f5527cc0790201",
+  "best_candidate_sha256": "b426ef0a309d41450e00e4ce2a1e32a71567a75b08776e27fa6fbc3bb4c566a8",
+  "base_harness_sha256": "360e57d1d1baa9d2ddc477224576a7ce87864ff9c3e0aefde546fbf4266cc96a",
+  "extension_harness_sha256": "1a4c71b0ac6e892f7c9e4acc4c76d571178f38f56d56a17bf7256f8ff21d6508",
+  "contract_sha256": "1ae25ce8341540929a90115f812de5a59e80c24312a4c3626184a32a702fef28",
+  "parent_contract_sha256": "13f71ba192ea8fdf474e89729d2c19fa1a17e9aee3b125a7966abca83941a883",
+  "decision": "promote_for_tested_scope",
+  "checks": {
+    "all_14_required_runs_complete": true,
+    "run_modes_and_seeds_match_manifest": true,
+    "frozen_parent_and_current_best_sources_match": true,
+    "all_recorded_source_hashes_match_exact_files": true,
+    "all_correctness_and_native_compatibility_pass": true,
+    "all_training_measurements_match_frozen_protocol": true,
+    "contract_training_protocol_matches_frozen_parent": true,
+    "all_model_adapter_counts_cover_every_step": true,
+    "main_shape_ce_forward_and_backward_kernel_execution_audited": true,
+    "contract_thresholds_are_at_least_required_strictness": true,
+    "three_primary_rounds_each_faster_than_native": true,
+    "native_primary_geomean_meets_contract": true,
+    "three_normalized_control_comparisons_each_faster": true,
+    "normalized_control_geomean_meets_contract": true,
+    "holdout_and_autocast_meet_contract": true,
+    "all_eight_training_memory_regressions_meet_contract": true
+  },
+  "thresholds": {
+    "native_geomean_min": 1.05,
+    "normalized_current_best_geomean_min": 1.02,
+    "holdout_and_autocast_min": 0.98,
+    "memory_regression_max_fraction": 0.05
+  },
+  "primary_speedups_vs_native": [
+    1.2027528603856796,
+    1.2132854809463962,
+    1.1577045974566453
+  ],
+  "primary_geomean_vs_native": 1.1910017116756388,
+  "current_best_speedups_vs_own_native": [
+    0.9990271006824294,
+    1.0042888182357705,
+    1.0267076401744937
+  ],
+  "normalized_speedups_vs_current_best": [
+    1.2039241573767983,
+    1.2081041418720255,
+    1.1275893469146563
+  ],
+  "normalized_geomean_vs_current_best": 1.179283318897192,
+  "control_comparison_method": "Normalized independent-process comparisons: (extension/native) / (current-best/native). These are not same-process paired, three-arm measurements.",
+  "primary_median_ms": {
+    "primary-24002": {
+      "native": 11.6825089789927,
+      "candidate": 9.713141713291407
+    },
+    "primary-24003": {
+      "native": 11.58487880602479,
+      "candidate": 9.548353613354266
+    },
+    "primary-24004": {
+      "native": 11.50166008155793,
+      "candidate": 9.934883308596909
+    },
+    "best-24002": {
+      "native": 11.245911568403244,
+      "candidate": 11.256863363087177
+    },
+    "best-24003": {
+      "native": 11.183938011527061,
+      "candidate": 11.136176972649992
+    },
+    "best-24004": {
+      "native": 11.552318534813821,
+      "candidate": 11.251809261739254
+    }
+  },
+  "robustness_speedups_vs_native": {
+    "holdout-24005": 1.21976229556883,
+    "autocast-24006": 1.0816323166539565
+  },
+  "temporary_peak_memory_fraction": {
+    "primary-24002": 0.0,
+    "primary-24003": 0.0,
+    "primary-24004": 0.0,
+    "best-24002": 0.0,
+    "best-24003": 0.0,
+    "best-24004": 0.0,
+    "holdout-24005": 0.0,
+    "autocast-24006": 0.0
+  },
+  "memory_scope": "Temporary peak over two resident models; not single-model total memory.",
+  "residual_case_summaries": {
+    "residual-24002": {
+      "finite_native_cases": 224,
+      "finite_correctness_passed": 224,
+      "native_invalid_cases": 16,
+      "native_invalid_compatibility_passed": 16
+    },
+    "residual-24003": {
+      "finite_native_cases": 224,
+      "finite_correctness_passed": 224,
+      "native_invalid_cases": 16,
+      "native_invalid_compatibility_passed": 16
+    },
+    "residual-24004": {
+      "finite_native_cases": 224,
+      "finite_correctness_passed": 224,
+      "native_invalid_cases": 16,
+      "native_invalid_compatibility_passed": 16
+    }
+  },
+  "cross_entropy_case_summaries": {
+    "ce-24002": {
+      "expected_cases": 630,
+      "observed_cases": 630,
+      "finite_native_cases": 504,
+      "finite_correctness_passed": 504,
+      "native_invalid_cases": 126,
+      "native_invalid_compatibility_passed": 126
+    },
+    "ce-24003": {
+      "expected_cases": 630,
+      "observed_cases": 630,
+      "finite_native_cases": 504,
+      "finite_correctness_passed": 504,
+      "native_invalid_cases": 126,
+      "native_invalid_compatibility_passed": 126
+    },
+    "ce-24004": {
+      "expected_cases": 630,
+      "observed_cases": 630,
+      "finite_native_cases": 504,
+      "finite_correctness_passed": 504,
+      "native_invalid_cases": 126,
+      "native_invalid_compatibility_passed": 126
+    }
+  },
+  "report_sha256": {
+    "residual-24002": "2a95e0dadd9aec64483631ed68871dbb580fab8d2a3e9369112da78e3fa648be",
+    "residual-24003": "00ffd349091ad7c038decd78b87a69f7ed4c51d2556254cf4028a85e09cf3ce9",
+    "residual-24004": "d9e93ef2f3339de7375718098810239dec758580b13642ad9701137b9feb824b",
+    "ce-24002": "5a6ef31085ee572992f0180e9e0e366dea2bea134329dbac598adc840a6e5650",
+    "ce-24003": "674bae2bb278f234561f05745eb519f4426909a9ed19874ff14114156ab41a04",
+    "ce-24004": "d590e9f37ca581f6fed438e1524f91354bb5463cb293c4b4453d040224b0efe3",
+    "primary-24002": "4d721b769f1dc289f11fa35a57565ae8bbea9b87cbddd7d79f401a8f26f725e2",
+    "primary-24003": "e156b1972c8b046387a7915a24e781e8d831117e1054fb0bf9c017e5dc7b5495",
+    "primary-24004": "fe7cba4c9f799147a0cb889699e15170cd0a55e1bd7a7195f1178b6f5e6ef788",
+    "best-24002": "2158ab07d494eb7ab53eae1454945ee09096325588a5246b58506dc7c30159de",
+    "best-24003": "9da71ac60c190e6e09ba64afff546d9e6524cbb5b5e851d42a28aeadcf1bd8b1",
+    "best-24004": "8741c04a608aec9f8c4b1b36b57fe8ea9597ded1dc3977b2f6e10302111f6d75",
+    "holdout-24005": "8aae58f2519fd6083cfb46947788ffa8c63cd925dc4dcfb16d5d3e32faeb1931",
+    "autocast-24006": "dd4fdd5f56b906a19eac5a1105e9d082aefdcb0e1e5384e670743b8a58a17aa8"
+  },
+  "per_run_gates": {
+    "identity": {
+      "residual-24002": true,
+      "residual-24003": true,
+      "residual-24004": true,
+      "ce-24002": true,
+      "ce-24003": true,
+      "ce-24004": true,
+      "primary-24002": true,
+      "primary-24003": true,
+      "primary-24004": true,
+      "best-24002": true,
+      "best-24003": true,
+      "best-24004": true,
+      "holdout-24005": true,
+      "autocast-24006": true
+    },
+    "sources": {
+      "residual-24002": true,
+      "residual-24003": true,
+      "residual-24004": true,
+      "ce-24002": true,
+      "ce-24003": true,
+      "ce-24004": true,
+      "primary-24002": true,
+      "primary-24003": true,
+      "primary-24004": true,
+      "best-24002": true,
+      "best-24003": true,
+      "best-24004": true,
+      "holdout-24005": true,
+      "autocast-24006": true
+    },
+    "correctness": {
+      "residual-24002": true,
+      "residual-24003": true,
+      "residual-24004": true,
+      "ce-24002": true,
+      "ce-24003": true,
+      "ce-24004": true,
+      "primary-24002": true,
+      "primary-24003": true,
+      "primary-24004": true,
+      "best-24002": true,
+      "best-24003": true,
+      "best-24004": true,
+      "holdout-24005": true,
+      "autocast-24006": true
+    },
+    "measurements": {
+      "residual-24002": true,
+      "residual-24003": true,
+      "residual-24004": true,
+      "ce-24002": true,
+      "ce-24003": true,
+      "ce-24004": true,
+      "primary-24002": true,
+      "primary-24003": true,
+      "primary-24004": true,
+      "best-24002": true,
+      "best-24003": true,
+      "best-24004": true,
+      "holdout-24005": true,
+      "autocast-24006": true
+    },
+    "adapter_coverage": {
+      "residual-24002": true,
+      "residual-24003": true,
+      "residual-24004": true,
+      "ce-24002": true,
+      "ce-24003": true,
+      "ce-24004": true,
+      "primary-24002": true,
+      "primary-24003": true,
+      "primary-24004": true,
+      "best-24002": true,
+      "best-24003": true,
+      "best-24004": true,
+      "holdout-24005": true,
+      "autocast-24006": true
+    }
+  },
+  "dispatch_audit": {
+    "path": "E:\\code\\GPGPU\\experiments\\kernelwiki_iluvatar\\megatron_cc\\higher_gain\\evidence\\0006-dispatch-audit.json",
+    "sha256": "beb3543505a8bc9fa3dc077005e76997b5913d8b1aa060eb84713c805a2d03e7",
+    "passed": true,
+    "payload": {
+      "candidate_sha256": "4a5c2180114396412b1c99907837ab970b2a9efdffe85e0a46f5527cc0790201",
+      "base_harness_sha256": "360e57d1d1baa9d2ddc477224576a7ce87864ff9c3e0aefde546fbf4266cc96a",
+      "base_contract_sha256": "13f71ba192ea8fdf474e89729d2c19fa1a17e9aee3b125a7966abca83941a883",
+      "extension_harness_sha256": "1a4c71b0ac6e892f7c9e4acc4c76d571178f38f56d56a17bf7256f8ff21d6508",
+      "contract_sha256": "1ae25ce8341540929a90115f812de5a59e80c24312a4c3626184a32a702fef28",
+      "operation": "cross_entropy",
+      "shape": [
+        128,
+        2,
+        1024
+      ],
+      "logits_dtype": "torch.float32",
+      "loss_dtype": "torch.float32",
+      "launches": [
+        {
+          "phase": "forward",
+          "grid": [
+            256,
+            1,
+            1
+          ],
+          "name": "_ce_forward_kernel_0d1d2d",
+          "asm_keys": [
+            "ast",
+            "cubin",
+            "llir",
+            "sass",
+            "ttgir",
+            "ttir"
+          ],
+          "scope": "observed CompiledKernel runner invocation; no instruction equivalence claim"
+        },
+        {
+          "phase": "backward",
+          "grid": [
+            256,
+            1,
+            1
+          ],
+          "name": "_ce_backward_kernel_0d1d2d3d",
+          "asm_keys": [
+            "ast",
+            "cubin",
+            "llir",
+            "sass",
+            "ttgir",
+            "ttir"
+          ],
+          "scope": "observed CompiledKernel runner invocation; no instruction equivalence claim"
+        },
+        {
+          "phase": "forward",
+          "grid": [
+            256,
+            1,
+            1
+          ],
+          "name": "_ce_forward_kernel_0d1d2d",
+          "asm_keys": [
+            "ast",
+            "cubin",
+            "llir",
+            "sass",
+            "ttgir",
+            "ttir"
+          ],
+          "scope": "observed CompiledKernel runner invocation; no instruction equivalence claim"
+        },
+        {
+          "phase": "backward",
+          "grid": [
+            256,
+            1,
+            1
+          ],
+          "name": "_ce_backward_kernel_0d1d2d3d",
+          "asm_keys": [
+            "ast",
+            "cubin",
+            "llir",
+            "sass",
+            "ttgir",
+            "ttir"
+          ],
+          "scope": "observed CompiledKernel runner invocation; no instruction equivalence claim"
+        }
+      ],
+      "forward": {
+        "compiled_kernel_names": [
+          "_ce_forward_kernel_0d1d2d"
+        ],
+        "launch_counts": {
+          "_ce_forward_kernel_0d1d2d": 2
+        }
+      },
+      "backward": {
+        "compiled_kernel_names": [
+          "_ce_backward_kernel_0d1d2d3d"
+        ],
+        "launch_counts": {
+          "_ce_backward_kernel_0d1d2d3d": 2
+        }
+      },
+      "forward_compiled_launches": 2,
+      "backward_compiled_launches": 2,
+      "wide_int64_out_of_range_probe": {
+        "loss": {
+          "passed": true,
+          "max_abs": 1.1920928955078125e-07,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 2.3796210289001465
+        },
+        "dlogits": {
+          "passed": true,
+          "max_abs": 2.9802322387695312e-08,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true,
+          "comparison_device": "CPU float64",
+          "reference_abs_max": 0.19054634869098663
+        }
+      },
+      "autocast_exact_native_checks": [
+        {
+          "input_dtype": "torch.float32",
+          "loss_exact_native": {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0,
+            "rtol": 0,
+            "finite": true,
+            "comparison_device": "CPU float64",
+            "reference_abs_max": 9.904180526733398
+          },
+          "dlogits_exact_native": {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0,
+            "rtol": 0,
+            "finite": true,
+            "comparison_device": "CPU float64",
+            "reference_abs_max": 2.2619080543518066
+          }
+        },
+        {
+          "input_dtype": "torch.bfloat16",
+          "loss_exact_native": {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0,
+            "rtol": 0,
+            "finite": true,
+            "comparison_device": "CPU float64",
+            "reference_abs_max": 9.383106231689453
+          },
+          "dlogits_exact_native": {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.bfloat16",
+            "reference_dtype": "torch.bfloat16",
+            "atol": 0,
+            "rtol": 0,
+            "finite": true,
+            "comparison_device": "CPU float64",
+            "reference_abs_max": 2.1875
+          }
+        }
+      ],
+      "autocast_triton_runner_launches": 0,
+      "passed": true,
+      "scope": "Independent CE-only observed compiled-runner audit; not timed throughput"
+    }
+  },
+  "issues": [],
+  "evidence_folder": "E:\\code\\GPGPU\\experiments\\kernelwiki_iluvatar\\megatron_cc\\higher_gain\\evidence\\0006-final",
+  "limitations": [
+    "Synthetic pinned Megatron GPT steps; production training is not established.",
+    "Current-best controls run independently; normalized ratios are indicative controls, not direct paired comparisons.",
+    "Residual operator reports retain the frozen parent v3 contract and base verifier.",
+    "Autocast results must be interpreted using actual executed candidate dispatch; passing does not establish low-precision fusion."
+  ]
+}

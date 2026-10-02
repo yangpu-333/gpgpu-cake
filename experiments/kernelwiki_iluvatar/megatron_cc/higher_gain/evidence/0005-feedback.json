@@ -1,0 +1,47 @@
+{
+  "candidate_id": "0005",
+  "decision": "rejected_due_to_autocast_correctness",
+  "native_primary_speedups": [
+    1.1732346983482653,
+    1.178757770825077,
+    1.1499031783426186
+  ],
+  "native_primary_geomean": 1.1672312705934729,
+  "normalized_current_best_geomean": 1.132385430109528,
+  "residual_all_passed": true,
+  "ce_all_passed": true,
+  "holdout_ratio": 1.263842521349691,
+  "int64_audit_passed": true,
+  "autocast_output_failures": [
+    {
+      "step": 1,
+      "passed": false,
+      "max_abs": 0.007993698120117188,
+      "bad_elements": 5,
+      "actual_dtype": "torch.float32",
+      "reference_dtype": "torch.float32",
+      "atol": 0.0003,
+      "rtol": 0.001,
+      "finite": true,
+      "comparison_device": "CPU float64",
+      "reference_abs_max": 8.032716751098633
+    },
+    {
+      "step": 2,
+      "passed": false,
+      "max_abs": 0.007979869842529297,
+      "bad_elements": 5,
+      "actual_dtype": "torch.float32",
+      "reference_dtype": "torch.float32",
+      "atol": 0.0003,
+      "rtol": 0.001,
+      "finite": true,
+      "comparison_device": "CPU float64",
+      "reference_abs_max": 8.778831481933594
+    }
+  ],
+  "parameter_gradient_checks": "passed unchanged tolerance, but output failures still require rejection",
+  "actual_ce_logits_dtype": "torch.bfloat16",
+  "actual_ce_loss_dtype": "torch.float32",
+  "next_step": "retain verified FP32 Triton CE, use exact native-equivalent TP=1 torch operations for CE when CUDA autocast active; no verifier/tolerance changes"
+}

@@ -1,0 +1,11 @@
+Use /kernelwiki-iluvatar. Generate candidate0005 as a MINIMAL child of0004. Read only:
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/higher_gain/contract.json
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/higher_gain/candidates/0004/candidate.py
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/higher_gain/evidence/0004-feedback.json
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/higher_gain/references/native_cross_entropy.py
+
+Measured0004: all630 CE cases passed (504 finite and126 native layout-error fallback compatibility); primary FP32 model output/loss/allgradients/SGD checks passed; complete-step screen native11.4916ms vs candidate9.6389ms, ratio1.192218; temporary peak same. These are SCREEN results only, not final acceptance. An independent actual-compiled-runner audit confirmed CE forward/backward launches but the additional wide int64 target probe failed: loss max error2.7277, dlogits max error1.0000, 3/4rows wrong.
+
+Cause: both CE kernels load target:int64 then cast it to tl.int32. Native supports all int64 targets and masks target<0 or target>=V. Values [-2^63, 2^32, 2^32+16, 2^63-1] were tested at V17; overflow can turn them into a valid class. Repair only the GPU target comparison: preserve loaded target as int64, or perform range masking in full int64 BEFORE any safe narrowing. Every out-of-range label must have predicted term0 and no onehot gradient subtraction. Prefer just .to(tl.int64) or leave tl.load's int64 type and allow integer comparison promotion. Do not change model, baseline, verifier, gates, tolerances, RNG, timing, row/warp/cache tuning, RMSNorm source, CE math or buffers. Parent0003 residual/RMSNorm prefix must remain EXACT verbatim, and0004CE kernels/cache/entrypoints should be otherwise unchanged. Retain support for V1, padded lanes, original FP32 input mutation, lowprecision original unchanged, and arbitrary signed/zero dloss. Update appended comments to explain int64 preservation, but keep code minimal.
+
+Return only JSON candidate_code (complete standalone Python), rationale, source_ids, parent("0004"), supported_scope. Do not claim promotion or production/multi-GPU/BF16-fused-RMS gains. Only Read; no edits, shell or unrelated files/credentials.

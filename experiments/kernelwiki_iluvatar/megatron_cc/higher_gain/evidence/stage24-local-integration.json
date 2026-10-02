@@ -1,0 +1,36 @@
+{
+  "recorded_at": "2026-10-02",
+  "skill_base": "b6b4301f15e8ce6955a56776690643ce5db369e6",
+  "kda_base": "ef6ce617693ef0782b3ecb9f37e39bbf10226a90",
+  "rebuilt_from_fixed_local_upstream_and_repository_patches": true,
+  "fresh_project_install_and_managed_cli_update": {
+    "installed_files_each": 2041,
+    "verified_files_each": 2041,
+    "architecture_paths": {"bi-v150": 22, "sm90": 286, "sm100": 379},
+    "exit_code_each": 0
+  },
+  "loader_unit_tests": {
+    "command": "python -m unittest discover -s experiments/kernelwiki_iluvatar/upstream-kda-stage24-final/tests -p test_load_external_skill.py -v",
+    "tests": 2,
+    "seconds": 1.509,
+    "status": "OK",
+    "exit_code": 0
+  },
+  "linux_skill_tests": {
+    "command": "python -u -m unittest discover -s tests -p 'test_*.py' -q",
+    "tests": 160,
+    "seconds": 163.180,
+    "status": "OK",
+    "exit_code": 0,
+    "raw_stderr": "stage24-linux-tests.stderr"
+  },
+  "linux_validator": {
+    "pages": 1063,
+    "source_ids": 1000,
+    "verbatim_assets": 37,
+    "candidate_ledgers": 14,
+    "exit_code": 0,
+    "raw_stdout": "stage24-linux-validation.stdout"
+  },
+  "scope": "Delivery summary of observed commands; GPU acceptance is recorded separately in decision-0006.json."
+}

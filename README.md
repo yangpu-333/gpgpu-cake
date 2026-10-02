@@ -16,14 +16,17 @@ CoreX 4.2.0、厂商 Triton 2.1.0；所有候选保留正确性检查、逐轮�
 | 已验证内容 | BI-V150 实测结果 |
 |---|---|
 | Residual Add RMSNorm 融合 | FP16/BF16、5 个形状、各 3 轮通过前向与参考梯度检查；前向相对**未融合 PyTorch 算子序列**为 10.12–14.65× |
-| Megatron 原生后端闭环 | Claude Code CLI 使用适配 skill 迭代 3 个候选；四层 FP32 合成 GPT 三轮完整 step 墙钟倍率为 **1.0116/1.0162/1.0048×**，平均吞吐提升约 **1.08%**。前向、梯度与 SGD 参数通过 CPU 数值复核；autocast 通过原生回退保持兼容 |
+| Megatron 原生后端：阶段 24 最新结果 | Claude Code CLI 保留原残差/RMSNorm，新增 TP=1 词表交叉熵融合；同一四层 FP32 合成 GPT 三轮完整 step 倍率为 **1.2028/1.2133/1.1577×**，几何平均吞吐提升 **19.10%**。输出、loss、全部参数梯度与 SGD 更新通过 CPU 数值复核 |
+| Megatron 原生后端：阶段 23 历史结果 | 仅融合 attention 残差加法与 RMSNorm；同一模型三轮倍率为 **1.0116/1.0162/1.0048×**，吞吐提升约 **1.08%**。原始候选和判定保留 |
 | GEMM+bias epilogue | FP16/BF16、3 个形状、4 种 tile、各 3 轮通过；同 tile 相对**单独执行 bias 加法**为 1.33–3.94× |
 | 流水阶段数 | FP16/BF16、两种形状与两种 tile 的留出复测全部数值通过；BF16 1024³、64×64×32 tile 上，`num_stages=2/3` 相对 1 仅为 0.915×/0.748× |
-| 知识库回归 | 固定补丁可重建；BI-V150 精确检索 20 页，原 SM90/SM100 的 286/379 条检索路径保持不变。新增原生 Megatron 闭环、精度异常与原始证据 |
+| 知识库回归 | 固定补丁可重建；BI-V150 精确检索 22 条路径，原 SM90/SM100 的 286/379 条路径逐条核对一致。160 项 Linux 知识库测试、2 项加载器测试、整库校验及 2041 个加载文件核对通过；新增 CE 来源、算子页和 168 个证据文件 |
 
-表中的大幅加速为单卡算子微基准；**约 1.08% 的训练吞吐提升仅来自所测四层合成模型**，不能外推到生产训练或融合 BF16 训练。计时包含清梯度、前向、loss、反向与 SGD，排除数据和 checkpoint I/O。FP8 `tl.dot` 在当前软件栈
+表中的 10× 级加速是单卡算子微基准。**最新 19.10% 是同一张 BI-V150 上，相对固定 Megatron 原生本地 PyTorch 后端的完整训练 step 吞吐提升**，仅覆盖所测四层 FP32 合成模型。三轮 step 从约 11.50–11.68 ms 降至 9.55–9.93 ms；模型、输入、容差和计时保持一致，包含清梯度、前向、loss、反向与 SGD，排除初始编译、数据和 checkpoint I/O。FP8 `tl.dot` 在当前软件栈
 编译失败；TMA、TMEM、warp specialization 等 NVIDIA 机制没有被改标为 BI-V150 的硬件等价能力。
-适配版 skill 和 KDA 仓库级通用加载器以补丁保留在本仓库，由 CI 验证重建、加载及知识库。三轮算子复测有 672 个有限值 case-round 通过；另有 48 个原生异常样本单独核对兼容性。当前 CoreX 的 GPU float64 比较出现零误差假象，验收已改为 CPU 比较且保持容差。后续需要生产配置，再验证实际训练收益。按项目决定，不向 KDA 上游提交 PR。
+适配版 skill 和 KDA 仓库级通用加载器以补丁保留在本仓库，由 CI 验证重建、加载及知识库。最新三轮通过 1512 个交叉熵有限值 case-round 和 672 个残差有限值 case-round；另有 378 个原生布局错误与 48 个原生非有限值 case-round 单独核对兼容性。越界 int64 标签和实际 CE 编译内核执行也通过独立审计。当前 CoreX 的 GPU float64 比较出现零误差假象，验收采用 CPU 比较且保持容差。
+
+BF16 autocast 下，残差使用原生回退，CE 使用原生等价 Torch 计算并省略单成员归约；该场景未运行 Triton CE，不能解释为融合 BF16 训练提速。相对旧候选的独立归一化对照改善约 17.93%，不是同进程直接配对。生产配置、多卡与 TE 收益尚未验证。按项目决定，不向 KDA 上游提交 PR。
 
 从仓库根目录重建 skill（脚本固定上游提交并应用本项目补丁，目标目录须尚不存在）：
 
@@ -34,7 +37,7 @@ python -m unittest discover -s /path/to/kernelwiki-iluvatar/tests
 ```
 
 构建所需的上游源码由脚本拉取；仓库保留本项目补丁、实验脚本和原始证据，不复制第三方完整语料。
-KDA 项目级加载器由[`build_kda_integration.py`](experiments/kernelwiki_iluvatar/build_kda_integration.py)从固定提交和补丁构建，并由[`verify_kda_integration.py`](experiments/kernelwiki_iluvatar/verify_kda_integration.py)把准备好的 skill 加载到该 checkout 的 `.claude/skills/`。这一路径无需个人安装，原 KernelWiki 子模块保持原样。完整证据、边界和计划见[工作总报告](experiments/kernelwiki_iluvatar/PROJECT_REPORT_0930.md)与[最终验收数据](experiments/kernelwiki_iluvatar/megatron_cc/evidence/decision-0003.json)。
+KDA 项目级加载器由[`build_kda_integration.py`](experiments/kernelwiki_iluvatar/build_kda_integration.py)从固定提交和补丁构建，并由[`verify_kda_integration.py`](experiments/kernelwiki_iluvatar/verify_kda_integration.py)把准备好的 skill 加载到该 checkout 的 `.claude/skills/`。这一路径无需个人安装，原 KernelWiki 子模块保持原样。完整证据、边界和计划见[工作总报告](experiments/kernelwiki_iluvatar/PROJECT_REPORT_0930.md)与[阶段 24 最终验收数据](experiments/kernelwiki_iluvatar/megatron_cc/higher_gain/evidence/decision-0006.json)。
 
 ## 核心成果
 

@@ -1,0 +1,192 @@
+{
+  "candidate_sha256": "4a5c2180114396412b1c99907837ab970b2a9efdffe85e0a46f5527cc0790201",
+  "base_harness_sha256": "360e57d1d1baa9d2ddc477224576a7ce87864ff9c3e0aefde546fbf4266cc96a",
+  "base_contract_sha256": "13f71ba192ea8fdf474e89729d2c19fa1a17e9aee3b125a7966abca83941a883",
+  "extension_harness_sha256": "1a4c71b0ac6e892f7c9e4acc4c76d571178f38f56d56a17bf7256f8ff21d6508",
+  "contract_sha256": "1ae25ce8341540929a90115f812de5a59e80c24312a4c3626184a32a702fef28",
+  "operation": "cross_entropy",
+  "shape": [
+    128,
+    2,
+    1024
+  ],
+  "logits_dtype": "torch.float32",
+  "loss_dtype": "torch.float32",
+  "launches": [
+    {
+      "phase": "forward",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "name": "_ce_forward_kernel_0d1d2d",
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ],
+      "scope": "observed CompiledKernel runner invocation; no instruction equivalence claim"
+    },
+    {
+      "phase": "backward",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "name": "_ce_backward_kernel_0d1d2d3d",
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ],
+      "scope": "observed CompiledKernel runner invocation; no instruction equivalence claim"
+    },
+    {
+      "phase": "forward",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "name": "_ce_forward_kernel_0d1d2d",
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ],
+      "scope": "observed CompiledKernel runner invocation; no instruction equivalence claim"
+    },
+    {
+      "phase": "backward",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "name": "_ce_backward_kernel_0d1d2d3d",
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ],
+      "scope": "observed CompiledKernel runner invocation; no instruction equivalence claim"
+    }
+  ],
+  "forward": {
+    "compiled_kernel_names": [
+      "_ce_forward_kernel_0d1d2d"
+    ],
+    "launch_counts": {
+      "_ce_forward_kernel_0d1d2d": 2
+    }
+  },
+  "backward": {
+    "compiled_kernel_names": [
+      "_ce_backward_kernel_0d1d2d3d"
+    ],
+    "launch_counts": {
+      "_ce_backward_kernel_0d1d2d3d": 2
+    }
+  },
+  "forward_compiled_launches": 2,
+  "backward_compiled_launches": 2,
+  "wide_int64_out_of_range_probe": {
+    "loss": {
+      "passed": true,
+      "max_abs": 1.1920928955078125e-07,
+      "bad_elements": 0,
+      "actual_dtype": "torch.float32",
+      "reference_dtype": "torch.float32",
+      "atol": 0.0003,
+      "rtol": 0.001,
+      "finite": true,
+      "comparison_device": "CPU float64",
+      "reference_abs_max": 2.3796210289001465
+    },
+    "dlogits": {
+      "passed": true,
+      "max_abs": 2.9802322387695312e-08,
+      "bad_elements": 0,
+      "actual_dtype": "torch.float32",
+      "reference_dtype": "torch.float32",
+      "atol": 0.0003,
+      "rtol": 0.001,
+      "finite": true,
+      "comparison_device": "CPU float64",
+      "reference_abs_max": 0.19054634869098663
+    }
+  },
+  "autocast_exact_native_checks": [
+    {
+      "input_dtype": "torch.float32",
+      "loss_exact_native": {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0,
+        "rtol": 0,
+        "finite": true,
+        "comparison_device": "CPU float64",
+        "reference_abs_max": 9.904180526733398
+      },
+      "dlogits_exact_native": {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0,
+        "rtol": 0,
+        "finite": true,
+        "comparison_device": "CPU float64",
+        "reference_abs_max": 2.2619080543518066
+      }
+    },
+    {
+      "input_dtype": "torch.bfloat16",
+      "loss_exact_native": {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0,
+        "rtol": 0,
+        "finite": true,
+        "comparison_device": "CPU float64",
+        "reference_abs_max": 9.383106231689453
+      },
+      "dlogits_exact_native": {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.bfloat16",
+        "reference_dtype": "torch.bfloat16",
+        "atol": 0,
+        "rtol": 0,
+        "finite": true,
+        "comparison_device": "CPU float64",
+        "reference_abs_max": 2.1875
+      }
+    }
+  ],
+  "autocast_triton_runner_launches": 0,
+  "passed": true,
+  "scope": "Independent CE-only observed compiled-runner audit; not timed throughput"
+}

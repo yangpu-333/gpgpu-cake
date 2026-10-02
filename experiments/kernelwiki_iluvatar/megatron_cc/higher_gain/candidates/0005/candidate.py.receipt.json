@@ -1,0 +1,16 @@
+{
+  "response": "experiments\\kernelwiki_iluvatar\\megatron_cc\\higher_gain\\evidence\\cc-candidate-0005.json",
+  "response_sha256": "3c93c4882c64c2f77410ac4cd17cf2905710a4fdf2dfc077635ada11a604d4db",
+  "output_sha256": "480ffbe4a3bbf2f61087f934e884789ec23454e83ea13101c6d8b2850a82de7f",
+  "cli_model": [
+    "Claude-Opus-4.8"
+  ],
+  "source_ids": [
+    "megatron_cc/higher_gain/contract.json",
+    "megatron_cc/higher_gain/candidates/0004/candidate.py",
+    "megatron_cc/higher_gain/evidence/0004-feedback.json",
+    "megatron_cc/higher_gain/references/native_cross_entropy.py"
+  ],
+  "rationale": "Candidate 0004 passed all 630 screened CE cases plus the FP32 model/loss/gradient/SGD checks and screened 1.1922x faster at equal temporary peak, but the independent compiled-runner audit rejected it: both CE kernels loaded target as int64 then narrowed it with .to(tl.int32). Labels outside int32 range wrap modulo 2^32 into a valid [0, V) class, so at V=17 the probe labels [-2^63, 2^32, 2^32+16, 2^63-1] produced loss max error 2.7277 and dlogits max error 1.0000 on 3/4 rows because those rows wrongly got the predicted-logit subtraction and a onehot gradient. Native masks (target < vocab_start) | (target >= vocab_end) (world_size=1 => target < 0 | target >= V) and gives masked rows predicted=0 with no softmax_update. The sole change versus 0004 is preserving the loaded target as int64 (.to(tl.int64)) in both the forward and backward CE kernels: the int32 lane index col is promoted to int64 for the (col == target) & mask comparison, so the range check is exact for every signed 64-bit label and no narrowing/wrap can occur. Out-of-range labels now match no lane, keeping the native log(sumexp) loss with zero predicted term and no onehot subtraction. Nothing else is touched: parent 0003 residual/RMSNorm prefix is byte-identical, and the CE kernels, process-local compiled-code cache, autograd Functions and public entry points are otherwise unchanged (same max-shift CE math, in-place FP32 softmax mutation, reused probability gradient buffer, num_warps=4, V>=1 / padded-lane support, low-precision-unchanged behavior, arbitrary signed/zero dloss, and native fallback). Only appended comments were updated to document the int64 preservation.",
+  "parent": "0004"
+}

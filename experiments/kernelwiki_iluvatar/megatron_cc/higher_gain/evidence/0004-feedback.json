@@ -1,0 +1,52 @@
+{
+  "candidate_id": "0004",
+  "candidate_sha256": "790321e2187e73b8e9390e5f204837fc95f92ee1c51c9ee60ff7f3e89d305352",
+  "ce_case_summary": {
+    "expected_cases": 630,
+    "observed_cases": 630,
+    "finite_native_cases": 504,
+    "finite_correctness_passed": 504,
+    "native_invalid_cases": 126,
+    "native_invalid_compatibility_passed": 126
+  },
+  "model_status": "passed",
+  "primary_screen_speedup": 1.1922181426465064,
+  "primary_screen_median_ms": {
+    "native": 11.491615558043122,
+    "candidate": 9.638853115029633
+  },
+  "temporary_peak_same": true,
+  "model_ce_dispatch": {
+    "optimized": 128,
+    "fallback": 0
+  },
+  "wide_int64_out_of_range_probe": {
+    "loss": {
+      "passed": false,
+      "max_abs": 2.7277278900146484,
+      "bad_elements": 3,
+      "actual_dtype": "torch.float32",
+      "reference_dtype": "torch.float32",
+      "atol": 0.0003,
+      "rtol": 0.001,
+      "finite": true,
+      "comparison_device": "CPU float64",
+      "reference_abs_max": 2.3796210289001465
+    },
+    "dlogits": {
+      "passed": false,
+      "max_abs": 1.0000000074505806,
+      "bad_elements": 3,
+      "actual_dtype": "torch.float32",
+      "reference_dtype": "torch.float32",
+      "atol": 0.0003,
+      "rtol": 0.001,
+      "finite": true,
+      "comparison_device": "CPU float64",
+      "reference_abs_max": 0.19054634869098663
+    }
+  },
+  "audit_passed": false,
+  "decision": "reject_until_int64_label_semantics_repaired",
+  "reason": "The generated kernels cast target int64 to int32; values wrapping to in-range classes incorrectly receive target subtraction."
+}
