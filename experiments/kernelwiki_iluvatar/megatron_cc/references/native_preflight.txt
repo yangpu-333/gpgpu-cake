@@ -1,0 +1,7 @@
+Native preflight, before candidate generation:
+- Four-layer GPT native-control validation passed; fusion-site shapes are [128,2,512], FP32 x/residual/weight/output, epsilon=1e-5.
+- Original operator matrix: 224/240 finite-correctness passes. All 16 failures were native FP16 residual dtype, input scale 0.001, both epsilons and gradient modes. Both control and native have nonfinite dx/dresidual.
+- An independent CPU-copy probe confirmed 4096/4096 native FP16 dx values are infinity at scale 0.001, epsilon1e-5. This is native behavior, not a candidate defect.
+- Native RMSNorm produces FP32 output when FP32 weight is combined with FP16/BF16 residual input. Low precision native math is not equivalent to a simple FP32 formula followed by one output cast.
+- Contract v2 keeps all 240 cases and all tolerances. The 16 native-invalid cases are compatibility-only, checked on CPU for finite values and matching signed-infinity/NaN patterns; they are never counted as finite correctness. Original contract/harness/results are archived. No optimized candidate exists yet.
+- First candidate should restrict the optimized path to FP32 residual/weight (possibly mixed low-precision x), with exact native fallback for low-precision residual. Primary and holdout models exercise FP32 residual. Do not claim FP16/BF16 residual training optimization.

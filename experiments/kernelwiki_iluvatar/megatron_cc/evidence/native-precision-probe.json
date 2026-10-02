@@ -1,0 +1,299 @@
+[
+  {
+    "input_dtype": "torch.float32",
+    "scale": 1.0,
+    "facts": {
+      "output": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 7.660416603088379
+      },
+      "dx": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 7.258817672729492
+      },
+      "dw": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 256,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 256,
+        "finite_abs_max": 11.68304443359375
+      }
+    }
+  },
+  {
+    "input_dtype": "torch.float32",
+    "scale": 0.001,
+    "facts": {
+      "output": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 1.6607266664505005
+      },
+      "dx": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 1839.3070068359375
+      },
+      "dw": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 256,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 256,
+        "finite_abs_max": 4.529312610626221
+      }
+    }
+  },
+  {
+    "input_dtype": "torch.float32",
+    "scale": 100.0,
+    "facts": {
+      "output": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 7.868536472320557
+      },
+      "dx": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 0.06922803074121475
+      },
+      "dw": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 256,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 256,
+        "finite_abs_max": 11.939287185668945
+      }
+    }
+  },
+  {
+    "input_dtype": "torch.float16",
+    "scale": 1.0,
+    "facts": {
+      "output": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 7.932704448699951
+      },
+      "dx": {
+        "dtype": "torch.float16",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 8.0234375
+      },
+      "dw": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 256,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 256,
+        "finite_abs_max": 11.179659843444824
+      }
+    }
+  },
+  {
+    "input_dtype": "torch.float16",
+    "scale": 0.001,
+    "facts": {
+      "output": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 2.347907543182373
+      },
+      "dx": {
+        "dtype": "torch.float16",
+        "gpu_isfinite_all": false,
+        "cpu_finite": 0,
+        "cpu_nan": 0,
+        "cpu_inf": 4096,
+        "elements": 4096,
+        "finite_abs_max": null
+      },
+      "dw": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 256,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 256,
+        "finite_abs_max": 4.517263412475586
+      }
+    }
+  },
+  {
+    "input_dtype": "torch.float16",
+    "scale": 100.0,
+    "facts": {
+      "output": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 4.361157417297363
+      },
+      "dx": {
+        "dtype": "torch.float16",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 0.06463623046875
+      },
+      "dw": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 256,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 256,
+        "finite_abs_max": 4.68376350402832
+      }
+    }
+  },
+  {
+    "input_dtype": "torch.bfloat16",
+    "scale": 1.0,
+    "facts": {
+      "output": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 7.7810564041137695
+      },
+      "dx": {
+        "dtype": "torch.bfloat16",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 5.125
+      },
+      "dw": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 256,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 256,
+        "finite_abs_max": 11.583064079284668
+      }
+    }
+  },
+  {
+    "input_dtype": "torch.bfloat16",
+    "scale": 0.001,
+    "facts": {
+      "output": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 1.8601293563842773
+      },
+      "dx": {
+        "dtype": "torch.bfloat16",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 2864.0
+      },
+      "dw": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 256,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 256,
+        "finite_abs_max": 5.357484340667725
+      }
+    }
+  },
+  {
+    "input_dtype": "torch.bfloat16",
+    "scale": 100.0,
+    "facts": {
+      "output": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 8.321908950805664
+      },
+      "dx": {
+        "dtype": "torch.bfloat16",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 4096,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 4096,
+        "finite_abs_max": 0.06298828125
+      },
+      "dw": {
+        "dtype": "torch.float32",
+        "gpu_isfinite_all": true,
+        "cpu_finite": 256,
+        "cpu_nan": 0,
+        "cpu_inf": 0,
+        "elements": 256,
+        "finite_abs_max": 11.575051307678223
+      }
+    }
+  }
+]

@@ -1,0 +1,17 @@
+Use /kernelwiki-iluvatar. The initial plan exists at E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/docs/draft.md. Generate the smallest first standalone candidate now, following the actual preflight evidence, not the stale draft assumptions.
+
+Read ONLY these exact files:
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/contract.json (revised v2, frozen before candidate generation)
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/references/native_preflight.txt
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/native_control.py (native semantics control)
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/references/stage3_residual_rmsnorm.py (forward implementation only)
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_cc/references/stage13_backward.py (backward implementation only)
+The skill pages and ledger were actually read in the planning turn; cite kernel-residual-rmsnorm-bi-v150 and kernel-residual-rmsnorm-backward-bi-v150. No additional search or unrelated reads. Do not attempt Bash, file edits or tool execution; only Read is enabled.
+
+Corrections to the draft: new operator tolerances are FP32 atol=3e-4 rtol=1e-3, FP16 .003/.003, BF16 .02/.02 (FP32 weight gradients use FP32 tolerance). Do NOT reuse old .03/.03. Mixed x/residual gradients may have different dtypes, so never require dx == dresidual bitwise for mixed inputs. Norm is native torch.nn.RMSNorm, with FP32 weights; its output is FP32 even for low-precision residual. Native low-precision RMSNorm math differs from a plain FP32 formula. The 16 native-invalid FP16 small-scale backward cases are compatibility-only and remain in the matrix. Keep all native behavior via exact native fallback for FP16/BF16 residual. Do not repair its nonfinite behavior, and do not claim low-precision residual training gain.
+
+Implement candidate 0001 as one Triton forward kernel and the existing two-kernel style backward, supporting FP32 residual + FP32 weight, contiguous tensors, 2D or 3D shapes with hidden <=8192. x can be FP32, FP16 or BF16: native BDA casts x to residual.dtype BEFORE addition, so perform the same FP32 add and return exact residual sum; allocate normalized output FP32. Use epsilon argument in every relevant kernel, masking tail elements. Use 1/tl.sqrt rather than unsupported tl.rsqrt. Use saved residual and FP32 partial weight grads. Return dx in original x dtype and dresidual in residual dtype. Handle absent dy and absent residual-output gradient without inventing gradients. Use the native_control.py path for any unsupported dtype/layout/range. Baseline and harness must remain unchanged. No hardcoded seeds/values, cached outputs, import of helpers/harness, allocations in global scope, or installing dependencies.
+
+Candidate must be a single self-contained .py exposing fused(x,residual,weight,epsilon). Imports restricted to torch,triton,triton.language,math. No source/harness reads at runtime. Use num_warps=4 initially; tuning follows external evidence. FMA differences should be constrained if needed for strict FP32 checks, without loosening tolerances. This first candidate is an experiment; GPU verification has not happened yet.
+
+Return only JSON with keys candidate_code (complete source as JSON string), rationale, source_ids, parent (null), supported_scope. Do not write files.

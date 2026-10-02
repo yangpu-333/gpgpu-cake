@@ -1,0 +1,26 @@
+{
+  "gpu_float32": {
+    "values": [
+      0.125,
+      0.25
+    ],
+    "max": 0.25,
+    "all_close_1e_minus_3": false
+  },
+  "gpu_float64": {
+    "values": [
+      0.0,
+      0.0
+    ],
+    "max": 0.0,
+    "all_close_1e_minus_3": true
+  },
+  "cpu_float64": {
+    "values": [
+      0.125,
+      0.25
+    ],
+    "max": 0.25,
+    "all_close_1e_minus_3": false
+  }
+}

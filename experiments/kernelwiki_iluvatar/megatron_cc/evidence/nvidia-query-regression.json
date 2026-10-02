@@ -1,0 +1,20 @@
+{
+  "baseline": "kernelwiki-iluvatar-stage22-check",
+  "candidate": "kernelwiki-iluvatar-stage23-final",
+  "architectures": [
+    {
+      "architecture": "sm90",
+      "before": 286,
+      "after": 286,
+      "exact_path_set_equal": true,
+      "sorted_paths_sha256": "65f1d2ccb7ba0502f7492bc47c8f8d4c2303f24dc10129619fc78dc533157559"
+    },
+    {
+      "architecture": "sm100",
+      "before": 379,
+      "after": 379,
+      "exact_path_set_equal": true,
+      "sorted_paths_sha256": "d01842e9ad745d861c29f878f73a3e11fd83a5d7523f6767070502a6a288aa94"
+    }
+  ]
+}

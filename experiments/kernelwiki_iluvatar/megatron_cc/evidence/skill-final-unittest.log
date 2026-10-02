@@ -1,0 +1,99 @@
+======================================================================
+ERROR: test_active_fixture_cannot_be_silently_deleted (test_check_dod_fixtures.DefinitionOfDoneFixtureTests.test_active_fixture_cannot_be_silently_deleted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\code\GPGPU\experiments\kernelwiki_iluvatar\kernelwiki-iluvatar-stage23-final\tests\test_check_dod_fixtures.py", line 40, in test_active_fixture_cannot_be_silently_deleted
+    data = yaml.safe_load((ROOT / "data" / "phase3-dod-fixtures.yaml").read_text())
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 822: illegal multibyte sequence
+
+======================================================================
+ERROR: test_current_active_and_retired_contracts_are_valid (test_check_dod_fixtures.DefinitionOfDoneFixtureTests.test_current_active_and_retired_contracts_are_valid)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\code\GPGPU\experiments\kernelwiki_iluvatar\kernelwiki-iluvatar-stage23-final\tests\test_check_dod_fixtures.py", line 20, in test_current_active_and_retired_contracts_are_valid
+    data = yaml.safe_load((ROOT / "data" / "phase3-dod-fixtures.yaml").read_text())
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 822: illegal multibyte sequence
+
+======================================================================
+ERROR: test_fixture_and_roster_row_cannot_be_jointly_deleted (test_check_dod_fixtures.DefinitionOfDoneFixtureTests.test_fixture_and_roster_row_cannot_be_jointly_deleted)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\code\GPGPU\experiments\kernelwiki_iluvatar\kernelwiki-iluvatar-stage23-final\tests\test_check_dod_fixtures.py", line 47, in test_fixture_and_roster_row_cannot_be_jointly_deleted
+    data = yaml.safe_load((ROOT / "data" / "phase3-dod-fixtures.yaml").read_text())
+                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 822: illegal multibyte sequence
+
+======================================================================
+ERROR: test_architecture_vocabulary_matches_supported_ampere_spellings (test_pr_policy.ArchitecturePolicyTests.test_architecture_vocabulary_matches_supported_ampere_spellings)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\code\GPGPU\experiments\kernelwiki_iluvatar\kernelwiki-iluvatar-stage23-final\tests\test_pr_policy.py", line 140, in test_architecture_vocabulary_matches_supported_ampere_spellings
+    yaml.safe_load((ROOT / "data" / "tags.yaml").read_text())["architectures"]
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py", line 546, in read_text
+    return PathBase.read_text(self, encoding, errors, newline)
+           ~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py", line 633, in read_text
+    return f.read()
+           ~~~~~~^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 27: illegal multibyte sequence
+
+======================================================================
+ERROR: test_concrete_documented_query_commands_return_results (test_validate_factual_contracts.ShippedDocumentationContractTests.test_concrete_documented_query_commands_return_results)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "E:\code\GPGPU\experiments\kernelwiki_iluvatar\kernelwiki-iluvatar-stage23-final\tests\test_validate_factual_contracts.py", line 498, in test_concrete_documented_query_commands_return_results
+    result = subprocess.run(
+        shlex.split(command, comments=True),
+    ...<3 lines>...
+        timeout=20,
+    )
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python313\Lib\subprocess.py", line 556, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python313\Lib\subprocess.py", line 1038, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\lenovo\AppData\Local\Programs\Python\Python313\Lib\subprocess.py", line 1550, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+OSError: [WinError 1920] ϵͳ�޷����ʴ��ļ���
+
+----------------------------------------------------------------------
+Ran 160 tests in 22.154s
+
+FAILED (errors=5)

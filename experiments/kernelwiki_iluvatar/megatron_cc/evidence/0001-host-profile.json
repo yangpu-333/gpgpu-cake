@@ -1,0 +1,2190 @@
+{
+  "scope": "cProfile diagnostic; not promotion timing",
+  "model": {
+    "correctness": [
+      {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true
+        },
+        "loss": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true
+        },
+        "gradients": [
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          }
+        ],
+        "parameters": [
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true
+        },
+        "loss": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true
+        },
+        "gradients": [
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          }
+        ],
+        "parameters": [
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          }
+        ],
+        "passed": true
+      },
+      {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true
+        },
+        "loss": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true
+        },
+        "gradients": [
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          }
+        ],
+        "parameters": [
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          },
+          {
+            "passed": true,
+            "max_abs": 0.0,
+            "bad_elements": 0,
+            "actual_dtype": "torch.float32",
+            "reference_dtype": "torch.float32",
+            "atol": 0.0003,
+            "rtol": 0.001,
+            "finite": true
+          }
+        ],
+        "passed": true
+      }
+    ],
+    "candidate_calls": {
+      "fused": 192,
+      "fallback": 0,
+      "observations": [
+        {
+          "shape": [
+            128,
+            2,
+            512
+          ],
+          "stride": [
+            1024,
+            512,
+            1
+          ],
+          "x_dtype": "torch.float32",
+          "residual_dtype": "torch.float32",
+          "weight_dtype": "torch.float32",
+          "y_dtype": "torch.float32",
+          "epsilon": 1e-05
+        },
+        {
+          "shape": [
+            128,
+            2,
+            512
+          ],
+          "stride": [
+            1024,
+            512,
+            1
+          ],
+          "x_dtype": "torch.float32",
+          "residual_dtype": "torch.float32",
+          "weight_dtype": "torch.float32",
+          "y_dtype": "torch.float32",
+          "epsilon": 1e-05
+        },
+        {
+          "shape": [
+            128,
+            2,
+            512
+          ],
+          "stride": [
+            1024,
+            512,
+            1
+          ],
+          "x_dtype": "torch.float32",
+          "residual_dtype": "torch.float32",
+          "weight_dtype": "torch.float32",
+          "y_dtype": "torch.float32",
+          "epsilon": 1e-05
+        },
+        {
+          "shape": [
+            128,
+            2,
+            512
+          ],
+          "stride": [
+            1024,
+            512,
+            1
+          ],
+          "x_dtype": "torch.float32",
+          "residual_dtype": "torch.float32",
+          "weight_dtype": "torch.float32",
+          "y_dtype": "torch.float32",
+          "epsilon": 1e-05
+        }
+      ]
+    },
+    "configuration": {
+      "layers": 4,
+      "hidden": 512,
+      "heads": 8,
+      "sequence": 128,
+      "micro_batch": 2,
+      "vocab": 1024,
+      "autocast": false
+    },
+    "passed": true,
+    "training": {
+      "metric": "synchronized wall ms per complete in-memory step",
+      "includes": [
+        "zero_grad",
+        "forward",
+        "loss",
+        "backward",
+        "SGD"
+      ],
+      "excludes": [
+        "data loading",
+        "checkpoint I/O",
+        "initial compilation"
+      ],
+      "raw_ms": {
+        "native": [
+          12.8888881765306,
+          13.186874892562628,
+          13.589074602350593,
+          13.504057005047798
+        ],
+        "candidate": [
+          14.72368617542088,
+          14.637378929182887,
+          15.421036398038268,
+          14.983383519575
+        ]
+      },
+      "median_ms": {
+        "native": 13.345465948805213,
+        "candidate": 14.85353484749794
+      },
+      "tokens_per_second": {
+        "native": 19182.544916906332,
+        "candidate": 17234.95468441459
+      },
+      "speedup": 0.8984707065236556,
+      "incremental_peak_bytes": {
+        "native": [
+          60312576,
+          60312576,
+          60312576,
+          60312576
+        ],
+        "candidate": [
+          60312576,
+          60312576,
+          60312576,
+          60312576
+        ]
+      },
+      "memory_scope": "temporary peak over two resident models; not single-model total memory",
+      "warmup": 5,
+      "samples": 4,
+      "steps_per_sample": 10
+    },
+    "after_timing_parameters": [
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      },
+      {
+        "passed": true,
+        "max_abs": 0.0,
+        "bad_elements": 0,
+        "actual_dtype": "torch.float32",
+        "reference_dtype": "torch.float32",
+        "atol": 0.003,
+        "rtol": 0.003,
+        "finite": true
+      }
+    ]
+  }
+}

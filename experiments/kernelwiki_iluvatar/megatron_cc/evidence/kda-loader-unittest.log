@@ -1,0 +1,7 @@
+test_install_check_and_managed_update (test_load_external_skill.ExternalSkillLoaderTests.test_install_check_and_managed_update) ... ok
+test_unmanaged_directory_is_never_replaced (test_load_external_skill.ExternalSkillLoaderTests.test_unmanaged_directory_is_never_replaced) ... ok
+
+----------------------------------------------------------------------
+Ran 2 tests in 1.275s
+
+OK

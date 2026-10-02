@@ -16,14 +16,14 @@ CoreX 4.2.0、厂商 Triton 2.1.0；所有候选保留正确性检查、逐轮�
 | 已验证内容 | BI-V150 实测结果 |
 |---|---|
 | Residual Add RMSNorm 融合 | FP16/BF16、5 个形状、各 3 轮通过前向与参考梯度检查；前向相对**未融合 PyTorch 算子序列**为 10.12–14.65× |
-| Megatron 小模型训练 | 单层 GPT 完成前向、反向和 SGD；一对融合在 FP32、合成 token 下三轮完整 step 比值为 1.018–1.023×。BF16 autocast 上下文中该融合点仍为 FP32，三轮比值降至 0.919–0.928× |
+| Megatron 原生后端闭环 | Claude Code CLI 使用适配 skill 迭代 3 个候选；四层 FP32 合成 GPT 三轮完整 step 墙钟倍率为 **1.0116/1.0162/1.0048×**，平均吞吐提升约 **1.08%**。前向、梯度与 SGD 参数通过 CPU 数值复核；autocast 通过原生回退保持兼容 |
 | GEMM+bias epilogue | FP16/BF16、3 个形状、4 种 tile、各 3 轮通过；同 tile 相对**单独执行 bias 加法**为 1.33–3.94× |
 | 流水阶段数 | FP16/BF16、两种形状与两种 tile 的留出复测全部数值通过；BF16 1024³、64×64×32 tile 上，`num_stages=2/3` 相对 1 仅为 0.915×/0.748× |
-| 知识库回归 | Linux 完整测试 160/160、整库验证通过；BI-V150 精确检索 18 页，原 SM90/SM100 的 286/379 条检索路径保持不变 |
+| 知识库回归 | 固定补丁可重建；BI-V150 精确检索 20 页，原 SM90/SM100 的 286/379 条检索路径保持不变。新增原生 Megatron 闭环、精度异常与原始证据 |
 
-表中的大幅加速为单卡算子微基准，**不代表端到端训练加速**；Megatron 的完整 step 比值仅来自单层合成 token 模型，不能外推到生产训练。FP8 `tl.dot` 在当前软件栈
+表中的大幅加速为单卡算子微基准；**约 1.08% 的训练吞吐提升仅来自所测四层合成模型**，不能外推到生产训练或融合 BF16 训练。计时包含清梯度、前向、loss、反向与 SGD，排除数据和 checkpoint I/O。FP8 `tl.dot` 在当前软件栈
 编译失败；TMA、TMEM、warp specialization 等 NVIDIA 机制没有被改标为 BI-V150 的硬件等价能力。
-适配版 skill 已完成固定版本重建验证；KDA 仓库级通用加载器以补丁保留在本仓库，GitHub CI 已验证其加载和完整知识库测试。后续如有生产配置与兼容 Transformer Engine，再采集生产形状和多层训练结果。按项目决定，不向 KDA 上游提交 PR。
+适配版 skill 和 KDA 仓库级通用加载器以补丁保留在本仓库，由 CI 验证重建、加载及知识库。三轮算子复测有 672 个有限值 case-round 通过；另有 48 个原生异常样本单独核对兼容性。当前 CoreX 的 GPU float64 比较出现零误差假象，验收已改为 CPU 比较且保持容差。后续需要生产配置，再验证实际训练收益。按项目决定，不向 KDA 上游提交 PR。
 
 从仓库根目录重建 skill（脚本固定上游提交并应用本项目补丁，目标目录须尚不存在）：
 
@@ -34,7 +34,7 @@ python -m unittest discover -s /path/to/kernelwiki-iluvatar/tests
 ```
 
 构建所需的上游源码由脚本拉取；仓库保留本项目补丁、实验脚本和原始证据，不复制第三方完整语料。
-KDA 项目级加载器由[`build_kda_integration.py`](experiments/kernelwiki_iluvatar/build_kda_integration.py)从固定提交和补丁构建，并由[`verify_kda_integration.py`](experiments/kernelwiki_iluvatar/verify_kda_integration.py)把准备好的 skill 加载到该 checkout 的 `.claude/skills/`。这一路径无需个人安装，原 KernelWiki 子模块保持原样。完整证据、边界和计划见[工作总报告](experiments/kernelwiki_iluvatar/PROJECT_REPORT_AND_NEXT_PLAN.md)。
+KDA 项目级加载器由[`build_kda_integration.py`](experiments/kernelwiki_iluvatar/build_kda_integration.py)从固定提交和补丁构建，并由[`verify_kda_integration.py`](experiments/kernelwiki_iluvatar/verify_kda_integration.py)把准备好的 skill 加载到该 checkout 的 `.claude/skills/`。这一路径无需个人安装，原 KernelWiki 子模块保持原样。完整证据、边界和计划见[工作总报告](experiments/kernelwiki_iluvatar/PROJECT_REPORT_0930.md)与[最终验收数据](experiments/kernelwiki_iluvatar/megatron_cc/evidence/decision-0003.json)。
 
 ## 核心成果
 
@@ -168,7 +168,7 @@ nohup bash experiments/kda_repro/scripts/run_gdn_decode_ordinary_agent.sh 1 \
 | 内容 | 文档 |
 |---|---|
 | 上周 Agent/Triton：任务覆盖、晋级判定与复跑 | [Agent/Triton 自动优化实验总报告](experiments/kda_repro/AGENT_TRITON_REPORT.md) |
-| 本周 KernelWiki/BI-V150：17 项迁移、实测、局限与 ixSYS 步骤 | [KernelWiki 天数适配总报告](experiments/kernelwiki_iluvatar/PROJECT_REPORT_AND_NEXT_PLAN.md) |
+| KernelWiki/BI-V150：17 项迁移、Megatron 原生闭环、局限与 ixSYS 步骤 | [KernelWiki 天数适配总报告](experiments/kernelwiki_iluvatar/PROJECT_REPORT_0930.md) |
 | CAKE、Poly 与 Halide IR 前期调研 | [研究资料索引](research/README.md) |
 
 原始 JSON、候选源码和 API 元数据位于 `experiments/kda_repro/evidence/`。上游 KDA、竞赛、

@@ -1,0 +1,46 @@
+{
+  "recorded_at": "2026-10-02",
+  "skill_upstream_commit": "b6b4301f15e8ce6955a56776690643ce5db369e6",
+  "kda_upstream_commit": "ef6ce617693ef0782b3ecb9f37e39bbf10226a90",
+  "linux_uploaded_skill_archive_sha256": "15014fda6650d485013e64e1db28295949da9b0c433f1300f0ef410e28d7dae1",
+  "linux_unittest": {
+    "command": "/root/miniconda3/bin/python -m unittest discover -s tests -p test_*.py -q",
+    "tests": 160,
+    "result": "OK",
+    "log": "linux-skill-unittest.log"
+  },
+  "linux_validate": {
+    "command": "/root/miniconda3/bin/python -u scripts/validate.py",
+    "pages": 1061,
+    "source_ids": 999,
+    "asset_bundles": 37,
+    "ledgers": 14,
+    "result": "All files valid.",
+    "log": "linux-skill-validate.log"
+  },
+  "kda_loader_unittest": {
+    "tests": 2,
+    "result": "OK",
+    "log": "kda-loader-unittest.log"
+  },
+  "project_loader": {
+    "files_verified": 1871,
+    "log": "kda-final-integration.log"
+  },
+  "architecture_query_paths": {
+    "bi-v150": 20,
+    "sm90": 286,
+    "sm100": 379
+  },
+  "exact_nvidia_path_set_comparison": "nvidia-query-regression.json",
+  "credential_scan": {
+    "configured_key_available": true,
+    "owned_files_and_patch_scanned": 169,
+    "hits": 0,
+    "values_printed": false
+  },
+  "retained_environment_failures": [
+    "skill-final-unittest.log: four GBK decode errors and one Windows python3 alias error",
+    "linux-skill-rebuild.log: an archived corpus directory was incorrectly passed as a Git source; subsequent Linux QA used the locally rebuilt and validated exact corpus archive"
+  ]
+}

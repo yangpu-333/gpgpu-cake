@@ -1,0 +1,139 @@
+{
+  "utc": "2026-10-02T08:14:39.745613+00:00",
+  "mode": "operator",
+  "candidate_sha256": "25b9ead956ee801b5b1155db3067b755d950a01dab00687292052600f8846bb5",
+  "harness_sha256": "e06f059bfb878d8fd813680cd5a7aa5268d3b66def558e669512248c48d65db6",
+  "contract_sha256": "24772b03371a0dcc2446c7fcd5d539a67091900201d89065cf27a37d366725f8",
+  "seed": 23001,
+  "baseline": "pinned Megatron native local PyTorch backend",
+  "status": "passed",
+  "environment": {
+    "torch": "2.4.1",
+    "triton": "2.1.0",
+    "gpu": "Iluvatar BI-V150",
+    "memory_bytes": 34359738368,
+    "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3"
+  },
+  "native_sources_sha256": {
+    "megatron/core/transformer/torch_norm.py": "98259df6a9f8ad565160731e322c7b7b4f9b222fac2e459cd3610c0cbdad34dc",
+    "megatron/core/fusions/fused_bias_dropout.py": "897e60739d918ec917f7a8bfc578ac82a5a413f3bb80314a747a18d69c7b95df"
+  },
+  "cases": [
+    {
+      "shape": [
+        16,
+        256
+      ],
+      "dtype": "torch.float32",
+      "residual_dtype": "torch.float32",
+      "epsilon": 1e-05,
+      "scale": 1,
+      "residual_grad_present": true,
+      "checks": {
+        "normalized": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true
+        },
+        "residual": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0,
+          "rtol": 0,
+          "finite": true
+        },
+        "dx": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true
+        },
+        "dresidual": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true
+        },
+        "dweight": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "actual_dtype": "torch.float32",
+          "reference_dtype": "torch.float32",
+          "atol": 0.0003,
+          "rtol": 0.001,
+          "finite": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true,
+      "baseline_valid": true,
+      "forward": {
+        "metric": "GPU event us per call",
+        "samples": {
+          "native": [
+            60.977691411972046,
+            55.611538887023926,
+            56.44307732582092
+          ],
+          "candidate": [
+            8.674615621566772,
+            8.669999986886978,
+            8.669999986886978
+          ]
+        },
+        "medians": {
+          "native": 56.44307732582092,
+          "candidate": 8.669999986886978
+        },
+        "speedup": 6.51015887095603,
+        "warmup": 10,
+        "launches_per_sample": 5
+      },
+      "forward_backward": {
+        "metric": "GPU event us per call",
+        "samples": {
+          "native": [
+            309.31692123413086,
+            347.24154472351074,
+            343.066930770874
+          ],
+          "candidate": [
+            23.18153828382492,
+            23.176923394203186,
+            23.45615327358246
+          ]
+        },
+        "medians": {
+          "native": 343.066930770874,
+          "candidate": 23.18153828382492
+        },
+        "speedup": 14.79914432642511,
+        "warmup": 10,
+        "launches_per_sample": 5
+      }
+    }
+  ],
+  "case_summary": {
+    "finite_native_cases": 1,
+    "finite_correctness_passed": 1,
+    "native_invalid_cases": 0,
+    "native_invalid_compatibility_passed": 0
+  }
+}

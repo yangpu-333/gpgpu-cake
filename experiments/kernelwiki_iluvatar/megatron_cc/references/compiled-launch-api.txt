@@ -1,0 +1,16 @@
+Observed verbatim CoreX Triton 2.1.0 CompiledKernel interface, compiler/compiler.py:
+    def __getitem__(self, grid):
+        self._init_handles()
+        def runner(*args, stream=None):
+            args_expand = self.assemble_tensormap_to_arg(args)
+            if stream is None:
+                if self.device_type in ["cuda"]:
+                    stream = get_cuda_stream()
+                else:
+                    stream = get_backend(self.device_type).get_stream(None)
+            self.c_wrapper(grid[0], grid[1], grid[2], self.num_warps, self.num_ctas, self.clusterDims[0],
+                           self.clusterDims[1], self.clusterDims[2], self.shared, stream, self.cu_function,
+                           CompiledKernel.launch_enter_hook, CompiledKernel.launch_exit_hook, self, *args_expand)
+        return runner
+JIT kernel[grid](...): returns CompiledKernel and performs first launch; its repeated launch path still computes device, signature, specialization and shape_info keys and CoreX SME metadata. CompiledKernel[(gx,gy,gz)](...): pass only non-constexpr runtime arguments in original order. Requires a 3-element grid in this build. Uses current stream on every invocation, not a stale captured stream.
+These details came from the currently installed runtime, not upstream NVIDIA Triton assumptions. Cache only compiled code/metadata, never tensor data or outputs. Include device, shapes, dtypes, constexpr configuration, runtime scalar specialization, and pointer alignment in a safe compilation cache key; any first-JIT failure must remain visible.

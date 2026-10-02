@@ -1,0 +1,69 @@
+{
+  "candidate_sha256": "b426ef0a309d41450e00e4ce2a1e32a71567a75b08776e27fa6fbc3bb4c566a8",
+  "cuda_autocast_enabled": true,
+  "compiled_kernel_cache_entries_after_forward_backward": 0,
+  "checks": [
+    {
+      "passed": true,
+      "max_abs": 0.0,
+      "bad_elements": 0,
+      "actual_dtype": "torch.float32",
+      "reference_dtype": "torch.float32",
+      "atol": 0,
+      "rtol": 0,
+      "finite": true,
+      "comparison_device": "CPU float64",
+      "reference_abs_max": 12.728791236877441
+    },
+    {
+      "passed": true,
+      "max_abs": 0.0,
+      "bad_elements": 0,
+      "actual_dtype": "torch.float32",
+      "reference_dtype": "torch.float32",
+      "atol": 0,
+      "rtol": 0,
+      "finite": true,
+      "comparison_device": "CPU float64",
+      "reference_abs_max": 6.193552494049072
+    },
+    {
+      "passed": true,
+      "max_abs": 0.0,
+      "bad_elements": 0,
+      "actual_dtype": "torch.bfloat16",
+      "reference_dtype": "torch.bfloat16",
+      "atol": 0,
+      "rtol": 0,
+      "finite": true,
+      "comparison_device": "CPU float64",
+      "reference_abs_max": 8.375
+    },
+    {
+      "passed": true,
+      "max_abs": 0.0,
+      "bad_elements": 0,
+      "actual_dtype": "torch.float32",
+      "reference_dtype": "torch.float32",
+      "atol": 0,
+      "rtol": 0,
+      "finite": true,
+      "comparison_device": "CPU float64",
+      "reference_abs_max": 8.388343811035156
+    },
+    {
+      "passed": true,
+      "max_abs": 0.0,
+      "bad_elements": 0,
+      "actual_dtype": "torch.float32",
+      "reference_dtype": "torch.float32",
+      "atol": 0,
+      "rtol": 0,
+      "finite": true,
+      "comparison_device": "CPU float64",
+      "reference_abs_max": 47.60143280029297
+    }
+  ],
+  "passed": true,
+  "scope": "Exact native fallback compatibility; not optimized BF16 training"
+}

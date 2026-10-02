@@ -1,0 +1,28 @@
+{
+  "started_utc": "2026-10-02T07:54:49.037794+00:00",
+  "candidate_id": "0001",
+  "phase": "smoke",
+  "gpu_visible": "0",
+  "runs": [
+    {
+      "name": "operator-smoke",
+      "command": [
+        "/root/miniconda3/bin/python",
+        "-u",
+        "/mnt/kda-biv150-stage3/megatron_cc/benchmark.py",
+        "--megatron-root",
+        "/private/atrex-megatron/src/megatron-lm",
+        "--candidate",
+        "/mnt/kda-biv150-stage3/megatron_cc/candidates/0001/candidate.py",
+        "--mode",
+        "operator",
+        "--smoke",
+        "--output",
+        "/mnt/kda-biv150-stage3/megatron_cc/evidence/0001-smoke/operator-smoke.json"
+      ],
+      "started_utc": "2026-10-02T07:54:49.052578+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T07:55:04.550955+00:00"
+    }
+  ]
+}

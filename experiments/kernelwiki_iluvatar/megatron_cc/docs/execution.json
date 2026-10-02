@@ -1,0 +1,18 @@
+{
+  "contract": "megatron-native-biv150-cc-v2",
+  "draft": "docs/draft.md",
+  "draft_corrections": "references/native_preflight.txt and implementation_prompt_0001.txt supersede stale dtype, tolerance and mixed-gradient assertions in the CLI draft",
+  "freeze_point": "After native-control preflight and before candidate 0001 generation",
+  "steps": [
+    "Generate standalone candidate 0001 via Claude Code CLI and project-managed kernelwiki-iluvatar",
+    "Inspect returned code, imports, fallback and epsilon without modifying it",
+    "Run operator smoke then full fixed matrix; save failures",
+    "Return measured feedback to Claude Code; generate a distinct child candidate if needed",
+    "Run full operator matrix in three independent processes for final candidate",
+    "Run four-layer FP32 complete-step wall benchmark in three independent processes",
+    "Run two-layer holdout and BF16 autocast context with actual dtype logging",
+    "Apply frozen promotion gates, preserve raw evidence and append findings to the existing project report"
+  ],
+  "operator_command": "/root/miniconda3/bin/python -u benchmark.py --megatron-root /private/atrex-megatron/src/megatron-lm --candidate candidates/0001/candidate.py --mode operator --output evidence/0001-operator.json",
+  "model_command": "/root/miniconda3/bin/python -u benchmark.py --megatron-root /private/atrex-megatron/src/megatron-lm --candidate candidates/0001/candidate.py --mode model --seed 23002 --output evidence/0001-primary-23002.json"
+}

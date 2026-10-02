@@ -1,0 +1,14 @@
+{
+  "response": "experiments\\kernelwiki_iluvatar\\megatron_cc\\evidence\\cc-candidate-0001.json",
+  "response_sha256": "58864a39e31dbb322aabf0782363ffe3e0e2697981c5c8f14c4174dd4f12f0f3",
+  "output_sha256": "69880d4b0ca83d437eacfdebbf7529c20721c1255974b656e61f5675be11325c",
+  "cli_model": [
+    "Claude-Opus-4.8"
+  ],
+  "source_ids": [
+    "kernel-residual-rmsnorm-bi-v150",
+    "kernel-residual-rmsnorm-backward-bi-v150"
+  ],
+  "rationale": "Smallest viable first candidate per native_preflight.txt step 7: optimize only the FP32-residual/FP32-weight path that the primary and holdout models actually exercise, and hand everything else to an exact native fallback. The preflight confirmed the 16 FP16 scale-0.001 failures are native (CPU probe: 4096/4096 dx infinities), so the optimized path deliberately excludes low-precision residual and the fallback reproduces native nonfinite behavior unchanged rather than repairing it. Forward is a single Triton kernel matching native BDA order: x is upcast to FP32 before the add (native casts x to residual.dtype first), the exact FP32 residual sum is stored, sum-of-squares is reduced in FP32, and inv_rms uses 1/tl.sqrt (not tl.rsqrt, which the observed CoreX build lacks) with the epsilon argument threaded through. Normalized output is allocated FP32 to mirror native RMSNorm emitting FP32 under an FP32 weight. Backward reuses the validated two-kernel style from stage13_backward.py: backward_rows computes the shared dr and FP32 per-row partials, backward_weight reduces partials into an FP32 weight gradient. dr is produced once in FP32 then cast separately to the original x dtype and the residual dtype, so mixed-dtype dx/dresidual are never required to be bitwise equal. Absent dy and absent residual-output gradient are handled by HAS_DY/HAS_H constexpr guards that zero the respective contributions instead of inventing gradients. All kernels mask tail elements via col < hidden. Values and seeds come only from inputs; no caching, no global allocations, no harness/helper imports. num_warps=4 is the untuned starting point; this candidate is unverified on GPU and FMA contraction may still need constraining if the FP32 atol=3e-4 checks are tight.",
+  "parent": null
+}

@@ -1,0 +1,22 @@
+{
+  "response": "experiments\\kernelwiki_iluvatar\\megatron_cc\\evidence\\cc-plan-retry.json",
+  "response_sha256": "d1fd69567f80a185d333a8b83ff90f09925ec1248d46e0025098d5c5d7138b79",
+  "output_sha256": "25ada5196dfe4e7a98e2b15963432700dfe4b81c5e3596ce1984bc4c2d69fcd8",
+  "cli_model": [
+    "Claude-Opus-4.8"
+  ],
+  "source_ids": [
+    "megatron-native-biv150-cc-v1",
+    "kernel-residual-rmsnorm-bi-v150",
+    "kernel-residual-rmsnorm-backward-bi-v150",
+    "exp-bi-v150-corex42-stage3",
+    "exp-bi-v150-corex42-stage13",
+    "exp-bi-v150-corex42-stage14",
+    "exp-bi-v150-corex42-stage21",
+    "references/stage3_residual_rmsnorm.py",
+    "references/stage13_backward.py",
+    "iluvatar-migration-ledger"
+  ],
+  "rationale": null,
+  "parent": null
+}

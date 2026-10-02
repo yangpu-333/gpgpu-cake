@@ -1,0 +1,17 @@
+{
+  "response": "experiments\\kernelwiki_iluvatar\\megatron_cc\\evidence\\cc-candidate-0003.json",
+  "response_sha256": "ebe04fa007772422d5436f37b23b73cf6985101858f1cfbaf27343ab743d82b4",
+  "output_sha256": "b426ef0a309d41450e00e4ce2a1e32a71567a75b08776e27fa6fbc3bb4c566a8",
+  "cli_model": [
+    "Claude-Opus-4.8"
+  ],
+  "source_ids": [
+    "megatron_cc/contract.json (megatron-native-biv150-cc-v3; CPU-float64 copy comparisons, unchanged tolerances/baseline/timing)",
+    "megatron_cc/candidates/0002/candidate.py (parent implementation, frozen)",
+    "megatron_cc/evidence/decision-0002.json (reject_or_experimental; primary speedups, failing autocast/memory gates)",
+    "megatron_cc/evidence/0002-final/autocast-23006.json (BF16 autocast model-correctness failure detail; x=BF16, residual/weight/y=FP32; candidate_calls counter note)",
+    "megatron_cc/references/feedback_corrections.txt (overclaim corrections: smoke vs full ratios, event-timing caveat, v3 CPU-copy supersession, screening ratios)"
+  ],
+  "rationale": "Candidate 0002 passed the full v3 CPU-float64 operator matrix (672/672 finite-native case-rounds, 48/48 native-invalid compatibility checks across 3 processes) and all primary FP32 model correctness, with primary wall speedups 1.005022/1.010870/1.021433 (geomean 1.012419), holdout 1.009660 and no temporary peak-memory regression. It was still rejected because the unchanged bfloat16-autocast model-correctness check failed: with x=BF16 and residual/weight/y=FP32, the optimized kernel's FP32 normalized math produced perturbations that, after propagating through BF16 rounding under autocast, exceeded tolerance on step2 and step3 (4 token-loss elements each near max~0.00789, plus one step3 parameter-gradient element near max~0.0003133 vs atol 0.0003). Per the fixed contract and feedback_corrections.txt, tolerance, baseline and harness must not change. The minimal repair in 0003 is a single autocast guard at the public fused entry: _cuda_autocast_enabled() detects the active CUDA autocast context (robust across the torch 2.4.1 is_autocast_enabled signatures) and routes to _native_fallback, which runs the exact native BDA dtype cast / dropout(p=0) / residual add and native torch.nn.functional.rms_norm directly inside the caller's still-active autocast region, so forward and backward rounding match the native Megatron path bit-for-bit. Every other aspect -- FP32-residual optimized kernels, process-local compiled-kernel cache, epsilon semantics, num_warps=4 and the supported row<=2048/hidden<=8192 range -- is byte-identical to 0002, with no kernel tuning or benchmark edits. This makes the BF16 autocast scenario a correctness/compatibility guarantee via NATIVE FALLBACK, explicitly not a fused BF16 training-performance claim; the harness candidate_calls.fused counter only tallies adapter API calls and does not prove Triton execution. The FP32 wall-clock gain remains small and, consistent with the corrections (event timing can include host launch gaps; the 9-12x figure came from a tiny smoke run; v3 single-process screens of 0.899/1.003 do not establish stable promotion), is not yet verified for this child. 0003 must not be called promoted until independent external verification of the full fixed training-sample wall-clock and the complete v3 correctness/compatibility matrix, including the BF16 autocast run, passes.",
+  "parent": "0002"
+}

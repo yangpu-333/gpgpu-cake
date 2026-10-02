@@ -1,0 +1,189 @@
+         456383 function calls (426793 primitive calls) in 2.732 seconds
+
+   Ordered by: internal time
+   List reduced from 1110 to 70 due to restriction <70>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+       96    0.502    0.005    0.502    0.005 {method 'run_backward' of 'torch._C._EngineBase' objects}
+      347    0.289    0.001    0.289    0.001 {method 'update' of '_hashlib.HASH' objects}
+      288    0.256    0.001    0.257    0.001 /usr/local/corex/lib64/python3/dist-packages/torch/distributed/distributed_c10d.py:2215(all_reduce)
+     1430    0.225    0.000    0.225    0.000 {method 'item' of 'torch._C.TensorBase' objects}
+      672    0.140    0.000    0.140    0.000 {built-in method torch.rms_norm}
+      192    0.077    0.000    0.077    0.000 {built-in method torch.embedding}
+     1632    0.064    0.000    0.064    0.000 {built-in method torch.matmul}
+       96    0.053    0.001    0.065    0.001 /mnt/atrex-megatron/src/megatron-lm/megatron/core/tensor_parallel/cross_entropy.py:31(calculate_predicted_logits)
+     3552    0.051    0.000    0.953    0.000 {built-in method apply}
+      362    0.048    0.000    0.048    0.000 {method 'read' of '_io.BufferedReader' objects}
+      289    0.047    0.000    0.307    0.001 /usr/local/corex/lib64/python3/dist-packages/torch/distributed/c10d_logger.py:76(wrapper)
+      404    0.038    0.000    0.038    0.000 {built-in method torch.isfinite}
+       21    0.035    0.002    0.035    0.002 {method 'readline' of '_io.BufferedReader' objects}
+        1    0.034    0.034    0.034    0.034 /mnt/atrex-megatron/src/megatron-lm/megatron/core/parallel_state.py:2506(destroy_model_parallel)
+      840    0.029    0.000    0.065    0.000 /mnt/atrex-megatron/src/megatron-lm/megatron/core/tensor_parallel/random.py:310(fork)
+       96    0.026    0.000    0.110    0.001 /mnt/atrex-megatron/src/megatron-lm/megatron/core/models/common/embeddings/language_model_embedding.py:98(forward)
+  6912/96    0.020    0.000    1.654    0.017 /usr/local/corex/lib64/python3/dist-packages/torch/nn/modules/module.py:1555(_call_impl)
+       24    0.017    0.001    0.017    0.001 /usr/local/corex/lib64/python3/dist-packages/torch/distributed/distributed_c10d.py:1445(_shutdown_backend)
+       96    0.017    0.000    0.017    0.000 {method 'div_' of 'torch._C.TensorBase' objects}
+     3264    0.015    0.000    0.015    0.000 {method 'view' of 'torch._C.TensorBase' objects}
+      202    0.015    0.000    0.305    0.002 /mnt/kda-biv150-stage3/megatron_cc/benchmark.py:52(check)
+      768    0.014    0.000    0.014    0.000 {method 'contiguous' of 'torch._C.TensorBase' objects}
+      384    0.014    0.000    0.915    0.002 /mnt/atrex-megatron/src/megatron-lm/megatron/core/transformer/transformer_layer.py:569(_forward_attention)
+      384    0.013    0.000    0.164    0.000 /mnt/atrex-megatron/src/megatron-lm/megatron/core/transformer/dot_product_attention.py:142(forward)
+      384    0.013    0.000    0.013    0.000 {method 'softmax' of 'torch._C.TensorBase' objects}
+      384    0.012    0.000    0.341    0.001 /mnt/atrex-megatron/src/megatron-lm/megatron/core/transformer/attention.py:1278(forward)
+    12576    0.012    0.000    0.012    0.000 /usr/local/corex/lib64/python3/dist-packages/torch/nn/modules/module.py:1716(__getattr__)
+      384    0.012    0.000    0.012    0.000 {built-in method torch._C._nn.gelu}
+      576    0.012    0.000    0.017    0.000 /mnt/atrex-megatron/src/megatron-lm/megatron/core/fusions/fused_bias_dropout.py:11(_bias_dropout_add_func)
+      384    0.011    0.000    0.011    0.000 {method 'masked_fill_' of 'torch._C.TensorBase' objects}
+     3552    0.011    0.000    0.993    0.000 /usr/local/corex/lib64/python3/dist-packages/torch/autograd/function.py:558(apply)
+48547/43955    0.010    0.000    0.017    0.000 {built-in method builtins.isinstance}
+  6912/96    0.010    0.000    1.655    0.017 /usr/local/corex/lib64/python3/dist-packages/torch/nn/modules/module.py:1549(_wrapped_call_impl)
+    24288    0.010    0.000    0.018    0.000 /usr/local/corex/lib64/python3/dist-packages/torch/_functorch/utils.py:33(<genexpr>)
+      606    0.010    0.000    0.010    0.000 {method 'all' of 'torch._C.TensorBase' objects}
+        1    0.009    0.009    2.732    2.732 /mnt/kda-biv150-stage3/megatron_cc/benchmark.py:221(model_test)
+       96    0.009    0.000    0.009    0.000 {built-in method torch._foreach_add_}
+     1536    0.009    0.000    0.009    0.000 {method 'reshape' of 'torch._C.TensorBase' objects}
+      384    0.009    0.000    0.009    0.000 {built-in method torch.baddbmm}
+      298    0.009    0.000    0.009    0.000 {method 'sum' of 'torch._C.TensorBase' objects}
+     1686    0.009    0.000    0.009    0.000 {method 'get_state' of 'torch._C.Generator' objects}
+     1824    0.008    0.000    0.008    0.000 {method 'transpose' of 'torch._C.TensorBase' objects}
+     1632    0.008    0.000    0.008    0.000 {method 't' of 'torch._C.TensorBase' objects}
+     2726    0.008    0.000    0.016    0.000 /usr/local/corex/lib64/python3/dist-packages/torch/nn/modules/module.py:1731(__setattr__)
+      864    0.008    0.000    0.133    0.000 /mnt/atrex-megatron/src/megatron-lm/megatron/core/tensor_parallel/layers.py:1100(forward)
+     3552    0.008    0.000    0.026    0.000 /usr/local/corex/lib64/python3/dist-packages/torch/_functorch/utils.py:31(unwrap_dead_wrappers)
+       96    0.008    0.000    0.008    0.000 {built-in method torch.log}
+        4    0.007    0.002    0.007    0.002 {built-in method torch.ones}
+     3312    0.007    0.000    0.020    0.000 /mnt/atrex-megatron/src/megatron-lm/megatron/core/utils.py:573(get_tensor_model_parallel_group_if_none)
+      384    0.007    0.000    0.007    0.000 {built-in method torch.bmm}
+      441    0.007    0.000    0.007    0.000 {built-in method torch.empty}
+       24    0.007    0.000    0.008    0.000 /usr/local/corex/lib64/python3/dist-packages/torch/distributed/distributed_c10d.py:1460(_new_process_group_helper)
+    10213    0.007    0.000    0.008    0.000 {built-in method builtins.hasattr}
+     1632    0.007    0.000    0.079    0.000 /mnt/atrex-megatron/src/megatron-lm/megatron/core/tensor_parallel/layers.py:528(forward)
+      192    0.006    0.000    0.395    0.002 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:403(launcher_body)
+      404    0.006    0.000    0.006    0.000 {method 'abs' of 'torch._C.TensorBase' objects}
+       96    0.006    0.000    0.006    0.000 {built-in method torch.max}
+      522    0.006    0.000    0.007    0.000 /usr/local/corex/lib64/python3/dist-packages/torch/nn/modules/module.py:429(__init__)
+      420    0.006    0.000    0.006    0.000 {built-in method torch.all}
+     1632    0.006    0.000    0.161    0.000 /mnt/atrex-megatron/src/megatron-lm/megatron/core/tensor_parallel/layers.py:755(linear_with_grad_accumulation_and_async_allreduce)
+      192    0.006    0.000    0.015    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:36(get_corex_sme)
+       96    0.006    0.000    1.108    0.012 /mnt/atrex-megatron/src/megatron-lm/megatron/core/transformer/transformer_block.py:489(forward)
+      606    0.006    0.000    0.006    0.000 {method 'double' of 'torch._C.TensorBase' objects}
+      384    0.006    0.000    0.101    0.000 /mnt/atrex-megatron/src/megatron-lm/megatron/core/transformer/attention.py:1812(get_query_key_value_tensors)
+      112    0.006    0.000    0.012    0.000 /usr/local/corex/lib64/python3/dist-packages/torch/optim/optimizer.py:911(zero_grad)
+      768    0.005    0.000    0.096    0.000 /mnt/atrex-megatron/src/megatron-lm/megatron/core/tensor_parallel/layers.py:1430(forward)
+       17    0.005    0.000    0.005    0.000 {built-in method torch._C._cuda_synchronize}
+     6912    0.005    0.000    0.005    0.000 {built-in method torch._C._get_tracing_state}
+      384    0.005    0.000    0.007    0.000 /mnt/atrex-megatron/src/megatron-lm/megatron/core/utils.py:701(get_tensor)
+      384    0.005    0.000    0.005    0.000 {built-in method torch.split_with_sizes}
+
+
+         456383 function calls (426793 primitive calls) in 2.732 seconds
+
+   Ordered by: cumulative time
+   List reduced from 1110 to 103 due to restriction <'candidate|triton|RMSNorm|rms_norm'>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+      192    0.000    0.000    0.412    0.002 /mnt/kda-biv150-stage3/megatron_cc/candidates/0001/candidate.py:146(fused)
+      192    0.003    0.000    0.405    0.002 /mnt/kda-biv150-stage3/megatron_cc/candidates/0001/candidate.py:69(forward)
+      192    0.006    0.000    0.395    0.002 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:403(launcher_body)
+        1    0.001    0.001    0.345    0.345 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:428(compile)
+        1    0.000    0.000    0.339    0.339 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/make_launcher.py:29(make_stub)
+        1    0.000    0.000    0.339    0.339 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:146(version_key)
+      672    0.001    0.000    0.142    0.000 /usr/local/corex/lib64/python3/dist-packages/torch/nn/functional.py:2578(rms_norm)
+      672    0.140    0.000    0.140    0.000 {built-in method torch.rms_norm}
+      192    0.006    0.000    0.015    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:36(get_corex_sme)
+      192    0.001    0.000    0.007    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:26(get_disable_sme)
+      192    0.001    0.000    0.006    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:427(<listcomp>)
+     1344    0.001    0.000    0.006    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:240(_pinned_memory_of)
+      192    0.001    0.000    0.004    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:425(<listcomp>)
+2310/1921    0.002    0.000    0.004    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:780(__getattribute__)
+      192    0.001    0.000    0.004    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:407(<listcomp>)
+     1344    0.002    0.000    0.004    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:232(_device_of)
+     1344    0.001    0.000    0.003    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:368(_get_arg_sig_key)
+     1344    0.002    0.000    0.002    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:355(_get_arg_specialization_key)
+      192    0.000    0.000    0.002    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:751(_init_handles)
+      192    0.002    0.000    0.002    0.000 /mnt/kda-biv150-stage3/megatron_cc/candidates/0001/candidate.py:120(_supported)
+        2    0.000    0.000    0.002    0.001 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:366(parse_mlir_module)
+        2    0.002    0.001    0.002    0.001 {built-in method triton._C.libtriton.triton.ir.parse_mlir_module}
+      192    0.002    0.000    0.002    0.000 {built-in method __triton_launcher.launch}
+        1    0.000    0.000    0.002    0.002 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:481(<lambda>)
+     1351    0.001    0.000    0.001    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:212(_key_of)
+      196    0.000    0.000    0.001    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:80(get_current_device)
+      576    0.000    0.000    0.001    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:400(regular_args_v)
+        5    0.000    0.000    0.001    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/driver.py:149(__getattr__)
+        5    0.000    0.000    0.001    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/driver.py:145(_initialize_obj)
+        1    0.000    0.000    0.001    0.001 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/driver.py:174(initialize_driver)
+      192    0.000    0.000    0.001    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:85(set_current_device)
+        1    0.000    0.000    0.001    0.001 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/driver.py:74(__init__)
+        1    0.000    0.000    0.001    0.001 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/driver.py:34(__init__)
+        1    0.000    0.000    0.001    0.001 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:290(make_hash)
+      192    0.001    0.000    0.001    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:69(get_cuda_stream)
+      192    0.000    0.000    0.001    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:786(assemble_tensormap_to_arg)
+        1    0.000    0.000    0.001    0.001 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:424(<lambda>)
+        1    0.000    0.000    0.001    0.001 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:552(cache_key)
+        1    0.000    0.000    0.001    0.001 /usr/local/corex/lib64/python3/dist-packages/triton/common/backend.py:90(get_backend)
+      192    0.000    0.000    0.001    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:192(__getitem__)
+      192    0.000    0.000    0.001    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:379(_conclude_device_type)
+      576    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:401(<listcomp>)
+        3    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/cache.py:136(get_cache_manager)
+      192    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/__init__.py:58(next_power_of_2)
+        3    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/cache.py:47(__init__)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/torch/cuda/__init__.py:1444(_register_triton_kernels)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:485(<lambda>)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/cache.py:102(put_group)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:720(__init__)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/cache.py:109(put)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:567(parse)
+        3    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/cache.py:9(default_cache_dir)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:256(_get_config)
+      192    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:426(<listcomp>)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/cache.py:82(get_group)
+      192    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:380(<listcomp>)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:487(<lambda>)
+     12/9    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:125(visit_Call)
+      192    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:408(<listcomp>)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:266(get_kernel_name)
+        3    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:385(get_cuda_capability)
+    13/10    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:117(visit_Attribute)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:481(<dictcomp>)
+        2    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:403(get_arch_default_num_stages)
+        7    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:291(_type_of)
+       12    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/cache.py:68(_make_path)
+        3    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:90(get_device_capability)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/make_launcher.py:19(make_so_cache_key)
+        3    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/cache.py:71(has_file)
+        2    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/cache.py:76(get_file)
+       27    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:114(visit_Name)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:109(__init__)
+        1    0.000    0.000    0.000    0.000 {built-in method triton._C.libtriton.triton.get_env_vars}
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:274(<setcomp>)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:276(<setcomp>)
+        8    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:257(is_divisible_by_16)
+        3    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:577(__setattr__)
+        8    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:266(is_divisible_by_8)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:308(<listcomp>)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:52(__getitem__)
+        3    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/common/build.py:19(is_corex)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:309(<listcomp>)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:307(<lambda>)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/driver.py:69(__new__)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:278(<setcomp>)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/make_launcher.py:21(<dictcomp>)
+        1    0.000    0.000    0.000    0.000 {built-in method triton._C.libtriton.triton.ir.is_ws_supported}
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/driver.py:153(__setattr__)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/driver.py:29(__new__)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:329(_make_constants)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:35(is_corex)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:588(__repr__)
+        2    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:376(is_hip)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:333(_call_hook)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:478(<dictcomp>)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:475(<listcomp>)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:423(add_iluvatar_stages)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:284(<setcomp>)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py:479(<dictcomp>)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:392(get_arch_default_num_warps)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/utils.py:62(get_ids_of_tensormaps)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:676(<listcomp>)
+        1    0.000    0.000    0.000    0.000 /usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py:480(<lambda>)
+
+

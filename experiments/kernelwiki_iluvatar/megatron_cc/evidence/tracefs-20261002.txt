@@ -1,0 +1,2 @@
+ls: cannot access '/sys/kernel/tracing/tracing_on': No such file or directory
+ls: cannot access '/sys/kernel/debug/tracing/tracing_on': No such file or directory

@@ -1,0 +1,12 @@
+{
+  "recorded_at": "2026-10-02",
+  "active_contract": "megatron-native-biv150-cc-v3",
+  "earlier_execution_record": "execution.json",
+  "reason": "An independent probe found GPU float64 subtraction returning zero for unequal inputs on this CoreX runtime.",
+  "change": "Copy values to CPU and compare in float64; retain original tolerances, model, input matrix, baseline and timing protocol.",
+  "superseded": "Numerical acceptance based on v1/v2 GPU float64 comparisons; raw timing observations remain archived with their original context.",
+  "reruns": ["0001-screen-v3", "0002-screen-v3", "0002-final", "0003-final"],
+  "authoritative_decision": "../evidence/decision-0003.json",
+  "review_scope_correction": "The CLI review's rows<=2048 and hidden<=8192 describe dispatch guards, not a fully tested acceptance domain. Acceptance covers only the explicitly recorded operator and model shapes.",
+  "precision_scope": "BF16 autocast dispatches to exact native fallback. Native-invalid FP16 cases are compatibility checks, not finite correctness passes."
+}

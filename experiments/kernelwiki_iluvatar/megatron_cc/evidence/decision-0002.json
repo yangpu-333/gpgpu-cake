@@ -1,0 +1,69 @@
+{
+  "candidate_id": "0002",
+  "contract": "megatron-native-biv150-cc-v3",
+  "candidate_sha256": "25b9ead956ee801b5b1155db3067b755d950a01dab00687292052600f8846bb5",
+  "harness_sha256": "360e57d1d1baa9d2ddc477224576a7ce87864ff9c3e0aefde546fbf4266cc96a",
+  "contract_sha256": "13f71ba192ea8fdf474e89729d2c19fa1a17e9aee3b125a7966abca83941a883",
+  "decision": "reject_or_experimental",
+  "checks": {
+    "all_required_runs_complete": true,
+    "identical_frozen_sources": true,
+    "all_correctness_and_native_compatibility_pass": false,
+    "three_primary_rounds_each_faster": true,
+    "primary_geomean_at_least_1_01": true,
+    "holdout_and_autocast_at_least_0_98": false,
+    "temporary_peak_memory_regression_at_most_5_percent": false
+  },
+  "primary_speedups": [
+    1.0050220306954563,
+    1.010870123091114,
+    1.021433262943984
+  ],
+  "primary_geomean": 1.0124190609735548,
+  "primary_median_ms": [
+    {
+      "native": 11.334580555558205,
+      "candidate": 11.277942382730544
+    },
+    {
+      "native": 11.535949679091573,
+      "candidate": 11.411900911480188
+    },
+    {
+      "native": 11.404441087506711,
+      "candidate": 11.165135796181858
+    }
+  ],
+  "robustness_speedups": {
+    "holdout-23005": 1.0096596803488853,
+    "autocast-23006": null
+  },
+  "temporary_peak_memory_fraction": {
+    "holdout-23005": 0.0,
+    "primary-23002": 0.0,
+    "primary-23003": 0.0,
+    "primary-23004": 0.0
+  },
+  "operator_case_summaries": {
+    "operator-23002": {
+      "finite_native_cases": 224,
+      "finite_correctness_passed": 224,
+      "native_invalid_cases": 16,
+      "native_invalid_compatibility_passed": 16
+    },
+    "operator-23003": {
+      "finite_native_cases": 224,
+      "finite_correctness_passed": 224,
+      "native_invalid_cases": 16,
+      "native_invalid_compatibility_passed": 16
+    },
+    "operator-23004": {
+      "finite_native_cases": 224,
+      "finite_correctness_passed": 224,
+      "native_invalid_cases": 16,
+      "native_invalid_compatibility_passed": 16
+    }
+  },
+  "scope": "BI-V150 CoreX 4.2, fixed Megatron local backend, FP32 residual fusion, representative synthetic GPT steps with SGD; not production or low-precision residual training",
+  "evidence_folder": "evidence\\0002-final"
+}

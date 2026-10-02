@@ -1,0 +1,28 @@
+{
+  "version": "megatron-native-biv150-cc-v1",
+  "date": "2026-10-02",
+  "objective": "Use Claude Code CLI to iterate a residual-add plus RMSNorm candidate on BI-V150 against the identical pinned Megatron native local backend, then verify complete training-step throughput.",
+  "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
+  "gpu": "Iluvatar BI-V150",
+  "expected_stack": {"corex": "4.2.0", "torch": "2.4.1", "triton": "2.1.0"},
+  "baseline": "Unmodified get_gpt_layer_local_spec(normalization='RMSNorm') plus get_bias_dropout_add(training=True, fused=False) at the pinned Megatron commit. Transformer Engine is not compatible in the present environment and is not the baseline.",
+  "target": "attention self_attn_bda -> pre_mlp_layernorm, dropout=0, bias=None, contiguous input; preserve both normalized output and residual stream",
+  "candidate_api": "fused(x, residual, weight, epsilon) -> (normalized, residual_sum); native dtype conversions, return dtypes, epsilon and backward must be preserved",
+  "allowed": ["torch allocation and dtype metadata", "Triton kernels supported by the observed CoreX build", "shape-based dispatch with documented supported range", "native fallback outside the supported contract"],
+  "forbidden": ["change the baseline, verifier, tolerance, input distribution or measurement code", "hard-code tensor values or RNG seed", "cache results across calls", "skip gradients or optimizer work", "claim NVIDIA instruction equivalence", "change installed Megatron or vendor packages"],
+  "operator_checks": {
+    "dtypes": ["float32", "float16", "bfloat16"],
+    "mixed_dtype_pairs": [["float16", "float32"], ["bfloat16", "float32"]],
+    "shapes": [[16, 256], [256, 512], [7, 769], [17, 1537]],
+    "epsilons": [0.00001, 0.000001],
+    "input_scales": [1, 0.001, 100],
+    "residual_gradient": ["present", "absent"],
+    "checks": ["outputs and gradients against actual Megatron-selected RMSNorm and BDA", "element-wise absolute plus relative tolerance", "finite values", "exact residual sum and matching return dtypes", "inputs unchanged", "independent autograd comparison"]
+  },
+  "model": {"num_layers": 4, "hidden_size": 512, "num_attention_heads": 8, "sequence_length": 128, "micro_batch_size": 2, "vocab_size": 1024, "normalization": "RMSNorm", "layernorm_epsilon": 0.00001, "add_bias_linear": false, "dropout": 0, "optimizer": "SGD", "input": "synthetic token batches, explicitly a representative benchmark, not production training"},
+  "holdout_model": {"num_layers": 2, "hidden_size": 256, "num_attention_heads": 4, "sequence_length": 17, "micro_batch_size": 2, "vocab_size": 512},
+  "precision_contexts": ["float32", "bfloat16 autocast; log actual fused input/output dtypes"],
+  "timing": {"operator": "torch.cuda.Event; warmup=10, samples=15, launches_per_sample=30; alternate baseline/candidate order; report microseconds per call", "training": "time.perf_counter around consecutive complete steps with GPU synchronization only at block boundaries; includes zero_grad, forward, loss, backward and optimizer.step; excludes data loading and checkpoint I/O", "training_warmup_steps": 5, "training_samples": 12, "steps_per_sample": 10, "independent_processes": 3, "speedup": "baseline median time / candidate median time; never mix event latency with wall-clock throughput"},
+  "promotion": {"all_correctness_checks_pass": true, "three_primary_rounds_each_faster": true, "primary_wall_speedup_geomean_min": 1.01, "holdout_and_autocast_speedup_min": 0.98, "memory_regression_max_fraction": 0.05, "memory_scope": "temporary peak over two resident models; excludes single-model total memory claims", "if_not_met": "reject or retain as experimental; a complete loop may correctly end in rejection"},
+  "evidence": ["CLI raw response, prompt and model ID", "candidate source and SHA256", "baseline source SHA256", "environment fingerprint", "all raw timing samples and numeric errors", "candidate parent and feedback", "final decision and limitations"]
+}

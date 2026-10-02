@@ -1,0 +1,18 @@
+{
+  "response": "experiments\\kernelwiki_iluvatar\\megatron_cc\\evidence\\cc-candidate-0002.json",
+  "response_sha256": "3a0c98b85d159aaed98e2762bc2ed76bd43632b2a55cf4b899dad2868801aed5",
+  "output_sha256": "25b9ead956ee801b5b1155db3067b755d950a01dab00687292052600f8846bb5",
+  "cli_model": [
+    "Claude-Opus-4.8"
+  ],
+  "source_ids": [
+    "megatron_cc/contract.json",
+    "megatron_cc/candidates/0001/candidate.py",
+    "megatron_cc/evidence/0001-screen/primary-23001.json",
+    "megatron_cc/evidence/0001-host-profile.txt",
+    "megatron_cc/references/compiled-launch-api.txt",
+    "candidate_sha256:69880d4b0ca83d437eacfdebbf7529c20721c1255974b656e61f5675be11325c"
+  ],
+  "rationale": "The 0001 diagnostic profile shows end-to-end regression (wall speedup 0.942) comes from host-side launcher overhead, not GPU math: triton/runtime/jit.py:403 launcher_body is ~0.395s cumulative over 192 fused calls, re-running get_corex_sme, _get_arg_specialization_key, _device_of, _pinned_memory_of and shape/signature key computation on every launch, plus view/reshape/contiguous churn. Microbench event latency (6-12x) already excludes this host cost, and the frozen training benchmark excludes cold compile, so the remaining gap is repeated JIT dispatch. 0002 keeps the exact three kernels, epsilon semantics, forward outputs, two-kernel backward, native low-precision fallback and num_warps=4, and adds a process-local cache of compiled kernel code + launch metadata: first call per specialization uses normal JIT and launches once, later calls use the verbatim CompiledKernel[(gx,gy,gz)] direct-launch path from references/compiled-launch-api.txt, passing only the non-constexpr pointer args in original order with a 3-element grid on the current stream. hidden and epsilon become constexpr (removes runtime scalar dispatch and bakes bounds) and are in every cache key. The key also includes device index, x dtype, BLOCK, HAS_DY/HAS_H, rows/ROW_BLOCK for the weight kernel, and per-pointer 16-byte alignment; a differing alignment misses the cache and takes a fresh correctly specialized JIT rather than unsafe reuse, and any first-JIT error stays visible. Unneeded 2D reshape views are removed: Triton uses flat contiguous pointers so inputs are passed and outputs allocated with empty_like in their original shapes, returned directly. Explicit rows<=2048 and hidden<=8192 scope bounds with native fallback outside; absent dy/h handled as before by reusing residual_out and the HAS_* constexpr variants. No tensors, results, gradients or device buffers are cached; no global device allocations; imports limited to torch, triton, triton.language. Mathematics is byte-identical to 0001 (promoting hidden/eps to constexpr changes only dispatch, not values), so the exact-match correctness is expected to hold. Must be verified externally for both correctness and genuine wall-clock promotion.",
+  "parent": "0001"
+}

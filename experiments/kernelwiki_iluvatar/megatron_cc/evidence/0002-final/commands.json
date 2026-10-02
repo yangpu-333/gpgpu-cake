@@ -1,0 +1,187 @@
+{
+  "started_utc": "2026-10-02T08:25:52.786240+00:00",
+  "candidate_id": "0002",
+  "phase": "final",
+  "gpu_visible": "0",
+  "runs": [
+    {
+      "name": "operator-23002",
+      "command": [
+        "/root/miniconda3/bin/python",
+        "-u",
+        "/mnt/kda-biv150-stage3/megatron_cc/benchmark.py",
+        "--megatron-root",
+        "/private/atrex-megatron/src/megatron-lm",
+        "--candidate",
+        "/mnt/kda-biv150-stage3/megatron_cc/candidates/0002/candidate.py",
+        "--mode",
+        "operator",
+        "--seed",
+        "23002",
+        "--output",
+        "/mnt/kda-biv150-stage3/megatron_cc/evidence/0002-final/operator-23002.json"
+      ],
+      "started_utc": "2026-10-02T08:25:52.796546+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T08:26:14.999163+00:00"
+    },
+    {
+      "name": "operator-23003",
+      "command": [
+        "/root/miniconda3/bin/python",
+        "-u",
+        "/mnt/kda-biv150-stage3/megatron_cc/benchmark.py",
+        "--megatron-root",
+        "/private/atrex-megatron/src/megatron-lm",
+        "--candidate",
+        "/mnt/kda-biv150-stage3/megatron_cc/candidates/0002/candidate.py",
+        "--mode",
+        "operator",
+        "--seed",
+        "23003",
+        "--output",
+        "/mnt/kda-biv150-stage3/megatron_cc/evidence/0002-final/operator-23003.json"
+      ],
+      "started_utc": "2026-10-02T08:26:15.001226+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T08:26:37.608049+00:00"
+    },
+    {
+      "name": "operator-23004",
+      "command": [
+        "/root/miniconda3/bin/python",
+        "-u",
+        "/mnt/kda-biv150-stage3/megatron_cc/benchmark.py",
+        "--megatron-root",
+        "/private/atrex-megatron/src/megatron-lm",
+        "--candidate",
+        "/mnt/kda-biv150-stage3/megatron_cc/candidates/0002/candidate.py",
+        "--mode",
+        "operator",
+        "--seed",
+        "23004",
+        "--output",
+        "/mnt/kda-biv150-stage3/megatron_cc/evidence/0002-final/operator-23004.json"
+      ],
+      "started_utc": "2026-10-02T08:26:37.614086+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T08:27:00.015529+00:00"
+    },
+    {
+      "name": "primary-23002",
+      "command": [
+        "/root/miniconda3/bin/python",
+        "-u",
+        "/mnt/kda-biv150-stage3/megatron_cc/benchmark.py",
+        "--megatron-root",
+        "/private/atrex-megatron/src/megatron-lm",
+        "--candidate",
+        "/mnt/kda-biv150-stage3/megatron_cc/candidates/0002/candidate.py",
+        "--mode",
+        "model",
+        "--seed",
+        "23002",
+        "--output",
+        "/mnt/kda-biv150-stage3/megatron_cc/evidence/0002-final/primary-23002.json"
+      ],
+      "started_utc": "2026-10-02T08:27:00.017823+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T08:27:16.609805+00:00"
+    },
+    {
+      "name": "primary-23003",
+      "command": [
+        "/root/miniconda3/bin/python",
+        "-u",
+        "/mnt/kda-biv150-stage3/megatron_cc/benchmark.py",
+        "--megatron-root",
+        "/private/atrex-megatron/src/megatron-lm",
+        "--candidate",
+        "/mnt/kda-biv150-stage3/megatron_cc/candidates/0002/candidate.py",
+        "--mode",
+        "model",
+        "--seed",
+        "23003",
+        "--output",
+        "/mnt/kda-biv150-stage3/megatron_cc/evidence/0002-final/primary-23003.json"
+      ],
+      "started_utc": "2026-10-02T08:27:16.613160+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T08:27:33.858120+00:00"
+    },
+    {
+      "name": "primary-23004",
+      "command": [
+        "/root/miniconda3/bin/python",
+        "-u",
+        "/mnt/kda-biv150-stage3/megatron_cc/benchmark.py",
+        "--megatron-root",
+        "/private/atrex-megatron/src/megatron-lm",
+        "--candidate",
+        "/mnt/kda-biv150-stage3/megatron_cc/candidates/0002/candidate.py",
+        "--mode",
+        "model",
+        "--seed",
+        "23004",
+        "--output",
+        "/mnt/kda-biv150-stage3/megatron_cc/evidence/0002-final/primary-23004.json"
+      ],
+      "started_utc": "2026-10-02T08:27:33.861639+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T08:27:50.304275+00:00"
+    },
+    {
+      "name": "holdout-23005",
+      "command": [
+        "/root/miniconda3/bin/python",
+        "-u",
+        "/mnt/kda-biv150-stage3/megatron_cc/benchmark.py",
+        "--megatron-root",
+        "/private/atrex-megatron/src/megatron-lm",
+        "--candidate",
+        "/mnt/kda-biv150-stage3/megatron_cc/candidates/0002/candidate.py",
+        "--mode",
+        "model",
+        "--seed",
+        "23005",
+        "--layers",
+        "2",
+        "--hidden",
+        "256",
+        "--heads",
+        "4",
+        "--sequence",
+        "17",
+        "--vocab",
+        "512",
+        "--output",
+        "/mnt/kda-biv150-stage3/megatron_cc/evidence/0002-final/holdout-23005.json"
+      ],
+      "started_utc": "2026-10-02T08:27:50.306605+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-02T08:28:06.147586+00:00"
+    },
+    {
+      "name": "autocast-23006",
+      "command": [
+        "/root/miniconda3/bin/python",
+        "-u",
+        "/mnt/kda-biv150-stage3/megatron_cc/benchmark.py",
+        "--megatron-root",
+        "/private/atrex-megatron/src/megatron-lm",
+        "--candidate",
+        "/mnt/kda-biv150-stage3/megatron_cc/candidates/0002/candidate.py",
+        "--mode",
+        "model",
+        "--seed",
+        "23006",
+        "--autocast",
+        "--output",
+        "/mnt/kda-biv150-stage3/megatron_cc/evidence/0002-final/autocast-23006.json"
+      ],
+      "started_utc": "2026-10-02T08:28:06.151752+00:00",
+      "exit_code": 1,
+      "finished_utc": "2026-10-02T08:28:19.894540+00:00"
+    }
+  ]
+}
