@@ -1,0 +1,166 @@
+{
+  "status": "verified",
+  "run_id": 37116380423,
+  "conclusion": "success",
+  "commit": "7addf723c4216fe56ac8413864e950122215ea8c",
+  "url": "https://github.com/yangpu-333/gpgpu-cake/actions/runs/37116380423",
+  "scope": "Linux CPU CI rebuilds fixed skill and KDA loader; tests BF16 evidence gates and full corpus; GPU experiments run separately on BI-V150.",
+  "jobs": [
+    {
+      "id": 111183896577,
+      "run_id": 37116380423,
+      "workflow_name": "KernelWiki BI-V150 KDA integration",
+      "head_branch": "main",
+      "run_url": "https://api.github.com/repos/yangpu-333/gpgpu-cake/actions/runs/37116380423",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOUkub-s8AAAAZ4xOgAQ",
+      "head_sha": "7addf723c4216fe56ac8413864e950122215ea8c",
+      "url": "https://api.github.com/repos/yangpu-333/gpgpu-cake/actions/jobs/111183896577",
+      "html_url": "https://github.com/yangpu-333/gpgpu-cake/actions/runs/37116380423/job/111183896577",
+      "status": "completed",
+      "conclusion": "success",
+      "created_at": "2026-10-03T10:25:37Z",
+      "started_at": "2026-10-03T10:25:39Z",
+      "completed_at": "2026-10-03T10:28:03Z",
+      "name": "rebuild-and-load",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-03T10:25:39Z",
+          "completed_at": "2026-10-03T10:25:40Z"
+        },
+        {
+          "name": "Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-03T10:25:40Z",
+          "completed_at": "2026-10-03T10:25:42Z"
+        },
+        {
+          "name": "Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-03T10:25:42Z",
+          "completed_at": "2026-10-03T10:25:43Z"
+        },
+        {
+          "name": "Rebuild KDA loader from pinned KDA commit",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-03T10:25:43Z",
+          "completed_at": "2026-10-03T10:25:43Z"
+        },
+        {
+          "name": "Test KDA project-level loader",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-03T10:25:43Z",
+          "completed_at": "2026-10-03T10:25:43Z"
+        },
+        {
+          "name": "Test opt-in Megatron kernel adapter",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-03T10:25:43Z",
+          "completed_at": "2026-10-03T10:25:43Z"
+        },
+        {
+          "name": "Test formal-loop performance log validation",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-03T10:25:43Z",
+          "completed_at": "2026-10-03T10:25:43Z"
+        },
+        {
+          "name": "Install pinned CPU Torch for BF16 evidence verifier tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-10-03T10:25:43Z",
+          "completed_at": "2026-10-03T10:26:03Z"
+        },
+        {
+          "name": "Test BF16 master-state and performance evidence gates",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-03T10:26:03Z",
+          "completed_at": "2026-10-03T10:26:05Z"
+        },
+        {
+          "name": "Rebuild BI-V150 skill from pinned KernelWiki commit",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-10-03T10:26:05Z",
+          "completed_at": "2026-10-03T10:26:07Z"
+        },
+        {
+          "name": "Validate BI-V150 corpus",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-03T10:26:07Z",
+          "completed_at": "2026-10-03T10:26:39Z"
+        },
+        {
+          "name": "Run KernelWiki full test suite",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-10-03T10:26:39Z",
+          "completed_at": "2026-10-03T10:27:53Z"
+        },
+        {
+          "name": "Load skill into KDA checkout and verify architecture paths",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-10-03T10:27:53Z",
+          "completed_at": "2026-10-03T10:28:01Z"
+        },
+        {
+          "name": "Post Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25,
+          "started_at": "2026-10-03T10:28:01Z",
+          "completed_at": "2026-10-03T10:28:01Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 26,
+          "started_at": "2026-10-03T10:28:01Z",
+          "completed_at": "2026-10-03T10:28:02Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 27,
+          "started_at": "2026-10-03T10:28:02Z",
+          "completed_at": "2026-10-03T10:28:02Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/yangpu-333/gpgpu-cake/check-runs/111183896577",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000000007,
+      "runner_name": "GitHub Actions 1000000007",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

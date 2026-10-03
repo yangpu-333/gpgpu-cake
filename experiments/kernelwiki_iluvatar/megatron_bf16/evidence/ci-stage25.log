@@ -1,0 +1,435 @@
+2026-10-03T10:25:39.8578565Z Current runner version: '2.337.0'
+2026-10-03T10:25:39.8601844Z ##[group]Runner Image Provisioner
+2026-10-03T10:25:39.8602549Z Hosted Compute Agent
+2026-10-03T10:25:39.8603104Z Version: 20260901.588
+2026-10-03T10:25:39.8603744Z Commit: f88ec8081b781fac6c440065ac7ff9e710ce3d0b
+2026-10-03T10:25:39.8604325Z Build Date: 2026-09-01T19:56:44Z
+2026-10-03T10:25:39.8604961Z Worker ID: {4040bf01-c4cb-46dc-aee4-2edd5eeee470}
+2026-10-03T10:25:39.8605571Z Azure Region: eastus
+2026-10-03T10:25:39.8606158Z ##[endgroup]
+2026-10-03T10:25:39.8607301Z ##[group]Operating System
+2026-10-03T10:25:39.8607803Z Ubuntu
+2026-10-03T10:25:39.8608279Z 24.04.5
+2026-10-03T10:25:39.8608745Z LTS
+2026-10-03T10:25:39.8609170Z ##[endgroup]
+2026-10-03T10:25:39.8609704Z ##[group]Runner Image
+2026-10-03T10:25:39.8610189Z Image: ubuntu-24.04
+2026-10-03T10:25:39.8610685Z Version: 20260927.320.1
+2026-10-03T10:25:39.8611781Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260927.320/images/ubuntu/Ubuntu2404-Readme.md
+2026-10-03T10:25:39.8613435Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260927.320
+2026-10-03T10:25:39.8614230Z ##[endgroup]
+2026-10-03T10:25:39.8615191Z ##[group]GITHUB_TOKEN Permissions
+2026-10-03T10:25:39.8617136Z Contents: read
+2026-10-03T10:25:39.8617688Z Metadata: read
+2026-10-03T10:25:39.8618196Z ##[endgroup]
+2026-10-03T10:25:39.8620190Z Secret source: Actions
+2026-10-03T10:25:39.8621077Z Cache mode: write
+2026-10-03T10:25:39.8621654Z Prepare workflow directory
+2026-10-03T10:25:39.8881900Z Prepare all required actions
+2026-10-03T10:25:39.8920041Z Getting action download info
+2026-10-03T10:25:40.1053823Z Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+2026-10-03T10:25:40.2045168Z Download action repository 'actions/setup-python@v7' (SHA:5fda3b95a4ea91299a34e894583c3862153e4b97)
+2026-10-03T10:25:40.6183544Z Complete job name: rebuild-and-load
+2026-10-03T10:25:40.6836879Z ##[group]Run actions/checkout@v7
+2026-10-03T10:25:40.6837861Z with:
+2026-10-03T10:25:40.6838268Z   repository: yangpu-333/gpgpu-cake
+2026-10-03T10:25:40.6841663Z   token: ***
+2026-10-03T10:25:40.6842046Z   ssh-strict: true
+2026-10-03T10:25:40.6842430Z   ssh-user: git
+2026-10-03T10:25:40.6842817Z   persist-credentials: true
+2026-10-03T10:25:40.6843233Z   clean: true
+2026-10-03T10:25:40.6843611Z   sparse-checkout-cone-mode: true
+2026-10-03T10:25:40.6844055Z   fetch-depth: 1
+2026-10-03T10:25:40.6844432Z   fetch-tags: false
+2026-10-03T10:25:40.6844812Z   show-progress: true
+2026-10-03T10:25:40.6845223Z   lfs: false
+2026-10-03T10:25:40.6845595Z   submodules: false
+2026-10-03T10:25:40.6846201Z   set-safe-directory: true
+2026-10-03T10:25:40.6846655Z   allow-unsafe-pr-checkout: false
+2026-10-03T10:25:40.6847298Z ##[endgroup]
+2026-10-03T10:25:40.7681677Z Syncing repository: yangpu-333/gpgpu-cake
+2026-10-03T10:25:40.7684004Z ##[group]Getting Git version info
+2026-10-03T10:25:40.7685121Z Working directory is '/home/runner/work/gpgpu-cake/gpgpu-cake'
+2026-10-03T10:25:40.7686824Z [command]/usr/bin/git version
+2026-10-03T10:25:40.7734813Z git version 2.55.0
+2026-10-03T10:25:40.7754085Z ##[endgroup]
+2026-10-03T10:25:40.7768575Z Temporarily overriding HOME='/home/runner/work/_temp/3a75fe87-6cb2-4071-b056-4389f83dbd1e' before making global git config changes
+2026-10-03T10:25:40.7772600Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-03T10:25:40.7778640Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/gpgpu-cake/gpgpu-cake
+2026-10-03T10:25:40.7837141Z Deleting the contents of '/home/runner/work/gpgpu-cake/gpgpu-cake'
+2026-10-03T10:25:40.7838990Z ##[group]Determining repository object format
+2026-10-03T10:25:40.7840246Z ##[endgroup]
+2026-10-03T10:25:40.7841295Z ##[group]Initializing the repository
+2026-10-03T10:25:40.7848688Z [command]/usr/bin/git init /home/runner/work/gpgpu-cake/gpgpu-cake
+2026-10-03T10:25:40.7947886Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-03T10:25:40.7949874Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-03T10:25:40.7954944Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-03T10:25:40.7956593Z hint: call:
+2026-10-03T10:25:40.7957562Z hint:
+2026-10-03T10:25:40.7958432Z hint: 	git config --global init.defaultBranch <name>
+2026-10-03T10:25:40.7959344Z hint:
+2026-10-03T10:25:40.7960201Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-03T10:25:40.7961530Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-03T10:25:40.7962643Z hint:
+2026-10-03T10:25:40.7963262Z hint: 	git branch -m <name>
+2026-10-03T10:25:40.7963952Z hint:
+2026-10-03T10:25:40.7964851Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-03T10:25:40.7966557Z Initialized empty Git repository in /home/runner/work/gpgpu-cake/gpgpu-cake/.git/
+2026-10-03T10:25:40.7968636Z [command]/usr/bin/git remote add origin https://github.com/yangpu-333/gpgpu-cake
+2026-10-03T10:25:40.8015553Z ##[endgroup]
+2026-10-03T10:25:40.8016830Z ##[group]Disabling automatic garbage collection
+2026-10-03T10:25:40.8019531Z [command]/usr/bin/git config --local gc.auto 0
+2026-10-03T10:25:40.8052792Z ##[endgroup]
+2026-10-03T10:25:40.8054068Z ##[group]Setting up auth
+2026-10-03T10:25:40.8054884Z Removing SSH command configuration
+2026-10-03T10:25:40.8058536Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-03T10:25:40.8091069Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-03T10:25:40.8430637Z Removing HTTP extra header
+2026-10-03T10:25:40.8436251Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-03T10:25:40.8467216Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-03T10:25:40.8662117Z Removing includeIf entries pointing to credentials config files
+2026-10-03T10:25:40.8668247Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-03T10:25:40.8707959Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-03T10:25:40.8928918Z [command]/usr/bin/git config --file /home/runner/work/_temp/git-credentials-8feea827-6b53-4be6-ba7e-d355ad974f5a.config http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-10-03T10:25:40.8969889Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/gpgpu-cake/gpgpu-cake/.git.path /home/runner/work/_temp/git-credentials-8feea827-6b53-4be6-ba7e-d355ad974f5a.config
+2026-10-03T10:25:40.9006337Z [command]/usr/bin/git config --local includeIf.gitdir:/home/runner/work/gpgpu-cake/gpgpu-cake/.git/worktrees/*.path /home/runner/work/_temp/git-credentials-8feea827-6b53-4be6-ba7e-d355ad974f5a.config
+2026-10-03T10:25:40.9042861Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git.path /github/runner_temp/git-credentials-8feea827-6b53-4be6-ba7e-d355ad974f5a.config
+2026-10-03T10:25:40.9076777Z [command]/usr/bin/git config --local includeIf.gitdir:/github/workspace/.git/worktrees/*.path /github/runner_temp/git-credentials-8feea827-6b53-4be6-ba7e-d355ad974f5a.config
+2026-10-03T10:25:40.9105023Z ##[endgroup]
+2026-10-03T10:25:40.9105682Z ##[group]Fetching the repository
+2026-10-03T10:25:40.9112809Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +7addf723c4216fe56ac8413864e950122215ea8c:refs/remotes/origin/main
+2026-10-03T10:25:42.6220839Z From https://github.com/yangpu-333/gpgpu-cake
+2026-10-03T10:25:42.6222786Z  * [new ref]         7addf723c4216fe56ac8413864e950122215ea8c -> origin/main
+2026-10-03T10:25:42.6229028Z [command]/usr/bin/git branch --list --remote origin/main
+2026-10-03T10:25:42.6255075Z   origin/main
+2026-10-03T10:25:42.6261532Z [command]/usr/bin/git rev-parse refs/remotes/origin/main
+2026-10-03T10:25:42.6284750Z 7addf723c4216fe56ac8413864e950122215ea8c
+2026-10-03T10:25:42.6288560Z ##[endgroup]
+2026-10-03T10:25:42.6289666Z ##[group]Determining the checkout info
+2026-10-03T10:25:42.6290790Z ##[endgroup]
+2026-10-03T10:25:42.6291879Z [command]/usr/bin/git sparse-checkout disable
+2026-10-03T10:25:42.6350877Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-10-03T10:25:42.6380586Z ##[group]Checking out the ref
+2026-10-03T10:25:42.6384595Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-10-03T10:25:42.8509721Z Switched to a new branch 'main'
+2026-10-03T10:25:42.8512533Z branch 'main' set up to track 'origin/main'.
+2026-10-03T10:25:42.8534995Z ##[endgroup]
+2026-10-03T10:25:42.8578052Z [command]/usr/bin/git log -1 --format=%H
+2026-10-03T10:25:42.8604296Z 7addf723c4216fe56ac8413864e950122215ea8c
+2026-10-03T10:25:42.8877591Z ##[group]Run actions/setup-python@v7
+2026-10-03T10:25:42.8878345Z with:
+2026-10-03T10:25:42.8878978Z   python-version: 3.11
+2026-10-03T10:25:42.8879636Z   check-latest: false
+2026-10-03T10:25:42.8882144Z   token: ***
+2026-10-03T10:25:42.8882796Z   update-environment: true
+2026-10-03T10:25:42.8883469Z   allow-prereleases: false
+2026-10-03T10:25:42.8884133Z   freethreaded: false
+2026-10-03T10:25:42.8884770Z ##[endgroup]
+2026-10-03T10:25:42.9908609Z ##[group]Installed versions
+2026-10-03T10:25:42.9972351Z Successfully set up CPython (3.11.16)
+2026-10-03T10:25:42.9973796Z ##[endgroup]
+2026-10-03T10:25:43.0139563Z ##[group]Run python experiments/kernelwiki_iluvatar/build_kda_integration.py --output "$RUNNER_TEMP/kda"
+2026-10-03T10:25:43.0141447Z [36;1mpython experiments/kernelwiki_iluvatar/build_kda_integration.py --output "$RUNNER_TEMP/kda"[0m
+2026-10-03T10:25:43.0408401Z shell: /usr/bin/bash -e {0}
+2026-10-03T10:25:43.0409176Z env:
+2026-10-03T10:25:43.0409908Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.0410805Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-10-03T10:25:43.0411671Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.0412495Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.0413316Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.0414142Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-10-03T10:25:43.0414952Z ##[endgroup]
+2026-10-03T10:25:43.1321475Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-03T10:25:43.1322969Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-03T10:25:43.1324315Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-03T10:25:43.1325161Z hint: call:
+2026-10-03T10:25:43.1325808Z hint:
+2026-10-03T10:25:43.1326809Z hint: 	git config --global init.defaultBranch <name>
+2026-10-03T10:25:43.1327554Z hint:
+2026-10-03T10:25:43.1328283Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-03T10:25:43.1329214Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-03T10:25:43.1330012Z hint:
+2026-10-03T10:25:43.1330675Z hint: 	git branch -m <name>
+2026-10-03T10:25:43.1331323Z hint:
+2026-10-03T10:25:43.1332078Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-03T10:25:43.1333086Z Initialized empty Git repository in /home/runner/work/_temp/kda/.git/
+2026-10-03T10:25:43.2905292Z From https://github.com/NVlabs/kda
+2026-10-03T10:25:43.2906531Z  * branch            ef6ce617693ef0782b3ecb9f37e39bbf10226a90 -> FETCH_HEAD
+2026-10-03T10:25:43.2981907Z HEAD is now at ef6ce61 Point wishlist contributors to the branch selection form
+2026-10-03T10:25:43.3017271Z /home/runner/work/_temp/kda
+2026-10-03T10:25:43.3096997Z ##[group]Run python -m unittest discover -s "$RUNNER_TEMP/kda/tests" -p test_load_external_skill.py -v
+2026-10-03T10:25:43.3097749Z [36;1mpython -m unittest discover -s "$RUNNER_TEMP/kda/tests" -p test_load_external_skill.py -v[0m
+2026-10-03T10:25:43.3159200Z shell: /usr/bin/bash -e {0}
+2026-10-03T10:25:43.3159429Z env:
+2026-10-03T10:25:43.3159663Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.3160020Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-10-03T10:25:43.3160360Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.3160665Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.3160975Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.3161275Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-10-03T10:25:43.3161540Z ##[endgroup]
+2026-10-03T10:25:43.6531049Z test_install_check_and_managed_update (test_load_external_skill.ExternalSkillLoaderTests.test_install_check_and_managed_update) ... ok
+2026-10-03T10:25:43.6863102Z test_unmanaged_directory_is_never_replaced (test_load_external_skill.ExternalSkillLoaderTests.test_unmanaged_directory_is_never_replaced) ... ok
+2026-10-03T10:25:43.6863857Z 
+2026-10-03T10:25:43.6864063Z ----------------------------------------------------------------------
+2026-10-03T10:25:43.6864520Z Ran 2 tests in 0.227s
+2026-10-03T10:25:43.6864710Z 
+2026-10-03T10:25:43.6864818Z OK
+2026-10-03T10:25:43.6970112Z ##[group]Run python -m unittest discover -s experiments/kernelwiki_iluvatar/megatron_training_entry/tests -v
+2026-10-03T10:25:43.6970719Z [36;1mpython -m unittest discover -s experiments/kernelwiki_iluvatar/megatron_training_entry/tests -v[0m
+2026-10-03T10:25:43.7031489Z shell: /usr/bin/bash -e {0}
+2026-10-03T10:25:43.7031718Z env:
+2026-10-03T10:25:43.7031947Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.7032496Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-10-03T10:25:43.7032861Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.7033171Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.7033476Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.7033781Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-10-03T10:25:43.7034049Z ##[endgroup]
+2026-10-03T10:25:43.8349828Z test_autocast_is_reported_as_compatibility_not_triton_evidence (test_kernel_adapter.AdapterTests.test_autocast_is_reported_as_compatibility_not_triton_evidence) ... ok
+2026-10-03T10:25:43.8357166Z test_candidate_failure_propagates_without_native_retry (test_kernel_adapter.AdapterTests.test_candidate_failure_propagates_without_native_retry) ... ok
+2026-10-03T10:25:43.8368229Z test_candidate_source_hash_is_checked_before_import (test_kernel_adapter.AdapterTests.test_candidate_source_hash_is_checked_before_import) ... ok
+2026-10-03T10:25:43.8375303Z test_ce_outside_tested_vocabulary_uses_native (test_kernel_adapter.AdapterTests.test_ce_outside_tested_vocabulary_uses_native) ... ok
+2026-10-03T10:25:43.8383071Z test_ce_tp_greater_than_one_uses_native (test_kernel_adapter.AdapterTests.test_ce_tp_greater_than_one_uses_native) ... ok
+2026-10-03T10:25:43.8390206Z test_conflicting_hook_does_not_get_overwritten_on_uninstall (test_kernel_adapter.AdapterTests.test_conflicting_hook_does_not_get_overwritten_on_uninstall) ... ok
+2026-10-03T10:25:43.8396986Z test_disabled_cannot_relabel_an_installed_model_as_baseline (test_kernel_adapter.AdapterTests.test_disabled_cannot_relabel_an_installed_model_as_baseline) ... ok
+2026-10-03T10:25:43.8404055Z test_disabled_is_noop_and_does_not_read_or_import (test_kernel_adapter.AdapterTests.test_disabled_is_noop_and_does_not_read_or_import) ... ok
+2026-10-03T10:25:43.8413112Z test_install_allows_cpu_weights_and_is_idempotent (test_kernel_adapter.AdapterTests.test_install_allows_cpu_weights_and_is_idempotent) ... ok
+2026-10-03T10:25:43.8434639Z test_native_source_modification_is_detected (test_kernel_adapter.AdapterTests.test_native_source_modification_is_detected) ... ok
+2026-10-03T10:25:43.8442063Z test_other_gpu_architecture_uses_native (test_kernel_adapter.AdapterTests.test_other_gpu_architecture_uses_native) ... ok
+2026-10-03T10:25:43.8449581Z test_pending_result_is_not_used_for_a_different_tensor (test_kernel_adapter.AdapterTests.test_pending_result_is_not_used_for_a_different_tensor) ... ok
+2026-10-03T10:25:43.8472903Z test_residual_known_unsupported_calls_use_native (test_kernel_adapter.AdapterTests.test_residual_known_unsupported_calls_use_native) ... ok
+2026-10-03T10:25:43.8494954Z test_snapshot_is_a_copy_without_runtime_tensors (test_kernel_adapter.AdapterTests.test_snapshot_is_a_copy_without_runtime_tensors) ... ok
+2026-10-03T10:25:43.8503519Z test_supported_ce_transposes_native_layout_and_returns_batch_sequence (test_kernel_adapter.AdapterTests.test_supported_ce_transposes_native_layout_and_returns_batch_sequence) ... ok
+2026-10-03T10:25:43.8511386Z test_supported_residual_consumes_exact_adjacent_result (test_kernel_adapter.AdapterTests.test_supported_residual_consumes_exact_adjacent_result) ... ok
+2026-10-03T10:25:43.8517941Z test_uninstall_restores_original_bindings (test_kernel_adapter.AdapterTests.test_uninstall_restores_original_bindings) ... ok
+2026-10-03T10:25:43.8524694Z test_unsupported_model_config_is_rejected_without_partial_install (test_kernel_adapter.AdapterTests.test_unsupported_model_config_is_rejected_without_partial_install) ... ok
+2026-10-03T10:25:43.8531036Z test_unverified_ffn_architecture_is_rejected (test_kernel_adapter.AdapterTests.test_unverified_ffn_architecture_is_rejected) ... ok
+2026-10-03T10:25:43.8539337Z test_verified_holdout_configuration_and_shapes (test_kernel_adapter.AdapterTests.test_verified_holdout_configuration_and_shapes) ... ok
+2026-10-03T10:25:43.8545746Z test_world_size_greater_than_one_uses_native (test_kernel_adapter.AdapterTests.test_world_size_greater_than_one_uses_native) ... ok
+2026-10-03T10:25:43.8546434Z 
+2026-10-03T10:25:43.8546574Z ----------------------------------------------------------------------
+2026-10-03T10:25:43.8546883Z Ran 21 tests in 0.021s
+2026-10-03T10:25:43.8547003Z 
+2026-10-03T10:25:43.8547082Z OK
+2026-10-03T10:25:43.8697502Z ##[group]Run python experiments/kernelwiki_iluvatar/megatron_training_entry/summarize_performance.py --self-test
+2026-10-03T10:25:43.8698136Z [36;1mpython experiments/kernelwiki_iluvatar/megatron_training_entry/summarize_performance.py --self-test[0m
+2026-10-03T10:25:43.8758222Z shell: /usr/bin/bash -e {0}
+2026-10-03T10:25:43.8758438Z env:
+2026-10-03T10:25:43.8758663Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.8759016Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-10-03T10:25:43.8759354Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.8759667Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.8759974Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.8760296Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-10-03T10:25:43.8760563Z ##[endgroup]
+2026-10-03T10:25:43.9644854Z test_duplicate_interval_fails (__main__.ParserTests.test_duplicate_interval_fails) ... ok
+2026-10-03T10:25:43.9650236Z test_duplicate_late_or_gap_with_startup_fails (__main__.ParserTests.test_duplicate_late_or_gap_with_startup_fails) ... ok
+2026-10-03T10:25:43.9652984Z test_missing_interval_fails (__main__.ParserTests.test_missing_interval_fails) ... ok
+2026-10-03T10:25:43.9657239Z test_native_first_iteration_startup_is_preserved_and_excluded (__main__.ParserTests.test_native_first_iteration_startup_is_preserved_and_excluded) ... ok
+2026-10-03T10:25:43.9658478Z test_nonfinite_loss_or_nonpositive_time_fails (__main__.ParserTests.test_nonfinite_loss_or_nonpositive_time_fails) ... ok
+2026-10-03T10:25:43.9661275Z test_out_of_order_interval_fails (__main__.ParserTests.test_out_of_order_interval_fails) ... ok
+2026-10-03T10:25:43.9674560Z test_path_alias_requires_actual_same_file (__main__.ParserTests.test_path_alias_requires_actual_same_file) ... ok
+2026-10-03T10:25:43.9676553Z test_skipped_nan_and_consumed_counts_fail (__main__.ParserTests.test_skipped_nan_and_consumed_counts_fail) ... ok
+2026-10-03T10:25:43.9679586Z test_valid_intervals_and_warmup (__main__.ParserTests.test_valid_intervals_and_warmup) ... ok
+2026-10-03T10:25:43.9680474Z test_wrong_total_fails (__main__.ParserTests.test_wrong_total_fails) ... ok
+2026-10-03T10:25:43.9680861Z 
+2026-10-03T10:25:43.9681417Z ----------------------------------------------------------------------
+2026-10-03T10:25:43.9681857Z Ran 10 tests in 0.005s
+2026-10-03T10:25:43.9682051Z 
+2026-10-03T10:25:43.9682161Z OK
+2026-10-03T10:25:43.9799351Z ##[group]Run python -m pip install torch==2.4.1 --index-url https://download.pytorch.org/whl/cpu
+2026-10-03T10:25:43.9799967Z [36;1mpython -m pip install torch==2.4.1 --index-url https://download.pytorch.org/whl/cpu[0m
+2026-10-03T10:25:43.9800327Z [36;1mpython -m pip install numpy==1.26.4[0m
+2026-10-03T10:25:43.9859316Z shell: /usr/bin/bash -e {0}
+2026-10-03T10:25:43.9859537Z env:
+2026-10-03T10:25:43.9859767Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.9860120Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-10-03T10:25:43.9860459Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.9860766Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.9861078Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:25:43.9861380Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-10-03T10:25:43.9861650Z ##[endgroup]
+2026-10-03T10:25:45.1287200Z Looking in indexes: https://download.pytorch.org/whl/cpu
+2026-10-03T10:25:45.2361071Z Collecting torch==2.4.1
+2026-10-03T10:25:45.3005888Z   Downloading torch-2.4.1%2Bcpu-cp311-cp311-linux_x86_64.whl (194.9 MB)
+2026-10-03T10:25:47.1456315Z      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 194.9/194.9 MB 106.0 MB/s  0:00:01
+2026-10-03T10:25:47.3516147Z Collecting filelock (from torch==2.4.1)
+2026-10-03T10:25:47.3904567Z   Downloading filelock-3.32.3-py3-none-any.whl.metadata (2.0 kB)
+2026-10-03T10:25:47.4048879Z Collecting typing-extensions>=4.8.0 (from torch==2.4.1)
+2026-10-03T10:25:47.4079493Z   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+2026-10-03T10:25:47.4220208Z Collecting sympy (from torch==2.4.1)
+2026-10-03T10:25:47.4251100Z   Downloading sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
+2026-10-03T10:25:47.4436612Z Collecting networkx (from torch==2.4.1)
+2026-10-03T10:25:47.4468858Z   Downloading networkx-3.6.1-py3-none-any.whl.metadata (6.8 kB)
+2026-10-03T10:25:47.4578327Z Collecting jinja2 (from torch==2.4.1)
+2026-10-03T10:25:47.4615155Z   Downloading jinja2-3.1.6-py3-none-any.whl.metadata (2.9 kB)
+2026-10-03T10:25:47.4786711Z Collecting fsspec (from torch==2.4.1)
+2026-10-03T10:25:47.4817671Z   Downloading fsspec-2026.7.0-py3-none-any.whl.metadata (10 kB)
+2026-10-03T10:25:47.5078709Z Collecting MarkupSafe>=2.0 (from jinja2->torch==2.4.1)
+2026-10-03T10:25:47.5121525Z   Downloading markupsafe-3.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.7 kB)
+2026-10-03T10:25:47.5246867Z Collecting mpmath<1.4,>=1.1.0 (from sympy->torch==2.4.1)
+2026-10-03T10:25:47.5276931Z   Downloading mpmath-1.3.0-py3-none-any.whl.metadata (8.6 kB)
+2026-10-03T10:25:47.5342904Z Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+2026-10-03T10:25:47.5419637Z Downloading filelock-3.32.3-py3-none-any.whl (98 kB)
+2026-10-03T10:25:47.5488139Z Downloading fsspec-2026.7.0-py3-none-any.whl (206 kB)
+2026-10-03T10:25:47.9368029Z Downloading jinja2-3.1.6-py3-none-any.whl (134 kB)
+2026-10-03T10:25:48.2352447Z Downloading markupsafe-3.0.3-cp311-cp311-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (22 kB)
+2026-10-03T10:25:48.2638981Z Downloading networkx-3.6.1-py3-none-any.whl (2.1 MB)
+2026-10-03T10:25:48.3210952Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 34.5 MB/s  0:00:00
+2026-10-03T10:25:48.3237560Z Downloading sympy-1.14.0-py3-none-any.whl (6.3 MB)
+2026-10-03T10:25:48.4503211Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 6.3/6.3 MB 48.7 MB/s  0:00:00
+2026-10-03T10:25:48.4538614Z Downloading mpmath-1.3.0-py3-none-any.whl (536 kB)
+2026-10-03T10:25:48.5111147Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 536.2/536.2 kB 5.0 MB/s  0:00:00
+2026-10-03T10:25:48.6214942Z Installing collected packages: mpmath, typing-extensions, sympy, networkx, MarkupSafe, fsspec, filelock, jinja2, torch
+2026-10-03T10:26:01.0631632Z 
+2026-10-03T10:26:01.0642818Z Successfully installed MarkupSafe-3.0.3 filelock-3.32.3 fsspec-2026.7.0 jinja2-3.1.6 mpmath-1.3.0 networkx-3.6.1 sympy-1.14.0 torch-2.4.1+cpu typing-extensions-4.16.0
+2026-10-03T10:26:01.7449820Z Collecting numpy==1.26.4
+2026-10-03T10:26:01.7875240Z   Downloading numpy-1.26.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (61 kB)
+2026-10-03T10:26:01.8124177Z Downloading numpy-1.26.4-cp311-cp311-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (18.3 MB)
+2026-10-03T10:26:01.9782649Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 18.3/18.3 MB 113.5 MB/s  0:00:00
+2026-10-03T10:26:02.0322780Z Installing collected packages: numpy
+2026-10-03T10:26:03.4908577Z Successfully installed numpy-1.26.4
+2026-10-03T10:26:03.5407134Z ##[group]Run python -m unittest discover -s experiments/kernelwiki_iluvatar/megatron_bf16/tests -v
+2026-10-03T10:26:03.5407681Z [36;1mpython -m unittest discover -s experiments/kernelwiki_iluvatar/megatron_bf16/tests -v[0m
+2026-10-03T10:26:03.5463561Z shell: /usr/bin/bash -e {0}
+2026-10-03T10:26:03.5463770Z env:
+2026-10-03T10:26:03.5463996Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:03.5464346Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-10-03T10:26:03.5464679Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:03.5464981Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:03.5465299Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:03.5465607Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-10-03T10:26:03.5465864Z ##[endgroup]
+2026-10-03T10:26:05.4885820Z test_bf16_gradient_is_rejected (test_compare_training.ComparisonTests.test_bf16_gradient_is_rejected) ... ok
+2026-10-03T10:26:05.4890804Z test_bf16_master_is_rejected (test_compare_training.ComparisonTests.test_bf16_master_is_rejected) ... ok
+2026-10-03T10:26:05.5120088Z test_complete_small_bf16_audit_passes (test_compare_training.ComparisonTests.test_complete_small_bf16_audit_passes) ... ok
+2026-10-03T10:26:05.5690062Z test_fp16_prewrap_parameters_are_rejected (test_compare_training.ComparisonTests.test_fp16_prewrap_parameters_are_rejected) ... ok
+2026-10-03T10:26:05.5918174Z test_master_difference_hidden_by_bf16_rounding_fails (test_compare_training.ComparisonTests.test_master_difference_hidden_by_bf16_rounding_fails) ... ok
+2026-10-03T10:26:05.5923485Z test_missing_mask_prevents_inferred_training_loss (test_compare_training.ComparisonTests.test_missing_mask_prevents_inferred_training_loss) ... ok
+2026-10-03T10:26:05.6129061Z test_missing_master_name_fails_even_if_both_arms_omit_it (test_compare_training.ComparisonTests.test_missing_master_name_fails_even_if_both_arms_omit_it) ... ok
+2026-10-03T10:26:05.6134919Z test_nan_optimizer_master_is_rejected (test_compare_training.ComparisonTests.test_nan_optimizer_master_is_rejected) ... ok
+2026-10-03T10:26:05.6519087Z test_native_bf16_model_matches_rounded_master_each_step (test_compare_training.ComparisonTests.test_native_bf16_model_matches_rounded_master_each_step) ... ok
+2026-10-03T10:26:05.6524399Z test_wrong_shape_is_rejected (test_compare_training.ComparisonTests.test_wrong_shape_is_rejected) ... ok
+2026-10-03T10:26:05.6547329Z test_api_fallback_rejects_claimed_kernel_coverage (test_performance_metadata.PerformanceMetadataTests.test_api_fallback_rejects_claimed_kernel_coverage) ... ok
+2026-10-03T10:26:05.6566997Z test_autocast_is_not_true_bf16_kernel_evidence (test_performance_metadata.PerformanceMetadataTests.test_autocast_is_not_true_bf16_kernel_evidence) ... ok
+2026-10-03T10:26:05.6584725Z test_changed_native_source_is_rejected (test_performance_metadata.PerformanceMetadataTests.test_changed_native_source_is_rejected) ... ok
+2026-10-03T10:26:05.6616327Z test_complete_coverage_is_validated (test_performance_metadata.PerformanceMetadataTests.test_complete_coverage_is_validated) ... ok
+2026-10-03T10:26:05.6635470Z test_fp32_logits_are_not_bf16_claim (test_performance_metadata.PerformanceMetadataTests.test_fp32_logits_are_not_bf16_claim) ... ok
+2026-10-03T10:26:05.6654936Z test_hidden_checkpoint_flag_is_rejected (test_performance_metadata.PerformanceMetadataTests.test_hidden_checkpoint_flag_is_rejected) ... ok
+2026-10-03T10:26:05.6670261Z test_timing_with_profile_is_rejected (test_performance_metadata.PerformanceMetadataTests.test_timing_with_profile_is_rejected) ... ok
+2026-10-03T10:26:05.6670916Z 
+2026-10-03T10:26:05.6671120Z ----------------------------------------------------------------------
+2026-10-03T10:26:05.6671517Z Ran 17 tests in 0.181s
+2026-10-03T10:26:05.6671643Z 
+2026-10-03T10:26:05.6671713Z OK
+2026-10-03T10:26:05.9149376Z ##[group]Run python experiments/kernelwiki_iluvatar/build_skill.py --output "$RUNNER_TEMP/kernelwiki-iluvatar"
+2026-10-03T10:26:05.9150414Z [36;1mpython experiments/kernelwiki_iluvatar/build_skill.py --output "$RUNNER_TEMP/kernelwiki-iluvatar"[0m
+2026-10-03T10:26:05.9211684Z shell: /usr/bin/bash -e {0}
+2026-10-03T10:26:05.9211912Z env:
+2026-10-03T10:26:05.9212155Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:05.9212531Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-10-03T10:26:05.9212893Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:05.9213214Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:05.9213530Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:05.9213851Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-10-03T10:26:05.9214116Z ##[endgroup]
+2026-10-03T10:26:05.9552314Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-10-03T10:26:05.9553189Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-10-03T10:26:05.9554043Z Initialized empty Git repository in /home/runner/work/_temp/kernelwiki-iluvatar/.git/
+2026-10-03T10:26:05.9554790Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-10-03T10:26:05.9555221Z hint: call:
+2026-10-03T10:26:05.9555511Z hint:
+2026-10-03T10:26:05.9555854Z hint: 	git config --global init.defaultBranch <name>
+2026-10-03T10:26:05.9556353Z hint:
+2026-10-03T10:26:05.9557781Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-10-03T10:26:05.9558319Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-10-03T10:26:05.9558945Z hint:
+2026-10-03T10:26:05.9559257Z hint: 	git branch -m <name>
+2026-10-03T10:26:05.9559598Z hint:
+2026-10-03T10:26:05.9559993Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-10-03T10:26:06.8429355Z From https://github.com/mit-han-lab/KernelWiki
+2026-10-03T10:26:06.8429746Z  * branch            b6b4301f15e8ce6955a56776690643ce5db369e6 -> FETCH_HEAD
+2026-10-03T10:26:06.9639635Z HEAD is now at b6b4301 chore: add MIT license
+2026-10-03T10:26:07.2725340Z /home/runner/work/_temp/kernelwiki-iluvatar
+2026-10-03T10:26:07.2810622Z ##[group]Run python "$RUNNER_TEMP/kernelwiki-iluvatar/scripts/validate.py"
+2026-10-03T10:26:07.2811321Z [36;1mpython "$RUNNER_TEMP/kernelwiki-iluvatar/scripts/validate.py"[0m
+2026-10-03T10:26:07.2886837Z shell: /usr/bin/bash -e {0}
+2026-10-03T10:26:07.2887063Z env:
+2026-10-03T10:26:07.2887300Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:07.2887682Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-10-03T10:26:07.2888040Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:07.2888519Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:07.2888824Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:07.2889145Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-10-03T10:26:07.2889413Z ##[endgroup]
+2026-10-03T10:26:39.7912872Z Validated 1064 files (1001 source IDs collected)
+2026-10-03T10:26:39.7913644Z Validated 37 asset bundles (verbatim=37, extracted=0, derived=0, orphan-source-files=0)
+2026-10-03T10:26:39.7914962Z Validated 14 candidate ledgers
+2026-10-03T10:26:39.7915258Z All files valid.
+2026-10-03T10:26:39.8034719Z ##[group]Run python -m unittest discover -s "$RUNNER_TEMP/kernelwiki-iluvatar/tests" -p "test_*.py" -q
+2026-10-03T10:26:39.8035303Z [36;1mpython -m unittest discover -s "$RUNNER_TEMP/kernelwiki-iluvatar/tests" -p "test_*.py" -q[0m
+2026-10-03T10:26:39.8091804Z shell: /usr/bin/bash -e {0}
+2026-10-03T10:26:39.8092018Z env:
+2026-10-03T10:26:39.8092259Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:39.8092612Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-10-03T10:26:39.8092951Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:39.8093250Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:39.8093565Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:26:39.8093877Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-10-03T10:26:39.8094136Z ##[endgroup]
+2026-10-03T10:27:53.5726622Z ----------------------------------------------------------------------
+2026-10-03T10:27:53.5727117Z Ran 160 tests in 73.606s
+2026-10-03T10:27:53.5727297Z 
+2026-10-03T10:27:53.5727397Z OK
+2026-10-03T10:27:53.5921448Z ##[group]Run python experiments/kernelwiki_iluvatar/verify_kda_integration.py --kda "$RUNNER_TEMP/kda" --skill "$RUNNER_TEMP/kernelwiki-iluvatar"
+2026-10-03T10:27:53.5922263Z [36;1mpython experiments/kernelwiki_iluvatar/verify_kda_integration.py --kda "$RUNNER_TEMP/kda" --skill "$RUNNER_TEMP/kernelwiki-iluvatar"[0m
+2026-10-03T10:27:53.5978512Z shell: /usr/bin/bash -e {0}
+2026-10-03T10:27:53.5978726Z env:
+2026-10-03T10:27:53.5978957Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:27:53.5979314Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib/pkgconfig
+2026-10-03T10:27:53.5979671Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:27:53.5979981Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:27:53.5980291Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.16/x64
+2026-10-03T10:27:53.5980589Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.16/x64/lib
+2026-10-03T10:27:53.5980923Z ##[endgroup]
+2026-10-03T10:28:01.8578346Z installed kernelwiki-iluvatar: 2402 files at /home/runner/work/_temp/kda/.claude/skills/kernelwiki-iluvatar
+2026-10-03T10:28:01.8579006Z verified kernelwiki-iluvatar: 2402 files at /home/runner/work/_temp/kda/.claude/skills/kernelwiki-iluvatar
+2026-10-03T10:28:01.8579437Z bi-v150: 23 paths
+2026-10-03T10:28:01.8579619Z sm90: 286 paths
+2026-10-03T10:28:01.8579803Z sm100: 379 paths
+2026-10-03T10:28:01.8580013Z KDA project-level skill integration verified
+2026-10-03T10:28:01.8704399Z Post job cleanup.
+2026-10-03T10:28:01.9780868Z Post job cleanup.
+2026-10-03T10:28:02.0489465Z [command]/usr/bin/git version
+2026-10-03T10:28:02.0533810Z git version 2.55.0
+2026-10-03T10:28:02.0562971Z Temporarily overriding HOME='/home/runner/work/_temp/9a9c6c4a-b596-4be7-90c5-0972ba77f9ac' before making global git config changes
+2026-10-03T10:28:02.0563928Z Adding repository directory to the temporary git global config as a safe directory
+2026-10-03T10:28:02.0568110Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/gpgpu-cake/gpgpu-cake
+2026-10-03T10:28:02.0599446Z Removing SSH command configuration
+2026-10-03T10:28:02.0605859Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-10-03T10:28:02.0644384Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-10-03T10:28:02.0865522Z Removing HTTP extra header
+2026-10-03T10:28:02.0870675Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-10-03T10:28:02.0901736Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-10-03T10:28:02.1117391Z Removing includeIf entries pointing to credentials config files
+2026-10-03T10:28:02.1122933Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-10-03T10:28:02.1156679Z includeif.gitdir:/home/runner/work/gpgpu-cake/gpgpu-cake/.git.path
+2026-10-03T10:28:02.1157501Z includeif.gitdir:/home/runner/work/gpgpu-cake/gpgpu-cake/.git/worktrees/*.path
+2026-10-03T10:28:02.1158305Z includeif.gitdir:/github/workspace/.git.path
+2026-10-03T10:28:02.1158891Z includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-03T10:28:02.1163772Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/gpgpu-cake/gpgpu-cake/.git.path
+2026-10-03T10:28:02.1186530Z /home/runner/work/_temp/git-credentials-8feea827-6b53-4be6-ba7e-d355ad974f5a.config
+2026-10-03T10:28:02.1196768Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/gpgpu-cake/gpgpu-cake/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-8feea827\-6b53\-4be6\-ba7e\-d355ad974f5a\.config
+2026-10-03T10:28:02.1233017Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/gpgpu-cake/gpgpu-cake/.git/worktrees/*.path
+2026-10-03T10:28:02.1259675Z /home/runner/work/_temp/git-credentials-8feea827-6b53-4be6-ba7e-d355ad974f5a.config
+2026-10-03T10:28:02.1267480Z [command]/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/gpgpu-cake/gpgpu-cake/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-8feea827\-6b53\-4be6\-ba7e\-d355ad974f5a\.config
+2026-10-03T10:28:02.1311285Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+2026-10-03T10:28:02.1334239Z /github/runner_temp/git-credentials-8feea827-6b53-4be6-ba7e-d355ad974f5a.config
+2026-10-03T10:28:02.1339791Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-8feea827\-6b53\-4be6\-ba7e\-d355ad974f5a\.config
+2026-10-03T10:28:02.1372000Z [command]/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+2026-10-03T10:28:02.1394319Z /github/runner_temp/git-credentials-8feea827-6b53-4be6-ba7e-d355ad974f5a.config
+2026-10-03T10:28:02.1401109Z [command]/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-8feea827\-6b53\-4be6\-ba7e\-d355ad974f5a\.config
+2026-10-03T10:28:02.1434999Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-10-03T10:28:02.1630898Z Removing credentials config '/home/runner/work/_temp/git-credentials-8feea827-6b53-4be6-ba7e-d355ad974f5a.config'
+2026-10-03T10:28:02.1780431Z Cleaning up orphan processes

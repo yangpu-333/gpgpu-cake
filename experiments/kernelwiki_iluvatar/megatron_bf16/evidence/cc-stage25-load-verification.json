@@ -1,0 +1,25 @@
+{
+  "status": "verified",
+  "scope": "Read-only Claude Code CLI read project-loaded CE page and stage25 decision after loader finished. Numeric summary checked against sealed receipts; not additional GPU validation.",
+  "cli_sha256": "d8772ba463a6cff15c9f5b5070b6eb02b9c80c6549c04fbcc330c6b7cc897470",
+  "requested_model": "Claude-Opus-4.8",
+  "returned_model_usage": [
+    "Claude-Opus-4.8"
+  ],
+  "project_source": "upstream-kda/.claude/skills/kernelwiki-iluvatar",
+  "required_terms": [
+    "BF16",
+    "0007",
+    "0008",
+    "0009",
+    "4.62",
+    "0.11",
+    "1.16",
+    "2.74",
+    "3.06",
+    "0.39",
+    "5400",
+    "master"
+  ],
+  "earlier_attempt": "cc-stage25-readonly.json ran before loader finished and read workspace fallback; retained but excluded from project-only proof."
+}

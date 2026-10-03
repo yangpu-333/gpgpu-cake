@@ -61,6 +61,8 @@ Claude Code CLI 使用项目级 skill 和此前配置的 Paratera API 生成三�
 
 实验契约、CLI 生成记录、失败候选、全部原始区间和数值回执见 [`megatron_bf16/`](megatron_bf16/)，汇总见[本轮验收数据](megatron_bf16/evidence/decision.json)，实际执行证据见[类型转换融合审计](megatron_bf16/evidence/profile-cast-fusion-audit.json)。这些结果仍限于单卡、小规模模型、模拟数据与 SGD，尚未验证生产训练、微调、AdamW 或多卡收益。
 
+本轮全部 **272个原始快照文件、共13.90 GB** 已在本机保留并逐文件核对SHA256，远端原始文件保留。按内容去重后对应87个独立哈希，重复文件在本机使用硬链接保留原文件名；包含失败时产生的不完整文件，仅保证字节保存，不把它们认定为有效张量。原始大张量和中断的压缩包不提交Git，公开仓库保存[NFS备份回执](megatron_bf16/evidence/raw-backup/nfs-snapshot-receipt.json)及[Pod本地备份回执](megatron_bf16/evidence/raw-backup/pod-local-snapshot-receipt.json)。
+
 ### FP32 正式训练入口：原生训练循环吞吐提升 6.97%（10 月 3 日）
 
 本轮复用经 Claude Code CLI 迭代验收的候选 0006，将它安装到 Megatron 原生 `pre_wrap_hooks` 提供的模型扩展位置。添加 `--iluvatar-kernels` 后，模型实例启用优化；省略该开关即为原生路径。两条路径均由正式 `pretrain_gpt.py` 执行参数解析、数据加载、DDP 包装、前后向调度、SGD、梯度保存和 checkpoint。
@@ -149,7 +151,7 @@ Claude Code CLI 在本机加载 KDA 项目目录中的适配 skill，通过已�
 
 ## 从实验到可用知识
 
-最新阶段25构建含 **1064 个页面、1001 个 source ID、37 个资产包和14个账本**，新增360个 BF16 证据包文件；KDA 项目级加载核对 **2402 个文件**，BI-V150 精确检索 **23 条路径**，SM90/SM100 仍为286/379条。新来源明确区分真正 BF16、autocast、独立算子正确性与完整训练验证，并保留0007失败及0009不稳定的性能结果。下述阶段24数据作为历史回归记录保留。
+最新阶段25构建含 **1064 个页面、1001 个 source ID、37 个资产包和14个账本**，新增360个 BF16 证据包文件；KDA 项目级加载核对 **2402 个文件**，BI-V150 精确检索 **23 条路径**，SM90/SM100 仍为286/379条。新来源明确区分真正 BF16、autocast、独立算子正确性与完整训练验证，并保留0007失败及0009不稳定的性能结果。下述阶段24数据作为历史回归记录保留。 Linux CI 已通过：160项知识库测试、2项加载器测试、原21项安装器及10项计时日志测试，以及新增17项 BF16/master-state 与计时门禁测试。见[CI回执](megatron_bf16/evidence/ci-stage25.json)和[完整Linux日志](megatron_bf16/evidence/ci-stage25.log)。新 skill 的 Claude Code 项目目录只读加载结果见[CLI回执](megatron_bf16/evidence/cc-stage25-readonly-loaded.json)。
 
 适配版不仅增加文字说明，还把每个 BI-V150 结论连接到源码、环境、原始计时和 SHA256 回执。迁移账本按“已验证、仅观察到编译中间表示、尚未验证”区分证据等级。阶段 24 最新构建含 **1063 个页面、1000 个 source ID、37 个资产包、14 个账本**，整库校验通过且无孤立来源文件；新增证据包的 168 个文件均通过 SHA256 核对。最新 **160 项 Linux 知识库测试全部通过**，原始结果见[测试日志](megatron_cc/higher_gain/evidence/stage24-linux-tests.stderr)和[整库校验日志](megatron_cc/higher_gain/evidence/stage24-linux-validation.stdout)。
 
@@ -165,6 +167,26 @@ KDA 可以从项目目录读取这套知识。一次只读 Claude Code 验证实
 4. **低精度与版本升级。** 在新版 CoreX/Triton 上重新探测 FP8/FP4、编译和数值行为；不同软件版本的性能数据分别记录。
 
 ## 复现与证据入口
+
+### 真正 BF16 训练复测
+
+准备独立 Linux 工作副本，保持 `megatron_bf16/` 与 `megatron_training_entry/` 相邻。使用本报告固定的 CoreX 环境及干净 Megatron 提交，原始证据完整保留；下列新 case 和输出文件须尚不存在。0008 为本轮默认候选，`main/wide/deep` 使用各自封存契约。以下以 main 为例：
+
+```bash
+export PYTHONPATH=/usr/local/corex/lib64/python3/dist-packages
+export LD_LIBRARY_PATH=/usr/local/corex/lib64:/usr/local/openmpi/lib
+export MEGATRON_CHECKOUT=/path/to/clean-pinned-megatron
+cd /path/to/independent-copy/experiments/kernelwiki_iluvatar/megatron_bf16
+python verify_operator.py --candidate candidates/0008/candidate.py --contract contracts/0008-main.json --megatron-root "$MEGATRON_CHECKOUT" --output evidence/operator-rerun.json
+python run_case.py native-rerun --mode native --contract contracts/0008-main.json --megatron-root "$MEGATRON_CHECKOUT" --steps 3 --seed 26001 --audit
+python run_case.py optimized-rerun --mode optimized --candidate candidates/0008/candidate.py --contract contracts/0008-main.json --megatron-root "$MEGATRON_CHECKOUT" --steps 3 --seed 26001 --audit
+python compare_training.py evidence/native-rerun evidence/optimized-rerun --contract contracts/0008-main.json --candidate candidates/0008/candidate.py --output evidence/audit-rerun.json
+python run_performance.py --contract contracts/0008-main.json --candidate candidates/0008/candidate.py --megatron-root "$MEGATRON_CHECKOUT" --audit evidence/audit-rerun.json --operator evidence/operator-rerun.json --prefix bf16-rerun
+```
+
+性能程序只有在对应候选和契约通过独立算子与三步模型检查后才运行；它另开无审计的正式训练进程，保存原始日志并产生 `evidence/bf16-rerun-performance.json`。原生数据构建的 Makefile 和 CPP 应来自该干净提交，helper 由对应源码与运行环境编译，并记录哈希。复测前保证磁盘有足够空间；GPU 串行锁位于 Pod 本地 `/tmp/`，避免 NFS 锁服务阻塞。
+
+### Skill 构建及历史 FP32 复测
 
 从本仓库根目录重建适配版 skill；构建脚本拉取固定的上游版本并应用本项目补丁，目标目录应事先不存在：
 
