@@ -173,7 +173,9 @@ Claude Code CLI 在本机加载 KDA 项目目录中的适配 skill，通过已�
 
 ## 从实验到可用知识
 
-最新阶段25构建含 **1064 个页面、1001 个 source ID、37 个资产包和14个账本**，新增360个 BF16 证据包文件；KDA 项目级加载核对 **2402 个文件**，BI-V150 精确检索 **23 条路径**，SM90/SM100 仍为286/379条。新来源明确区分真正 BF16、autocast、独立算子正确性与完整训练验证，并保留0007失败及0009不稳定的性能结果。下述阶段24数据作为历史回归记录保留。 Linux CI 已通过：160项知识库测试、2项加载器测试、原21项安装器及10项计时日志测试，以及新增17项 BF16/master-state 与计时门禁测试。见[CI回执](megatron_bf16/evidence/ci-stage25.json)和[完整Linux日志](megatron_bf16/evidence/ci-stage25.log)。新 skill 的 Claude Code 项目目录只读加载结果见[CLI回执](megatron_bf16/evidence/cc-stage25-readonly-loaded.json)。
+阶段26构建含 **1065个页面、1002个 source ID、37个资产包和14个账本**。KDA 项目目录逐文件核对 **2530个文件**；BI-V150 检索24条路径。SM90/SM100的286/379条路径及对应页面字节均与阶段25一致，见[构建回归记录](megatron_bf16/evidence/gradnorm-stage26/skill-provenance.json)。新增梯度范数实验来源、候选及原始反馈，CI 复核原始计时与数值验收证据。
+
+阶段25构建含 **1064 个页面、1001 个 source ID、37 个资产包和14个账本**，新增360个 BF16 证据包文件；KDA 项目级加载核对 **2402 个文件**，BI-V150 精确检索 **23 条路径**，SM90/SM100 仍为286/379条。新来源明确区分真正 BF16、autocast、独立算子正确性与完整训练验证，并保留0007失败及0009不稳定的性能结果。下述阶段24数据作为历史回归记录保留。 Linux CI 已通过：160项知识库测试、2项加载器测试、原21项安装器及10项计时日志测试，以及新增17项 BF16/master-state 与计时门禁测试。见[CI回执](megatron_bf16/evidence/ci-stage25.json)和[完整Linux日志](megatron_bf16/evidence/ci-stage25.log)。新 skill 的 Claude Code 项目目录只读加载结果见[CLI回执](megatron_bf16/evidence/cc-stage25-readonly-loaded.json)。
 
 适配版不仅增加文字说明，还把每个 BI-V150 结论连接到源码、环境、原始计时和 SHA256 回执。迁移账本按“已验证、仅观察到编译中间表示、尚未验证”区分证据等级。阶段 24 最新构建含 **1063 个页面、1000 个 source ID、37 个资产包、14 个账本**，整库校验通过且无孤立来源文件；新增证据包的 168 个文件均通过 SHA256 核对。最新 **160 项 Linux 知识库测试全部通过**，原始结果见[测试日志](megatron_cc/higher_gain/evidence/stage24-linux-tests.stderr)和[整库校验日志](megatron_cc/higher_gain/evidence/stage24-linux-validation.stdout)。
 
