@@ -1,0 +1,11 @@
+{
+  "candidate_sha256": "9b22e12b4744b2a41b9209faa280e361e6defe1d5480f5e5683fddd247b7f493",
+  "imports": [
+    "math",
+    "torch",
+    "triton",
+    "triton.language"
+  ],
+  "violations": [],
+  "review": "Native-equivalent forward retains original Torch operation ordering and storage; removes TP1 all-reduce identities. Only backward fused. Original int64 target preserved, CPU float64 verifier unchanged. enable_fp_fusion=False attempt, TypeError retry remains sub-then-mul with no add-of-product. No candidate external side effects or baseline mutation."
+}

@@ -1,0 +1,237 @@
+--- immutable-0006
++++ 0007
+@@ -242,59 +242,73 @@
+ 
+ 
+ # ---------------------------------------------------------------------------
+-# Candidate 0005 (minimal child of 0004): repair wide int64 cross-entropy target
+-# semantics. Candidate 0004 loaded target as int64 but immediately narrowed it
+-# with .to(tl.int32) in both CE kernels; any label outside the signed 32-bit
+-# range (the audit probed 2**32, 2**32+16, 2**63-1 and -2**63 at V=17) wraps
+-# modulo 2**32 into a valid [0, V) class, so those rows wrongly received the
+-# predicted-logit subtraction and a onehot gradient -- the independent compiled
+-# runner saw loss max error 2.7277 and dlogits max error 1.0000 on 3/4 rows.
+-# The ONLY change from 0004 is preserving the loaded target as int64 in both CE
+-# kernels: the int32 lane index col is promoted to int64 for the (col == target)
+-# & mask comparison, so the in-range test is exact across the full signed 64-bit
+-# label space and no narrowing/overflow can happen. Every out-of-range label
+-# (target < 0 or target >= V, matching native (target < vocab_start) |
+-# (target >= vocab_end) masking at world_size=1) now matches no lane, so it keeps
+-# the native log(sumexp) loss with a zero predicted term in the forward and takes
+-# no onehot subtraction in the backward. The residual/RMSNorm prefix above is
+-# byte-identical to parent 0003, and the CE kernels, process-local compiled-code
+-# cache, autograd Functions and entry points are otherwise unchanged from 0004
+-# (same max-shift CE math and buffers, observable FP32 softmax overwrite with the
+-# original low-precision input left unchanged, reused probability gradient buffer,
+-# num_warps=4, V>=1 / padded-lane support, arbitrary signed/zero upstream dloss,
+-# and native fallback). Screen-only evidence, not a promotion claim.
++# Candidate 0007 (minimal child of 0006, non-autocast Triton CE branch only):
++# remove the separate logits.float() conversion launch from the fused CE
++# forward. 0005/0006 built probabilities = logits.float() -- a full extra device
++# launch producing an FP32 copy -- and then had the single forward kernel read
++# AND write that FP32 buffer in place. 0007 removes that launch: it loads the
++# native-dtype logits directly inside the fused forward and widens them to FP32
++# in-kernel, writing softmax into a SEPARATE FP32 probability buffer. For
++# low-precision (BF16) input the buffer is a fresh torch.empty_like(float32), so
++# the BF16 input is only read and stays bitwise unchanged (matching native
++# .float() which leaves a low-precision input untouched). For FP32 input the
++# probability buffer aliases the input itself, reproducing the native observable
++# in-place softmax overwrite and the native gradient-alias behavior.
++#
++# Numerics are unchanged from the parent: BF16 -> FP32 widening is exact, and
++# both torch.float() and tl.to(tl.float32) perform the same lossless widening,
++# so the FP32 value entering the max/exp/sum/log math is bitwise identical to
++# 0005/0006. Loss and softmax outputs are therefore identical; only the extra
++# .float() launch is eliminated. No new approximate math is introduced.
++#
++# The forward kernel now takes a distinct read pointer (LOGITS, native dtype)
++# and write pointer (PROB, FP32). The process-local compiled-code cache key for
++# the forward additionally encodes logits.dtype and prob.dtype (alongside the
++# existing device index, vocab, block and 16-byte alignment flags) so a
++# BF16-read compilation and an FP32-read compilation never collide. The backward
++# kernel, its reuse of the probability buffer as the gradient buffer, the int64
++# wide/out-of-range label handling (-100 is NOT ignore-index), the autocast
++# native-equivalent Torch CE branch and every public entry point are
++# byte-identical to 0006. The residual/RMSNorm prefix above is byte-identical to
++# parent 0003. Scope stays TP=1, zero smoothing, tested seq128 / vocab1024;
++# seq256/512 and vocab4096/8192 are not claimed. Screen-only; not a promotion
++# claim, and all formal processes must be rerun before any promotion.
+ # ---------------------------------------------------------------------------
+ 
+ 
+ @triton.jit
+-def _ce_forward_kernel(LOGITS, TARGET, LOSS,
++def _ce_forward_kernel(LOGITS, PROB, TARGET, LOSS,
+                        V: tl.constexpr, BLOCK: tl.constexpr):
+     row = tl.program_id(0)
+     col = tl.arange(0, BLOCK)
+     mask = col < V
+     offset = row * V + col
+-    x = tl.load(LOGITS + offset, mask=mask, other=-float('inf'))
++    # Load the native-dtype logits directly and widen to FP32 inside the kernel,
++    # removing the parent's separate logits.float() launch. BF16 -> FP32 is an
++    # exact widening, so x is bitwise identical to loading the FP32 result of a
++    # prior .float() copy; the CE math below is unchanged from 0005/0006. LOGITS
++    # is only read here, so a BF16 input is never mutated.
++    x = tl.load(LOGITS + offset, mask=mask, other=-float('inf')).to(tl.float32)
+     row_max = tl.max(x, axis=0)
+     z = x - row_max
+     exp_z = tl.exp(z)
+     sum_exp = tl.sum(exp_z, axis=0)
+-    # Keep the native int64 target. Narrowing to int32 (as 0004 did) let wide
+-    # labels wrap modulo 2**32 into a valid [0, V) class and wrongly collect the
+-    # predicted term; loading as int64 promotes the int32 lane index col to
+-    # int64 in the comparison below, so the range check is exact for every signed
+-    # 64-bit label.
++    # Keep the native int64 target. Loading as int64 promotes the int32 lane
++    # index col to int64 in the comparison below, so the range check is exact for
++    # every signed 64-bit label and no narrowing/overflow can happen.
+     target = tl.load(TARGET + row).to(tl.int64)
+     # (col == target) & mask selects the ground-truth lane only when target lies
+     # in [0, V). Any out-of-range target (target < 0 or target >= V, matching
+-    # native vocab_start/vocab_end masking at world_size=1, including labels that
+-    # land on a padding lane in [V, BLOCK)) matches no lane, so the row keeps the
+-    # native log(sumexp) loss with a zero predicted term.
++    # native vocab_start/vocab_end masking at world_size=1) matches no lane, so
++    # the row keeps the native log(sumexp) loss with a zero predicted term.
+     selected = (col == target) & mask
+     predicted = tl.sum(tl.where(selected, z, 0.0), axis=0)
+     tl.store(LOSS + row, tl.log(sum_exp) - predicted)
+-    # Overwrite the FP32 buffer with softmax probabilities, mirroring the native
+-    # observable forward mutation.
+-    tl.store(LOGITS + offset, exp_z / sum_exp, mask=mask)
++    # Write FP32 softmax into the separate probability buffer. When PROB aliases
++    # an FP32 input (FP32 case) this reproduces the native observable in-place
++    # overwrite; for BF16 input PROB is a fresh FP32 buffer and the BF16 input
++    # stays bitwise unchanged.
++    tl.store(PROB + offset, exp_z / sum_exp, mask=mask)
+ 
+ 
+ @triton.jit
+@@ -314,18 +328,21 @@
+     tl.store(DLOGITS + offset, (prob - onehot) * grad_output, mask=mask)
+ 
+ 
+-def _launch_ce_forward(logits, target, loss, vocab, rows):
++def _launch_ce_forward(logits, prob, target, loss, vocab, rows):
+     block = triton.next_power_of_2(vocab)
+-    key = ("ce_forward", logits.device.index, vocab, block,
+-           _alignment(logits, target, loss))
++    # Key encodes device, native-logits dtype, probability-buffer dtype, vocab
++    # (shape), block (layout) and 16-byte alignment so the BF16-read and
++    # FP32-read compilations never collide. No tensors/results/gradients stored.
++    key = ("ce_forward", logits.device.index, logits.dtype, prob.dtype, vocab,
++           block, _alignment(logits, prob, target, loss))
+     compiled = _COMPILED_KERNELS.get(key)
+     if compiled is None:
+         compiled = _ce_forward_kernel[(rows,)](
+-            logits, target, loss, V=vocab, BLOCK=block, num_warps=4,
++            logits, prob, target, loss, V=vocab, BLOCK=block, num_warps=4,
+         )
+         _COMPILED_KERNELS[key] = compiled
+     else:
+-        compiled[(rows, 1, 1)](logits, target, loss)
++        compiled[(rows, 1, 1)](logits, prob, target, loss)
+ 
+ 
+ def _launch_ce_backward(prob, target, grad_output, dlogits, vocab, rows):
+@@ -347,13 +364,19 @@
+     def forward(ctx, logits, target):
+         sequence, batch, vocab = logits.shape
+         rows = sequence * batch
+-        # Mirror native vocab_parallel_logits.float(): for FP32 input this is the
+-        # same tensor, so the softmax overwrite is observable on the input; for
+-        # low precision it is a separate FP32 buffer and the original low
+-        # precision tensor stays exactly unchanged.
+-        probabilities = logits.float()
++        # Remove the parent's separate logits.float() conversion launch. For
++        # low-precision (BF16) input allocate a fresh FP32 probability buffer and
++        # let the fused forward widen the BF16 logits in-kernel; the BF16 input
++        # is only read and stays bitwise unchanged, matching native .float()
++        # which leaves a low-precision input untouched. For FP32 input alias the
++        # input itself so the native observable in-place softmax overwrite (and
++        # native gradient alias) are preserved.
++        if logits.dtype == torch.float32:
++            probabilities = logits
++        else:
++            probabilities = torch.empty_like(logits, dtype=torch.float32)
+         loss = torch.empty((sequence, batch), dtype=torch.float32, device=logits.device)
+-        _launch_ce_forward(probabilities, target, loss, vocab, rows)
++        _launch_ce_forward(logits, probabilities, target, loss, vocab, rows)
+         ctx.save_for_backward(probabilities, target)
+         ctx.vocab = vocab
+         ctx.rows = rows
+@@ -371,53 +394,6 @@
+         _launch_ce_backward(probabilities, target, grad_output, probabilities,
+                             ctx.vocab, ctx.rows)
+         return probabilities, None
+-
+-
+-# ---------------------------------------------------------------------------
+-# Candidate 0006 (minimal child of 0005): repair the BF16-autocast cross-entropy
+-# output failures. 0005 passed all residual/RMSNorm, all full CE matrices, the
+-# wide-int64 semantic + actual-GPU-runner audit, every FP32 model output / loss /
+-# gradient / SGD check and the 2-layer holdout (FP32 complete-step ratios
+-# 1.173235 / 1.178758 / 1.149903, geomean ~1.167). But under BF16 autocast the
+-# FP32 Triton CE math, once its FP32 result propagated back through BF16 rounding
+-# in the surrounding autocast region, perturbed five token-loss elements per step
+-# on steps 2/3 by max~0.00799, exceeding the UNCHANGED atol 3e-4 / rtol 1e-3. The
+-# model gradient checks still passed, but that does NOT excuse the output
+-# failures, so 0005 is rejected; tolerances / verifier / config / timer stay
+-# untouched.
+-#
+-# The ONLY change from 0005 is at the public cross_entropy entry: it now adds an
+-# active-CUDA-autocast guard (parent's _cuda_autocast_enabled()) that dispatches
+-# to a separate TP=1 native-equivalent Torch autograd CE below. That branch
+-# reproduces the PINNED native VocabParallelCrossEntropy operations and their
+-# exact ordering -- logits.float(), torch.max, in-place subtract_ of the
+-# unsqueezed max, target_mask = (target < 0) | (target >= V), masked_target =
+-# target.clone() - 0 with masked_target[target_mask] = 0, the 2D view + arange +
+-# advanced index + clone().contiguous() + view_as(target), predicted[target_mask]
+-# = 0.0, torch.exp(out=same buffer), sum(dim=-1), log(sum_exp) - predicted, then
+-# div_ to normalize -- and saves exp_logits (probabilities), target_mask and
+-# masked_target_1d. Backward reproduces the native view / arange / softmax_update
+-# = 1.0 - target_mask.float(), the in-place grad_2d[arange, masked_target] -=
+-# softmax_update onehot subtraction, then mul_ by grad_output.unsqueeze(-1). It
+-# does NOT use F.cross_entropy / log_softmax / simplified autograd. Loss and
+-# grad_input stay FP32 internally; autograd casts the gradient to the original
+-# logits dtype exactly as native does. World_size is 1, so the native
+-# all_reduce(MAX) on logits_max and the two all_reduce(SUM) on predicted_logits /
+-# sum_exp_logits are the identity and are omitted; vocab_start=0, vocab_end=V.
+-# The default world group is never touched and Megatron is never imported -- the
+-# external adapter owns the TP group, the TP=1 / zero-smoothing / contiguity /
+-# dtype guards and the native fallback. Wide/out-of-range int64 labels are caught
+-# by target_mask (no onehot term, native log(sumexp) loss), there is no
+-# ignore_index, and zero smoothing only. Under autocast with BF16 input,
+-# logits.float() allocates a separate FP32 buffer so the original low-precision
+-# input is unchanged; native FP32-input overwrite is preserved when the input is
+-# already FP32. This Torch branch is a compatibility path, NOT Triton CE fusion
+-# under autocast: the adapter's optimized call counter only proves the candidate
+-# API was selected, not which internal branch ran. The 0003 residual/RMSNorm
+-# prefix and the 0005 FP32 Triton CE kernels, math, launch cache and int64
+-# comparison are byte-identical above. Screen-only; not a promotion claim, and
+-# all 14 formal processes must be rerun before any promotion.
+-# ---------------------------------------------------------------------------
+ 
+ 
+ class _NativeAutocastCrossEntropy(torch.autograd.Function):
+@@ -488,14 +464,11 @@
+     # and native-fallback guards, so this entry assumes supported contiguous CUDA
+     # logits[S,B,V] and contiguous int64 target[S,B].
+     #
+-    # Under an active CUDA autocast context the verified FP32 Triton CE path
+-    # perturbed a few token-loss elements once its FP32 result re-rounded through
+-    # BF16 in the surrounding autocast region (0005 autocast output failures,
+-    # max~0.00799 > atol 3e-4 / rtol 1e-3), so dispatch to the Torch autograd CE
+-    # that reproduces the pinned native operations and ordering exactly, matching
+-    # Megatron native rounding under autocast. This is a compatibility path, not
+-    # Triton CE fusion under autocast. Outside autocast the verified FP32 Triton
+-    # CE runs unchanged.
++    # Under an active CUDA autocast context dispatch to the Torch autograd CE that
++    # reproduces the pinned native operations and ordering exactly (0006 repair of
++    # 0005's autocast re-rounding output failures). Outside autocast the FP32
++    # Triton CE runs; 0007 removes its separate logits.float() launch by widening
++    # the native-dtype logits in-kernel into a separate FP32 probability buffer.
+     if _cuda_autocast_enabled():
+         return _NativeAutocastCrossEntropy.apply(logits, target)
+     return _FusedCrossEntropy.apply(logits, target)

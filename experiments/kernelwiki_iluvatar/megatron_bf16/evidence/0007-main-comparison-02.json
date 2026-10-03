@@ -1,0 +1,1610 @@
+{
+  "schema": "megatron-bf16-formal-entry-audit-comparison-v1",
+  "passed": false,
+  "native_case": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02",
+  "optimized_case": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/optimized-0007-audit-02",
+  "steps": 3,
+  "comparison_device": "CPU float64 copies",
+  "atol": 0.0003,
+  "rtol": 0.001,
+  "strict_equality_scope": "Initial state_dict tensors and every captured input batch tensor; BF16 model and FP32 master optimizer start tensors; all recursively captured non-tensor values must be equivalent.",
+  "optimizer_master_scope": "Every FP32 master parameter is compared at initialization and after each of three native SGD updates, independently of rounded BF16 model parameter comparisons.",
+  "pre_wrap_initial_dtype_counts": {},
+  "comparator_sha256": "feb475eb504fe452267f930f2069d5f17b36387a6cb4ad0f839a6aaa8df27eda",
+  "torch": "2.4.1",
+  "checks": [
+    {
+      "name": "explicit sealed contract and candidate paths supplied",
+      "passed": true
+    },
+    {
+      "name": "sealed contract preserves exact FP32 tolerances and three steps",
+      "passed": true
+    },
+    {
+      "name": "sealed contract pins native commit",
+      "passed": true
+    },
+    {
+      "name": "candidate bytes match sealed BF16 contract",
+      "passed": true
+    },
+    {
+      "name": "sealed model supplies all positive configuration and parameter sizes",
+      "passed": true
+    },
+    {
+      "name": "sealed model is true BF16 with native BF16 residual and RMSNorm",
+      "passed": true
+    },
+    {
+      "name": "fixed complete 600-file native manifest present",
+      "passed": true
+    },
+    {
+      "name": "native/command.json exists",
+      "passed": true
+    },
+    {
+      "name": "native/command.json is an object",
+      "passed": true
+    },
+    {
+      "name": "native/entry.json exists",
+      "passed": true
+    },
+    {
+      "name": "native/entry.json is an object",
+      "passed": true
+    },
+    {
+      "name": "optimized/command.json exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/command.json is an object",
+      "passed": true
+    },
+    {
+      "name": "optimized/entry.json exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/entry.json is an object",
+      "passed": true
+    },
+    {
+      "name": "native run mode",
+      "passed": true
+    },
+    {
+      "name": "native three-step unprofiled tensor audit",
+      "passed": true
+    },
+    {
+      "name": "native formal native launch completed",
+      "passed": true
+    },
+    {
+      "name": "native pinned Megatron commit",
+      "passed": true
+    },
+    {
+      "name": "native command and launch match sealed verifier contract",
+      "passed": true
+    },
+    {
+      "name": "native all native sources match exact fixed manifest",
+      "passed": true
+    },
+    {
+      "name": "native all integration sources match verifier files",
+      "passed": true
+    },
+    {
+      "name": "native final launcher remains frozen",
+      "passed": true
+    },
+    {
+      "name": "native exactly one native model chunk",
+      "passed": true
+    },
+    {
+      "name": "native model metadata object",
+      "passed": true
+    },
+    {
+      "name": "native fixed builder record parameters",
+      "passed": true
+    },
+    {
+      "name": "native fixed builder record layers",
+      "passed": true
+    },
+    {
+      "name": "native fixed builder record hidden_size",
+      "passed": true
+    },
+    {
+      "name": "native fixed builder record vocab_size",
+      "passed": true
+    },
+    {
+      "name": "native fixed builder record bf16",
+      "passed": true
+    },
+    {
+      "name": "native fixed builder record fp16",
+      "passed": true
+    },
+    {
+      "name": "native fixed builder record class",
+      "passed": true
+    },
+    {
+      "name": "native complete unique native parameter names recorded",
+      "passed": true
+    },
+    {
+      "name": "optimized run mode",
+      "passed": true
+    },
+    {
+      "name": "optimized three-step unprofiled tensor audit",
+      "passed": true
+    },
+    {
+      "name": "optimized formal native launch completed",
+      "passed": false
+    },
+    {
+      "name": "optimized pinned Megatron commit",
+      "passed": true
+    },
+    {
+      "name": "optimized command and launch match sealed verifier contract",
+      "passed": true
+    },
+    {
+      "name": "optimized all native sources match exact fixed manifest",
+      "passed": true
+    },
+    {
+      "name": "optimized all integration sources match verifier files",
+      "passed": true
+    },
+    {
+      "name": "optimized final launcher remains frozen",
+      "passed": true
+    },
+    {
+      "name": "optimized exactly one native model chunk",
+      "passed": true
+    },
+    {
+      "name": "optimized model metadata object",
+      "passed": true
+    },
+    {
+      "name": "optimized fixed builder record parameters",
+      "passed": true
+    },
+    {
+      "name": "optimized fixed builder record layers",
+      "passed": true
+    },
+    {
+      "name": "optimized fixed builder record hidden_size",
+      "passed": true
+    },
+    {
+      "name": "optimized fixed builder record vocab_size",
+      "passed": true
+    },
+    {
+      "name": "optimized fixed builder record bf16",
+      "passed": true
+    },
+    {
+      "name": "optimized fixed builder record fp16",
+      "passed": true
+    },
+    {
+      "name": "optimized fixed builder record class",
+      "passed": true
+    },
+    {
+      "name": "optimized complete unique native parameter names recorded",
+      "passed": true
+    },
+    {
+      "name": "same explicit seed",
+      "passed": true
+    },
+    {
+      "name": "both arms have identical native sources",
+      "passed": true
+    },
+    {
+      "name": "both arms have identical integration sources",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata sequence types and lengths match",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0 mapping types match",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0 keys match",
+      "passed": true,
+      "native_only": [],
+      "optimized_only": []
+    },
+    {
+      "name": "model construction metadata/0/bf16 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/class raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/fp16 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/hidden_size raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/layers raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names sequence types and lengths match",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/0 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/1 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/2 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/3 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/4 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/5 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/6 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/7 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/8 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/9 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/10 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/11 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/12 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/13 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/14 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/15 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/16 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/17 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/18 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/19 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/20 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/21 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/22 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/23 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/24 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/25 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/26 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameter_names/27 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/parameters raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys sequence types and lengths match",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/0 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/1 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/2 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/3 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/4 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/5 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/6 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/7 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/8 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/9 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/10 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/11 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/12 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/13 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/14 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/15 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/16 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/17 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/18 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/19 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/20 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/21 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/22 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/23 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/24 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/25 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/26 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/27 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/28 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/29 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/30 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/31 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/32 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/33 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/34 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/35 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/36 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/37 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/38 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/39 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/40 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/41 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/42 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/43 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/state_dict_keys/44 raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "model construction metadata/0/vocab_size raw values recursively equivalent",
+      "passed": true
+    },
+    {
+      "name": "both arms have complete formal training argv",
+      "passed": true
+    },
+    {
+      "name": "identical training argv except output directory",
+      "passed": true
+    },
+    {
+      "name": "both arms exactly execute sealed BF16 audit arguments",
+      "passed": true
+    },
+    {
+      "name": "native has no candidate installation",
+      "passed": true
+    },
+    {
+      "name": "optimized explicitly opted in",
+      "passed": true
+    },
+    {
+      "name": "both correctness arms have no profiler hooks",
+      "passed": true
+    },
+    {
+      "name": "optimized has exactly one BF16 CE adapter",
+      "passed": false
+    },
+    {
+      "name": "native exact initial/forward/master snapshot inventory",
+      "passed": true,
+      "expected": [
+        "actual-start.pt",
+        "master-after-001.pt",
+        "master-after-002.pt",
+        "master-after-003.pt",
+        "model0-forward-001.pt",
+        "model0-forward-002.pt",
+        "model0-forward-003.pt",
+        "model0-initial.pt"
+      ],
+      "observed": [
+        "actual-start.pt",
+        "master-after-001.pt",
+        "master-after-002.pt",
+        "master-after-003.pt",
+        "model0-forward-001.pt",
+        "model0-forward-002.pt",
+        "model0-forward-003.pt",
+        "model0-initial.pt"
+      ]
+    },
+    {
+      "name": "native exact native wgrads inventory",
+      "passed": true,
+      "expected": [
+        "iter_0000001/mp_rank_00.pth",
+        "iter_0000002/mp_rank_00.pth",
+        "iter_0000003/mp_rank_00.pth"
+      ],
+      "observed": [
+        "iter_0000001/mp_rank_00.pth",
+        "iter_0000002/mp_rank_00.pth",
+        "iter_0000003/mp_rank_00.pth"
+      ]
+    },
+    {
+      "name": "native exact native params inventory",
+      "passed": true,
+      "expected": [
+        "iter_0000001/mp_rank_00.pth",
+        "iter_0000002/mp_rank_00.pth",
+        "iter_0000003/mp_rank_00.pth"
+      ],
+      "observed": [
+        "iter_0000001/mp_rank_00.pth",
+        "iter_0000002/mp_rank_00.pth",
+        "iter_0000003/mp_rank_00.pth"
+      ]
+    },
+    {
+      "name": "optimized exact initial/forward/master snapshot inventory",
+      "passed": false,
+      "expected": [
+        "actual-start.pt",
+        "master-after-001.pt",
+        "master-after-002.pt",
+        "master-after-003.pt",
+        "model0-forward-001.pt",
+        "model0-forward-002.pt",
+        "model0-forward-003.pt",
+        "model0-initial.pt"
+      ],
+      "observed": []
+    },
+    {
+      "name": "optimized exact native wgrads inventory",
+      "passed": false,
+      "expected": [
+        "iter_0000001/mp_rank_00.pth",
+        "iter_0000002/mp_rank_00.pth",
+        "iter_0000003/mp_rank_00.pth"
+      ],
+      "observed": []
+    },
+    {
+      "name": "optimized exact native params inventory",
+      "passed": false,
+      "expected": [
+        "iter_0000001/mp_rank_00.pth",
+        "iter_0000002/mp_rank_00.pth",
+        "iter_0000003/mp_rank_00.pth"
+      ],
+      "observed": []
+    },
+    {
+      "name": "native/model0-initial.pt exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/model0-initial.pt exists",
+      "passed": false
+    },
+    {
+      "name": "both initial state_dict snapshots are nonempty mappings",
+      "passed": false
+    },
+    {
+      "name": "native/actual-start.pt exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/actual-start.pt exists",
+      "passed": false
+    },
+    {
+      "name": "actual-start exact model/master mapping keys",
+      "passed": false
+    },
+    {
+      "name": "native/model0-forward-001.pt exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/model0-forward-001.pt exists",
+      "passed": false
+    },
+    {
+      "name": "step 1 both forward snapshots are mappings",
+      "passed": false
+    },
+    {
+      "name": "native/wgrads/iter_0000001/mp_rank_00.pth exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/wgrads/iter_0000001/mp_rank_00.pth exists",
+      "passed": false
+    },
+    {
+      "name": "step 1/wgrads exactly model_chunk0",
+      "passed": false
+    },
+    {
+      "name": "native/params/iter_0000001/mp_rank_00.pth exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/params/iter_0000001/mp_rank_00.pth exists",
+      "passed": false
+    },
+    {
+      "name": "step 1/params exactly model_chunk0",
+      "passed": false
+    },
+    {
+      "name": "native/master-after-001.pt exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/master-after-001.pt exists",
+      "passed": false
+    },
+    {
+      "name": "native/step 1/FP32 optimizer master nonempty parameter mapping",
+      "passed": true
+    },
+    {
+      "name": "native/step 1/FP32 optimizer master contains only parameter tensors",
+      "passed": true
+    },
+    {
+      "name": "native/step 1/FP32 optimizer master parameter dtype torch.float32",
+      "passed": true
+    },
+    {
+      "name": "native/step 1/FP32 optimizer master covers every recorded parameter name",
+      "passed": true,
+      "missing": [],
+      "extra": []
+    },
+    {
+      "name": "native/step 1/FP32 optimizer master covers every recorded parameter element",
+      "passed": true,
+      "expected_numel": 13701632,
+      "observed_numel": 13701632
+    },
+    {
+      "name": "native/step 1/FP32 optimizer master covers builder parameter element count",
+      "passed": true
+    },
+    {
+      "name": "optimized/step 1/FP32 optimizer master nonempty parameter mapping",
+      "passed": false
+    },
+    {
+      "name": "native/model0-forward-002.pt exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/model0-forward-002.pt exists",
+      "passed": false
+    },
+    {
+      "name": "step 2 both forward snapshots are mappings",
+      "passed": false
+    },
+    {
+      "name": "native/wgrads/iter_0000002/mp_rank_00.pth exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/wgrads/iter_0000002/mp_rank_00.pth exists",
+      "passed": false
+    },
+    {
+      "name": "step 2/wgrads exactly model_chunk0",
+      "passed": false
+    },
+    {
+      "name": "native/params/iter_0000002/mp_rank_00.pth exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/params/iter_0000002/mp_rank_00.pth exists",
+      "passed": false
+    },
+    {
+      "name": "step 2/params exactly model_chunk0",
+      "passed": false
+    },
+    {
+      "name": "native/master-after-002.pt exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/master-after-002.pt exists",
+      "passed": false
+    },
+    {
+      "name": "native/step 2/FP32 optimizer master nonempty parameter mapping",
+      "passed": true
+    },
+    {
+      "name": "native/step 2/FP32 optimizer master contains only parameter tensors",
+      "passed": true
+    },
+    {
+      "name": "native/step 2/FP32 optimizer master parameter dtype torch.float32",
+      "passed": true
+    },
+    {
+      "name": "native/step 2/FP32 optimizer master covers every recorded parameter name",
+      "passed": true,
+      "missing": [],
+      "extra": []
+    },
+    {
+      "name": "native/step 2/FP32 optimizer master covers every recorded parameter element",
+      "passed": true,
+      "expected_numel": 13701632,
+      "observed_numel": 13701632
+    },
+    {
+      "name": "native/step 2/FP32 optimizer master covers builder parameter element count",
+      "passed": true
+    },
+    {
+      "name": "optimized/step 2/FP32 optimizer master nonempty parameter mapping",
+      "passed": false
+    },
+    {
+      "name": "native/model0-forward-003.pt exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/model0-forward-003.pt exists",
+      "passed": false
+    },
+    {
+      "name": "step 3 both forward snapshots are mappings",
+      "passed": false
+    },
+    {
+      "name": "native/wgrads/iter_0000003/mp_rank_00.pth exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/wgrads/iter_0000003/mp_rank_00.pth exists",
+      "passed": false
+    },
+    {
+      "name": "step 3/wgrads exactly model_chunk0",
+      "passed": false
+    },
+    {
+      "name": "native/params/iter_0000003/mp_rank_00.pth exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/params/iter_0000003/mp_rank_00.pth exists",
+      "passed": false
+    },
+    {
+      "name": "step 3/params exactly model_chunk0",
+      "passed": false
+    },
+    {
+      "name": "native/master-after-003.pt exists",
+      "passed": true
+    },
+    {
+      "name": "optimized/master-after-003.pt exists",
+      "passed": false
+    },
+    {
+      "name": "native/step 3/FP32 optimizer master nonempty parameter mapping",
+      "passed": true
+    },
+    {
+      "name": "native/step 3/FP32 optimizer master contains only parameter tensors",
+      "passed": true
+    },
+    {
+      "name": "native/step 3/FP32 optimizer master parameter dtype torch.float32",
+      "passed": true
+    },
+    {
+      "name": "native/step 3/FP32 optimizer master covers every recorded parameter name",
+      "passed": true,
+      "missing": [],
+      "extra": []
+    },
+    {
+      "name": "native/step 3/FP32 optimizer master covers every recorded parameter element",
+      "passed": true,
+      "expected_numel": 13701632,
+      "observed_numel": 13701632
+    },
+    {
+      "name": "native/step 3/FP32 optimizer master covers builder parameter element count",
+      "passed": true
+    },
+    {
+      "name": "optimized/step 3/FP32 optimizer master nonempty parameter mapping",
+      "passed": false
+    },
+    {
+      "name": "initial tensor comparison coverage nonempty",
+      "passed": false
+    },
+    {
+      "name": "actual_start_model_parameters tensor comparison coverage nonempty",
+      "passed": false
+    },
+    {
+      "name": "actual_start_master_parameters tensor comparison coverage nonempty",
+      "passed": false
+    },
+    {
+      "name": "master_initialization tensor comparison coverage nonempty",
+      "passed": false
+    },
+    {
+      "name": "model_initialization tensor comparison coverage nonempty",
+      "passed": false
+    },
+    {
+      "name": "batches tensor comparison coverage nonempty",
+      "passed": false
+    },
+    {
+      "name": "output tensor comparison coverage nonempty",
+      "passed": false
+    },
+    {
+      "name": "derived_loss tensor comparison coverage nonempty",
+      "passed": false
+    },
+    {
+      "name": "wgrads tensor comparison coverage nonempty",
+      "passed": false
+    },
+    {
+      "name": "params tensor comparison coverage nonempty",
+      "passed": false
+    },
+    {
+      "name": "masters tensor comparison coverage nonempty",
+      "passed": false
+    },
+    {
+      "name": "master_model_consistency tensor comparison coverage nonempty",
+      "passed": false
+    }
+  ],
+  "check_summary": {
+    "total": 224,
+    "passed": 179,
+    "failed": 45
+  },
+  "tensor_groups": {},
+  "tensor_comparisons": [],
+  "raw_value_comparisons": [
+    {
+      "path": "model construction metadata/0/bf16",
+      "native_type": "bool",
+      "optimized_type": "bool",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/class",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/fp16",
+      "native_type": "bool",
+      "optimized_type": "bool",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/hidden_size",
+      "native_type": "int",
+      "optimized_type": "int",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/layers",
+      "native_type": "int",
+      "optimized_type": "int",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/0",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/1",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/2",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/3",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/4",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/5",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/6",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/7",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/8",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/9",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/10",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/11",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/12",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/13",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/14",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/15",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/16",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/17",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/18",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/19",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/20",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/21",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/22",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/23",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/24",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/25",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/26",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameter_names/27",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/parameters",
+      "native_type": "int",
+      "optimized_type": "int",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/0",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/1",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/2",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/3",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/4",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/5",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/6",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/7",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/8",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/9",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/10",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/11",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/12",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/13",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/14",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/15",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/16",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/17",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/18",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/19",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/20",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/21",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/22",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/23",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/24",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/25",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/26",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/27",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/28",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/29",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/30",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/31",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/32",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/33",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/34",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/35",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/36",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/37",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/38",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/39",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/40",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/41",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/42",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/43",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/state_dict_keys/44",
+      "native_type": "str",
+      "optimized_type": "str",
+      "passed": true
+    },
+    {
+      "path": "model construction metadata/0/vocab_size",
+      "native_type": "int",
+      "optimized_type": "int",
+      "passed": true
+    }
+  ],
+  "derived_masked_mean_loss": [],
+  "adapter_coverage": {},
+  "input_files": [
+    {
+      "arm": "fixed-verifier",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/contracts/0007-main.json",
+      "bytes": 4316,
+      "sha256": "dbaf1b2f2ebb3aa452ffca6351bba57a791c52c9d3f47fb210ebf5f33b5d3d3c"
+    },
+    {
+      "arm": "fixed-verifier",
+      "path": "/mnt/kda-biv150-stage3/megatron_training_entry/source_manifest.json",
+      "bytes": 75309,
+      "sha256": "a72ded960488d399ded2255ef55f357257e03532b8fa21a06d958170c5c98c2d"
+    },
+    {
+      "arm": "fixed-verifier",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/candidates/0007/candidate.py",
+      "bytes": 22999,
+      "sha256": "9b5c99fcd31bb6b73691d64005b11f0be964530f87631ee4b403456adcb24831"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/command.json",
+      "bytes": 2729,
+      "sha256": "c248667bd92289898747d372bd87a18ea63245bee5773e7ed842a7673d0cbec9"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/entry.json",
+      "bytes": 82488,
+      "sha256": "33827aab7dd0984570a056641c03e81c583f757112b92007645db688027b0a7c"
+    },
+    {
+      "arm": "optimized",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/optimized-0007-audit-02/command.json",
+      "bytes": 2835,
+      "sha256": "a4480b58304b892afd65c2d8e795dce1b1f85f742bf7cbddecacb6d60959befb"
+    },
+    {
+      "arm": "optimized",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/optimized-0007-audit-02/entry.json",
+      "bytes": 84574,
+      "sha256": "6a76b27ee3e1b32ed4bb8f68809e363c729d86443a319eb5848f0963aaec99af"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/snapshots/model0-initial.pt",
+      "bytes": 27553890,
+      "sha256": "90b9f941fcc6ef4cf7b45d7489a3bea91b556f0807d4da58d9cf263bdf0f908b"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/snapshots/actual-start.pt",
+      "bytes": 82226778,
+      "sha256": "6601f30b9c3fe06ca0483263761512de84c43d2433ea9cafb3a985dc720bef8a"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/snapshots/model0-forward-001.pt",
+      "bytes": 43638,
+      "sha256": "e322b3766985ce7971c2eec51567c2679f60a7380b891b448ee8ad1862288c94"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/snapshots/wgrads/iter_0000001/mp_rank_00.pth",
+      "bytes": 54815778,
+      "sha256": "e25c282c6a0103e3593a4008362958861a4fb17faa616f4b0800030fddc25081"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/snapshots/params/iter_0000001/mp_rank_00.pth",
+      "bytes": 27412514,
+      "sha256": "e6bd0da18f7137fa5b14b7858bb4f92f83652790314b39b78c43a94f0f2ead75"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/snapshots/master-after-001.pt",
+      "bytes": 54815970,
+      "sha256": "0cfe53ae40f748a11b898e47a9b03b96e576d49d5c4bd38b9c121d5f338bb1d7"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/snapshots/model0-forward-002.pt",
+      "bytes": 43638,
+      "sha256": "b8e4626bbdfb2dcf12324622f70a96792e3a813288f647fdfbf581926bbe32f4"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/snapshots/wgrads/iter_0000002/mp_rank_00.pth",
+      "bytes": 54815778,
+      "sha256": "ab156a1175823f63641236442306520e637a0d59b982b4e90d40d605a45c1d5b"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/snapshots/params/iter_0000002/mp_rank_00.pth",
+      "bytes": 27412514,
+      "sha256": "8c2e48c1d5d9eca14223629e7d6e8013da0ee338d26eb5f6c5c54fc933e0248e"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/snapshots/master-after-002.pt",
+      "bytes": 54815970,
+      "sha256": "289179a83ae601ab1f58aa0b63072c9a92140bb96dc7343165ae8fa7d0f8cdb9"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/snapshots/model0-forward-003.pt",
+      "bytes": 43638,
+      "sha256": "ce252061d1634ed4f9db16faad5d8515eb02b9947909ffa52484e6493ebe3753"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/snapshots/wgrads/iter_0000003/mp_rank_00.pth",
+      "bytes": 54815778,
+      "sha256": "ae9037a02e41689a50adec2c0d61535b40a8e09d709333b3fb6347872d96fbb1"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/snapshots/params/iter_0000003/mp_rank_00.pth",
+      "bytes": 27412514,
+      "sha256": "1ff4760959976ecded856719d1c41cf21579933bad3c76424d6948ace2f6a249"
+    },
+    {
+      "arm": "native",
+      "path": "/mnt/kda-biv150-stage3/megatron_bf16/evidence/native-0007-audit-02/snapshots/master-after-003.pt",
+      "bytes": 54815970,
+      "sha256": "72d761ae4e1582a21cd2968b5eac07c3dba9cf53a0ff8a92400c451758ae6273"
+    }
+  ],
+  "finished_utc": "2026-10-03T08:43:57.437565+00:00"
+}

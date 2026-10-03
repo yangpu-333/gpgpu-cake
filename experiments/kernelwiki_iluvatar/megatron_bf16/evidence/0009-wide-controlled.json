@@ -1,0 +1,1193 @@
+{
+  "status": "validated",
+  "candidate_sha256": "b31dfb88325dc19f3856122146bab6e4a643c0d91344b4a0fc194d5d6a50f1f4",
+  "control_sha256": "9b22e12b4744b2a41b9209faa280e361e6defe1d5480f5e5683fddd247b7f493",
+  "harness_sha256": "918a92c75dd212de946c278713233dbe3fec6de7060eb2b7272db5cb36505a78",
+  "scope": {
+    "num_layers": 4,
+    "hidden_size": 512,
+    "ffn_hidden_size": 2048,
+    "num_attention_heads": 8,
+    "sequence_length": 256,
+    "micro_batch_size": 2,
+    "global_batch_size": 2,
+    "vocab_size": 4096,
+    "parameters": 16912896,
+    "normalization": "RMSNorm",
+    "epsilon": 1e-05,
+    "bf16": true,
+    "fp32_residual_connection": false
+  },
+  "orders": [
+    [
+      "native",
+      "control",
+      "optimized"
+    ],
+    [
+      "optimized",
+      "control",
+      "native"
+    ],
+    [
+      "control",
+      "native",
+      "optimized"
+    ]
+  ],
+  "controls": [
+    {
+      "seed": 26012,
+      "control": {
+        "case": "optimized-0009-wide-control-perf-26012",
+        "mode": "optimized",
+        "seed": 26012,
+        "mean_iteration_ms": 37.76,
+        "tokens_per_second": 13559.322033898306,
+        "intervals": [
+          {
+            "iteration": 1,
+            "total_iterations": 120,
+            "line_number": 924,
+            "raw_line": " [2026-10-03 17:40:54.246213] iteration        1/     120 | consumed samples:            2 | elapsed time per iteration (ms): 1114.9 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.427348E+00 | loss scale: 1.0 | grad norm: 4.816 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": false,
+            "kind": "startup_first_iteration",
+            "mean_iteration_ms": 1114.9,
+            "lm_loss": 8.427348,
+            "consumed_samples": 2,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 10,
+            "total_iterations": 120,
+            "line_number": 936,
+            "raw_line": " [2026-10-03 17:40:54.694451] iteration       10/     120 | consumed samples:           20 | elapsed time per iteration (ms): 156.3 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.416010E+00 | loss scale: 1.0 | grad norm: 4.739 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": false,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 156.3,
+            "lm_loss": 8.41601,
+            "consumed_samples": 20,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 20,
+            "total_iterations": 120,
+            "line_number": 948,
+            "raw_line": " [2026-10-03 17:40:55.257654] iteration       20/     120 | consumed samples:           40 | elapsed time per iteration (ms): 56.3 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.410420E+00 | loss scale: 1.0 | grad norm: 4.727 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": false,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 56.3,
+            "lm_loss": 8.41042,
+            "consumed_samples": 40,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 30,
+            "total_iterations": 120,
+            "line_number": 949,
+            "raw_line": " [2026-10-03 17:40:55.819878] iteration       30/     120 | consumed samples:           60 | elapsed time per iteration (ms): 56.1 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.399045E+00 | loss scale: 1.0 | grad norm: 4.847 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 56.1,
+            "lm_loss": 8.399045,
+            "consumed_samples": 60,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 40,
+            "total_iterations": 120,
+            "line_number": 950,
+            "raw_line": " [2026-10-03 17:40:56.345978] iteration       40/     120 | consumed samples:           80 | elapsed time per iteration (ms): 52.6 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.398489E+00 | loss scale: 1.0 | grad norm: 4.744 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 52.6,
+            "lm_loss": 8.398489,
+            "consumed_samples": 80,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 50,
+            "total_iterations": 120,
+            "line_number": 951,
+            "raw_line": " [2026-10-03 17:40:56.725922] iteration       50/     120 | consumed samples:          100 | elapsed time per iteration (ms): 38.0 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.375967E+00 | loss scale: 1.0 | grad norm: 4.917 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 38.0,
+            "lm_loss": 8.375967,
+            "consumed_samples": 100,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 60,
+            "total_iterations": 120,
+            "line_number": 952,
+            "raw_line": " [2026-10-03 17:40:57.096243] iteration       60/     120 | consumed samples:          120 | elapsed time per iteration (ms): 37.0 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.355996E+00 | loss scale: 1.0 | grad norm: 4.797 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 37.0,
+            "lm_loss": 8.355996,
+            "consumed_samples": 120,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 70,
+            "total_iterations": 120,
+            "line_number": 953,
+            "raw_line": " [2026-10-03 17:40:57.411933] iteration       70/     120 | consumed samples:          140 | elapsed time per iteration (ms): 31.5 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.367046E+00 | loss scale: 1.0 | grad norm: 4.736 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 31.5,
+            "lm_loss": 8.367046,
+            "consumed_samples": 140,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 80,
+            "total_iterations": 120,
+            "line_number": 954,
+            "raw_line": " [2026-10-03 17:40:57.735416] iteration       80/     120 | consumed samples:          160 | elapsed time per iteration (ms): 32.3 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.343738E+00 | loss scale: 1.0 | grad norm: 4.678 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 32.3,
+            "lm_loss": 8.343738,
+            "consumed_samples": 160,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 90,
+            "total_iterations": 120,
+            "line_number": 955,
+            "raw_line": " [2026-10-03 17:40:58.051975] iteration       90/     120 | consumed samples:          180 | elapsed time per iteration (ms): 31.6 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.337332E+00 | loss scale: 1.0 | grad norm: 4.768 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 31.6,
+            "lm_loss": 8.337332,
+            "consumed_samples": 180,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 100,
+            "total_iterations": 120,
+            "line_number": 956,
+            "raw_line": " [2026-10-03 17:40:58.389429] iteration      100/     120 | consumed samples:          200 | elapsed time per iteration (ms): 33.7 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.297428E+00 | loss scale: 1.0 | grad norm: 5.092 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 33.7,
+            "lm_loss": 8.297428,
+            "consumed_samples": 200,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 110,
+            "total_iterations": 120,
+            "line_number": 957,
+            "raw_line": " [2026-10-03 17:40:58.716601] iteration      110/     120 | consumed samples:          220 | elapsed time per iteration (ms): 32.7 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.305866E+00 | loss scale: 1.0 | grad norm: 4.660 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 32.7,
+            "lm_loss": 8.305866,
+            "consumed_samples": 220,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 120,
+            "total_iterations": 120,
+            "line_number": 958,
+            "raw_line": " [2026-10-03 17:40:59.037619] iteration      120/     120 | consumed samples:          240 | elapsed time per iteration (ms): 32.1 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.272231E+00 | loss scale: 1.0 | grad norm: 4.596 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 32.1,
+            "lm_loss": 8.272231,
+            "consumed_samples": 240,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          }
+        ],
+        "whole_process_seconds": 22.882073398679495,
+        "started_utc": "2026-10-03T09:40:40.581021+00:00",
+        "finished_utc": "2026-10-03T09:41:03.463227+00:00",
+        "model": {
+          "class": "megatron.core.models.gpt.gpt_model.GPTModel",
+          "parameters": 16912896,
+          "parameter_names": [
+            "embedding.word_embeddings.weight",
+            "embedding.position_embeddings.weight",
+            "decoder.layers.0.input_layernorm.weight",
+            "decoder.layers.0.self_attention.linear_proj.weight",
+            "decoder.layers.0.self_attention.linear_qkv.weight",
+            "decoder.layers.0.pre_mlp_layernorm.weight",
+            "decoder.layers.0.mlp.linear_fc1.weight",
+            "decoder.layers.0.mlp.linear_fc2.weight",
+            "decoder.layers.1.input_layernorm.weight",
+            "decoder.layers.1.self_attention.linear_proj.weight",
+            "decoder.layers.1.self_attention.linear_qkv.weight",
+            "decoder.layers.1.pre_mlp_layernorm.weight",
+            "decoder.layers.1.mlp.linear_fc1.weight",
+            "decoder.layers.1.mlp.linear_fc2.weight",
+            "decoder.layers.2.input_layernorm.weight",
+            "decoder.layers.2.self_attention.linear_proj.weight",
+            "decoder.layers.2.self_attention.linear_qkv.weight",
+            "decoder.layers.2.pre_mlp_layernorm.weight",
+            "decoder.layers.2.mlp.linear_fc1.weight",
+            "decoder.layers.2.mlp.linear_fc2.weight",
+            "decoder.layers.3.input_layernorm.weight",
+            "decoder.layers.3.self_attention.linear_proj.weight",
+            "decoder.layers.3.self_attention.linear_qkv.weight",
+            "decoder.layers.3.pre_mlp_layernorm.weight",
+            "decoder.layers.3.mlp.linear_fc1.weight",
+            "decoder.layers.3.mlp.linear_fc2.weight",
+            "decoder.final_layernorm.weight",
+            "output_layer.weight"
+          ],
+          "state_dict_keys": [
+            "embedding.word_embeddings.weight",
+            "embedding.position_embeddings.weight",
+            "decoder.layers.0.input_layernorm.weight",
+            "decoder.layers.0.self_attention.linear_proj.weight",
+            "decoder.layers.0.self_attention.linear_proj._extra_state",
+            "decoder.layers.0.self_attention.linear_qkv.weight",
+            "decoder.layers.0.self_attention.linear_qkv._extra_state",
+            "decoder.layers.0.pre_mlp_layernorm.weight",
+            "decoder.layers.0.mlp.linear_fc1.weight",
+            "decoder.layers.0.mlp.linear_fc1._extra_state",
+            "decoder.layers.0.mlp.linear_fc2.weight",
+            "decoder.layers.0.mlp.linear_fc2._extra_state",
+            "decoder.layers.1.input_layernorm.weight",
+            "decoder.layers.1.self_attention.linear_proj.weight",
+            "decoder.layers.1.self_attention.linear_proj._extra_state",
+            "decoder.layers.1.self_attention.linear_qkv.weight",
+            "decoder.layers.1.self_attention.linear_qkv._extra_state",
+            "decoder.layers.1.pre_mlp_layernorm.weight",
+            "decoder.layers.1.mlp.linear_fc1.weight",
+            "decoder.layers.1.mlp.linear_fc1._extra_state",
+            "decoder.layers.1.mlp.linear_fc2.weight",
+            "decoder.layers.1.mlp.linear_fc2._extra_state",
+            "decoder.layers.2.input_layernorm.weight",
+            "decoder.layers.2.self_attention.linear_proj.weight",
+            "decoder.layers.2.self_attention.linear_proj._extra_state",
+            "decoder.layers.2.self_attention.linear_qkv.weight",
+            "decoder.layers.2.self_attention.linear_qkv._extra_state",
+            "decoder.layers.2.pre_mlp_layernorm.weight",
+            "decoder.layers.2.mlp.linear_fc1.weight",
+            "decoder.layers.2.mlp.linear_fc1._extra_state",
+            "decoder.layers.2.mlp.linear_fc2.weight",
+            "decoder.layers.2.mlp.linear_fc2._extra_state",
+            "decoder.layers.3.input_layernorm.weight",
+            "decoder.layers.3.self_attention.linear_proj.weight",
+            "decoder.layers.3.self_attention.linear_proj._extra_state",
+            "decoder.layers.3.self_attention.linear_qkv.weight",
+            "decoder.layers.3.self_attention.linear_qkv._extra_state",
+            "decoder.layers.3.pre_mlp_layernorm.weight",
+            "decoder.layers.3.mlp.linear_fc1.weight",
+            "decoder.layers.3.mlp.linear_fc1._extra_state",
+            "decoder.layers.3.mlp.linear_fc2.weight",
+            "decoder.layers.3.mlp.linear_fc2._extra_state",
+            "decoder.final_layernorm.weight",
+            "output_layer.weight",
+            "output_layer._extra_state"
+          ],
+          "layers": 4,
+          "hidden_size": 512,
+          "vocab_size": 4096,
+          "bf16": true,
+          "fp16": false
+        },
+        "adapter": {
+          "enabled": true,
+          "active": true,
+          "provenance_verified": true,
+          "candidate_sha256": "9b22e12b4744b2a41b9209faa280e361e6defe1d5480f5e5683fddd247b7f493",
+          "candidate_expected_sha256": "9b22e12b4744b2a41b9209faa280e361e6defe1d5480f5e5683fddd247b7f493",
+          "runtime_world_size": 1,
+          "verified_devices": {
+            "0": "Iluvatar BI-V150"
+          },
+          "config_at_installation": {
+            "num_layers": 4,
+            "hidden_size": 512,
+            "num_attention_heads": 8,
+            "ffn_hidden_size": 2048,
+            "bf16": true,
+            "fp16": false,
+            "normalization": "RMSNorm",
+            "layernorm_epsilon": 1e-05,
+            "hidden_dropout": 0.0,
+            "attention_dropout": 0.0,
+            "add_bias_linear": false,
+            "tensor_model_parallel_size": 1,
+            "pipeline_model_parallel_size": 1,
+            "context_parallel_size": 1
+          },
+          "counts": {
+            "ce_candidate_calls": 120,
+            "ce_native_calls": 0,
+            "residual_native_calls": 480,
+            "fallback_reasons": {}
+          },
+          "observations": [
+            {
+              "logits_shape": [
+                256,
+                2,
+                4096
+              ],
+              "logits_dtype": "torch.bfloat16",
+              "loss_shape": [
+                256,
+                2
+              ],
+              "loss_dtype": "torch.float32",
+              "autocast": false
+            },
+            {
+              "logits_shape": [
+                256,
+                2,
+                4096
+              ],
+              "logits_dtype": "torch.bfloat16",
+              "loss_shape": [
+                256,
+                2
+              ],
+              "loss_dtype": "torch.float32",
+              "autocast": false
+            },
+            {
+              "logits_shape": [
+                256,
+                2,
+                4096
+              ],
+              "logits_dtype": "torch.bfloat16",
+              "loss_shape": [
+                256,
+                2
+              ],
+              "loss_dtype": "torch.float32",
+              "autocast": false
+            },
+            {
+              "logits_shape": [
+                256,
+                2,
+                4096
+              ],
+              "logits_dtype": "torch.bfloat16",
+              "loss_shape": [
+                256,
+                2
+              ],
+              "loss_dtype": "torch.float32",
+              "autocast": false
+            }
+          ],
+          "scope": "CE-only candidate API; residual/RMSNorm remain native. Counts are not compiled-launch proof."
+        },
+        "raw_sha256": {
+          "command.json": "86a099783e317f84b4b2b8cc6837203af2354329aede21ac23e42bff99be7bf1",
+          "entry.json": "3d880289a10918b0459740cd524f80578abd41fc32ea96816c9785e190d4791a",
+          "stdout.log": "3b21e3ec482997eb0ecab14ea718349f3c285b118e8729ed78eab86b14b94761",
+          "stderr.log": "4b8eae265638a9d7d97a108d7b3d66adc77868c5a9046ed1798caf301285e38f"
+        }
+      },
+      "candidate_vs_control_throughput_ratio": 1.1519219035997559,
+      "control_vs_same_native_ratio": 0.9033368644067797
+    },
+    {
+      "seed": 26013,
+      "control": {
+        "case": "optimized-0009-wide-control-perf-26013",
+        "mode": "optimized",
+        "seed": 26013,
+        "mean_iteration_ms": 32.64,
+        "tokens_per_second": 15686.274509803921,
+        "intervals": [
+          {
+            "iteration": 1,
+            "total_iterations": 120,
+            "line_number": 924,
+            "raw_line": " [2026-10-03 17:41:59.831396] iteration        1/     120 | consumed samples:            2 | elapsed time per iteration (ms): 648.6 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.453545E+00 | loss scale: 1.0 | grad norm: 4.987 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": false,
+            "kind": "startup_first_iteration",
+            "mean_iteration_ms": 648.6,
+            "lm_loss": 8.453545,
+            "consumed_samples": 2,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 10,
+            "total_iterations": 120,
+            "line_number": 936,
+            "raw_line": " [2026-10-03 17:42:00.146298] iteration       10/     120 | consumed samples:           20 | elapsed time per iteration (ms): 96.3 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.431644E+00 | loss scale: 1.0 | grad norm: 4.784 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": false,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 96.3,
+            "lm_loss": 8.431644,
+            "consumed_samples": 20,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 20,
+            "total_iterations": 120,
+            "line_number": 948,
+            "raw_line": " [2026-10-03 17:42:00.474776] iteration       20/     120 | consumed samples:           40 | elapsed time per iteration (ms): 32.8 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.407324E+00 | loss scale: 1.0 | grad norm: 4.720 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": false,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 32.8,
+            "lm_loss": 8.407324,
+            "consumed_samples": 40,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 30,
+            "total_iterations": 120,
+            "line_number": 949,
+            "raw_line": " [2026-10-03 17:42:00.799312] iteration       30/     120 | consumed samples:           60 | elapsed time per iteration (ms): 32.4 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.398677E+00 | loss scale: 1.0 | grad norm: 4.926 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 32.4,
+            "lm_loss": 8.398677,
+            "consumed_samples": 60,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 40,
+            "total_iterations": 120,
+            "line_number": 950,
+            "raw_line": " [2026-10-03 17:42:01.129944] iteration       40/     120 | consumed samples:           80 | elapsed time per iteration (ms): 33.0 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.379520E+00 | loss scale: 1.0 | grad norm: 4.836 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 33.0,
+            "lm_loss": 8.37952,
+            "consumed_samples": 80,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 50,
+            "total_iterations": 120,
+            "line_number": 951,
+            "raw_line": " [2026-10-03 17:42:01.472423] iteration       50/     120 | consumed samples:          100 | elapsed time per iteration (ms): 34.2 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.359830E+00 | loss scale: 1.0 | grad norm: 4.680 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 34.2,
+            "lm_loss": 8.35983,
+            "consumed_samples": 100,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 60,
+            "total_iterations": 120,
+            "line_number": 952,
+            "raw_line": " [2026-10-03 17:42:01.801967] iteration       60/     120 | consumed samples:          120 | elapsed time per iteration (ms): 32.9 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.339117E+00 | loss scale: 1.0 | grad norm: 4.807 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 32.9,
+            "lm_loss": 8.339117,
+            "consumed_samples": 120,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 70,
+            "total_iterations": 120,
+            "line_number": 953,
+            "raw_line": " [2026-10-03 17:42:02.143417] iteration       70/     120 | consumed samples:          140 | elapsed time per iteration (ms): 34.1 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.346449E+00 | loss scale: 1.0 | grad norm: 4.716 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 34.1,
+            "lm_loss": 8.346449,
+            "consumed_samples": 140,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 80,
+            "total_iterations": 120,
+            "line_number": 954,
+            "raw_line": " [2026-10-03 17:42:02.459120] iteration       80/     120 | consumed samples:          160 | elapsed time per iteration (ms): 31.5 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.353690E+00 | loss scale: 1.0 | grad norm: 4.742 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 31.5,
+            "lm_loss": 8.35369,
+            "consumed_samples": 160,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 90,
+            "total_iterations": 120,
+            "line_number": 955,
+            "raw_line": " [2026-10-03 17:42:02.781789] iteration       90/     120 | consumed samples:          180 | elapsed time per iteration (ms): 32.2 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.311717E+00 | loss scale: 1.0 | grad norm: 4.668 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 32.2,
+            "lm_loss": 8.311717,
+            "consumed_samples": 180,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 100,
+            "total_iterations": 120,
+            "line_number": 956,
+            "raw_line": " [2026-10-03 17:42:03.099948] iteration      100/     120 | consumed samples:          200 | elapsed time per iteration (ms): 31.8 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.322208E+00 | loss scale: 1.0 | grad norm: 4.442 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 31.8,
+            "lm_loss": 8.322208,
+            "consumed_samples": 200,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 110,
+            "total_iterations": 120,
+            "line_number": 957,
+            "raw_line": " [2026-10-03 17:42:03.419778] iteration      110/     120 | consumed samples:          220 | elapsed time per iteration (ms): 32.0 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.303461E+00 | loss scale: 1.0 | grad norm: 4.904 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 32.0,
+            "lm_loss": 8.303461,
+            "consumed_samples": 220,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 120,
+            "total_iterations": 120,
+            "line_number": 958,
+            "raw_line": " [2026-10-03 17:42:03.742937] iteration      120/     120 | consumed samples:          240 | elapsed time per iteration (ms): 32.3 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.273594E+00 | loss scale: 1.0 | grad norm: 5.539 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 32.3,
+            "lm_loss": 8.273594,
+            "consumed_samples": 240,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          }
+        ],
+        "whole_process_seconds": 20.999034351669252,
+        "started_utc": "2026-10-03T09:41:47.006220+00:00",
+        "finished_utc": "2026-10-03T09:42:08.005356+00:00",
+        "model": {
+          "class": "megatron.core.models.gpt.gpt_model.GPTModel",
+          "parameters": 16912896,
+          "parameter_names": [
+            "embedding.word_embeddings.weight",
+            "embedding.position_embeddings.weight",
+            "decoder.layers.0.input_layernorm.weight",
+            "decoder.layers.0.self_attention.linear_proj.weight",
+            "decoder.layers.0.self_attention.linear_qkv.weight",
+            "decoder.layers.0.pre_mlp_layernorm.weight",
+            "decoder.layers.0.mlp.linear_fc1.weight",
+            "decoder.layers.0.mlp.linear_fc2.weight",
+            "decoder.layers.1.input_layernorm.weight",
+            "decoder.layers.1.self_attention.linear_proj.weight",
+            "decoder.layers.1.self_attention.linear_qkv.weight",
+            "decoder.layers.1.pre_mlp_layernorm.weight",
+            "decoder.layers.1.mlp.linear_fc1.weight",
+            "decoder.layers.1.mlp.linear_fc2.weight",
+            "decoder.layers.2.input_layernorm.weight",
+            "decoder.layers.2.self_attention.linear_proj.weight",
+            "decoder.layers.2.self_attention.linear_qkv.weight",
+            "decoder.layers.2.pre_mlp_layernorm.weight",
+            "decoder.layers.2.mlp.linear_fc1.weight",
+            "decoder.layers.2.mlp.linear_fc2.weight",
+            "decoder.layers.3.input_layernorm.weight",
+            "decoder.layers.3.self_attention.linear_proj.weight",
+            "decoder.layers.3.self_attention.linear_qkv.weight",
+            "decoder.layers.3.pre_mlp_layernorm.weight",
+            "decoder.layers.3.mlp.linear_fc1.weight",
+            "decoder.layers.3.mlp.linear_fc2.weight",
+            "decoder.final_layernorm.weight",
+            "output_layer.weight"
+          ],
+          "state_dict_keys": [
+            "embedding.word_embeddings.weight",
+            "embedding.position_embeddings.weight",
+            "decoder.layers.0.input_layernorm.weight",
+            "decoder.layers.0.self_attention.linear_proj.weight",
+            "decoder.layers.0.self_attention.linear_proj._extra_state",
+            "decoder.layers.0.self_attention.linear_qkv.weight",
+            "decoder.layers.0.self_attention.linear_qkv._extra_state",
+            "decoder.layers.0.pre_mlp_layernorm.weight",
+            "decoder.layers.0.mlp.linear_fc1.weight",
+            "decoder.layers.0.mlp.linear_fc1._extra_state",
+            "decoder.layers.0.mlp.linear_fc2.weight",
+            "decoder.layers.0.mlp.linear_fc2._extra_state",
+            "decoder.layers.1.input_layernorm.weight",
+            "decoder.layers.1.self_attention.linear_proj.weight",
+            "decoder.layers.1.self_attention.linear_proj._extra_state",
+            "decoder.layers.1.self_attention.linear_qkv.weight",
+            "decoder.layers.1.self_attention.linear_qkv._extra_state",
+            "decoder.layers.1.pre_mlp_layernorm.weight",
+            "decoder.layers.1.mlp.linear_fc1.weight",
+            "decoder.layers.1.mlp.linear_fc1._extra_state",
+            "decoder.layers.1.mlp.linear_fc2.weight",
+            "decoder.layers.1.mlp.linear_fc2._extra_state",
+            "decoder.layers.2.input_layernorm.weight",
+            "decoder.layers.2.self_attention.linear_proj.weight",
+            "decoder.layers.2.self_attention.linear_proj._extra_state",
+            "decoder.layers.2.self_attention.linear_qkv.weight",
+            "decoder.layers.2.self_attention.linear_qkv._extra_state",
+            "decoder.layers.2.pre_mlp_layernorm.weight",
+            "decoder.layers.2.mlp.linear_fc1.weight",
+            "decoder.layers.2.mlp.linear_fc1._extra_state",
+            "decoder.layers.2.mlp.linear_fc2.weight",
+            "decoder.layers.2.mlp.linear_fc2._extra_state",
+            "decoder.layers.3.input_layernorm.weight",
+            "decoder.layers.3.self_attention.linear_proj.weight",
+            "decoder.layers.3.self_attention.linear_proj._extra_state",
+            "decoder.layers.3.self_attention.linear_qkv.weight",
+            "decoder.layers.3.self_attention.linear_qkv._extra_state",
+            "decoder.layers.3.pre_mlp_layernorm.weight",
+            "decoder.layers.3.mlp.linear_fc1.weight",
+            "decoder.layers.3.mlp.linear_fc1._extra_state",
+            "decoder.layers.3.mlp.linear_fc2.weight",
+            "decoder.layers.3.mlp.linear_fc2._extra_state",
+            "decoder.final_layernorm.weight",
+            "output_layer.weight",
+            "output_layer._extra_state"
+          ],
+          "layers": 4,
+          "hidden_size": 512,
+          "vocab_size": 4096,
+          "bf16": true,
+          "fp16": false
+        },
+        "adapter": {
+          "enabled": true,
+          "active": true,
+          "provenance_verified": true,
+          "candidate_sha256": "9b22e12b4744b2a41b9209faa280e361e6defe1d5480f5e5683fddd247b7f493",
+          "candidate_expected_sha256": "9b22e12b4744b2a41b9209faa280e361e6defe1d5480f5e5683fddd247b7f493",
+          "runtime_world_size": 1,
+          "verified_devices": {
+            "0": "Iluvatar BI-V150"
+          },
+          "config_at_installation": {
+            "num_layers": 4,
+            "hidden_size": 512,
+            "num_attention_heads": 8,
+            "ffn_hidden_size": 2048,
+            "bf16": true,
+            "fp16": false,
+            "normalization": "RMSNorm",
+            "layernorm_epsilon": 1e-05,
+            "hidden_dropout": 0.0,
+            "attention_dropout": 0.0,
+            "add_bias_linear": false,
+            "tensor_model_parallel_size": 1,
+            "pipeline_model_parallel_size": 1,
+            "context_parallel_size": 1
+          },
+          "counts": {
+            "ce_candidate_calls": 120,
+            "ce_native_calls": 0,
+            "residual_native_calls": 480,
+            "fallback_reasons": {}
+          },
+          "observations": [
+            {
+              "logits_shape": [
+                256,
+                2,
+                4096
+              ],
+              "logits_dtype": "torch.bfloat16",
+              "loss_shape": [
+                256,
+                2
+              ],
+              "loss_dtype": "torch.float32",
+              "autocast": false
+            },
+            {
+              "logits_shape": [
+                256,
+                2,
+                4096
+              ],
+              "logits_dtype": "torch.bfloat16",
+              "loss_shape": [
+                256,
+                2
+              ],
+              "loss_dtype": "torch.float32",
+              "autocast": false
+            },
+            {
+              "logits_shape": [
+                256,
+                2,
+                4096
+              ],
+              "logits_dtype": "torch.bfloat16",
+              "loss_shape": [
+                256,
+                2
+              ],
+              "loss_dtype": "torch.float32",
+              "autocast": false
+            },
+            {
+              "logits_shape": [
+                256,
+                2,
+                4096
+              ],
+              "logits_dtype": "torch.bfloat16",
+              "loss_shape": [
+                256,
+                2
+              ],
+              "loss_dtype": "torch.float32",
+              "autocast": false
+            }
+          ],
+          "scope": "CE-only candidate API; residual/RMSNorm remain native. Counts are not compiled-launch proof."
+        },
+        "raw_sha256": {
+          "command.json": "41ee72ab0fed6573d740bf4ad570fb9e67a5fae1418b7f2355fc1a1dc86212a5",
+          "entry.json": "3edf580eabcda724aee30c386244a28cdf487e541e3acabbac1c552c29b7e469",
+          "stdout.log": "ec5d36819123f8dd93f969225df8e3742b044a831bcf0a89fa4e2c8c1ed06ad0",
+          "stderr.log": "751f6986c317f736d6cd818123f3421ed612246ebba5ff9742bb75b882db7f42"
+        }
+      },
+      "candidate_vs_control_throughput_ratio": 0.960847806888431,
+      "control_vs_same_native_ratio": 1.0582107843137254
+    },
+    {
+      "seed": 26014,
+      "control": {
+        "case": "optimized-0009-wide-control-perf-26014",
+        "mode": "optimized",
+        "seed": 26014,
+        "mean_iteration_ms": 33.08,
+        "tokens_per_second": 15477.629987908102,
+        "intervals": [
+          {
+            "iteration": 1,
+            "total_iterations": 120,
+            "line_number": 924,
+            "raw_line": " [2026-10-03 17:42:42.258461] iteration        1/     120 | consumed samples:            2 | elapsed time per iteration (ms): 575.3 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.405092E+00 | loss scale: 1.0 | grad norm: 4.744 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": false,
+            "kind": "startup_first_iteration",
+            "mean_iteration_ms": 575.3,
+            "lm_loss": 8.405092,
+            "consumed_samples": 2,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 10,
+            "total_iterations": 120,
+            "line_number": 936,
+            "raw_line": " [2026-10-03 17:42:42.626839] iteration       10/     120 | consumed samples:           20 | elapsed time per iteration (ms): 94.3 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.412756E+00 | loss scale: 1.0 | grad norm: 4.808 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": false,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 94.3,
+            "lm_loss": 8.412756,
+            "consumed_samples": 20,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 20,
+            "total_iterations": 120,
+            "line_number": 948,
+            "raw_line": " [2026-10-03 17:42:43.035103] iteration       20/     120 | consumed samples:           40 | elapsed time per iteration (ms): 40.8 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.413058E+00 | loss scale: 1.0 | grad norm: 4.856 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": false,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 40.8,
+            "lm_loss": 8.413058,
+            "consumed_samples": 40,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 30,
+            "total_iterations": 120,
+            "line_number": 949,
+            "raw_line": " [2026-10-03 17:42:43.400361] iteration       30/     120 | consumed samples:           60 | elapsed time per iteration (ms): 36.5 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.405544E+00 | loss scale: 1.0 | grad norm: 5.565 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 36.5,
+            "lm_loss": 8.405544,
+            "consumed_samples": 60,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 40,
+            "total_iterations": 120,
+            "line_number": 950,
+            "raw_line": " [2026-10-03 17:42:43.768004] iteration       40/     120 | consumed samples:           80 | elapsed time per iteration (ms): 36.7 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.381517E+00 | loss scale: 1.0 | grad norm: 4.605 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 36.7,
+            "lm_loss": 8.381517,
+            "consumed_samples": 80,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 50,
+            "total_iterations": 120,
+            "line_number": 951,
+            "raw_line": " [2026-10-03 17:42:44.103191] iteration       50/     120 | consumed samples:          100 | elapsed time per iteration (ms): 33.5 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.377846E+00 | loss scale: 1.0 | grad norm: 4.729 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 33.5,
+            "lm_loss": 8.377846,
+            "consumed_samples": 100,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 60,
+            "total_iterations": 120,
+            "line_number": 952,
+            "raw_line": " [2026-10-03 17:42:44.424527] iteration       60/     120 | consumed samples:          120 | elapsed time per iteration (ms): 32.1 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.375030E+00 | loss scale: 1.0 | grad norm: 4.926 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 32.1,
+            "lm_loss": 8.37503,
+            "consumed_samples": 120,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 70,
+            "total_iterations": 120,
+            "line_number": 953,
+            "raw_line": " [2026-10-03 17:42:44.740546] iteration       70/     120 | consumed samples:          140 | elapsed time per iteration (ms): 31.6 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.352553E+00 | loss scale: 1.0 | grad norm: 5.061 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 31.6,
+            "lm_loss": 8.352553,
+            "consumed_samples": 140,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 80,
+            "total_iterations": 120,
+            "line_number": 954,
+            "raw_line": " [2026-10-03 17:42:45.076139] iteration       80/     120 | consumed samples:          160 | elapsed time per iteration (ms): 33.5 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.324683E+00 | loss scale: 1.0 | grad norm: 4.647 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 33.5,
+            "lm_loss": 8.324683,
+            "consumed_samples": 160,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 90,
+            "total_iterations": 120,
+            "line_number": 955,
+            "raw_line": " [2026-10-03 17:42:45.389006] iteration       90/     120 | consumed samples:          180 | elapsed time per iteration (ms): 31.3 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.324388E+00 | loss scale: 1.0 | grad norm: 4.717 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 31.3,
+            "lm_loss": 8.324388,
+            "consumed_samples": 180,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 100,
+            "total_iterations": 120,
+            "line_number": 956,
+            "raw_line": " [2026-10-03 17:42:45.696967] iteration      100/     120 | consumed samples:          200 | elapsed time per iteration (ms): 30.8 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.327599E+00 | loss scale: 1.0 | grad norm: 5.367 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 30.8,
+            "lm_loss": 8.327599,
+            "consumed_samples": 200,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 110,
+            "total_iterations": 120,
+            "line_number": 957,
+            "raw_line": " [2026-10-03 17:42:46.017451] iteration      110/     120 | consumed samples:          220 | elapsed time per iteration (ms): 32.0 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.293392E+00 | loss scale: 1.0 | grad norm: 4.599 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 32.0,
+            "lm_loss": 8.293392,
+            "consumed_samples": 220,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          },
+          {
+            "iteration": 120,
+            "total_iterations": 120,
+            "line_number": 958,
+            "raw_line": " [2026-10-03 17:42:46.345324] iteration      120/     120 | consumed samples:          240 | elapsed time per iteration (ms): 32.8 | learning rate: 1.000000E-03 | global batch size:     2 | lm loss: 8.311632E+00 | loss scale: 1.0 | grad norm: 4.832 | number of skipped iterations:   0 | number of nan iterations:   0 |",
+            "retained": true,
+            "kind": "logged_interval",
+            "mean_iteration_ms": 32.8,
+            "lm_loss": 8.311632,
+            "consumed_samples": 240,
+            "global_batch_size": 2,
+            "skipped_iterations": 0,
+            "nan_iterations": 0
+          }
+        ],
+        "whole_process_seconds": 21.04858864704147,
+        "started_utc": "2026-10-03T09:42:29.549331+00:00",
+        "finished_utc": "2026-10-03T09:42:50.598041+00:00",
+        "model": {
+          "class": "megatron.core.models.gpt.gpt_model.GPTModel",
+          "parameters": 16912896,
+          "parameter_names": [
+            "embedding.word_embeddings.weight",
+            "embedding.position_embeddings.weight",
+            "decoder.layers.0.input_layernorm.weight",
+            "decoder.layers.0.self_attention.linear_proj.weight",
+            "decoder.layers.0.self_attention.linear_qkv.weight",
+            "decoder.layers.0.pre_mlp_layernorm.weight",
+            "decoder.layers.0.mlp.linear_fc1.weight",
+            "decoder.layers.0.mlp.linear_fc2.weight",
+            "decoder.layers.1.input_layernorm.weight",
+            "decoder.layers.1.self_attention.linear_proj.weight",
+            "decoder.layers.1.self_attention.linear_qkv.weight",
+            "decoder.layers.1.pre_mlp_layernorm.weight",
+            "decoder.layers.1.mlp.linear_fc1.weight",
+            "decoder.layers.1.mlp.linear_fc2.weight",
+            "decoder.layers.2.input_layernorm.weight",
+            "decoder.layers.2.self_attention.linear_proj.weight",
+            "decoder.layers.2.self_attention.linear_qkv.weight",
+            "decoder.layers.2.pre_mlp_layernorm.weight",
+            "decoder.layers.2.mlp.linear_fc1.weight",
+            "decoder.layers.2.mlp.linear_fc2.weight",
+            "decoder.layers.3.input_layernorm.weight",
+            "decoder.layers.3.self_attention.linear_proj.weight",
+            "decoder.layers.3.self_attention.linear_qkv.weight",
+            "decoder.layers.3.pre_mlp_layernorm.weight",
+            "decoder.layers.3.mlp.linear_fc1.weight",
+            "decoder.layers.3.mlp.linear_fc2.weight",
+            "decoder.final_layernorm.weight",
+            "output_layer.weight"
+          ],
+          "state_dict_keys": [
+            "embedding.word_embeddings.weight",
+            "embedding.position_embeddings.weight",
+            "decoder.layers.0.input_layernorm.weight",
+            "decoder.layers.0.self_attention.linear_proj.weight",
+            "decoder.layers.0.self_attention.linear_proj._extra_state",
+            "decoder.layers.0.self_attention.linear_qkv.weight",
+            "decoder.layers.0.self_attention.linear_qkv._extra_state",
+            "decoder.layers.0.pre_mlp_layernorm.weight",
+            "decoder.layers.0.mlp.linear_fc1.weight",
+            "decoder.layers.0.mlp.linear_fc1._extra_state",
+            "decoder.layers.0.mlp.linear_fc2.weight",
+            "decoder.layers.0.mlp.linear_fc2._extra_state",
+            "decoder.layers.1.input_layernorm.weight",
+            "decoder.layers.1.self_attention.linear_proj.weight",
+            "decoder.layers.1.self_attention.linear_proj._extra_state",
+            "decoder.layers.1.self_attention.linear_qkv.weight",
+            "decoder.layers.1.self_attention.linear_qkv._extra_state",
+            "decoder.layers.1.pre_mlp_layernorm.weight",
+            "decoder.layers.1.mlp.linear_fc1.weight",
+            "decoder.layers.1.mlp.linear_fc1._extra_state",
+            "decoder.layers.1.mlp.linear_fc2.weight",
+            "decoder.layers.1.mlp.linear_fc2._extra_state",
+            "decoder.layers.2.input_layernorm.weight",
+            "decoder.layers.2.self_attention.linear_proj.weight",
+            "decoder.layers.2.self_attention.linear_proj._extra_state",
+            "decoder.layers.2.self_attention.linear_qkv.weight",
+            "decoder.layers.2.self_attention.linear_qkv._extra_state",
+            "decoder.layers.2.pre_mlp_layernorm.weight",
+            "decoder.layers.2.mlp.linear_fc1.weight",
+            "decoder.layers.2.mlp.linear_fc1._extra_state",
+            "decoder.layers.2.mlp.linear_fc2.weight",
+            "decoder.layers.2.mlp.linear_fc2._extra_state",
+            "decoder.layers.3.input_layernorm.weight",
+            "decoder.layers.3.self_attention.linear_proj.weight",
+            "decoder.layers.3.self_attention.linear_proj._extra_state",
+            "decoder.layers.3.self_attention.linear_qkv.weight",
+            "decoder.layers.3.self_attention.linear_qkv._extra_state",
+            "decoder.layers.3.pre_mlp_layernorm.weight",
+            "decoder.layers.3.mlp.linear_fc1.weight",
+            "decoder.layers.3.mlp.linear_fc1._extra_state",
+            "decoder.layers.3.mlp.linear_fc2.weight",
+            "decoder.layers.3.mlp.linear_fc2._extra_state",
+            "decoder.final_layernorm.weight",
+            "output_layer.weight",
+            "output_layer._extra_state"
+          ],
+          "layers": 4,
+          "hidden_size": 512,
+          "vocab_size": 4096,
+          "bf16": true,
+          "fp16": false
+        },
+        "adapter": {
+          "enabled": true,
+          "active": true,
+          "provenance_verified": true,
+          "candidate_sha256": "9b22e12b4744b2a41b9209faa280e361e6defe1d5480f5e5683fddd247b7f493",
+          "candidate_expected_sha256": "9b22e12b4744b2a41b9209faa280e361e6defe1d5480f5e5683fddd247b7f493",
+          "runtime_world_size": 1,
+          "verified_devices": {
+            "0": "Iluvatar BI-V150"
+          },
+          "config_at_installation": {
+            "num_layers": 4,
+            "hidden_size": 512,
+            "num_attention_heads": 8,
+            "ffn_hidden_size": 2048,
+            "bf16": true,
+            "fp16": false,
+            "normalization": "RMSNorm",
+            "layernorm_epsilon": 1e-05,
+            "hidden_dropout": 0.0,
+            "attention_dropout": 0.0,
+            "add_bias_linear": false,
+            "tensor_model_parallel_size": 1,
+            "pipeline_model_parallel_size": 1,
+            "context_parallel_size": 1
+          },
+          "counts": {
+            "ce_candidate_calls": 120,
+            "ce_native_calls": 0,
+            "residual_native_calls": 480,
+            "fallback_reasons": {}
+          },
+          "observations": [
+            {
+              "logits_shape": [
+                256,
+                2,
+                4096
+              ],
+              "logits_dtype": "torch.bfloat16",
+              "loss_shape": [
+                256,
+                2
+              ],
+              "loss_dtype": "torch.float32",
+              "autocast": false
+            },
+            {
+              "logits_shape": [
+                256,
+                2,
+                4096
+              ],
+              "logits_dtype": "torch.bfloat16",
+              "loss_shape": [
+                256,
+                2
+              ],
+              "loss_dtype": "torch.float32",
+              "autocast": false
+            },
+            {
+              "logits_shape": [
+                256,
+                2,
+                4096
+              ],
+              "logits_dtype": "torch.bfloat16",
+              "loss_shape": [
+                256,
+                2
+              ],
+              "loss_dtype": "torch.float32",
+              "autocast": false
+            },
+            {
+              "logits_shape": [
+                256,
+                2,
+                4096
+              ],
+              "logits_dtype": "torch.bfloat16",
+              "loss_shape": [
+                256,
+                2
+              ],
+              "loss_dtype": "torch.float32",
+              "autocast": false
+            }
+          ],
+          "scope": "CE-only candidate API; residual/RMSNorm remain native. Counts are not compiled-launch proof."
+        },
+        "raw_sha256": {
+          "command.json": "f02ad9917c962d9a9e454199ad8a44396f008777136132eb7b3363df2672d113",
+          "entry.json": "43dfe6da80296f78d290291208110a925ee540c11849ade1c953f420d44b0f39",
+          "stdout.log": "e82e4d1ce1a0dd791a37d383a15b9526ec78272f0ebdda72508209ba2712282c",
+          "stderr.log": "14dac6b0a96710330329482f7f894b2f61cbe20498d4d831625161619e1c8c0c"
+        }
+      },
+      "candidate_vs_control_throughput_ratio": 0.9816023738872403,
+      "control_vs_same_native_ratio": 1.0541112454655381
+    }
+  ],
+  "candidate_vs_control_geomean": 1.0280267446530964,
+  "all_seeds_faster_than_control": false,
+  "native_geomean": 1.0306404917826213,
+  "metric": "Three sequential fresh process arms per seed; same formal native interval timer, model, data, optimizer and source hashes. Not confidence interval evidence."
+}

@@ -1,0 +1,101 @@
+--- 0008
++++ 0009
+@@ -17,8 +17,9 @@
+ 
+ 
+ @triton.jit
+-def _ce_backward_kernel(PROB, TARGET, GRAD_OUTPUT, DLOGITS,
+-                        V: tl.constexpr, BLOCK: tl.constexpr):
++def _ce_backward_kernel(PROB, TARGET, GRAD_OUTPUT, DLOGITS, DLOGITS_BF16,
++                        V: tl.constexpr, BLOCK: tl.constexpr,
++                        CAST: tl.constexpr):
+     row = tl.program_id(0)
+     col = tl.arange(0, BLOCK)
+     mask = col < V
+@@ -34,28 +35,41 @@
+     # native grad -= softmax_update; grad.mul_(grad_output). mul(sub(.), .) has
+     # no add-of-product so no FMA contraction applies; enable_fp_fusion=False is
+     # belt-and-suspenders.
+-    tl.store(DLOGITS + offset, (prob - onehot) * grad_output, mask=mask)
++    dgrad = (prob - onehot) * grad_output
++    # Overwrite the saved FP32 probability buffer in place, exactly as native
++    # mutates its softmax storage, for every dtype.
++    tl.store(DLOGITS + offset, dgrad, mask=mask)
++    if CAST:
++        # BF16-only: round the SAME FP32 dgrad to BF16 with the default RNE,
++        # matching the CoreX native cast autograd would otherwise launch, and
++        # write it to the separate BF16 output so autograd does not recast.
++        tl.store(DLOGITS_BF16 + offset, dgrad.to(tl.bfloat16), mask=mask)
+ 
+ 
+-def _launch_ce_backward(prob, target, grad_output, dlogits, vocab, rows):
++def _launch_ce_backward(prob, target, grad_output, dlogits, dlogits_bf16,
++                        vocab, rows, cast):
+     block = triton.next_power_of_2(vocab)
+-    key = ('ce_backward', prob.device.index, vocab, block,
+-           _alignment(prob, target, grad_output, dlogits))
++    key = ('ce_backward', prob.device.index, vocab, block, bool(cast),
++           dlogits_bf16.dtype,
++           _alignment(prob, target, grad_output, dlogits, dlogits_bf16))
+     compiled = _COMPILED_KERNELS.get(key)
+     if compiled is None:
+         try:
+             compiled = _ce_backward_kernel[(rows,)](
+-                prob, target, grad_output, dlogits, V=vocab, BLOCK=block,
++                prob, target, grad_output, dlogits, dlogits_bf16,
++                V=vocab, BLOCK=block, CAST=cast,
+                 num_warps=4, enable_fp_fusion=False,
+             )
+         except TypeError:
+             compiled = _ce_backward_kernel[(rows,)](
+-                prob, target, grad_output, dlogits, V=vocab, BLOCK=block,
++                prob, target, grad_output, dlogits, dlogits_bf16,
++                V=vocab, BLOCK=block, CAST=cast,
+                 num_warps=4,
+             )
+         _COMPILED_KERNELS[key] = compiled
+     else:
+-        compiled[(rows, 1, 1)](prob, target, grad_output, dlogits)
++        compiled[(rows, 1, 1)](prob, target, grad_output, dlogits,
++                               dlogits_bf16)
+ 
+ 
+ class _NativeForwardFusedBackwardCrossEntropy(torch.autograd.Function):
+@@ -91,17 +105,33 @@
+         ctx.save_for_backward(exp_logits, target)
+         ctx.vocab = partition_vocab_size
+         ctx.rows = logits_2d.size()[0]
++        # Record the original input dtype so backward restricts the fused
++        # FP32->BF16 cast to BF16 inputs and leaves all other dtypes on the
++        # parent 0008 path.
++        ctx.input_dtype = logits.dtype
+         return loss
+ 
+     @staticmethod
+     def backward(ctx, grad_output):
+         probabilities, target = ctx.saved_tensors
+         grad_output = grad_output.contiguous()
+-        # Reuse the saved FP32 softmax storage as the gradient buffer, exactly as
+-        # native overwrites its softmax in place; autograd casts the FP32 dlogits
+-        # to the BF16 logits dtype.
++        if ctx.input_dtype == torch.bfloat16:
++            # BF16 training: fuse the FP32->BF16 dlogits cast into the backward
++            # kernel. Still overwrite the FP32 probability buffer in place
++            # (native mutation) and additionally emit a rounded BF16 gradient,
++            # returned directly so autograd performs no extra cast launch.
++            dlogits_bf16 = torch.empty_like(probabilities,
++                                            dtype=torch.bfloat16)
++            _launch_ce_backward(probabilities, target, grad_output,
++                                probabilities, dlogits_bf16, ctx.vocab,
++                                ctx.rows, cast=True)
++            return dlogits_bf16, None
++        # Parent 0008 path for FP32 (and any non-BF16) input: reuse the saved
++        # FP32 softmax storage as the gradient buffer and let autograd cast the
++        # returned FP32 dlogits to the logits dtype. The BF16 output pointer is
++        # a dummy alias that CAST=False never stores to.
+         _launch_ce_backward(probabilities, target, grad_output, probabilities,
+-                            ctx.vocab, ctx.rows)
++                            probabilities, ctx.vocab, ctx.rows, cast=False)
+         return probabilities, None
+ 
+ 

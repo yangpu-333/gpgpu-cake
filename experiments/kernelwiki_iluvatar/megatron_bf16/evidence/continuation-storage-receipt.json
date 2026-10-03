@@ -1,0 +1,1 @@
+{"target": "/tmp/kda-bf16-continuation", "native_files": 600, "native_commit": "5be9626709af2722333bf54797c954c09edeada3", "reason": "100GB NFS volume full; no existing user data removed. New evidence/checkpoints use Pod-local overlay; all three trial arms share identical clone."}

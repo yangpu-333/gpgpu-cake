@@ -1,0 +1,18 @@
+{
+  "status": "verified",
+  "rows": {
+    "native-profile-01": {
+      "events_sha256": "2a92493d5499dc4882aa3cbaa469aa61b3e027a7b428ac271bf0ab35f3d3dd79",
+      "trace_sha256": "b41a18b1e8fdd97c80515983c73b7a74e058ffcf75c6aba7f7d317612701a6a8",
+      "ce_shape_to_copy_count": 6,
+      "ce_backward_kernel_gpu_events": 0
+    },
+    "optimized-0009-profile-01": {
+      "events_sha256": "b82d4fe61a782b5072052f005769e43acddd514d8445a33e4231ccef502e1608",
+      "trace_sha256": "daabf1bf803532eb5c173ed871a90dfdea04f6f212dc428893543617d8e2c34a",
+      "ce_shape_to_copy_count": 3,
+      "ce_backward_kernel_gpu_events": 3
+    }
+  },
+  "scope": "Separate diagnostic CPU/CUDA Kineto profile; three active native formal training steps. CE-shape conversion op count6->3 and three actual Triton backward GPU events support execution/cast removal, not speed attribution or final machine instruction equivalence."
+}

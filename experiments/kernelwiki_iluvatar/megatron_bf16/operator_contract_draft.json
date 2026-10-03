@@ -1,0 +1,160 @@
+{
+  "schema": "megatron-bf16-operator-draft-v1",
+  "status": "proposed_not_executed",
+  "date": "2026-10-03",
+  "purpose": "Record source-backed BF16 semantics and proposed native-operator probes before any new BF16 candidate or final training contract is frozen.",
+  "not_a_training_contract": true,
+  "not_an_acceptance_gate": true,
+  "scope": "Same small local-backend Megatron GPT shapes as the previous experiments; native --bf16 Float16Module differs from CUDA autocast.",
+  "provenance": {
+    "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
+    "candidate_0006_sha256": "4a5c2180114396412b1c99907837ab970b2a9efdffe85e0a46f5527cc0790201",
+    "native_source_hash_method": "SHA256 of exact pinned Git blobs, read locally with git show; no remote process or external model API was invoked.",
+    "native_sources_sha256": {
+      "megatron/core/tensor_parallel/cross_entropy.py": "136feeeb3234d3d9d0e8b4fb91d82e88d4cb951e50f2a4d85ee6a5e0974b7f5d",
+      "megatron/core/transformer/torch_norm.py": "98259df6a9f8ad565160731e322c7b7b4f9b222fac2e459cd3610c0cbdad34dc",
+      "megatron/core/fusions/fused_bias_dropout.py": "897e60739d918ec917f7a8bfc578ac82a5a413f3bb80314a747a18d69c7b95df",
+      "megatron/core/transformer/module.py": "4c6a05aaa1a64ad9c5c4fa8dc2e38a9dc3d93244448c1f6deb7515838c866287",
+      "megatron/core/transformer/transformer_layer.py": "8a55711d060b5ea3b3cffec6ade4583d4c684980518ce71a5c61d7fcb1ab9227",
+      "megatron/core/models/common/embeddings/language_model_embedding.py": "84c6d292c11dc31d26c805f21a07096ea15c4d9b6371acb302e4c8bfb66505c7",
+      "megatron/core/transformer/transformer_config.py": "3b0843377e6c827b1e2e389edec30392d3c288ab5c58d168167d0c85a26949ee",
+      "megatron/training/training.py": "d968ef8216f63d6373372190ac895fc905234c116bba3e804d2951876e6ad98c"
+    },
+    "archived_evidence": [
+      "../megatron_cc/higher_gain/evidence/0006-final/autocast-24006.json",
+      "../megatron_cc/higher_gain/evidence/0006-dispatch-audit.json",
+      "../megatron_cc/higher_gain/evidence/0006-final/ce-24002.json",
+      "../megatron_cc/higher_gain/evidence/0006-final/residual-24002.json"
+    ]
+  },
+  "established_facts": [
+    {
+      "claim": "The formal --bf16 entry wraps the model with Float16Module, which calls module.bfloat16(), converting norm weights along with the other model parameters. This wrapper does not itself enter a CUDA autocast context.",
+      "source": "megatron/training/training.py:1821; megatron/core/transformer/module.py:436,464,512",
+      "confidence": "verified_source"
+    },
+    {
+      "claim": "fp32_residual_connection defaults to false. Only the explicitly enabled flag promotes the embedding/residual stream to FP32. Actual local-backend compatibility of that extra flag with BF16 norm/linear weights still requires a native runtime probe.",
+      "source": "megatron/core/transformer/transformer_config.py:187; megatron/core/models/common/embeddings/language_model_embedding.py:135; megatron/core/transformer/transformer_layer.py:639,841",
+      "confidence": "verified_source_with_runtime_limit"
+    },
+    {
+      "claim": "Native training BDA casts x to residual.dtype when needed, performs dropout(p=0) and residual addition without modifying the original x/residual inputs. With BF16 residual, the summed tensor is stored in BF16 before the following RMSNorm reads it.",
+      "source": "megatron/core/fusions/fused_bias_dropout.py:_bias_dropout_add_func",
+      "confidence": "verified_source"
+    },
+    {
+      "claim": "The local norm is torch.nn.RMSNorm. Megatron does not specify the vendor binary's internal RMSNorm accumulation, intermediate casts or backward reduction ordering in its wrapper. A mathematical FP32 RMS formula is not an authoritative native-rounding reference.",
+      "source": "megatron/core/transformer/torch_norm.py:WrappedTorchNorm",
+      "confidence": "verified_source_runtime_rounding_pending"
+    },
+    {
+      "claim": "0006 fused residual/RMSNorm accepts only FP32 residual and FP32 weight outside autocast; all CUDA autocast calls take the native fallback. Formal default BF16 residual plus BF16 weight is outside its fused scope.",
+      "source": "../megatron_cc/higher_gain/candidates/0006/candidate.py:193,223,231",
+      "confidence": "verified_source"
+    },
+    {
+      "claim": "Native CE first calls logits.float(). FP32 logits share the native probability/gradient storage and are modified in forward and backward. BF16 logits get a separate FP32 buffer and must remain exactly unchanged. Native loss is FP32; autograd casts the returned FP32 dlogits to the original logits dtype.",
+      "source": "megatron/core/tensor_parallel/cross_entropy.py:20,42,62,77,114; archived0006CE driver mutation checks",
+      "confidence": "verified_source_and_archived_evidence"
+    },
+    {
+      "claim": "0006 CE selects Triton outside CUDA autocast even when logits are BF16, using logits.float() for its probability storage. Under CUDA autocast it selects the native-equivalent Torch branch.",
+      "source": "../megatron_cc/higher_gain/candidates/0006/candidate.py:345,354,483",
+      "confidence": "verified_source"
+    },
+    {
+      "claim": "Old autocast model observations were xBF16/residualFP32/weightFP32/normalizedFP32, not formal full-BF16 weights. Old residual matrices did not convert the norm weights to BF16. Old CE nonautocast BF16 matrix seed24002 had168 finite passed cases and42 native layout-error compatibility cases; that supports standalone CE only.",
+      "source": "../megatron_cc/benchmark.py:127,265; archived0006autocast andCE evidence",
+      "confidence": "verified_archived_evidence"
+    },
+    {
+      "claim": "For TP1 and zero smoothing, out-of-range int64 targets, including -100, are not ignore_index: the predicted term is zero and the backward is softmax times upstream gradient. Singleton MAX/SUM all-reduces are identity operations.",
+      "source": "megatron/core/tensor_parallel/cross_entropy.py:42,102,127",
+      "confidence": "verified_source"
+    }
+  ],
+  "first_native_formal_capture": {
+    "before_assuming_any_optimized_scope": true,
+    "configuration": ["bf16", "fp16", "fp32_residual_connection", "params_dtype", "pipeline_dtype", "cross_entropy_loss_fusion", "TP/PP/CP/world sizes"],
+    "runtime": ["torch/CoreX/Triton build", "GPU name", "CUDA autocast enabled and autocast dtype at each operator", "Float16Module wrapping and underlying GPT model class"],
+    "per_layer_tensors": ["attention BDA x and residual", "pre_mlp RMSNorm input, weight and output", "BDA summed output", "backward dx, dresidual and dweight"],
+    "ce_tensors": ["logits[S,B,V] before and after forward", "target[S,B]", "loss[S,B]", "upstream dloss", "dlogits", "original logits again after backward"],
+    "metadata_for_every_tensor": ["shape", "dtype", "device", "stride", "contiguous", "requires_grad", "storage alias observations"],
+    "training_state": ["parameter dtype after Float16Module conversion", "main_grad dtype", "optimizer FP32 main/master parameter dtype where present", "saved gradient and post-update parameter inventories"],
+    "expected_primary_shape_not_yet_observed": {
+      "residual_and_norm": [128, 2, 512],
+      "norm_weight": [512],
+      "logits": [128, 2, 1024],
+      "targets_and_operator_loss": [128, 2],
+      "model_labels_and_model_loss": [2, 128]
+    }
+  },
+  "proposed_operator_probes": [
+    {
+      "id": "native-full-bf16-residual-rmsnorm",
+      "baseline": "Pinned native get_bias_dropout_add(training=True,fused=False)((x,None),residual,0), then the same vendor torch.nn.RMSNorm with weight explicitly BF16 and epsilon1e-5.",
+      "primary_shape": [128, 2, 512],
+      "dtypes": {"x": "BF16", "residual": "BF16", "weight": "BF16"},
+      "cuda_autocast": false,
+      "values": ["seeded random scales0.001,1,100", "allzero", "cancelling residual+x", "values bracketing BF16 round-to-nearest ties", "BF16 weight ones,zeros,random signed and rounding-boundary values"],
+      "upstream_modes": ["normalized output only", "summed residual only", "both outputs with independent signed/zero gradients"],
+      "required_observations": ["native output and all gradient dtypes", "native summed tensor exact values", "rounding difference counts and errors for normalized output/dx/dresidual/dweight", "original inputs and weight unchanged", "None versus zero unused-gradient behavior"],
+      "rounding_hazards": ["RMSNorm must consume the BF16-rounded addition, not the unrounded FP32 sum", "native RMS output multiplication/cast boundaries require probing", "native RMS backward reaches the BF16 summed tensor before its gradient is added to the independent residual-stream gradient"],
+      "comparison": "CPU float64 copies against native values; exact equality for summed output and unchanged inputs; report exact mismatch count, max error and elements outside the existing strict3e-4/1e-3 diagnostic envelope. This draft does not register a tolerance or permit loosening any frozen gate."
+    },
+    {
+      "id": "residual-rmsnorm-dtype-controls",
+      "baseline": "Same native BDA+RMSNorm, retaining each requested dtype and recording native errors rather than inventing mixed-dtype support.",
+      "shape": [128, 2, 512],
+      "dtype_combinations": [
+        ["BF16", "BF16", "BF16"],
+        ["BF16", "FP32", "BF16"],
+        ["BF16", "FP32", "FP32"],
+        ["FP32", "BF16", "BF16"]
+      ],
+      "tuple_order": ["x", "residual", "weight"],
+      "purpose": "Distinguish formal default BF16, explicit FP32 residual and old autocast observations; probe native rounding and error outcomes, not an expanded optimized support promise.",
+      "autocast_control": "Run each requested supported native combination with autocast disabled; separately record enabled-autocast controls without claiming formal BF16 coverage."
+    },
+    {
+      "id": "native-tp1-bf16-cross-entropy",
+      "baseline": "Pinned vocab_parallel_cross_entropy(logits,target,label_smoothing=0,tp_group=the actual singleton TP group).",
+      "primary_shape": [128, 2, 1024],
+      "dtypes": {"logits": "BF16", "targets": "int64", "loss": "observe, nativeFP32", "dlogits": "observe, nativeBF16"},
+      "cuda_autocast": false,
+      "layouts": ["contiguous primary", "last-stride2 native/fallback control", "leading-dimension-transpose native/fallback control"],
+      "values": ["seeded random scales0.001,1,10", "zero logits and ties", "offset10000", "dominant positive/negative1000", "real logits captured from native BF16 forward"],
+      "targets": ["0 andV-1", "-100,-1,V,V+1", "2**32,2**32+16,2**63-1,-2**63"],
+      "upstream_gradients": "FP32 signed, nonuniform and zero elements; a single-row control must use a nonzero upstream gradient.",
+      "checks": ["BF16 original logits bitwise unchanged after forward and backward", "targets bitwise unchanged", "native loss and all dlogits compared on CPU float64", "lossFP32 and dlogitsBF16 dtype equality", "finite native cases separate from matching native error/nonfinite behavior", "no input copies or synchronization inserted in the timed branch"],
+      "controls": ["FP32 input must preserve observable native probability/gradient overwrite", "autocast-enabled branch must remain labeled Torch compatibility if no CE Triton runner executes"],
+      "comparison": "Use the native operator, not F.cross_entropy or an ignore_index reference; retain the existing strict3e-4/1e-3 diagnostics without treating this draft as a final gate."
+    }
+  ],
+  "possible_fusion_paths_not_yet_validated": [
+    {
+      "priority": 1,
+      "proposal": "First screen existing0006 CE against native formal BF16 while retaining native BF16 RMSNorm. This isolates already-tested low-precision CE from the new BF16-weight RMS semantics.",
+      "limit": "Existing formal adapter has FP32 config/weight guards; use a separate opt-in BF16 integration after provenance and native capture, never relabel its silent fallback as fused execution."
+    },
+    {
+      "priority": 2,
+      "proposal": "BF16 CE forward can load BF16 logits directly, promote each lane toFP32 and emit loss plus a separate FP32 probability buffer, eliminating the separate logits.float() cast kernel while preserving the untouched BF16 input.",
+      "backward": "Compute the nativeFP32 probability-minus-onehot and upstream scaling, then explicitly round/store a BF16 dlogits result; verify against native autograd's BF16 cast before claiming a saved cast kernel.",
+      "limit": "Keep TP1, zero smoothing, full int64 range checks, native mutation controls and actual compiled-runner execution evidence; final training equivalence may be stricter than standalone CE."
+    },
+    {
+      "priority": 3,
+      "proposal": "Develop a separate BF16 residual+RMSNorm child only after native rounding probes: explicitly round summed residual toBF16 before reduction, preserve native output/weight multiplication cast boundaries and BF16 gradient accumulation boundaries.",
+      "limit": "A FP32 ideal RMS derivative followed by one final BF16 cast is not established native equivalence. Keep native fallback until per-output and per-gradient probes pass."
+    }
+  ],
+  "remaining_unknowns": [
+    "Actual CoreX torch2.4.1 native RMSNorm BF16 internal cast/accumulation/reduction behavior and resulting full-BF16 gradients.",
+    "Actual formal --bf16 no-autocast operator dtype observations and BF16 optimizer/main_grad/master-parameter behavior in this runtime.",
+    "End-to-end correctness and throughput after any new BF16 branch; old FP32/autocast performance numbers do not establish this result."
+  ],
+  "execution": {"new_gpu_probes_run": 0, "new_formal_bf16_training_runs": 0, "external_model_api_calls": 0},
+  "preservation": "Existing0006, formal-entry sources, previous contracts/verifiers and archived reports remain untouched."
+}

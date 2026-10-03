@@ -1,0 +1,11 @@
+{
+  "candidate_sha256": "b31dfb88325dc19f3856122146bab6e4a643c0d91344b4a0fc194d5d6a50f1f4",
+  "imports": [
+    "math",
+    "torch",
+    "triton",
+    "triton.language"
+  ],
+  "violations": [],
+  "review": "Preserves Torch forward and FP32 probability overwrite; adds BF16 output store and dtype cache key. Candidate compile/bitwise behavior remains subject to fixed runtime matrix/full-training gates."
+}

@@ -1,0 +1,41 @@
+{
+  "status": "completed",
+  "launches": [
+    {
+      "name": "_ce_backward_kernel_0d1d2d3d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_ce_backward_kernel_0d1d2d3d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    }
+  ],
+  "counts": {
+    "_ce_backward_kernel_0d1d2d3d": 2
+  },
+  "scope": "Successful cached CompiledKernel runner invocations during true BF16 formal training; first JIT launches are outside this observer. Separate untimed process. No hardware instruction equivalence claim."
+}

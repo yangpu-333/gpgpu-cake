@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 
-EXPECTED_ARCHITECTURE_COUNTS = {"bi-v150": 22, "sm90": 286, "sm100": 379}
+EXPECTED_ARCHITECTURE_COUNTS = {"bi-v150": 23, "sm90": 286, "sm100": 379}
 
 
 def run(*args):
@@ -57,7 +57,11 @@ def main():
                      "evidence/bi-v150-corex42-stage23/candidates/0003/candidate.py",
                      "sources/experiments/bi-v150-corex42-stage24.md",
                      "wiki/kernels/cross-entropy-megatron-bi-v150.md",
-                     "evidence/bi-v150-corex42-stage24/higher_gain/candidates/0006/candidate.py"):
+                     "evidence/bi-v150-corex42-stage24/higher_gain/candidates/0006/candidate.py",
+                     "sources/experiments/bi-v150-corex42-stage25.md",
+                     "evidence/bi-v150-corex42-stage25/megatron_bf16/candidates/0008/candidate.py",
+                     "evidence/bi-v150-corex42-stage25/megatron_bf16/candidates/0009/candidate.py",
+                     "evidence/bi-v150-corex42-stage25/megatron_bf16/evidence/decision.json"):
         if not (project_skill / relative).is_file():
             raise RuntimeError(f"native Megatron loop evidence missing: {relative}")
     print("KDA project-level skill integration verified")

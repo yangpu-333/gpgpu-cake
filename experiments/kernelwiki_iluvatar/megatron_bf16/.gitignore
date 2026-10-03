@@ -1,0 +1,4 @@
+__pycache__/
+/evidence/**/snapshots/
+/*.tar.gz
+/evidence/raw-backup/*.tar.gz

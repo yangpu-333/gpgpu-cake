@@ -1,0 +1,4 @@
+This is a read-only project-skill loading verification. Do not generate or modify any code. Read exactly these two project skill pages:
+1. .claude/skills/kernelwiki-iluvatar/wiki/kernels/cross-entropy-megatron-bi-v150.md
+2. .claude/skills/kernelwiki-iluvatar/evidence/bi-v150-corex42-stage25/megatron_bf16/evidence/decision.json
+Use the kernelwiki-iluvatar project skill. Return a concise Chinese summary stating: actual BF16 weights vs autocast; baseline and original formal timer; why candidate0007 was rejected despite standalone correctness; what0008 and0009 fuse; the three initial0008 gains and later0009 gains; why0008 remains default; separate three-step full-tensor/master-state audits versus5400 timed steps; residual/RMSNorm and production/multi-GPU limitations. Do not infer a universal speedup or reinterpret NVIDIA hardware claims. Do not read credentials or any unrelated files.

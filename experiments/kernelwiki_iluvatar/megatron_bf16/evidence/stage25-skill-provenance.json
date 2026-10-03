@@ -1,0 +1,24 @@
+{
+  "architectures": {
+    "sm90": {
+      "paths": 286,
+      "same_paths": true,
+      "same_page_bytes": true
+    },
+    "sm100": {
+      "paths": 379,
+      "same_paths": true,
+      "same_page_bytes": true
+    }
+  },
+  "new_bi_paths": [
+    "sources/experiments/bi-v150-corex42-stage25.md"
+  ],
+  "status": "verified",
+  "patch_sha256": "2aed716ee131382c2a222feb828b74af32d99e935b152074e8343d9e8d2ddeb3",
+  "project_loaded_files": 2402,
+  "wiki_pages": 1064,
+  "source_ids": 1001,
+  "asset_bundles": 37,
+  "candidate_ledgers": 14
+}

@@ -1,0 +1,53 @@
+/mnt/kda-biv150-stage3/megatron-native-5be9626/megatron/core/optimizer/__init__.py:25: UserWarning: Transformer Engine and Apex are not installed. Falling back to Torch optimizers.
+  warnings.warn(
+/mnt/kda-biv150-stage3/megatron-native-5be9626/megatron/core/inference/contexts/__init__.py:9: DeprecationWarning: The following imports from `dynamic_context.py` will be removed in this file in `megatron-core` 0.14. The imports here result in a cyclic import issue that causes rotary embeddings to import from Apex rather than Transformer Engine.
+  warnings.warn(
+/mnt/kda-biv150-stage3/megatron-native-5be9626/megatron/core/distributed/fsdp/src/megatron_fsdp/mixed_precision.py:115: UserWarning: Transformer Engine and Apex are not installed. Falling back to local implementations of multi_tensor_applier and multi_tensor_scale
+  warnings.warn(
+/mnt/kda-biv150-stage3/megatron-native-5be9626/megatron/core/optimizer/optimizer.py:29: UserWarning: Transformer Engine and Apex are not installed. Falling back to local implementations of multi_tensor_applier and multi_tensor_scale
+  warnings.warn(
+/mnt/kda-biv150-stage3/megatron-native-5be9626/megatron/core/optimizer/clip_grads.py:32: UserWarning: Transformer Engine and Apex are not installed. Falling back to local implementations of multi_tensor_applier, multi_tensor_l2norm, and multi_tensor_scale
+  warnings.warn(
+2026-10-03 17:12:24.975271: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-10-03 17:12:25.037170: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING:tensorflow:Deprecation warnings have been disabled. Set TF_ENABLE_DEPRECATION_WARNINGS=1 to re-enable them.
+/mnt/kda-biv150-stage3/megatron-native-5be9626/megatron/training/utils/common_utils.py:27: UserWarning: Transformer Engine and Apex are not installed. Falling back to local implementations of multi_tensor_applier and multi_tensor_l2norm
+  warnings.warn(
+/mnt/kda-biv150-stage3/megatron-native-5be9626/megatron/core/models/backends.py:34: UserWarning: Apex is not installed. Falling back to Torch Norm
+  warnings.warn("Apex is not installed. Falling back to Torch Norm")
+/usr/local/corex/lib64/python3/dist-packages/mamba_ssm/ops/selective_scan_interface.py:164: FutureWarning: `torch.cuda.amp.custom_fwd(args...)` is deprecated. Please use `torch.amp.custom_fwd(args..., device_type='cuda')` instead.
+  def forward(ctx, xz, conv1d_weight, conv1d_bias, x_proj_weight, delta_proj_weight,
+/usr/local/corex/lib64/python3/dist-packages/mamba_ssm/ops/selective_scan_interface.py:240: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  def backward(ctx, dout):
+/usr/local/corex/lib64/python3/dist-packages/mamba_ssm/ops/triton/layer_norm.py:986: FutureWarning: `torch.cuda.amp.custom_fwd(args...)` is deprecated. Please use `torch.amp.custom_fwd(args..., device_type='cuda')` instead.
+  def forward(
+/usr/local/corex/lib64/python3/dist-packages/mamba_ssm/ops/triton/layer_norm.py:1045: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  def backward(ctx, dout, *args):
+/usr/local/corex/lib64/python3/dist-packages/mamba_ssm/distributed/tensor_parallel.py:26: FutureWarning: `torch.cuda.amp.custom_fwd(args...)` is deprecated. Please use `torch.amp.custom_fwd(args..., device_type='cuda')` instead.
+  def forward(ctx, x, weight, bias, process_group=None, sequence_parallel=True):
+/usr/local/corex/lib64/python3/dist-packages/mamba_ssm/distributed/tensor_parallel.py:62: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  def backward(ctx, grad_output):
+/usr/local/corex/lib64/python3/dist-packages/mamba_ssm/ops/triton/ssd_combined.py:758: FutureWarning: `torch.cuda.amp.custom_fwd(args...)` is deprecated. Please use `torch.amp.custom_fwd(args..., device_type='cuda')` instead.
+  def forward(ctx, zxbcdt, conv1d_weight, conv1d_bias, dt_bias, A, D, chunk_size, initial_states=None, seq_idx=None, dt_limit=(0.0, float("inf")), return_final_states=False, activation="silu",
+/usr/local/corex/lib64/python3/dist-packages/mamba_ssm/ops/triton/ssd_combined.py:836: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  def backward(ctx, dout, *args):
+/mnt/kda-biv150-stage3/megatron-native-5be9626/megatron/core/extensions/transformer_engine_spec_provider.py:88: UserWarning: Only transformer-engine>=1.7.0 supports MoE experts, but your version is 0.0.0. Use local linear implementation instead.
+  warnings.warn(
+/mnt/kda-biv150-stage3/megatron-native-5be9626/megatron/core/models/gpt/heterogeneous/heterogeneous_layer_specs.py:68: UserWarning: Apex is not installed. Falling back to Torch Norm
+  warnings.warn("Apex is not installed. Falling back to Torch Norm")
+/mnt/kda-biv150-stage3/megatron-native-5be9626/megatron/core/models/gpt/gpt_layer_specs.py:74: UserWarning: Apex is not installed. Falling back to Torch Norm
+  warnings.warn("Apex is not installed. Falling back to Torch Norm")
+/mnt/kda-biv150-stage3/megatron-native-5be9626/megatron/training/utils/common_utils.py:454: UserWarning: Overriding default arguments for tokenizer_type:GPT2BPETokenizer with tokenizer_type:NullTokenizer
+  warnings.warn(message)
+/mnt/kda-biv150-stage3/megatron-native-5be9626/megatron/training/training.py:1131: UserWarning: Limited support for torch.double is provided currently. As for how to resolve the warning, contact Iluvatar application engineers. (Triggered internally at /home/corex/sw_home/apps/pytorch/aten/src/ATen/native/cuda/Copy.cu:372.)
+  program_start_global = torch.tensor([_STARTUP_TIMESTAMPS['program_start']], dtype=torch.double, device='cuda')
+/mnt/kda-biv150-stage3/megatron-native-5be9626/megatron/core/transformer/mlp.py:413: DeprecationWarning: MLP requires ffn_hidden_size, but it was not provided. Using                     config.ffn_hidden_size by default.
+  return cls(
+/mnt/kda-biv150-stage3/megatron-native-5be9626/megatron/core/models/mimo/config/base_configs.py:12: UserWarning: MimoModelConfig is experimental and still under active development. The API may change without notice in future releases.
+  class MimoModelConfig:
+/mnt/kda-biv150-stage3/megatron-native-5be9626/megatron/core/tensor_parallel/layers.py:830: DeprecationWarning: Warning: tp_group is None, using default tp group. Passing tp_group will be mandatory soon
+  tp_group = get_tensor_model_parallel_group_if_none(tp_group)
+/root/miniconda3/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmpnbm2mcvf'>
+  _warnings.warn(warn_message, ResourceWarning)
+[rank0]:[W1003 17:12:34.338076588 ProcessGroupNCCL.cpp:1211] Warning: WARNING: process group has NOT been destroyed before we destruct ProcessGroupNCCL. On normal program exit, the application should call destroy_process_group to ensure that any pending NCCL operations have finished in this process. In rare cases this process can exit before this point and block the progress of another member of the process group. This constraint has always been present,  but this warning has only been added since PyTorch 2.4 (function operator())

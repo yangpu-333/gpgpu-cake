@@ -1,0 +1,18 @@
+{
+  "status": "infrastructure-block-repaired",
+  "date": "2026-10-03",
+  "blocked_run_case_pids": [
+    47150,
+    47191
+  ],
+  "wchan": "rpc_wait_bit_killable",
+  "open_fd": "/mnt/kda-biv150-stage3/megatron_cc/.gpu-experiment.lock",
+  "proc_locks": "No corresponding flock holder in /proc/locks; both Python processes blocked during NFS lock RPC before stdout/entry capture. No training child started.",
+  "terminated_owned_processes": [
+    47149,
+    47189,
+    47150,
+    47191
+  ],
+  "repair": "BF16 run_case and operator verification serialize GPU0 with Pod-local /tmp/kda-biv150-gpu0.lock. Historical harness remains unchanged. Empty audit-01 dirs retained; retry uses audit-02."
+}

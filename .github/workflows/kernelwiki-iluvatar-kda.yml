@@ -30,6 +30,12 @@ jobs:
         run: python -m unittest discover -s experiments/kernelwiki_iluvatar/megatron_training_entry/tests -v
       - name: Test formal-loop performance log validation
         run: python experiments/kernelwiki_iluvatar/megatron_training_entry/summarize_performance.py --self-test
+      - name: Install pinned CPU Torch for BF16 evidence verifier tests
+        run: |
+          python -m pip install torch==2.4.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install numpy==1.26.4
+      - name: Test BF16 master-state and performance evidence gates
+        run: python -m unittest discover -s experiments/kernelwiki_iluvatar/megatron_bf16/tests -v
       - name: Rebuild BI-V150 skill from pinned KernelWiki commit
         run: python experiments/kernelwiki_iluvatar/build_skill.py --output "$RUNNER_TEMP/kernelwiki-iluvatar"
       - name: Validate BI-V150 corpus

@@ -1,0 +1,6 @@
+{
+  "candidate_sha256": "9b5c99fcd31bb6b73691d64005b11f0be964530f87631ee4b403456adcb24831",
+  "parent_sha256": "4a5c2180114396412b1c99907837ab970b2a9efdffe85e0a46f5527cc0790201",
+  "forbidden_imports_calls_global_assignments": [],
+  "review": "Changes only CE forward read pointer, separate probability buffer, and forward dtype cache key; inherited residual and autocast path not installed in BF16 CE-only adapter. No evaluator, networking, files, timer, RNG changes."
+}

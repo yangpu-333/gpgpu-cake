@@ -1,0 +1,980 @@
+{
+  "scope": "Vendor Torch BF16 RMSNorm mathematical decomposition probe, no fusion or timing evidence.",
+  "harness_sha256": "97d45e89d8311c25df48c9ed3ffb649fc086c8eee07cd46a81b3865e2d37e570",
+  "gpu": "Iluvatar BI-V150",
+  "torch": "2.4.1",
+  "rows": [
+    {
+      "shape": [
+        128,
+        2,
+        512
+      ],
+      "scale": 0.001,
+      "formula": "fp32_every_stage",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.0078125,
+        "failed_elements": 39842,
+        "elements": 131072
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 8.0,
+        "failed_elements": 54837,
+        "elements": 131072
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.0625,
+        "failed_elements": 277,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        128,
+        2,
+        512
+      ],
+      "scale": 0.001,
+      "formula": "bf16_every_stage",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.015625,
+        "failed_elements": 8858,
+        "elements": 131072
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 16.0,
+        "failed_elements": 47491,
+        "elements": 131072
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.0625,
+        "failed_elements": 240,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        128,
+        2,
+        512
+      ],
+      "scale": 0.001,
+      "formula": "fp32_stat_bf16_inverse",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.01171875,
+        "failed_elements": 2906,
+        "elements": 131072
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 8.0,
+        "failed_elements": 4844,
+        "elements": 131072
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.0625,
+        "failed_elements": 170,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        128,
+        2,
+        512
+      ],
+      "scale": 0.001,
+      "formula": "fp32_normalize_bf16_weight_multiply",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.015625,
+        "failed_elements": 30107,
+        "elements": 131072
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 8.0,
+        "failed_elements": 46716,
+        "elements": 131072
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.0625,
+        "failed_elements": 298,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        128,
+        2,
+        512
+      ],
+      "scale": 1,
+      "formula": "fp32_every_stage",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 46105,
+        "elements": 131072
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 55408,
+        "elements": 131072
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.25,
+        "failed_elements": 278,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        128,
+        2,
+        512
+      ],
+      "scale": 1,
+      "formula": "bf16_every_stage",
+      "output": {
+        "exact": true,
+        "max_abs_error": 0.0,
+        "failed_elements": 0,
+        "elements": 131072
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 56303,
+        "elements": 131072
+      },
+      "dweight": {
+        "exact": true,
+        "max_abs_error": 0.0,
+        "failed_elements": 0,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        128,
+        2,
+        512
+      ],
+      "scale": 1,
+      "formula": "fp32_stat_bf16_inverse",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.046875,
+        "failed_elements": 9000,
+        "elements": 131072
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.046875,
+        "failed_elements": 17337,
+        "elements": 131072
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.25,
+        "failed_elements": 225,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        128,
+        2,
+        512
+      ],
+      "scale": 1,
+      "formula": "fp32_normalize_bf16_weight_multiply",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 32922,
+        "elements": 131072
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 47766,
+        "elements": 131072
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.25,
+        "failed_elements": 282,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        128,
+        2,
+        512
+      ],
+      "scale": 100,
+      "formula": "fp32_every_stage",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 50608,
+        "elements": 131072
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.00048828125,
+        "failed_elements": 2,
+        "elements": 131072
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.25,
+        "failed_elements": 309,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        128,
+        2,
+        512
+      ],
+      "scale": 100,
+      "formula": "bf16_every_stage",
+      "output": {
+        "exact": true,
+        "max_abs_error": 0.0,
+        "failed_elements": 0,
+        "elements": 131072
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.000244140625,
+        "failed_elements": 0,
+        "elements": 131072
+      },
+      "dweight": {
+        "exact": true,
+        "max_abs_error": 0.0,
+        "failed_elements": 0,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        128,
+        2,
+        512
+      ],
+      "scale": 100,
+      "formula": "fp32_stat_bf16_inverse",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.046875,
+        "failed_elements": 24494,
+        "elements": 131072
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.00048828125,
+        "failed_elements": 2,
+        "elements": 131072
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.25,
+        "failed_elements": 304,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        128,
+        2,
+        512
+      ],
+      "scale": 100,
+      "formula": "fp32_normalize_bf16_weight_multiply",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 40080,
+        "elements": 131072
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.000244140625,
+        "failed_elements": 0,
+        "elements": 131072
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.25,
+        "failed_elements": 336,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        256,
+        2,
+        512
+      ],
+      "scale": 0.001,
+      "formula": "fp32_every_stage",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.0078125,
+        "failed_elements": 80720,
+        "elements": 262144
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 8.0,
+        "failed_elements": 109886,
+        "elements": 262144
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.0625,
+        "failed_elements": 291,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        256,
+        2,
+        512
+      ],
+      "scale": 0.001,
+      "formula": "bf16_every_stage",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.015625,
+        "failed_elements": 17122,
+        "elements": 262144
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 12.0,
+        "failed_elements": 91696,
+        "elements": 262144
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.125,
+        "failed_elements": 228,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        256,
+        2,
+        512
+      ],
+      "scale": 0.001,
+      "formula": "fp32_stat_bf16_inverse",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.015625,
+        "failed_elements": 10299,
+        "elements": 262144
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 8.0,
+        "failed_elements": 14991,
+        "elements": 262144
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.0625,
+        "failed_elements": 198,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        256,
+        2,
+        512
+      ],
+      "scale": 0.001,
+      "formula": "fp32_normalize_bf16_weight_multiply",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.015625,
+        "failed_elements": 60831,
+        "elements": 262144
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 8.0,
+        "failed_elements": 93669,
+        "elements": 262144
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.06640625,
+        "failed_elements": 302,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        256,
+        2,
+        512
+      ],
+      "scale": 1,
+      "formula": "fp32_every_stage",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 88301,
+        "elements": 262144
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.0625,
+        "failed_elements": 107963,
+        "elements": 262144
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.25,
+        "failed_elements": 272,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        256,
+        2,
+        512
+      ],
+      "scale": 1,
+      "formula": "bf16_every_stage",
+      "output": {
+        "exact": true,
+        "max_abs_error": 0.0,
+        "failed_elements": 0,
+        "elements": 262144
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 113469,
+        "elements": 262144
+      },
+      "dweight": {
+        "exact": true,
+        "max_abs_error": 0.0,
+        "failed_elements": 0,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        256,
+        2,
+        512
+      ],
+      "scale": 1,
+      "formula": "fp32_stat_bf16_inverse",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.046875,
+        "failed_elements": 17762,
+        "elements": 262144
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 31366,
+        "elements": 262144
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.25,
+        "failed_elements": 214,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        256,
+        2,
+        512
+      ],
+      "scale": 1,
+      "formula": "fp32_normalize_bf16_weight_multiply",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 60282,
+        "elements": 262144
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 92287,
+        "elements": 262144
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.25,
+        "failed_elements": 293,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        256,
+        2,
+        512
+      ],
+      "scale": 100,
+      "formula": "fp32_every_stage",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 97217,
+        "elements": 262144
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.00048828125,
+        "failed_elements": 1,
+        "elements": 262144
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.25,
+        "failed_elements": 295,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        256,
+        2,
+        512
+      ],
+      "scale": 100,
+      "formula": "bf16_every_stage",
+      "output": {
+        "exact": true,
+        "max_abs_error": 0.0,
+        "failed_elements": 0,
+        "elements": 262144
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.000244140625,
+        "failed_elements": 0,
+        "elements": 262144
+      },
+      "dweight": {
+        "exact": true,
+        "max_abs_error": 0.0,
+        "failed_elements": 0,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        256,
+        2,
+        512
+      ],
+      "scale": 100,
+      "formula": "fp32_stat_bf16_inverse",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.0625,
+        "failed_elements": 36330,
+        "elements": 262144
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.0003662109375,
+        "failed_elements": 5,
+        "elements": 262144
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.25,
+        "failed_elements": 258,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        256,
+        2,
+        512
+      ],
+      "scale": 100,
+      "formula": "fp32_normalize_bf16_weight_multiply",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 73947,
+        "elements": 262144
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.000244140625,
+        "failed_elements": 0,
+        "elements": 262144
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.296875,
+        "failed_elements": 283,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        512,
+        2,
+        512
+      ],
+      "scale": 0.001,
+      "formula": "fp32_every_stage",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.0078125,
+        "failed_elements": 162074,
+        "elements": 524288
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 16.0,
+        "failed_elements": 221027,
+        "elements": 524288
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.125,
+        "failed_elements": 288,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        512,
+        2,
+        512
+      ],
+      "scale": 0.001,
+      "formula": "bf16_every_stage",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.015625,
+        "failed_elements": 30653,
+        "elements": 524288
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 16.0,
+        "failed_elements": 186441,
+        "elements": 524288
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.125,
+        "failed_elements": 233,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        512,
+        2,
+        512
+      ],
+      "scale": 0.001,
+      "formula": "fp32_stat_bf16_inverse",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.015625,
+        "failed_elements": 13586,
+        "elements": 524288
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 12.0,
+        "failed_elements": 21898,
+        "elements": 524288
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.125,
+        "failed_elements": 175,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        512,
+        2,
+        512
+      ],
+      "scale": 0.001,
+      "formula": "fp32_normalize_bf16_weight_multiply",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.015625,
+        "failed_elements": 122830,
+        "elements": 524288
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 8.0,
+        "failed_elements": 188767,
+        "elements": 524288
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.12890625,
+        "failed_elements": 298,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        512,
+        2,
+        512
+      ],
+      "scale": 1,
+      "formula": "fp32_every_stage",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 181670,
+        "elements": 524288
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.0625,
+        "failed_elements": 220166,
+        "elements": 524288
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.5,
+        "failed_elements": 321,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        512,
+        2,
+        512
+      ],
+      "scale": 1,
+      "formula": "bf16_every_stage",
+      "output": {
+        "exact": true,
+        "max_abs_error": 0.0,
+        "failed_elements": 0,
+        "elements": 524288
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 222948,
+        "elements": 524288
+      },
+      "dweight": {
+        "exact": true,
+        "max_abs_error": 0.0,
+        "failed_elements": 0,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        512,
+        2,
+        512
+      ],
+      "scale": 1,
+      "formula": "fp32_stat_bf16_inverse",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.046875,
+        "failed_elements": 49375,
+        "elements": 524288
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.046875,
+        "failed_elements": 77375,
+        "elements": 524288
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.5,
+        "failed_elements": 271,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        512,
+        2,
+        512
+      ],
+      "scale": 1,
+      "formula": "fp32_normalize_bf16_weight_multiply",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 127205,
+        "elements": 524288
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 189420,
+        "elements": 524288
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.5,
+        "failed_elements": 314,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        512,
+        2,
+        512
+      ],
+      "scale": 100,
+      "formula": "fp32_every_stage",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 198070,
+        "elements": 524288
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.00048828125,
+        "failed_elements": 3,
+        "elements": 524288
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.5,
+        "failed_elements": 284,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        512,
+        2,
+        512
+      ],
+      "scale": 100,
+      "formula": "bf16_every_stage",
+      "output": {
+        "exact": true,
+        "max_abs_error": 0.0,
+        "failed_elements": 0,
+        "elements": 524288
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.000244140625,
+        "failed_elements": 0,
+        "elements": 524288
+      },
+      "dweight": {
+        "exact": true,
+        "max_abs_error": 0.0,
+        "failed_elements": 0,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        512,
+        2,
+        512
+      ],
+      "scale": 100,
+      "formula": "fp32_stat_bf16_inverse",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.0625,
+        "failed_elements": 81294,
+        "elements": 524288
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.0003662109375,
+        "failed_elements": 8,
+        "elements": 524288
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.5,
+        "failed_elements": 283,
+        "elements": 512
+      }
+    },
+    {
+      "shape": [
+        512,
+        2,
+        512
+      ],
+      "scale": 100,
+      "formula": "fp32_normalize_bf16_weight_multiply",
+      "output": {
+        "exact": false,
+        "max_abs_error": 0.03125,
+        "failed_elements": 153434,
+        "elements": 524288
+      },
+      "dx": {
+        "exact": false,
+        "max_abs_error": 0.000244140625,
+        "failed_elements": 0,
+        "elements": 524288
+      },
+      "dweight": {
+        "exact": false,
+        "max_abs_error": 0.5,
+        "failed_elements": 293,
+        "elements": 512
+      }
+    }
+  ]
+}

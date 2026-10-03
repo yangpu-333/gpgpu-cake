@@ -1,0 +1,320 @@
+/kernelwiki-iluvatar
+Read project wiki/kernels/cross-entropy-megatron-bi-v150.md and hardware BI-V150 runtime page with Read. We tested your candidate0007 in TRUE BF16 formal Megatron training, no CUDA autocast, BF16 weights and FP32 master SGD. It FAILED three-step fixed tolerance. No permission to relax tolerance, change harness/baseline/data or skip checks. Return ONLY a JSON object {"plan":"...","code":"complete standalone Python source", "lineage":"...","semantic_risks":[...]}, no prose or Markdown.
+Generate new candidate0008, public cross_entropy(logits[S,B,V]BF16,target[S,B]int64)->loss[S,B]FP32, single BI-V150/CoreX4.2/Triton2.1.0, TP1 zero smoothing. Imports torch,triton,triton.language,math only. No file/env/network/process, timers/printing, RNG or global monkeypatch. Compiled cache stores ONLY code objects/metadata.
+The fully fused forward0007 softmax roundoff changed BF16 dlogits, amplified by parameter re-rounding in step2/3. Preserve EXACT native Torch forward math and operation ordering from _NativeAutocastCrossEntropy.forward in the supplied parent, including logits.float/max/in-place subtract/index/exp(out)/sum/log/div_. Omit the three singleton all-reduces only (identity TP1). This is native-equivalent forward, not Triton forward fusion.
+Try fusing ONLY backward: retain same FP32 probability storage/alias semantics, target int64/target mask (out of range incl -100 NOT ignore index), subtract onehot in FP32 THEN multiply FP32 upstream exactly as native. Use inherited _ce_backward_kernel but enable_fp_fusion=False in launch if supported (Triton2.1), to avoid changed rounding due FMA. Autograd casts FP32 dlogits to BF16 natively. Forward returns EXACT native FP32 loss and probabilities, BF16 original logits unchanged. No assumptions that removing forward conversion alone caused error; reduction/exp/div ordering differs from Torch. Restrict new standalone source to CE; do not include unused residual prefix. Full CPUfloat64 atol3e-4 rtol1e-3 loss/grad/all three SGDmaster updates remain gates. Any fused backward discrepancy will reject this candidate too.
+Failure details0007:
+[
+  {
+    "path": "step 2/output",
+    "group": "output",
+    "exact_required": false,
+    "native_shape": [
+      2,
+      128
+    ],
+    "optimized_shape": [
+      2,
+      128
+    ],
+    "native_dtype": "torch.float32",
+    "optimized_dtype": "torch.float32",
+    "native_numel": 256,
+    "optimized_numel": 256,
+    "native_sha256": "f61e286e16f50db5628c63d80652bad8970b4c14b7ccf2c758ac585a794cdb48",
+    "optimized_sha256": "01c1d87fcdd4ce8d5aff7d7e9bb4f7ab42c0ff839e8886c791706a1c34265e47",
+    "shape_dtype_layout_match": true,
+    "all_elements_finite": true,
+    "exact_equal": false,
+    "max_absolute_error": 0.010133743286132812,
+    "max_relative_error_to_clamped_native": 0.0014490375103119147,
+    "max_tolerance_fraction": 1.3894343857917428,
+    "elements_outside_tolerance": 9,
+    "elements_not_exactly_equal": 256,
+    "atol": 0.0003,
+    "rtol": 0.001,
+    "passed": false
+  },
+  {
+    "path": "step 2/wgrads/model_chunk0/embedding.position_embeddings.weight",
+    "group": "wgrads",
+    "exact_required": false,
+    "native_shape": [
+      128,
+      512
+    ],
+    "optimized_shape": [
+      128,
+      512
+    ],
+    "native_dtype": "torch.float32",
+    "optimized_dtype": "torch.float32",
+    "native_numel": 65536,
+    "optimized_numel": 65536,
+    "native_sha256": "6d77981110db722dc2c83545878a64bac5659fd0306cfafff4f4d13e759227ee",
+    "optimized_sha256": "f77b187a3e29639dc24b7cf3d7840af995ec733419de8fd63520d800ff3d4cde",
+    "shape_dtype_layout_match": true,
+    "all_elements_finite": true,
+    "exact_equal": false,
+    "max_absolute_error": 0.0003662109375,
+    "max_relative_error_to_clamped_native": 0.5,
+    "max_tolerance_fraction": 1.1840858856962426,
+    "elements_outside_tolerance": 2,
+    "elements_not_exactly_equal": 51129,
+    "atol": 0.0003,
+    "rtol": 0.001,
+    "passed": false
+  },
+  {
+    "path": "step 3/output",
+    "group": "output",
+    "exact_required": false,
+    "native_shape": [
+      2,
+      128
+    ],
+    "optimized_shape": [
+      2,
+      128
+    ],
+    "native_dtype": "torch.float32",
+    "optimized_dtype": "torch.float32",
+    "native_numel": 256,
+    "optimized_numel": 256,
+    "native_sha256": "cfb5ff5924f1b2de11fc0e907e7fdb0c5a1856b0e458f3b3947a951978537d18",
+    "optimized_sha256": "2145ecddd8a0e7c1d88d5d6dafe11f91b9c390cab32c20b8163e6477f56ba0d5",
+    "shape_dtype_layout_match": true,
+    "all_elements_finite": true,
+    "exact_equal": false,
+    "max_absolute_error": 0.014744281768798828,
+    "max_relative_error_to_clamped_native": 0.002416489616854986,
+    "max_tolerance_fraction": 2.303243723364764,
+    "elements_outside_tolerance": 14,
+    "elements_not_exactly_equal": 256,
+    "atol": 0.0003,
+    "rtol": 0.001,
+    "passed": false
+  },
+  {
+    "path": "step 3/wgrads/model_chunk0/decoder.layers.0.self_attention.linear_proj.weight",
+    "group": "wgrads",
+    "exact_required": false,
+    "native_shape": [
+      512,
+      512
+    ],
+    "optimized_shape": [
+      512,
+      512
+    ],
+    "native_dtype": "torch.float32",
+    "optimized_dtype": "torch.float32",
+    "native_numel": 262144,
+    "optimized_numel": 262144,
+    "native_sha256": "2a771e4c47b84e2e93cef3533783929ae6faa5c1e6d77247bc9c5ac92b13ff77",
+    "optimized_sha256": "6fe290d1c1b3c2d43a58b2ee15b520c59c5a4c5dae256c015f3a00695468bad4",
+    "shape_dtype_layout_match": true,
+    "all_elements_finite": true,
+    "exact_equal": false,
+    "max_absolute_error": 0.000335693359375,
+    "max_relative_error_to_clamped_native": 0.9957949320475261,
+    "max_tolerance_fraction": 1.101057014734145,
+    "elements_outside_tolerance": 1,
+    "elements_not_exactly_equal": 208785,
+    "atol": 0.0003,
+    "rtol": 0.001,
+    "passed": false
+  },
+  {
+    "path": "step 3/wgrads/model_chunk0/embedding.position_embeddings.weight",
+    "group": "wgrads",
+    "exact_required": false,
+    "native_shape": [
+      128,
+      512
+    ],
+    "optimized_shape": [
+      128,
+      512
+    ],
+    "native_dtype": "torch.float32",
+    "optimized_dtype": "torch.float32",
+    "native_numel": 65536,
+    "optimized_numel": 65536,
+    "native_sha256": "790ecfaa1c07d54077dae945ba6b08435d30c3065cc0004e53605cb87ced616b",
+    "optimized_sha256": "c2ad502cc4463e00ad789ea247eef9e638d7b3f5af48db257399fbbc47cfc10f",
+    "shape_dtype_layout_match": true,
+    "all_elements_finite": true,
+    "exact_equal": false,
+    "max_absolute_error": 0.00048828125,
+    "max_relative_error_to_clamped_native": 0.6607142857142857,
+    "max_tolerance_fraction": 1.5165301789505612,
+    "elements_outside_tolerance": 5,
+    "elements_not_exactly_equal": 51129,
+    "atol": 0.0003,
+    "rtol": 0.001,
+    "passed": false
+  }
+]
+Relevant parent CE backward/native forward:
+@triton.jit
+def _ce_backward_kernel(PROB, TARGET, GRAD_OUTPUT, DLOGITS,
+                        V: tl.constexpr, BLOCK: tl.constexpr):
+    row = tl.program_id(0)
+    col = tl.arange(0, BLOCK)
+    mask = col < V
+    offset = row * V + col
+    prob = tl.load(PROB + offset, mask=mask, other=0.0)
+    # Same int64 preservation as the forward kernel: a wide/negative int64 label
+    # matches no lane, so no onehot subtraction is applied, exactly as native
+    # skips softmax_update on masked targets.
+    target = tl.load(TARGET + row).to(tl.int64)
+    grad_output = tl.load(GRAD_OUTPUT + row)
+    onehot = tl.where((col == target) & mask, 1.0, 0.0)
+    tl.store(DLOGITS + offset, (prob - onehot) * grad_output, mask=mask)
+
+
+def _launch_ce_forward(logits, prob, target, loss, vocab, rows):
+    block = triton.next_power_of_2(vocab)
+    # Key encodes device, native-logits dtype, probability-buffer dtype, vocab
+    # (shape), block (layout) and 16-byte alignment so the BF16-read and
+    # FP32-read compilations never collide. No tensors/results/gradients stored.
+    key = ("ce_forward", logits.device.index, logits.dtype, prob.dtype, vocab,
+           block, _alignment(logits, prob, target, loss))
+    compiled = _COMPILED_KERNELS.get(key)
+    if compiled is None:
+        compiled = _ce_forward_kernel[(rows,)](
+            logits, prob, target, loss, V=vocab, BLOCK=block, num_warps=4,
+        )
+        _COMPILED_KERNELS[key] = compiled
+    else:
+        compiled[(rows, 1, 1)](logits, prob, target, loss)
+
+
+def _launch_ce_backward(prob, target, grad_output, dlogits, vocab, rows):
+    block = triton.next_power_of_2(vocab)
+    key = ("ce_backward", prob.device.index, vocab, block,
+           _alignment(prob, target, grad_output, dlogits))
+    compiled = _COMPILED_KERNELS.get(key)
+    if compiled is None:
+        compiled = _ce_backward_kernel[(rows,)](
+            prob, target, grad_output, dlogits, V=vocab, BLOCK=block, num_warps=4,
+        )
+        _COMPILED_KERNELS[key] = compiled
+    else:
+        compiled[(rows, 1, 1)](prob, target, grad_output, dlogits)
+
+
+class _FusedCrossEntropy(torch.autograd.Function):
+    @staticmethod
+    def forward(ctx, logits, target):
+        sequence, batch, vocab = logits.shape
+        rows = sequence * batch
+        # Remove the parent's separate logits.float() conversion launch. For
+        # low-precision (BF16) input allocate a fresh FP32 probability buffer and
+        # let the fused forward widen the BF16 logits in-kernel; the BF16 input
+        # is only read and stays bitwise unchanged, matching native .float()
+        # which leaves a low-precision input untouched. For FP32 input alias the
+        # input itself so the native observable in-place softmax overwrite (and
+        # native gradient alias) are preserved.
+        if logits.dtype == torch.float32:
+            probabilities = logits
+        else:
+            probabilities = torch.empty_like(logits, dtype=torch.float32)
+        loss = torch.empty((sequence, batch), dtype=torch.float32, device=logits.device)
+        _launch_ce_forward(logits, probabilities, target, loss, vocab, rows)
+        ctx.save_for_backward(probabilities, target)
+        ctx.vocab = vocab
+        ctx.rows = rows
+        return loss
+
+    @staticmethod
+    def backward(ctx, grad_output):
+        probabilities, target = ctx.saved_tensors
+        grad_output = grad_output.contiguous()
+        # Reuse the saved probability storage as the gradient buffer exactly as
+        # native overwrites its softmax buffer, avoiding an extra [S,B,V]
+        # temporary. (P - onehot) * grad_output, with no subtraction for
+        # out-of-range targets. Autograd casts this FP32 gradient back to the
+        # logits input dtype, matching native.
+        _launch_ce_backward(probabilities, target, grad_output, probabilities,
+                            ctx.vocab, ctx.rows)
+        return probabilities, None
+
+
+class _NativeAutocastCrossEntropy(torch.autograd.Function):
+    @staticmethod
+    def forward(ctx, logits, target):
+        # calculate_logits_max: native vocab_parallel_logits.float() then max.
+        # Under BF16 autocast .float() allocates a separate FP32 buffer, so the
+        # original low-precision input stays unchanged; for FP32 input it is the
+        # same tensor and the native in-place mutation is observable.
+        vocab_parallel_logits = logits.float()
+        logits_max = torch.max(vocab_parallel_logits, dim=-1)[0]
+        # world_size == 1: all_reduce(logits_max, MAX) is the identity, omitted.
+
+        # vocab range for rank 0 at world_size 1.
+        partition_vocab_size = vocab_parallel_logits.size()[-1]
+        vocab_start_index = 0
+        vocab_end_index = partition_vocab_size
+
+        # calculate_predicted_logits (native ordering, in-place subtract_).
+        vocab_parallel_logits -= logits_max.unsqueeze(dim=-1)
+        target_mask = (target < vocab_start_index) | (target >= vocab_end_index)
+        masked_target = target.clone() - vocab_start_index
+        masked_target[target_mask] = 0
+        logits_2d = vocab_parallel_logits.view(-1, partition_vocab_size)
+        masked_target_1d = masked_target.view(-1)
+        arange_1d = torch.arange(start=0, end=logits_2d.size()[0], device=logits_2d.device)
+        predicted_logits_1d = logits_2d[arange_1d, masked_target_1d]
+        predicted_logits_1d = predicted_logits_1d.clone().contiguous()
+        predicted_logits = predicted_logits_1d.view_as(target)
+        predicted_logits[target_mask] = 0.0
+        # world_size == 1: all_reduce(predicted_logits, SUM) is the identity.
+        exp_logits = vocab_parallel_logits
+        torch.exp(vocab_parallel_logits, out=exp_logits)
+        sum_exp_logits = exp_logits.sum(dim=-1)
+        # world_size == 1: all_reduce(sum_exp_logits, SUM) is the identity.
+
+        # calculate_cross_entropy_loss: loss then normalize softmax in place.
+        loss = torch.log(sum_exp_logits) - predicted_logits
+        exp_logits.div_(sum_exp_logits.unsqueeze(dim=-1))
+
+        # Store softmax, target-mask and masked-target for backward, as native.
+        ctx.save_for_backward(exp_logits, target_mask, masked_target_1d)
+        return loss
+
+    @staticmethod
+    def backward(ctx, grad_output):
+        softmax, target_mask, masked_target_1d = ctx.saved_tensors
+        # prepare_gradient_calculation_operands: softmax is the gradient.
+        grad_input = softmax
+        partition_vocab_size = softmax.size()[-1]
+        grad_2d = grad_input.view(-1, partition_vocab_size)
+        arange_1d = torch.arange(start=0, end=grad_2d.size()[0], device=grad_2d.device)
+        softmax_update = 1.0 - target_mask.view(-1).float()
+        # calculate_gradients (zero smoothing): onehot subtraction then scale.
+        # Out-of-range labels have softmax_update 0, so no subtraction applies.
+        grad_2d[arange_1d, masked_target_1d] -= softmax_update
+        grad_input.mul_(grad_output.unsqueeze(dim=-1))
+        # grad_input is FP32; autograd casts it to the original logits dtype,
+        # exactly as native.
+        return grad_input, None
+
+
+def cross_entropy(logits, target):
+    # TP=1, zero-label-smoothing vocabulary cross entropy returning float32
+    # loss[S,B]. Out-of-range labels (including -100) are NOT ignore_index: their
+    # loss is log(sumexp) and their gradient is plain softmax*grad_output. The
+    # protected adapter owns the singleton-TP, zero-smoothing, contiguity, dtype
+    # and native-fallback guards, so this entry assumes supported contiguous CUDA
+    # logits[S,B,V] and contiguous int64 target[S,B].
+    #
+    # Under an active CUDA autocast context dispatch to the Torch autograd CE that
+    # reproduces the pinned native operations and ordering exactly (0006 repair of
+    # 0005's autocast re-rounding output failures). Outside autocast the FP32
+    # Triton CE runs; 0007 removes its separate logits.float() launch by widening
+    # the native-dtype logits in-kernel into a separate FP32 probability buffer.
+    if _cuda_autocast_enabled():
+        return _NativeAutocastCrossEntropy.apply(logits, target)
+    return _FusedCrossEntropy.apply(logits, target)

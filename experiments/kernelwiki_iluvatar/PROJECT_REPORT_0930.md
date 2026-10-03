@@ -6,11 +6,11 @@
 
 KernelWiki 原本收录 NVIDIA Hopper、Blackwell GPU 的算子优化知识。本项目保留这些原始内容及其适用范围，在同一知识库中增加天数智芯 BI-V150 的工具链说明、可运行案例和独立实验依据。这样，KDA（Kernel Design Agents）既能继续检索 NVIDIA 知识，也能查询“哪些思路已在 BI-V150 上验证、哪些还不能直接迁移”。
 
-目前交付的是**可重建、可检索、可由 KDA 项目目录加载的适配版 skill**。我们在 BI-V150 上完成了多个算子实验，并使用 Claude Code CLI、适配 skill 和固定验收程序持续迭代。最新候选融合残差/RMSNorm 与 TP=1 词表交叉熵，已接入固定版本 Megatron 的正式 `pretrain_gpt.py` 入口。同一四层 FP32 合成 GPT，三组各 120 步的正式训练对照相对原生本地 PyTorch 后端，吞吐提升 **6.97%**；三步输出、loss、全部参数梯度与 SGD 更新通过逐元素复核。此前独立训练 step 基准的 **19.10%** 作为历史结果保留，两个数字使用不同计时范围。**当前仍是单卡、小模型与原生模拟数据验证，尚无生产训练或多卡收益。**
+目前交付的是**可重建、可检索、可由 KDA 项目目录加载的适配版 skill**。我们在 BI-V150 上完成多个算子实验，使用 Claude Code CLI、项目级 skill 和固定验收程序持续迭代。FP32 四层合成 GPT 已接入正式训练入口，吞吐提升 **6.97%**；最新扩展到真正 BF16 的三种 4/8 层模型，完成 CE 反向融合、三步全张量与 FP32 optimizer master 核对，以及 45 个正式计时进程。BF16 的收益依赖模型规模，新增候选未稳定胜过上一候选。历史独立 step 的 **19.10%** 使用不同计时范围。**这些结果仍限于单卡、小模型和模拟数据，尚无生产训练或多卡收益。**
 
 | 交付内容 | 已验证状态 |
 |---|---|
-| 知识库扩充 | BI-V150 可精确检索 22 条路径；原 SM90/SM100 的 286/379 条路径逐条核对一致 |
+| 知识库扩充 | BI-V150 可精确检索 23 条路径；原 SM90/SM100 的 286/379 条路径逐条核对一致 |
 | 可复现构建 | 固定上游提交加本项目补丁；整库校验通过，来源与实验数据可追溯 |
 | KDA 项目级加载 | 适配版复制到 KDA 项目的 `.claude/skills/`，逐文件校验；不依赖个人 skill 安装，也不改原 NVIDIA 子模块 |
 | 自动验收 | 最新构建的 160 项知识库测试在 Linux 全部通过，2 项加载器测试及三架构检索通过；[GitHub Actions](https://github.com/yangpu-333/gpgpu-cake/actions/workflows/kernelwiki-iluvatar-kda.yml)按同一流程从源码重建并验收 |
@@ -39,7 +39,29 @@ Hopper 和 Blackwell 的资料既有通用算法思路，也有只属于 NVIDIA 
 
 负面结果同样进入知识库：当前 CoreX/Triton 组合能分配 FP8 张量，但所测 FP8 `tl.dot` 候选编译失败；分块 scan 虽正确，却比 `torch.cumsum` 慢；部分流水、缓存、持久 kernel 和近似函数候选也没有稳定收益。这些结论只针对上述软件版本和测试形状，不能推断 BI-V150 硬件完全不支持相应能力。
 
-### 正式训练入口：原生训练循环吞吐提升 6.97%（10 月 3 日）
+### 正式 BF16 训练：三种模型规模与交叉熵反向融合（10 月 3 日）
+
+本轮把验证扩展到真正的 BF16 训练：正式 `pretrain_gpt.py` 使用 `--bf16`，全部模型权重（包括 RMSNorm 权重）为 BF16，梯度累积及 SGD master 参数为 FP32，未启用 CUDA autocast。基线仍是固定 Megatron 的原生模拟数据、本地 PyTorch 后端、DDP 和 SGD；运行于一张 BI-V150。600 个 Python 源码文件及原生数据构建辅助文件均按哈希核对，两条路径共同使用显式 CoreX 兼容映射。
+
+Claude Code CLI 使用项目级 skill 和此前配置的 Paratera API 生成三个候选。0007 的融合 CE 前向通过了 **504/504** 个独立算子检查，却在三步模型验证中失败了 5 项 loss/梯度检查，因此淘汰。0008 保留原生 Torch 前向计算顺序，省略 TP=1 的单成员归约，将 CE 反向融合为 Triton kernel。0009 在此基础上，把输出梯度转为 BF16 的操作也放进同一个 kernel。残差/RMSNorm 保持原生：此前融合要求 FP32 残差和权重，不能直接用于此次全 BF16 路径。
+
+0008、0009 均通过各自的 504 个算子检查和三种规模的三步正式训练核对。每次核对覆盖逐 token loss、全部梯度、更新后的 BF16 模型权重及 **FP32 optimizer master 参数**，采用 CPU float64 比较，原容差保持 `atol=3e-4, rtol=1e-3`。0009 在三种规模中分别通过 **1475/1475、1475/1475、2371/2371** 项检查，所有被比较张量均与原生路径逐元素完全相等；这只证明所测的三次更新，不代表长周期收敛。
+
+| 模型规模 | 层数 / 序列 / 词表 | 参数量 | 0008 首轮相对原生 | 0009 后续相对原生 | 0009 相对同轮 0008 |
+|---|---|---:|---:|---:|---:|
+| main | 4 / 128 / 1024 | 1370 万 | +4.62% | +2.74% | +1.44% |
+| wide | 4 / 256 / 4096 | 1691 万 | +0.11% | +3.06% | +2.80% |
+| deep | 8 / 512 / 8192 | 3383 万 | +1.16% | +0.39% | −0.29% |
+
+所有模型的 hidden size 为 512、micro-batch/global batch 为 2、TP/PP/CP 为 1。表中为三个 seed 的吞吐倍率几何平均。首轮 0008 采用原生/优化两臂对照，后续 0009 采用原生/0008/0009 三臂对照，每个 seed 改变执行顺序。两批实验的存储根目录不同，**比较 0008 与 0009 时使用最后一列的同轮对照**。三个规模都出现了 0009 不如 0008 的 seed，尚不能认定其稳定更快，因此保留 0008 为默认，0009 作为数值通过的实验候选。
+
+本轮成功完成 **45 个计时进程 × 120 步，共 5400 步**。主指标采用原生训练循环中 GPU 同步的 `time.time` 区间，舍弃前 20 步，保留后 100 步的十个日志区间均值；计时期间关闭张量保存、profiling、checkpoint 和评估。完整张量正确性在另开的三步审计中检查，不能把 5400 个计时 step 写成全部经过逐张量验收。三组 seed 也不足以给出可靠置信区间。
+
+另开的短 profiler 记录到：0009 在三个活跃训练 step 中实际执行三次 Triton CE 反向 kernel，CE 形状的 `aten::_to_copy` 从原生的六次减少到三次。这支持“反向融合了 BF16 梯度转换”的执行结论，不能单独解释整个训练吞吐的变化。BF16 RMSNorm 的舍入探针也表明，通用 FP32/BF16 公式不能在所有测试中重现原生前后向；后续需单独验证。
+
+实验契约、CLI 生成记录、失败候选、全部原始区间和数值回执见 [`megatron_bf16/`](megatron_bf16/)，汇总见[本轮验收数据](megatron_bf16/evidence/decision.json)，实际执行证据见[类型转换融合审计](megatron_bf16/evidence/profile-cast-fusion-audit.json)。这些结果仍限于单卡、小规模模型、模拟数据与 SGD，尚未验证生产训练、微调、AdamW 或多卡收益。
+
+### FP32 正式训练入口：原生训练循环吞吐提升 6.97%（10 月 3 日）
 
 本轮复用经 Claude Code CLI 迭代验收的候选 0006，将它安装到 Megatron 原生 `pre_wrap_hooks` 提供的模型扩展位置。添加 `--iluvatar-kernels` 后，模型实例启用优化；省略该开关即为原生路径。两条路径均由正式 `pretrain_gpt.py` 执行参数解析、数据加载、DDP 包装、前后向调度、SGD、梯度保存和 checkpoint。
 
@@ -127,6 +149,8 @@ Claude Code CLI 在本机加载 KDA 项目目录中的适配 skill，通过已�
 
 ## 从实验到可用知识
 
+最新阶段25构建含 **1064 个页面、1001 个 source ID、37 个资产包和14个账本**，新增360个 BF16 证据包文件；KDA 项目级加载核对 **2402 个文件**，BI-V150 精确检索 **23 条路径**，SM90/SM100 仍为286/379条。新来源明确区分真正 BF16、autocast、独立算子正确性与完整训练验证，并保留0007失败及0009不稳定的性能结果。下述阶段24数据作为历史回归记录保留。
+
 适配版不仅增加文字说明，还把每个 BI-V150 结论连接到源码、环境、原始计时和 SHA256 回执。迁移账本按“已验证、仅观察到编译中间表示、尚未验证”区分证据等级。阶段 24 最新构建含 **1063 个页面、1000 个 source ID、37 个资产包、14 个账本**，整库校验通过且无孤立来源文件；新增证据包的 168 个文件均通过 SHA256 核对。最新 **160 项 Linux 知识库测试全部通过**，原始结果见[测试日志](megatron_cc/higher_gain/evidence/stage24-linux-tests.stderr)和[整库校验日志](megatron_cc/higher_gain/evidence/stage24-linux-validation.stdout)。
 
 KDA 的 2 项加载器测试通过；项目级加载逐文件校验了 **2041 个文件**，本轮 CLI 使用的 checkout 也完成同样核对。BI-V150 检索仅增加本轮 CE 来源和算子页，合计 22 条路径；SM90/SM100 的 286/379 条路径与上一版本逐条一致，见[阶段 24 回归与证据核对](megatron_cc/higher_gain/evidence/stage24-skill-provenance.json)。[阶段 23 Linux 测试](megatron_cc/evidence/linux-skill-unittest.log)与[整库校验](megatron_cc/evidence/linux-skill-validate.log)作为历史记录保留。Windows 初次测试因默认 GBK 编码和系统 `python3` 别名报错，记录保留，回归采用与 CI 一致的 Linux 环境。
@@ -136,8 +160,8 @@ KDA 可以从项目目录读取这套知识。一次只读 Claude Code 验证实
 ## 当前边界与下一步
 
 1. **生产训练配置。** 正式 `pretrain_gpt.py` 已在本地 PyTorch 后端运行并接入优化，原生模拟数据的四层 FP32 对照取得 6.97% 吞吐提升。尚无代表性的生产模型、数据、训练命令和精度配置；取得配置后，需要重新采集实际形状并验证 loss 曲线、显存与吞吐。当前运行时兼容方案也只在上述范围验证。
-2. **模型级融合。** 已在四层合成 GPT 中接入逐层残差/RMSNorm和 TP=1 词表交叉熵。下一步按真实训练配置重新分析热点，覆盖实际形状、bias、dropout、精度和词表大小；TP>1 的交叉熵还需要正确的跨卡归约。当前 autocast 采用原生或原生等价计算，低精度融合需要单独设计并验证。
-3. **硬件归因。** 目前有 Triton 编译中间表示和计时，没有足够的最终机器指令、计算/搬运重叠或共享存储冲突证据。平台开放 tracefs/debugfs 后，才能用 ixSYS 采集时间线并进一步分析。
+2. **模型级融合。** 已在 FP32 四层模型中接入逐层残差/RMSNorm和 TP=1 词表交叉熵，并在真正 BF16 的 4/8 层模型中验证 CE 反向融合。较大形状的收益有限且波动，后续按 profiler 热点优先研究 BF16 RMSNorm 舍入及梯度 L2 归约，同时覆盖实际 bias、dropout、精度和词表大小；TP>1 还需要正确的跨卡归约。
+3. **硬件归因。** 已保存 Kineto 的 CPU/GPU 时间线及实际 CE kernel 调用，但仍无充分的最终机器指令、计算/搬运重叠或共享存储冲突证据。平台开放 tracefs/debugfs 后，可继续使用 ixSYS 的 `.ptrace` 分析。
 4. **低精度与版本升级。** 在新版 CoreX/Triton 上重新探测 FP8/FP4、编译和数值行为；不同软件版本的性能数据分别记录。
 
 ## 复现与证据入口
@@ -199,6 +223,8 @@ python summarize.py 0003 evidence/decision-rerun.json
 `run_remote.py`、`higher_gain/run_extended.py` 和独立审计中的 Megatron 路径默认是 `/private/atrex-megatron/src/megatron-lm`；其他部署需改为本机固定源码的位置。源码、契约和验收程序的 SHA256 同时进入逐轮结果，以便识别复测是否使用相同内容。
 
 **ixSYS 可视化：** 项目已准备[带 NVTX 标记的短工作负载](stage4_trace_case.py)。10 月 2 日重启后的 Pod 仍缺少 tracefs/debugfs 控制节点，尚未生成可上传的 `.ptrace`；本轮网页访问也超时。JSON、stdout 和 stderr 不能直接当 trace 上传。平台开放挂载并可正常访问网站后，先用 ixSYS CLI 采集 `.ptrace`，将文件下载到本机，再在 [ixSYS 页面](https://ui.ixsys.iluvatar.com)选择 **Open trace file**。当前诊断见[tracefs 日志](megatron_cc/evidence/tracefs-20261002.txt)，原始采集失败记录见[平台诊断日志](evidence/stage12-20260929/tracefs-probe.log)。
+
+**现有时间线可视化：** 本轮已采集 Kineto ChromeJSON，可直接打开[原生训练 trace](megatron_bf16/evidence/native-profile-01/profile/trace.json)或[0009 训练 trace](megatron_bf16/evidence/optimized-0009-profile-01/profile/trace.json)。将文件下载到本机，打开 [Perfetto](https://ui.perfetto.dev)，点击侧栏 **Open trace file** 或拖入文件，即可查看 CPU 算子、GPU kernel 与 memcpy。该查看器支持 Chrome JSON 格式，见 [Perfetto 官方说明](https://perfetto.dev/docs/visualization/perfetto-ui)。这些短时间线单独采集，不参与训练吞吐计时；ixSYS 仍需自己的 .ptrace。
 
 ---
 

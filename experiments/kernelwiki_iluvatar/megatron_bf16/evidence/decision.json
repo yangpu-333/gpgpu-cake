@@ -1,0 +1,174 @@
+{
+  "status": "completed",
+  "recorded_at": "2026-10-03",
+  "completion_scope": "GPU optimization and sealed correctness/performance protocol; repository delivery and raw-data backup have separate receipts.",
+  "baseline": "Pinned original Megatron pretrain_gpt.py with native MockGPTDataset, local Torch, DDP and SGD on one BI-V150; shared explicit CoreX4.2 compatibility.",
+  "precision": "Actual BF16 model weights, FP32 gradient accumulation and SGD master weights; no active CUDA autocast.",
+  "candidate7": {
+    "status": "rejected",
+    "operator_cases_passed": 504,
+    "formal_checks_failed": 5
+  },
+  "candidate8": {
+    "status": "default",
+    "operator_cases_passed": 504,
+    "forward": "Native Torch ordering; TP1 all-reduce identities omitted",
+    "backward": "Triton onehot-subtract and upstream multiply"
+  },
+  "candidate9": {
+    "status": "numerically_verified_experimental",
+    "operator_cases_passed": 504,
+    "backward": "Additionally stores BF16 dlogits in the same Triton backward kernel"
+  },
+  "scopes": {
+    "main": {
+      "model": {
+        "num_layers": 4,
+        "hidden_size": 512,
+        "ffn_hidden_size": 2048,
+        "num_attention_heads": 8,
+        "sequence_length": 128,
+        "micro_batch_size": 2,
+        "global_batch_size": 2,
+        "vocab_size": 1024,
+        "parameters": 13701632,
+        "normalization": "RMSNorm",
+        "epsilon": 1e-05,
+        "bf16": true,
+        "fp32_residual_connection": false
+      },
+      "numerical_verification_passed": true,
+      "candidate8_checks": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "candidate9_checks": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "candidate9_all_compared_tensors_bitwise_equal": true,
+      "preferred_candidate": "0008",
+      "candidate8_initial_gain_percent": 4.616751690401744,
+      "candidate9_gain_percent": 2.7371914479497272,
+      "candidate9_vs_control_gain_percent": 1.435673873819665,
+      "throughput_gain_percent": 1.28309649300411,
+      "throughput_gain_scope": "0008 control vs native in the later same-trial three-arm batch",
+      "candidate9_all_seeds_faster_than_control": false,
+      "selection_reason": "0009 passes numerical gates but has mixed seed gains and no stable universal improvement over 0008."
+    },
+    "wide": {
+      "model": {
+        "num_layers": 4,
+        "hidden_size": 512,
+        "ffn_hidden_size": 2048,
+        "num_attention_heads": 8,
+        "sequence_length": 256,
+        "micro_batch_size": 2,
+        "global_batch_size": 2,
+        "vocab_size": 4096,
+        "parameters": 16912896,
+        "normalization": "RMSNorm",
+        "epsilon": 1e-05,
+        "bf16": true,
+        "fp32_residual_connection": false
+      },
+      "numerical_verification_passed": true,
+      "candidate8_checks": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "candidate9_checks": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "candidate9_all_compared_tensors_bitwise_equal": true,
+      "preferred_candidate": "0008",
+      "candidate8_initial_gain_percent": 0.10991047763455608,
+      "candidate9_gain_percent": 3.0640491782621293,
+      "candidate9_vs_control_gain_percent": 2.8026744653096403,
+      "throughput_gain_percent": 0.25424894275556387,
+      "throughput_gain_scope": "0008 control vs native in the later same-trial three-arm batch",
+      "candidate9_all_seeds_faster_than_control": false,
+      "selection_reason": "0009 passes numerical gates but has mixed seed gains and no stable universal improvement over 0008."
+    },
+    "deep": {
+      "model": {
+        "num_layers": 8,
+        "hidden_size": 512,
+        "ffn_hidden_size": 2048,
+        "num_attention_heads": 8,
+        "sequence_length": 512,
+        "micro_batch_size": 2,
+        "global_batch_size": 2,
+        "vocab_size": 8192,
+        "parameters": 33825280,
+        "normalization": "RMSNorm",
+        "epsilon": 1e-05,
+        "bf16": true,
+        "fp32_residual_connection": false
+      },
+      "numerical_verification_passed": true,
+      "candidate8_checks": {
+        "total": 2371,
+        "passed": 2371,
+        "failed": 0
+      },
+      "candidate9_checks": {
+        "total": 2371,
+        "passed": 2371,
+        "failed": 0
+      },
+      "candidate9_all_compared_tensors_bitwise_equal": true,
+      "preferred_candidate": "0008",
+      "candidate8_initial_gain_percent": 1.157195357013574,
+      "candidate9_gain_percent": 0.39018672321733394,
+      "candidate9_vs_control_gain_percent": -0.29456867595903935,
+      "throughput_gain_percent": 0.6867784333141502,
+      "throughput_gain_scope": "0008 control vs native in the later same-trial three-arm batch",
+      "candidate9_all_seeds_faster_than_control": false,
+      "selection_reason": "0009 passes numerical gates but has mixed seed gains and no stable universal improvement over 0008."
+    }
+  },
+  "receipt_sha256": {
+    "main": {
+      "performance8": "a2acfc3f3c541c589dc98ba6f6c42c9ba432e196f559fd114bb847843015cda0",
+      "performance9": "962a55d12b7bb4e497ad367e623feb826ab2a25e453797e75cea2989adad88e3",
+      "controlled": "0706bfe8f41a8d02eb9607d6e156ffc273a248685a4af28afdf3286f0a22ba1e",
+      "audit8": "cff1013420b414360d88ca5b858cdb90cd6eea0c2b489248202c630f327ad612",
+      "audit9": "8df9c18be4175dabe67d0a084a9157daffe9ce951303c2e5750cd042d4170a61"
+    },
+    "wide": {
+      "performance8": "5acdaadc62911ae234fbca70f3041964c917ad0f57f09fef392715ed039ea9d4",
+      "performance9": "54a4f972d859906312319aa4e43224bf233f0637bfcc7a273fff32dc859643a9",
+      "controlled": "c479c613bd35ccdca4759aa55feb8be78196eac81212754769ea715e691258b1",
+      "audit8": "054891e8823d1071d0e9da134127c16b15541cece2e59b52613ec30bfc82f330",
+      "audit9": "a305f13aeb471be87b578819f87a5c0b4a704b48964527838a153beadda928c8"
+    },
+    "deep": {
+      "performance8": "c01de29656ba2e7203bf5907e043de8a2d22c5ec93621b5f1e4170e850d91902",
+      "performance9": "ccf7e4de42f3e0cbc50da35f160a74204184f97673ff54f586b247b2fbe33ad1",
+      "controlled": "0cfe46952fa0c98c262c60538603f9800d19ecbea94a29e9c511d2c099508896",
+      "audit8": "69ae491af61ad852ffa0ab4739dfcbd9e15db6f69e427a83c18d46189d1c8e28",
+      "audit9": "a4799afef7d0dbf38ff06997224f08f78ec92d14d65893a9df721529d35d7385"
+    }
+  },
+  "successful_timed_processes": 45,
+  "steps_per_timed_process": 120,
+  "total_timed_steps": 5400,
+  "discarded_startup_steps_per_process": 20,
+  "timing": "Original GPU-synchronized time.time intervals; ten interval10 means ending30..120; no tensor snapshots, profiling, checkpoint or evaluation while timing.",
+  "numerical_scope": "Separate three-update audits of per-token loss, all gradients, BF16 model parameters and FP32 optimizer master parameters. Not full-tensor audits of all5400 timed steps.",
+  "performance_limit": "Three seeds are observations, not confidence intervals. Initial 0008 two-arm and later 0009 three-arm batches have different storage roots; only same-trial controls compare the implementations.",
+  "remaining": [
+    "Real production model/data and convergence",
+    "AdamW and training/finetuning tasks",
+    "Multi-GPU/TP>1",
+    "Native BF16 RMSNorm rounding before fusion",
+    "Gradient L2 reduction hotspots"
+  ],
+  "nvidia_provenance": "Original Hopper/Blackwell pages and hardware claims retain their original architecture scope."
+}

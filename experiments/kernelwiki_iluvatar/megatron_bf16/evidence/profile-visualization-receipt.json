@@ -1,0 +1,19 @@
+{
+  "trace_sha256": "b41a18b1e8fdd97c80515983c73b7a74e058ffcf75c6aba7f7d317612701a6a8",
+  "trace_bytes": 5708135,
+  "category_counts": {
+    "cpu_op": 7524,
+    "fwdbwd": 1140,
+    "user_annotation": 87,
+    "cuda_runtime": 2831,
+    "ac2g": 4488,
+    "kernel": 1390,
+    "gpu_memcpy": 264,
+    "gpu_memset": 3,
+    "None": 64,
+    "Trace": 1
+  },
+  "scope": "Kineto Chrome JSON from 3 profiled native BF16 formal steps; CPU and vendor CUDA API/kernel events present. Distinct from ixSYS ptrace or hardware instruction trace.",
+  "viewer_documentation": "https://perfetto.dev/docs/visualization/perfetto-ui",
+  "viewer": "https://ui.perfetto.dev"
+}
