@@ -1,0 +1,52 @@
+{
+  "status": "accepted_for_tested_main_scope",
+  "candidate_sha256": "84c851ce5af7a49ba97685710790146d2c315f9c8837259366bffd7831f67dc0",
+  "baseline": "Pinned native formal Megatron; same-trial native / CE0008 / CE0008+gradnorm; actual BF16 weights, FP32 grads and SGD masters, one BI-V150, mock data, local Torch.",
+  "change": "Batch per-tensor GPU norm scalars into one CPU transfer; GPU per-tensor torch.norm calls and final CPU reduction remain native. Not new Triton compute or universal hardware speedup.",
+  "correctness_checks": {
+    "total": 1475,
+    "passed": 1475,
+    "failed": 0
+  },
+  "all_compared_training_tensors_bitwise_equal": true,
+  "actual_training_norms": [
+    {
+      "candidate_norm": 6.729794025421143,
+      "native_norm": 6.729794025421143,
+      "bitwise_equal": true
+    },
+    {
+      "candidate_norm": 6.890683174133301,
+      "native_norm": 6.890683174133301,
+      "bitwise_equal": true
+    },
+    {
+      "candidate_norm": 8.483530044555664,
+      "native_norm": 8.483530044555664,
+      "bitwise_equal": true
+    }
+  ],
+  "vs_native": {
+    "ratio": 1.0440978475693177,
+    "gain_percent": 4.409784756931767,
+    "all_seeds_faster": true
+  },
+  "vs_control": {
+    "ratio": 1.0387234586574066,
+    "gain_percent": 3.872345865740656,
+    "all_seeds_faster": true
+  },
+  "successful_timed_processes": 9,
+  "steps_per_process": 120,
+  "receipt_sha256": {
+    "audit": "739ddb8fcf80121895cbcab97c141271e486932e6393739d1d8162fdd2574200",
+    "performance": "329fcbebde05a0b7f64d2b2bce2fb6da25b5c2fe9852009f6877ebe57bfda060"
+  },
+  "limits": [
+    "Formal training validated only main4layers/H512/S128/V1024/batch2",
+    "Wide/deep only scalar/operator probe; no formal throughput claim",
+    "No production data, long-run convergence, AdamW, clipping or multi-GPU proof",
+    "Three seeds are observations, not confidence intervals",
+    "Do not compare or multiply historical4.62% with new same-trial gains"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "kernelwiki_commit": "b6b4301f15e8ce6955a56776690643ce5db369e6",
+  "architectures": {
+    "sm90": {
+      "paths": 286,
+      "byte_checked_files": 286,
+      "unchanged": true
+    },
+    "sm100": {
+      "paths": 379,
+      "byte_checked_files": 379,
+      "unchanged": true
+    }
+  },
+  "pages": 1065,
+  "source_ids": 1002,
+  "loaded_files": 2530,
+  "patch_sha256": "1412a8853114da161a69ad693a1446089bc325922af7cc457a76a9d0b127f7e6"
+}

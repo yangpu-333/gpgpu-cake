@@ -2,3 +2,4 @@ __pycache__/
 /evidence/**/snapshots/
 /*.tar.gz
 /evidence/raw-backup/*.tar.gz
+/evidence/gradnorm-stage26/*.tar.gz

@@ -1,0 +1,24 @@
+{
+  "enabled": true,
+  "calls": 3,
+  "wrapper_sha256": "385ecb1a1c53d129f0bb7bfc4c83060593bc6217c1abfaecdb3bbcaa23f0d601",
+  "candidate_sha256": "84c851ce5af7a49ba97685710790146d2c315f9c8837259366bffd7831f67dc0",
+  "norm_audit": [
+    {
+      "candidate_norm": 6.729794025421143,
+      "native_norm": 6.729794025421143,
+      "bitwise_equal": true
+    },
+    {
+      "candidate_norm": 6.890683174133301,
+      "native_norm": 6.890683174133301,
+      "bitwise_equal": true
+    },
+    {
+      "candidate_norm": 8.483530044555664,
+      "native_norm": 8.483530044555664,
+      "bitwise_equal": true
+    }
+  ],
+  "scope": "Process-only local multi-tensor L2 hook; original all-reduces, optimizer, CE0008 and training timer unchanged."
+}

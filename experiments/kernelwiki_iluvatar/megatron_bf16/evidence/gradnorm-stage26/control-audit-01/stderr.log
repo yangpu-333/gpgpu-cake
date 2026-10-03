@@ -1,0 +1,4 @@
+usage: launch_gradnorm.py --bf16-root BF16_ROOT
+                          [--gradnorm-candidate GRADNORM_CANDIDATE]
+                          --gradnorm-receipt GRADNORM_RECEIPT
+launch_gradnorm.py: error: argument --bf16-root: expected one argument
