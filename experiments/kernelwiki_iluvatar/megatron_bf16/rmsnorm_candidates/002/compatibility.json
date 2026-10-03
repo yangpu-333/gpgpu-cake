@@ -1,0 +1,5 @@
+{
+  "change": "Remove exactly two unsupported vendor Triton2.1 enable_fp_fusion launch keywords; no kernel/body/API changes. Kernels contain only products, explicit BF16 casts and stores; no multiply-add fusion expression. Original model code retained.",
+  "original_sha256": "eb02cd413d42c92adc71df0061ccc883220d74e7c24059082f83499dc752421e",
+  "compatible_sha256": "cddae61a47d8c0b6b628de79c3ffaa06fda632159669242256f3596091efbda8"
+}

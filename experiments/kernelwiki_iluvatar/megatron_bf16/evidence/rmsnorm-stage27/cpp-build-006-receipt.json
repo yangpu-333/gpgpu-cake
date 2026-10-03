@@ -1,0 +1,21 @@
+{
+  "name": "kda_bf16_affine_stage27_006",
+  "torch": "2.4.1",
+  "cuda": "10.2",
+  "arch": "7.0 CUDA compatibility target",
+  "sources": {
+    "affine-006.cpp": "81e994d3621c09443e0bcf89b7f3d627eab985b8c47bb244cb4c3a431315b3e0",
+    "affine-006.cu": "173c13bdd7e5655b258691011859a8a19fdb2e42ddf7f9a295731fc4229a6d09"
+  },
+  "build_script_sha256": "6b5dfa2feba7438cba7302cfe84d4a2a5ce15c8614e1dd6979b21da01f87eb4a",
+  "extra_cflags": [
+    "-O3"
+  ],
+  "extra_cuda_cflags": [
+    "-O3"
+  ],
+  "build_directory": "/tmp/kda-rmsnorm-stage27/cpp-build-006",
+  "status": "built",
+  "artifact_sha256": "74ea67c92632691281122be56e434c3322856f6c13773b500fe260993a960644",
+  "artifact": "/tmp/kda-rmsnorm-stage27/cpp-build-006/kda_bf16_affine_stage27_006.so"
+}

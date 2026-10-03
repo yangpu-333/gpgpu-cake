@@ -1,0 +1,14 @@
+{
+  "plan": "Candidate005 is a minimal literal patch to candidate004's _bwd2_kernel cube computation only. The independent GPU probe showed vendor Torch BF16 r.pow(3) equals (r*r)*r evaluated in BF16 (each multiply rounded to BF16), and differs from the float32-accumulated cube with a single final BF16 rounding that candidate004 used. The native analytic backward from the prior prompt remains exact precisely because it calls native r.pow(3), i.e. a BF16-rounded square followed by a BF16-rounded multiply by r. The patch replaces the single-round cube (r*r)*r with two staged BF16 roundings: first sq=BF16(r*r), then cube=BF16(sq*r), using the existing .to(tl.bfloat16).to(tl.float32) barrier after r*r and after square*r. No tolerances, reductions, launch closures, kernel arity, guards, or any other algorithm/kernel code change. Vendor-native BF16 pow(3) rounding differs from common opmath (float32-accumulate) assumptions, so this cube correction must be re-verified by independent full forward/dx/dw gates and the formal 3-step training audit before any judgement.",
+  "risks": [
+    "The fix assumes native r.pow(3) is exactly BF16(BF16(r*r)*r) as the probe reported; if the vendor kernel instead rounds differently for pow with an odd exponent (e.g. r * (r*r) ordering, or square-and-multiply with a fused step) the two-stage form could still diverge in some dx cases.",
+    "Only the cube stage is changed; the remaining dx chain (scale, dv, dsq, two_x, extra, direct, sum) is unchanged and was not the identified fault, but exactness of the full dx now hinges solely on this stage matching native, which requires the full independent rerun to confirm.",
+    "Output y and dw were already exact and are untouched; no behavior there should change, but the evaluator must still re-run all 12 dx cases plus the training audit since dx feeds upstream gradient accumulation.",
+    "No speed or correctness claim is made before the actual independent rerun; promotion depends on the native/CPU gates and formal training comparator, which may still reject the candidate."
+  ],
+  "replacement_old": "    cube = (r * r) * r\n    cube = cube.to(tl.bfloat16).to(tl.float32)",
+  "replacement_new": "    cube = r * r\n    cube = cube.to(tl.bfloat16).to(tl.float32)\n    cube = cube * r\n    cube = cube.to(tl.bfloat16).to(tl.float32)",
+  "sha256": "b22ee076dc3ae6bdb1ee612d069a3ebf0dacb7ee8901c51cbabd02996d014ad7",
+  "parent_sha256": "10b45e36c2443cdb6dd82b0d48a493d243c1e8cd40fa9b98c2e379abc9f13113",
+  "serialization": "Model-authored literal patch; SHA256 over actual file bytes, including Windows CRLF serialization."
+}

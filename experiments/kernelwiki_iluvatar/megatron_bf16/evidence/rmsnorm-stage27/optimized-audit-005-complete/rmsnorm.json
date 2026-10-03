@@ -1,0 +1,10 @@
+{
+  "enabled": true,
+  "calls": 27,
+  "fallback_calls": 0,
+  "wrapper_sha256": "2d07f26faa79b2cdeeb132af747102a2b1fe45d0e2ff2ac4208b82fcb7183d92",
+  "candidate_sha256": "b22ee076dc3ae6bdb1ee612d069a3ebf0dacb7ee8901c51cbabd02996d014ad7",
+  "shapes": {
+    "((128, 2, 512), (1024, 512, 1), 'torch.bfloat16', 'torch.bfloat16')": 27
+  }
+}

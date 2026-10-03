@@ -1,0 +1,35 @@
+{
+  "status": "accepted_for_tested_main_scope",
+  "candidate": "006 native C++/CUDA pointwise affine fusion, native RMSNorm reduction/autograd branch preserved",
+  "candidate_sha256": "efc60b6e45bdf3d380224f0f8b429a61fe2c7376a64c7169bb0ce0c71909acbb",
+  "compiled_sources_sha256": {
+    "affine-006.cpp": "81e994d3621c09443e0bcf89b7f3d627eab985b8c47bb244cb4c3a431315b3e0",
+    "affine-006.cu": "173c13bdd7e5655b258691011859a8a19fdb2e42ddf7f9a295731fc4229a6d09"
+  },
+  "artifact_sha256": "74ea67c92632691281122be56e434c3322856f6c13773b500fe260993a960644",
+  "checks": {
+    "total": 1475,
+    "passed": 1475,
+    "failed": 0
+  },
+  "all_compared_tensors_bitwise_equal": true,
+  "vs_control": {
+    "ratio": 1.0203194665755086,
+    "gain_percent": 2.031946657550865,
+    "all_seeds_faster": true
+  },
+  "vs_native": {
+    "ratio": 1.0799040776252697,
+    "gain_percent": 7.990407762526974,
+    "all_seeds_faster": true
+  },
+  "timed_processes": 9,
+  "timed_steps": 1080,
+  "limits": [
+    "Single BI-V150, main 4layer/H512/S128/V1024/batch2, trueBF16, FP32 gradients/SGD masters, no gradient clipping, TP/PP/CP1, mock data.",
+    "No production/multiGPU/AdamW/nonfinite/clipping or TE/Apex performance evidence.",
+    "Formal throughput uses original GPU-synchronized time.time intervals, dropfirst20steps; standalone synchronized perf_counter cannot substitute.",
+    "Candidate003 numerical gates passed but same-control throughput -2.81%, not promoted; candidate005 standalone passed but8 fulltraining gates failed, not promoted.",
+    "CUDA10.2/arch7.0 are vendor CUDA compatibility/compiler values, not NVIDIA hardware instruction equivalence."
+  ]
+}

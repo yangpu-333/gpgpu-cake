@@ -1,0 +1,330 @@
+{
+  "candidate_sha256": "b22ee076dc3ae6bdb1ee612d069a3ebf0dacb7ee8901c51cbabd02996d014ad7",
+  "status": "passed",
+  "checks": [
+    {
+      "rows": 128,
+      "strided": false,
+      "repeat": 0,
+      "name": "output",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": false,
+      "repeat": 0,
+      "name": "dx",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": false,
+      "repeat": 0,
+      "name": "dw",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": false,
+      "repeat": 1,
+      "name": "output",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": false,
+      "repeat": 1,
+      "name": "dx",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": false,
+      "repeat": 1,
+      "name": "dw",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": false,
+      "repeat": 2,
+      "name": "output",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": false,
+      "repeat": 2,
+      "name": "dx",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": false,
+      "repeat": 2,
+      "name": "dw",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": true,
+      "repeat": 0,
+      "name": "output",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": true,
+      "repeat": 0,
+      "name": "dx",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": true,
+      "repeat": 0,
+      "name": "dw",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": true,
+      "repeat": 1,
+      "name": "output",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": true,
+      "repeat": 1,
+      "name": "dx",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": true,
+      "repeat": 1,
+      "name": "dw",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": true,
+      "repeat": 2,
+      "name": "output",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": true,
+      "repeat": 2,
+      "name": "dx",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 128,
+      "strided": true,
+      "repeat": 2,
+      "name": "dw",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": false,
+      "repeat": 0,
+      "name": "output",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": false,
+      "repeat": 0,
+      "name": "dx",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": false,
+      "repeat": 0,
+      "name": "dw",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": false,
+      "repeat": 1,
+      "name": "output",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": false,
+      "repeat": 1,
+      "name": "dx",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": false,
+      "repeat": 1,
+      "name": "dw",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": false,
+      "repeat": 2,
+      "name": "output",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": false,
+      "repeat": 2,
+      "name": "dx",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": false,
+      "repeat": 2,
+      "name": "dw",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": true,
+      "repeat": 0,
+      "name": "output",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": true,
+      "repeat": 0,
+      "name": "dx",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": true,
+      "repeat": 0,
+      "name": "dw",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": true,
+      "repeat": 1,
+      "name": "output",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": true,
+      "repeat": 1,
+      "name": "dx",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": true,
+      "repeat": 1,
+      "name": "dw",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": true,
+      "repeat": 2,
+      "name": "output",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": true,
+      "repeat": 2,
+      "name": "dx",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    },
+    {
+      "rows": 63,
+      "strided": true,
+      "repeat": 2,
+      "name": "dw",
+      "passed": true,
+      "bitwise_equal": true,
+      "max_abs": 0.0
+    }
+  ]
+}

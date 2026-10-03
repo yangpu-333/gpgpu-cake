@@ -1,0 +1,9 @@
+{
+  "enabled": false,
+  "calls": 0,
+  "wrapper_sha256": "12503df82b69f7eb5059cc0c0722677e05ff14cdf1a37b6c34c0d7e3c8acba7f",
+  "candidate_sha256": null,
+  "norm_audit": [],
+  "fallback_calls": 0,
+  "scope": "Process-only local multi-tensor L2 hook; original all-reduces, optimizer, CE0008 and training timer unchanged."
+}

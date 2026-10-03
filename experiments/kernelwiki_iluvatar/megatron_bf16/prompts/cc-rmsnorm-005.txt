@@ -1,0 +1,6 @@
+Candidate004 independent native/CPU gate rejected dx for 9/12 cases; output and dw exact. Found actual vendor Torch BF16 pow(3) has internal rounding: a direct GPU probe shows r.pow(3) == (r*r)*r in BF16, but differs from ((r.float()*r.float())*r.float()).bfloat16(). Earlier assumption float32 cube then one BF16 round was wrong; keep failure evidence. Native analytic Torch sequence from previous prompt still exact because it uses native r.pow(3).
+
+Return ONLY JSON {plan,risks,replacement_old,replacement_new}. This is a minimal literal patch to your candidate004; evaluator will require replacement_old appears exactly once and derive candidate005 by applying this exact model-authored patch, no other code changes. Patch these lines:
+    cube = (r * r) * r
+    cube = cube.to(tl.bfloat16).to(tl.float32)
+into the correct native BF16 square then cube stages with .to(tl.bfloat16).to(tl.float32) after r*r and after square*r. No change to tolerances or other algorithm/kernel launches. Note vendor-native BF16 pow3 rounding differs from common opmath assumptions; cube correction needs independent full forward/dx/dw checks and formal training audit. Do not assert speed or correctness before actual rerun.

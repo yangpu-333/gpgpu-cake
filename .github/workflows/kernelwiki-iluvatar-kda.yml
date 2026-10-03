@@ -38,6 +38,8 @@ jobs:
         run: python -m unittest discover -s experiments/kernelwiki_iluvatar/megatron_bf16/tests -v
       - name: Verify recorded gradient-norm training and raw timing receipts
         run: python experiments/kernelwiki_iluvatar/megatron_bf16/verify_gradnorm_receipts.py
+      - name: Verify recorded native BF16 RMSNorm build and training receipts
+        run: python experiments/kernelwiki_iluvatar/megatron_bf16/verify_rmsnorm_receipts.py
       - name: Rebuild BI-V150 skill from pinned KernelWiki commit
         run: python experiments/kernelwiki_iluvatar/build_skill.py --output "$RUNNER_TEMP/kernelwiki-iluvatar"
       - name: Validate BI-V150 corpus

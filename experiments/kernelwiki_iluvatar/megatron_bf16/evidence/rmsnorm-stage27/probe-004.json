@@ -1,0 +1,296 @@
+{
+  "status": "rejected",
+  "candidate_sha256": "10b45e36c2443cdb6dd82b0d48a493d243c1e8cd40fa9b98c2e379abc9f13113",
+  "checks": [
+    {
+      "rows": 17,
+      "scale": 0.0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "name": "dx",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "name": "dw",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    {
+      "rows": 17,
+      "scale": 0.01,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "name": "dx",
+          "passed": false,
+          "bitwise_equal": false,
+          "max_abs": 1.0
+        },
+        {
+          "name": "dw",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    {
+      "rows": 17,
+      "scale": 1.0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "name": "dx",
+          "passed": false,
+          "bitwise_equal": false,
+          "max_abs": 0.015625
+        },
+        {
+          "name": "dw",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    {
+      "rows": 17,
+      "scale": 10.0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "name": "dx",
+          "passed": false,
+          "bitwise_equal": false,
+          "max_abs": 0.0009765625
+        },
+        {
+          "name": "dw",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    {
+      "rows": 256,
+      "scale": 0.0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "name": "dx",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "name": "dw",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    {
+      "rows": 256,
+      "scale": 0.01,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "name": "dx",
+          "passed": false,
+          "bitwise_equal": false,
+          "max_abs": 2.0
+        },
+        {
+          "name": "dw",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    {
+      "rows": 256,
+      "scale": 1.0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "name": "dx",
+          "passed": false,
+          "bitwise_equal": false,
+          "max_abs": 0.015625
+        },
+        {
+          "name": "dw",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    {
+      "rows": 256,
+      "scale": 10.0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "name": "dx",
+          "passed": false,
+          "bitwise_equal": false,
+          "max_abs": 0.001953125
+        },
+        {
+          "name": "dw",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    {
+      "rows": 513,
+      "scale": 0.0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "name": "dx",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "name": "dw",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    {
+      "rows": 513,
+      "scale": 0.01,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "name": "dx",
+          "passed": false,
+          "bitwise_equal": false,
+          "max_abs": 2.0
+        },
+        {
+          "name": "dw",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    {
+      "rows": 513,
+      "scale": 1.0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "name": "dx",
+          "passed": false,
+          "bitwise_equal": false,
+          "max_abs": 0.015625
+        },
+        {
+          "name": "dw",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        }
+      ]
+    },
+    {
+      "rows": 513,
+      "scale": 10.0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        },
+        {
+          "name": "dx",
+          "passed": false,
+          "bitwise_equal": false,
+          "max_abs": 0.001953125
+        },
+        {
+          "name": "dw",
+          "passed": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0
+        }
+      ]
+    }
+  ],
+  "performance": [],
+  "timer": "GPU synchronized time.perf_counter wall; standalone forward or forward+backward, not formal training"
+}

@@ -3,3 +3,8 @@ __pycache__/
 /*.tar.gz
 /evidence/raw-backup/*.tar.gz
 /evidence/gradnorm-stage26/*.tar.gz
+
+/evidence/rmsnorm-stage27/*.tar.gz
+
+/evidence/rmsnorm-stage27/**/*.tar.gz
+/evidence/rmsnorm-stage27/**/*.so

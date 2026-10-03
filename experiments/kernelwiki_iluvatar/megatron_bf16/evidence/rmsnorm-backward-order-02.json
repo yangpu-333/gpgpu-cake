@@ -1,0 +1,74 @@
+[
+  {
+    "scale": 0.0,
+    "name": "pow3_order",
+    "staged_bf16_equal": true,
+    "float_cube_equal": true
+  },
+  {
+    "scale": 0.0,
+    "name": "dx",
+    "bitwise_equal": true,
+    "max_abs": 0.0
+  },
+  {
+    "scale": 0.0,
+    "name": "dw",
+    "bitwise_equal": true,
+    "max_abs": 0.0
+  },
+  {
+    "scale": 0.01,
+    "name": "pow3_order",
+    "staged_bf16_equal": true,
+    "float_cube_equal": false
+  },
+  {
+    "scale": 0.01,
+    "name": "dx",
+    "bitwise_equal": true,
+    "max_abs": 0.0
+  },
+  {
+    "scale": 0.01,
+    "name": "dw",
+    "bitwise_equal": true,
+    "max_abs": 0.0
+  },
+  {
+    "scale": 1.0,
+    "name": "pow3_order",
+    "staged_bf16_equal": true,
+    "float_cube_equal": false
+  },
+  {
+    "scale": 1.0,
+    "name": "dx",
+    "bitwise_equal": true,
+    "max_abs": 0.0
+  },
+  {
+    "scale": 1.0,
+    "name": "dw",
+    "bitwise_equal": true,
+    "max_abs": 0.0
+  },
+  {
+    "scale": 10.0,
+    "name": "pow3_order",
+    "staged_bf16_equal": true,
+    "float_cube_equal": false
+  },
+  {
+    "scale": 10.0,
+    "name": "dx",
+    "bitwise_equal": true,
+    "max_abs": 0.0
+  },
+  {
+    "scale": 10.0,
+    "name": "dw",
+    "bitwise_equal": true,
+    "max_abs": 0.0
+  }
+]
