@@ -1,0 +1,605 @@
+{
+  "status": "completed",
+  "launches": [
+    {
+      "name": "_forward_kernel_0d1d2d3d4d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_forward_kernel_0d1d2d3d4d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_forward_kernel_0d1d2d3d4d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_rows_kernel_0d1d2d3d4d5d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_weight_kernel_0d1d",
+      "grid": [
+        16,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_rows_kernel_0d1d2d3d4d5d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_weight_kernel_0d1d",
+      "grid": [
+        16,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_rows_kernel_0d1d2d3d4d5d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_weight_kernel_0d1d",
+      "grid": [
+        16,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_forward_kernel_0d1d2d3d4d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_forward_kernel_0d1d2d3d4d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_forward_kernel_0d1d2d3d4d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_forward_kernel_0d1d2d3d4d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_ce_forward_kernel_0d1d2d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_ce_backward_kernel_0d1d2d3d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_rows_kernel_0d1d2d3d4d5d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_weight_kernel_0d1d",
+      "grid": [
+        16,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_rows_kernel_0d1d2d3d4d5d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_weight_kernel_0d1d",
+      "grid": [
+        16,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_rows_kernel_0d1d2d3d4d5d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_weight_kernel_0d1d",
+      "grid": [
+        16,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_rows_kernel_0d1d2d3d4d5d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_weight_kernel_0d1d",
+      "grid": [
+        16,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_forward_kernel_0d1d2d3d4d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_forward_kernel_0d1d2d3d4d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_forward_kernel_0d1d2d3d4d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_forward_kernel_0d1d2d3d4d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_ce_forward_kernel_0d1d2d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_ce_backward_kernel_0d1d2d3d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_rows_kernel_0d1d2d3d4d5d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_weight_kernel_0d1d",
+      "grid": [
+        16,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_rows_kernel_0d1d2d3d4d5d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_weight_kernel_0d1d",
+      "grid": [
+        16,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_rows_kernel_0d1d2d3d4d5d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_weight_kernel_0d1d",
+      "grid": [
+        16,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_rows_kernel_0d1d2d3d4d5d",
+      "grid": [
+        256,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    },
+    {
+      "name": "_backward_weight_kernel_0d1d",
+      "grid": [
+        16,
+        1,
+        1
+      ],
+      "asm_keys": [
+        "ast",
+        "cubin",
+        "llir",
+        "sass",
+        "ttgir",
+        "ttir"
+      ]
+    }
+  ],
+  "counts": {
+    "_forward_kernel_0d1d2d3d4d": 11,
+    "_backward_rows_kernel_0d1d2d3d4d5d": 11,
+    "_backward_weight_kernel_0d1d": 11,
+    "_ce_forward_kernel_0d1d2d": 2,
+    "_ce_backward_kernel_0d1d2d3d": 2
+  },
+  "scope": "Successful CompiledKernel runner invocations during formal training; separate untimed process. No hardware instruction equivalence claim."
+}

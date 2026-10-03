@@ -1,12 +1,12 @@
 # KernelWiki 在天数 BI-V150 上的知识迁移与验证
 
-**公开技术报告｜更新至 2026 年 10 月 2 日**
+**公开技术报告｜更新至 2026 年 10 月 3 日**
 
 ## 项目概览
 
 KernelWiki 原本收录 NVIDIA Hopper、Blackwell GPU 的算子优化知识。本项目保留这些原始内容及其适用范围，在同一知识库中增加天数智芯 BI-V150 的工具链说明、可运行案例和独立实验依据。这样，KDA（Kernel Design Agents）既能继续检索 NVIDIA 知识，也能查询“哪些思路已在 BI-V150 上验证、哪些还不能直接迁移”。
 
-目前交付的是**可重建、可检索、可由 KDA 项目目录加载的适配版 skill**。我们在 BI-V150 上完成了多个算子实验，并使用 Claude Code CLI、适配 skill 和固定验收程序持续迭代。最新候选在保留残差/RMSNorm 优化的基础上增加词表交叉熵融合；固定版本 Megatron 的同一四层 FP32 合成 GPT，三次独立复测相对原生本地 PyTorch 后端的吞吐提升 **19.10%**。输出、loss、全部参数梯度和 SGD 更新通过 CPU 数值复核。**这一结果覆盖所测模型的完整训练 step，尚未证明生产训练或多卡收益。**阶段 23 仅优化残差/RMSNorm 的约 1.08% 结果作为历史记录保留。
+目前交付的是**可重建、可检索、可由 KDA 项目目录加载的适配版 skill**。我们在 BI-V150 上完成了多个算子实验，并使用 Claude Code CLI、适配 skill 和固定验收程序持续迭代。最新候选融合残差/RMSNorm 与 TP=1 词表交叉熵，已接入固定版本 Megatron 的正式 `pretrain_gpt.py` 入口。同一四层 FP32 合成 GPT，三组各 120 步的正式训练对照相对原生本地 PyTorch 后端，吞吐提升 **6.97%**；三步输出、loss、全部参数梯度与 SGD 更新通过逐元素复核。此前独立训练 step 基准的 **19.10%** 作为历史结果保留，两个数字使用不同计时范围。**当前仍是单卡、小模型与原生模拟数据验证，尚无生产训练或多卡收益。**
 
 | 交付内容 | 已验证状态 |
 |---|---|
@@ -14,6 +14,7 @@ KernelWiki 原本收录 NVIDIA Hopper、Blackwell GPU 的算子优化知识。�
 | 可复现构建 | 固定上游提交加本项目补丁；整库校验通过，来源与实验数据可追溯 |
 | KDA 项目级加载 | 适配版复制到 KDA 项目的 `.claude/skills/`，逐文件校验；不依赖个人 skill 安装，也不改原 NVIDIA 子模块 |
 | 自动验收 | 最新构建的 160 项知识库测试在 Linux 全部通过，2 项加载器测试及三架构检索通过；[GitHub Actions](https://github.com/yangpu-333/gpgpu-cake/actions/workflows/kernelwiki-iluvatar-kda.yml)按同一流程从源码重建并验收 |
+| 正式训练入口 | 原生模型安装 hook 提供显式优化开关；600 个原生源码文件哈希一致，原生数据、DDP、训练循环、SGD 和 checkpoint 正常运行 |
 
 ## 为什么需要单独验证
 
@@ -37,6 +38,28 @@ Hopper 和 Blackwell 的资料既有通用算法思路，也有只属于 NVIDIA 
 单层 GPT 的观察形状是 `[8,2,256]`，stride 为 `[512,256,1]`，仅有一对融合点被替换。阶段 21 的约 2% 改善和阶段 22 的退化都来自**合成输入、本地 PyTorch 层规范、小模型**；不能外推到多层生产模型。阶段 14 还在 FP16/BF16 的合成前后向中完成了 **18/18** 组输出、loss、梯度和一次 SGD 更新核对，见[阶段 14 证据](evidence/stage14-20260929/manifest.json)。
 
 负面结果同样进入知识库：当前 CoreX/Triton 组合能分配 FP8 张量，但所测 FP8 `tl.dot` 候选编译失败；分块 scan 虽正确，却比 `torch.cumsum` 慢；部分流水、缓存、持久 kernel 和近似函数候选也没有稳定收益。这些结论只针对上述软件版本和测试形状，不能推断 BI-V150 硬件完全不支持相应能力。
+
+### 正式训练入口：原生训练循环吞吐提升 6.97%（10 月 3 日）
+
+本轮复用经 Claude Code CLI 迭代验收的候选 0006，将它安装到 Megatron 原生 `pre_wrap_hooks` 提供的模型扩展位置。添加 `--iluvatar-kernels` 后，模型实例启用优化；省略该开关即为原生路径。两条路径均由正式 `pretrain_gpt.py` 执行参数解析、数据加载、DDP 包装、前后向调度、SGD、梯度保存和 checkpoint。
+
+实验使用独立的固定提交副本，逐字节核对 **600 个原生源码文件**。旧工具链的导入兼容映射作为显式 `--corex42-compat` 选项保存在本仓库，两条对照共同使用；未修改安装包或该干净副本的源码。当前 Pod 的 Python 3.10.16、Torch 2.4.1 低于该提交声明的 Python 3.12、Torch 2.6 要求，因此这是已测配置的实验兼容方案。Transformer Engine 和 Apex 在进程内禁用，选择上游自带的本地 PyTorch 算子与 Torch SGD；它们不是本轮正式训练成功的前提。未使用的旧 Triton 不兼容 autotuner 只允许导入，若被调用会明确报错。
+
+模型仍为四层、hidden size 512、8 个 head、序列 128、micro-batch/global batch 2、词表 1024、FP32、TP/PP/CP=1、dropout 0。数据改由 **Megatron 原生 MockGPTDataset 与 NullTokenizer** 构建，属于模拟数据。原生与优化路径初始权重和捕获的输入完全相等；逐 token loss、按捕获 mask 重算的 loss、全部 28 个参数的梯度与三次 SGD 更新，以 CPU float64 在原容差 `atol=3e-4, rtol=1e-3` 下核对，**737/737 项通过**。每步检查 13,701,632 个参数元素，三步共检查 41,104,896 个梯度元素及同等数量的更新后参数元素。两条路径也成功保存了第 3 步原生 checkpoint。
+
+| 独立 seed | 原生训练循环均值 | 优化训练循环均值 | 原生 / 优化倍率 | 吞吐变化 |
+|---|---:|---:|---:|---:|
+| 25002 | 31.59 ms/step | 29.35 ms/step | 1.07632× | +7.63% |
+| 25003 | 31.52 ms/step | 29.38 ms/step | 1.07284× | +7.28% |
+| 25004 | 30.86 ms/step | 29.11 ms/step | 1.06012× | +6.01% |
+
+三轮倍率几何平均 **1.069736×，即吞吐提升 6.97%**，约从 8.10–8.30 千 token/s 提高到 8.71–8.79 千 token/s。每个进程运行 120 步，原生/优化进程顺序在三组之间交替；原生每 10 步日志中的 GPU 同步 `time.time` 区间计时为主指标，舍弃前 20 步，平均后 100 步的 10 个完整区间。首次单步初始化日志另存，不参与平均；日志单区间精度为 0.1 ms。性能测试关闭张量审计，不保存 checkpoint、不执行评估；启动耗时另记。这个范围包含原生数据与调度、DDP、SGD 和训练运行检查，较此前独立 step 基准更广，不能直接套用历史 19.10% 的倍率。
+
+每个优化性能进程有 480 次残差融合、480 次归一化结果消费、120 次 CE 调用，无原生回退。另一个非计时的正式训练进程观察到残差前向、两种反向及 CE 前后向共五类编译内核的实际 runner 调用；首轮 JIT 的直接启动不经过这一观察接口，因此该审计只证明已记录的调用，不把 API 计数当作 GPU 时间线。
+
+恢复验证使用同一个原生第 3 步 checkpoint，两条路径都加载原生 optimizer/RNG 与学习率调度状态，继续执行第 4、5、6 步并保存第 6 步 checkpoint。实际恢复日志、样本消费进度、共同输入 checkpoint 的字节哈希及后续逐元素比较通过 **776/776 项检查**，见[恢复训练验收](megatron_training_entry/evidence/resume-comparison-01.json)。恢复审计含磁盘与张量保存，仅用于正确性，不参与吞吐统计；三步继续训练也不构成长周期收敛证明。
+
+集成代码、固定契约、每次启动命令、失败诊断、逐张量误差和原始区间保存在 [`megatron_training_entry/`](megatron_training_entry/)。主要结果见[三步数值验收](megatron_training_entry/evidence/audit-comparison-01.json)、[正式循环性能验收](megatron_training_entry/evidence/performance-120-validated.json)和[编译调用观察](megatron_training_entry/evidence/formal-dispatch-01/dispatch.json)。本轮未改变已有算子候选、容差、旧基准程序或 KernelWiki 的 NVIDIA 资料。
 
 ### 词表交叉熵扩展：完整 step 吞吐提升 19.10%（阶段 24，10 月 2 日）
 
@@ -112,7 +135,7 @@ KDA 可以从项目目录读取这套知识。一次只读 Claude Code 验证实
 
 ## 当前边界与下一步
 
-1. **真实训练。** 当前 Pod 的 Transformer Engine 与固定 Megatron 提交不兼容，因此模型实验采用 Megatron 自带的本地 PyTorch 层规范。尚无生产训练配置；需要兼容运行时和代表性配置后，才能采集实际形状、精度、loss 曲线、显存及生产模型吞吐。
+1. **生产训练配置。** 正式 `pretrain_gpt.py` 已在本地 PyTorch 后端运行并接入优化，原生模拟数据的四层 FP32 对照取得 6.97% 吞吐提升。尚无代表性的生产模型、数据、训练命令和精度配置；取得配置后，需要重新采集实际形状并验证 loss 曲线、显存与吞吐。当前运行时兼容方案也只在上述范围验证。
 2. **模型级融合。** 已在四层合成 GPT 中接入逐层残差/RMSNorm和 TP=1 词表交叉熵。下一步按真实训练配置重新分析热点，覆盖实际形状、bias、dropout、精度和词表大小；TP>1 的交叉熵还需要正确的跨卡归约。当前 autocast 采用原生或原生等价计算，低精度融合需要单独设计并验证。
 3. **硬件归因。** 目前有 Triton 编译中间表示和计时，没有足够的最终机器指令、计算/搬运重叠或共享存储冲突证据。平台开放 tracefs/debugfs 后，才能用 ixSYS 采集时间线并进一步分析。
 4. **低精度与版本升级。** 在新版 CoreX/Triton 上重新探测 FP8/FP4、编译和数值行为；不同软件版本的性能数据分别记录。
@@ -128,6 +151,25 @@ python -m unittest discover -s /path/to/kernelwiki-iluvatar/tests
 ```
 
 KDA 项目级加载使用[构建脚本](build_kda_integration.py)和[验收脚本](verify_kda_integration.py)。[CI 工作流](../../.github/workflows/kernelwiki-iluvatar-kda.yml)从固定的 KDA 与 KernelWiki 提交重新构建，执行完整测试并核查 BI-V150、SM90、SM100 三架构查询。实验脚本、逐轮 JSON、失败记录和校验清单位于本目录的 [`evidence/`](evidence/) 及相邻源码文件；性能结论以这些原始记录为准。
+
+正式入口复测使用 `megatron_training_entry/contract.json` 和同目录的 `source_manifest.json`，候选仍为 `megatron_cc/higher_gain/candidates/0006/candidate.py`。准备本仓库的独立 Linux 工作副本及 Megatron 的干净固定提交，保留两目录的相邻关系；将复制后的原 `evidence/` 归档到另一个目录，保留原文件，重新建立空的 `evidence/` 用于本次运行。下面命令中新 case 目录与 output 应尚不存在。入口显式使用 `--corex42-compat`；直接启动 `launch_pretrain.py` 时加 `--iluvatar-kernels` 启用优化。该运行时选项针对本报告的软件组合，不能作为新版环境的通用兼容层。
+
+```bash
+export PYTHONPATH=/usr/local/corex/lib64/python3/dist-packages
+export LD_LIBRARY_PATH=/usr/local/corex/lib64:/usr/local/openmpi/lib
+cd /path/to/independent-copy/experiments/kernelwiki_iluvatar/megatron_training_entry
+export MEGATRON_CHECKOUT=/path/to/clean-pinned-megatron
+python run_case.py native-check --mode native --megatron-root "$MEGATRON_CHECKOUT" --steps 3 --seed 25001 --audit
+python run_case.py optimized-check --mode optimized --megatron-root "$MEGATRON_CHECKOUT" --steps 3 --seed 25001 --audit
+python compare_cases.py evidence/native-check evidence/optimized-check --output evidence/audit-rerun.json
+python run_performance.py "$MEGATRON_CHECKOUT"
+python summarize_performance.py evidence evidence/performance-rerun.json
+python run_dispatch.py "$MEGATRON_CHECKOUT"
+python run_resume.py native-resume-check optimized-resume-check --megatron-root "$MEGATRON_CHECKOUT" --checkpoint-case evidence/native-check
+python compare_resume.py evidence/native-resume-check evidence/optimized-resume-check --checkpoint-case evidence/native-check --output evidence/resume-rerun.json
+```
+
+大张量快照与原生 checkpoint 单独保留，不提交 Git；远端60个原始文件合计约2.19 GB，其大小、位置和逐文件SHA256见[原始数据清单](megatron_training_entry/evidence/raw-snapshots-manifest.json)。公开仓库保存日志、契约、误差与哈希回执，远端原始根目录在清单中记录；最终数值验收与恢复的快照另备份到本机同一case的`snapshots/`。CPU CI增加了21项安装器测试和10项计时日志测试；实机训练与恢复验证在BI-V150上单独执行，GitHub CI不运行GPU训练。
 
 阶段 24 使用 `megatron_cc/higher_gain/contract.json`，同时固定继承阶段 23 的 `benchmark.py`、原契约和 0003 残差/RMSNorm 源码。在具有上述 CoreX 环境及固定 Megatron 源码的 Linux 机器上，准备独立工作副本，保留 `megatron_cc/` 的目录结构。复测副本中的 `higher_gain/evidence/0006-final/` 应尚不存在，已归档的原始运行目录完整保留在证据副本中。
 
@@ -160,4 +202,4 @@ python summarize.py 0003 evidence/decision-rerun.json
 
 ---
 
-本报告记录的是截至 2026 年 10 月 2 日、固定环境下的可复核结果。NVIDIA 原知识、BI-V150 实测和待验证推断在适配版中分别标注，避免跨设备借用性能数字。
+本报告记录的是截至 2026 年 10 月 3 日、固定环境下的可复核结果。NVIDIA 原知识、BI-V150 实测和待验证推断在适配版中分别标注，避免跨设备借用性能数字。

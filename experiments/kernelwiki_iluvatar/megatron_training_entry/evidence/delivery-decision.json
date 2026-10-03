@@ -1,0 +1,61 @@
+{
+  "schema": "megatron-formal-entry-delivery-v1",
+  "finished_utc": "2026-10-03T04:27:28.513585+00:00",
+  "passed": true,
+  "checks": {
+    "audit-comparison-01.json": {
+      "passed": true,
+      "sha256": "5d9e1032c9870d129a74c2fb42a7c4e5f387b6cadec6f22b511f6279fad5bf02",
+      "check_summary": {
+        "total": 737,
+        "passed": 737,
+        "failed": 0
+      }
+    },
+    "resume-comparison-01.json": {
+      "passed": true,
+      "sha256": "ce5e8e715397ecd8e951012c360dcc4d89f59f148851a6ab2610dbf21a959535",
+      "check_summary": {
+        "total": 776,
+        "passed": 776,
+        "failed": 0
+      }
+    },
+    "performance-120-validated.json": {
+      "passed": true,
+      "sha256": "379d1a4b87ed10e06d652a7689cd5d214b997eea2e36acee81b41c857c2ce53e",
+      "check_summary": null
+    },
+    "compiled_dispatch": {
+      "passed": true,
+      "counts": {
+        "_forward_kernel_0d1d2d3d4d": 11,
+        "_backward_rows_kernel_0d1d2d3d4d5d": 11,
+        "_backward_weight_kernel_0d1d": 11,
+        "_ce_forward_kernel_0d1d2d": 2,
+        "_ce_backward_kernel_0d1d2d3d": 2
+      },
+      "scope": "Successful CompiledKernel runner invocations during formal training; separate untimed process. No hardware instruction equivalence claim.",
+      "sha256": "e37ee0d46a23a6ab44ecb81b9d38baf502bb8ae6d66e28c5de5e6b7eb1228f39"
+    },
+    "adapter-cpu-tests": {
+      "passed": true,
+      "exit_code": 0
+    },
+    "performance-parser-cpu-tests": {
+      "passed": true,
+      "exit_code": 0
+    },
+    "candidate_unchanged": {
+      "passed": true,
+      "sha256": "4a5c2180114396412b1c99907837ab970b2a9efdffe85e0a46f5527cc0790201"
+    },
+    "configured_secret_scan": {
+      "passed": true,
+      "configured_values_checked": 2,
+      "matching_files": []
+    }
+  },
+  "formal_training_throughput_ratio": 1.0697358519426867,
+  "scope": "Four-layer FP32, native MockGPTDataset, TP/PP/CP1. No production, BF16 fusion, SFT or multi-GPU claim."
+}

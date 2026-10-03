@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/mnt/kda-biv150-stage3/megatron_training_entry/launch_pretrain.py", line 123, in <module>
+    main()
+  File "/mnt/kda-biv150-stage3/megatron_training_entry/launch_pretrain.py", line 49, in main
+    raise RuntimeError('native source integrity mismatch: '+repr(changed))
+RuntimeError: native source integrity mismatch: ['megatron/core/models/gpt/gpt_layer_specs.py', 'megatron/core/transformer/transformer_block.py']

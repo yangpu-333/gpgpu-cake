@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/mnt/kda-biv150-stage3/megatron_training_entry/launch_pretrain.py", line 123, in <module>
+    main()
+  File "/mnt/kda-biv150-stage3/megatron_training_entry/launch_pretrain.py", line 45, in main
+    observed = {name:hashlib.sha256((root/name).read_bytes()).hexdigest()
+  File "/mnt/kda-biv150-stage3/megatron_training_entry/launch_pretrain.py", line 45, in <dictcomp>
+    observed = {name:hashlib.sha256((root/name).read_bytes()).hexdigest()
+  File "/root/miniconda3/lib/python3.10/pathlib.py", line 1126, in read_bytes
+    with self.open(mode='rb') as f:
+  File "/root/miniconda3/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/kda-biv150-stage3/megatron-native-5be9626/train_rl.py'

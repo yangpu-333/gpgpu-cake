@@ -1,0 +1,15 @@
+test_duplicate_interval_fails (__main__.ParserTests.test_duplicate_interval_fails) ... ok
+test_duplicate_late_or_gap_with_startup_fails (__main__.ParserTests.test_duplicate_late_or_gap_with_startup_fails) ... ok
+test_missing_interval_fails (__main__.ParserTests.test_missing_interval_fails) ... ok
+test_native_first_iteration_startup_is_preserved_and_excluded (__main__.ParserTests.test_native_first_iteration_startup_is_preserved_and_excluded) ... ok
+test_nonfinite_loss_or_nonpositive_time_fails (__main__.ParserTests.test_nonfinite_loss_or_nonpositive_time_fails) ... ok
+test_out_of_order_interval_fails (__main__.ParserTests.test_out_of_order_interval_fails) ... ok
+test_path_alias_requires_actual_same_file (__main__.ParserTests.test_path_alias_requires_actual_same_file) ... ok
+test_skipped_nan_and_consumed_counts_fail (__main__.ParserTests.test_skipped_nan_and_consumed_counts_fail) ... ok
+test_valid_intervals_and_warmup (__main__.ParserTests.test_valid_intervals_and_warmup) ... ok
+test_wrong_total_fails (__main__.ParserTests.test_wrong_total_fails) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.019s
+
+OK

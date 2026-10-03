@@ -1,0 +1,44 @@
+{
+  "started_utc": "2026-10-03T03:47:26.704881+00:00",
+  "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
+  "formal_entry": "/mnt/atrex-megatron/src/megatron-lm/pretrain_gpt.py",
+  "training_argv": [
+    "--transformer-impl",
+    "local",
+    "--help"
+  ],
+  "iluvatar_kernels": false,
+  "status": "failed",
+  "runtime_compatibility": {
+    "torch": "2.4.1",
+    "selected_megatron_source": "/mnt/atrex-megatron/src/megatron-lm",
+    "dtensor_namespace_exports": [
+      "DTensor",
+      "DeviceMesh",
+      "Partial",
+      "Placement",
+      "Replicate",
+      "Shard",
+      "distribute_module",
+      "distribute_tensor"
+    ],
+    "typing_override": "typing_extensions.override",
+    "ignored_triton_profiler_launch_metadata": [
+      "_matmul_launch_metadata"
+    ],
+    "unavailable_restore_value_autotuners": [
+      "rotary_fwd_q_kernel",
+      "rotary_bwd_q_kernel"
+    ],
+    "optional_backends_disabled_in_process": [
+      "transformer_engine",
+      "apex"
+    ]
+  },
+  "error_type": "ValueError",
+  "error": "unsupported format character ')' (0x29) at index 157",
+  "traceback": "Traceback (most recent call last):\n  File \"/private/kda-biv150-stage3/megatron_training_entry/launch_pretrain.py\", line 61, in main\n    runpy.run_path(str(root/'pretrain_gpt.py'), run_name='__main__')\n  File \"/root/miniconda3/lib/python3.10/runpy.py\", line 289, in run_path\n    return _run_module_code(code, init_globals, run_name,\n  File \"/root/miniconda3/lib/python3.10/runpy.py\", line 96, in _run_module_code\n    _run_code(code, mod_globals, init_globals,\n  File \"/root/miniconda3/lib/python3.10/runpy.py\", line 86, in _run_code\n    exec(code, run_globals)\n  File \"/mnt/atrex-megatron/src/megatron-lm/pretrain_gpt.py\", line 510, in <module>\n    pretrain, store = inprocess_restart.maybe_wrap_for_inprocess_restart(pretrain)\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/training/inprocess_restart.py\", line 133, in maybe_wrap_for_inprocess_restart\n    args = arguments.parse_args(ignore_unknown_args=True)\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/training/arguments.py\", line 129, in parse_args\n    args, _ = parser.parse_known_args()\n  File \"/root/miniconda3/lib/python3.10/argparse.py\", line 1866, in parse_known_args\n    namespace, args = self._parse_known_args(args, namespace)\n  File \"/root/miniconda3/lib/python3.10/argparse.py\", line 2079, in _parse_known_args\n    start_index = consume_optional(start_index)\n  File \"/root/miniconda3/lib/python3.10/argparse.py\", line 2019, in consume_optional\n    take_action(action, args, option_string)\n  File \"/root/miniconda3/lib/python3.10/argparse.py\", line 1943, in take_action\n    action(self, namespace, argument_values, option_string)\n  File \"/root/miniconda3/lib/python3.10/argparse.py\", line 1106, in __call__\n    parser.print_help()\n  File \"/root/miniconda3/lib/python3.10/argparse.py\", line 2567, in print_help\n    self._print_message(self.format_help(), file)\n  File \"/root/miniconda3/lib/python3.10/argparse.py\", line 2551, in format_help\n    return formatter.format_help()\n  File \"/root/miniconda3/lib/python3.10/argparse.py\", line 283, in format_help\n    help = self._root_section.format_help()\n  File \"/root/miniconda3/lib/python3.10/argparse.py\", line 214, in format_help\n    item_help = join([func(*args) for func, args in self.items])\n  File \"/root/miniconda3/lib/python3.10/argparse.py\", line 214, in <listcomp>\n    item_help = join([func(*args) for func, args in self.items])\n  File \"/root/miniconda3/lib/python3.10/argparse.py\", line 214, in format_help\n    item_help = join([func(*args) for func, args in self.items])\n  File \"/root/miniconda3/lib/python3.10/argparse.py\", line 214, in <listcomp>\n    item_help = join([func(*args) for func, args in self.items])\n  File \"/root/miniconda3/lib/python3.10/argparse.py\", line 540, in _format_action\n    help_text = self._expand_help(action)\n  File \"/root/miniconda3/lib/python3.10/argparse.py\", line 637, in _expand_help\n    return self._get_help_string(action) % params\nValueError: unsupported format character ')' (0x29) at index 157\n",
+  "finished_utc": "2026-10-03T03:47:37.903340+00:00",
+  "kernel_adapters": [],
+  "launcher_sha256": "d8c05777c310b201c89146e72ed953f2330056393283ed26c2fb78879c304d57"
+}

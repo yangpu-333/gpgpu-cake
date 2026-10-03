@@ -1,0 +1,14 @@
+fatal: detected dubious ownership in repository at '/mnt/atrex-megatron/src/megatron-lm'
+To add an exception for this directory, call:
+
+	git config --global --add safe.directory /mnt/atrex-megatron/src/megatron-lm
+Traceback (most recent call last):
+  File "/private/kda-biv150-stage3/megatron_training_entry/launch_pretrain.py", line 78, in <module>
+    main()
+  File "/private/kda-biv150-stage3/megatron_training_entry/launch_pretrain.py", line 31, in main
+    commit = subprocess.check_output(prefix+['rev-parse','HEAD'], text=True).strip()
+  File "/root/miniconda3/lib/python3.10/subprocess.py", line 421, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+  File "/root/miniconda3/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['git', '-c', 'safe.directory=/mnt/atrex-megatron/src/megatron-lm', '-C', '/mnt/atrex-megatron/src/megatron-lm', 'rev-parse', 'HEAD']' returned non-zero exit status 128.

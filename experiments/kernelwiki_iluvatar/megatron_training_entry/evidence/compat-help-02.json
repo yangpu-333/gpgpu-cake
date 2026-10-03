@@ -1,0 +1,36 @@
+{
+  "started_utc": "2026-10-03T03:43:42.936980+00:00",
+  "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
+  "formal_entry": "/mnt/atrex-megatron/src/megatron-lm/pretrain_gpt.py",
+  "training_argv": [
+    "--transformer-impl",
+    "local",
+    "--help"
+  ],
+  "iluvatar_kernels": false,
+  "status": "failed",
+  "runtime_compatibility": {
+    "torch": "2.4.1",
+    "selected_megatron_source": "/mnt/atrex-megatron/src/megatron-lm",
+    "dtensor_namespace_exports": [
+      "DTensor",
+      "DeviceMesh",
+      "Partial",
+      "Placement",
+      "Replicate",
+      "Shard",
+      "distribute_module",
+      "distribute_tensor"
+    ],
+    "optional_backends_disabled_in_process": [
+      "transformer_engine",
+      "apex"
+    ]
+  },
+  "error_type": "TypeError",
+  "error": "jit() got an unexpected keyword argument 'launch_metadata'",
+  "traceback": "Traceback (most recent call last):\n  File \"/private/kda-biv150-stage3/megatron_training_entry/launch_pretrain.py\", line 47, in main\n    from megatron.training import argument_utils\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/training/__init__.py\", line 13, in <module>\n    from .initialize  import initialize_megatron\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/training/initialize.py\", line 26, in <module>\n    from megatron.core.transformer.custom_layers.batch_invariant_kernels import (\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/core/transformer/custom_layers/batch_invariant_kernels.py\", line 72, in <module>\n    @triton.jit(launch_metadata=_matmul_launch_metadata)\nTypeError: jit() got an unexpected keyword argument 'launch_metadata'\n",
+  "finished_utc": "2026-10-03T03:43:51.321006+00:00",
+  "kernel_adapters": [],
+  "launcher_sha256": "d8c05777c310b201c89146e72ed953f2330056393283ed26c2fb78879c304d57"
+}

@@ -1,0 +1,40 @@
+{
+  "started_utc": "2026-10-03T03:45:30.487142+00:00",
+  "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
+  "formal_entry": "/mnt/atrex-megatron/src/megatron-lm/pretrain_gpt.py",
+  "training_argv": [
+    "--transformer-impl",
+    "local",
+    "--help"
+  ],
+  "iluvatar_kernels": false,
+  "status": "failed",
+  "runtime_compatibility": {
+    "torch": "2.4.1",
+    "selected_megatron_source": "/mnt/atrex-megatron/src/megatron-lm",
+    "dtensor_namespace_exports": [
+      "DTensor",
+      "DeviceMesh",
+      "Partial",
+      "Placement",
+      "Replicate",
+      "Shard",
+      "distribute_module",
+      "distribute_tensor"
+    ],
+    "typing_override": "typing_extensions.override",
+    "ignored_triton_profiler_launch_metadata": [
+      "_matmul_launch_metadata"
+    ],
+    "optional_backends_disabled_in_process": [
+      "transformer_engine",
+      "apex"
+    ]
+  },
+  "error_type": "TypeError",
+  "error": "autotune() got an unexpected keyword argument 'restore_value'",
+  "traceback": "Traceback (most recent call last):\n  File \"/private/kda-biv150-stage3/megatron_training_entry/launch_pretrain.py\", line 47, in main\n    from megatron.training import argument_utils\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/training/__init__.py\", line 13, in <module>\n    from .initialize  import initialize_megatron\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/training/initialize.py\", line 30, in <module>\n    from megatron.training import (\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/training/inprocess_restart.py\", line 13, in <module>\n    from megatron.training.async_utils import (\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/training/async_utils.py\", line 19, in <module>\n    from megatron.training.utils import print_rank_0\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/training/utils/__init__.py\", line 31, in <module>\n    from megatron.training.utils.utils import start_memory_history_recording\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/training/utils/utils.py\", line 9, in <module>\n    from megatron.training.config import ProfilingConfig\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/training/config/__init__.py\", line 23, in <module>\n    from megatron.training.config.container import InferenceConfigContainer, PretrainConfigContainer\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/training/config/container.py\", line 36, in <module>\n    from megatron.training.models import GPTModelConfig, Serializable, HybridModelConfig\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/training/models/__init__.py\", line 8, in <module>\n    from megatron.training.models.hybrid import HybridModelBuilder, HybridModelConfig\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/training/models/hybrid.py\", line 9, in <module>\n    from megatron.core.models.hybrid.hybrid_layer_specs import (\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/core/models/hybrid/hybrid_layer_specs.py\", line 29, in <module>\n    from megatron.core.transformer.experimental_attention_variant.absorbed_mla import (\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/core/transformer/experimental_attention_variant/absorbed_mla.py\", line 44, in <module>\n    from megatron.core.fusions.fused_mla_yarn_rope_apply import (\n  File \"/mnt/atrex-megatron/src/megatron-lm/megatron/core/fusions/fused_mla_yarn_rope_apply.py\", line 53, in <module>\n    @triton.autotune(\nTypeError: autotune() got an unexpected keyword argument 'restore_value'\n",
+  "finished_utc": "2026-10-03T03:45:39.765929+00:00",
+  "kernel_adapters": [],
+  "launcher_sha256": "d8c05777c310b201c89146e72ed953f2330056393283ed26c2fb78879c304d57"
+}

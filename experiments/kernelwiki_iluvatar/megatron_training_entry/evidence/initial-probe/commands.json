@@ -1,0 +1,23 @@
+[
+  {
+    "name": "minimum-allocation",
+    "command": [
+      "/root/miniconda3/bin/python",
+      "-c",
+      "import torch; x=torch.zeros(1).cuda(); torch.cuda.synchronize(); print(torch.__version__,torch.cuda.get_device_name(0),x.cpu().tolist())"
+    ],
+    "started_utc": "2026-10-03T03:36:38.832012+00:00",
+    "exit_code": 0
+  },
+  {
+    "name": "native-pretrain-help",
+    "command": [
+      "/root/miniconda3/bin/python",
+      "-u",
+      "/private/atrex-megatron/src/megatron-lm/pretrain_gpt.py",
+      "--help"
+    ],
+    "started_utc": "2026-10-03T03:36:41.056989+00:00",
+    "exit_code": 1
+  }
+]

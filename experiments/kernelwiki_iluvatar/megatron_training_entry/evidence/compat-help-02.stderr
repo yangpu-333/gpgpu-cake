@@ -1,0 +1,28 @@
+/mnt/atrex-megatron/src/megatron-lm/megatron/core/optimizer/__init__.py:25: UserWarning: Transformer Engine and Apex are not installed. Falling back to Torch optimizers.
+  warnings.warn(
+/mnt/atrex-megatron/src/megatron-lm/megatron/core/inference/contexts/__init__.py:9: DeprecationWarning: The following imports from `dynamic_context.py` will be removed in this file in `megatron-core` 0.14. The imports here result in a cyclic import issue that causes rotary embeddings to import from Apex rather than Transformer Engine.
+  warnings.warn(
+/mnt/atrex-megatron/src/megatron-lm/megatron/core/distributed/fsdp/src/megatron_fsdp/mixed_precision.py:115: UserWarning: Transformer Engine and Apex are not installed. Falling back to local implementations of multi_tensor_applier and multi_tensor_scale
+  warnings.warn(
+/mnt/atrex-megatron/src/megatron-lm/megatron/core/optimizer/optimizer.py:29: UserWarning: Transformer Engine and Apex are not installed. Falling back to local implementations of multi_tensor_applier and multi_tensor_scale
+  warnings.warn(
+/mnt/atrex-megatron/src/megatron-lm/megatron/core/optimizer/clip_grads.py:32: UserWarning: Transformer Engine and Apex are not installed. Falling back to local implementations of multi_tensor_applier, multi_tensor_l2norm, and multi_tensor_scale
+  warnings.warn(
+2026-10-03 11:43:48.866462: I tensorflow/core/util/port.cc:110] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-10-03 11:43:48.928921: I tensorflow/core/platform/cpu_feature_guard.cc:182] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+WARNING:tensorflow:Deprecation warnings have been disabled. Set TF_ENABLE_DEPRECATION_WARNINGS=1 to re-enable them.
+Traceback (most recent call last):
+  File "/private/kda-biv150-stage3/megatron_training_entry/launch_pretrain.py", line 79, in <module>
+    main()
+  File "/private/kda-biv150-stage3/megatron_training_entry/launch_pretrain.py", line 47, in main
+    from megatron.training import argument_utils
+  File "/mnt/atrex-megatron/src/megatron-lm/megatron/training/__init__.py", line 13, in <module>
+    from .initialize  import initialize_megatron
+  File "/mnt/atrex-megatron/src/megatron-lm/megatron/training/initialize.py", line 26, in <module>
+    from megatron.core.transformer.custom_layers.batch_invariant_kernels import (
+  File "/mnt/atrex-megatron/src/megatron-lm/megatron/core/transformer/custom_layers/batch_invariant_kernels.py", line 72, in <module>
+    @triton.jit(launch_metadata=_matmul_launch_metadata)
+TypeError: jit() got an unexpected keyword argument 'launch_metadata'
+/root/miniconda3/lib/python3.10/tempfile.py:869: ResourceWarning: Implicitly cleaning up <TemporaryDirectory '/tmp/tmpnz54gebr'>
+  _warnings.warn(warn_message, ResourceWarning)

@@ -1,0 +1,16 @@
+/usr/local/corex/lib64/python3/dist-packages/megatron/core/tensor_parallel/random.py:10: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  from pkg_resources import packaging
+/usr/local/corex/lib64/python3/dist-packages/megatron/core/tensor_parallel/layers.py:281: FutureWarning: `torch.cuda.amp.custom_fwd(args...)` is deprecated. Please use `torch.amp.custom_fwd(args..., device_type='cuda')` instead.
+  def forward(
+/usr/local/corex/lib64/python3/dist-packages/megatron/core/tensor_parallel/layers.py:297: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  def backward(ctx, grad_output):
+/usr/local/corex/lib64/python3/dist-packages/megatron/core/transformer/moe/sparse_gemm_util.py:27: FutureWarning: `torch.cuda.amp.custom_fwd(args...)` is deprecated. Please use `torch.amp.custom_fwd(args..., device_type='cuda')` instead.
+  def forward(
+/usr/local/corex/lib64/python3/dist-packages/megatron/core/transformer/moe/sparse_gemm_util.py:70: FutureWarning: `torch.cuda.amp.custom_bwd(args...)` is deprecated. Please use `torch.amp.custom_bwd(args..., device_type='cuda')` instead.
+  def backward(ctx, grad_output):
+Traceback (most recent call last):
+  File "/private/atrex-megatron/src/megatron-lm/pretrain_gpt.py", line 26, in <module>
+    from gpt_builders import gpt_builder
+  File "/mnt/atrex-megatron/src/megatron-lm/gpt_builders.py", line 4, in <module>
+    from megatron.core.models.gpt.gpt_layer_specs import (
+ImportError: cannot import name 'get_gpt_decoder_block_spec' from 'megatron.core.models.gpt.gpt_layer_specs' (/usr/local/corex/lib64/python3/dist-packages/megatron/core/models/gpt/gpt_layer_specs.py)

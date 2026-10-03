@@ -26,6 +26,10 @@ jobs:
         run: python experiments/kernelwiki_iluvatar/build_kda_integration.py --output "$RUNNER_TEMP/kda"
       - name: Test KDA project-level loader
         run: python -m unittest discover -s "$RUNNER_TEMP/kda/tests" -p test_load_external_skill.py -v
+      - name: Test opt-in Megatron kernel adapter
+        run: python -m unittest discover -s experiments/kernelwiki_iluvatar/megatron_training_entry/tests -v
+      - name: Test formal-loop performance log validation
+        run: python experiments/kernelwiki_iluvatar/megatron_training_entry/summarize_performance.py --self-test
       - name: Rebuild BI-V150 skill from pinned KernelWiki commit
         run: python experiments/kernelwiki_iluvatar/build_skill.py --output "$RUNNER_TEMP/kernelwiki-iluvatar"
       - name: Validate BI-V150 corpus

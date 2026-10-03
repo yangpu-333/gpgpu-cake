@@ -1,0 +1,26 @@
+test_autocast_is_reported_as_compatibility_not_triton_evidence (test_kernel_adapter.AdapterTests.test_autocast_is_reported_as_compatibility_not_triton_evidence) ... ok
+test_candidate_failure_propagates_without_native_retry (test_kernel_adapter.AdapterTests.test_candidate_failure_propagates_without_native_retry) ... ok
+test_candidate_source_hash_is_checked_before_import (test_kernel_adapter.AdapterTests.test_candidate_source_hash_is_checked_before_import) ... ok
+test_ce_outside_tested_vocabulary_uses_native (test_kernel_adapter.AdapterTests.test_ce_outside_tested_vocabulary_uses_native) ... ok
+test_ce_tp_greater_than_one_uses_native (test_kernel_adapter.AdapterTests.test_ce_tp_greater_than_one_uses_native) ... ok
+test_conflicting_hook_does_not_get_overwritten_on_uninstall (test_kernel_adapter.AdapterTests.test_conflicting_hook_does_not_get_overwritten_on_uninstall) ... ok
+test_disabled_cannot_relabel_an_installed_model_as_baseline (test_kernel_adapter.AdapterTests.test_disabled_cannot_relabel_an_installed_model_as_baseline) ... ok
+test_disabled_is_noop_and_does_not_read_or_import (test_kernel_adapter.AdapterTests.test_disabled_is_noop_and_does_not_read_or_import) ... ok
+test_install_allows_cpu_weights_and_is_idempotent (test_kernel_adapter.AdapterTests.test_install_allows_cpu_weights_and_is_idempotent) ... ok
+test_native_source_modification_is_detected (test_kernel_adapter.AdapterTests.test_native_source_modification_is_detected) ... ok
+test_other_gpu_architecture_uses_native (test_kernel_adapter.AdapterTests.test_other_gpu_architecture_uses_native) ... ok
+test_pending_result_is_not_used_for_a_different_tensor (test_kernel_adapter.AdapterTests.test_pending_result_is_not_used_for_a_different_tensor) ... ok
+test_residual_known_unsupported_calls_use_native (test_kernel_adapter.AdapterTests.test_residual_known_unsupported_calls_use_native) ... ok
+test_snapshot_is_a_copy_without_runtime_tensors (test_kernel_adapter.AdapterTests.test_snapshot_is_a_copy_without_runtime_tensors) ... ok
+test_supported_ce_transposes_native_layout_and_returns_batch_sequence (test_kernel_adapter.AdapterTests.test_supported_ce_transposes_native_layout_and_returns_batch_sequence) ... ok
+test_supported_residual_consumes_exact_adjacent_result (test_kernel_adapter.AdapterTests.test_supported_residual_consumes_exact_adjacent_result) ... ok
+test_uninstall_restores_original_bindings (test_kernel_adapter.AdapterTests.test_uninstall_restores_original_bindings) ... ok
+test_unsupported_model_config_is_rejected_without_partial_install (test_kernel_adapter.AdapterTests.test_unsupported_model_config_is_rejected_without_partial_install) ... ok
+test_unverified_ffn_architecture_is_rejected (test_kernel_adapter.AdapterTests.test_unverified_ffn_architecture_is_rejected) ... ok
+test_verified_holdout_configuration_and_shapes (test_kernel_adapter.AdapterTests.test_verified_holdout_configuration_and_shapes) ... ok
+test_world_size_greater_than_one_uses_native (test_kernel_adapter.AdapterTests.test_world_size_greater_than_one_uses_native) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.058s
+
+OK
