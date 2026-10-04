@@ -1,0 +1,18 @@
+{
+  "enabled": true,
+  "calls": 2040,
+  "fallback_calls": 0,
+  "wrapper_sha256": "a1cfb74d66887b126f973505273b9106f4cdf07f611416ec0c5b5ed255b6f060",
+  "candidate_sha256": "efc60b6e45bdf3d380224f0f8b429a61fe2c7376a64c7169bb0ce0c71909acbb",
+  "shapes": {
+    "((512, 2, 512), (1024, 512, 1), 'torch.bfloat16', 'torch.bfloat16')": 2040
+  },
+  "extension": {
+    "path": "/tmp/kda-rmsnorm-stage27/cpp-build-006/kda_bf16_affine_stage27_006.so",
+    "sha256": "74ea67c92632691281122be56e434c3322856f6c13773b500fe260993a960644",
+    "sources": {
+      "affine-006.cpp": "81e994d3621c09443e0bcf89b7f3d627eab985b8c47bb244cb4c3a431315b3e0",
+      "affine-006.cu": "173c13bdd7e5655b258691011859a8a19fdb2e42ddf7f9a295731fc4229a6d09"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "enabled": false,
+  "calls": 0,
+  "fallback_calls": 0,
+  "wrapper_sha256": "a1cfb74d66887b126f973505273b9106f4cdf07f611416ec0c5b5ed255b6f060",
+  "candidate_sha256": null,
+  "shapes": {}
+}

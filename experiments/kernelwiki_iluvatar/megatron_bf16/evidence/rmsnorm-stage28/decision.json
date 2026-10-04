@@ -1,0 +1,73 @@
+{
+  "schema": "held-out-bf16-shapes-v1",
+  "status": "complete_mixed_and_negative_results_retained",
+  "models": {
+    "wide": {
+      "vs_native": {
+        "ratio": 1.046542907508232,
+        "gain_percent": 4.654290750823198,
+        "all_seeds_faster": true
+      },
+      "vs_control": {
+        "ratio": 1.0421959181674338,
+        "gain_percent": 4.219591816743384,
+        "all_seeds_faster": false
+      },
+      "checks": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "status": "not_promoted_RMSNorm_increment",
+      "reason": "Fails fixed >1% vs optimized control and all-three-seeds-faster gate",
+      "native_comparisons": {
+        "control": {
+          "total": 1475,
+          "passed": 1475,
+          "failed": 0
+        },
+        "optimized": {
+          "total": 1475,
+          "passed": 1475,
+          "failed": 0
+        }
+      },
+      "bitwise_equal": true
+    },
+    "deep": {
+      "vs_native": {
+        "ratio": 1.0505581164353166,
+        "gain_percent": 5.05581164353166,
+        "all_seeds_faster": true
+      },
+      "vs_control": {
+        "ratio": 0.9993957140881244,
+        "gain_percent": -0.060428591187555725,
+        "all_seeds_faster": false
+      },
+      "checks": {
+        "total": 2371,
+        "passed": 2371,
+        "failed": 0
+      },
+      "status": "not_promoted_RMSNorm_increment",
+      "reason": "Fails fixed >1% vs optimized control and all-three-seeds-faster gate",
+      "native_comparisons": {
+        "control": {
+          "total": 2371,
+          "passed": 2371,
+          "failed": 0
+        },
+        "optimized": {
+          "total": 2371,
+          "passed": 2371,
+          "failed": 0
+        }
+      },
+      "bitwise_equal": true
+    }
+  },
+  "scope": "Single BI-V150 true BF16 mock GPT, pinned original Megatron localTorch, FP32 gradients/SGD masters, clipping/dropout0; no tuning of stage27 candidate, no production/multiGPU/AdamW claims",
+  "timing_activity": "GPU experiments serialized. Wide timing has deep audit processes between some arms. Deep timing overlaps CPU snapshot compression/transfer; effect unproven. No confidence interval or stable benefit claim.",
+  "next": "Keep stage27 main-only RMSNorm acceptance; profile larger-model attention/MLP/CE costs under a separately frozen contract rather than unconditionally enabling RMSNorm."
+}
