@@ -1,0 +1,26 @@
+{
+  "plan": [
+    "Candidate004: abandon the C++/expf path (003) and the two-kernel Triton rewrite (001) and reproduce the NATIVE inductor-generated SwiGLU math exactly in Triton, so bitwise behavior matches the pinned baseline bias_swiglu_impl.",
+    "Two JIT kernels only. Forward: a,b = BF16 loads .to(fp32); sig = tl.sigmoid(a); y = (a*sig)*b; single BF16 store (pointer-dtype cast, one rounding). Backward: sig = tl.sigmoid(a); tmp8=g*sig; tmp10=1-sig; tmp11=a*tmp10; tmp12=tmp11+1; tmp13=tmp8*tmp12; dx_gate=tmp13*b; dx_up=g*(a*tl.sigmoid(a)); two BF16 stores. FP32 op order and tl.sigmoid preserved; no rsqrt, no fp-fast-math, no enable_fp_fusion kwarg.",
+    "Indexing: flatten over the H-sized (pair) output. program covers offs in [0,numel_out); row=offs//H, col=offs%H with H:tl.constexpr so the H=2048 main case lowers to shift/mask and all shapes avoid a register-divisor modulo. gate=row*2H+col, up=gate+H. Backward is launched on the SAME H-sized grid and writes both halves per program (pair-output map), covering every dx element with no duplication.",
+    "torch.autograd.Function saves x only; backward calls g.contiguous(); dx is a fresh contiguous tensor of full x shape each call; out is a fresh (prefix,H) tensor each call. Nothing cached per-result.",
+    "Dispatch cache holds ONLY CompiledKernel launch closures, keyed by (phase, device, numel, H, grid_x, data_ptr()%16 of every tensor arg). Miss: kernel[grid](runtime args, H=H, BLOCK=1024, num_warps=4) launches and returns the compiled kernel; store compiled[(grid_x,1,1)]. Hit: call that closure with the CURRENT runtime args (x/out/numel, constexpr H/BLOCK dropped). Closure fetches the active stream each launch, so non-default streams keep working; no tensor/pointer/stream is pinned.",
+    "Guarded closure use (per stage27 uncertainty on H-constexpr runner arity): first closure-call failure flips a global flag, clears the cache, and all subsequent calls use the plain kernel[grid] miss path \u2014 correctness never depends on the closure working. Re-launch after a closure miss is idempotent (same inputs overwrite identical outputs).",
+    "Edge handling: numel==0 returns the empty out / empty dx with no launch (no divide-by-zero in grid math); numel==1 is handled by the normal miss path (equal_to_1 specialization is compiled on miss and keyed by exact numel, so closures never cross specialization classes); odd-storage-offset views are distinguished by data_ptr()%16 in the key.",
+    "Validation in swiglu(): contiguous CUDA BF16, 2D/3D, even last dim, else NotImplementedError. Then _SwiGLU.apply(x). BLOCK=1024, num_warps=4 as first guess (same as 001).",
+    "Promotion gate unchanged: full 3-step loss/grad/weight/master/source-hash parity, then 120-step (first 20 discarded) x3 seeds 26002/26003/26004 vs SAME-ROUND CE0008+gradnorm control; promote only if strictly >1% AND faster on every seed. If not, keep native Torch.compile SwiGLU backend as default."
+  ],
+  "risks": [
+    "Closure arity for an H-constexpr kernel in vendor Triton 2.1.0 is unverified; if compiled[(grid_x,1,1)](x,out,numel) does not accept these runtime args, every call falls back to the plain kernel[grid] launch \u2014 correct but with no dispatch speedup, so the >1% gate may not be met.",
+    "data_ptr()%16 keying is conservative (16 alignment classes per arg) and could create many closure entries under alternating shapes/offsets, diluting the cache-hit benefit without harming correctness.",
+    "Matching inductor bitwise still depends on Triton emitting the identical fp32 sequence and a single round-to-nearest BF16 store; any auto-inserted intermediate cast or reassociation by the vendor compiler could reintroduce the 1-ULP divergences seen in 003 and fail the 1475-check/637-tensor formal audit.",
+    "int32 offset arithmetic is safe for the fixed controller shapes (max gate offset ~4.2M < 2^31) but would overflow for much larger inputs; this candidate targets the declared shapes only.",
+    "The closure keeps the native stream-fetch-per-launch behavior; if any harness path pins a stream around the module hook, parity with the baseline must be re-confirmed on the two non-default-stream cases.",
+    "No tolerance weakening and prior fails (001 control regression, 002 unsupported flag, 003 enlarged-case failures) are retained; this candidate must stand on native-math parity plus dispatch savings alone."
+  ],
+  "model": "Claude-Opus-4.8",
+  "session_id": "7daac75c-814e-462f-9467-c76028acbf32",
+  "candidate_sha256": "a516bb372012cd5569eed99db2815a41c0b229755158289ddf6536248d554250",
+  "sha256": "a516bb372012cd5569eed99db2815a41c0b229755158289ddf6536248d554250",
+  "metadata_note": "Canonical sha256 alias added for archive schema; model response and candidate source unchanged."
+}

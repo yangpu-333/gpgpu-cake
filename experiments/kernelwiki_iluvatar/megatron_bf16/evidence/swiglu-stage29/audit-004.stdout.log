@@ -1,0 +1,6 @@
+{"case": "main-control-audit-004-complete", "stage29_arm": "control", "exit_code": 0, "whole_process_elapsed_seconds": 18.64150083484128}
+{"case": "main-optimized-audit-004-complete", "stage29_arm": "optimized", "exit_code": 0, "whole_process_elapsed_seconds": 17.490087357815355}
+{"comparison": "controlled", "path": "/tmp/kda-swiglu-stage29/comparison-main-004-complete.json", "sha256": "4bda96602a2cbb187700c87e182dfa14142ed0ebd9fe3d1f876216fa46b7c9fa", "passed": true, "check_summary": {"total": 1475, "passed": 1475, "failed": 0}, "tensor_comparisons": 637, "all_tensors_bitwise_equal": true}
+{"comparison": "native_optimized", "path": "/tmp/kda-swiglu-stage29/comparison-native-optimized-main-004-complete.json", "sha256": "3e777b8ce7882f9a0c341f2c00bac0921aac7ba9ddfed185d506b091208f197e", "passed": true, "check_summary": {"total": 1475, "passed": 1475, "failed": 0}, "tensor_comparisons": 637, "all_tensors_bitwise_equal": true}
+{"comparison": "native_control", "path": "/tmp/kda-swiglu-stage29/comparison-native-control-main-004-complete.json", "sha256": "2aab32e8a8f19f7d08652976bbb33070ecf40e7047730ba7230468fceee78794", "passed": true, "check_summary": {"total": 1475, "passed": 1475, "failed": 0}, "tensor_comparisons": 637, "all_tensors_bitwise_equal": true}
+{"passed": true, "summary": "/tmp/kda-swiglu-stage29/audit-summary-main-004-complete.json"}

@@ -1,0 +1,30 @@
+{
+  "enabled": true,
+  "calls": 12,
+  "native_calls": 0,
+  "fallback_calls": 0,
+  "shapes": {
+    "((128, 2, 4096), (8192, 4096, 1), 'torch.bfloat16')": 12
+  },
+  "wrapper_sha256": "50a8c68426d2925c4ea2666d9dedde7d57aec357484e57cebcf9ec859aa09e08",
+  "candidate_sha256": "8adf1f276aaf908a7d01f91839f6fa1ab2aaf75d319f1af77939b50c3446301f",
+  "native_source_sha256": {
+    "megatron/core/transformer/mlp.py": "f54a7209db5cad4e095143cbbc1eedcbf41e913ea1eec64db3cb1b8408e6ff07",
+    "megatron/core/fusions/fused_bias_swiglu.py": "5303680596749464c45f9c3ec65f94d1127fb6d49b2aa9ec3ba8c91b1141f08f",
+    "megatron/core/jit.py": "0de81ea1c3a8fd5bf1a880a1c3d3ddacd706b4df946c9016d563b5c14778a3ba"
+  },
+  "native_jit_callable": "<class 'function'>",
+  "native_compiled_callable": true,
+  "configuration": {
+    "gated_linear_unit": true,
+    "bias_activation_fusion": true,
+    "activation_func": "torch.nn.functional.silu",
+    "add_bias_linear": false,
+    "use_te_activation_func": false,
+    "activation_func_fp8_input_store": false,
+    "glu_linear_offset": 0.0,
+    "activation_func_clamp_value": null,
+    "cpu_offloading": false,
+    "per_token_scale_present": false
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "status": "verified",
+  "version": "001",
+  "probe": {
+    "path": "E:\\code\\GPGPU\\experiments\\kernelwiki_iluvatar\\megatron_bf16\\evidence\\swiglu-stage29\\probe-001.json",
+    "sha256": "31e991b6e8a504a28293fd03dc6f049059f6c6c15000bc569c939f92ea6fc3d8",
+    "cases": 22,
+    "numeric_checks": 44,
+    "guard_checks": 4
+  },
+  "comparisons": {
+    "controlled": {
+      "checks": 1475,
+      "tensors": 637,
+      "all_tensors_exact_equal": true,
+      "all_tensors_bitwise": true
+    },
+    "native_optimized": {
+      "checks": 1475,
+      "tensors": 637,
+      "all_tensors_exact_equal": true,
+      "all_tensors_bitwise": true
+    },
+    "native_control": {
+      "checks": 1475,
+      "tensors": 637,
+      "all_tensors_exact_equal": true,
+      "all_tensors_bitwise": true
+    }
+  },
+  "performance": {
+    "available": true,
+    "timed_processes": 9,
+    "promoted": false,
+    "vs_native": {
+      "ratio": 1.0365336027616958,
+      "gain_percent": 3.6533602761695816,
+      "all_seeds_faster": true
+    },
+    "vs_control": {
+      "ratio": 0.9782973225543772,
+      "gain_percent": -2.170267744562282,
+      "all_seeds_faster": false
+    },
+    "control_vs_native": {
+      "ratio": 1.0595282015647973,
+      "gain_percent": 5.952820156479732,
+      "all_seeds_faster": true
+    },
+    "path": "E:\\code\\GPGPU\\experiments\\kernelwiki_iluvatar\\megatron_bf16\\evidence\\swiglu-stage29\\performance-main-001-complete.json",
+    "sha256": "41c292c129b9b76175688395e1367666955060a72b2efac6ea395cd5df5c3ec5"
+  },
+  "compiled_extension": null,
+  "binary_bytes_checked": false,
+  "snapshot_files_hashed": 42,
+  "snapshot_files_not_present_locally": 0,
+  "raw_backup": {
+    "available": true,
+    "inventory_sha256": "a27dbae28e80b15d4a0baf6fa206304631bdf77b0e8b37721ef241aa7c03ae9a",
+    "receipt_checked": true,
+    "inventory_files": 83,
+    "files_hashed": 83,
+    "files_not_present_locally": 0,
+    "unique_contents": 23
+  },
+  "gpu_rerun": false,
+  "tensor_snapshot_values_recomputed": false,
+  "scope": "CPU archive revalidation of every published numerical check/tensor record, all source/contract/controller provenance, and raw native timing logs. No training/GPU rerun and no tensor snapshot arithmetic replay. Available raw snapshots and extension binaries are checked by SHA256; missing raw bytes remain explicitly reported."
+}

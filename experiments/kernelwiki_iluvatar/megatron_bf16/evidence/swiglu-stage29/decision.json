@@ -1,0 +1,134 @@
+{
+  "schema": "native-default-swiglu-stage29-decision-v1",
+  "recorded_at": "2026-10-04",
+  "sealed_utc": "2026-10-04T03:57:50.886836+00:00",
+  "status": "promoted_main_only",
+  "promoted": true,
+  "selected_candidate": "004",
+  "candidate_versions": [
+    "001",
+    "002",
+    "003",
+    "004"
+  ],
+  "scope": "Only fixed single-BI-V150 4-layer BF16 SwiGLU GPT: H512 FFN2048 seq128 vocab1024 batch2 17895936 parameters, FP32 gradients/SGD masters, TP/PP/CP1, mock data, native RMSNorm and default compiled activation baseline. No GELU cross-model comparison, held-out training, production, convergence, AdamW or multiGPU claim. Explicit opt-in only.",
+  "model": {
+    "num_layers": 4,
+    "hidden_size": 512,
+    "ffn_hidden_size": 2048,
+    "num_attention_heads": 8,
+    "sequence_length": 128,
+    "micro_batch_size": 2,
+    "global_batch_size": 2,
+    "vocab_size": 1024,
+    "parameters": 17895936,
+    "normalization": "RMSNorm",
+    "epsilon": 1e-05,
+    "bf16": true,
+    "fp32_residual_connection": false,
+    "gated_linear_unit": true,
+    "bias_activation_fusion": true
+  },
+  "vs_control": {
+    "ratio": 1.0310703185313335,
+    "gain_percent": 3.1070318531333463,
+    "all_seeds_faster": true
+  },
+  "vs_native": {
+    "ratio": 1.0886704143317671,
+    "gain_percent": 8.867041433176714,
+    "all_seeds_faster": true
+  },
+  "timed_processes": 18,
+  "timed_steps": 2160,
+  "candidate_results": {
+    "001": {
+      "numerical": "three-way audits all1475;637tensors bitwise",
+      "performance": "not_promoted",
+      "gain_vs_control_percent": -2.170267744562282
+    },
+    "002": {
+      "status": "build_rejected",
+      "reason": "CoreX clang does not accept --fmad=false; source not numerically tested"
+    },
+    "003": {
+      "status": "numeric_rejected",
+      "failed_probe_cases": 19,
+      "total_probe_cases": 37,
+      "training_or_performance_run": false
+    },
+    "004": {
+      "status": "promoted_main_only",
+      "probe_cases": 37,
+      "guard_checks": 4,
+      "audit": {
+        "controlled": {
+          "path": "/tmp/kda-swiglu-stage29/comparison-main-004-complete.json",
+          "sha256": "4bda96602a2cbb187700c87e182dfa14142ed0ebd9fe3d1f876216fa46b7c9fa",
+          "passed": true,
+          "check_summary": {
+            "total": 1475,
+            "passed": 1475,
+            "failed": 0
+          },
+          "tensor_comparisons": 637,
+          "all_tensors_bitwise_equal": true
+        },
+        "native_optimized": {
+          "path": "/tmp/kda-swiglu-stage29/comparison-native-optimized-main-004-complete.json",
+          "sha256": "3e777b8ce7882f9a0c341f2c00bac0921aac7ba9ddfed185d506b091208f197e",
+          "passed": true,
+          "check_summary": {
+            "total": 1475,
+            "passed": 1475,
+            "failed": 0
+          },
+          "tensor_comparisons": 637,
+          "all_tensors_bitwise_equal": true
+        },
+        "native_control": {
+          "path": "/tmp/kda-swiglu-stage29/comparison-native-control-main-004-complete.json",
+          "sha256": "2aab32e8a8f19f7d08652976bbb33070ecf40e7047730ba7230468fceee78794",
+          "passed": true,
+          "check_summary": {
+            "total": 1475,
+            "passed": 1475,
+            "failed": 0
+          },
+          "tensor_comparisons": 637,
+          "all_tensors_bitwise_equal": true
+        }
+      },
+      "performance": {
+        "ratio": 1.0310703185313335,
+        "gain_percent": 3.1070318531333463,
+        "all_seeds_faster": true
+      }
+    }
+  },
+  "backup": {
+    "verified_files": 83,
+    "raw_bytes": 3943897778,
+    "unique_bytes": 1222186094,
+    "remote_deleted": false
+  },
+  "evidence_sha256": {
+    "probe-001.json": "31e991b6e8a504a28293fd03dc6f049059f6c6c15000bc569c939f92ea6fc3d8",
+    "probe-003-v3.json": "d154ec28b93f67967d6c15e55b1dce5dad6862f892188d53cdd03720fdaf1a96",
+    "probe-004-v3.json": "afbb2c40c283cc16cfd42c5f27792068436c280a1de9959cb0d0e6bed7a0e342",
+    "audit-summary-main-001-complete.json": "5ac0b684594f5e4eeb175d8bee3a40798e916c0c321e3d1b5428495a1b163771",
+    "audit-summary-main-004-complete.json": "4743a300dd2760a540055f29b09e8e63a1a4da7b22b74f32dee8e35105ee62ad",
+    "performance-main-001-complete.json": "41c292c129b9b76175688395e1367666955060a72b2efac6ea395cd5df5c3ec5",
+    "performance-main-004-complete.json": "8dc1188eb744be149d589da598c951ed99e4b0b913dc69fe0454a61471abeb08",
+    "raw-inventory.json": "a27dbae28e80b15d4a0baf6fa206304631bdf77b0e8b37721ef241aa7c03ae9a",
+    "raw-backup-receipt.json": "232cc06767231418401c8e60a8dc8a767833271d0451306bf00d088c7fad6522",
+    "cpu-verification-001.json": "5fe2cddbacead5e1201f5c76140f7e708b3d1da8a8cd7bda9205422d0e89c0d0",
+    "cpu-verification-004.json": "5bfab43a2ddafac0d0d394fbe9693e97e610f49c6b03563e65bd5bec716e4168",
+    "launch-observation-004.json": "4999816a769d71e0e3d03713309b11737ba3df5102fe4ecab349112efae97fd3"
+  },
+  "next": [
+    "Fixed-code held-out SwiGLU training shapes before extending promotion",
+    "Capture actual dense attention hotspot and native numerical contract",
+    "MoE requires separate native MoE model contract; current dense GPT does not execute it"
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "schema": "native-compiled-swiglu-semantics-v1",
+  "checks": [
+    {
+      "scale": 0.0,
+      "comparisons": {
+        "output_vs_eager": {
+          "bitwise_equal": true,
+          "passed_fixed_tolerance": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        "dx_vs_eager": {
+          "bitwise_equal": true,
+          "passed_fixed_tolerance": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        "output_vs_fp32": {
+          "bitwise_equal": true,
+          "passed_fixed_tolerance": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        "dx_vs_fp32": {
+          "bitwise_equal": true,
+          "passed_fixed_tolerance": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      }
+    },
+    {
+      "scale": 0.01,
+      "comparisons": {
+        "output_vs_eager": {
+          "bitwise_equal": false,
+          "passed_fixed_tolerance": true,
+          "max_abs": 1.9073486328125e-06,
+          "unequal_elements": 2292
+        },
+        "dx_vs_eager": {
+          "bitwise_equal": false,
+          "passed_fixed_tolerance": true,
+          "max_abs": 0.000244140625,
+          "unequal_elements": 7252
+        },
+        "output_vs_fp32": {
+          "bitwise_equal": true,
+          "passed_fixed_tolerance": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        "dx_vs_fp32": {
+          "bitwise_equal": true,
+          "passed_fixed_tolerance": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      }
+    },
+    {
+      "scale": 1.0,
+      "comparisons": {
+        "output_vs_eager": {
+          "bitwise_equal": false,
+          "passed_fixed_tolerance": false,
+          "max_abs": 0.03125,
+          "unequal_elements": 2392
+        },
+        "dx_vs_eager": {
+          "bitwise_equal": false,
+          "passed_fixed_tolerance": false,
+          "max_abs": 0.0625,
+          "unequal_elements": 7083
+        },
+        "output_vs_fp32": {
+          "bitwise_equal": true,
+          "passed_fixed_tolerance": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        "dx_vs_fp32": {
+          "bitwise_equal": true,
+          "passed_fixed_tolerance": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      }
+    },
+    {
+      "scale": 10.0,
+      "comparisons": {
+        "output_vs_eager": {
+          "bitwise_equal": false,
+          "passed_fixed_tolerance": false,
+          "max_abs": 1.0,
+          "unequal_elements": 1751
+        },
+        "dx_vs_eager": {
+          "bitwise_equal": false,
+          "passed_fixed_tolerance": false,
+          "max_abs": 0.5,
+          "unequal_elements": 5455
+        },
+        "output_vs_fp32": {
+          "bitwise_equal": true,
+          "passed_fixed_tolerance": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        "dx_vs_fp32": {
+          "bitwise_equal": true,
+          "passed_fixed_tolerance": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      }
+    }
+  ],
+  "script_sha256": "9fc9a19a03d4da01bd93ff9ef86730d580aee2f017d27758e3fd5dc19e467cbc",
+  "note": "Probe diagnoses arithmetic; candidate must compare to compiled native, not eager or a mathematical substitute."
+}

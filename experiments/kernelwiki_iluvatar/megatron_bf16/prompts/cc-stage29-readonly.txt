@@ -1,0 +1,5 @@
+/kernelwiki-iluvatar
+This is a read-only project-skill loading check, not a new optimization run. Read only these two project skill pages in .claude/skills/kernelwiki-iluvatar:
+- sources/experiments/bi-v150-corex42-stage29.md
+- wiki/kernels/swiglu-megatron-bi-v150.md
+Do not edit files or inspect any other file. Return a short JSON object with source_page_id, kernel_page_id, accepted_candidate, main_parameters, incremental_throughput_gain_percent, combined_throughput_gain_percent, native_activation_baseline, rmsnorm_backend, and validation_scope. If the pages are not present, report the missing paths instead of guessing. Preserve the distinction between fixed main-shape acceptance and unvalidated held-out or production training.

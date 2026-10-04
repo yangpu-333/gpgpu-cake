@@ -1,0 +1,2057 @@
+{
+  "schema": "native-compiled-swiglu-independent-probe-v3",
+  "status": "passed",
+  "candidate_sha256": "a516bb372012cd5569eed99db2815a41c0b229755158289ddf6536248d554250",
+  "verifier_sha256": "3ec1540f4ef0ebf188a0cd7ca42da06c22e2e3686b9e4bce4ecdb08b659e8570",
+  "extension": {
+    "required": false,
+    "passed": true
+  },
+  "runtime_compatibility": {
+    "torch": "2.4.1",
+    "selected_megatron_source": "/tmp/kda-bf16-continuation/megatron-native-5be9626",
+    "dtensor_namespace_exports": [
+      "DTensor",
+      "DeviceMesh",
+      "Partial",
+      "Placement",
+      "Replicate",
+      "Shard",
+      "distribute_module",
+      "distribute_tensor"
+    ],
+    "typing_override": "typing_extensions.override",
+    "ignored_triton_profiler_launch_metadata": [],
+    "unavailable_restore_value_autotuners": [],
+    "optional_backends_disabled_in_process": [
+      "transformer_engine",
+      "apex"
+    ]
+  },
+  "torch": "2.4.1",
+  "gpu": "Iluvatar BI-V150",
+  "native_source_sha256": {
+    "megatron/core/fusions/fused_bias_swiglu.py": "5303680596749464c45f9c3ec65f94d1127fb6d49b2aa9ec3ba8c91b1141f08f",
+    "megatron/core/jit.py": "0de81ea1c3a8fd5bf1a880a1c3d3ddacd706b4df946c9016d563b5c14778a3ba"
+  },
+  "original_case_count": 22,
+  "total_case_count": 37,
+  "checks": [
+    {
+      "case": "random-scale-0.0",
+      "group": "original",
+      "shape": [
+        17,
+        514
+      ],
+      "stride": [
+        514,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        17,
+        257
+      ],
+      "upstream_stride": [
+        257,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-0.01",
+      "group": "original",
+      "shape": [
+        17,
+        514
+      ],
+      "stride": [
+        514,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        17,
+        257
+      ],
+      "upstream_stride": [
+        257,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-1.0",
+      "group": "original",
+      "shape": [
+        17,
+        514
+      ],
+      "stride": [
+        514,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        17,
+        257
+      ],
+      "upstream_stride": [
+        257,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-10.0",
+      "group": "original",
+      "shape": [
+        17,
+        514
+      ],
+      "stride": [
+        514,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        17,
+        257
+      ],
+      "upstream_stride": [
+        257,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-0.0",
+      "group": "original",
+      "shape": [
+        257,
+        1538
+      ],
+      "stride": [
+        1538,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        257,
+        769
+      ],
+      "upstream_stride": [
+        769,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-0.01",
+      "group": "original",
+      "shape": [
+        257,
+        1538
+      ],
+      "stride": [
+        1538,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        257,
+        769
+      ],
+      "upstream_stride": [
+        769,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-1.0",
+      "group": "original",
+      "shape": [
+        257,
+        1538
+      ],
+      "stride": [
+        1538,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        257,
+        769
+      ],
+      "upstream_stride": [
+        769,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-10.0",
+      "group": "original",
+      "shape": [
+        257,
+        1538
+      ],
+      "stride": [
+        1538,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        257,
+        769
+      ],
+      "upstream_stride": [
+        769,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-0.0",
+      "group": "original",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-0.01",
+      "group": "original",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-1.0",
+      "group": "original",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-10.0",
+      "group": "original",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-0.0",
+      "group": "original",
+      "shape": [
+        256,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        256,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-0.01",
+      "group": "original",
+      "shape": [
+        256,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        256,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-1.0",
+      "group": "original",
+      "shape": [
+        256,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        256,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-10.0",
+      "group": "original",
+      "shape": [
+        256,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        256,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-0.0",
+      "group": "original",
+      "shape": [
+        513,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        513,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-0.01",
+      "group": "original",
+      "shape": [
+        513,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        513,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-1.0",
+      "group": "original",
+      "shape": [
+        513,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        513,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "random-scale-10.0",
+      "group": "original",
+      "shape": [
+        513,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        513,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "actual-native-training-input-and-grad",
+      "group": "original",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "noncontiguous-upstream-gradient",
+      "group": "original",
+      "shape": [
+        17,
+        514
+      ],
+      "stride": [
+        514,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        17,
+        257
+      ],
+      "upstream_stride": [
+        514,
+        2
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "same-shape-fresh-input-and-grad-0",
+      "group": "fresh-data-reuse",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "same-shape-fresh-input-and-grad-1",
+      "group": "fresh-data-reuse",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "same-shape-fresh-input-and-grad-2",
+      "group": "fresh-data-reuse",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "same-shape-fresh-input-and-grad-3",
+      "group": "fresh-data-reuse",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "same-input-fresh-grad-0",
+      "group": "fresh-data-reuse",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "same-input-fresh-grad-1",
+      "group": "fresh-data-reuse",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "alternating-size-0",
+      "group": "alternating-sizes",
+      "shape": [
+        17,
+        514
+      ],
+      "stride": [
+        514,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        17,
+        257
+      ],
+      "upstream_stride": [
+        257,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "alternating-size-1",
+      "group": "alternating-sizes",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "alternating-size-2",
+      "group": "alternating-sizes",
+      "shape": [
+        257,
+        1538
+      ],
+      "stride": [
+        1538,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        257,
+        769
+      ],
+      "upstream_stride": [
+        769,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "alternating-size-3",
+      "group": "alternating-sizes",
+      "shape": [
+        17,
+        514
+      ],
+      "stride": [
+        514,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        17,
+        257
+      ],
+      "upstream_stride": [
+        257,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "alternating-size-4",
+      "group": "alternating-sizes",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "offset-contiguous-input-and-grad-0",
+      "group": "storage-offset",
+      "shape": [
+        17,
+        514
+      ],
+      "stride": [
+        514,
+        1
+      ],
+      "input_storage_offset": 3,
+      "upstream_shape": [
+        17,
+        257
+      ],
+      "upstream_stride": [
+        257,
+        1
+      ],
+      "upstream_storage_offset": 5,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "offset-contiguous-input-and-grad-1",
+      "group": "storage-offset",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 3,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 5,
+      "current_stream": 0,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "nondefault-current-stream-0",
+      "group": "current-stream",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 275515328,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    },
+    {
+      "case": "nondefault-current-stream-1",
+      "group": "current-stream",
+      "shape": [
+        128,
+        2,
+        4096
+      ],
+      "stride": [
+        8192,
+        4096,
+        1
+      ],
+      "input_storage_offset": 0,
+      "upstream_shape": [
+        128,
+        2,
+        2048
+      ],
+      "upstream_stride": [
+        4096,
+        2048,
+        1
+      ],
+      "upstream_storage_offset": 0,
+      "current_stream": 138275737469248,
+      "checks": [
+        {
+          "name": "output",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        },
+        {
+          "name": "input_grad",
+          "passed": true,
+          "shape_equal": true,
+          "dtype_equal": true,
+          "device_equal": true,
+          "finite": true,
+          "bitwise_equal": true,
+          "max_abs": 0.0,
+          "unequal_elements": 0
+        }
+      ],
+      "input_unchanged": true,
+      "upstream_unchanged": true
+    }
+  ],
+  "guard_checks": [
+    {
+      "name": "cpu",
+      "passed": true
+    },
+    {
+      "name": "FP32",
+      "passed": true
+    },
+    {
+      "name": "odd-lastdim",
+      "passed": true
+    },
+    {
+      "name": "noncontiguous-input",
+      "passed": true
+    }
+  ],
+  "performance": [
+    {
+      "backward": false,
+      "samples_us": {
+        "native": [
+          9.328589836756388,
+          10.124743978182474,
+          9.49999988079071,
+          10.258076588312784,
+          31.70730670293172,
+          9.945897261301676,
+          10.4358971118927,
+          9.946025411287943,
+          10.258076588312784,
+          9.455256660779318,
+          9.411410490671793,
+          9.856667121251425,
+          9.633846084276835,
+          69.33064460754395,
+          10.034743944803873
+        ],
+        "candidate": [
+          10.302692651748657,
+          10.123974084854126,
+          10.391282041867575,
+          10.391410191853842,
+          10.391410191853842,
+          10.481282075246176,
+          10.436025261878967,
+          10.436025261878967,
+          10.392050941785177,
+          10.391410191853842,
+          10.391410191853842,
+          10.48064132531484,
+          10.391410191853842,
+          10.481410225232443,
+          10.436025261878967
+        ]
+      },
+      "median_us": {
+        "native": 9.946025411287943,
+        "candidate": 10.391410191853842
+      }
+    },
+    {
+      "backward": true,
+      "samples_us": {
+        "native": [
+          82.67486890157063,
+          83.12666416168213,
+          89.9385929107666,
+          83.33000342051189,
+          186.18858655293783,
+          76.06461842854817,
+          82.42512543996175,
+          128.67371241251627,
+          81.77884419759114,
+          222.97499974568686,
+          82.80833562215169,
+          82.07499980926514,
+          82.24807580312093,
+          81.95127646128337,
+          81.76154295603435
+        ],
+        "candidate": [
+          122.15268611907959,
+          45.2817956606547,
+          44.66397364934286,
+          44.945128758748375,
+          44.89410320917765,
+          44.80461676915487,
+          44.725000858306885,
+          44.6262796719869,
+          45.56794961293539,
+          44.56474383672079,
+          44.74294980367025,
+          70.2256441116333,
+          42.622435092926025,
+          44.88525390625,
+          120.62179247538249
+        ]
+      },
+      "median_us": {
+        "native": 82.67486890157063,
+        "candidate": 44.88525390625
+      }
+    }
+  ],
+  "timer": "torch.cuda.Event API elapsed; 10 warmup, 15 paired samples x30 calls; forward or forward+backward. CPU dispatch and autograd submission gaps can appear inside the Event interval. Compilation excluded. Not isolated kernel time or formal training throughput; formal training retains its separate original GPU-synchronized time.time wall timer."
+}

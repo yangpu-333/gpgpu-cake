@@ -1,0 +1,24 @@
+{
+  "name": "kda_swiglu_stage29_003",
+  "torch": "2.4.1",
+  "cuda": "10.2",
+  "arch": "7.0 SDK compatibility target; not a NVIDIA GPU identity",
+  "sources": {
+    "swiglu-003.cpp": "2e29f4dc9eadbf98fec5018141823697063761e218e7a435a88501b09fb545f8",
+    "swiglu-003.cu": "7c87984388c83e9f845cc2597667da6dead05db4a7de46c69124d087949d4076"
+  },
+  "build_script_path": "/tmp/kda-swiglu-stage29/build_cpp-02.py",
+  "build_script_sha256": "324e906384c46ee67c7c4c5d415c84f769478c5b371a12e7d09a9683616acdbd",
+  "extra_cflags": [
+    "-O3",
+    "-ffp-contract=off"
+  ],
+  "extra_cuda_cflags": [
+    "-O3",
+    "-ffp-contract=off"
+  ],
+  "build_directory": "/tmp/kda-swiglu-stage29/cpp-build-003",
+  "status": "built",
+  "artifact": "/tmp/kda-swiglu-stage29/cpp-build-003/kda_swiglu_stage29_003.so",
+  "artifact_sha256": "69cadbb56cd50ecc068ba383fc9a4ada8771617418673b9742bac5cbd31acbf4"
+}

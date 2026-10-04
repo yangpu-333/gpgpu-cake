@@ -1,0 +1,33 @@
+{
+  "runtime": {
+    "torch": "2.4.1",
+    "selected_megatron_source": "/tmp/kda-bf16-continuation/megatron-native-5be9626",
+    "dtensor_namespace_exports": [
+      "DTensor",
+      "DeviceMesh",
+      "Partial",
+      "Placement",
+      "Replicate",
+      "Shard",
+      "distribute_module",
+      "distribute_tensor"
+    ],
+    "typing_override": "typing_extensions.override",
+    "ignored_triton_profiler_launch_metadata": [],
+    "unavailable_restore_value_autotuners": [],
+    "optional_backends_disabled_in_process": [
+      "transformer_engine",
+      "apex"
+    ]
+  },
+  "torch": "2.4.1",
+  "gpu": "Iluvatar BI-V150",
+  "status": "passed",
+  "shape": [
+    17,
+    2,
+    257
+  ],
+  "finite_output": true,
+  "finite_grad": true
+}

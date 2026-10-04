@@ -1,0 +1,25 @@
+Detected CUDA files, patching ldflags
+Emitting ninja build file /tmp/kda-swiglu-stage29/cpp-build-002/build.ninja...
+Building extension module kda_swiglu_stage29_002...
+Using envvar MAX_JOBS (1) as the number of workers...
+Traceback (most recent call last):
+  File "/usr/local/corex/lib64/python3/dist-packages/torch/utils/cpp_extension.py", line 2205, in _run_ninja_build
+    subprocess.run(
+  File "/root/miniconda3/lib/python3.10/subprocess.py", line 526, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ninja', '-v', '-j', '1']' returned non-zero exit status 1.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/tmp/kda-swiglu-stage29/build_cpp.py", line 33, in <module>
+    module = load(name=receipt['name'], sources=[str(path) for path in sources],
+  File "/usr/local/corex/lib64/python3/dist-packages/torch/utils/cpp_extension.py", line 1390, in load
+    return _jit_compile(
+  File "/usr/local/corex/lib64/python3/dist-packages/torch/utils/cpp_extension.py", line 1800, in _jit_compile
+    _write_ninja_file_and_build_library(
+  File "/usr/local/corex/lib64/python3/dist-packages/torch/utils/cpp_extension.py", line 1912, in _write_ninja_file_and_build_library
+    _run_ninja_build(
+  File "/usr/local/corex/lib64/python3/dist-packages/torch/utils/cpp_extension.py", line 2221, in _run_ninja_build
+    raise RuntimeError(message) from e
+RuntimeError: Error building extension 'kda_swiglu_stage29_002'

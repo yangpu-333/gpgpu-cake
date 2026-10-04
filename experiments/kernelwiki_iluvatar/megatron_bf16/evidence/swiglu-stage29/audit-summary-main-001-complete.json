@@ -1,0 +1,54 @@
+{
+  "schema": "megatron-default-swiglu-three-way-audit-v1",
+  "version": "001",
+  "case_suffix": "complete",
+  "candidate_sha256": "8adf1f276aaf908a7d01f91839f6fa1ab2aaf75d319f1af77939b50c3446301f",
+  "contract_sha256": "b71917793c455625cb2a1e09733b6969f8e20b08058385408c3f5f7f930d723e",
+  "probe_path": "/tmp/kda-swiglu-stage29/probe-001.json",
+  "probe_sha256": "31e991b6e8a504a28293fd03dc6f049059f6c6c15000bc569c939f92ea6fc3d8",
+  "runner_sha256": "d357c2a687f5581a5cca427d8b3e3a17481374e324268009eb5917400b87e617",
+  "frozen_comparator_sha256": "feb475eb504fe452267f930f2069d5f17b36387a6cb4ad0f839a6aaa8df27eda",
+  "wrapper_sha256": "50a8c68426d2925c4ea2666d9dedde7d57aec357484e57cebcf9ec859aa09e08",
+  "comparisons": {
+    "controlled": {
+      "path": "/tmp/kda-swiglu-stage29/comparison-main-001-complete.json",
+      "sha256": "3cfaccb45cc5365e552e80367d6aa5fc17ce13911899455346b6209ec13d259d",
+      "passed": true,
+      "check_summary": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "tensor_comparisons": 637,
+      "all_tensors_bitwise_equal": true
+    },
+    "native_optimized": {
+      "path": "/tmp/kda-swiglu-stage29/comparison-native-optimized-main-001-complete.json",
+      "sha256": "2cc5ba61708bf4fb3c8a13dc3ccde7cdafc981aaa2bbeeb217ed3177548d9783",
+      "passed": true,
+      "check_summary": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "tensor_comparisons": 637,
+      "all_tensors_bitwise_equal": true
+    },
+    "native_control": {
+      "path": "/tmp/kda-swiglu-stage29/comparison-native-control-main-001-complete.json",
+      "sha256": "e8181d905604406d4839bee8743231e55e957df259a568e1b44c1f1e2bf47444",
+      "passed": true,
+      "check_summary": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "tensor_comparisons": 637,
+      "all_tensors_bitwise_equal": true
+    }
+  },
+  "swiglu_receipt_guard_passed": true,
+  "passed": true,
+  "finished_utc": "2026-10-04T02:49:11.716789+00:00",
+  "scope": "Three untimed steps; fixed native default compiled SwiGLU. All original model/source/tensor/master gates retained. Passing permits a separate performance experiment; this is not throughput evidence."
+}

@@ -1,0 +1,23 @@
+{
+  "name": "kda_swiglu_stage29_002",
+  "torch": "2.4.1",
+  "cuda": "10.2",
+  "arch": "7.0 SDK compatibility target; not a NVIDIA GPU identity",
+  "sources": {
+    "swiglu-002.cpp": "167feab0affe0fbe7e4718a8be9dc097fe406f807f7ca7f23e2aaf43c333ef9d",
+    "swiglu-002.cu": "9dfc3ca8e6bd3cef2ba4a120bea5c6162ce7522ddeb94d6455200392e39ad422"
+  },
+  "build_script_path": "/tmp/kda-swiglu-stage29/build_cpp.py",
+  "build_script_sha256": "be699e973529f30a4a00517244473ed52b140b8e91f611b8d4a8d7d331fea75b",
+  "extra_cflags": [
+    "-O3",
+    "-ffp-contract=off"
+  ],
+  "extra_cuda_cflags": [
+    "-O3",
+    "--fmad=false"
+  ],
+  "build_directory": "/tmp/kda-swiglu-stage29/cpp-build-002",
+  "status": "failed",
+  "error": "RuntimeError(\"Error building extension 'kda_swiglu_stage29_002'\")"
+}

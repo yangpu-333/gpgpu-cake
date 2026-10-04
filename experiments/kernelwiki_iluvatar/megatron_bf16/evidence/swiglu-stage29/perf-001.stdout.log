@@ -1,0 +1,10 @@
+{"arm": "native", "seed": 26002, "case": "main-native-perf-001-complete-26002", "mean_iteration_ms": 33.87}
+{"arm": "control", "seed": 26002, "case": "main-control-perf-001-complete-26002", "mean_iteration_ms": 31.18}
+{"arm": "optimized", "seed": 26002, "case": "main-optimized-perf-001-complete-26002", "mean_iteration_ms": 32.14}
+{"arm": "optimized", "seed": 26003, "case": "main-optimized-perf-001-complete-26003", "mean_iteration_ms": 32.21}
+{"arm": "control", "seed": 26003, "case": "main-control-perf-001-complete-26003", "mean_iteration_ms": 31.72}
+{"arm": "native", "seed": 26003, "case": "main-native-perf-001-complete-26003", "mean_iteration_ms": 33.24}
+{"arm": "control", "seed": 26004, "case": "main-control-perf-001-complete-26004", "mean_iteration_ms": 31.41}
+{"arm": "native", "seed": 26004, "case": "main-native-perf-001-complete-26004", "mean_iteration_ms": 32.82}
+{"arm": "optimized", "seed": 26004, "case": "main-optimized-perf-001-complete-26004", "mean_iteration_ms": 32.05}
+{"status": "validated", "decision": "not_promoted", "promoted": false, "vs_native": {"ratio": 1.0365336027616958, "gain_percent": 3.6533602761695816, "all_seeds_faster": true}, "vs_control": {"ratio": 0.9782973225543772, "gain_percent": -2.170267744562282, "all_seeds_faster": false}, "error": null, "output": "/tmp/kda-swiglu-stage29/performance-main-001-complete.json"}

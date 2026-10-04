@@ -13,19 +13,26 @@
 BI-V150 的架构检索、工具链说明、算子案例和 **17 项逐项迁移账本**。实验固定在 BI-V150、
 CoreX 4.2.0、厂商 Triton 2.1.0；所有候选保留正确性检查、逐轮计时及失败记录。
 
+**最新结果：SwiGLU 正式训练验证（阶段29）。** 在四层、1790 万参数的 BF16 模拟训练中，
+新增 SwiGLU 优化相对同轮“交叉熵＋梯度范数”版本提升 **3.11%**；三项组合相对原生后端提升
+**8.87%**，三个种子均更快。原生基线保留默认 `torch.compile` 融合，RMSNorm 保持原生。
+三步训练的1475项检查全部通过，637个被比较张量逐位一致。这是新增的 SwiGLU 模型，
+不能与此前1370万参数的 GELU 模型直接比较。见[本轮验收](experiments/kernelwiki_iluvatar/megatron_bf16/evidence/swiglu-stage29/decision.json)。
+
 | 已验证内容 | BI-V150 实测结果 |
 |---|---|
+| BF16 正式训练：SwiGLU（阶段29） | 相对同轮 CE＋梯度范数再提升 **3.11%**，组合相对原生提升 **8.87%**；37个算子 case、4个分派检查及三步训练检查通过。首版虽数值通过，但相对已有优化退化2.17%，未采用 |
 | BF16 正式训练：RMSNorm 点运算融合（阶段27） | Claude Code 生成原生 C++/CUDA 融合，保留原生 BF16 归约与梯度图；3种子、9进程共1080计时步，相对同轮 CE＋梯度范数版本再提升 **2.03%**，合计相对原生后端提升 **7.99%**；1475项完整训练检查通过，637个被比较张量逐位一致 |
 | BF16 较大模型留出验证（阶段28） | 固定代码扩展到4层序列256／8层序列512，原生三步检查1475／2371项均通过；组合优化相对同轮原生吞吐 +4.65%／+5.06%。新增 RMSNorm 在两种形状均未通过推广门槛，保留原始结果 |
 | BF16 正式训练：梯度范数传输合并（阶段26） | 四层合成 GPT，保留原生 GPU `torch.norm`，将逐张量取回 CPU 标量合并为一次传输。3 个种子、9 个进程共1080计时步：相对同轮 CE 0008 再提升 **3.87%**，合计相对原生后端提升 **4.41%**；三步1475项检查通过，张量与实际梯度范数逐位一致 |
 | Residual Add RMSNorm 融合 | FP16/BF16、5 个形状、各 3 轮通过前向与参考梯度检查；前向相对**未融合 PyTorch 算子序列**为 10.12–14.65× |
 | Megatron 正式训练入口：10 月 3 日 | 同一四层 FP32 合成 GPT，正式 `pretrain_gpt.py` 使用原生模拟数据、DDP 和 SGD；三组各120步对照吞吐提升 **7.63% / 7.28% / 6.01%**，几何平均 **6.97%**。三步逐 token loss、全部梯度与参数更新通过737项检查 |
 | Megatron 真正 BF16 正式训练：10 月 3 日 | 全部模型权重为 BF16、SGD master 为 FP32，关闭 autocast；4/8 层、三种序列/词表规模通过三步数值核对。CE 反向融合的 0008 首轮吞吐提升 **4.62% / 0.11% / 1.16%**；新增 BF16 梯度转换融合的 0009 未稳定胜过同轮 0008，保留 0008 为默认。45 个计时进程共5400步，完整张量正确性另做三步审计 |
-| Megatron 原生后端：阶段 24 最新结果 | Claude Code CLI 保留原残差/RMSNorm，新增 TP=1 词表交叉熵融合；同一四层 FP32 合成 GPT 三轮完整 step 倍率为 **1.2028/1.2133/1.1577×**，几何平均吞吐提升 **19.10%**。输出、loss、全部参数梯度与 SGD 更新通过 CPU 数值复核 |
+| Megatron 原生后端：阶段 24 历史结果 | Claude Code CLI 保留原残差/RMSNorm，新增 TP=1 词表交叉熵融合；同一四层 FP32 合成 GPT 三轮完整 step 倍率为 **1.2028/1.2133/1.1577×**，几何平均吞吐提升 **19.10%**。输出、loss、全部参数梯度与 SGD 更新通过 CPU 数值复核 |
 | Megatron 原生后端：阶段 23 历史结果 | 仅融合 attention 残差加法与 RMSNorm；同一模型三轮倍率为 **1.0116/1.0162/1.0048×**，吞吐提升约 **1.08%**。原始候选和判定保留 |
 | GEMM+bias epilogue | FP16/BF16、3 个形状、4 种 tile、各 3 轮通过；同 tile 相对**单独执行 bias 加法**为 1.33–3.94× |
 | 流水阶段数 | FP16/BF16、两种形状与两种 tile 的留出复测全部数值通过；BF16 1024³、64×64×32 tile 上，`num_stages=2/3` 相对 1 仅为 0.915×/0.748× |
-| 知识库回归 | 固定补丁可重建；BI-V150 精确检索 26 条路径，原 SM90/SM100 的 286/379 条路径逐条核对一致。160 项 Linux 知识库测试、2 项加载器测试、整库校验及2974个文件逐文件加载核对通过；新增真正 BF16 训练来源及360个证据包文件 |
+| 知识库回归 | 固定补丁可重建；BI-V150 精确检索 28 条路径，原 SM90/SM100 的 286/379 条路径逐条核对一致。160 项知识库测试、整库校验及3244个文件逐文件加载核对通过；新增 SwiGLU 来源、算子页及266个证据包文件 |
 
 表中的 10× 级加速是单卡算子微基准。**FP32 正式入口吞吐提升为6.97%**：相对同一张 BI-V150 上的固定 Megatron 原生本地 PyTorch 后端，原生循环从30.86–31.59 ms/step降至29.11–29.38 ms/step；包含原生数据与调度、DDP和SGD，排除启动、checkpoint与评估。原生600个源码文件哈希一致，显式优化开关安装候选，原始日志与数值证据见[正式入口验收](experiments/kernelwiki_iluvatar/megatron_training_entry/evidence/performance-120-validated.json)。**历史19.10%使用独立完整step基准**，从约11.50–11.68 ms降至9.55–9.93 ms，排除数据与checkpoint I/O；两个计时范围不能互换。这组 FP32 结果仅覆盖所测单卡四层合成模型。FP8 `tl.dot` 在当前软件栈
 编译失败；TMA、TMEM、warp specialization 等 NVIDIA 机制没有被改标为 BI-V150 的硬件等价能力。
@@ -189,6 +196,10 @@ FlashInfer Bench 和 DeepGEMM 提交记录在
 NVLabs 官方 Agent 工具链输出，不是 B200 官方 evaluator 成绩，也不能直接代表端到端模型性能。
 这些边界均保留在结果报告和原始证据中。
 
-最新梯度范数结果只覆盖四层 BF16、单卡、SGD、关闭梯度裁剪的模拟训练。它减少 CPU/GPU 同步与传输，保留原有 GPU 范数计算；并非新的 Triton 归约内核，也未验证 TE/Apex 后端收益。两项改善使用同轮对照，不能与历史批次的百分比相加。见[原始验收](experiments/kernelwiki_iluvatar/megatron_bf16/evidence/gradnorm-stage26/decision.json)。
+阶段26的梯度范数结果只覆盖四层 BF16、单卡、SGD、关闭梯度裁剪的模拟训练。它减少 CPU/GPU 同步与传输，保留原有 GPU 范数计算；并非新的 Triton 归约内核，也未验证 TE/Apex 后端收益。两项改善使用同轮对照，不能与历史批次的百分比相加。见[原始验收](experiments/kernelwiki_iluvatar/megatron_bf16/evidence/gradnorm-stage26/decision.json)。
 
-最新阶段27的 **7.99%** 来自同轮原生／CE＋梯度范数／新增 RMSNorm 三臂对照，不能由历史百分比相加得出。5轮 Triton 迭代的退化与数值失败保留；第6轮原生 C++/CUDA 候选仅在固定四层 BF16、单卡 SGD 模拟训练中通过验收。[RMSNorm 验收](experiments/kernelwiki_iluvatar/megatron_bf16/evidence/rmsnorm-stage27/decision.json)。
+阶段27的 **7.99%** 来自同轮原生／CE＋梯度范数／新增 RMSNorm 三臂对照，不能由历史百分比相加得出。5轮 Triton 迭代的退化与数值失败保留；第6轮原生 C++/CUDA 候选仅在固定四层 BF16、单卡 SGD 模拟训练中通过验收。[RMSNorm 验收](experiments/kernelwiki_iluvatar/megatron_bf16/evidence/rmsnorm-stage27/decision.json)。
+
+阶段29的 **8.87%** 使用新的1790万参数 SwiGLU 模型和同轮三臂对照，未包含阶段27的 RMSNorm 候选。
+两轮共18个120步性能进程，逐进程剔除前20步；正确性另做三步全张量审计。当前只覆盖单卡、小模型、
+模拟数据和 SGD。后续将验证较大 SwiGLU 形状、Dense Attention；MoE Grouped GEMM 需要独立的 MoE 模型契约。
