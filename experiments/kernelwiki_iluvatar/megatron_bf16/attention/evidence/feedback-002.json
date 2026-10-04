@@ -1,0 +1,126 @@
+{
+  "candidate": "002",
+  "performance_sha256": "56d21d5d2701647a445da3f670be56ec81a06e4d64540629955af006d26e18b9",
+  "audit_sha256": "a8149fff803f8a3355f5225baacdb83f631d7e4224cffdbc221ecbb21daf1adb",
+  "numerical": {
+    "controlled": {
+      "path": "/tmp/kda-attention-stage31/comparison-main-002-complete.json",
+      "sha256": "c3794123918420af5f5ab9596e911b83f217e4383b8eb7e5baa3d22ab3c1c6f3",
+      "passed": true,
+      "check_summary": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "tensor_comparisons": 637,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    },
+    "native_optimized": {
+      "path": "/tmp/kda-attention-stage31/comparison-native-optimized-main-002-complete.json",
+      "sha256": "b7d978efad2f8387722cebf00bea7323d91389929ff8430da973d12fbbc84524",
+      "passed": true,
+      "check_summary": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "tensor_comparisons": 637,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    },
+    "native_control": {
+      "path": "/tmp/kda-attention-stage31/comparison-native-control-main-002-complete.json",
+      "sha256": "ffe973fcfff82a87d66658b03260f167fb056dce61be7504b1a8d97d68982407",
+      "passed": true,
+      "check_summary": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "tensor_comparisons": 637,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    }
+  },
+  "performance": {
+    "status": "validated",
+    "decision": "not_promoted",
+    "completed_cases": [
+      {
+        "arm": "native",
+        "seed": 31102,
+        "case": "main-native-perf-002-complete-31102",
+        "mean_iteration_ms": 31.84
+      },
+      {
+        "arm": "control",
+        "seed": 31102,
+        "case": "main-control-perf-002-complete-31102",
+        "mean_iteration_ms": 29.02
+      },
+      {
+        "arm": "optimized",
+        "seed": 31102,
+        "case": "main-optimized-perf-002-complete-31102",
+        "mean_iteration_ms": 29.18
+      },
+      {
+        "arm": "optimized",
+        "seed": 31103,
+        "case": "main-optimized-perf-002-complete-31103",
+        "mean_iteration_ms": 29.61
+      },
+      {
+        "arm": "control",
+        "seed": 31103,
+        "case": "main-control-perf-002-complete-31103",
+        "mean_iteration_ms": 30.86
+      },
+      {
+        "arm": "native",
+        "seed": 31103,
+        "case": "main-native-perf-002-complete-31103",
+        "mean_iteration_ms": 32.97
+      },
+      {
+        "arm": "control",
+        "seed": 31104,
+        "case": "main-control-perf-002-complete-31104",
+        "mean_iteration_ms": 30.84
+      },
+      {
+        "arm": "native",
+        "seed": 31104,
+        "case": "main-native-perf-002-complete-31104",
+        "mean_iteration_ms": 33.13
+      },
+      {
+        "arm": "optimized",
+        "seed": 31104,
+        "case": "main-optimized-perf-002-complete-31104",
+        "mean_iteration_ms": 29.46
+      }
+    ],
+    "vs_native": {
+      "ratio": 1.109649107571448,
+      "gain_percent": 10.964910757144807,
+      "all_seeds_faster": true
+    },
+    "vs_control": {
+      "ratio": 1.0275834174384233,
+      "gain_percent": 2.7583417438423297,
+      "all_seeds_faster": false
+    },
+    "control_vs_native": {
+      "ratio": 1.079862801151073,
+      "gain_percent": 7.9862801151072915,
+      "all_seeds_faster": true
+    },
+    "promotion_rule": {
+      "gain_vs_control_strictly_greater_than": 0.01,
+      "all_three_seeds_faster_vs_control": true
+    }
+  },
+  "instruction": "Not promoted: seed31102 optimized29.18ms vs control29.02ms. Keep frozen numerical and full-step gates. Seek lower actual dispatch/launch cost rather than rerunning until it passes."
+}

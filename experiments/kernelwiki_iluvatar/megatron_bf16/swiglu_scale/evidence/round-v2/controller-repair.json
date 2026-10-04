@@ -1,0 +1,45 @@
+{
+  "schema": "fixed-swiglu-stage30-controller-metadata-repair-v1",
+  "old_controller_sources_sha256": {
+    "common.py": "e5e57d9616d33e3a65572a8d4a1065293d2d27c4cc41fd3e6cf201ba6adb23c8",
+    "run_audit.py": "bcb89234e2c5ffbbc48cb7eb92c5f0267fb2841bd1aa27d293ff174e10e3e28f",
+    "run_performance.py": "4e372fa6c5756fc0a32358c4836fe6db2435af139c623d08dd0606cfd6c7b7d7",
+    "contracts/wide.json": "8be328eedac90bac9743fa9cc9d99a179e74c4146bce2e7b29cca58042f277aa",
+    "contracts/deep.json": "2f8c3ec5147a2d8d235823f94fe5c8887ef99581075f0f5daa4c1cc3dc5ce6f9"
+  },
+  "new_controller_sources_sha256": {
+    "common.py": "e5e57d9616d33e3a65572a8d4a1065293d2d27c4cc41fd3e6cf201ba6adb23c8",
+    "run_audit.py": "bcb89234e2c5ffbbc48cb7eb92c5f0267fb2841bd1aa27d293ff174e10e3e28f",
+    "run_performance.py": "d024105eb2d971021c2f4cf3d58e2e6f6766dcc6004eb8b5e7ca19ff6484986f",
+    "contracts/wide.json": "8be328eedac90bac9743fa9cc9d99a179e74c4146bce2e7b29cca58042f277aa",
+    "contracts/deep.json": "2f8c3ec5147a2d8d235823f94fe5c8887ef99581075f0f5daa4c1cc3dc5ce6f9"
+  },
+  "changed_file": "run_performance.py",
+  "old_source_archive": "controller_v1/run_performance.py",
+  "old_sha256": "4e372fa6c5756fc0a32358c4836fe6db2435af139c623d08dd0606cfd6c7b7d7",
+  "new_sha256": "d024105eb2d971021c2f4cf3d58e2e6f6766dcc6004eb8b5e7ca19ff6484986f",
+  "old_adaptation_record_sha256": "d61cce44ad47ad0fc5fb74a3a7b7bfd17e640fda8eb2387af5fac38397e7bd04",
+  "new_adaptation_record_sha256": "4c6d780a8f9863832fd9e53d32006e0f3ad68d1070d6d7664ba39544f6ddc386",
+  "old_block_sha256": "388e2f7391b9c07807273079e1daeea3093c64cbeaf1e3dde2c6a725d3bf6c7a",
+  "new_block_sha256": "622ea6a734aa7ff4ab8de3213a99c3aeb79f2e9e228248e0ceb05428a49a2f04",
+  "exact_old_block": "    for path, row in inventories.items():\n        raw = Path(path)\n        c.require(raw.is_file() and raw.stat().st_size == row['bytes']\n                  and c.sha(raw) == row['sha256'],\n                  'raw tensor/metadata bytes changed after full numerical audit: ' + path)\n",
+  "exact_new_block": "    for raw_name, row in inventories.items():\n        raw = Path(raw_name)\n        c.require(raw.is_file() and raw.stat().st_size == row['bytes']\n                  and c.sha(raw) == row['sha256'],\n                  'raw tensor/metadata bytes changed after full numerical audit: ' + raw_name)\n",
+  "change": "Rename only the numerical_gate raw inventory loop variable in three places. Return the original same-model audit-summary path rather than the final snapshot path. All native source/model/precision/numerical/master/shape/timer/promotion checks are unchanged.",
+  "historical_v1": {
+    "models": [
+      "wide",
+      "deep"
+    ],
+    "immutable": true,
+    "full_archive_verdict": "rejected_metadata_audit_binding",
+    "promoted": false,
+    "observed_performance_scope": "Diagnostic timing only; audit_path and audit_sha256 bind the wrong snapshot. No formal validated/promoted performance claim."
+  },
+  "next_round": {
+    "suffix": "repair-v2",
+    "fresh_three_way_audits_required": true,
+    "fresh_nine_process_performance_each_model_required": true,
+    "local_archive": "evidence/round-v2",
+    "remote_root": "/tmp/kda-swiglu-scale-stage30"
+  }
+}

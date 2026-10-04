@@ -1,3 +1,5 @@
 * -text -eol whitespace=cr-at-eol
 evidence/** -whitespace
 candidates/**/parent.diff -whitespace
+attention/evidence/** -whitespace
+swiglu_scale/evidence/** -whitespace

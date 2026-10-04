@@ -6,27 +6,56 @@
 
 KernelWiki 原本收录 NVIDIA Hopper、Blackwell GPU 的算子优化知识。本项目保留这些原始内容及其适用范围，在同一知识库中增加天数智芯 BI-V150 的工具链说明、可运行案例和独立实验依据。这样，KDA（Kernel Design Agents）既能继续检索 NVIDIA 知识，也能查询“哪些思路已在 BI-V150 上验证、哪些还不能直接迁移”。
 
-目前交付的是**可重建、可检索、可由 KDA 项目目录加载的适配版 skill**。我们使用 Claude Code CLI、项目级 skill 和固定验收程序，在 BI-V150 上持续验证算子优化。最新完成 SwiGLU 正式训练验证：在四层1790万参数模型中，相对同轮交叉熵＋梯度范数版本再提升 **3.11%**，组合相对原生后端提升 **8.87%**，三个种子均更快。
+目前交付的是**可重建、可检索、可由 KDA 项目目录加载的适配版 skill**。我们使用 Claude Code CLI、项目级 skill 和固定验收程序，在 BI-V150 上持续验证算子优化。最新完成默认融合 Attention 后端的完整训练验证：在四层1790万参数模型中，新增 Attention 相对同轮“交叉熵＋梯度范数＋SwiGLU”版本再提升 **4.51%**，四项组合相对原生后端提升 **13.96%**，三个种子均更快。
 
 此前已完成 FP32 正式入口的 **6.97%** 收益，以及真正 BF16 的三种4/8层模型的 CE、梯度范数和 RMSNorm 实验。旧四层 GELU 模型的组合收益为 **7.99%**，较大模型的 RMSNorm 增量没有通过推广门槛；这些模型与新增 SwiGLU 模型分别对照。历史独立 step 的 **19.10%** 使用不同计时范围。**目前结果仍限于单卡、小模型和模拟数据，尚无生产训练或多卡收益。**
 
 | 交付内容 | 已验证状态 |
 |---|---|
-| 知识库扩充 | BI-V150 可精确检索 28 条路径；原 SM90/SM100 的 286/379 条路径逐条核对一致 |
+| 知识库扩充 | 阶段31：BI-V150 可精确检索32条路径；原1069页字节与 SM90/SM100 的286/379条路径保持一致 |
 | 可复现构建 | 固定上游提交加本项目补丁；整库校验通过，来源与实验数据可追溯 |
 | KDA 项目级加载 | 适配版复制到 KDA 项目的 `.claude/skills/`，逐文件校验；不依赖个人 skill 安装，也不改原 NVIDIA 子模块 |
-| 自动验收 | 最新构建的 160 项知识库测试在 Linux 全部通过，2 项加载器测试及三架构检索通过；[GitHub Actions](https://github.com/yangpu-333/gpgpu-cake/actions/workflows/kernelwiki-iluvatar-kda.yml)按同一流程从源码重建并验收 |
+| 自动验收 | 阶段31的160项知识库测试全部通过，项目加载及三架构检索通过；[GitHub Actions](https://github.com/yangpu-333/gpgpu-cake/actions/workflows/kernelwiki-iluvatar-kda.yml)按同一流程从源码重建并验收。原始数值与计时记录另由 CPU 验收程序复核 |
 | 正式训练入口 | 原生模型安装 hook 提供显式优化开关；600 个原生源码文件哈希一致，原生数据、DDP、训练循环、SGD 和 checkpoint 正常运行 |
+
+## 默认融合 Attention 与完整训练收益（阶段31）
+
+本轮在原生 Megatron `pretrain_gpt.py` 中运行4层、H512、FFN2048、S128、词表1024、batch2的 BF16 模型，共 **17,895,936** 个参数。使用单张 BI-V150、CoreX4.2、厂商 Torch2.4.1、FP32 梯度及 SGD master，TP/PP/CP 为1，模拟数据、dropout0。三臂均启用原生默认 CUDA causal softmax 融合；RMSNorm 保持原生。
+
+Claude Code 生成的 Attention003 复用厂商 CUDA causal softmax，保留 BF16 score、BF16 概率与 GEMM，合并 Attention 的 autograd 节点，并把四段布局与 GEMM 调用移入 TorchScript，减少重复的 Python 调用开销。本轮验证的是原生融合后端上的分派优化；FlashAttention 和 Hopper/Blackwell 专用指令的天数对应实现仍未验证。
+
+| 种子 | 原生后端 ms/step | CE＋梯度范数＋SwiGLU ms/step | 再加入 Attention ms/step |
+|---|---:|---:|---:|
+|31102|33.80|31.03|29.93|
+|31103|34.15|30.45|29.32|
+|31104|33.15|31.23|29.46|
+
+新增 Attention 相对同轮 CE＋梯度范数＋SwiGLU 控制组，吞吐几何平均提升 **4.51%**；组合相对同轮原生后端提升 **13.96%**。三个种子、三臂共九个独立进程，每个运行120步、剔除前20步，保留10个区间；使用原生 GPU 同步后的 `time.time` 训练计时。性能阶段不做 profiling、张量保存、checkpoint、评估或大型备份；三臂的主分派观察一致，原生融合路由在另行运行的正确性审计中确认。
+
+22个独立算子用例通过，包括实际 QKV 与上游梯度、S128/256/512、共享存储、偏移视图、新输入、非默认 stream 和尾部回退。原生、已有优化、新增 Attention 的三份完整训练比较各通过 **1475项检查、637个张量比较，全部逐位一致**，包含完整 FP32 master。三种子只说明这些实测均更快，不构成统计置信区间。
+
+第一版在偏移共享视图上失败；SDPA 预探未通过既定输出容差。Attention002 数值通过，但一个种子略慢，没有推广。CPU 复核发现旧控制器还把性能记录的审计链接指向了最后一个原始张量；002 旧记录完整保留，仅用于诊断，不属于有效完整验收。控制器仅修正变量名，Attention003 重新完成三向审计和全部九个性能进程。见[第三版完整验收](megatron_bf16/attention/evidence/decision.json)。
+
+## 较大 SwiGLU 模型的留出复验（阶段30）
+
+固定使用阶段29候选004，没有针对较大模型重新调参。两模型继续使用三臂一致的 `--no-masked-softmax-fusion`，因此只比较各自同轮基线，不能与阶段31直接拼接收益。
+
+| 模型 | 参数量 | 组合相对原生吞吐 | 新增 SwiGLU 相对 CE＋梯度范数 | 推广决定 |
+|---|---:|---:|---:|---|
+|4层 H512 FFN2048 S256 V4096 batch2|21,107,200|+6.06%|+0.5964%|未推广：一个种子略慢，增量也未超过1%|
+|8层 H512 FFN2048 S512 V8192 batch2|42,213,888|+5.08%|+1.1899%|未推广：一个种子略慢|
+
+两模型三向完整训练比较均通过，分别为每份1475项／637个张量及2371项／1165个张量，全部逐位一致。首版 v1 记录存在同一审计链接元数据错误，完整保留，仅用于诊断；上述数据来自修正版控制器重新执行的18个性能进程。两个留出模型均未推广新增 SwiGLU。阶段29主模型的晋级结果保留；阶段31在控制组中复用候选004，但没有重新单独测量它的增量。见[留出复验决定](megatron_bf16/swiglu_scale/evidence/decision.json)。
 
 ## SwiGLU 正式训练验证（阶段29）
 
-本轮优化 Megatron 的 SwiGLU 激活，两侧 GEMM 保持原生。原生基线保留默认 `torch.compile` 融合。
+本轮优化 Megatron 的 SwiGLU 激活，两侧 GEMM 保持原生。原生 SwiGLU 基线保留默认 `torch.compile` 融合。
 Claude Code 生成的候选004采用 Triton 前后向点运算、维度特化和已编译启动入口复用；
 复用对象为代码，不缓存输入、输出或梯度结果。训练中的 RMSNorm 保持原生，未叠加阶段27的 RMSNorm 候选。
 
 模型固定为4层、H512、FFN2048、序列128、词表1024、batch2，参数量 **17,895,936**。
 使用一张 BI-V150、CoreX4.2、BF16 权重、FP32 梯度和 SGD master，TP/PP/CP 均为1，
-无 autocast、dropout 和梯度裁剪。新增 SwiGLU 会改变参数量，不能把这组耗时与旧1370万参数 GELU 模型直接比较。
+无 autocast、dropout 和梯度裁剪。阶段29及阶段30沿用兼容模板的 `--no-masked-softmax-fusion`，三臂设置一致；其 Attention 使用 Torch 路径。阶段31另行启用原生默认 CUDA softmax 融合并重新建立三臂对照。新增 SwiGLU 会改变参数量，不能把这组耗时与旧1370万参数 GELU 模型直接比较，也不能直接拼接不同 Attention 后端的收益。
 
 | 种子 | 原生后端 ms/step | CE＋梯度范数 ms/step | 再加入 SwiGLU ms/step |
 |---|---:|---:|---:|
@@ -36,7 +65,7 @@ Claude Code 生成的候选004采用 Triton 前后向点运算、维度特化和
 
 新增 SwiGLU 相对同轮 CE＋梯度范数版本，吞吐几何平均提升 **3.11%**；三项组合相对同轮原生后端提升 **8.87%**。
 两种比较中三个种子都更快，候选004通过“相对已有优化超过1%，且每个种子均更快”的固定推广门槛。
-原生基线没有人为关闭融合，候选接入时的主机分派和计数开销也计入训练时间。
+SwiGLU 原生基线保留默认激活融合，候选接入时的主机分派和计数开销也计入训练时间；Attention 的融合设置及范围如上所述。
 
 独立算子验证通过37个数值 case 和4个分派检查，覆盖新输入与梯度、交替尺寸、偏移连续视图和当前 stream。
 三步训练分别对照原生、已有优化和新增候选，**三份比较均通过1475项检查，每份637个被比较张量全部逐位一致**，
@@ -48,8 +77,8 @@ Claude Code 生成的候选004采用 Triton 前后向点运算、维度特化和
 独立 `CUDA Event` 微基准可能包含主机提交间隙，不与训练吞吐混算。三个种子不构成统计置信区间。
 
 [本轮实验决定](megatron_bf16/evidence/swiglu-stage29/decision.json)保存候选、原始计时、固定验收及拒绝原因。
-83份原始数据引用约3.94GB，全部经过哈希核对；去重后的文件数据约1.22GB。后续先做较大 SwiGLU 模型留出验证，
-再继续 Dense Attention；MoE Grouped GEMM 使用独立 MoE 模型契约。当前结果不代表生产模型、多卡、AdamW 或长程收敛收益。
+83份原始数据引用约3.94GB，全部经过哈希核对；去重后的文件数据约1.22GB。较大 SwiGLU 模型留出复验见阶段30，
+默认融合 Attention 的正式训练验证见阶段31。MoE Grouped GEMM 仍需独立 MoE 模型契约与原生后端可用性证据。当前结果不代表生产模型、多卡、AdamW 或长程收敛收益。
 
 ## 较大模型留出验证（阶段28）
 
@@ -64,7 +93,7 @@ Claude Code 生成的候选004采用 Triton 前后向点运算、维度特化和
 
 **两个留出模型均不推广新增 RMSNorm**：宽模型有一组退化，深模型平均没有收益，均未通过“相对已有优化超过1%，且三个种子全部更快”的既定规则。此前短序列四层模型的7.99%仍是该固定配置的结果。计时进程由GPU锁串行；宽模型部分进程之间插入了独立深模型审计，深模型计时期间有CPU归档与传输活动，尚无因果证据解释波动，也不据此声称稳定收益。
 
-[完整实验决定](megatron_bf16/evidence/rmsnorm-stage28/decision.json)保留原始日志、固定契约、数值比较和未推广原因。CPU验收独立复算日志比例，原始张量按哈希备份。后续的新算子分别冻结模型与原生后端契约；SwiGLU 的首次正式验证见阶段29，较大形状仍需留出复测。
+[完整实验决定](megatron_bf16/evidence/rmsnorm-stage28/decision.json)保留原始日志、固定契约、数值比较和未推广原因。CPU验收独立复算日志比例，原始张量按哈希备份。后续的新算子分别冻结模型与原生后端契约；SwiGLU 的首次正式验证见阶段29，较大形状的留出复验见阶段30。
 
 阶段28知识库构建包含1067个页面、1004个来源ID；原1066页字节与NVIDIA检索路径保持一致。KDA项目加载2974个文件逐一核对通过，BI-V150可检索26条路径。
 
@@ -205,7 +234,7 @@ Claude Code CLI 通过 Paratera 请求 `Claude-Opus-4.8`，原始响应的模型
 
 ### 原生 Megatron 与 Claude Code 完整闭环（10 月 2 日）
 
-以下保留阶段 23 的历史结果，优化范围仅为残差/RMSNorm；阶段 24 的最新完整 step 结果见上一节。
+以下保留阶段 23 的历史结果，优化范围仅为残差/RMSNorm；阶段 24 的交叉熵扩展结果见上一节。
 
 本轮优化对象是 attention 残差加法与紧邻的 pre-MLP RMSNorm。基线采用 Megatron 提交 `5be9626709af2722333bf54797c954c09edeada3` 的原生本地 PyTorch 后端。两条路径使用相同权重、合成 token、epsilon、精度和 SGD；没有使用 Transformer Engine 作为基线。
 
@@ -245,6 +274,8 @@ Claude Code CLI 在本机加载 KDA 项目目录中的适配 skill，通过已�
 
 ## 从实验到可用知识
 
+阶段31新 skill 的最终构建、检索和加载计数仍待核对。以下保留各阶段已经验收的历史记录。
+
 阶段29构建含 **1069个页面、1005个 source ID、37个资产包和14个账本**，新增266个 SwiGLU 证据包文件。KDA 项目目录逐文件核对 **3244个文件**；BI-V150 检索28条路径。原1067页字节与 SM90/SM100 的286/379条检索路径保持一致，见[构建回归记录](megatron_bf16/evidence/swiglu-stage29/skill-provenance.json)。160项知识库测试通过；新增 CPU 验收从原始日志复算吞吐，并检查未通过候选与验收程序的拒绝能力。[Claude Code 只读加载回执](megatron_bf16/evidence/cc-stage29-readonly-loaded.json)确认新版页面、候选与性能范围可从项目目录读取。CI 复核记录，GPU 实验仍需 BI-V150 环境。
 
 阶段27构建含 **1066个页面、1003个 source ID、37个资产包和14个账本**，新增266个实验包文件。KDA 项目目录逐文件核对 **2799个文件**；BI-V150 检索25条路径。原 SM90/SM100 的286/379条路径及页面字节与阶段26完全一致，见[本轮构建回归记录](megatron_bf16/evidence/rmsnorm-stage27/skill-provenance.json)。新增纯 CPU 验收程序复核 C++/CUDA 源码、共享库哈希绑定、完整训练检查和原始吞吐日志。
@@ -253,16 +284,18 @@ Claude Code CLI 在本机加载 KDA 项目目录中的适配 skill，通过已�
 
 阶段25构建含 **1064 个页面、1001 个 source ID、37 个资产包和14个账本**，新增360个 BF16 证据包文件；KDA 项目级加载核对 **2402 个文件**，BI-V150 精确检索 **23 条路径**，SM90/SM100 仍为286/379条。新来源明确区分真正 BF16、autocast、独立算子正确性与完整训练验证，并保留0007失败及0009不稳定的性能结果。下述阶段24数据作为历史回归记录保留。 Linux CI 已通过：160项知识库测试、2项加载器测试、原21项安装器及10项计时日志测试，以及新增17项 BF16/master-state 与计时门禁测试。见[CI回执](megatron_bf16/evidence/ci-stage25.json)和[完整Linux日志](megatron_bf16/evidence/ci-stage25.log)。新 skill 的 Claude Code 项目目录只读加载结果见[CLI回执](megatron_bf16/evidence/cc-stage25-readonly-loaded.json)。
 
-适配版不仅增加文字说明，还把每个 BI-V150 结论连接到源码、环境、原始计时和 SHA256 回执。迁移账本按“已验证、仅观察到编译中间表示、尚未验证”区分证据等级。阶段 24 最新构建含 **1063 个页面、1000 个 source ID、37 个资产包、14 个账本**，整库校验通过且无孤立来源文件；新增证据包的 168 个文件均通过 SHA256 核对。最新 **160 项 Linux 知识库测试全部通过**，原始结果见[测试日志](megatron_cc/higher_gain/evidence/stage24-linux-tests.stderr)和[整库校验日志](megatron_cc/higher_gain/evidence/stage24-linux-validation.stdout)。
+适配版将 BI-V150 结论连接到源码、环境、原始计时和 SHA256 回执。迁移账本按“已验证、仅观察到编译中间表示、尚未验证”区分证据等级。阶段24构建含 **1063 个页面、1000 个 source ID、37 个资产包、14 个账本**，整库校验通过且无孤立来源文件；新增证据包的 168 个文件均通过 SHA256 核对。该阶段 **160 项 Linux 知识库测试全部通过**，原始结果见[测试日志](megatron_cc/higher_gain/evidence/stage24-linux-tests.stderr)和[整库校验日志](megatron_cc/higher_gain/evidence/stage24-linux-validation.stdout)。
 
 KDA 的 2 项加载器测试通过；项目级加载逐文件校验了 **2041 个文件**，本轮 CLI 使用的 checkout 也完成同样核对。BI-V150 检索仅增加本轮 CE 来源和算子页，合计 22 条路径；SM90/SM100 的 286/379 条路径与上一版本逐条一致，见[阶段 24 回归与证据核对](megatron_cc/higher_gain/evidence/stage24-skill-provenance.json)。[阶段 23 Linux 测试](megatron_cc/evidence/linux-skill-unittest.log)与[整库校验](megatron_cc/evidence/linux-skill-validate.log)作为历史记录保留。Windows 初次测试因默认 GBK 编码和系统 `python3` 别名报错，记录保留，回归采用与 CI 一致的 Linux 环境。
 
 KDA 可以从项目目录读取这套知识。一次只读 Claude Code 验证实际读取了新增的[阶段 21 来源页](evidence/kda-repo-integration-20260930/claude-stage21-read.json)，正确返回观察形状、三轮完整 step 倍率及其非生产训练的限制。加载器、测试和 CI 均作为本仓库补丁交付；本项目没有向 NVlabs/kda 上游提交 PR。
 
+阶段31重建含 **1073页、1007个来源ID**，BI-V150 检索32条路径；基础补丁未修改，新增补丁按 SHA 清单顺序应用。原1069页字节与 NVIDIA 的286/379条检索路径逐项保持一致，160项知识库测试全部通过。KDA 项目目录逐文件校验 **3924个文件**，新增证据包含673个小型文件。数值快照、原生 capture 和 checkpoint 在本地按 SHA 去重备份，完整验收引用的原始文件缺失数为0；Git只收录源码、日志、清单与验收记录。见[阶段31构建与加载依据](megatron_bf16/attention/evidence/skill-provenance.json)。
+
 ## 当前边界与下一步
 
-1. **生产训练配置。** 正式 `pretrain_gpt.py` 已在本地 PyTorch 后端运行并接入优化，原生模拟数据的四层 FP32 对照取得 6.97% 吞吐提升。尚无代表性的生产模型、数据、训练命令和精度配置；取得配置后，需要重新采集实际形状并验证 loss 曲线、显存与吞吐。当前运行时兼容方案也只在上述范围验证。
-2. **其他算子与留出验证。** 已完成 CE、梯度范数、RMSNorm 的受限训练验证，新增 SwiGLU 在独立四层模型中通过验收。下一步对 SwiGLU 做较大形状留出复测，再验证 Dense Attention 前后向和完整训练收益。MoE Grouped GEMM 需要独立 MoE 模型与负载契约；后续覆盖实际 bias、dropout、optimizer，并为 TP>1 验证跨卡归约。
+1. **生产训练配置。** 正式 `pretrain_gpt.py` 已在本地 PyTorch 后端运行并接入 FP32、BF16 优化。阶段31四层 BF16 模拟训练的组合吞吐提升为13.96%。尚无代表性的生产模型、数据、训练命令和精度配置；取得配置后，需要重新采集实际形状并验证 loss 曲线、显存与吞吐。当前运行时兼容方案也只在上述范围验证。
+2. **其他算子与留出验证。** SwiGLU 较大模型留出复验已完成，两种形状均未推广；Dense Attention003 在默认融合后端上的三步正确性与正式训练吞吐验收已完成。下一步验证新增 Attention 的较大形状，以及 MoE 原生训练后端的可用性；MoE 优化另行冻结模型、路由与负载契约。后续覆盖实际 bias、dropout、optimizer，并为 TP>1 验证跨卡归约。
 3. **硬件归因。** 已保存 Kineto 的 CPU/GPU 时间线及实际 CE kernel 调用，但仍无充分的最终机器指令、计算/搬运重叠或共享存储冲突证据。平台开放 tracefs/debugfs 后，可继续使用 ixSYS 的 `.ptrace` 分析。
 4. **低精度与版本升级。** 在新版 CoreX/Triton 上重新探测 FP8/FP4、编译和数值行为；不同软件版本的性能数据分别记录。
 
@@ -270,7 +303,7 @@ KDA 可以从项目目录读取这套知识。一次只读 Claude Code 验证实
 
 ### 真正 BF16 训练复测
 
-准备独立 Linux 工作副本，保持 `megatron_bf16/` 与 `megatron_training_entry/` 相邻。使用本报告固定的 CoreX 环境及干净 Megatron 提交，原始证据完整保留；下列新 case 和输出文件须尚不存在。0008 为本轮默认候选，`main/wide/deep` 使用各自封存契约。以下以 main 为例：
+准备独立 Linux 工作副本，保持 `megatron_bf16/` 与 `megatron_training_entry/` 相邻。使用本报告固定的 CoreX 环境及干净 Megatron 提交，原始证据完整保留；下列新 case 和输出文件须尚不存在。本节给出阶段25 CE0008 的复测示例，`main/wide/deep` 使用各自封存契约。阶段31 Attention003 的候选、三臂控制器及契约保存在 [`attention/`](megatron_bf16/attention/) 中。以下以 CE0008 main 为例：
 
 ```bash
 export PYTHONPATH=/usr/local/corex/lib64/python3/dist-packages

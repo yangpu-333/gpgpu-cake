@@ -1,0 +1,28 @@
+{
+  "status": "completed",
+  "date": "2026-10-04",
+  "candidate_versions": [
+    "003"
+  ],
+  "promoted": true,
+  "scope": "Only the tested single BI-V150 BF16 4L H512 FFN2048 S128 B2 V1024 17,895,936-parameter mock GPT model. All arms retain default native causal CUDA fused softmax. Added Attention003 versus same-round CE0008+gradnorm001+SwiGLU004 control: +4.5071194005639414%; combined versus original native: +13.962641026831468%. Three seeds faster; no production, convergence or multi-GPU claim.",
+  "rounds": [
+    {
+      "model_name": "main",
+      "version": "003",
+      "audit_suffix": "complete",
+      "run_suffix": "complete",
+      "verification_path": "cpu-verify-003.json",
+      "verification_sha256": "5a98dacfd866ec5e947f3a3227b7742d2e023c75b402b921b477c5f3fc4310d2"
+    }
+  ],
+  "rejected_versions": {
+    "001": "standalone_correctness_shared_offset_views",
+    "002": "not_all_seeds_faster_and_invalid_audit_metadata_binding"
+  },
+  "controller_repair": "Renamed three shadowed variable references; fresh audit and nine-process timing after repair. Original rejected records preserved.",
+  "primary_timer": "Pinned native GPU-synchronized time.time intervals, 120 steps, first20 excluded, ten retained interval10 means per arm.",
+  "raw_policy": "42 audit tensor references plus6 native capture files SHA256 verified locally; raw inventory54 includes additional audit checkpoint/metadata files. CPU archive check does not replay tensor arithmetic.",
+  "production_validated": false,
+  "selected_candidate": "003"
+}

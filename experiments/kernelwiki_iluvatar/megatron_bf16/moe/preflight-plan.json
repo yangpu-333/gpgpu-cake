@@ -1,0 +1,34 @@
+{
+  "status": "source_preparation_only",
+  "date": "2026-10-04",
+  "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
+  "provenance_sha256": "606674370a41d07091e1331a0da5bc9ac6529b85781bba51739d94f92244b801",
+  "runtime_proven": false,
+  "performance_claims": [],
+  "next_actions": [
+    "Obtain transformer_config.py, argument_utils.py and extensions/transformer_engine.py from the same pinned600-file manifest; do not substitute another Megatron release.",
+    "Run native single-device BF16 MoE forward/backward/SGD preflight and observe the actual expert backend class, default fusion flags, token counts and probability application point.",
+    "Freeze a native baseline contract before Claude Code candidate generation. Start with local SequentialMLP only if observed; grouped-GEMM support requires separate proof.",
+    "Capture weighted expert MLP and routing interfaces; compare fixed shape/tail/empty-expert and balanced/skewed token cases against the real native backend.",
+    "Run full model output/loss/all named gradients/FP32 master-state gates, then three rotated seeds with original120/20 synchronized training timer."
+  ],
+  "proposed_first_model": {
+    "num_layers": 4,
+    "hidden_size": 512,
+    "ffn_hidden_size": 2048,
+    "sequence_length": 128,
+    "micro_batch_size": 2,
+    "vocab_size": 1024,
+    "num_experts": 4,
+    "router_topk": 2,
+    "precision": "BF16 weights and intermediates; FP32 main_grad and SGD masters",
+    "tentative_until_native_preflight": true
+  },
+  "blocking_semantic_requirements": [
+    "Apply routing probability after activation and before FC2 with the exact native BF16 cast boundary. Dense SwiGLU004 does not cover weighted MoE semantics.",
+    "Check router logits/probabilities/routing maps/topk/sort indices/token counts, weighted hidden states and probability gradients.",
+    "Check auxiliary loss, z-loss and MoEAuxLossAutoScaler behavior; do not drop router/expert/embedding gradients or empty experts.",
+    "Use observed dynamic expert/token dispatch coverage; do not reuse dense num_layers*steps counts."
+  ],
+  "promotion_rule": "All fixed numerical gates, strict >1% incremental throughput versus same-round compatible existing control, all three seeds faster. Runtime fallback/changed native fusion/hidden tensor caching invalidates coverage."
+}

@@ -1,0 +1,7 @@
+/kernelwiki-iluvatar Perform only a read-only project-loading verification. Use Read on these project files, not the personal installation:
+.claude/skills/kernelwiki-iluvatar/SKILL.md
+.claude/skills/kernelwiki-iluvatar/wiki/kernels/dense-attention-megatron-bi-v150.md
+.claude/skills/kernelwiki-iluvatar/wiki/kernels/swiglu-heldout-megatron-bi-v150.md
+.claude/skills/kernelwiki-iluvatar/evidence/bi-v150-corex42-stage30-31/megatron_bf16/attention/evidence/decision.json
+.claude/skills/kernelwiki-iluvatar/evidence/bi-v150-corex42-stage30-31/megatron_bf16/swiglu_scale/evidence/decision.json
+Return a concise JSON object with skill path, both kernel page IDs, source IDs, selected Attention candidate, exact model parameters, same-round control, default masked-softmax-fusion value, incremental and combined throughput percentages, three-seed status, heldout SwiGLU promotion decisions, rejected candidate reasons, primary timer and production scope limits. Do not edit files, generate code, run experiments, read credentials, or browse outside those files. Cite those project paths. Distinguish retained failed historical metadata from the corrected fresh Attention003 round.

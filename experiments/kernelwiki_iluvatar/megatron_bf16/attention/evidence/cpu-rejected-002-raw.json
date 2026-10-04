@@ -1,0 +1,105 @@
+{
+  "status": "expected_rejection_confirmed",
+  "version": "002",
+  "complete_archive_status": "rejected",
+  "reason": "numerical audit-summary path/SHA metadata binding",
+  "promoted": false,
+  "comparisons": {
+    "controlled": {
+      "checks": 1475,
+      "tensors": 637,
+      "tensor_groups": {
+        "initial": 28,
+        "actual_start_model_parameters": 28,
+        "actual_start_master_parameters": 28,
+        "master_initialization": 56,
+        "model_initialization": 56,
+        "batches": 15,
+        "output": 3,
+        "derived_loss": 3,
+        "wgrads": 84,
+        "params": 84,
+        "masters": 84,
+        "master_model_consistency": 168
+      },
+      "raw_value_comparisons": 97,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    },
+    "native_optimized": {
+      "checks": 1475,
+      "tensors": 637,
+      "tensor_groups": {
+        "initial": 28,
+        "actual_start_model_parameters": 28,
+        "actual_start_master_parameters": 28,
+        "master_initialization": 56,
+        "model_initialization": 56,
+        "batches": 15,
+        "output": 3,
+        "derived_loss": 3,
+        "wgrads": 84,
+        "params": 84,
+        "masters": 84,
+        "master_model_consistency": 168
+      },
+      "raw_value_comparisons": 97,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    },
+    "native_control": {
+      "checks": 1475,
+      "tensors": 637,
+      "tensor_groups": {
+        "initial": 28,
+        "actual_start_model_parameters": 28,
+        "actual_start_master_parameters": 28,
+        "master_initialization": 56,
+        "model_initialization": 56,
+        "batches": 15,
+        "output": 3,
+        "derived_loss": 3,
+        "wgrads": 84,
+        "params": 84,
+        "masters": 84,
+        "master_model_consistency": 168
+      },
+      "raw_value_comparisons": 97,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    }
+  },
+  "diagnostic_performance": {
+    "available": true,
+    "sha256": "56d21d5d2701647a445da3f670be56ec81a06e4d64540629955af006d26e18b9",
+    "timed_processes": 9,
+    "run_steps": 1080,
+    "retained_steps": 900,
+    "native_route_observed_per_timed_call": false,
+    "promoted": false,
+    "audit_metadata_binding_passed": false,
+    "diagnostic_only": true,
+    "vs_native": {
+      "ratio": 1.109649107571448,
+      "gain_percent": 10.964910757144807,
+      "all_seeds_faster": true
+    },
+    "vs_control": {
+      "ratio": 1.0275834174384233,
+      "gain_percent": 2.7583417438423297,
+      "all_seeds_faster": false
+    },
+    "control_vs_native": {
+      "ratio": 1.079862801151073,
+      "gain_percent": 7.9862801151072915,
+      "all_seeds_faster": true
+    }
+  },
+  "snapshot_files_available": 48,
+  "snapshot_files_missing": 0,
+  "tensor_arithmetic_replayed": false,
+  "verifier_sha256": "735db4c10c9fa10cd971f54a31ce58796e0178d5e5914f9453da770d337d5c31",
+  "gpu_rerun": false,
+  "evidence_rewritten": false,
+  "scope": "Original002 preserved. Full numerical receipts and source/header/timing data rechecked only to diagnose known metadata rejection and NOTpromoted result. This does not convert002 into a completely verified optimization round."
+}

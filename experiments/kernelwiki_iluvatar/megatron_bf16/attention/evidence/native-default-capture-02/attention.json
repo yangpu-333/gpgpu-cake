@@ -1,0 +1,143 @@
+{
+  "scope": "untimed native attention input/output/gradient capture; no candidate",
+  "calls": 4,
+  "capture_written": true,
+  "wrapper_sha256": "2dfb11f307755fc6af312936c8fc88abdfee46f6af1edbef40419d515307ab33",
+  "observations": [
+    {
+      "query": {
+        "shape": [
+          128,
+          2,
+          8,
+          64
+        ],
+        "stride": [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        "dtype": "torch.bfloat16",
+        "storage_offset": 0,
+        "requires_grad": true
+      },
+      "key": {
+        "shape": [
+          128,
+          2,
+          8,
+          64
+        ],
+        "stride": [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        "dtype": "torch.bfloat16",
+        "storage_offset": 64,
+        "requires_grad": true
+      },
+      "value": {
+        "shape": [
+          128,
+          2,
+          8,
+          64
+        ],
+        "stride": [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        "dtype": "torch.bfloat16",
+        "storage_offset": 128,
+        "requires_grad": true
+      },
+      "attention_mask": {
+        "shape": [
+          2,
+          1,
+          128,
+          128
+        ],
+        "stride": [
+          16384,
+          16384,
+          128,
+          1
+        ],
+        "dtype": "torch.bool",
+        "storage_offset": 0,
+        "requires_grad": false
+      },
+      "output": {
+        "shape": [
+          128,
+          2,
+          512
+        ],
+        "stride": [
+          1024,
+          512,
+          1
+        ],
+        "dtype": "torch.bfloat16",
+        "storage_offset": 0,
+        "requires_grad": true
+      },
+      "softmax_scale": 0.125,
+      "softmax_offset": null,
+      "attn_mask_type": "AttnMaskType.causal",
+      "configuration": {
+        "num_layers": 4,
+        "hidden_size": 512,
+        "num_attention_heads": 8,
+        "num_query_groups": 8,
+        "kv_channels": 64,
+        "attention_dropout": 0.0,
+        "masked_softmax_fusion": true,
+        "attention_softmax_in_fp32": false,
+        "apply_query_key_layer_scaling": false,
+        "sequence_parallel": false,
+        "context_parallel_size": 1,
+        "softmax_type": "vanilla"
+      },
+      "scaled_masked_softmax_fusion": true,
+      "softmax_in_fp32": false
+    }
+  ],
+  "native_source_sha256": {
+    "megatron/core/transformer/dot_product_attention.py": "7c631bfeba97d0273cd5399e7187a16f114b25a4f12a4e1c9edbacf71cf4e6f6",
+    "megatron/core/fusions/fused_softmax.py": "a75dc9d23380ff5d2ccdbfaa335c050bc4d16039fe35797f96dc108bad011e68",
+    "megatron/core/transformer/utils.py": "014ccd7deb6bb51ed4443cb87efd960dff13b725d16074e800c96f63faff1dca"
+  },
+  "raw_files": {
+    "inputs.pt": {
+      "sha256": "92e5979825153fa96640ee0ed94a8503d373160e367452bf87bf5e9195b6d2cd",
+      "bytes": 821000
+    },
+    "key-grad.pt": {
+      "sha256": "b594c548257288f0f7d86e50af1209e2bc39c360f26b25419c202f0aa986d4e9",
+      "bytes": 263329
+    },
+    "output.pt": {
+      "sha256": "140aac93943d59a1b7d762ee27d11a9404bca3405ed768df64c5712d01328788",
+      "bytes": 263255
+    },
+    "value-grad.pt": {
+      "sha256": "430c1b939e2c9c0dacc4a0ad7e712ca8b871c38a25f632e17fc5612c3f6e374b",
+      "bytes": 263339
+    },
+    "upstream-grad.pt": {
+      "sha256": "d9e5ae694344571d43be1b97ab7d681dec30d283df17b40b4e7e5bc1851c73f1",
+      "bytes": 263354
+    },
+    "query-grad.pt": {
+      "sha256": "bdaab453774dd2488fe82b3a307ceb68b4f47783b03178685568966692dbdc17",
+      "bytes": 263339
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "native-full-attention-stage31-controller-metadata-repair-v1",
+  "old_controller_sources_sha256": {
+    "common.py": "e15268a4fd525b9c91754b603438f383cb48620a8458ab77ea7408fcb4f20db8",
+    "launch_attention.py": "685766bd5243f1039c93bb150191774f1dda7409b2bbd87ccb62e055b6d56478",
+    "run_audit.py": "4603346236f182517c21c0f84779b49e5e965760fba64e8200036c88d8717686",
+    "run_performance.py": "0bdbbf0b598696fb91adfaa058d03b3f2e0501afc53a1b7dfbcce966b14ec514"
+  },
+  "new_controller_sources_sha256": {
+    "common.py": "e15268a4fd525b9c91754b603438f383cb48620a8458ab77ea7408fcb4f20db8",
+    "launch_attention.py": "685766bd5243f1039c93bb150191774f1dda7409b2bbd87ccb62e055b6d56478",
+    "run_audit.py": "4603346236f182517c21c0f84779b49e5e965760fba64e8200036c88d8717686",
+    "run_performance.py": "cf917dff658e6ea2dc50a37932bc72be0e330ddd9452beda0066fe300ba9deba"
+  },
+  "changed_file": "run_performance.py",
+  "old_source_archive": "controller_v1/run_performance.py",
+  "old_sha256": "0bdbbf0b598696fb91adfaa058d03b3f2e0501afc53a1b7dfbcce966b14ec514",
+  "new_sha256": "cf917dff658e6ea2dc50a37932bc72be0e330ddd9452beda0066fe300ba9deba",
+  "old_block_sha256": "9693ee61e1f7243395cd0baa5a3d28cefbbe7618b4fb9e61866bbeae91cdf73e",
+  "new_block_sha256": "cff50f4ae5d3d91f9dd1e18d83d2b4ab8ff03cffd747ab171703c169c634d838",
+  "exact_old_block": "    for path, row in inventories.items():\n        raw = Path(path)\n        c.require(raw.is_file() and raw.stat().st_size == row['bytes'] and c.sha(raw) == row['sha256'],\n                  'raw tensor/metadata bytes changed after full numerical audit: ' + path)\n",
+  "exact_new_block": "    for raw_name, row in inventories.items():\n        raw = Path(raw_name)\n        c.require(raw.is_file() and raw.stat().st_size == row['bytes'] and c.sha(raw) == row['sha256'],\n                  'raw tensor/metadata bytes changed after full numerical audit: ' + raw_name)\n",
+  "change": "Rename only the numerical_gate raw inventory loop variable. Return the original audit-summary path instead of the final raw tensor path. No numerical/source/master/precision/timer/admission gate changed.",
+  "fixed_full_probe_sha256": "7778dc5837265b9fa4def2cf90d07ceeac2b992e583aa6939d74b5e99ad57fd0",
+  "historical_round002": {
+    "immutable": true,
+    "promoted": false,
+    "full_archive_verdict": "rejected_metadata_audit_binding",
+    "fresh_gpu_rerun": false
+  },
+  "next_round": "003 fresh three-way audit and fresh nine-process performance with new controller sources"
+}

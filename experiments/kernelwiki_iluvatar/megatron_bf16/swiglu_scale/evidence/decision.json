@@ -1,0 +1,30 @@
+{
+  "status": "completed",
+  "date": "2026-10-04",
+  "candidate_versions": [
+    "004"
+  ],
+  "promoted": false,
+  "scope": "Frozen SwiGLU004 heldout validation on two BF16 native Megatron models. Both fail the all-three-seeds faster and strict >1% incremental promotion rule; retain native SwiGLU for these shapes. Inherited masked-softmax fusion=False.",
+  "rounds": [
+    {
+      "model_name": "wide",
+      "version": "004",
+      "audit_suffix": "repair-v2",
+      "run_suffix": "repair-v2",
+      "verification_path": "cpu-verify-wide-raw.json",
+      "verification_sha256": "af91921a45d3b6f8c7a605596c78a93bd5af3b36be116ebf100d19a1f6d0dfa2"
+    },
+    {
+      "model_name": "deep",
+      "version": "004",
+      "audit_suffix": "repair-v2",
+      "run_suffix": "repair-v2",
+      "verification_path": "cpu-verify-deep-raw.json",
+      "verification_sha256": "3c03b837183f4d1326a60e2012f5584e8af1b6d4f3b000ad4a84889b06be93e4"
+    }
+  ],
+  "historical_v1_status": "rejected_metadata_audit_binding",
+  "raw_policy": "All original snapshot bytes backed up and SHA256 verified locally; hardlink deduplication, no remote deletion.",
+  "production_validated": false
+}

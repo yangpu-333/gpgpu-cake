@@ -1,0 +1,58 @@
+{
+  "schema": "fixed-swiglu-stage30-adaptation-v1",
+  "date": "2026-10-04",
+  "candidate": "004",
+  "candidate_sha256": "a516bb372012cd5569eed99db2815a41c0b229755158289ddf6536248d554250",
+  "controller_sources_sha256": {
+    "common.py": "e5e57d9616d33e3a65572a8d4a1065293d2d27c4cc41fd3e6cf201ba6adb23c8",
+    "run_audit.py": "bcb89234e2c5ffbbc48cb7eb92c5f0267fb2841bd1aa27d293ff174e10e3e28f",
+    "run_performance.py": "4e372fa6c5756fc0a32358c4836fe6db2435af139c623d08dd0606cfd6c7b7d7",
+    "contracts/wide.json": "8be328eedac90bac9743fa9cc9d99a179e74c4146bce2e7b29cca58042f277aa",
+    "contracts/deep.json": "2f8c3ec5147a2d8d235823f94fe5c8887ef99581075f0f5daa4c1cc3dc5ce6f9"
+  },
+  "frozen_sources_sha256": {
+    "stage29/candidate-004.py": "a516bb372012cd5569eed99db2815a41c0b229755158289ddf6536248d554250",
+    "stage29/launch_swiglu-03.py": "ad9e63f3361a284f2d137cd147c9dbf515b822e657d681a5de098724ffbddb1c",
+    "stage29/run_candidate_audit.py": "d357c2a687f5581a5cca427d8b3e3a17481374e324268009eb5917400b87e617",
+    "stage29/run_performance.py": "710769ae4416f9e8f7a6d7ae7140965cdfc8718634badc225d213abd37fe3467",
+    "stage29/probe-004-v3.json": "afbb2c40c283cc16cfd42c5f27792068436c280a1de9959cb0d0e6bed7a0e342",
+    "stage29/decision.json": "d0dc77fcf3aded453f1e368d24e49ce2763b22683ca88d5fd22e8b90561e602f",
+    "stage29/contracts/wide.json": "45d7a6e20198755cf54be0c6026dfa0ca22a979cd89863b47cd7a7e27bee8ccf",
+    "stage29/contracts/deep.json": "4f980d7b3c9ed4ac5ecbc9be0b2e36f3b35c12efc574a2b42fbe76148829019a",
+    "bf16/compare_training.py": "feb475eb504fe452267f930f2069d5f17b36387a6cb4ad0f839a6aaa8df27eda",
+    "bf16/summarize_performance.py": "6130e7cd9a2ffa26b42db42142694781bd45f9bdaa83336d4f1944a48368e5b7",
+    "bf16/launch_training.py": "a7909648600a4ef8448e738a75e5346845a392bdbcf2fbffc2fadecae1297e90",
+    "bf16/kernel_adapter.py": "bd84038d9037c8d62262a2a36d1cf378faa695bf2a9f3cd7288c02bc52037296",
+    "bf16/run_case.py": "6f3fede9c52e872033ff086968d31cfa6d839cedf49fc8f1a4c86c71944ed6d3",
+    "bf16/candidates/0008/candidate.py": "9b22e12b4744b2a41b9209faa280e361e6defe1d5480f5e5683fddd247b7f493",
+    "formal/runtime_compat.py": "6a7e4bd6130ea4b2141d3ac2e3f00a284da2915d997a76249272322ef6973bff",
+    "formal/source_manifest.json": "a72ded960488d399ded2255ef55f357257e03532b8fa21a06d958170c5c98c2d",
+    "gradnorm/candidate.py": "84c851ce5af7a49ba97685710790146d2c315f9c8837259366bffd7831f67dc0",
+    "gradnorm/launch_gradnorm-04.py": "12503df82b69f7eb5059cc0c0722677e05ff14cdf1a37b6c34c0d7e3c8acba7f"
+  },
+  "native_source_commit": "5be9626709af2722333bf54797c954c09edeada3",
+  "native_source_file_count": 600,
+  "peripheral_changes": [
+    "Fresh stage30 immutable output directory and source/controller provenance ledger",
+    "Use original wide/deep training arguments, precision, source model configuration and numerical tolerances",
+    "Explicit fixed three-arm rotation and declared per-model audit/performance seeds",
+    "Actual activation-shape and call-count guards derive from original model contracts",
+    "Controlled comparator changes only native-run identity and no-CE-installation assumptions",
+    "Performance validator changes only exact outer wrapper invocation block; original formal entry and all other gates retained",
+    "Before performance, rehash every unique inventoried audit tensor/metadata path against the unchanged frozen comparator receipt; no tensor arithmetic replay or GPU work"
+  ],
+  "protected": [
+    "Original 600 native sources, formal training/data/DDP/GEMMs/SGD and checkpoint writer",
+    "BF16 model weights, FP32 gradients and SGD masters; no autocast, dropout or gradient clipping",
+    "Default compiled native SwiGLU baseline; only fixed candidate004 in optimized arm",
+    "Native RMSNorm; no RMSNorm006 integration",
+    "Original all-parameter/master three-step comparison and tolerances",
+    "Native GPU-synchronized time.time interval timer;120steps and first20excluded"
+  ],
+  "promotion_rule": {
+    "gain_vs_same_round_control_strictly_greater_than": 0.01,
+    "all_three_seeds_faster": true,
+    "successful_same_model_three_way_audit_required": true,
+    "no_shape_code_retuning": true
+  }
+}

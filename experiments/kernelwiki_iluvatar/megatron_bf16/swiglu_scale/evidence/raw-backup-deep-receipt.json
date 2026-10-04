@@ -1,0 +1,260 @@
+{
+  "status": "verified",
+  "model_name": "deep",
+  "audit_suffix": "complete",
+  "remote_root": "/tmp/kda-swiglu-scale-stage30",
+  "remote_deleted": false,
+  "inventory_sha256": "4cbc571b584de9945b63578190c55b0db9cf1444016cc2aed5cee8ea601dc538",
+  "files": [
+    {
+      "path": "deep-native-audit-004-complete/snapshots/actual-start.pt",
+      "bytes": 253314942,
+      "sha256": "ac711aeb535baec0ce1f076521d19fb2adbf8bb20190f2a0bf4a6e6c4995e12e"
+    },
+    {
+      "path": "deep-native-audit-004-complete/snapshots/iter_0000003/mp_rank_00/model_optim_rng.pt",
+      "bytes": 253376160,
+      "sha256": "3b525c9515ce7f4b2d1a4bb31c4867fafefb2206e6e6ab777d1dbf2bf9e1b2da"
+    },
+    {
+      "path": "deep-native-audit-004-complete/snapshots/latest_checkpointed_iteration.txt",
+      "bytes": 1,
+      "sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"
+    },
+    {
+      "path": "deep-native-audit-004-complete/snapshots/master-after-001.pt",
+      "bytes": 168872818,
+      "sha256": "e8064389d18c4fa1d1c2f71adbd025b7e03aa5df93297c8c7e7b4c592b8c5a82"
+    },
+    {
+      "path": "deep-native-audit-004-complete/snapshots/master-after-002.pt",
+      "bytes": 168872818,
+      "sha256": "f5778429c3ef1878cfc63fa01def60f72fedcc539414cd7cd8764906dc78e89e"
+    },
+    {
+      "path": "deep-native-audit-004-complete/snapshots/master-after-003.pt",
+      "bytes": 168872818,
+      "sha256": "ab0a12db6aa2777b2d70fd7a59e9b8bf189579ee51226e12566857cdc6e952a8"
+    },
+    {
+      "path": "deep-native-audit-004-complete/snapshots/model0-forward-001.pt",
+      "bytes": 559734,
+      "sha256": "ad8b44d3ebcc3fe1df37535504255c791051f3033135b498475b1d4a483f8c89"
+    },
+    {
+      "path": "deep-native-audit-004-complete/snapshots/model0-forward-002.pt",
+      "bytes": 559734,
+      "sha256": "522984c22f27c44358aa321644c7437dfd58d994d1ba655b9abb153a7ca05cdc"
+    },
+    {
+      "path": "deep-native-audit-004-complete/snapshots/model0-forward-003.pt",
+      "bytes": 559734,
+      "sha256": "18d4c06ec3450a0186c74023dd12629972104a6663180a2f3d9e90512b71f3eb"
+    },
+    {
+      "path": "deep-native-audit-004-complete/snapshots/model0-initial.pt",
+      "bytes": 84988610,
+      "sha256": "7f94e9c05c7a24c6bf99e2961e3af638e9f334b653b3cc04db6441f3b001afa4"
+    },
+    {
+      "path": "deep-native-audit-004-complete/snapshots/params/iter_0000001/mp_rank_00.pth",
+      "bytes": 84444706,
+      "sha256": "6552d374ce43057085b4c772397364a159d5fcb2fd1710ff26bcac7de71e7dd6"
+    },
+    {
+      "path": "deep-native-audit-004-complete/snapshots/params/iter_0000002/mp_rank_00.pth",
+      "bytes": 84444706,
+      "sha256": "b84dbb452ea001d88b7cbc5f33bdbbdf7dffe1ffa63366da362ebe67beb6c11c"
+    },
+    {
+      "path": "deep-native-audit-004-complete/snapshots/params/iter_0000003/mp_rank_00.pth",
+      "bytes": 84444706,
+      "sha256": "5bb2cb3816f5889c78cd07cc42ca99439dcc8eac7b09ecacfc3cf27d9610c6a3"
+    },
+    {
+      "path": "deep-native-audit-004-complete/snapshots/wgrads/iter_0000001/mp_rank_00.pth",
+      "bytes": 168872482,
+      "sha256": "15d7d6ece269768570ba4b92214a6c5a8b26f6ab6833b2dff45cde696e586985"
+    },
+    {
+      "path": "deep-native-audit-004-complete/snapshots/wgrads/iter_0000002/mp_rank_00.pth",
+      "bytes": 168872482,
+      "sha256": "8dd58c9d6e75931588325db1c3a3cfd7a88350cf27fc672415bb6b3382bd2f5f"
+    },
+    {
+      "path": "deep-native-audit-004-complete/snapshots/wgrads/iter_0000003/mp_rank_00.pth",
+      "bytes": 168872482,
+      "sha256": "d4aa9b75f4f0f5c2d2323a60d1ed12076d063613016ae5a95cadba82484299d0"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/actual-start.pt",
+      "bytes": 253314942,
+      "sha256": "ac711aeb535baec0ce1f076521d19fb2adbf8bb20190f2a0bf4a6e6c4995e12e"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/iter_0000003/mp_rank_00/model_optim_rng.pt",
+      "bytes": 253376160,
+      "sha256": "d1399da738be4cf031f18612aaecffb951b56c78524f603cf50d02af06089363"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/latest_checkpointed_iteration.txt",
+      "bytes": 1,
+      "sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/master-after-001.pt",
+      "bytes": 168872818,
+      "sha256": "e8064389d18c4fa1d1c2f71adbd025b7e03aa5df93297c8c7e7b4c592b8c5a82"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/master-after-002.pt",
+      "bytes": 168872818,
+      "sha256": "f5778429c3ef1878cfc63fa01def60f72fedcc539414cd7cd8764906dc78e89e"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/master-after-003.pt",
+      "bytes": 168872818,
+      "sha256": "ab0a12db6aa2777b2d70fd7a59e9b8bf189579ee51226e12566857cdc6e952a8"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/model0-forward-001.pt",
+      "bytes": 559734,
+      "sha256": "ad8b44d3ebcc3fe1df37535504255c791051f3033135b498475b1d4a483f8c89"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/model0-forward-002.pt",
+      "bytes": 559734,
+      "sha256": "522984c22f27c44358aa321644c7437dfd58d994d1ba655b9abb153a7ca05cdc"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/model0-forward-003.pt",
+      "bytes": 559734,
+      "sha256": "18d4c06ec3450a0186c74023dd12629972104a6663180a2f3d9e90512b71f3eb"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/model0-initial.pt",
+      "bytes": 84988610,
+      "sha256": "7f94e9c05c7a24c6bf99e2961e3af638e9f334b653b3cc04db6441f3b001afa4"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/params/iter_0000001/mp_rank_00.pth",
+      "bytes": 84444706,
+      "sha256": "6552d374ce43057085b4c772397364a159d5fcb2fd1710ff26bcac7de71e7dd6"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/params/iter_0000002/mp_rank_00.pth",
+      "bytes": 84444706,
+      "sha256": "b84dbb452ea001d88b7cbc5f33bdbbdf7dffe1ffa63366da362ebe67beb6c11c"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/params/iter_0000003/mp_rank_00.pth",
+      "bytes": 84444706,
+      "sha256": "5bb2cb3816f5889c78cd07cc42ca99439dcc8eac7b09ecacfc3cf27d9610c6a3"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/wgrads/iter_0000001/mp_rank_00.pth",
+      "bytes": 168872482,
+      "sha256": "15d7d6ece269768570ba4b92214a6c5a8b26f6ab6833b2dff45cde696e586985"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/wgrads/iter_0000002/mp_rank_00.pth",
+      "bytes": 168872482,
+      "sha256": "8dd58c9d6e75931588325db1c3a3cfd7a88350cf27fc672415bb6b3382bd2f5f"
+    },
+    {
+      "path": "deep-control-audit-004-complete/snapshots/wgrads/iter_0000003/mp_rank_00.pth",
+      "bytes": 168872482,
+      "sha256": "d4aa9b75f4f0f5c2d2323a60d1ed12076d063613016ae5a95cadba82484299d0"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/actual-start.pt",
+      "bytes": 253314942,
+      "sha256": "ac711aeb535baec0ce1f076521d19fb2adbf8bb20190f2a0bf4a6e6c4995e12e"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/iter_0000003/mp_rank_00/model_optim_rng.pt",
+      "bytes": 253376160,
+      "sha256": "0714900e85db582da2ccfc2da3d0bc876814fdd40f75d77108dcae8b1579534a"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/latest_checkpointed_iteration.txt",
+      "bytes": 1,
+      "sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/master-after-001.pt",
+      "bytes": 168872818,
+      "sha256": "e8064389d18c4fa1d1c2f71adbd025b7e03aa5df93297c8c7e7b4c592b8c5a82"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/master-after-002.pt",
+      "bytes": 168872818,
+      "sha256": "f5778429c3ef1878cfc63fa01def60f72fedcc539414cd7cd8764906dc78e89e"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/master-after-003.pt",
+      "bytes": 168872818,
+      "sha256": "ab0a12db6aa2777b2d70fd7a59e9b8bf189579ee51226e12566857cdc6e952a8"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/model0-forward-001.pt",
+      "bytes": 559734,
+      "sha256": "ad8b44d3ebcc3fe1df37535504255c791051f3033135b498475b1d4a483f8c89"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/model0-forward-002.pt",
+      "bytes": 559734,
+      "sha256": "522984c22f27c44358aa321644c7437dfd58d994d1ba655b9abb153a7ca05cdc"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/model0-forward-003.pt",
+      "bytes": 559734,
+      "sha256": "18d4c06ec3450a0186c74023dd12629972104a6663180a2f3d9e90512b71f3eb"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/model0-initial.pt",
+      "bytes": 84988610,
+      "sha256": "7f94e9c05c7a24c6bf99e2961e3af638e9f334b653b3cc04db6441f3b001afa4"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/params/iter_0000001/mp_rank_00.pth",
+      "bytes": 84444706,
+      "sha256": "6552d374ce43057085b4c772397364a159d5fcb2fd1710ff26bcac7de71e7dd6"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/params/iter_0000002/mp_rank_00.pth",
+      "bytes": 84444706,
+      "sha256": "b84dbb452ea001d88b7cbc5f33bdbbdf7dffe1ffa63366da362ebe67beb6c11c"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/params/iter_0000003/mp_rank_00.pth",
+      "bytes": 84444706,
+      "sha256": "5bb2cb3816f5889c78cd07cc42ca99439dcc8eac7b09ecacfc3cf27d9610c6a3"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/wgrads/iter_0000001/mp_rank_00.pth",
+      "bytes": 168872482,
+      "sha256": "15d7d6ece269768570ba4b92214a6c5a8b26f6ab6833b2dff45cde696e586985"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/wgrads/iter_0000002/mp_rank_00.pth",
+      "bytes": 168872482,
+      "sha256": "8dd58c9d6e75931588325db1c3a3cfd7a88350cf27fc672415bb6b3382bd2f5f"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/snapshots/wgrads/iter_0000003/mp_rank_00.pth",
+      "bytes": 168872482,
+      "sha256": "d4aa9b75f4f0f5c2d2323a60d1ed12076d063613016ae5a95cadba82484299d0"
+    }
+  ],
+  "verified_files": 48,
+  "raw_bytes": 5579786799,
+  "unique_files": 18,
+  "unique_bytes": 2366681253,
+  "objects_transferred": 17,
+  "deduplication": "shared SHA256 objects and hardlinks",
+  "transfer_archive_retained": false,
+  "backup_script_sha256": "65ac0d67a48696d751190f9bbb4c5495c72912c745c1b4a461723056bf827adf",
+  "gpu_timing_finished_acknowledged": true,
+  "scope": "Local raw tensor/checkpoint backup only; no tensor arithmetic replay or remote deletion."
+}

@@ -13,3 +13,7 @@ __pycache__/
 /evidence/rmsnorm-stage28/**/*.tar.gz
 /evidence/rmsnorm-stage28/**/*.so
 /evidence/swiglu-stage29/raw-backup/
+
+# Preserve large raw tensors locally; publish their SHA256 inventories and receipts.
+**/raw-backup/
+**/evidence/**/*.pt

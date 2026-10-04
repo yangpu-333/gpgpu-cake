@@ -1,0 +1,115 @@
+{
+  "schema": "fixed-swiglu-stage30-cpu-archive-verification-v1",
+  "status": "verified",
+  "model_name": "deep",
+  "candidate": "004",
+  "candidate_sha256": "a516bb372012cd5569eed99db2815a41c0b229755158289ddf6536248d554250",
+  "contract_sha256": "2f8c3ec5147a2d8d235823f94fe5c8887ef99581075f0f5daa4c1cc3dc5ce6f9",
+  "audit_sha256": "1e324470cf974af4efbb1e5716edcc76c19ca2808fbb22429728f1d12dc1e855",
+  "controller_source_identity": "current-repair-v2",
+  "adaptation_record_sha256": "4c6d780a8f9863832fd9e53d32006e0f3ad68d1070d6d7664ba39544f6ddc386",
+  "native_interval_parser_sha256": "6c2d1f7955f7e474a3de0b9e4edc156bc9ba90b5f23c7a5fce696ee736dcd2d3",
+  "verifier_sha256": "61dd5270dad2f3d620722fad8db9cfa209944f1d5f07658232f2b22635666aa3",
+  "comparisons": {
+    "controlled": {
+      "checks": 2371,
+      "tensors": 1165,
+      "tensor_groups": {
+        "initial": 52,
+        "actual_start_model_parameters": 52,
+        "actual_start_master_parameters": 52,
+        "master_initialization": 104,
+        "model_initialization": 104,
+        "batches": 15,
+        "output": 3,
+        "derived_loss": 3,
+        "wgrads": 156,
+        "params": 156,
+        "masters": 156,
+        "master_model_consistency": 312
+      },
+      "raw_value_comparisons": 177,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    },
+    "native_optimized": {
+      "checks": 2371,
+      "tensors": 1165,
+      "tensor_groups": {
+        "initial": 52,
+        "actual_start_model_parameters": 52,
+        "actual_start_master_parameters": 52,
+        "master_initialization": 104,
+        "model_initialization": 104,
+        "batches": 15,
+        "output": 3,
+        "derived_loss": 3,
+        "wgrads": 156,
+        "params": 156,
+        "masters": 156,
+        "master_model_consistency": 312
+      },
+      "raw_value_comparisons": 177,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    },
+    "native_control": {
+      "checks": 2371,
+      "tensors": 1165,
+      "tensor_groups": {
+        "initial": 52,
+        "actual_start_model_parameters": 52,
+        "actual_start_master_parameters": 52,
+        "master_initialization": 104,
+        "model_initialization": 104,
+        "batches": 15,
+        "output": 3,
+        "derived_loss": 3,
+        "wgrads": 156,
+        "params": 156,
+        "masters": 156,
+        "master_model_consistency": 312
+      },
+      "raw_value_comparisons": 177,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    }
+  },
+  "performance": {
+    "available": true,
+    "path": "E:\\code\\GPGPU\\experiments\\kernelwiki_iluvatar\\megatron_bf16\\swiglu_scale\\evidence\\round-v2\\performance-deep-004-repair-v2.json",
+    "sha256": "be7ab35a0f2e2aee7f7d8adfbbd30f917acf6800a22f537cca04ff22232e30b6",
+    "timed_processes": 9,
+    "run_steps": 1080,
+    "retained_steps": 900,
+    "promoted": false,
+    "vs_native": {
+      "ratio": 1.0508225267701317,
+      "gain_percent": 5.082252677013166,
+      "all_seeds_faster": true
+    },
+    "vs_control": {
+      "ratio": 1.0118989487735996,
+      "gain_percent": 1.189894877359965,
+      "all_seeds_faster": false
+    },
+    "control_vs_native": {
+      "ratio": 1.038465874526015,
+      "gain_percent": 3.846587452601491,
+      "all_seeds_faster": true
+    }
+  },
+  "snapshot_inventory_records": 42,
+  "snapshot_files_available": 0,
+  "snapshot_files_missing": 42,
+  "raw_backup": {
+    "inventory_available": false,
+    "receipt_available": false,
+    "inventory_files": 0,
+    "files_available": 0,
+    "files_missing": 0
+  },
+  "gpu_rerun": false,
+  "tensor_arithmetic_replayed": false,
+  "scope": "Every frozen numerical receipt record, source/contract/controller/frozen dependency, actual model/shape/config/dispatch header and native interval log is rechecked on CPU. Only available raw snapshot bytes are SHA256 checked; missing raw bytes are explicit. No Torch/candidate import, tensor arithmetic replay, GPU run or production extrapolation."
+}

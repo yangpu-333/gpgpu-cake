@@ -1,0 +1,10 @@
+{
+  "model": "Claude-Opus-4.8",
+  "claude_code": true,
+  "session_id": "9174945c-433a-4636-884c-1f3731acff5d",
+  "num_turns": 5,
+  "raw_response": "../../../evidence/cc-attention-002.json",
+  "raw_response_sha256": "2468b1e8896d3f28ee627b56f8db104422ca8bec2ac0080f35226f7c629a36c2",
+  "prompt_sha256": "a61aca10007691f39a53ed8bb4f5aa5e23bcb5ab81792c5bb668a63aaf21d4c7",
+  "sha256": "3197be62fe4dd05cc278b368df29cd4a6098ce458d8493b1832df35e49ce4a84"
+}

@@ -1,0 +1,1786 @@
+{
+  "schema": "native-fused-full-attention-independent-probe-v1",
+  "status": "passed",
+  "version": "003",
+  "candidate_sha256": "4881f91c230324f258cf6faf7b1d63a493b043b960df4efdca0dad708195db48",
+  "verifier_sha256": "7778dc5837265b9fa4def2cf90d07ceeac2b992e583aa6939d74b5e99ad57fd0",
+  "native_source_sha256": {
+    "megatron/core/transformer/dot_product_attention.py": "7c631bfeba97d0273cd5399e7187a16f114b25a4f12a4e1c9edbacf71cf4e6f6",
+    "megatron/core/fusions/fused_softmax.py": "a75dc9d23380ff5d2ccdbfaa335c050bc4d16039fe35797f96dc108bad011e68",
+    "megatron/core/transformer/utils.py": "014ccd7deb6bb51ed4443cb87efd960dff13b725d16074e800c96f63faff1dca"
+  },
+  "backend_proof_sha256": "fa399ad4038edbae7cd078c2d50bc588f4c91e5563f0a2bbce0d22c05af3f1df",
+  "runtime": {
+    "torch": "2.4.1",
+    "selected_megatron_source": "/tmp/kda-bf16-continuation/megatron-native-5be9626",
+    "dtensor_namespace_exports": [
+      "DTensor",
+      "DeviceMesh",
+      "Partial",
+      "Placement",
+      "Replicate",
+      "Shard",
+      "distribute_module",
+      "distribute_tensor"
+    ],
+    "typing_override": "typing_extensions.override",
+    "ignored_triton_profiler_launch_metadata": [],
+    "unavailable_restore_value_autotuners": [],
+    "optional_backends_disabled_in_process": [
+      "transformer_engine",
+      "apex"
+    ]
+  },
+  "atol": 0.0003,
+  "rtol": 0.001,
+  "comparison": "CPU float64",
+  "native_capture_replay": {
+    "output": {
+      "passed": true,
+      "max_abs": 0.0,
+      "bad_elements": 0,
+      "elements": 131072,
+      "exact_equal": true
+    },
+    "query_grad": {
+      "passed": true,
+      "max_abs": 0.0,
+      "bad_elements": 0,
+      "elements": 131072,
+      "exact_equal": true
+    },
+    "key_grad": {
+      "passed": true,
+      "max_abs": 0.0,
+      "bad_elements": 0,
+      "elements": 131072,
+      "exact_equal": true
+    },
+    "value_grad": {
+      "passed": true,
+      "max_abs": 0.0,
+      "bad_elements": 0,
+      "elements": 131072,
+      "exact_equal": true
+    }
+  },
+  "checks": [
+    {
+      "case": "actual-formal-input-and-gradient",
+      "group": "positive",
+      "shape": [
+        128,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S128-random0.01",
+      "group": "positive",
+      "shape": [
+        128,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S128-random0.25",
+      "group": "positive",
+      "shape": [
+        128,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S128-random1",
+      "group": "positive",
+      "shape": [
+        128,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S128-noncontiguous-upstream",
+      "group": "positive",
+      "shape": [
+        128,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        2048,
+        1024,
+        2
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S128-offset-shared-views",
+      "group": "offset",
+      "shape": [
+        128,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        1,
+        65,
+        129
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        2048,
+        1024,
+        2
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S256-random0.01",
+      "group": "positive",
+      "shape": [
+        256,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S256-random0.25",
+      "group": "positive",
+      "shape": [
+        256,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S256-random1",
+      "group": "positive",
+      "shape": [
+        256,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S256-noncontiguous-upstream",
+      "group": "positive",
+      "shape": [
+        256,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        2048,
+        1024,
+        2
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S256-offset-shared-views",
+      "group": "offset",
+      "shape": [
+        256,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        1,
+        65,
+        129
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        2048,
+        1024,
+        2
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 262144,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S512-random0.01",
+      "group": "positive",
+      "shape": [
+        512,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S512-random0.25",
+      "group": "positive",
+      "shape": [
+        512,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S512-random1",
+      "group": "positive",
+      "shape": [
+        512,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S512-noncontiguous-upstream",
+      "group": "positive",
+      "shape": [
+        512,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        2048,
+        1024,
+        2
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S512-offset-shared-views",
+      "group": "offset",
+      "shape": [
+        512,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        1,
+        65,
+        129
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        2048,
+        1024,
+        2
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 524288,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "fresh-input-0",
+      "group": "positive",
+      "shape": [
+        128,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "fresh-input-1",
+      "group": "positive",
+      "shape": [
+        128,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "fresh-input-2",
+      "group": "positive",
+      "shape": [
+        128,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "fresh-input-3",
+      "group": "positive",
+      "shape": [
+        128,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "nondefault-stream",
+      "group": "positive",
+      "shape": [
+        128,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 306252096,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 131072,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "S17-native-automatic-fallback",
+      "group": "positive",
+      "shape": [
+        17,
+        2,
+        8,
+        64
+      ],
+      "input_strides": [
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ],
+        [
+          3072,
+          1536,
+          192,
+          1
+        ]
+      ],
+      "storage_offsets": [
+        0,
+        64,
+        128
+      ],
+      "input_storage_shared": true,
+      "current_stream": 0,
+      "upstream_stride": [
+        1024,
+        512,
+        1
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 17408,
+          "exact_equal": true
+        },
+        "query_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 17408,
+          "exact_equal": true
+        },
+        "key_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 17408,
+          "exact_equal": true
+        },
+        "value_grad": {
+          "passed": true,
+          "max_abs": 0.0,
+          "bad_elements": 0,
+          "elements": 17408,
+          "exact_equal": true
+        }
+      },
+      "inputs_unchanged": true,
+      "passed": true
+    }
+  ],
+  "guard_checks": [
+    {
+      "case": "cpu",
+      "passed": true,
+      "error_type": "RuntimeError"
+    },
+    {
+      "case": "float32",
+      "passed": true,
+      "error_type": "RuntimeError"
+    }
+  ],
+  "timing": [
+    {
+      "mode": "forward",
+      "metric": "torch.cuda.Event full API milliseconds; submission gaps may be included",
+      "raw_pairs": {
+        "native": [
+          0.11975001096725464,
+          0.1095509648323059,
+          0.1125653862953186,
+          0.11272981166839599,
+          0.11235193014144898,
+          0.11405289173126221,
+          0.11200960874557495,
+          0.11304615736007691,
+          0.12010961771011353,
+          0.11349807977676392,
+          0.11272981166839599,
+          0.1444442391395569
+        ],
+        "candidate": [
+          0.07439808249473571,
+          0.07266345620155334,
+          0.07149807810783386,
+          0.0720403790473938,
+          0.07332499623298645,
+          0.08803942203521728,
+          0.07009903788566589,
+          0.07454519271850586,
+          0.07084038257598876,
+          0.07174326777458191,
+          0.0708134651184082,
+          0.07107884287834168
+        ]
+      },
+      "native_median_ms": 0.11288798451423646,
+      "candidate_median_ms": 0.07189182341098785,
+      "baseline_scope": "bitwise-validated native functional replay, fresh torch.empty scratch; original module/global-buffer/RNG wrapper cost is excluded; final gate uses actual original formal training"
+    },
+    {
+      "mode": "forward-backward",
+      "metric": "torch.cuda.Event full API milliseconds; submission gaps may be included",
+      "raw_pairs": {
+        "native": [
+          0.42205963134765623,
+          0.40111441612243653,
+          0.3970769166946411,
+          0.3998980760574341,
+          0.4007720947265625,
+          0.39950385093688967,
+          0.39331827163696287,
+          0.3937875032424927,
+          0.39944326877593994,
+          0.4067807674407959,
+          0.4183480739593506,
+          0.4393932819366455
+        ],
+        "candidate": [
+          0.3057576894760132,
+          0.30356154441833494,
+          0.30836827754974366,
+          0.3180288553237915,
+          0.3065394163131714,
+          0.3059394121170044,
+          0.298779821395874,
+          0.3004528760910034,
+          0.30603365898132323,
+          0.2967721223831177,
+          0.31611344814300535,
+          0.30450096130371096
+        ]
+      },
+      "native_median_ms": 0.4003350853919983,
+      "candidate_median_ms": 0.30584855079650874,
+      "baseline_scope": "bitwise-validated native functional replay, fresh torch.empty scratch; original module/global-buffer/RNG wrapper cost is excluded; final gate uses actual original formal training"
+    }
+  ],
+  "scope": "Full attention API with default native CUDA fused softmax; actual QKV layouts/offsets and all QKV gradients; no training or production claim"
+}

@@ -1,0 +1,62 @@
+{
+  "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
+  "source_manifest_sha256": "a72ded960488d399ded2255ef55f357257e03532b8fa21a06d958170c5c98c2d",
+  "files": [
+    {
+      "path": "arguments.py",
+      "native_path": "megatron/training/arguments.py",
+      "sha256": "f7fad20bc0e0cd9ba4b9ba7e70fa1a1b77030dfd020a7edb50b1d3b3aa41ebf6",
+      "bytes": 207996
+    },
+    {
+      "path": "backends.py",
+      "native_path": "megatron/core/models/backends.py",
+      "sha256": "6128229ad7bfb2de97e385ce37471bd32442e2536a0a5a9ac655fe7342e5f80b",
+      "bytes": 7859
+    },
+    {
+      "path": "experts.py",
+      "native_path": "megatron/core/transformer/moe/experts.py",
+      "sha256": "32e1a36533a217599b20cdc2a47285f0e8af19716a7a1b10db8fe421c8b24fef",
+      "bytes": 64213
+    },
+    {
+      "path": "mlp.py",
+      "native_path": "megatron/core/transformer/mlp.py",
+      "sha256": "f54a7209db5cad4e095143cbbc1eedcbf41e913ea1eec64db3cb1b8408e6ff07",
+      "bytes": 21705
+    },
+    {
+      "path": "moe_layer.py",
+      "native_path": "megatron/core/transformer/moe/moe_layer.py",
+      "sha256": "189b0ce590ca1cb9fd8b8c33c2df8e2205e5def7d58dbb8dfd1829a5526553e3",
+      "bytes": 35212
+    },
+    {
+      "path": "moe_utils.py",
+      "native_path": "megatron/core/transformer/moe/moe_utils.py",
+      "sha256": "b20192e71b54ed07b00f9e3d0bbd7daf470cb9ea3dc3037c20f544528e56f14f",
+      "bytes": 71579
+    },
+    {
+      "path": "router.py",
+      "native_path": "megatron/core/transformer/moe/router.py",
+      "sha256": "1a1b6a2b82dc28835d44f637628243f283310e6ae50a2d836b19f19ae56c8f3a",
+      "bytes": 41760
+    },
+    {
+      "path": "token_dispatcher.py",
+      "native_path": "megatron/core/transformer/moe/token_dispatcher.py",
+      "sha256": "7af2746153268f5c5f7f03d7a340092541b633fbc8faa10f666d6ddbdf98be0a",
+      "bytes": 90848
+    },
+    {
+      "path": "transformer_engine_spec_provider.py",
+      "native_path": "megatron/core/extensions/transformer_engine_spec_provider.py",
+      "sha256": "20dd369cdd701747808e0b270c26807527d5577cc59a36e9175354e94406ee4f",
+      "bytes": 4700
+    }
+  ],
+  "status": "verified-original-source-only",
+  "runtime_proven": false
+}

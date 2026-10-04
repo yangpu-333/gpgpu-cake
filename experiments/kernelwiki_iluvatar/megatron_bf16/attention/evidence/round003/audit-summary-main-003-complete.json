@@ -1,0 +1,862 @@
+{
+  "schema": "native-full-attention-stage31-three-way-audit-v1",
+  "status": "completed",
+  "passed": true,
+  "version": "003",
+  "model_name": "main",
+  "suffix": "complete",
+  "candidate_sha256": "4881f91c230324f258cf6faf7b1d63a493b043b960df4efdca0dad708195db48",
+  "contract_sha256": "c2a36adb7a8d8b5ee0db4ddeac7856a094b5d21a4acb7dcaab2dbd5db3d8d4a8",
+  "wrapper_sha256": "685766bd5243f1039c93bb150191774f1dda7409b2bbd87ccb62e055b6d56478",
+  "runner_sha256": "4603346236f182517c21c0f84779b49e5e965760fba64e8200036c88d8717686",
+  "controller_sources_sha256": {
+    "common.py": "e15268a4fd525b9c91754b603438f383cb48620a8458ab77ea7408fcb4f20db8",
+    "launch_attention.py": "685766bd5243f1039c93bb150191774f1dda7409b2bbd87ccb62e055b6d56478",
+    "run_audit.py": "4603346236f182517c21c0f84779b49e5e965760fba64e8200036c88d8717686",
+    "run_performance.py": "cf917dff658e6ea2dc50a37932bc72be0e330ddd9452beda0066fe300ba9deba"
+  },
+  "provenance": {
+    "frozen_sources_sha256": {
+      "stage31/probe_full.py": "7778dc5837265b9fa4def2cf90d07ceeac2b992e583aa6939d74b5e99ad57fd0",
+      "stage29/candidate-004.py": "a516bb372012cd5569eed99db2815a41c0b229755158289ddf6536248d554250",
+      "stage29/launch_swiglu-03.py": "ad9e63f3361a284f2d137cd147c9dbf515b822e657d681a5de098724ffbddb1c",
+      "stage29/contracts/main.json": "b71917793c455625cb2a1e09733b6969f8e20b08058385408c3f5f7f930d723e",
+      "stage29/probe-004-v3.json": "afbb2c40c283cc16cfd42c5f27792068436c280a1de9959cb0d0e6bed7a0e342",
+      "stage29/decision.json": "d0dc77fcf3aded453f1e368d24e49ce2763b22683ca88d5fd22e8b90561e602f",
+      "bf16/compare_training.py": "feb475eb504fe452267f930f2069d5f17b36387a6cb4ad0f839a6aaa8df27eda",
+      "bf16/summarize_performance.py": "6130e7cd9a2ffa26b42db42142694781bd45f9bdaa83336d4f1944a48368e5b7",
+      "bf16/launch_training.py": "a7909648600a4ef8448e738a75e5346845a392bdbcf2fbffc2fadecae1297e90",
+      "bf16/kernel_adapter.py": "bd84038d9037c8d62262a2a36d1cf378faa695bf2a9f3cd7288c02bc52037296",
+      "bf16/run_case.py": "6f3fede9c52e872033ff086968d31cfa6d839cedf49fc8f1a4c86c71944ed6d3",
+      "bf16/candidates/0008/candidate.py": "9b22e12b4744b2a41b9209faa280e361e6defe1d5480f5e5683fddd247b7f493",
+      "formal/runtime_compat.py": "6a7e4bd6130ea4b2141d3ac2e3f00a284da2915d997a76249272322ef6973bff",
+      "formal/source_manifest.json": "a72ded960488d399ded2255ef55f357257e03532b8fa21a06d958170c5c98c2d",
+      "formal/summarize_performance.py": "6c2d1f7955f7e474a3de0b9e4edc156bc9ba90b5f23c7a5fce696ee736dcd2d3",
+      "gradnorm/candidate.py": "84c851ce5af7a49ba97685710790146d2c315f9c8837259366bffd7831f67dc0",
+      "gradnorm/launch_gradnorm-04.py": "12503df82b69f7eb5059cc0c0722677e05ff14cdf1a37b6c34c0d7e3c8acba7f"
+    },
+    "controller_sources_sha256": {
+      "common.py": "e15268a4fd525b9c91754b603438f383cb48620a8458ab77ea7408fcb4f20db8",
+      "launch_attention.py": "685766bd5243f1039c93bb150191774f1dda7409b2bbd87ccb62e055b6d56478",
+      "run_audit.py": "4603346236f182517c21c0f84779b49e5e965760fba64e8200036c88d8717686",
+      "run_performance.py": "cf917dff658e6ea2dc50a37932bc72be0e330ddd9452beda0066fe300ba9deba"
+    },
+    "backend": {
+      "path": "/tmp/kda-attention-stage31/backend-default.json",
+      "sha256": "fa399ad4038edbae7cd078c2d50bc588f4c91e5563f0a2bbce0d22c05af3f1df",
+      "native_source_sha256": {
+        "megatron/core/transformer/dot_product_attention.py": "7c631bfeba97d0273cd5399e7187a16f114b25a4f12a4e1c9edbacf71cf4e6f6",
+        "megatron/core/fusions/fused_softmax.py": "a75dc9d23380ff5d2ccdbfaa335c050bc4d16039fe35797f96dc108bad011e68",
+        "megatron/core/transformer/utils.py": "014ccd7deb6bb51ed4443cb87efd960dff13b725d16074e800c96f63faff1dca"
+      },
+      "native_extensions": {
+        "scaled_masked_softmax_cuda": {
+          "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+          "sha256": "a155625037cff9d8dcf7c0935c6bc9f80e49d63aeaaf8df75c075665fecd6be5"
+        },
+        "scaled_upper_triang_masked_softmax_cuda": {
+          "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_upper_triang_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+          "sha256": "7af725f33f3cf9d5a14579b01510af0909f1411d2a320557bc98fcbc1a6228e8"
+        }
+      }
+    },
+    "probe_path": "/tmp/kda-attention-stage31/probe-full-003.json",
+    "probe_sha256": "15144ae11bc7a4a8d052f1ec678195cf0d01f78396f9188772bc8f25c6be813f",
+    "verifier_path": "/tmp/kda-attention-stage31/probe_full.py",
+    "verifier_sha256": "7778dc5837265b9fa4def2cf90d07ceeac2b992e583aa6939d74b5e99ad57fd0",
+    "native_capture_receipt_sha256": "c4bf61c70b1b041dfbdadee41584285e741b64bad0910a223ea64613e59a3722",
+    "native_capture_raw_files": {
+      "inputs.pt": {
+        "sha256": "92e5979825153fa96640ee0ed94a8503d373160e367452bf87bf5e9195b6d2cd",
+        "bytes": 821000
+      },
+      "key-grad.pt": {
+        "sha256": "b594c548257288f0f7d86e50af1209e2bc39c360f26b25419c202f0aa986d4e9",
+        "bytes": 263329
+      },
+      "output.pt": {
+        "sha256": "140aac93943d59a1b7d762ee27d11a9404bca3405ed768df64c5712d01328788",
+        "bytes": 263255
+      },
+      "value-grad.pt": {
+        "sha256": "430c1b939e2c9c0dacc4a0ad7e712ca8b871c38a25f632e17fc5612c3f6e374b",
+        "bytes": 263339
+      },
+      "upstream-grad.pt": {
+        "sha256": "d9e5ae694344571d43be1b97ab7d681dec30d283df17b40b4e7e5bc1851c73f1",
+        "bytes": 263354
+      },
+      "query-grad.pt": {
+        "sha256": "bdaab453774dd2488fe82b3a307ceb68b4f47783b03178685568966692dbdc17",
+        "bytes": 263339
+      }
+    },
+    "candidate_sha256": "4881f91c230324f258cf6faf7b1d63a493b043b960df4efdca0dad708195db48",
+    "swiglu_candidate_sha256": "a516bb372012cd5569eed99db2815a41c0b229755158289ddf6536248d554250",
+    "native_source_commit": "5be9626709af2722333bf54797c954c09edeada3",
+    "native_source_file_count": 600,
+    "adaptation": "Only outer launcher identity and controlled-left candidate identity gates adapted. Original model/source/all-tensor/master/precision/timer gates retained."
+  },
+  "frozen_comparator_sha256": "feb475eb504fe452267f930f2069d5f17b36387a6cb4ad0f839a6aaa8df27eda",
+  "audit_seed": 31101,
+  "comparisons": {
+    "controlled": {
+      "path": "/tmp/kda-attention-stage31/comparison-main-003-complete.json",
+      "sha256": "8647e2acf46cf9147736768a36126c76e567748f9f22d9a183a1f69dfd80eac1",
+      "passed": true,
+      "check_summary": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "tensor_comparisons": 637,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    },
+    "native_optimized": {
+      "path": "/tmp/kda-attention-stage31/comparison-native-optimized-main-003-complete.json",
+      "sha256": "6f528feeebb823068178064f8d54d3497064c4e96314a4ca1298a2545916dab9",
+      "passed": true,
+      "check_summary": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "tensor_comparisons": 637,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    },
+    "native_control": {
+      "path": "/tmp/kda-attention-stage31/comparison-native-control-main-003-complete.json",
+      "sha256": "62a1f3cfa745c0084a5655c5a2d235c00f60a1d76a54ff173d61899e5c97a4d9",
+      "passed": true,
+      "check_summary": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "tensor_comparisons": 637,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    }
+  },
+  "completed_cases": [
+    {
+      "arm": "native",
+      "path": "/tmp/kda-attention-stage31/main-native-audit-003-complete",
+      "hooks": {
+        "attention": {
+          "schema": "native-complete-attention-dispatch-v1",
+          "enabled": false,
+          "calls": 12,
+          "candidate_calls": 0,
+          "native_calls": 12,
+          "fallback_calls": 0,
+          "native_fused_forward_calls": 12,
+          "native_torch_forward_calls": 0,
+          "native_fused_backward_calls": 12,
+          "native_routes_observed": true,
+          "unsupported_calls": 0,
+          "shapes": {
+            "(((128, 2, 8, 64), (3072, 1536, 192, 1), 'torch.bfloat16', 0, True, True), ((128, 2, 8, 64), (3072, 1536, 192, 1), 'torch.bfloat16', 64, True, True), ((128, 2, 8, 64), (3072, 1536, 192, 1), 'torch.bfloat16', 128, True, True), ((2, 1, 128, 128), (16384, 16384, 128, 1), 'torch.bool', 0, False, True))": 12
+          },
+          "configurations": [
+            {
+              "num_layers": 4,
+              "hidden_size": 512,
+              "num_attention_heads": 8,
+              "num_query_groups": 8,
+              "kv_channels": 64,
+              "attention_dropout": 0.0,
+              "masked_softmax_fusion": true,
+              "attention_softmax_in_fp32": false,
+              "apply_query_key_layer_scaling": false,
+              "sequence_parallel": false,
+              "context_parallel_size": 1,
+              "tensor_model_parallel_size": 1,
+              "softmax_type": "vanilla",
+              "window_size": null,
+              "bf16": true,
+              "fp16": false,
+              "softmax_scale": 0.125,
+              "softmax_offset_present": false,
+              "attn_mask_type": "AttnMaskType.causal",
+              "dropout_probability": 0.0,
+              "tp_group_size": 1,
+              "heads_per_partition": 8,
+              "groups_per_partition": 8,
+              "head_dimension": 64,
+              "hidden_per_partition": 512,
+              "scaled_masked_softmax_fusion": true,
+              "softmax_in_fp32": false,
+              "additional_softmax_scale": null,
+              "softmax_window_size": null,
+              "softmax_attn_mask_type": "AttnMaskType.causal",
+              "softmax_input_bf16": true,
+              "softmax_input_fp16": false,
+              "native_kernel_available": true
+            },
+            {
+              "num_layers": 4,
+              "hidden_size": 512,
+              "num_attention_heads": 8,
+              "num_query_groups": 8,
+              "kv_channels": 64,
+              "attention_dropout": 0.0,
+              "masked_softmax_fusion": true,
+              "attention_softmax_in_fp32": false,
+              "apply_query_key_layer_scaling": false,
+              "sequence_parallel": false,
+              "context_parallel_size": 1,
+              "tensor_model_parallel_size": 1,
+              "softmax_type": "vanilla",
+              "window_size": null,
+              "bf16": true,
+              "fp16": false,
+              "softmax_scale": 0.125,
+              "softmax_offset_present": false,
+              "attn_mask_type": "AttnMaskType.causal",
+              "dropout_probability": 0.0,
+              "tp_group_size": 1,
+              "heads_per_partition": 8,
+              "groups_per_partition": 8,
+              "head_dimension": 64,
+              "hidden_per_partition": 512,
+              "scaled_masked_softmax_fusion": true,
+              "softmax_in_fp32": false,
+              "additional_softmax_scale": null,
+              "softmax_window_size": null,
+              "softmax_attn_mask_type": "AttnMaskType.causal",
+              "softmax_input_bf16": true,
+              "softmax_input_fp16": false,
+              "native_kernel_available": true
+            },
+            {
+              "num_layers": 4,
+              "hidden_size": 512,
+              "num_attention_heads": 8,
+              "num_query_groups": 8,
+              "kv_channels": 64,
+              "attention_dropout": 0.0,
+              "masked_softmax_fusion": true,
+              "attention_softmax_in_fp32": false,
+              "apply_query_key_layer_scaling": false,
+              "sequence_parallel": false,
+              "context_parallel_size": 1,
+              "tensor_model_parallel_size": 1,
+              "softmax_type": "vanilla",
+              "window_size": null,
+              "bf16": true,
+              "fp16": false,
+              "softmax_scale": 0.125,
+              "softmax_offset_present": false,
+              "attn_mask_type": "AttnMaskType.causal",
+              "dropout_probability": 0.0,
+              "tp_group_size": 1,
+              "heads_per_partition": 8,
+              "groups_per_partition": 8,
+              "head_dimension": 64,
+              "hidden_per_partition": 512,
+              "scaled_masked_softmax_fusion": true,
+              "softmax_in_fp32": false,
+              "additional_softmax_scale": null,
+              "softmax_window_size": null,
+              "softmax_attn_mask_type": "AttnMaskType.causal",
+              "softmax_input_bf16": true,
+              "softmax_input_fp16": false,
+              "native_kernel_available": true
+            },
+            {
+              "num_layers": 4,
+              "hidden_size": 512,
+              "num_attention_heads": 8,
+              "num_query_groups": 8,
+              "kv_channels": 64,
+              "attention_dropout": 0.0,
+              "masked_softmax_fusion": true,
+              "attention_softmax_in_fp32": false,
+              "apply_query_key_layer_scaling": false,
+              "sequence_parallel": false,
+              "context_parallel_size": 1,
+              "tensor_model_parallel_size": 1,
+              "softmax_type": "vanilla",
+              "window_size": null,
+              "bf16": true,
+              "fp16": false,
+              "softmax_scale": 0.125,
+              "softmax_offset_present": false,
+              "attn_mask_type": "AttnMaskType.causal",
+              "dropout_probability": 0.0,
+              "tp_group_size": 1,
+              "heads_per_partition": 8,
+              "groups_per_partition": 8,
+              "head_dimension": 64,
+              "hidden_per_partition": 512,
+              "scaled_masked_softmax_fusion": true,
+              "softmax_in_fp32": false,
+              "additional_softmax_scale": null,
+              "softmax_window_size": null,
+              "softmax_attn_mask_type": "AttnMaskType.causal",
+              "softmax_input_bf16": true,
+              "softmax_input_fp16": false,
+              "native_kernel_available": true
+            }
+          ],
+          "wrapper_sha256": "685766bd5243f1039c93bb150191774f1dda7409b2bbd87ccb62e055b6d56478",
+          "delegate_launcher_sha256": "ad9e63f3361a284f2d137cd147c9dbf515b822e657d681a5de098724ffbddb1c",
+          "candidate_sha256": null,
+          "capture_written": false,
+          "scope": "Whole native DotProductAttention replacement only for the audited causal BF16 scope; native/control use original forward, default fused softmax remains enabled. Extra native softmax forward/backward route wrappers are installed only for untimed audit; performance does not observe those routes per call.",
+          "native_source_sha256": {
+            "megatron/core/transformer/dot_product_attention.py": "7c631bfeba97d0273cd5399e7187a16f114b25a4f12a4e1c9edbacf71cf4e6f6",
+            "megatron/core/fusions/fused_softmax.py": "a75dc9d23380ff5d2ccdbfaa335c050bc4d16039fe35797f96dc108bad011e68",
+            "megatron/core/transformer/utils.py": "014ccd7deb6bb51ed4443cb87efd960dff13b725d16074e800c96f63faff1dca"
+          },
+          "native_extensions": {
+            "scaled_masked_softmax_cuda": {
+              "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+              "sha256": "a155625037cff9d8dcf7c0935c6bc9f80e49d63aeaaf8df75c075665fecd6be5"
+            },
+            "scaled_upper_triang_masked_softmax_cuda": {
+              "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_upper_triang_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+              "sha256": "7af725f33f3cf9d5a14579b01510af0909f1411d2a320557bc98fcbc1a6228e8"
+            }
+          }
+        },
+        "swiglu": {
+          "enabled": false,
+          "calls": 0,
+          "native_calls": 0,
+          "fallback_calls": 0,
+          "shapes": {},
+          "wrapper_sha256": "ad9e63f3361a284f2d137cd147c9dbf515b822e657d681a5de098724ffbddb1c",
+          "candidate_sha256": null,
+          "native_source_sha256": {
+            "megatron/core/transformer/mlp.py": "f54a7209db5cad4e095143cbbc1eedcbf41e913ea1eec64db3cb1b8408e6ff07",
+            "megatron/core/fusions/fused_bias_swiglu.py": "5303680596749464c45f9c3ec65f94d1127fb6d49b2aa9ec3ba8c91b1141f08f",
+            "megatron/core/jit.py": "0de81ea1c3a8fd5bf1a880a1c3d3ddacd706b4df946c9016d563b5c14778a3ba"
+          },
+          "native_jit_callable": "<class 'function'>",
+          "native_compiled_callable": true,
+          "configuration": {
+            "gated_linear_unit": true,
+            "bias_activation_fusion": true,
+            "activation_func": "torch.nn.functional.silu",
+            "add_bias_linear": false,
+            "use_te_activation_func": false,
+            "activation_func_fp8_input_store": false,
+            "glu_linear_offset": 0.0,
+            "activation_func_clamp_value": null,
+            "cpu_offloading": false,
+            "per_token_scale_present": false
+          }
+        },
+        "gradnorm": {
+          "enabled": false,
+          "calls": 0,
+          "wrapper_sha256": "12503df82b69f7eb5059cc0c0722677e05ff14cdf1a37b6c34c0d7e3c8acba7f",
+          "candidate_sha256": null,
+          "norm_audit": [],
+          "fallback_calls": 0,
+          "scope": "Process-only local multi-tensor L2 hook; original all-reduces, optimizer, CE0008 and training timer unchanged."
+        },
+        "raw_sha256": {
+          "attention.json": "3ac7b01ec593ac9a978324f37407a347e7ac1cd38ee03a68db9531f4ea3e01cd",
+          "swiglu.json": "e489677efd9c4bcb54102c1aadaadc4e234052fea601b415882b308b07b427a3",
+          "gradnorm.json": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+        }
+      }
+    },
+    {
+      "arm": "control",
+      "path": "/tmp/kda-attention-stage31/main-control-audit-003-complete",
+      "hooks": {
+        "attention": {
+          "schema": "native-complete-attention-dispatch-v1",
+          "enabled": false,
+          "calls": 12,
+          "candidate_calls": 0,
+          "native_calls": 12,
+          "fallback_calls": 0,
+          "native_fused_forward_calls": 12,
+          "native_torch_forward_calls": 0,
+          "native_fused_backward_calls": 12,
+          "native_routes_observed": true,
+          "unsupported_calls": 0,
+          "shapes": {
+            "(((128, 2, 8, 64), (3072, 1536, 192, 1), 'torch.bfloat16', 0, True, True), ((128, 2, 8, 64), (3072, 1536, 192, 1), 'torch.bfloat16', 64, True, True), ((128, 2, 8, 64), (3072, 1536, 192, 1), 'torch.bfloat16', 128, True, True), ((2, 1, 128, 128), (16384, 16384, 128, 1), 'torch.bool', 0, False, True))": 12
+          },
+          "configurations": [
+            {
+              "num_layers": 4,
+              "hidden_size": 512,
+              "num_attention_heads": 8,
+              "num_query_groups": 8,
+              "kv_channels": 64,
+              "attention_dropout": 0.0,
+              "masked_softmax_fusion": true,
+              "attention_softmax_in_fp32": false,
+              "apply_query_key_layer_scaling": false,
+              "sequence_parallel": false,
+              "context_parallel_size": 1,
+              "tensor_model_parallel_size": 1,
+              "softmax_type": "vanilla",
+              "window_size": null,
+              "bf16": true,
+              "fp16": false,
+              "softmax_scale": 0.125,
+              "softmax_offset_present": false,
+              "attn_mask_type": "AttnMaskType.causal",
+              "dropout_probability": 0.0,
+              "tp_group_size": 1,
+              "heads_per_partition": 8,
+              "groups_per_partition": 8,
+              "head_dimension": 64,
+              "hidden_per_partition": 512,
+              "scaled_masked_softmax_fusion": true,
+              "softmax_in_fp32": false,
+              "additional_softmax_scale": null,
+              "softmax_window_size": null,
+              "softmax_attn_mask_type": "AttnMaskType.causal",
+              "softmax_input_bf16": true,
+              "softmax_input_fp16": false,
+              "native_kernel_available": true
+            },
+            {
+              "num_layers": 4,
+              "hidden_size": 512,
+              "num_attention_heads": 8,
+              "num_query_groups": 8,
+              "kv_channels": 64,
+              "attention_dropout": 0.0,
+              "masked_softmax_fusion": true,
+              "attention_softmax_in_fp32": false,
+              "apply_query_key_layer_scaling": false,
+              "sequence_parallel": false,
+              "context_parallel_size": 1,
+              "tensor_model_parallel_size": 1,
+              "softmax_type": "vanilla",
+              "window_size": null,
+              "bf16": true,
+              "fp16": false,
+              "softmax_scale": 0.125,
+              "softmax_offset_present": false,
+              "attn_mask_type": "AttnMaskType.causal",
+              "dropout_probability": 0.0,
+              "tp_group_size": 1,
+              "heads_per_partition": 8,
+              "groups_per_partition": 8,
+              "head_dimension": 64,
+              "hidden_per_partition": 512,
+              "scaled_masked_softmax_fusion": true,
+              "softmax_in_fp32": false,
+              "additional_softmax_scale": null,
+              "softmax_window_size": null,
+              "softmax_attn_mask_type": "AttnMaskType.causal",
+              "softmax_input_bf16": true,
+              "softmax_input_fp16": false,
+              "native_kernel_available": true
+            },
+            {
+              "num_layers": 4,
+              "hidden_size": 512,
+              "num_attention_heads": 8,
+              "num_query_groups": 8,
+              "kv_channels": 64,
+              "attention_dropout": 0.0,
+              "masked_softmax_fusion": true,
+              "attention_softmax_in_fp32": false,
+              "apply_query_key_layer_scaling": false,
+              "sequence_parallel": false,
+              "context_parallel_size": 1,
+              "tensor_model_parallel_size": 1,
+              "softmax_type": "vanilla",
+              "window_size": null,
+              "bf16": true,
+              "fp16": false,
+              "softmax_scale": 0.125,
+              "softmax_offset_present": false,
+              "attn_mask_type": "AttnMaskType.causal",
+              "dropout_probability": 0.0,
+              "tp_group_size": 1,
+              "heads_per_partition": 8,
+              "groups_per_partition": 8,
+              "head_dimension": 64,
+              "hidden_per_partition": 512,
+              "scaled_masked_softmax_fusion": true,
+              "softmax_in_fp32": false,
+              "additional_softmax_scale": null,
+              "softmax_window_size": null,
+              "softmax_attn_mask_type": "AttnMaskType.causal",
+              "softmax_input_bf16": true,
+              "softmax_input_fp16": false,
+              "native_kernel_available": true
+            },
+            {
+              "num_layers": 4,
+              "hidden_size": 512,
+              "num_attention_heads": 8,
+              "num_query_groups": 8,
+              "kv_channels": 64,
+              "attention_dropout": 0.0,
+              "masked_softmax_fusion": true,
+              "attention_softmax_in_fp32": false,
+              "apply_query_key_layer_scaling": false,
+              "sequence_parallel": false,
+              "context_parallel_size": 1,
+              "tensor_model_parallel_size": 1,
+              "softmax_type": "vanilla",
+              "window_size": null,
+              "bf16": true,
+              "fp16": false,
+              "softmax_scale": 0.125,
+              "softmax_offset_present": false,
+              "attn_mask_type": "AttnMaskType.causal",
+              "dropout_probability": 0.0,
+              "tp_group_size": 1,
+              "heads_per_partition": 8,
+              "groups_per_partition": 8,
+              "head_dimension": 64,
+              "hidden_per_partition": 512,
+              "scaled_masked_softmax_fusion": true,
+              "softmax_in_fp32": false,
+              "additional_softmax_scale": null,
+              "softmax_window_size": null,
+              "softmax_attn_mask_type": "AttnMaskType.causal",
+              "softmax_input_bf16": true,
+              "softmax_input_fp16": false,
+              "native_kernel_available": true
+            }
+          ],
+          "wrapper_sha256": "685766bd5243f1039c93bb150191774f1dda7409b2bbd87ccb62e055b6d56478",
+          "delegate_launcher_sha256": "ad9e63f3361a284f2d137cd147c9dbf515b822e657d681a5de098724ffbddb1c",
+          "candidate_sha256": null,
+          "capture_written": false,
+          "scope": "Whole native DotProductAttention replacement only for the audited causal BF16 scope; native/control use original forward, default fused softmax remains enabled. Extra native softmax forward/backward route wrappers are installed only for untimed audit; performance does not observe those routes per call.",
+          "native_source_sha256": {
+            "megatron/core/transformer/dot_product_attention.py": "7c631bfeba97d0273cd5399e7187a16f114b25a4f12a4e1c9edbacf71cf4e6f6",
+            "megatron/core/fusions/fused_softmax.py": "a75dc9d23380ff5d2ccdbfaa335c050bc4d16039fe35797f96dc108bad011e68",
+            "megatron/core/transformer/utils.py": "014ccd7deb6bb51ed4443cb87efd960dff13b725d16074e800c96f63faff1dca"
+          },
+          "native_extensions": {
+            "scaled_masked_softmax_cuda": {
+              "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+              "sha256": "a155625037cff9d8dcf7c0935c6bc9f80e49d63aeaaf8df75c075665fecd6be5"
+            },
+            "scaled_upper_triang_masked_softmax_cuda": {
+              "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_upper_triang_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+              "sha256": "7af725f33f3cf9d5a14579b01510af0909f1411d2a320557bc98fcbc1a6228e8"
+            }
+          }
+        },
+        "swiglu": {
+          "enabled": true,
+          "calls": 12,
+          "native_calls": 0,
+          "fallback_calls": 0,
+          "shapes": {
+            "((128, 2, 4096), (8192, 4096, 1), 'torch.bfloat16')": 12
+          },
+          "wrapper_sha256": "ad9e63f3361a284f2d137cd147c9dbf515b822e657d681a5de098724ffbddb1c",
+          "candidate_sha256": "a516bb372012cd5569eed99db2815a41c0b229755158289ddf6536248d554250",
+          "native_source_sha256": {
+            "megatron/core/transformer/mlp.py": "f54a7209db5cad4e095143cbbc1eedcbf41e913ea1eec64db3cb1b8408e6ff07",
+            "megatron/core/fusions/fused_bias_swiglu.py": "5303680596749464c45f9c3ec65f94d1127fb6d49b2aa9ec3ba8c91b1141f08f",
+            "megatron/core/jit.py": "0de81ea1c3a8fd5bf1a880a1c3d3ddacd706b4df946c9016d563b5c14778a3ba"
+          },
+          "native_jit_callable": "<class 'function'>",
+          "native_compiled_callable": true,
+          "configuration": {
+            "gated_linear_unit": true,
+            "bias_activation_fusion": true,
+            "activation_func": "torch.nn.functional.silu",
+            "add_bias_linear": false,
+            "use_te_activation_func": false,
+            "activation_func_fp8_input_store": false,
+            "glu_linear_offset": 0.0,
+            "activation_func_clamp_value": null,
+            "cpu_offloading": false,
+            "per_token_scale_present": false
+          }
+        },
+        "gradnorm": {
+          "enabled": true,
+          "calls": 3,
+          "wrapper_sha256": "12503df82b69f7eb5059cc0c0722677e05ff14cdf1a37b6c34c0d7e3c8acba7f",
+          "candidate_sha256": "84c851ce5af7a49ba97685710790146d2c315f9c8837259366bffd7831f67dc0",
+          "norm_audit": [
+            {
+              "candidate_norm": 8.109807014465332,
+              "native_norm": 8.109807014465332,
+              "bitwise_equal": true
+            },
+            {
+              "candidate_norm": 8.144824981689453,
+              "native_norm": 8.144824981689453,
+              "bitwise_equal": true
+            },
+            {
+              "candidate_norm": 7.862072467803955,
+              "native_norm": 7.862072467803955,
+              "bitwise_equal": true
+            }
+          ],
+          "fallback_calls": 0,
+          "scope": "Process-only local multi-tensor L2 hook; original all-reduces, optimizer, CE0008 and training timer unchanged."
+        },
+        "raw_sha256": {
+          "attention.json": "3ac7b01ec593ac9a978324f37407a347e7ac1cd38ee03a68db9531f4ea3e01cd",
+          "swiglu.json": "656956901cf2277bcfe2c6ef22d7c24925f290f73972c34308456a0341f3310f",
+          "gradnorm.json": "65449efcddc69024f2f62fd900f96d11576a9d4ab9a394aa6b2bbbbf5e63ef75"
+        }
+      }
+    },
+    {
+      "arm": "optimized",
+      "path": "/tmp/kda-attention-stage31/main-optimized-audit-003-complete",
+      "hooks": {
+        "attention": {
+          "schema": "native-complete-attention-dispatch-v1",
+          "enabled": true,
+          "calls": 12,
+          "candidate_calls": 12,
+          "native_calls": 0,
+          "fallback_calls": 0,
+          "native_fused_forward_calls": 0,
+          "native_torch_forward_calls": 0,
+          "native_fused_backward_calls": 0,
+          "native_routes_observed": true,
+          "unsupported_calls": 0,
+          "shapes": {
+            "(((128, 2, 8, 64), (3072, 1536, 192, 1), 'torch.bfloat16', 0, True, True), ((128, 2, 8, 64), (3072, 1536, 192, 1), 'torch.bfloat16', 64, True, True), ((128, 2, 8, 64), (3072, 1536, 192, 1), 'torch.bfloat16', 128, True, True), ((2, 1, 128, 128), (16384, 16384, 128, 1), 'torch.bool', 0, False, True))": 12
+          },
+          "configurations": [
+            {
+              "num_layers": 4,
+              "hidden_size": 512,
+              "num_attention_heads": 8,
+              "num_query_groups": 8,
+              "kv_channels": 64,
+              "attention_dropout": 0.0,
+              "masked_softmax_fusion": true,
+              "attention_softmax_in_fp32": false,
+              "apply_query_key_layer_scaling": false,
+              "sequence_parallel": false,
+              "context_parallel_size": 1,
+              "tensor_model_parallel_size": 1,
+              "softmax_type": "vanilla",
+              "window_size": null,
+              "bf16": true,
+              "fp16": false,
+              "softmax_scale": 0.125,
+              "softmax_offset_present": false,
+              "attn_mask_type": "AttnMaskType.causal",
+              "dropout_probability": 0.0,
+              "tp_group_size": 1,
+              "heads_per_partition": 8,
+              "groups_per_partition": 8,
+              "head_dimension": 64,
+              "hidden_per_partition": 512,
+              "scaled_masked_softmax_fusion": true,
+              "softmax_in_fp32": false,
+              "additional_softmax_scale": null,
+              "softmax_window_size": null,
+              "softmax_attn_mask_type": "AttnMaskType.causal",
+              "softmax_input_bf16": true,
+              "softmax_input_fp16": false,
+              "native_kernel_available": true
+            },
+            {
+              "num_layers": 4,
+              "hidden_size": 512,
+              "num_attention_heads": 8,
+              "num_query_groups": 8,
+              "kv_channels": 64,
+              "attention_dropout": 0.0,
+              "masked_softmax_fusion": true,
+              "attention_softmax_in_fp32": false,
+              "apply_query_key_layer_scaling": false,
+              "sequence_parallel": false,
+              "context_parallel_size": 1,
+              "tensor_model_parallel_size": 1,
+              "softmax_type": "vanilla",
+              "window_size": null,
+              "bf16": true,
+              "fp16": false,
+              "softmax_scale": 0.125,
+              "softmax_offset_present": false,
+              "attn_mask_type": "AttnMaskType.causal",
+              "dropout_probability": 0.0,
+              "tp_group_size": 1,
+              "heads_per_partition": 8,
+              "groups_per_partition": 8,
+              "head_dimension": 64,
+              "hidden_per_partition": 512,
+              "scaled_masked_softmax_fusion": true,
+              "softmax_in_fp32": false,
+              "additional_softmax_scale": null,
+              "softmax_window_size": null,
+              "softmax_attn_mask_type": "AttnMaskType.causal",
+              "softmax_input_bf16": true,
+              "softmax_input_fp16": false,
+              "native_kernel_available": true
+            },
+            {
+              "num_layers": 4,
+              "hidden_size": 512,
+              "num_attention_heads": 8,
+              "num_query_groups": 8,
+              "kv_channels": 64,
+              "attention_dropout": 0.0,
+              "masked_softmax_fusion": true,
+              "attention_softmax_in_fp32": false,
+              "apply_query_key_layer_scaling": false,
+              "sequence_parallel": false,
+              "context_parallel_size": 1,
+              "tensor_model_parallel_size": 1,
+              "softmax_type": "vanilla",
+              "window_size": null,
+              "bf16": true,
+              "fp16": false,
+              "softmax_scale": 0.125,
+              "softmax_offset_present": false,
+              "attn_mask_type": "AttnMaskType.causal",
+              "dropout_probability": 0.0,
+              "tp_group_size": 1,
+              "heads_per_partition": 8,
+              "groups_per_partition": 8,
+              "head_dimension": 64,
+              "hidden_per_partition": 512,
+              "scaled_masked_softmax_fusion": true,
+              "softmax_in_fp32": false,
+              "additional_softmax_scale": null,
+              "softmax_window_size": null,
+              "softmax_attn_mask_type": "AttnMaskType.causal",
+              "softmax_input_bf16": true,
+              "softmax_input_fp16": false,
+              "native_kernel_available": true
+            },
+            {
+              "num_layers": 4,
+              "hidden_size": 512,
+              "num_attention_heads": 8,
+              "num_query_groups": 8,
+              "kv_channels": 64,
+              "attention_dropout": 0.0,
+              "masked_softmax_fusion": true,
+              "attention_softmax_in_fp32": false,
+              "apply_query_key_layer_scaling": false,
+              "sequence_parallel": false,
+              "context_parallel_size": 1,
+              "tensor_model_parallel_size": 1,
+              "softmax_type": "vanilla",
+              "window_size": null,
+              "bf16": true,
+              "fp16": false,
+              "softmax_scale": 0.125,
+              "softmax_offset_present": false,
+              "attn_mask_type": "AttnMaskType.causal",
+              "dropout_probability": 0.0,
+              "tp_group_size": 1,
+              "heads_per_partition": 8,
+              "groups_per_partition": 8,
+              "head_dimension": 64,
+              "hidden_per_partition": 512,
+              "scaled_masked_softmax_fusion": true,
+              "softmax_in_fp32": false,
+              "additional_softmax_scale": null,
+              "softmax_window_size": null,
+              "softmax_attn_mask_type": "AttnMaskType.causal",
+              "softmax_input_bf16": true,
+              "softmax_input_fp16": false,
+              "native_kernel_available": true
+            }
+          ],
+          "wrapper_sha256": "685766bd5243f1039c93bb150191774f1dda7409b2bbd87ccb62e055b6d56478",
+          "delegate_launcher_sha256": "ad9e63f3361a284f2d137cd147c9dbf515b822e657d681a5de098724ffbddb1c",
+          "candidate_sha256": "4881f91c230324f258cf6faf7b1d63a493b043b960df4efdca0dad708195db48",
+          "capture_written": false,
+          "scope": "Whole native DotProductAttention replacement only for the audited causal BF16 scope; native/control use original forward, default fused softmax remains enabled. Extra native softmax forward/backward route wrappers are installed only for untimed audit; performance does not observe those routes per call.",
+          "native_source_sha256": {
+            "megatron/core/transformer/dot_product_attention.py": "7c631bfeba97d0273cd5399e7187a16f114b25a4f12a4e1c9edbacf71cf4e6f6",
+            "megatron/core/fusions/fused_softmax.py": "a75dc9d23380ff5d2ccdbfaa335c050bc4d16039fe35797f96dc108bad011e68",
+            "megatron/core/transformer/utils.py": "014ccd7deb6bb51ed4443cb87efd960dff13b725d16074e800c96f63faff1dca"
+          },
+          "native_extensions": {
+            "scaled_masked_softmax_cuda": {
+              "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+              "sha256": "a155625037cff9d8dcf7c0935c6bc9f80e49d63aeaaf8df75c075665fecd6be5"
+            },
+            "scaled_upper_triang_masked_softmax_cuda": {
+              "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_upper_triang_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+              "sha256": "7af725f33f3cf9d5a14579b01510af0909f1411d2a320557bc98fcbc1a6228e8"
+            }
+          }
+        },
+        "swiglu": {
+          "enabled": true,
+          "calls": 12,
+          "native_calls": 0,
+          "fallback_calls": 0,
+          "shapes": {
+            "((128, 2, 4096), (8192, 4096, 1), 'torch.bfloat16')": 12
+          },
+          "wrapper_sha256": "ad9e63f3361a284f2d137cd147c9dbf515b822e657d681a5de098724ffbddb1c",
+          "candidate_sha256": "a516bb372012cd5569eed99db2815a41c0b229755158289ddf6536248d554250",
+          "native_source_sha256": {
+            "megatron/core/transformer/mlp.py": "f54a7209db5cad4e095143cbbc1eedcbf41e913ea1eec64db3cb1b8408e6ff07",
+            "megatron/core/fusions/fused_bias_swiglu.py": "5303680596749464c45f9c3ec65f94d1127fb6d49b2aa9ec3ba8c91b1141f08f",
+            "megatron/core/jit.py": "0de81ea1c3a8fd5bf1a880a1c3d3ddacd706b4df946c9016d563b5c14778a3ba"
+          },
+          "native_jit_callable": "<class 'function'>",
+          "native_compiled_callable": true,
+          "configuration": {
+            "gated_linear_unit": true,
+            "bias_activation_fusion": true,
+            "activation_func": "torch.nn.functional.silu",
+            "add_bias_linear": false,
+            "use_te_activation_func": false,
+            "activation_func_fp8_input_store": false,
+            "glu_linear_offset": 0.0,
+            "activation_func_clamp_value": null,
+            "cpu_offloading": false,
+            "per_token_scale_present": false
+          }
+        },
+        "gradnorm": {
+          "enabled": true,
+          "calls": 3,
+          "wrapper_sha256": "12503df82b69f7eb5059cc0c0722677e05ff14cdf1a37b6c34c0d7e3c8acba7f",
+          "candidate_sha256": "84c851ce5af7a49ba97685710790146d2c315f9c8837259366bffd7831f67dc0",
+          "norm_audit": [
+            {
+              "candidate_norm": 8.109807014465332,
+              "native_norm": 8.109807014465332,
+              "bitwise_equal": true
+            },
+            {
+              "candidate_norm": 8.144824981689453,
+              "native_norm": 8.144824981689453,
+              "bitwise_equal": true
+            },
+            {
+              "candidate_norm": 7.862072467803955,
+              "native_norm": 7.862072467803955,
+              "bitwise_equal": true
+            }
+          ],
+          "fallback_calls": 0,
+          "scope": "Process-only local multi-tensor L2 hook; original all-reduces, optimizer, CE0008 and training timer unchanged."
+        },
+        "raw_sha256": {
+          "attention.json": "9b2ae6c39d88c0f06905f2a572d8a1c7537bcafdd6c96d1c85a6e64da816e542",
+          "swiglu.json": "656956901cf2277bcfe2c6ef22d7c24925f290f73972c34308456a0341f3310f",
+          "gradnorm.json": "65449efcddc69024f2f62fd900f96d11576a9d4ab9a394aa6b2bbbbf5e63ef75"
+        }
+      }
+    }
+  ],
+  "started_utc": "2026-10-04T11:08:42.671842+00:00",
+  "finished_utc": "2026-10-04T11:10:06.994076+00:00",
+  "scope": "Fresh native/control/optimized three-step full-model runs. Original 600-source, model/input/loss/all-gradient/BF16-update/FP32-master gates unchanged. Only controlled-left candidate/run-mode identity assumptions adapted. All arms retain default native fused softmax flags; native/control route counters prove original fusion APIs forward/backward, without a GPU timeline claim. Native RMSNorm; no performance, heldout, production or convergence claim."
+}

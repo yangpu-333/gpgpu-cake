@@ -1,0 +1,20 @@
+/kernelwiki-iluvatar
+Generate one full dense Attention candidate Python module for the fixed BI-V150 Megatron training contract. This is a new optimization run under the same authorized Paratera service. Read ONLY:
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/attention/contracts/main.json
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/attention/native_sources/dot_product_attention.py
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/attention/native_sources/fused_softmax.py
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/attention/native_sources/utils.py
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/attention/evidence/backend-default.json
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/attention/evidence/sdpa-backends-01.json
+- .claude/skills/kernelwiki-iluvatar/wiki/hardware/bi-v150-stack.md
+- .claude/skills/kernelwiki-iluvatar/wiki/languages/triton-iluvatar.md
+
+Runtime: vendor Torch2.4.1/Python3.10/CoreX4.2/Triton2.1 on BI-V150. The default native CUDA fused masked softmax is AVAILABLE in both a standalone probe and the original formal training entry. Its exact binary paths/hashes are in the receipt. Baseline is native fusion=True, never weaken it to torch eager softmax. Direct SDPA requested FLASH/EFFICIENT/MATH configurations failed the fixed output tolerance on actual training inputs; requested backend names are not GPU timeline proof. Do not repeat SDPA or change tolerances.
+
+First candidate should reduce native Attention host/launch/wrapper costs while retaining the exact staged native math. Retain torch.baddbmm(beta=0,alpha=scale) so BF16 scores round at the same boundary, invoke the existing scaled_upper_triang_masked_softmax_cuda.forward/backward with scalar scale1.0 and BF16 probabilities, retain torch.bmm for BF16 context. Optimize unnecessary CPU scale tensor creation/shape-query checks, or reduce layout work if safely possible. Native dropout=0 and the model RNG tracker fork causes no random draws; candidate must not draw randomness or change global RNG. Shape/config validation is done by the external model hook and must also reject invalid public API input types. Do not cache input/output tensors, pointer values or results. Code/config launch caching alone is allowed and must consume fresh pointers/current stream each call.
+
+Public API: attention(q,k,v,scale) returns contiguous [S,B,H*D] BF16, gradients for every q/k/v. Q/K/V are REAL noncontiguous views with shape[S,2,8,64], stride[3072,1536,192,1], storage offsets0/64/128. Test all128/256/512/17-tail sizes, fresh data, arbitrary upstream gradients, offset views and CUDA streams. Only dense causal self-attention (no general masks, dropout,bias,GQA,FP8,packed,CP). Unsupported CPU/FP32 must explicitly reject, external hook provides native fallback. torch.autograd.Function may help remove host overhead; derivative order and BF16 casts must match native PyTorch/extension stages. Forward outputs and q/k/v gradients gate against the original default native backend with fixed CPU float64 atol3e-4,rtol1e-3; full model gradients/master/threeSGDsteps also gate. Do not guarantee bitwise unless tests prove it.
+
+If using direct extension ABI float1.0, allow a once-per-process harmless ABI check to choose an accepted scalar representation. Prefer no per-call CPU tensor alloc. You cannot run GPU/build code here; generate code only and the independent controller tests it. Avoid external dependencies or handwritten NVIDIA instructions. Explain likely risks briefly after code.
+
+Return exactly one complete candidate in a single ```python fenced block, followed by a brief explanation. Do not edit files, run code, inspect other files, or suggest disabling original native fusion. All performance tests and numerical gates are frozen outside your code.

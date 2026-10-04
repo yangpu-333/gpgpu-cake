@@ -1,0 +1,19 @@
+{"case": "main-native-perf-002-complete-31102", "stage31_arm": "native", "exit_code": 0, "whole_process_elapsed_seconds": 22.448321488685906}
+{"arm": "native", "seed": 31102, "case": "main-native-perf-002-complete-31102", "mean_iteration_ms": 31.84}
+{"case": "main-control-perf-002-complete-31102", "stage31_arm": "control", "exit_code": 0, "whole_process_elapsed_seconds": 20.89518409781158}
+{"arm": "control", "seed": 31102, "case": "main-control-perf-002-complete-31102", "mean_iteration_ms": 29.02}
+{"case": "main-optimized-perf-002-complete-31102", "stage31_arm": "optimized", "exit_code": 0, "whole_process_elapsed_seconds": 20.846038246061653}
+{"arm": "optimized", "seed": 31102, "case": "main-optimized-perf-002-complete-31102", "mean_iteration_ms": 29.18}
+{"case": "main-optimized-perf-002-complete-31103", "stage31_arm": "optimized", "exit_code": 0, "whole_process_elapsed_seconds": 21.199281821027398}
+{"arm": "optimized", "seed": 31103, "case": "main-optimized-perf-002-complete-31103", "mean_iteration_ms": 29.61}
+{"case": "main-control-perf-002-complete-31103", "stage31_arm": "control", "exit_code": 0, "whole_process_elapsed_seconds": 21.049675520975143}
+{"arm": "control", "seed": 31103, "case": "main-control-perf-002-complete-31103", "mean_iteration_ms": 30.86}
+{"case": "main-native-perf-002-complete-31103", "stage31_arm": "native", "exit_code": 0, "whole_process_elapsed_seconds": 22.750264096073806}
+{"arm": "native", "seed": 31103, "case": "main-native-perf-002-complete-31103", "mean_iteration_ms": 32.97}
+{"case": "main-control-perf-002-complete-31104", "stage31_arm": "control", "exit_code": 0, "whole_process_elapsed_seconds": 21.198764191009104}
+{"arm": "control", "seed": 31104, "case": "main-control-perf-002-complete-31104", "mean_iteration_ms": 30.84}
+{"case": "main-native-perf-002-complete-31104", "stage31_arm": "native", "exit_code": 0, "whole_process_elapsed_seconds": 22.49943086737767}
+{"arm": "native", "seed": 31104, "case": "main-native-perf-002-complete-31104", "mean_iteration_ms": 33.13}
+{"case": "main-optimized-perf-002-complete-31104", "stage31_arm": "optimized", "exit_code": 0, "whole_process_elapsed_seconds": 20.948173833079636}
+{"arm": "optimized", "seed": 31104, "case": "main-optimized-perf-002-complete-31104", "mean_iteration_ms": 29.46}
+{"status": "validated", "decision": "not_promoted", "vs_native": {"ratio": 1.109649107571448, "gain_percent": 10.964910757144807, "all_seeds_faster": true}, "vs_control": {"ratio": 1.0275834174384233, "gain_percent": 2.7583417438423297, "all_seeds_faster": false}, "error": null, "output": "/tmp/kda-attention-stage31/performance-main-002-complete.json"}

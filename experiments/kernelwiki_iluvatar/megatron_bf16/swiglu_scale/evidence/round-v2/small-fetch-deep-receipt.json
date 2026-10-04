@@ -1,0 +1,433 @@
+{
+  "status": "fetched",
+  "model_name": "deep",
+  "remote_root": "/tmp/kda-swiglu-scale-stage30",
+  "audit_suffix": "repair-v2",
+  "run_suffix": "repair-v2",
+  "files": [
+    {
+      "path": "adaptation-record.json",
+      "bytes": 4189,
+      "sha256": "4c6d780a8f9863832fd9e53d32006e0f3ad68d1070d6d7664ba39544f6ddc386"
+    },
+    {
+      "path": "audit-summary-deep-004-repair-v2.json",
+      "bytes": 11850,
+      "sha256": "1e324470cf974af4efbb1e5716edcc76c19ca2808fbb22429728f1d12dc1e855"
+    },
+    {
+      "path": "common.py",
+      "bytes": 14585,
+      "sha256": "e5e57d9616d33e3a65572a8d4a1065293d2d27c4cc41fd3e6cf201ba6adb23c8"
+    },
+    {
+      "path": "comparison-deep-004-repair-v2.json",
+      "bytes": 1492108,
+      "sha256": "b5a3672326f4433ca6c9640b2184e86cda814faa6367a4d82ea61cec5f0d8323"
+    },
+    {
+      "path": "comparison-native-control-deep-004-repair-v2.json",
+      "bytes": 1486736,
+      "sha256": "d2a1ee57a01fcdf16fa5b84fd5ac3599321c66ac5a6038991e88ce1b82af41f1"
+    },
+    {
+      "path": "comparison-native-optimized-deep-004-repair-v2.json",
+      "bytes": 1486772,
+      "sha256": "4c858106d00e6c5c8cef324cc0f6e548899bed1d8f1d7d15504ecb59113d699f"
+    },
+    {
+      "path": "contracts/deep.json",
+      "bytes": 5900,
+      "sha256": "2f8c3ec5147a2d8d235823f94fe5c8887ef99581075f0f5daa4c1cc3dc5ce6f9"
+    },
+    {
+      "path": "contracts/wide.json",
+      "bytes": 5900,
+      "sha256": "8be328eedac90bac9743fa9cc9d99a179e74c4146bce2e7b29cca58042f277aa"
+    },
+    {
+      "path": "controller-repair.json",
+      "bytes": 3220,
+      "sha256": "704d333efaa330126a56ab3f298935a11aaa6b13f8dbb46912ea9aab9b52203e"
+    },
+    {
+      "path": "deep-control-audit-004-repair-v2/command.json",
+      "bytes": 3623,
+      "sha256": "fef27825a32abd06fa2507192c99d19ff4f862b56052859bdf54d142f08d765c"
+    },
+    {
+      "path": "deep-control-audit-004-repair-v2/entry.json",
+      "bytes": 88171,
+      "sha256": "88578faba43bf7affa5da19869c9ad912e9d02604f500a1cc52077993457cc84"
+    },
+    {
+      "path": "deep-control-audit-004-repair-v2/gradnorm.json",
+      "bytes": 756,
+      "sha256": "1049cdd57bca7b1422693877a27dd637ac3d2348f0c049832e472677e47f5c11"
+    },
+    {
+      "path": "deep-control-audit-004-repair-v2/stderr.log",
+      "bytes": 8410,
+      "sha256": "178ba74455db6fb8601186dd80a1c7276adbd9e4e8c4436643bb94d0c6ac2294"
+    },
+    {
+      "path": "deep-control-audit-004-repair-v2/stdout.log",
+      "bytes": 66016,
+      "sha256": "c48d168115556a776afb3891fbb6f2dec2606528d7a0756313e4a71677c34827"
+    },
+    {
+      "path": "deep-control-audit-004-repair-v2/swiglu.json",
+      "bytes": 1044,
+      "sha256": "e489677efd9c4bcb54102c1aadaadc4e234052fea601b415882b308b07b427a3"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26022/command.json",
+      "bytes": 3346,
+      "sha256": "239a860951a648ab102b6908ed00a324870905c75eeefd3340e84ee834cc7daf"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26022/entry.json",
+      "bytes": 88267,
+      "sha256": "78b1da87cd51021d81e1743340fe1a07613ca7f343ffc0e27558c97d1733c7a8"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26022/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26022/stderr.log",
+      "bytes": 8410,
+      "sha256": "102e5604ca1853e1b1fd5e1ff17e143a18134f1425c06a50554dc55b757d5aef"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26022/stdout.log",
+      "bytes": 67077,
+      "sha256": "efa4c22fe64bb57757ee00ddc9d25c5e65bd40c8cb2163590f44d1d29863f078"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26022/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26023/command.json",
+      "bytes": 3345,
+      "sha256": "fd32e5bcd2e4eb0356533676499b5d37e0bf4b200cbb63be260242abc54176cd"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26023/entry.json",
+      "bytes": 88267,
+      "sha256": "5c4af88b12435b60ecd2b99fb1fac3dbe9399fbe720068b5a0da1e76c2ece41c"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26023/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26023/stderr.log",
+      "bytes": 8410,
+      "sha256": "9c6b5d9eab52271751db53758a03591068d6551b8d9fb9eafd63aa3931a90f4c"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26023/stdout.log",
+      "bytes": 67079,
+      "sha256": "f3fc83827902093fce05feaf10560260b8bcd1368d47f87a1a9f141844ee4b93"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26023/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26024/command.json",
+      "bytes": 3346,
+      "sha256": "1e603bea393f7269cab90b4275bab4870efbbc52deb995ae0937c5e32fe37f39"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26024/entry.json",
+      "bytes": 88267,
+      "sha256": "a5f96ff7ae17aa754202cba8cb15834419cf955af48afc20ed2ea6f23f9b18a3"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26024/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26024/stderr.log",
+      "bytes": 8410,
+      "sha256": "c18656945c8d1db598606be71c005072f87c41858cd476079335359d35b9e953"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26024/stdout.log",
+      "bytes": 67077,
+      "sha256": "a4d9ac478c28d9d06062e722d428ce6e2205049c4bc97a374ed7207e911f5806"
+    },
+    {
+      "path": "deep-control-perf-004-repair-v2-26024/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "deep-native-audit-004-repair-v2/command.json",
+      "bytes": 3443,
+      "sha256": "50499dc547d49c97c617586599c0feeade190c2dfb3769873bce273cc19b16fb"
+    },
+    {
+      "path": "deep-native-audit-004-repair-v2/entry.json",
+      "bytes": 86099,
+      "sha256": "680adfad807041d9f27a0b22cf9c28b4ab1883ad671d969ca0621388a83bfe5f"
+    },
+    {
+      "path": "deep-native-audit-004-repair-v2/gradnorm.json",
+      "bytes": 321,
+      "sha256": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+    },
+    {
+      "path": "deep-native-audit-004-repair-v2/stderr.log",
+      "bytes": 8410,
+      "sha256": "b4ae282255ec4a426e339ee9401c476893cd10461109e0c53f60938f8b142e84"
+    },
+    {
+      "path": "deep-native-audit-004-repair-v2/stdout.log",
+      "bytes": 66013,
+      "sha256": "c85196c7e896fc2369ebaad1da49f9f745c5cd76061d06c44ed434e009b27957"
+    },
+    {
+      "path": "deep-native-audit-004-repair-v2/swiglu.json",
+      "bytes": 1044,
+      "sha256": "e489677efd9c4bcb54102c1aadaadc4e234052fea601b415882b308b07b427a3"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26022/command.json",
+      "bytes": 3168,
+      "sha256": "88cb10cbafeae9747d49e9561080a3e7cadd3c030e88a42aa7e0c4500b903cfb"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26022/entry.json",
+      "bytes": 85899,
+      "sha256": "4b3c2345a1390462bb8a52e3330bc279dae27476185bce6557c20e3d5941ba25"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26022/gradnorm.json",
+      "bytes": 321,
+      "sha256": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26022/stderr.log",
+      "bytes": 8410,
+      "sha256": "c1651b120a1b237035cb2bcf820572c793ed31772cb3b40360bc02195924c776"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26022/stdout.log",
+      "bytes": 67079,
+      "sha256": "ba1f306af73b14b4fa063812f43ec3ca36ae7d71de1b9595fe23e31526240af1"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26022/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26023/command.json",
+      "bytes": 3167,
+      "sha256": "ec9f6d2f7653cf7da34b07223f165556cfff657b7afcc31a2781190a6eac5b1e"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26023/entry.json",
+      "bytes": 85899,
+      "sha256": "9e43452d778fa8638c09f236a0003acc0bba25954eae4eab11fdf9622d03471c"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26023/gradnorm.json",
+      "bytes": 321,
+      "sha256": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26023/stderr.log",
+      "bytes": 8410,
+      "sha256": "b1d1657e80c39dd7d62f8ad60fbda8a82c2cba876b0ddccaca90216ed9798524"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26023/stdout.log",
+      "bytes": 67079,
+      "sha256": "5c35950f836b1064b0670dde85c196d93528030479a1e4da0736d91a6ca09557"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26023/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26024/command.json",
+      "bytes": 3168,
+      "sha256": "377bd96e92589bae4057244803198c3a967fa780e3b6f78a36a3679cc2cf8768"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26024/entry.json",
+      "bytes": 85899,
+      "sha256": "7ed74c9da8046c0bf2b83d091ed7e87437e7f63bc9a331c9b6b61918c2b1b00e"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26024/gradnorm.json",
+      "bytes": 321,
+      "sha256": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26024/stderr.log",
+      "bytes": 8410,
+      "sha256": "c274dd7e1398b542e1a34881e445f7197355ec18f9ef88be903471dafdd7836c"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26024/stdout.log",
+      "bytes": 67077,
+      "sha256": "9d3edc581bad8ed6b1e8d2301cd130bf729e8a2e6b90a002bde4aeade48a3b90"
+    },
+    {
+      "path": "deep-native-perf-004-repair-v2-26024/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "deep-optimized-audit-004-repair-v2/command.json",
+      "bytes": 3772,
+      "sha256": "22cd3aa2045090c3b05a48e13cd4535163f92385571034db811e8bbcec87f254"
+    },
+    {
+      "path": "deep-optimized-audit-004-repair-v2/entry.json",
+      "bytes": 88173,
+      "sha256": "6c69df90f154cc2fe1a8f65b59cc61a0d0a620cb2f14de38995a6acee05ac2df"
+    },
+    {
+      "path": "deep-optimized-audit-004-repair-v2/gradnorm.json",
+      "bytes": 756,
+      "sha256": "1049cdd57bca7b1422693877a27dd637ac3d2348f0c049832e472677e47f5c11"
+    },
+    {
+      "path": "deep-optimized-audit-004-repair-v2/stderr.log",
+      "bytes": 7870,
+      "sha256": "d914d70e35588139022318b671054f2367804602eecb8c909f662b62d9cc2d43"
+    },
+    {
+      "path": "deep-optimized-audit-004-repair-v2/stdout.log",
+      "bytes": 66022,
+      "sha256": "5c27a94f631a92db96de53849c01fa881889d4095c37d19121fa85ee716a7ce7"
+    },
+    {
+      "path": "deep-optimized-audit-004-repair-v2/swiglu.json",
+      "bytes": 1171,
+      "sha256": "256c3da9ce42781a1c6fde3c6620aec94e796306b59b815f2962db58189c7f66"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26022/command.json",
+      "bytes": 3492,
+      "sha256": "60a390420cdf2ebf96cf18291ae2ef7a912ab4c9d96837754158795d39767e77"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26022/entry.json",
+      "bytes": 88267,
+      "sha256": "04119e4484bf4065eadc5cc01507553aaa148e0c95da7f4907bea1739a1ce75b"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26022/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26022/stderr.log",
+      "bytes": 7870,
+      "sha256": "3c0e4c7337c63b6ccee8c274d52b8e6d6fb882d675061df9907820f0c1cca709"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26022/stdout.log",
+      "bytes": 67076,
+      "sha256": "4063900d2eba9de63ba177f4479f8b51eb31af6ba53159a598272bcaa0479219"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26022/swiglu.json",
+      "bytes": 1173,
+      "sha256": "d6bc4ab112fd5852e924ea31aeacb2f10ba41b92754832e80530380b588a186e"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26023/command.json",
+      "bytes": 3492,
+      "sha256": "6d8aedad5a17ab3e7dfa7463f8b16918309d17a8921592802d70abc929ec33c9"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26023/entry.json",
+      "bytes": 88267,
+      "sha256": "6d60536a0349f2202323490eeb518d518e69b77f65e1e36fbdee61be77d3278f"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26023/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26023/stderr.log",
+      "bytes": 7870,
+      "sha256": "964d8771ed2bfa954018f6c35da1e278245ddf5aae259036e55314f3d0c82c5b"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26023/stdout.log",
+      "bytes": 67076,
+      "sha256": "f7e30de06327785e5f70d7ab1f6c9c0bc6da7ed812415598d24b273477800090"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26023/swiglu.json",
+      "bytes": 1173,
+      "sha256": "d6bc4ab112fd5852e924ea31aeacb2f10ba41b92754832e80530380b588a186e"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26024/command.json",
+      "bytes": 3492,
+      "sha256": "2079417d745f9f66c1ff8b723725019cd7873f32c0cb5ad73cb85db2339105ea"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26024/entry.json",
+      "bytes": 88267,
+      "sha256": "0a0109f609b0ba80b972b9a435dff4e10b02fffc38f140955929dc62fd840399"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26024/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26024/stderr.log",
+      "bytes": 7870,
+      "sha256": "31b650dcd9d72ebe2f8e36dcc0c259873e00ce04e1c0b9b70172c34486074b28"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26024/stdout.log",
+      "bytes": 67076,
+      "sha256": "10f56e227452aee384c603c1295a4c4e535790ea62cb9ab92d85369018f9f8aa"
+    },
+    {
+      "path": "deep-optimized-perf-004-repair-v2-26024/swiglu.json",
+      "bytes": 1173,
+      "sha256": "d6bc4ab112fd5852e924ea31aeacb2f10ba41b92754832e80530380b588a186e"
+    },
+    {
+      "path": "performance-deep-004-repair-v2.json",
+      "bytes": 220133,
+      "sha256": "be7ab35a0f2e2aee7f7d8adfbbd30f917acf6800a22f537cca04ff22232e30b6"
+    },
+    {
+      "path": "run_audit.py",
+      "bytes": 6618,
+      "sha256": "bcb89234e2c5ffbbc48cb7eb92c5f0267fb2841bd1aa27d293ff174e10e3e28f"
+    },
+    {
+      "path": "run_performance.py",
+      "bytes": 11048,
+      "sha256": "d024105eb2d971021c2f4cf3d58e2e6f6766dcc6004eb8b5e7ca19ff6484986f"
+    }
+  ],
+  "fetch_script_sha256": "454b42ca27a87248a823d803b417f8a651934b8c12b57008520891561ee671bb",
+  "raw_snapshots_fetched": false,
+  "transfer_archive_retained": false,
+  "remote_deleted": false
+}

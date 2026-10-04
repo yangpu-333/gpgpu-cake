@@ -1,0 +1,426 @@
+{
+  "status": "fetched",
+  "model_name": "deep",
+  "remote_root": "/tmp/kda-swiglu-scale-stage30",
+  "files": [
+    {
+      "path": "adaptation-record.json",
+      "bytes": 4189,
+      "sha256": "d61cce44ad47ad0fc5fb74a3a7b7bfd17e640fda8eb2387af5fac38397e7bd04"
+    },
+    {
+      "path": "audit-summary-deep-004-complete.json",
+      "bytes": 11843,
+      "sha256": "7afde8a13e26e018940e368bf1bae5d5d56e1147799524d0b11c4ece7cf27c53"
+    },
+    {
+      "path": "common.py",
+      "bytes": 14585,
+      "sha256": "e5e57d9616d33e3a65572a8d4a1065293d2d27c4cc41fd3e6cf201ba6adb23c8"
+    },
+    {
+      "path": "comparison-deep-004-complete.json",
+      "bytes": 1492074,
+      "sha256": "d674d14b47509e120d3005bcc5ec8eb656cee69fab8a5d834c3216991cbaae1a"
+    },
+    {
+      "path": "comparison-native-control-deep-004-complete.json",
+      "bytes": 1486702,
+      "sha256": "15ae11f45651869d7d2b1a8a7018d9b804342b2a4e7487d98105bed3dc4c1bba"
+    },
+    {
+      "path": "comparison-native-optimized-deep-004-complete.json",
+      "bytes": 1486738,
+      "sha256": "bcbe4bdb0167e60ec7a85e2499bc97bb7627bebdfc707dfab15aad0493927da6"
+    },
+    {
+      "path": "contracts/deep.json",
+      "bytes": 5900,
+      "sha256": "2f8c3ec5147a2d8d235823f94fe5c8887ef99581075f0f5daa4c1cc3dc5ce6f9"
+    },
+    {
+      "path": "contracts/wide.json",
+      "bytes": 5900,
+      "sha256": "8be328eedac90bac9743fa9cc9d99a179e74c4146bce2e7b29cca58042f277aa"
+    },
+    {
+      "path": "deep-control-audit-004-complete/command.json",
+      "bytes": 3617,
+      "sha256": "a5b6a28b14e78fbeb26c8cee34344988ddee2797d563bf74a0688c411a712322"
+    },
+    {
+      "path": "deep-control-audit-004-complete/entry.json",
+      "bytes": 88170,
+      "sha256": "56c0c194d360c36ce05855b0f6ce3e76d78e4234ba762a5274b15ddb2fb31f8f"
+    },
+    {
+      "path": "deep-control-audit-004-complete/gradnorm.json",
+      "bytes": 756,
+      "sha256": "1049cdd57bca7b1422693877a27dd637ac3d2348f0c049832e472677e47f5c11"
+    },
+    {
+      "path": "deep-control-audit-004-complete/stderr.log",
+      "bytes": 8410,
+      "sha256": "3e49a7f3d902593c7183e48607e24bf4070e51cf1cd997b2105d3bcad70d683d"
+    },
+    {
+      "path": "deep-control-audit-004-complete/stdout.log",
+      "bytes": 66011,
+      "sha256": "f81ecd81020a18f7e0304366d94e3ae0dee599549d35b14eb862bd2ae2a0e2fc"
+    },
+    {
+      "path": "deep-control-audit-004-complete/swiglu.json",
+      "bytes": 1044,
+      "sha256": "e489677efd9c4bcb54102c1aadaadc4e234052fea601b415882b308b07b427a3"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26022/command.json",
+      "bytes": 3342,
+      "sha256": "afce8a991a88687d06f9f30a4735359643510ac4ee984adb07b19f58b8013683"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26022/entry.json",
+      "bytes": 88267,
+      "sha256": "f8c2dac703fc7e4373f69c79c176c24068cceb23c2c0365143e6b0db44c2daaa"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26022/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26022/stderr.log",
+      "bytes": 8410,
+      "sha256": "092942c23fded78440fd64c583263202204f69bcd91612ceecab031808e15438"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26022/stdout.log",
+      "bytes": 67077,
+      "sha256": "2ed0b7436d407c5fb806ab35d791ea8c25313aa8ff896788c35bf156664fda69"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26022/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26023/command.json",
+      "bytes": 3342,
+      "sha256": "6afd2b4ff9392c907b714ddbd3a2ff745a9f85866cb40554ee96cf331f219113"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26023/entry.json",
+      "bytes": 88267,
+      "sha256": "7725fee9bfbcb5f0d7896a5c35f88bf575e8dde55805c941334c9cdd028f46a0"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26023/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26023/stderr.log",
+      "bytes": 8410,
+      "sha256": "0e0fbc4d15c408d3ba02137cea1473640d4800333ada7971920ccf1a573a006e"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26023/stdout.log",
+      "bytes": 67079,
+      "sha256": "b2c899f9ed313ccd55504cc9ba8abbceb7ef8ed8ac037e3f7da3e9c9fee2305b"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26023/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26024/command.json",
+      "bytes": 3341,
+      "sha256": "548a0e593783d58d5348ad74f6f5272e30d6e1d6a89e720b4fc8db2befb788e0"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26024/entry.json",
+      "bytes": 88267,
+      "sha256": "39a033822d7512dc537fb4fe90cf368684a87250ea0c1b5a4d78fc90cde06ac3"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26024/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26024/stderr.log",
+      "bytes": 8410,
+      "sha256": "5a099e6ffc58ee7768f3170ff4d9f158b963e7f97a38d411454f7742658f950d"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26024/stdout.log",
+      "bytes": 67077,
+      "sha256": "1b2c2e05e1f1d205df9a8c9fbf46519caccfe8fef86cc606563f95a3d1892b70"
+    },
+    {
+      "path": "deep-control-perf-004-complete-26024/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "deep-native-audit-004-complete/command.json",
+      "bytes": 3437,
+      "sha256": "05714b43f2234e0c98d82b134d1476455656ef073fa5665aec54be370d10bc20"
+    },
+    {
+      "path": "deep-native-audit-004-complete/entry.json",
+      "bytes": 86098,
+      "sha256": "aa9975037fb1712de4b791b903db8ec2f3a0fe2724e2a5f07c7608f08d2622f5"
+    },
+    {
+      "path": "deep-native-audit-004-complete/gradnorm.json",
+      "bytes": 321,
+      "sha256": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+    },
+    {
+      "path": "deep-native-audit-004-complete/stderr.log",
+      "bytes": 8410,
+      "sha256": "e9cf73a8d8f698e27e9606aaa01bc66f0dc3255fdfe11eb8bb32240f0c9e846c"
+    },
+    {
+      "path": "deep-native-audit-004-complete/stdout.log",
+      "bytes": 66016,
+      "sha256": "5cfe2035477fd3bbbc8cc8bd85ad60251fc47cce80024c2e393345325aaad7ce"
+    },
+    {
+      "path": "deep-native-audit-004-complete/swiglu.json",
+      "bytes": 1044,
+      "sha256": "e489677efd9c4bcb54102c1aadaadc4e234052fea601b415882b308b07b427a3"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26022/command.json",
+      "bytes": 3163,
+      "sha256": "eadeb2b2aef61ff5365b6bb89ae1b35095c9cf9ae0ec9284257ad952454819a4"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26022/entry.json",
+      "bytes": 85899,
+      "sha256": "c5af7a38a5fa327f3fb7626fcdbe3d7848f828628b4327730211e123ac5dcb91"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26022/gradnorm.json",
+      "bytes": 321,
+      "sha256": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26022/stderr.log",
+      "bytes": 8410,
+      "sha256": "89674efde62ea3fc86de724a776e8c069b8e47063af73ebd94113e36095484ec"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26022/stdout.log",
+      "bytes": 67077,
+      "sha256": "5b087260b1f4348cab043f69c319f3a02bbb0f1a478c891cefd43c3c5b28f4d7"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26022/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26023/command.json",
+      "bytes": 3164,
+      "sha256": "47ad67a0a8a15ba0e0fe21d6faf5fed4eb21cb3155f6bb41482b1a0b986b0d6d"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26023/entry.json",
+      "bytes": 85899,
+      "sha256": "815334a5bf986fd78ab6e54888554359fbf0c0431e78347a30b83c24392bf665"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26023/gradnorm.json",
+      "bytes": 321,
+      "sha256": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26023/stderr.log",
+      "bytes": 8410,
+      "sha256": "c6e8c7a9ad5c13a85ff8a98383bbf3e267acec53f809c73ed4043a53f65cb240"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26023/stdout.log",
+      "bytes": 67077,
+      "sha256": "d3e8d82b3f7569ce0a7981b8a5745ea95a836aad5f9233d53c037f1f5d37e5df"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26023/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26024/command.json",
+      "bytes": 3164,
+      "sha256": "91ec99da46c4949b97a0ed2ea564fc056132c4fc92b48116e046a19f736a7748"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26024/entry.json",
+      "bytes": 85899,
+      "sha256": "21f4efb53ba8e9dc855e798cb5ffec95cce4cc564298419e78152db2b03e718a"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26024/gradnorm.json",
+      "bytes": 321,
+      "sha256": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26024/stderr.log",
+      "bytes": 8410,
+      "sha256": "bdf66fda19beeb771a6511fff90858e07d253c9b12f571d1e19b55dcd9a3fac8"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26024/stdout.log",
+      "bytes": 67077,
+      "sha256": "ff437f37b1cd584e4fad35343cbd35e3333d2eab5234a5bb411a21abc5f17941"
+    },
+    {
+      "path": "deep-native-perf-004-complete-26024/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/command.json",
+      "bytes": 3766,
+      "sha256": "30e922655db36e917e6ff72c5ef196fc6ccc2bb951cf59255c32cdd11461809c"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/entry.json",
+      "bytes": 88172,
+      "sha256": "c3d475bc2dbea4bba03e617f1f8dd12337023c6049bcd27ba08123a11b681cc7"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/gradnorm.json",
+      "bytes": 756,
+      "sha256": "1049cdd57bca7b1422693877a27dd637ac3d2348f0c049832e472677e47f5c11"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/stderr.log",
+      "bytes": 7870,
+      "sha256": "1f1ba2fb3f7bac9014ff231b2e666da887b123281158d1f25a224483548d72d1"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/stdout.log",
+      "bytes": 66017,
+      "sha256": "76ba35e9bbead5f4d8a8623fe94b33d73d705776992e9f66053e6a9de0725d31"
+    },
+    {
+      "path": "deep-optimized-audit-004-complete/swiglu.json",
+      "bytes": 1171,
+      "sha256": "256c3da9ce42781a1c6fde3c6620aec94e796306b59b815f2962db58189c7f66"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26022/command.json",
+      "bytes": 3488,
+      "sha256": "3af202c654e083dc56a387076f4ea41cacc7bdf3b23477cea6735e66bed4a7de"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26022/entry.json",
+      "bytes": 88267,
+      "sha256": "9169217263e10c23af9007c9a551e704faf28427619822155dbb7fad71e4222b"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26022/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26022/stderr.log",
+      "bytes": 7870,
+      "sha256": "eebf9c23326347fa2dd4f07b46f7b920201420b2d8c84015dab96c73cbbbf996"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26022/stdout.log",
+      "bytes": 67078,
+      "sha256": "1a5798d818563ee145921e172785fddb7dd92f0750338a44260fa25185d3339b"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26022/swiglu.json",
+      "bytes": 1173,
+      "sha256": "d6bc4ab112fd5852e924ea31aeacb2f10ba41b92754832e80530380b588a186e"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26023/command.json",
+      "bytes": 3487,
+      "sha256": "523cf0c5fdf69cad0aa0863222db018ca607c06d8cb8a6753ac370282c7be8de"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26023/entry.json",
+      "bytes": 88267,
+      "sha256": "8729047342fd8fc4fdfc1becba2f3f135582224f3f8022801eab39fb0746cb24"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26023/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26023/stderr.log",
+      "bytes": 7870,
+      "sha256": "78c9d037ee6771c43c6ebbed97dd7f2ae9b64d6b6e62c00d115c61fc80fd9fe3"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26023/stdout.log",
+      "bytes": 67076,
+      "sha256": "214392edb5f103d4aab92193748c5de3758275f735246e131c806c3a8be4907a"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26023/swiglu.json",
+      "bytes": 1173,
+      "sha256": "d6bc4ab112fd5852e924ea31aeacb2f10ba41b92754832e80530380b588a186e"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26024/command.json",
+      "bytes": 3488,
+      "sha256": "02ced846f3ca482313f404cdc89c95d0f378e34163b11911f7367e9ed127df42"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26024/entry.json",
+      "bytes": 88267,
+      "sha256": "e7abfa8e514c9633e9bcfddeefc583b7ab6a918435ff0eed68d1b20c3af13ef2"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26024/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26024/stderr.log",
+      "bytes": 7870,
+      "sha256": "25c078ae6c5fa3ebf69370da91dcf319a04f760ae8b143470379afb266300357"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26024/stdout.log",
+      "bytes": 67076,
+      "sha256": "bfc2e28b57a37c15d68ddeecd07259d189f49110d3ae1f0e63ef2dbfc7670c22"
+    },
+    {
+      "path": "deep-optimized-perf-004-complete-26024/swiglu.json",
+      "bytes": 1173,
+      "sha256": "d6bc4ab112fd5852e924ea31aeacb2f10ba41b92754832e80530380b588a186e"
+    },
+    {
+      "path": "performance-deep-004-complete.json",
+      "bytes": 220154,
+      "sha256": "2bc1898704b4064abf42d4fa4a749656ff406ff08624c26f0e91b0a8b4660273"
+    },
+    {
+      "path": "run_audit.py",
+      "bytes": 6618,
+      "sha256": "bcb89234e2c5ffbbc48cb7eb92c5f0267fb2841bd1aa27d293ff174e10e3e28f"
+    },
+    {
+      "path": "run_performance.py",
+      "bytes": 11036,
+      "sha256": "4e372fa6c5756fc0a32358c4836fe6db2435af139c623d08dd0606cfd6c7b7d7"
+    }
+  ],
+  "fetch_script_sha256": "8b1abcbb808cc635afd344f9ea3d3a7d959eeb62a13e425590bb0b84912e67a6",
+  "raw_snapshots_fetched": false,
+  "transfer_archive_retained": false,
+  "remote_deleted": false
+}

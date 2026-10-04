@@ -1,0 +1,118 @@
+{
+  "schema": "fixed-swiglu-stage30-cpu-archive-verification-v1",
+  "status": "verified",
+  "model_name": "wide",
+  "candidate": "004",
+  "candidate_sha256": "a516bb372012cd5569eed99db2815a41c0b229755158289ddf6536248d554250",
+  "contract_sha256": "8be328eedac90bac9743fa9cc9d99a179e74c4146bce2e7b29cca58042f277aa",
+  "audit_sha256": "c9ee58181925a388d54c94f1a4c7136accdb13b55dad7e482f9b6cf2a5021dad",
+  "controller_source_identity": "current-repair-v2",
+  "adaptation_record_sha256": "4c6d780a8f9863832fd9e53d32006e0f3ad68d1070d6d7664ba39544f6ddc386",
+  "native_interval_parser_sha256": "6c2d1f7955f7e474a3de0b9e4edc156bc9ba90b5f23c7a5fce696ee736dcd2d3",
+  "verifier_sha256": "61dd5270dad2f3d620722fad8db9cfa209944f1d5f07658232f2b22635666aa3",
+  "comparisons": {
+    "controlled": {
+      "checks": 1475,
+      "tensors": 637,
+      "tensor_groups": {
+        "initial": 28,
+        "actual_start_model_parameters": 28,
+        "actual_start_master_parameters": 28,
+        "master_initialization": 56,
+        "model_initialization": 56,
+        "batches": 15,
+        "output": 3,
+        "derived_loss": 3,
+        "wgrads": 84,
+        "params": 84,
+        "masters": 84,
+        "master_model_consistency": 168
+      },
+      "raw_value_comparisons": 97,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    },
+    "native_optimized": {
+      "checks": 1475,
+      "tensors": 637,
+      "tensor_groups": {
+        "initial": 28,
+        "actual_start_model_parameters": 28,
+        "actual_start_master_parameters": 28,
+        "master_initialization": 56,
+        "model_initialization": 56,
+        "batches": 15,
+        "output": 3,
+        "derived_loss": 3,
+        "wgrads": 84,
+        "params": 84,
+        "masters": 84,
+        "master_model_consistency": 168
+      },
+      "raw_value_comparisons": 97,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    },
+    "native_control": {
+      "checks": 1475,
+      "tensors": 637,
+      "tensor_groups": {
+        "initial": 28,
+        "actual_start_model_parameters": 28,
+        "actual_start_master_parameters": 28,
+        "master_initialization": 56,
+        "model_initialization": 56,
+        "batches": 15,
+        "output": 3,
+        "derived_loss": 3,
+        "wgrads": 84,
+        "params": 84,
+        "masters": 84,
+        "master_model_consistency": 168
+      },
+      "raw_value_comparisons": 97,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    }
+  },
+  "performance": {
+    "available": true,
+    "path": "E:\\code\\GPGPU\\experiments\\kernelwiki_iluvatar\\megatron_bf16\\swiglu_scale\\evidence\\round-v2\\performance-wide-004-repair-v2.json",
+    "sha256": "dcf834bf2e8a31a1614ce60b7b0e2e61d49394dd098c647d7ce08365b01da429",
+    "timed_processes": 9,
+    "run_steps": 1080,
+    "retained_steps": 900,
+    "promoted": false,
+    "vs_native": {
+      "ratio": 1.0605677202046553,
+      "gain_percent": 6.056772020465528,
+      "all_seeds_faster": true
+    },
+    "vs_control": {
+      "ratio": 1.0059641772350696,
+      "gain_percent": 0.596417723506959,
+      "all_seeds_faster": false
+    },
+    "control_vs_native": {
+      "ratio": 1.0542798085709826,
+      "gain_percent": 5.427980857098258,
+      "all_seeds_faster": true
+    }
+  },
+  "snapshot_inventory_records": 42,
+  "snapshot_files_available": 0,
+  "snapshot_files_missing": 42,
+  "raw_backup": {
+    "inventory_available": true,
+    "inventory_sha256": "bdecb88c0f22f902a411a092749789904433ad162bdbfd78088c3c1b0f80bbc7",
+    "receipt_available": false,
+    "receipt_checked": false,
+    "inventory_files": 48,
+    "files_available": 0,
+    "files_missing": 48,
+    "unique_contents": 18
+  },
+  "gpu_rerun": false,
+  "tensor_arithmetic_replayed": false,
+  "scope": "Every frozen numerical receipt record, source/contract/controller/frozen dependency, actual model/shape/config/dispatch header and native interval log is rechecked on CPU. Only available raw snapshot bytes are SHA256 checked; missing raw bytes are explicit. No Torch/candidate import, tensor arithmetic replay, GPU run or production extrapolation."
+}

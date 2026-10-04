@@ -52,6 +52,12 @@ jobs:
           python -m unittest discover -s experiments/kernelwiki_iluvatar/megatron_bf16/swiglu -p test_verify_receipts.py -v
       - name: Rebuild BI-V150 skill from pinned KernelWiki commit
         run: python experiments/kernelwiki_iluvatar/build_skill.py --output "$RUNNER_TEMP/kernelwiki-iluvatar"
+      - name: Verify fixed heldout SwiGLU and native fused Attention receipts
+        run: |
+          python experiments/kernelwiki_iluvatar/megatron_bf16/swiglu_scale/verify_receipts.py --model wide --base experiments/kernelwiki_iluvatar/megatron_bf16/swiglu_scale/evidence/round-v2 --audit-suffix repair-v2 --run-suffix repair-v2
+          python experiments/kernelwiki_iluvatar/megatron_bf16/swiglu_scale/verify_receipts.py --model deep --base experiments/kernelwiki_iluvatar/megatron_bf16/swiglu_scale/evidence/round-v2 --audit-suffix repair-v2 --run-suffix repair-v2
+          python experiments/kernelwiki_iluvatar/megatron_bf16/attention/verify_failed_rounds.py --version 002
+          python experiments/kernelwiki_iluvatar/megatron_bf16/attention/verify_receipts.py --version 003 --base experiments/kernelwiki_iluvatar/megatron_bf16/attention/evidence/round003
       - name: Validate BI-V150 corpus
         run: python "$RUNNER_TEMP/kernelwiki-iluvatar/scripts/validate.py"
       - name: Run KernelWiki full test suite

@@ -1,0 +1,242 @@
+[
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/actual-start.pt",
+    "bytes": 126660250,
+    "sha256": "cd6b51c26bf5da5c01da0271e96bce1bb823530c6000b07cd35634a8242ae130"
+  },
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/iter_0000003/mp_rank_00/model_optim_rng.pt",
+    "bytes": 126713895,
+    "sha256": "951810a5136182a4f7b2f49c0ddf4cfd52a3cf34f7ea8a9767d346c6a0604b62"
+  },
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/latest_checkpointed_iteration.txt",
+    "bytes": 1,
+    "sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"
+  },
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/master-after-001.pt",
+    "bytes": 84438242,
+    "sha256": "393afd46ce4fe672c836bc864c1201ba307d012cdcaac12edcc22baea8bee127"
+  },
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/master-after-002.pt",
+    "bytes": 84438242,
+    "sha256": "1f912f34d425e256ecb554d699ba109762371be60f0fbf8d72be430556200680"
+  },
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/master-after-003.pt",
+    "bytes": 84438242,
+    "sha256": "b4f154f1916b4a5f3cb01cb168478ba5ad98318970b283a8299565673f1c4e8d"
+  },
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/model0-forward-001.pt",
+    "bytes": 150134,
+    "sha256": "8807a065c15b497786feac453a2ec07bb98e0fd04fed037bb1572e15341afa36"
+  },
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/model0-forward-002.pt",
+    "bytes": 150134,
+    "sha256": "ef4fbf94e19b95f05e2cc502ee53c995d9d824b5f2fe5704e49eafb91e80b584"
+  },
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/model0-forward-003.pt",
+    "bytes": 150134,
+    "sha256": "a741b9a1e8dda98ee7ff1678f44ddcd5f30f49ae4c3e402486809f2236e6ea57"
+  },
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/model0-initial.pt",
+    "bytes": 42496098,
+    "sha256": "be8ce356336d695faedf6648d31602365c0a2eec0ed1081934adf95b1deac558"
+  },
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/params/iter_0000001/mp_rank_00.pth",
+    "bytes": 42223650,
+    "sha256": "e2bb4ba2dcbe86c07b8aa366b6089497efb5817b8bbbbad78e3d8148ad6370c2"
+  },
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/params/iter_0000002/mp_rank_00.pth",
+    "bytes": 42223650,
+    "sha256": "c9eded8b731d3813a9ebba301bbfa96a59db5dbe980316459338cd25d6d40b39"
+  },
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/params/iter_0000003/mp_rank_00.pth",
+    "bytes": 42223650,
+    "sha256": "9e54976d44b6b7fa529b25a5efa4c4641ffb46b4b7f26ac9d58fa33d9e7e2b31"
+  },
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/wgrads/iter_0000001/mp_rank_00.pth",
+    "bytes": 84438050,
+    "sha256": "383d33a7a307c18bc5b832afd80031e69015bf7dd86a1888403c3475e2df3b73"
+  },
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/wgrads/iter_0000002/mp_rank_00.pth",
+    "bytes": 84438050,
+    "sha256": "ea56781eea77b387f91af2f8b74d1d9b107732ef3ee4f6cdddcf3b1803ccd8c4"
+  },
+  {
+    "path": "wide-native-audit-004-repair-v2/snapshots/wgrads/iter_0000003/mp_rank_00.pth",
+    "bytes": 84438050,
+    "sha256": "d2cafae6957103eaffb81fef245e4acc0d299528318cb733aeba9ae094fdd36e"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/actual-start.pt",
+    "bytes": 126660250,
+    "sha256": "cd6b51c26bf5da5c01da0271e96bce1bb823530c6000b07cd35634a8242ae130"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/iter_0000003/mp_rank_00/model_optim_rng.pt",
+    "bytes": 126713959,
+    "sha256": "b49aab0be6d8cc5d000fa0d6251d1403035ecbd3468bd3cc810f8b08e25771cd"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/latest_checkpointed_iteration.txt",
+    "bytes": 1,
+    "sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/master-after-001.pt",
+    "bytes": 84438242,
+    "sha256": "393afd46ce4fe672c836bc864c1201ba307d012cdcaac12edcc22baea8bee127"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/master-after-002.pt",
+    "bytes": 84438242,
+    "sha256": "1f912f34d425e256ecb554d699ba109762371be60f0fbf8d72be430556200680"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/master-after-003.pt",
+    "bytes": 84438242,
+    "sha256": "b4f154f1916b4a5f3cb01cb168478ba5ad98318970b283a8299565673f1c4e8d"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/model0-forward-001.pt",
+    "bytes": 150134,
+    "sha256": "8807a065c15b497786feac453a2ec07bb98e0fd04fed037bb1572e15341afa36"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/model0-forward-002.pt",
+    "bytes": 150134,
+    "sha256": "ef4fbf94e19b95f05e2cc502ee53c995d9d824b5f2fe5704e49eafb91e80b584"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/model0-forward-003.pt",
+    "bytes": 150134,
+    "sha256": "a741b9a1e8dda98ee7ff1678f44ddcd5f30f49ae4c3e402486809f2236e6ea57"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/model0-initial.pt",
+    "bytes": 42496098,
+    "sha256": "be8ce356336d695faedf6648d31602365c0a2eec0ed1081934adf95b1deac558"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/params/iter_0000001/mp_rank_00.pth",
+    "bytes": 42223650,
+    "sha256": "e2bb4ba2dcbe86c07b8aa366b6089497efb5817b8bbbbad78e3d8148ad6370c2"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/params/iter_0000002/mp_rank_00.pth",
+    "bytes": 42223650,
+    "sha256": "c9eded8b731d3813a9ebba301bbfa96a59db5dbe980316459338cd25d6d40b39"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/params/iter_0000003/mp_rank_00.pth",
+    "bytes": 42223650,
+    "sha256": "9e54976d44b6b7fa529b25a5efa4c4641ffb46b4b7f26ac9d58fa33d9e7e2b31"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/wgrads/iter_0000001/mp_rank_00.pth",
+    "bytes": 84438050,
+    "sha256": "383d33a7a307c18bc5b832afd80031e69015bf7dd86a1888403c3475e2df3b73"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/wgrads/iter_0000002/mp_rank_00.pth",
+    "bytes": 84438050,
+    "sha256": "ea56781eea77b387f91af2f8b74d1d9b107732ef3ee4f6cdddcf3b1803ccd8c4"
+  },
+  {
+    "path": "wide-control-audit-004-repair-v2/snapshots/wgrads/iter_0000003/mp_rank_00.pth",
+    "bytes": 84438050,
+    "sha256": "d2cafae6957103eaffb81fef245e4acc0d299528318cb733aeba9ae094fdd36e"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/actual-start.pt",
+    "bytes": 126660250,
+    "sha256": "cd6b51c26bf5da5c01da0271e96bce1bb823530c6000b07cd35634a8242ae130"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/iter_0000003/mp_rank_00/model_optim_rng.pt",
+    "bytes": 126713959,
+    "sha256": "f0c5ee781fd9c72d87f29f259450451c15f5c6f60fcf46aa3944bb704ed593ab"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/latest_checkpointed_iteration.txt",
+    "bytes": 1,
+    "sha256": "4e07408562bedb8b60ce05c1decfe3ad16b72230967de01f640b7e4729b49fce"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/master-after-001.pt",
+    "bytes": 84438242,
+    "sha256": "393afd46ce4fe672c836bc864c1201ba307d012cdcaac12edcc22baea8bee127"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/master-after-002.pt",
+    "bytes": 84438242,
+    "sha256": "1f912f34d425e256ecb554d699ba109762371be60f0fbf8d72be430556200680"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/master-after-003.pt",
+    "bytes": 84438242,
+    "sha256": "b4f154f1916b4a5f3cb01cb168478ba5ad98318970b283a8299565673f1c4e8d"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/model0-forward-001.pt",
+    "bytes": 150134,
+    "sha256": "8807a065c15b497786feac453a2ec07bb98e0fd04fed037bb1572e15341afa36"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/model0-forward-002.pt",
+    "bytes": 150134,
+    "sha256": "ef4fbf94e19b95f05e2cc502ee53c995d9d824b5f2fe5704e49eafb91e80b584"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/model0-forward-003.pt",
+    "bytes": 150134,
+    "sha256": "a741b9a1e8dda98ee7ff1678f44ddcd5f30f49ae4c3e402486809f2236e6ea57"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/model0-initial.pt",
+    "bytes": 42496098,
+    "sha256": "be8ce356336d695faedf6648d31602365c0a2eec0ed1081934adf95b1deac558"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/params/iter_0000001/mp_rank_00.pth",
+    "bytes": 42223650,
+    "sha256": "e2bb4ba2dcbe86c07b8aa366b6089497efb5817b8bbbbad78e3d8148ad6370c2"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/params/iter_0000002/mp_rank_00.pth",
+    "bytes": 42223650,
+    "sha256": "c9eded8b731d3813a9ebba301bbfa96a59db5dbe980316459338cd25d6d40b39"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/params/iter_0000003/mp_rank_00.pth",
+    "bytes": 42223650,
+    "sha256": "9e54976d44b6b7fa529b25a5efa4c4641ffb46b4b7f26ac9d58fa33d9e7e2b31"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/wgrads/iter_0000001/mp_rank_00.pth",
+    "bytes": 84438050,
+    "sha256": "383d33a7a307c18bc5b832afd80031e69015bf7dd86a1888403c3475e2df3b73"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/wgrads/iter_0000002/mp_rank_00.pth",
+    "bytes": 84438050,
+    "sha256": "ea56781eea77b387f91af2f8b74d1d9b107732ef3ee4f6cdddcf3b1803ccd8c4"
+  },
+  {
+    "path": "wide-optimized-audit-004-repair-v2/snapshots/wgrads/iter_0000003/mp_rank_00.pth",
+    "bytes": 84438050,
+    "sha256": "d2cafae6957103eaffb81fef245e4acc0d299528318cb733aeba9ae094fdd36e"
+  }
+]

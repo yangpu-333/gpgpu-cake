@@ -1,0 +1,256 @@
+{
+  "schema": "fixed-swiglu-stage30-three-way-audit-v1",
+  "status": "completed",
+  "passed": true,
+  "model_name": "wide",
+  "suffix": "repair-v2",
+  "candidate_sha256": "a516bb372012cd5569eed99db2815a41c0b229755158289ddf6536248d554250",
+  "contract_sha256": "8be328eedac90bac9743fa9cc9d99a179e74c4146bce2e7b29cca58042f277aa",
+  "wrapper_sha256": "ad9e63f3361a284f2d137cd147c9dbf515b822e657d681a5de098724ffbddb1c",
+  "runner_sha256": "bcb89234e2c5ffbbc48cb7eb92c5f0267fb2841bd1aa27d293ff174e10e3e28f",
+  "common_sha256": "e5e57d9616d33e3a65572a8d4a1065293d2d27c4cc41fd3e6cf201ba6adb23c8",
+  "adaptation_record_sha256": "4c6d780a8f9863832fd9e53d32006e0f3ad68d1070d6d7664ba39544f6ddc386",
+  "frozen_sources_sha256": {
+    "stage29/candidate-004.py": "a516bb372012cd5569eed99db2815a41c0b229755158289ddf6536248d554250",
+    "stage29/launch_swiglu-03.py": "ad9e63f3361a284f2d137cd147c9dbf515b822e657d681a5de098724ffbddb1c",
+    "stage29/run_candidate_audit.py": "d357c2a687f5581a5cca427d8b3e3a17481374e324268009eb5917400b87e617",
+    "stage29/run_performance.py": "710769ae4416f9e8f7a6d7ae7140965cdfc8718634badc225d213abd37fe3467",
+    "stage29/probe-004-v3.json": "afbb2c40c283cc16cfd42c5f27792068436c280a1de9959cb0d0e6bed7a0e342",
+    "stage29/decision.json": "d0dc77fcf3aded453f1e368d24e49ce2763b22683ca88d5fd22e8b90561e602f",
+    "stage29/contracts/wide.json": "45d7a6e20198755cf54be0c6026dfa0ca22a979cd89863b47cd7a7e27bee8ccf",
+    "stage29/contracts/deep.json": "4f980d7b3c9ed4ac5ecbc9be0b2e36f3b35c12efc574a2b42fbe76148829019a",
+    "bf16/compare_training.py": "feb475eb504fe452267f930f2069d5f17b36387a6cb4ad0f839a6aaa8df27eda",
+    "bf16/summarize_performance.py": "6130e7cd9a2ffa26b42db42142694781bd45f9bdaa83336d4f1944a48368e5b7",
+    "bf16/launch_training.py": "a7909648600a4ef8448e738a75e5346845a392bdbcf2fbffc2fadecae1297e90",
+    "bf16/kernel_adapter.py": "bd84038d9037c8d62262a2a36d1cf378faa695bf2a9f3cd7288c02bc52037296",
+    "bf16/run_case.py": "6f3fede9c52e872033ff086968d31cfa6d839cedf49fc8f1a4c86c71944ed6d3",
+    "bf16/candidates/0008/candidate.py": "9b22e12b4744b2a41b9209faa280e361e6defe1d5480f5e5683fddd247b7f493",
+    "formal/runtime_compat.py": "6a7e4bd6130ea4b2141d3ac2e3f00a284da2915d997a76249272322ef6973bff",
+    "formal/source_manifest.json": "a72ded960488d399ded2255ef55f357257e03532b8fa21a06d958170c5c98c2d",
+    "gradnorm/candidate.py": "84c851ce5af7a49ba97685710790146d2c315f9c8837259366bffd7831f67dc0",
+    "gradnorm/launch_gradnorm-04.py": "12503df82b69f7eb5059cc0c0722677e05ff14cdf1a37b6c34c0d7e3c8acba7f"
+  },
+  "frozen_comparator_sha256": "feb475eb504fe452267f930f2069d5f17b36387a6cb4ad0f839a6aaa8df27eda",
+  "audit_seed": 30101,
+  "comparisons": {
+    "controlled": {
+      "path": "/tmp/kda-swiglu-scale-stage30/comparison-wide-004-repair-v2.json",
+      "sha256": "ac950c304a9892c81a48b5af4a97c54c9c0ebc2e137cf541c5bb6b18b80fe3c1",
+      "passed": true,
+      "check_summary": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "tensor_comparisons": 637,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    },
+    "native_optimized": {
+      "path": "/tmp/kda-swiglu-scale-stage30/comparison-native-optimized-wide-004-repair-v2.json",
+      "sha256": "bdf40432743fa8ca87644cc85db98211d0648daad78d6a539653ea31cd8eba05",
+      "passed": true,
+      "check_summary": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "tensor_comparisons": 637,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    },
+    "native_control": {
+      "path": "/tmp/kda-swiglu-scale-stage30/comparison-native-control-wide-004-repair-v2.json",
+      "sha256": "4bbfe75dbb7dab88dba13e81b215c06965fc4bd672c8ff48d155a35f082d9b81",
+      "passed": true,
+      "check_summary": {
+        "total": 1475,
+        "passed": 1475,
+        "failed": 0
+      },
+      "tensor_comparisons": 637,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    }
+  },
+  "completed_cases": [
+    {
+      "arm": "native",
+      "path": "/tmp/kda-swiglu-scale-stage30/wide-native-audit-004-repair-v2",
+      "hooks": {
+        "swiglu": {
+          "enabled": false,
+          "calls": 0,
+          "native_calls": 0,
+          "fallback_calls": 0,
+          "shapes": {},
+          "wrapper_sha256": "ad9e63f3361a284f2d137cd147c9dbf515b822e657d681a5de098724ffbddb1c",
+          "candidate_sha256": null,
+          "native_source_sha256": {
+            "megatron/core/transformer/mlp.py": "f54a7209db5cad4e095143cbbc1eedcbf41e913ea1eec64db3cb1b8408e6ff07",
+            "megatron/core/fusions/fused_bias_swiglu.py": "5303680596749464c45f9c3ec65f94d1127fb6d49b2aa9ec3ba8c91b1141f08f",
+            "megatron/core/jit.py": "0de81ea1c3a8fd5bf1a880a1c3d3ddacd706b4df946c9016d563b5c14778a3ba"
+          },
+          "native_jit_callable": "<class 'function'>",
+          "native_compiled_callable": true,
+          "configuration": {
+            "gated_linear_unit": true,
+            "bias_activation_fusion": true,
+            "activation_func": "torch.nn.functional.silu",
+            "add_bias_linear": false,
+            "use_te_activation_func": false,
+            "activation_func_fp8_input_store": false,
+            "glu_linear_offset": 0.0,
+            "activation_func_clamp_value": null,
+            "cpu_offloading": false,
+            "per_token_scale_present": false
+          }
+        },
+        "gradnorm": {
+          "enabled": false,
+          "calls": 0,
+          "wrapper_sha256": "12503df82b69f7eb5059cc0c0722677e05ff14cdf1a37b6c34c0d7e3c8acba7f",
+          "candidate_sha256": null,
+          "norm_audit": [],
+          "fallback_calls": 0,
+          "scope": "Process-only local multi-tensor L2 hook; original all-reduces, optimizer, CE0008 and training timer unchanged."
+        },
+        "raw_sha256": {
+          "swiglu.json": "e489677efd9c4bcb54102c1aadaadc4e234052fea601b415882b308b07b427a3",
+          "gradnorm.json": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+        }
+      }
+    },
+    {
+      "arm": "control",
+      "path": "/tmp/kda-swiglu-scale-stage30/wide-control-audit-004-repair-v2",
+      "hooks": {
+        "swiglu": {
+          "enabled": false,
+          "calls": 0,
+          "native_calls": 0,
+          "fallback_calls": 0,
+          "shapes": {},
+          "wrapper_sha256": "ad9e63f3361a284f2d137cd147c9dbf515b822e657d681a5de098724ffbddb1c",
+          "candidate_sha256": null,
+          "native_source_sha256": {
+            "megatron/core/transformer/mlp.py": "f54a7209db5cad4e095143cbbc1eedcbf41e913ea1eec64db3cb1b8408e6ff07",
+            "megatron/core/fusions/fused_bias_swiglu.py": "5303680596749464c45f9c3ec65f94d1127fb6d49b2aa9ec3ba8c91b1141f08f",
+            "megatron/core/jit.py": "0de81ea1c3a8fd5bf1a880a1c3d3ddacd706b4df946c9016d563b5c14778a3ba"
+          },
+          "native_jit_callable": "<class 'function'>",
+          "native_compiled_callable": true,
+          "configuration": {
+            "gated_linear_unit": true,
+            "bias_activation_fusion": true,
+            "activation_func": "torch.nn.functional.silu",
+            "add_bias_linear": false,
+            "use_te_activation_func": false,
+            "activation_func_fp8_input_store": false,
+            "glu_linear_offset": 0.0,
+            "activation_func_clamp_value": null,
+            "cpu_offloading": false,
+            "per_token_scale_present": false
+          }
+        },
+        "gradnorm": {
+          "enabled": true,
+          "calls": 3,
+          "wrapper_sha256": "12503df82b69f7eb5059cc0c0722677e05ff14cdf1a37b6c34c0d7e3c8acba7f",
+          "candidate_sha256": "84c851ce5af7a49ba97685710790146d2c315f9c8837259366bffd7831f67dc0",
+          "norm_audit": [
+            {
+              "candidate_norm": 5.961212635040283,
+              "native_norm": 5.961212635040283,
+              "bitwise_equal": true
+            },
+            {
+              "candidate_norm": 5.985384464263916,
+              "native_norm": 5.985384464263916,
+              "bitwise_equal": true
+            },
+            {
+              "candidate_norm": 5.774272441864014,
+              "native_norm": 5.774272441864014,
+              "bitwise_equal": true
+            }
+          ],
+          "fallback_calls": 0,
+          "scope": "Process-only local multi-tensor L2 hook; original all-reduces, optimizer, CE0008 and training timer unchanged."
+        },
+        "raw_sha256": {
+          "swiglu.json": "e489677efd9c4bcb54102c1aadaadc4e234052fea601b415882b308b07b427a3",
+          "gradnorm.json": "f38924c6746461f8d3848a1bcecf546a40721e6e189f885f525182c558747178"
+        }
+      }
+    },
+    {
+      "arm": "optimized",
+      "path": "/tmp/kda-swiglu-scale-stage30/wide-optimized-audit-004-repair-v2",
+      "hooks": {
+        "swiglu": {
+          "enabled": true,
+          "calls": 12,
+          "native_calls": 0,
+          "fallback_calls": 0,
+          "shapes": {
+            "((256, 2, 4096), (8192, 4096, 1), 'torch.bfloat16')": 12
+          },
+          "wrapper_sha256": "ad9e63f3361a284f2d137cd147c9dbf515b822e657d681a5de098724ffbddb1c",
+          "candidate_sha256": "a516bb372012cd5569eed99db2815a41c0b229755158289ddf6536248d554250",
+          "native_source_sha256": {
+            "megatron/core/transformer/mlp.py": "f54a7209db5cad4e095143cbbc1eedcbf41e913ea1eec64db3cb1b8408e6ff07",
+            "megatron/core/fusions/fused_bias_swiglu.py": "5303680596749464c45f9c3ec65f94d1127fb6d49b2aa9ec3ba8c91b1141f08f",
+            "megatron/core/jit.py": "0de81ea1c3a8fd5bf1a880a1c3d3ddacd706b4df946c9016d563b5c14778a3ba"
+          },
+          "native_jit_callable": "<class 'function'>",
+          "native_compiled_callable": true,
+          "configuration": {
+            "gated_linear_unit": true,
+            "bias_activation_fusion": true,
+            "activation_func": "torch.nn.functional.silu",
+            "add_bias_linear": false,
+            "use_te_activation_func": false,
+            "activation_func_fp8_input_store": false,
+            "glu_linear_offset": 0.0,
+            "activation_func_clamp_value": null,
+            "cpu_offloading": false,
+            "per_token_scale_present": false
+          }
+        },
+        "gradnorm": {
+          "enabled": true,
+          "calls": 3,
+          "wrapper_sha256": "12503df82b69f7eb5059cc0c0722677e05ff14cdf1a37b6c34c0d7e3c8acba7f",
+          "candidate_sha256": "84c851ce5af7a49ba97685710790146d2c315f9c8837259366bffd7831f67dc0",
+          "norm_audit": [
+            {
+              "candidate_norm": 5.961212635040283,
+              "native_norm": 5.961212635040283,
+              "bitwise_equal": true
+            },
+            {
+              "candidate_norm": 5.985384464263916,
+              "native_norm": 5.985384464263916,
+              "bitwise_equal": true
+            },
+            {
+              "candidate_norm": 5.774272441864014,
+              "native_norm": 5.774272441864014,
+              "bitwise_equal": true
+            }
+          ],
+          "fallback_calls": 0,
+          "scope": "Process-only local multi-tensor L2 hook; original all-reduces, optimizer, CE0008 and training timer unchanged."
+        },
+        "raw_sha256": {
+          "swiglu.json": "f63bd38e15396c8b23424edafdeb1af959c6028e2c71801dcfd219053a1c4281",
+          "gradnorm.json": "f38924c6746461f8d3848a1bcecf546a40721e6e189f885f525182c558747178"
+        }
+      }
+    }
+  ],
+  "started_utc": "2026-10-04T11:15:38.591075+00:00",
+  "finished_utc": "2026-10-04T11:17:09.311436+00:00",
+  "scope": "Fresh native/control/optimized three-step heldout runs; original 600-source, model/input/loss/all-gradient/BF16-update/FP32-master gates unchanged. Only the controlled comparator left-arm identity checks differ. RMSNorm stays native; no timing or production/convergence claim."
+}

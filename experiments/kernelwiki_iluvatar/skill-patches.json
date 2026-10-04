@@ -1,0 +1,13 @@
+{
+  "upstream_sha": "b6b4301f15e8ce6955a56776690643ce5db369e6",
+  "patches": [
+    {
+      "file": "kernelwiki-iluvatar.patch",
+      "sha256": "320f347cfde8267009a8abe4511d322cca7b7296a69e1bab3c42b6cf41ac3660"
+    },
+    {
+      "file": "kernelwiki-iluvatar-stage30-31.patch",
+      "sha256": "652227208de55c42b9c6a914200f180125d793d6edab892d4d7b627640627426"
+    }
+  ]
+}

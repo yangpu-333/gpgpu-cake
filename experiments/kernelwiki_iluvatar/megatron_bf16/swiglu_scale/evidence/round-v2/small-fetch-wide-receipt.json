@@ -1,0 +1,433 @@
+{
+  "status": "fetched",
+  "model_name": "wide",
+  "remote_root": "/tmp/kda-swiglu-scale-stage30",
+  "audit_suffix": "repair-v2",
+  "run_suffix": "repair-v2",
+  "files": [
+    {
+      "path": "adaptation-record.json",
+      "bytes": 4189,
+      "sha256": "4c6d780a8f9863832fd9e53d32006e0f3ad68d1070d6d7664ba39544f6ddc386"
+    },
+    {
+      "path": "audit-summary-wide-004-repair-v2.json",
+      "bytes": 11847,
+      "sha256": "c9ee58181925a388d54c94f1a4c7136accdb13b55dad7e482f9b6cf2a5021dad"
+    },
+    {
+      "path": "common.py",
+      "bytes": 14585,
+      "sha256": "e5e57d9616d33e3a65572a8d4a1065293d2d27c4cc41fd3e6cf201ba6adb23c8"
+    },
+    {
+      "path": "comparison-native-control-wide-004-repair-v2.json",
+      "bytes": 836706,
+      "sha256": "4bbfe75dbb7dab88dba13e81b215c06965fc4bd672c8ff48d155a35f082d9b81"
+    },
+    {
+      "path": "comparison-native-optimized-wide-004-repair-v2.json",
+      "bytes": 836742,
+      "sha256": "bdf40432743fa8ca87644cc85db98211d0648daad78d6a539653ea31cd8eba05"
+    },
+    {
+      "path": "comparison-wide-004-repair-v2.json",
+      "bytes": 842078,
+      "sha256": "ac950c304a9892c81a48b5af4a97c54c9c0ebc2e137cf541c5bb6b18b80fe3c1"
+    },
+    {
+      "path": "contracts/deep.json",
+      "bytes": 5900,
+      "sha256": "2f8c3ec5147a2d8d235823f94fe5c8887ef99581075f0f5daa4c1cc3dc5ce6f9"
+    },
+    {
+      "path": "contracts/wide.json",
+      "bytes": 5900,
+      "sha256": "8be328eedac90bac9743fa9cc9d99a179e74c4146bce2e7b29cca58042f277aa"
+    },
+    {
+      "path": "controller-repair.json",
+      "bytes": 3220,
+      "sha256": "704d333efaa330126a56ab3f298935a11aaa6b13f8dbb46912ea9aab9b52203e"
+    },
+    {
+      "path": "performance-wide-004-repair-v2.json",
+      "bytes": 184227,
+      "sha256": "dcf834bf2e8a31a1614ce60b7b0e2e61d49394dd098c647d7ce08365b01da429"
+    },
+    {
+      "path": "run_audit.py",
+      "bytes": 6618,
+      "sha256": "bcb89234e2c5ffbbc48cb7eb92c5f0267fb2841bd1aa27d293ff174e10e3e28f"
+    },
+    {
+      "path": "run_performance.py",
+      "bytes": 11048,
+      "sha256": "d024105eb2d971021c2f4cf3d58e2e6f6766dcc6004eb8b5e7ca19ff6484986f"
+    },
+    {
+      "path": "wide-control-audit-004-repair-v2/command.json",
+      "bytes": 3623,
+      "sha256": "c1c81023f69cf1808b34093f7ad5988d63d1ce5c22ed95d535972fb5b797d1ff"
+    },
+    {
+      "path": "wide-control-audit-004-repair-v2/entry.json",
+      "bytes": 84567,
+      "sha256": "4557a7342445795dbcebc5f7654a4004caf8aeabce76156511c69cd55db5a12e"
+    },
+    {
+      "path": "wide-control-audit-004-repair-v2/gradnorm.json",
+      "bytes": 756,
+      "sha256": "f38924c6746461f8d3848a1bcecf546a40721e6e189f885f525182c558747178"
+    },
+    {
+      "path": "wide-control-audit-004-repair-v2/stderr.log",
+      "bytes": 8410,
+      "sha256": "4fcacd36dea365795699aacbb3c5a5790e5ed8b61e8cbc15f6cae64349d9dc74"
+    },
+    {
+      "path": "wide-control-audit-004-repair-v2/stdout.log",
+      "bytes": 63864,
+      "sha256": "b9099ef23f65b8495a72385c24636a7bc81e11100ea9a433a38fc71576fcff8d"
+    },
+    {
+      "path": "wide-control-audit-004-repair-v2/swiglu.json",
+      "bytes": 1044,
+      "sha256": "e489677efd9c4bcb54102c1aadaadc4e234052fea601b415882b308b07b427a3"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26012/command.json",
+      "bytes": 3346,
+      "sha256": "98d2e0489f3e62242b8162acffef72327ff526ee4258b9050ad246b45e7148f3"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26012/entry.json",
+      "bytes": 84663,
+      "sha256": "c2ba2c658f3900998bc329931ae25fd31c08ce7e4a0696fefa7a2290cf4be083"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26012/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26012/stderr.log",
+      "bytes": 8410,
+      "sha256": "d6b90fc10421a25b644c710f1edf71d29d1873d2669e76d728334f131597f1e1"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26012/stdout.log",
+      "bytes": 64925,
+      "sha256": "cf53301085a5846e4d506070cda20841e6fe1f437968e6b0e1eb3ddca71268f2"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26012/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26013/command.json",
+      "bytes": 3346,
+      "sha256": "723eefa04e6444064245bde19db9b7d5a6d92eb3889b898788884a98d983fdf6"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26013/entry.json",
+      "bytes": 84663,
+      "sha256": "79e36c37f920a922225fdf8b66b9e932f924470805d841c18be0e5503e7c33eb"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26013/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26013/stderr.log",
+      "bytes": 8410,
+      "sha256": "14cbf57ca6f532e47175bdb73ca93840ccec05f153996f2ceffd40d404016900"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26013/stdout.log",
+      "bytes": 64927,
+      "sha256": "0cf571d33abb684c6ddcd38f20a5ffda93e174ddeb397f402cbe6403d6a2913e"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26013/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26014/command.json",
+      "bytes": 3346,
+      "sha256": "c4158e10d4c3bc0ca4945a8e60072d9d809769457cf230b07ccfc8cfa22e0843"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26014/entry.json",
+      "bytes": 84663,
+      "sha256": "55972fbdea3b1310b187a000b6369797e51bd8e29bc12f6abbebee673c6aeba8"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26014/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26014/stderr.log",
+      "bytes": 8410,
+      "sha256": "16a2ab79e1f75d0ee748f4d7f570c39582e6478310e8a29127441b688dcf0ea1"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26014/stdout.log",
+      "bytes": 64927,
+      "sha256": "8594ff647620697541d3106b98bce74ce32c1aaf0f4de2943e44460114af99e6"
+    },
+    {
+      "path": "wide-control-perf-004-repair-v2-26014/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "wide-native-audit-004-repair-v2/command.json",
+      "bytes": 3443,
+      "sha256": "2335c887ed573f47cb8c688299a93f59f0cc0c05c36ed8127ea88c11fffdb8b1"
+    },
+    {
+      "path": "wide-native-audit-004-repair-v2/entry.json",
+      "bytes": 82495,
+      "sha256": "5d6e2c7512b9586e9d800dadd24c3c06c9e9e9b6e24a9e780eb0a7a166650261"
+    },
+    {
+      "path": "wide-native-audit-004-repair-v2/gradnorm.json",
+      "bytes": 321,
+      "sha256": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+    },
+    {
+      "path": "wide-native-audit-004-repair-v2/stderr.log",
+      "bytes": 8410,
+      "sha256": "9e83a84b4682733eb603947eb4801a31510c3610ff4d7ad970302b934a2751a8"
+    },
+    {
+      "path": "wide-native-audit-004-repair-v2/stdout.log",
+      "bytes": 63861,
+      "sha256": "51b118958ca8254835f94cc2d40a1038e3dde5c927bc5a0cd7e6ab37ab5c5091"
+    },
+    {
+      "path": "wide-native-audit-004-repair-v2/swiglu.json",
+      "bytes": 1044,
+      "sha256": "e489677efd9c4bcb54102c1aadaadc4e234052fea601b415882b308b07b427a3"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26012/command.json",
+      "bytes": 3167,
+      "sha256": "d203656c913948c2f1d23dce8844aaef84da3ba1ae9523db9a05f35af6603619"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26012/entry.json",
+      "bytes": 82295,
+      "sha256": "b0a482940dcd69350a012f13da5b56b9b6c2aa559246336baa673d6bedbc669c"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26012/gradnorm.json",
+      "bytes": 321,
+      "sha256": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26012/stderr.log",
+      "bytes": 8410,
+      "sha256": "1e6d6977ea51d40e8f3247bca6754ad0a074b64960c7e717bd86cbe9256935bf"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26012/stdout.log",
+      "bytes": 64925,
+      "sha256": "df1887650afe3c00f66065cff1c12c741d2bfa1d25b0ac7ca57269e1f9619154"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26012/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26013/command.json",
+      "bytes": 3168,
+      "sha256": "f7daa6be413b804300b2bd8aab20cf554c8b456a91740a0ff516ab90c3fab548"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26013/entry.json",
+      "bytes": 82295,
+      "sha256": "fa35bf4916417da5bcc07fc69a5e980ba6cb45b5175964032f4c7241d97bc7f9"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26013/gradnorm.json",
+      "bytes": 321,
+      "sha256": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26013/stderr.log",
+      "bytes": 8410,
+      "sha256": "2dc77689b501c3276f228ae7025f8099c2b79c4150df7ff371ef6e104c10c8b0"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26013/stdout.log",
+      "bytes": 64927,
+      "sha256": "02aed1534fc83910c097918a4eba94fe6fb62fa8ed21c43b064aa49331644f32"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26013/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26014/command.json",
+      "bytes": 3168,
+      "sha256": "017a92ba316954c14e96b46039fb8c76fa9403ab1146c4d1a5693298c6f4aeec"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26014/entry.json",
+      "bytes": 82295,
+      "sha256": "a297bacac58410fcfd254d5a3544792754ad1e9d17aa045a74b270b6d471d286"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26014/gradnorm.json",
+      "bytes": 321,
+      "sha256": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26014/stderr.log",
+      "bytes": 8410,
+      "sha256": "8c5148eb6cdb12ac2d8c434cec5a711fc618b4c282359dd9322ec76e47beee49"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26014/stdout.log",
+      "bytes": 64927,
+      "sha256": "d219fb38e3f71188eb608f3c6826eb68e37f8a55d3474a1ba30bb9bcc34101c3"
+    },
+    {
+      "path": "wide-native-perf-004-repair-v2-26014/swiglu.json",
+      "bytes": 650,
+      "sha256": "61cd84740574351f5ee1cdb9d689736c916af7842185d6eb68cf78f55763e86d"
+    },
+    {
+      "path": "wide-optimized-audit-004-repair-v2/command.json",
+      "bytes": 3773,
+      "sha256": "51d5958e5796f27a73e729f08672fabbb1ad06c5c0c03be864e3a9d0ca1d1bab"
+    },
+    {
+      "path": "wide-optimized-audit-004-repair-v2/entry.json",
+      "bytes": 84569,
+      "sha256": "3f6f3d8cc985a0c570107a2580372e0c3c8643d1440a0c0259ff70db13fa8abc"
+    },
+    {
+      "path": "wide-optimized-audit-004-repair-v2/gradnorm.json",
+      "bytes": 756,
+      "sha256": "f38924c6746461f8d3848a1bcecf546a40721e6e189f885f525182c558747178"
+    },
+    {
+      "path": "wide-optimized-audit-004-repair-v2/stderr.log",
+      "bytes": 7870,
+      "sha256": "3e161047f6b56a736f878dea9f7e9eb48653e2fd15b8b9f3637d8f33eaacbbc4"
+    },
+    {
+      "path": "wide-optimized-audit-004-repair-v2/stdout.log",
+      "bytes": 63868,
+      "sha256": "adacb96ffdc7361adbe91a91d4be49fbc29f9233a0f8e4dbda08c5b7e5cefae4"
+    },
+    {
+      "path": "wide-optimized-audit-004-repair-v2/swiglu.json",
+      "bytes": 1171,
+      "sha256": "f63bd38e15396c8b23424edafdeb1af959c6028e2c71801dcfd219053a1c4281"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26012/command.json",
+      "bytes": 3491,
+      "sha256": "8b729003d1449539c092c6b52b6cea7fd9c3412396b0734db25a14bf9f0549ef"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26012/entry.json",
+      "bytes": 84663,
+      "sha256": "ee2cc7374a459189e31301ea6fd61d39d0ee55c1606e5417f155b46e1b9732f7"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26012/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26012/stderr.log",
+      "bytes": 7870,
+      "sha256": "7f467f604e15870078e1443fc670b15ded33a3aa31bbe7ff9479929da6f5aeb2"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26012/stdout.log",
+      "bytes": 64925,
+      "sha256": "05296770907fcfa74a0a02352b6459beb1b87b71f676d8713f6e9c0e86a284f4"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26012/swiglu.json",
+      "bytes": 1173,
+      "sha256": "1b755c2a7caaa1ea10548454fb417c0666ac09fce44a2bb5954874f22080a831"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26013/command.json",
+      "bytes": 3491,
+      "sha256": "f4485607ee4dcdd570b9a884a577dab4d9c82583f101f625631bafa92dddcfc0"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26013/entry.json",
+      "bytes": 84663,
+      "sha256": "2e38ee9c2ce38694496ca2cfcfc46067a7f9ca64dc94175703af9e1287bbadcc"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26013/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26013/stderr.log",
+      "bytes": 7870,
+      "sha256": "3001425e0186f3350265742286235e08c93436678f7758d69bca60277b963e4f"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26013/stdout.log",
+      "bytes": 64923,
+      "sha256": "b880acf61a890c7fcc5e879fdd111ebac43163c62a3bc4f48649a62e52fa0fd0"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26013/swiglu.json",
+      "bytes": 1173,
+      "sha256": "1b755c2a7caaa1ea10548454fb417c0666ac09fce44a2bb5954874f22080a831"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26014/command.json",
+      "bytes": 3492,
+      "sha256": "015cec6008250a8236dc1ae50ed013f415683bbc26342e3f6e766da8adc58682"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26014/entry.json",
+      "bytes": 84663,
+      "sha256": "f07f90f2046d0981fe5ea72c813963e88c246291bdd4404538dca676d19a9e0b"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26014/gradnorm.json",
+      "bytes": 384,
+      "sha256": "4b07a7ac2db38b2e864bd8a4dffa41ec20cdbafd08f2ad35f2725c45640c889e"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26014/stderr.log",
+      "bytes": 7870,
+      "sha256": "85addfeab238392b47b5db9dc9a70afdc8fea622a9c15a9489fde04f969be3a3"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26014/stdout.log",
+      "bytes": 64923,
+      "sha256": "a138656b998dfa0829f1087e1858f0df14180ff8f010e361120517fbe2871cbd"
+    },
+    {
+      "path": "wide-optimized-perf-004-repair-v2-26014/swiglu.json",
+      "bytes": 1173,
+      "sha256": "1b755c2a7caaa1ea10548454fb417c0666ac09fce44a2bb5954874f22080a831"
+    }
+  ],
+  "fetch_script_sha256": "454b42ca27a87248a823d803b417f8a651934b8c12b57008520891561ee671bb",
+  "raw_snapshots_fetched": false,
+  "transfer_archive_retained": false,
+  "remote_deleted": false
+}

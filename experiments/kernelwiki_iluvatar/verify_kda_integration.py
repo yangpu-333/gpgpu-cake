@@ -6,7 +6,28 @@ import sys
 from pathlib import Path
 
 
-EXPECTED_ARCHITECTURE_COUNTS = {"bi-v150": 28, "sm90": 286, "sm100": 379}
+EXPECTED_ARCHITECTURE_COUNTS = {"bi-v150": 32, "sm90": 286, "sm100": 379}
+EXTENSION_PAGE_PATHS = (
+    "sources/experiments/bi-v150-corex42-stage30.md",
+    "wiki/kernels/swiglu-heldout-megatron-bi-v150.md",
+    "sources/experiments/bi-v150-corex42-stage31.md",
+    "wiki/kernels/dense-attention-megatron-bi-v150.md",
+)
+EXTENSION_BUNDLE = "evidence/bi-v150-corex42-stage30-31"
+EXTENSION_EVIDENCE_PATHS = (
+    "manifest.json",
+    "PROVENANCE.yaml",
+    "megatron_bf16/swiglu_scale/evidence/decision.json",
+    "megatron_bf16/swiglu_scale/evidence/round-v2/cpu-verify-wide-raw.json",
+    "megatron_bf16/swiglu_scale/evidence/round-v2/cpu-verify-deep-raw.json",
+    "megatron_bf16/swiglu_scale/evidence/round-v2/performance-wide-004-repair-v2.json",
+    "megatron_bf16/swiglu_scale/evidence/round-v2/performance-deep-004-repair-v2.json",
+    "megatron_bf16/attention/candidates/003/candidate.py",
+    "megatron_bf16/attention/evidence/decision.json",
+    "megatron_bf16/attention/evidence/round003/cpu-verify-003.json",
+    "megatron_bf16/attention/evidence/round003/performance-main-003-complete.json",
+    "megatron_bf16/attention/verify_failed_rounds.py",
+)
 
 
 def run(*args):
@@ -18,7 +39,7 @@ def query_paths(skill, architecture):
         sys.executable, str(skill / "scripts" / "query.py"),
         "--architecture", architecture, "--paths-only", "--limit", "1000",
     )
-    return set(response.stdout.splitlines())
+    return {line.replace("\\", "/") for line in response.stdout.splitlines()}
 
 
 def main():
@@ -48,6 +69,10 @@ def main():
             raise RuntimeError(
                 f"{architecture}: expected {expected} query paths, got {len(actual)}"
             )
+        if architecture == "bi-v150":
+            missing = set(EXTENSION_PAGE_PATHS) - actual
+            if missing:
+                raise RuntimeError(f"stage30/31 BI-V150 query pages missing: {sorted(missing)}")
         print(f"{architecture}: {len(actual)} paths")
     stage14 = project_skill / "sources" / "experiments" / "bi-v150-corex42-stage14.md"
     if not stage14.is_file():
@@ -76,6 +101,10 @@ def main():
                      "evidence/bi-v150-corex42-stage29/megatron_bf16/evidence/swiglu-stage29/decision.json"):
         if not (project_skill / relative).is_file():
             raise RuntimeError(f"native Megatron loop evidence missing: {relative}")
+    for relative in (*EXTENSION_PAGE_PATHS,
+                     *(f"{EXTENSION_BUNDLE}/{path}" for path in EXTENSION_EVIDENCE_PATHS)):
+        if not (project_skill / relative).is_file():
+            raise RuntimeError(f"stage30/31 Megatron loop evidence missing: {relative}")
     print("KDA project-level skill integration verified")
 
 

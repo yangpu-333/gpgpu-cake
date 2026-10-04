@@ -1,0 +1,167 @@
+{
+  "schema": "native-full-attention-stage31-cpu-archive-verification-v1",
+  "status": "verified",
+  "version": "003",
+  "candidate_sha256": "4881f91c230324f258cf6faf7b1d63a493b043b960df4efdca0dad708195db48",
+  "contract_sha256": "c2a36adb7a8d8b5ee0db4ddeac7856a094b5d21a4acb7dcaab2dbd5db3d8d4a8",
+  "controller_sources_sha256": {
+    "common.py": "e15268a4fd525b9c91754b603438f383cb48620a8458ab77ea7408fcb4f20db8",
+    "launch_attention.py": "685766bd5243f1039c93bb150191774f1dda7409b2bbd87ccb62e055b6d56478",
+    "run_audit.py": "4603346236f182517c21c0f84779b49e5e965760fba64e8200036c88d8717686",
+    "run_performance.py": "cf917dff658e6ea2dc50a37932bc72be0e330ddd9452beda0066fe300ba9deba"
+  },
+  "frozen_sources_checked": 17,
+  "verifier_sha256": "5ec635e25b8360cef6eaef7bd4db12a87b0c43919ad5f705dcb12c4db99f3adb",
+  "probe": {
+    "checks": 22,
+    "guards": 2,
+    "sha256": "15144ae11bc7a4a8d052f1ec678195cf0d01f78396f9188772bc8f25c6be813f",
+    "verifier_sha256": "7778dc5837265b9fa4def2cf90d07ceeac2b992e583aa6939d74b5e99ad57fd0"
+  },
+  "generation": {
+    "sha256": "2180181a7224c49f98dde5176c3a8ffb2e59f0b25eace2e9c4fa78d5022ce711",
+    "raw_response_sha256": "a633809b76a7b48a8ca50ce96703ffd677b549fbed7ddc5b1cdce0acd0f0dd5d",
+    "prompt_sha256": "07dd5c4dbb570b9e49190b14cc583bb178f703c7f74e58738c2303826148dabd",
+    "model": "Claude-Opus-4.8",
+    "claude_code": true,
+    "session_id": "4920c2a6-0ce4-4704-8298-f617e07808a0"
+  },
+  "audit_sha256": "7273c58aa1123b95da413bf11a0f3797669c7bf4fc1f13d227788483c9a8ad43",
+  "comparisons": {
+    "controlled": {
+      "checks": 1475,
+      "tensors": 637,
+      "tensor_groups": {
+        "initial": 28,
+        "actual_start_model_parameters": 28,
+        "actual_start_master_parameters": 28,
+        "master_initialization": 56,
+        "model_initialization": 56,
+        "batches": 15,
+        "output": 3,
+        "derived_loss": 3,
+        "wgrads": 84,
+        "params": 84,
+        "masters": 84,
+        "master_model_consistency": 168
+      },
+      "raw_value_comparisons": 97,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    },
+    "native_optimized": {
+      "checks": 1475,
+      "tensors": 637,
+      "tensor_groups": {
+        "initial": 28,
+        "actual_start_model_parameters": 28,
+        "actual_start_master_parameters": 28,
+        "master_initialization": 56,
+        "model_initialization": 56,
+        "batches": 15,
+        "output": 3,
+        "derived_loss": 3,
+        "wgrads": 84,
+        "params": 84,
+        "masters": 84,
+        "master_model_consistency": 168
+      },
+      "raw_value_comparisons": 97,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    },
+    "native_control": {
+      "checks": 1475,
+      "tensors": 637,
+      "tensor_groups": {
+        "initial": 28,
+        "actual_start_model_parameters": 28,
+        "actual_start_master_parameters": 28,
+        "master_initialization": 56,
+        "model_initialization": 56,
+        "batches": 15,
+        "output": 3,
+        "derived_loss": 3,
+        "wgrads": 84,
+        "params": 84,
+        "masters": 84,
+        "master_model_consistency": 168
+      },
+      "raw_value_comparisons": 97,
+      "all_tensors_exact_equal": true,
+      "all_tensor_bytes_equal": true
+    }
+  },
+  "untimed_audit_routes": {
+    "native": {
+      "case": "main-native-audit-003-complete",
+      "attention_receipt_sha256": "3ac7b01ec593ac9a978324f37407a347e7ac1cd38ee03a68db9531f4ea3e01cd",
+      "native_routes_observed": true,
+      "native_fused_forward_calls": 12,
+      "native_fused_backward_calls": 12,
+      "native_torch_forward_calls": 0,
+      "candidate_calls": 0,
+      "fallback_calls": 0
+    },
+    "control": {
+      "case": "main-control-audit-003-complete",
+      "attention_receipt_sha256": "3ac7b01ec593ac9a978324f37407a347e7ac1cd38ee03a68db9531f4ea3e01cd",
+      "native_routes_observed": true,
+      "native_fused_forward_calls": 12,
+      "native_fused_backward_calls": 12,
+      "native_torch_forward_calls": 0,
+      "candidate_calls": 0,
+      "fallback_calls": 0
+    },
+    "optimized": {
+      "case": "main-optimized-audit-003-complete",
+      "attention_receipt_sha256": "9b2ae6c39d88c0f06905f2a572d8a1c7537bcafdd6c96d1c85a6e64da816e542",
+      "native_routes_observed": true,
+      "native_fused_forward_calls": 0,
+      "native_fused_backward_calls": 0,
+      "native_torch_forward_calls": 0,
+      "candidate_calls": 12,
+      "fallback_calls": 0
+    }
+  },
+  "performance": {
+    "available": true,
+    "sha256": "ebcdd90fe307dce06d208410f1b02629c382c00f50bfb762c0cf89a8740d9958",
+    "timed_processes": 9,
+    "run_steps": 1080,
+    "retained_steps": 900,
+    "native_route_observed_per_timed_call": false,
+    "promoted": true,
+    "audit_metadata_binding_passed": true,
+    "diagnostic_only": false,
+    "vs_native": {
+      "ratio": 1.1396264102683147,
+      "gain_percent": 13.962641026831468,
+      "all_seeds_faster": true
+    },
+    "vs_control": {
+      "ratio": 1.0450711940056394,
+      "gain_percent": 4.5071194005639414,
+      "all_seeds_faster": true
+    },
+    "control_vs_native": {
+      "ratio": 1.0904772964799228,
+      "gain_percent": 9.047729647992275,
+      "all_seeds_faster": true
+    }
+  },
+  "snapshot_inventory_records": 48,
+  "snapshot_files_available": 0,
+  "snapshot_files_missing": 48,
+  "raw_backup": {
+    "inventory_available": false,
+    "receipt_available": false,
+    "inventory_files": 0,
+    "files_available": 0,
+    "files_missing": 0
+  },
+  "native_extension_binary_bytes_verified_locally": false,
+  "gpu_rerun": false,
+  "tensor_arithmetic_replayed": false,
+  "scope": "All recorded source/contract/controller/probe/generation identities, three-way637-tensor/master receipts and every original training interval log rechecked on CPU. Available raw tensors are SHA256 checked; missing raw bytes remain explicit. Native extension hashes are bound to untimed backend/audit and actual formal receipts; binary bytes are not asserted present locally. No Torch/candidate import, GPU rerun, tensor arithmetic replay or production extrapolation."
+}

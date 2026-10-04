@@ -1,0 +1,12 @@
+/kernelwiki-iluvatar
+Continue the same authorized BI-V150 full Attention optimization with a second immutable candidate. Read ONLY these files:
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/attention/contracts/main.json
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/attention/candidates/001/candidate.py
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/attention/evidence/probe-full-001.json
+- E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/attention/native_sources/dot_product_attention.py
+
+Candidate001 preserves native default CUDA fused softmax and passes actual formal input/output and every gradient, all random S128/256/512, noncontiguous upstream, fresh inputs, nondefault stream, and S17 automatic native fallback. It is REJECTED because all three offset-shared-view cases fail catastrophically (output max_abs0.875–0.9609375, not just BF16 ULP). These cases have q/k/v in one shared BF16 buffer with a one-element prefix: identical QKV stride[3072,1536,192,1], storage offsets1/65/129, therefore actual pointers offset by2 bytes. The reference uses identical values in an aligned fused-QKV layout. The trigger is observed; the cause has not been isolated. Suspect the vendor GEMM/extension alignment requirement; do not present that as proved.
+
+Produce candidate002 fixing this supported offset-view case without altering primary math, baseline, or tests. A safe alignment-aware contiguous copy only for misaligned q/k/v is acceptable: real model inputs at offsets0/64/128 must keep the fast native staged path, all fallback/copy cost must be included. Never cache inputs, outputs, pointers or results. Preserve the original alpha=.125 baddbmm BF16 score boundary, SAME native scaled_upper_triang_masked_softmax_cuda forward/backward BF16 probability boundary, native bmm BF16 context, and original output contiguity. Keep CPU/FP32 rejection explicit, causal-only scope, all QKV gradients, current stream use. Public API remains attention(q,k,v,scale).
+
+Do not edit or run files. Return one complete replacement Python module in one ```python block, then a brief explanation of the fix and remaining risk. Independent frozen probe and full training gates run outside your code. Do not remove any test, weaken tolerances, disable native fusion, or retry SDPA.
