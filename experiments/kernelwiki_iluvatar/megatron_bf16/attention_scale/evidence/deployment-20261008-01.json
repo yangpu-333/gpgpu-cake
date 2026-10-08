@@ -1,0 +1,16 @@
+{
+  "status": "frozen_bytes_deployed",
+  "files": {
+    "common.py": "02d3949c524ba451687bc6655bce09f664447456446b9f1c6eb44e55ed0abd0c",
+    "launch_attention_scale.py": "1f528939a0da292910f264670c550a03f3eb7caa087209a8abb1d1046cb1fe2e",
+    "run_audit.py": "d22dfd86f48e40d1fa21c939dc888e90a111f9aa590fe9d330ab5f7a15f046d1",
+    "run_performance.py": "99dd90aabd494a00f34f9e0ba3a0ef7c80920419cd099e4e7c2b3723b43e694e",
+    "contracts/wide.json": "d89816a795d1c9e7d1b46137186b34265b0256b9051d5d26466733bcd44c5b4f",
+    "contracts/deep.json": "a473489c036e86a9269b9d91b9e8c0223889fb464adf17ff1a14b4d3422d6162"
+  },
+  "candidate_version": "003",
+  "candidate_sha256": "4881f91c230324f258cf6faf7b1d63a493b043b960df4efdca0dad708195db48",
+  "candidate_retuned": false,
+  "swiglu_candidate_enabled": false,
+  "deployment_script_sha256": "d00e66a44a1078de606b22fb1ffc8f9e35be9d96db3af2105e286e86f2d50b26"
+}

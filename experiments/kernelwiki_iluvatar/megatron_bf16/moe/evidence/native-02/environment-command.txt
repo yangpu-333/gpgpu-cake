@@ -1,0 +1,1 @@
+env LD_LIBRARY_PATH=/usr/local/corex/lib64:/usr/local/openmpi/lib PYTHONPATH=/usr/local/corex/lib64/python3/dist-packages MASTER_ADDR=127.0.0.1 MASTER_PORT=29533 RANK=0 WORLD_SIZE=1 LOCAL_RANK=0 CUDA_VISIBLE_DEVICES=0 

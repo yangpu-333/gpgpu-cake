@@ -1,0 +1,5 @@
+Use the project-loaded KernelWiki skill in .claude/skills/kernelwiki-iluvatar. Read SKILL.md, sources/experiments/bi-v150-corex42-stage32.md, wiki/kernels/dense-attention-heldout-megatron-bi-v150.md and evidence/bi-v150-corex42-stage32/megatron_bf16/attention_scale/evidence/decision.json.
+
+This is a read-only review of the completed frozen Attention003 heldout experiment on BI-V150. Do not write files, generate a replacement candidate or run shell/network commands. Report whether the skill and original decision agree about the exact same-round native/control/optimized backend, promotion of wide versus deep, and numerical/measurement scope. Explain why stage31's13.96% cannot be used as a stage32 result, and why a positive geometric mean alone does not promote wide. Identify the concrete next operator/runtime prerequisite from the existing MoE plan, without claiming any completed MoE speedup.
+
+In at most250 words, name the files actually read, return the two decisions and ratios, and note any discrepancy. Do not access credentials, SSH configuration or unrelated files.

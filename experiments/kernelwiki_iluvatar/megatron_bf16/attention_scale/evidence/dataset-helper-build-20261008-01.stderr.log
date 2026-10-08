@@ -1,0 +1,6 @@
+/root/miniconda3/bin/python3: No module named pybind11
+[01m[Khelpers.cpp:12:10:[m[K [01;31m[Kfatal error: [m[Kpybind11/pybind11.h: No such file or directory
+   12 | #include [01;31m[K<pybind11/pybind11.h>[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+make: *** [Makefile:13: helpers_cpp.cpython-310-x86_64-linux-gnu.so] Error 1

@@ -1,0 +1,140 @@
+{
+  "schema": "native-full-attention-stage32-three-way-audit-v1",
+  "status": "rejected",
+  "passed": false,
+  "version": "003",
+  "model_name": "wide",
+  "suffix": "complete",
+  "candidate_sha256": "4881f91c230324f258cf6faf7b1d63a493b043b960df4efdca0dad708195db48",
+  "contract_sha256": "d89816a795d1c9e7d1b46137186b34265b0256b9051d5d26466733bcd44c5b4f",
+  "wrapper_sha256": "1f528939a0da292910f264670c550a03f3eb7caa087209a8abb1d1046cb1fe2e",
+  "runner_sha256": "d22dfd86f48e40d1fa21c939dc888e90a111f9aa590fe9d330ab5f7a15f046d1",
+  "controller_sources_sha256": {
+    "common.py": "02d3949c524ba451687bc6655bce09f664447456446b9f1c6eb44e55ed0abd0c",
+    "launch_attention_scale.py": "1f528939a0da292910f264670c550a03f3eb7caa087209a8abb1d1046cb1fe2e",
+    "run_audit.py": "d22dfd86f48e40d1fa21c939dc888e90a111f9aa590fe9d330ab5f7a15f046d1",
+    "run_performance.py": "99dd90aabd494a00f34f9e0ba3a0ef7c80920419cd099e4e7c2b3723b43e694e",
+    "contracts/wide.json": "d89816a795d1c9e7d1b46137186b34265b0256b9051d5d26466733bcd44c5b4f",
+    "contracts/deep.json": "a473489c036e86a9269b9d91b9e8c0223889fb464adf17ff1a14b4d3422d6162"
+  },
+  "provenance": {
+    "frozen_sources_sha256": {
+      "stage31/candidate-003.py": "4881f91c230324f258cf6faf7b1d63a493b043b960df4efdca0dad708195db48",
+      "stage31/probe_full.py": "7778dc5837265b9fa4def2cf90d07ceeac2b992e583aa6939d74b5e99ad57fd0",
+      "stage31/probe-full-003.json": "15144ae11bc7a4a8d052f1ec678195cf0d01f78396f9188772bc8f25c6be813f",
+      "stage31/probe_native_backend.py": "8036e4a0218f7e5b5f2cedcaa16a34c4859e192203a71157b689f0183d3b87e1",
+      "stage31/backend-default.json": "fa399ad4038edbae7cd078c2d50bc588f4c91e5563f0a2bbce0d22c05af3f1df",
+      "stage31/native-default-capture-02/attention.json": "c4bf61c70b1b041dfbdadee41584285e741b64bad0910a223ea64613e59a3722",
+      "stage31/audit-summary-main-003-complete.json": "7273c58aa1123b95da413bf11a0f3797669c7bf4fc1f13d227788483c9a8ad43",
+      "stage31/performance-main-003-complete.json": "ebcdd90fe307dce06d208410f1b02629c382c00f50bfb762c0cf89a8740d9958",
+      "stage29/contracts/wide.json": "45d7a6e20198755cf54be0c6026dfa0ca22a979cd89863b47cd7a7e27bee8ccf",
+      "stage29/contracts/deep.json": "4f980d7b3c9ed4ac5ecbc9be0b2e36f3b35c12efc574a2b42fbe76148829019a",
+      "bf16/compare_training.py": "feb475eb504fe452267f930f2069d5f17b36387a6cb4ad0f839a6aaa8df27eda",
+      "bf16/summarize_performance.py": "6130e7cd9a2ffa26b42db42142694781bd45f9bdaa83336d4f1944a48368e5b7",
+      "bf16/launch_training.py": "a7909648600a4ef8448e738a75e5346845a392bdbcf2fbffc2fadecae1297e90",
+      "bf16/kernel_adapter.py": "bd84038d9037c8d62262a2a36d1cf378faa695bf2a9f3cd7288c02bc52037296",
+      "bf16/run_case.py": "6f3fede9c52e872033ff086968d31cfa6d839cedf49fc8f1a4c86c71944ed6d3",
+      "bf16/candidates/0008/candidate.py": "9b22e12b4744b2a41b9209faa280e361e6defe1d5480f5e5683fddd247b7f493",
+      "formal/runtime_compat.py": "6a7e4bd6130ea4b2141d3ac2e3f00a284da2915d997a76249272322ef6973bff",
+      "formal/source_manifest.json": "a72ded960488d399ded2255ef55f357257e03532b8fa21a06d958170c5c98c2d",
+      "formal/summarize_performance.py": "6c2d1f7955f7e474a3de0b9e4edc156bc9ba90b5f23c7a5fce696ee736dcd2d3",
+      "gradnorm/candidate.py": "84c851ce5af7a49ba97685710790146d2c315f9c8837259366bffd7831f67dc0",
+      "gradnorm/launch_gradnorm-04.py": "12503df82b69f7eb5059cc0c0722677e05ff14cdf1a37b6c34c0d7e3c8acba7f"
+    },
+    "controller_sources_sha256": {
+      "common.py": "02d3949c524ba451687bc6655bce09f664447456446b9f1c6eb44e55ed0abd0c",
+      "launch_attention_scale.py": "1f528939a0da292910f264670c550a03f3eb7caa087209a8abb1d1046cb1fe2e",
+      "run_audit.py": "d22dfd86f48e40d1fa21c939dc888e90a111f9aa590fe9d330ab5f7a15f046d1",
+      "run_performance.py": "99dd90aabd494a00f34f9e0ba3a0ef7c80920419cd099e4e7c2b3723b43e694e",
+      "contracts/wide.json": "d89816a795d1c9e7d1b46137186b34265b0256b9051d5d26466733bcd44c5b4f",
+      "contracts/deep.json": "a473489c036e86a9269b9d91b9e8c0223889fb464adf17ff1a14b4d3422d6162"
+    },
+    "backend": {
+      "path": "/tmp/kda-attention-scale-stage32/backend-current-20261008-01.json",
+      "sha256": "0aaa2ef96b5eebb52b691151567e5e44659b0fdf64d477137f5b4c42860890eb",
+      "native_source_sha256": {
+        "megatron/core/transformer/dot_product_attention.py": "7c631bfeba97d0273cd5399e7187a16f114b25a4f12a4e1c9edbacf71cf4e6f6",
+        "megatron/core/fusions/fused_softmax.py": "a75dc9d23380ff5d2ccdbfaa335c050bc4d16039fe35797f96dc108bad011e68",
+        "megatron/core/transformer/utils.py": "014ccd7deb6bb51ed4443cb87efd960dff13b725d16074e800c96f63faff1dca"
+      },
+      "native_extensions": {
+        "scaled_masked_softmax_cuda": {
+          "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+          "sha256": "a155625037cff9d8dcf7c0935c6bc9f80e49d63aeaaf8df75c075665fecd6be5"
+        },
+        "scaled_upper_triang_masked_softmax_cuda": {
+          "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_upper_triang_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+          "sha256": "7af725f33f3cf9d5a14579b01510af0909f1411d2a320557bc98fcbc1a6228e8"
+        }
+      },
+      "historical_path": "/tmp/kda-attention-stage31/backend-default.json",
+      "historical_sha256": "fa399ad4038edbae7cd078c2d50bc588f4c91e5563f0a2bbce0d22c05af3f1df"
+    },
+    "probe_path": "/tmp/kda-attention-scale-stage32/probe-full-0032026100801.json",
+    "probe_sha256": "b8509fc036bea49240878986cff2eb723849717636ad5e6620a7492d4bb572cb",
+    "probe_trial_label": "0032026100801",
+    "candidate_version": "003",
+    "historical_probe_sha256": "15144ae11bc7a4a8d052f1ec678195cf0d01f78396f9188772bc8f25c6be813f",
+    "verifier_path": "/tmp/kda-attention-stage31/probe_full.py",
+    "verifier_sha256": "7778dc5837265b9fa4def2cf90d07ceeac2b992e583aa6939d74b5e99ad57fd0",
+    "native_capture_receipt_sha256": "c4bf61c70b1b041dfbdadee41584285e741b64bad0910a223ea64613e59a3722",
+    "native_capture_raw_files": {
+      "inputs.pt": {
+        "sha256": "92e5979825153fa96640ee0ed94a8503d373160e367452bf87bf5e9195b6d2cd",
+        "bytes": 821000
+      },
+      "key-grad.pt": {
+        "sha256": "b594c548257288f0f7d86e50af1209e2bc39c360f26b25419c202f0aa986d4e9",
+        "bytes": 263329
+      },
+      "output.pt": {
+        "sha256": "140aac93943d59a1b7d762ee27d11a9404bca3405ed768df64c5712d01328788",
+        "bytes": 263255
+      },
+      "value-grad.pt": {
+        "sha256": "430c1b939e2c9c0dacc4a0ad7e712ca8b871c38a25f632e17fc5612c3f6e374b",
+        "bytes": 263339
+      },
+      "upstream-grad.pt": {
+        "sha256": "d9e5ae694344571d43be1b97ab7d681dec30d283df17b40b4e7e5bc1851c73f1",
+        "bytes": 263354
+      },
+      "query-grad.pt": {
+        "sha256": "bdaab453774dd2488fe82b3a307ceb68b4f47783b03178685568966692dbdc17",
+        "bytes": 263339
+      }
+    },
+    "candidate_path": "/tmp/kda-attention-stage31/candidate-003.py",
+    "candidate_sha256": "4881f91c230324f258cf6faf7b1d63a493b043b960df4efdca0dad708195db48",
+    "swiglu_candidate_sha256": null,
+    "native_source_commit": "5be9626709af2722333bf54797c954c09edeada3",
+    "native_source_file_count": 600,
+    "adaptation": "Only declared larger model/seed/path/outer launcher identities and two controlled-left candidate identity gates adapted. Original all-tensor, master, source, precision, optimizer and timer gates retained. Default native compiled SwiGLU and fused causal softmax in every arm; no Swi004."
+  },
+  "frozen_comparator_sha256": "feb475eb504fe452267f930f2069d5f17b36387a6cb4ad0f839a6aaa8df27eda",
+  "audit_seed": 32101,
+  "comparisons": {},
+  "completed_cases": [],
+  "model": {
+    "num_layers": 4,
+    "hidden_size": 512,
+    "ffn_hidden_size": 2048,
+    "num_attention_heads": 8,
+    "sequence_length": 256,
+    "micro_batch_size": 2,
+    "global_batch_size": 2,
+    "vocab_size": 4096,
+    "parameters": 21107200,
+    "normalization": "RMSNorm",
+    "epsilon": 1e-05,
+    "bf16": true,
+    "fp32_residual_connection": false,
+    "gated_linear_unit": true,
+    "bias_activation_fusion": true
+  },
+  "started_utc": "2026-10-08T00:22:22.674591+00:00",
+  "error_type": "RuntimeError",
+  "error": "formal training process failed: wide-native-audit-003-complete",
+  "finished_utc": "2026-10-08T00:22:35.159099+00:00",
+  "scope": "Fresh native/control/optimized held-out three-step full-model training. Original all600-source, model/input/loss/all-gradient/BF16-update/FP32-master gates unchanged. Only two controlled-left candidate/run-mode assumptions adapted. Native compiled SwiGLU and fused causal softmax in every arm. Untimed native/control forward/backward route counters prove original APIs; all-arm actual native SwiGLU observation and optimized four ScriptFunction graphs retained. No performance, production, convergence or multiGPU claim."
+}

@@ -1,0 +1,15 @@
+{
+  "status": "failed",
+  "exit_code": 1,
+  "performance_claims": [],
+  "wrapper_sha256": "fe3c1047b26769f58045b39736ce91f07cb2462f56f227f277c5c7cdfd246be0",
+  "runner_sha256": "f94fab090fccf5507c7037f62f85afdd60ff6c9950c0755601bdc3ba79a3d48c",
+  "files": {
+    "command.json": "bafea91b4b4ed9ba038209cda165508706933254a4c670e7c4cd4a7c161b3b48",
+    "contract.json": "1979f2fda4a51c8849f8949787ae1493b205c004db85fbb67fef273ccf9e55c9",
+    "entry.json": "b375ea9314a0acec0ec8f736747e7a12dd3a9cc3fe2029060ebb50bed57c99ad",
+    "moe.json": "c4336e598a3e0b01b10e8e0006757a5c426eac166ee432e233c47c3f5797fb5c",
+    "stderr.log": "7fbfeefe119a4dba99c600bc2d5072144f0d39f10731b5ffb7e04a0c91aafc29",
+    "stdout.log": "76e197ddf5f1c4c87f866d7d8ad73e82ef5a4824be3a75a2bda2b53a06d49a5f"
+  }
+}

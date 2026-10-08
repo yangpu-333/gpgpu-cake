@@ -3,3 +3,5 @@ evidence/** -whitespace
 candidates/**/parent.diff -whitespace
 attention/evidence/** -whitespace
 swiglu_scale/evidence/** -whitespace
+attention_scale/evidence/** -whitespace
+moe/evidence/** -whitespace

@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "gpu_device": 0,
+  "source_sha256": "b9a8b816b5be5e1b074d81aad631439e153f5bb402d89ae9fbf248b11b44fc4c",
+  "python": "3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]",
+  "machine": "x86_64",
+  "scope": "Allocation, current-stream execution and CPU value check only; no timing benchmark.",
+  "torch": "2.4.1",
+  "cuda_compatibility_label": "10.2",
+  "cuda_available": true,
+  "device_count": 2,
+  "device_name": "Iluvatar BI-V150",
+  "total_memory_bytes": 34359738368,
+  "compute_capability_compatibility_label": [
+    7,
+    1
+  ],
+  "cases": [
+    {
+      "dtype": "torch.float32",
+      "elements": 256,
+      "allocation_completed": true,
+      "execution_completed": true,
+      "exact_cpu_value_check": true
+    },
+    {
+      "dtype": "torch.bfloat16",
+      "elements": 256,
+      "allocation_completed": true,
+      "execution_completed": true,
+      "exact_cpu_value_check": true
+    }
+  ],
+  "compatibility_labels_are_not_nvidia_architecture_identity": true,
+  "finished_unix_seconds": 1791418264.3120553
+}

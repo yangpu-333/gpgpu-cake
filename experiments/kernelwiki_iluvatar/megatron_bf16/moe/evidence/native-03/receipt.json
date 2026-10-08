@@ -1,0 +1,18 @@
+{
+  "status": "completed",
+  "exit_code": 0,
+  "performance_claims": [],
+  "wrapper_sha256": "a4e190bbb78a0f933a2eae3292e2a11bdab8f4f17998cb8a987b6e31268e1448",
+  "runner_sha256": "5e05cb467dc752e0735c65f6347f6719466207553ae8ceb6d99b34bbc4410692",
+  "files": {
+    "command.json": "3f3cf2252977929386bff0eb1656c7b1a288bc5708950379e0a6052d1acdd277",
+    "contract.json": "c8d2ecc6f5c355414e5fc4803f239ade32da89cdace25f5481fb02d78120f0a7",
+    "entry.json": "42a1c23cdfc137f8f2b3c43f348c03de05d53cb54254c540d9f814470d343883",
+    "environment-command.txt": "f1b4b6ded4e5314e4bcaa7c71e69ad4cb729fdc542a24248a98ffe2307bf4cba",
+    "launch_preflight.py": "a4e190bbb78a0f933a2eae3292e2a11bdab8f4f17998cb8a987b6e31268e1448",
+    "moe.json": "4e43d974550e7474d83d89e6780f6b41ff29a6b0de813f34fe994ef033d02c23",
+    "run_preflight.py": "5e05cb467dc752e0735c65f6347f6719466207553ae8ceb6d99b34bbc4410692",
+    "stderr.log": "60fddf480445beafc36981aae0939c2da6808eaefaab1cf4e17810e8a3c62a81",
+    "stdout.log": "ad9d1c2d6d33da58a122cf9430b0118879f6e2984fc193e4e747c58bfebd7dde"
+  }
+}

@@ -1,0 +1,248 @@
+{
+  "schema": "native-attention-softmax-backend-probe-v1",
+  "requested_backend": "default-fusion",
+  "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
+  "source_manifest_sha256": "a72ded960488d399ded2255ef55f357257e03532b8fa21a06d958170c5c98c2d",
+  "native_source_sha256": {
+    "megatron/core/fusions/fused_softmax.py": "a75dc9d23380ff5d2ccdbfaa335c050bc4d16039fe35797f96dc108bad011e68",
+    "megatron/core/transformer/utils.py": "014ccd7deb6bb51ed4443cb87efd960dff13b725d16074e800c96f63faff1dca",
+    "megatron/core/transformer/dot_product_attention.py": "7c631bfeba97d0273cd5399e7187a16f114b25a4f12a4e1c9edbacf71cf4e6f6"
+  },
+  "controller_sha256": "8036e4a0218f7e5b5f2cedcaa16a34c4859e192203a71157b689f0183d3b87e1",
+  "started_utc": "2026-10-08T00:14:21.670839+00:00",
+  "cases": [
+    {
+      "sequence": 128,
+      "shape": [
+        2,
+        8,
+        128,
+        128
+      ],
+      "mask_shape": [
+        2,
+        1,
+        128,
+        128
+      ],
+      "mask_true_means": "masked",
+      "input_dtype": "torch.bfloat16",
+      "softmax_in_fp32": false,
+      "additional_softmax_scale": null,
+      "softmax_offset": null,
+      "scaled_masked_softmax_fusion": true,
+      "kernel_available": true,
+      "route": "cuda-extension",
+      "forward_completed": true,
+      "backward_completed": true,
+      "stage": "native-backward",
+      "output_shape": [
+        2,
+        8,
+        128,
+        128
+      ],
+      "output_dtype": "torch.bfloat16",
+      "gradient_shape": [
+        2,
+        8,
+        128,
+        128
+      ],
+      "gradient_dtype": "torch.bfloat16",
+      "finite_output": true,
+      "finite_gradient": true,
+      "mask_unchanged": true,
+      "status": "passed",
+      "cuda_extension_forward_completed": true,
+      "cuda_extension_backward_completed": true,
+      "extensions_after": {
+        "scaled_masked_softmax_cuda": {
+          "importable": true,
+          "loaded": true,
+          "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+          "sha256": "a155625037cff9d8dcf7c0935c6bc9f80e49d63aeaaf8df75c075665fecd6be5"
+        },
+        "scaled_upper_triang_masked_softmax_cuda": {
+          "importable": true,
+          "loaded": true,
+          "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_upper_triang_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+          "sha256": "7af725f33f3cf9d5a14579b01510af0909f1411d2a320557bc98fcbc1a6228e8"
+        },
+        "scaled_softmax_cuda": {
+          "importable": true,
+          "loaded": false
+        }
+      }
+    },
+    {
+      "sequence": 256,
+      "shape": [
+        2,
+        8,
+        256,
+        256
+      ],
+      "mask_shape": [
+        2,
+        1,
+        256,
+        256
+      ],
+      "mask_true_means": "masked",
+      "input_dtype": "torch.bfloat16",
+      "softmax_in_fp32": false,
+      "additional_softmax_scale": null,
+      "softmax_offset": null,
+      "scaled_masked_softmax_fusion": true,
+      "kernel_available": true,
+      "route": "cuda-extension",
+      "forward_completed": true,
+      "backward_completed": true,
+      "stage": "native-backward",
+      "output_shape": [
+        2,
+        8,
+        256,
+        256
+      ],
+      "output_dtype": "torch.bfloat16",
+      "gradient_shape": [
+        2,
+        8,
+        256,
+        256
+      ],
+      "gradient_dtype": "torch.bfloat16",
+      "finite_output": true,
+      "finite_gradient": true,
+      "mask_unchanged": true,
+      "status": "passed",
+      "cuda_extension_forward_completed": true,
+      "cuda_extension_backward_completed": true,
+      "extensions_after": {
+        "scaled_masked_softmax_cuda": {
+          "importable": true,
+          "loaded": true,
+          "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+          "sha256": "a155625037cff9d8dcf7c0935c6bc9f80e49d63aeaaf8df75c075665fecd6be5"
+        },
+        "scaled_upper_triang_masked_softmax_cuda": {
+          "importable": true,
+          "loaded": true,
+          "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_upper_triang_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+          "sha256": "7af725f33f3cf9d5a14579b01510af0909f1411d2a320557bc98fcbc1a6228e8"
+        },
+        "scaled_softmax_cuda": {
+          "importable": true,
+          "loaded": false
+        }
+      }
+    },
+    {
+      "sequence": 512,
+      "shape": [
+        2,
+        8,
+        512,
+        512
+      ],
+      "mask_shape": [
+        2,
+        1,
+        512,
+        512
+      ],
+      "mask_true_means": "masked",
+      "input_dtype": "torch.bfloat16",
+      "softmax_in_fp32": false,
+      "additional_softmax_scale": null,
+      "softmax_offset": null,
+      "scaled_masked_softmax_fusion": true,
+      "kernel_available": true,
+      "route": "cuda-extension",
+      "forward_completed": true,
+      "backward_completed": true,
+      "stage": "native-backward",
+      "output_shape": [
+        2,
+        8,
+        512,
+        512
+      ],
+      "output_dtype": "torch.bfloat16",
+      "gradient_shape": [
+        2,
+        8,
+        512,
+        512
+      ],
+      "gradient_dtype": "torch.bfloat16",
+      "finite_output": true,
+      "finite_gradient": true,
+      "mask_unchanged": true,
+      "status": "passed",
+      "cuda_extension_forward_completed": true,
+      "cuda_extension_backward_completed": true,
+      "extensions_after": {
+        "scaled_masked_softmax_cuda": {
+          "importable": true,
+          "loaded": true,
+          "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+          "sha256": "a155625037cff9d8dcf7c0935c6bc9f80e49d63aeaaf8df75c075665fecd6be5"
+        },
+        "scaled_upper_triang_masked_softmax_cuda": {
+          "importable": true,
+          "loaded": true,
+          "path": "/usr/local/corex-4.2.0/lib64/python3/dist-packages/scaled_upper_triang_masked_softmax_cuda.cpython-310-x86_64-linux-gnu.so",
+          "sha256": "7af725f33f3cf9d5a14579b01510af0909f1411d2a320557bc98fcbc1a6228e8"
+        },
+        "scaled_softmax_cuda": {
+          "importable": true,
+          "loaded": false
+        }
+      }
+    }
+  ],
+  "note": "One forward and one backward per shape, no performance measurement. CUDA-extension API coverage does not prove a GPU kernel timeline. Fallback is never silently substituted for requested default fusion.",
+  "runtime_compatibility": {
+    "torch": "2.4.1",
+    "selected_megatron_source": "/tmp/kda-bf16-continuation/megatron-native-5be9626",
+    "dtensor_namespace_exports": [
+      "DTensor",
+      "DeviceMesh",
+      "Partial",
+      "Placement",
+      "Replicate",
+      "Shard",
+      "distribute_module",
+      "distribute_tensor"
+    ],
+    "typing_override": "typing_extensions.override",
+    "ignored_triton_profiler_launch_metadata": [],
+    "unavailable_restore_value_autotuners": [],
+    "optional_backends_disabled_in_process": [
+      "transformer_engine",
+      "apex"
+    ]
+  },
+  "torch": "2.4.1",
+  "gpu": "Iluvatar BI-V150",
+  "extensions_before": {
+    "scaled_masked_softmax_cuda": {
+      "importable": true,
+      "loaded": false
+    },
+    "scaled_upper_triang_masked_softmax_cuda": {
+      "importable": true,
+      "loaded": false
+    },
+    "scaled_softmax_cuda": {
+      "importable": true,
+      "loaded": false
+    }
+  },
+  "status": "passed",
+  "sources_unchanged": true,
+  "finished_utc": "2026-10-08T00:14:29.507282+00:00"
+}

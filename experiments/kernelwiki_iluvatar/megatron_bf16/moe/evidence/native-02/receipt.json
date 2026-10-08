@@ -1,0 +1,16 @@
+{
+  "status": "failed",
+  "exit_code": 1,
+  "performance_claims": [],
+  "wrapper_sha256": "fe3c1047b26769f58045b39736ce91f07cb2462f56f227f277c5c7cdfd246be0",
+  "runner_sha256": "13c2aab5e70b213e6a7fd2fd5c82c3c40d93dbb1f0bbe4850212a99317e1a95f",
+  "files": {
+    "command.json": "24e7b2b38c752a48de007498dde2472c1a0325071c7ae1a2decb8164fadfb3b2",
+    "contract.json": "1979f2fda4a51c8849f8949787ae1493b205c004db85fbb67fef273ccf9e55c9",
+    "entry.json": "40dcdf11d558df5650ddf657ad228700ee6a5c01dd28959cc842cd92a864efa9",
+    "environment-command.txt": "f1b4b6ded4e5314e4bcaa7c71e69ad4cb729fdc542a24248a98ffe2307bf4cba",
+    "moe.json": "1ae3e27bc3f42a94ada41d5c3890d219a5f32a0a4e775c1d412a67ed94405224",
+    "stderr.log": "02e73714e5ca4cc4bef0443c2be86d4ebb9ef35c58bcf0053164df3c103d53ef",
+    "stdout.log": "6651da9e411c300dbc290a443b14fdf5e12e86f43e00a87afd416bca719f0e56"
+  }
+}

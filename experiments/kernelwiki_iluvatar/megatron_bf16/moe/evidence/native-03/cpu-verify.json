@@ -1,0 +1,15 @@
+{
+  "status": "availability_verified",
+  "receipt_sha256": "7c7582fcea9def7cd0126c93eb7a0124cca1fbf969f08d8fc2f84ae5af69737b",
+  "verifier_sha256": "1cb9184d604a5dc1cda4fd8a4769ce8a9f03470cd3bc1d02538b9da046245183",
+  "native_sources": 600,
+  "training_steps": 3,
+  "layer_calls": 12,
+  "stable_sort_probes": 32,
+  "parameters": 55652864,
+  "expert_backend": "SequentialMLP",
+  "candidate_correctness_compared": false,
+  "performance_claims": [],
+  "gpu_rerun": false,
+  "scope": "CPU receipt/hash/config/dispatch/gradient-dtype checks of an explicit runtime-compatible native preflight, not arithmetic replay, GroupedGEMM or accepted optimization."
+}

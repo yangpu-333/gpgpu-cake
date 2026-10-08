@@ -1,0 +1,83 @@
+{
+  "status": "verified",
+  "date": "2026-10-08",
+  "patch_manifest": {
+    "upstream_sha": "b6b4301f15e8ce6955a56776690643ce5db369e6",
+    "patches": [
+      {
+        "file": "kernelwiki-iluvatar.patch",
+        "sha256": "320f347cfde8267009a8abe4511d322cca7b7296a69e1bab3c42b6cf41ac3660"
+      },
+      {
+        "file": "kernelwiki-iluvatar-stage30-31.patch",
+        "sha256": "652227208de55c42b9c6a914200f180125d793d6edab892d4d7b627640627426"
+      },
+      {
+        "file": "kernelwiki-iluvatar-stage32.patch",
+        "sha256": "f41298cd92a68720d27ac4b3b2ece8f7b57c95ee01d08742534aeb44baf4f944"
+      }
+    ]
+  },
+  "first_two_patch_hashes_unchanged": true,
+  "old_pages_byte_identical": 1073,
+  "architecture_counts": {
+    "bi-v150": 34,
+    "sm90": 286,
+    "sm100": 379
+  },
+  "nvidia_architecture_path_sets_identical": true,
+  "indexed_pages": 1075,
+  "source_ids": 1008,
+  "asset_bundles": 37,
+  "candidate_ledgers": 14,
+  "built_and_loaded_files_identical": 4171,
+  "loaded_tree_sha256": "1fc8616907876d92c993ff06a9b646b7db71909e2ff211a881f439412a9b3fd0",
+  "test_suite": {
+    "tests": 160,
+    "failures": 0,
+    "errors": 0,
+    "python": "C:\\Users\\lenovo\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+    "test_source_changed": false,
+    "python3_alias_only": true,
+    "temp_directory": "workspace results/test-temp",
+    "retry_reason": "Windows sandbox default TEMP denied nested directory creation"
+  },
+  "test_first_attempt": {
+    "tests": 160,
+    "failures": 0,
+    "errors": 6,
+    "python": "C:\\Users\\lenovo\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+    "test_source_changed": false,
+    "python3_alias_only": true
+  },
+  "loader_sha256": "697e2d50529f23b27427a560f77bf89c9360b7339f0701961124cd395af38b69",
+  "extension_packager_sha256": "88486ce916baa58b925ca354b0c454abf84d10742df506954be814b318d2596b",
+  "new_evidence_files": 242,
+  "raw_policy": "96 original files retained locally as35 shared SHA256 objects and hardlinks;84 numerical references all present; no GPU arithmetic rerun in build verification.",
+  "cc_readonly": {
+    "reviews": [
+      {
+        "path": "megatron_bf16/evidence/cc-stage32-readonly-loaded.json",
+        "sha256": "a76cedd36eb58d37e5a3a3a381467446d07c68214abc9b5b7a26b85abcee49bc",
+        "turns": 5,
+        "session_id": "1dd9e929-4f13-4cdc-aa29-4dc04fc4a75c",
+        "model": [
+          "Claude-Opus-4.8"
+        ],
+        "permission_denials": []
+      },
+      {
+        "path": "megatron_bf16/evidence/cc-stage32-readonly-correction.json",
+        "sha256": "edb722e1edf5ee58f569f68c5b451cd56a4e6d1f35143ef3c767cd89384bd330",
+        "turns": 5,
+        "session_id": "1edd2cfa-3643-4c58-939d-7c5b2c3f14b7",
+        "model": [
+          "Claude-Opus-4.8"
+        ],
+        "permission_denials": []
+      }
+    ],
+    "first_review_correction": "Initial model summary conflated native and control; a separate preserved correction checked original native/control entry receipts. Source pages, numerical decisions and runner bytes required no edit.",
+    "corrected_native_has_no_candidates": true
+  }
+}

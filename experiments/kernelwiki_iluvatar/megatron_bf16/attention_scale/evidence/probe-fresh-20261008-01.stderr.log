@@ -1,0 +1,4 @@
+Traceback (most recent call last):
+  File "/tmp/kda-attention-stage31/probe_full.py", line 15, in <module>
+    assert a.version.isdigit()
+AssertionError

@@ -1,0 +1,196 @@
+{
+  "schema": "frozen-attention-stage32-sealed-decision-v1",
+  "date": "2026-10-08",
+  "status": "completed",
+  "candidate_versions": [
+    "003"
+  ],
+  "promoted": true,
+  "promoted_models": [
+    "deep"
+  ],
+  "rounds": [
+    {
+      "model_name": "wide",
+      "version": "003",
+      "audit_suffix": "complete02",
+      "run_suffix": "complete02",
+      "verification_path": "cpu-verify-wide-raw.json",
+      "verification_sha256": "703dc9874e487f67999caaf3038e10dac1635b94abfde1709640fd415532d1b7",
+      "candidate_sha256": "4881f91c230324f258cf6faf7b1d63a493b043b960df4efdca0dad708195db48",
+      "contract_sha256": "d89816a795d1c9e7d1b46137186b34265b0256b9051d5d26466733bcd44c5b4f",
+      "performance_sha256": "61c8b35258f447319a06eb39d872f54e5fc6bc42fc642f38e38aa55c3e922642",
+      "promoted": false,
+      "vs_control": {
+        "ratio": 1.0314090738848303,
+        "gain_percent": 3.1409073884830274,
+        "all_seeds_faster": false
+      },
+      "vs_native": {
+        "ratio": 1.094984170422858,
+        "gain_percent": 9.498417042285801,
+        "all_seeds_faster": true
+      },
+      "comparisons": {
+        "controlled": {
+          "checks": 1475,
+          "tensors": 637,
+          "tensor_groups": {
+            "initial": 28,
+            "actual_start_model_parameters": 28,
+            "actual_start_master_parameters": 28,
+            "master_initialization": 56,
+            "model_initialization": 56,
+            "batches": 15,
+            "output": 3,
+            "derived_loss": 3,
+            "wgrads": 84,
+            "params": 84,
+            "masters": 84,
+            "master_model_consistency": 168
+          },
+          "raw_value_comparisons": 97,
+          "all_tensors_exact_equal": true,
+          "all_tensor_bytes_equal": true
+        },
+        "native_optimized": {
+          "checks": 1475,
+          "tensors": 637,
+          "tensor_groups": {
+            "initial": 28,
+            "actual_start_model_parameters": 28,
+            "actual_start_master_parameters": 28,
+            "master_initialization": 56,
+            "model_initialization": 56,
+            "batches": 15,
+            "output": 3,
+            "derived_loss": 3,
+            "wgrads": 84,
+            "params": 84,
+            "masters": 84,
+            "master_model_consistency": 168
+          },
+          "raw_value_comparisons": 97,
+          "all_tensors_exact_equal": true,
+          "all_tensor_bytes_equal": true
+        },
+        "native_control": {
+          "checks": 1475,
+          "tensors": 637,
+          "tensor_groups": {
+            "initial": 28,
+            "actual_start_model_parameters": 28,
+            "actual_start_master_parameters": 28,
+            "master_initialization": 56,
+            "model_initialization": 56,
+            "batches": 15,
+            "output": 3,
+            "derived_loss": 3,
+            "wgrads": 84,
+            "params": 84,
+            "masters": 84,
+            "master_model_consistency": 168
+          },
+          "raw_value_comparisons": 97,
+          "all_tensors_exact_equal": true,
+          "all_tensor_bytes_equal": true
+        }
+      },
+      "snapshot_files_missing": 0
+    },
+    {
+      "model_name": "deep",
+      "version": "003",
+      "audit_suffix": "complete02",
+      "run_suffix": "complete02",
+      "verification_path": "cpu-verify-deep-raw.json",
+      "verification_sha256": "4bb6d3928dffcef88c1e63808617bf46574c3c522a81b12d9fead8fc9c18c2ac",
+      "candidate_sha256": "4881f91c230324f258cf6faf7b1d63a493b043b960df4efdca0dad708195db48",
+      "contract_sha256": "a473489c036e86a9269b9d91b9e8c0223889fb464adf17ff1a14b4d3422d6162",
+      "performance_sha256": "f21b77cbe7c64ce310d46046009fcda6dc3541f35a5527b06e8732ab55d3b830",
+      "promoted": true,
+      "vs_control": {
+        "ratio": 1.0441068272174798,
+        "gain_percent": 4.410682721747983,
+        "all_seeds_faster": true
+      },
+      "vs_native": {
+        "ratio": 1.082140505647889,
+        "gain_percent": 8.214050564788899,
+        "all_seeds_faster": true
+      },
+      "comparisons": {
+        "controlled": {
+          "checks": 2371,
+          "tensors": 1165,
+          "tensor_groups": {
+            "initial": 52,
+            "actual_start_model_parameters": 52,
+            "actual_start_master_parameters": 52,
+            "master_initialization": 104,
+            "model_initialization": 104,
+            "batches": 15,
+            "output": 3,
+            "derived_loss": 3,
+            "wgrads": 156,
+            "params": 156,
+            "masters": 156,
+            "master_model_consistency": 312
+          },
+          "raw_value_comparisons": 177,
+          "all_tensors_exact_equal": true,
+          "all_tensor_bytes_equal": true
+        },
+        "native_optimized": {
+          "checks": 2371,
+          "tensors": 1165,
+          "tensor_groups": {
+            "initial": 52,
+            "actual_start_model_parameters": 52,
+            "actual_start_master_parameters": 52,
+            "master_initialization": 104,
+            "model_initialization": 104,
+            "batches": 15,
+            "output": 3,
+            "derived_loss": 3,
+            "wgrads": 156,
+            "params": 156,
+            "masters": 156,
+            "master_model_consistency": 312
+          },
+          "raw_value_comparisons": 177,
+          "all_tensors_exact_equal": true,
+          "all_tensor_bytes_equal": true
+        },
+        "native_control": {
+          "checks": 2371,
+          "tensors": 1165,
+          "tensor_groups": {
+            "initial": 52,
+            "actual_start_model_parameters": 52,
+            "actual_start_master_parameters": 52,
+            "master_initialization": 104,
+            "model_initialization": 104,
+            "batches": 15,
+            "output": 3,
+            "derived_loss": 3,
+            "wgrads": 156,
+            "params": 156,
+            "masters": 156,
+            "master_model_consistency": 312
+          },
+          "raw_value_comparisons": 177,
+          "all_tensors_exact_equal": true,
+          "all_tensor_bytes_equal": true
+        }
+      },
+      "snapshot_files_missing": 0
+    }
+  ],
+  "promotion_rule": "strictly >1% geometric throughput over same-round control and all three seeds faster",
+  "control": "CE0008 + gradnorm001; native compiled SwiGLU, native RMSNorm, default fused causal softmax=True",
+  "optimized": "same control plus unchanged frozen Attention003",
+  "code_retuned": false,
+  "raw_backups_complete": true,
+  "scope": "Only these two fixed single BI-V150 BF16 mock-data GPT shapes, FP32 gradients/SGD masters, TP/PP/CP1,120 timed steps per arm/first20 excluded. Stage31 has a different control including SwiGLU004 and remains separately scoped. No production, convergence or multiGPU result."
+}

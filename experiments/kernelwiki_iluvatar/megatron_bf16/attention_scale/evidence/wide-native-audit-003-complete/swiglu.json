@@ -1,0 +1,24 @@
+{
+  "schema": "native-default-swiglu-stage32-observation-v1",
+  "enabled": false,
+  "candidate_sha256": null,
+  "candidate_calls": 0,
+  "calls": 0,
+  "native_calls": 0,
+  "fallback_calls": 0,
+  "capture_written": false,
+  "native_calls_observed": true,
+  "configuration_observed": true,
+  "shapes": {},
+  "configurations": [],
+  "extension": null,
+  "wrapper_sha256": "1f528939a0da292910f264670c550a03f3eb7caa087209a8abb1d1046cb1fe2e",
+  "scope": "Original default compiled bias_swiglu_impl in every arm. Actual call/config observation only in untimed audit; no SwiGLU wrapper during performance.",
+  "native_source_sha256": {
+    "megatron/core/transformer/mlp.py": "f54a7209db5cad4e095143cbbc1eedcbf41e913ea1eec64db3cb1b8408e6ff07",
+    "megatron/core/fusions/fused_bias_swiglu.py": "5303680596749464c45f9c3ec65f94d1127fb6d49b2aa9ec3ba8c91b1141f08f",
+    "megatron/core/jit.py": "0de81ea1c3a8fd5bf1a880a1c3d3ddacd706b4df946c9016d563b5c14778a3ba"
+  },
+  "native_jit_callable": "<class 'function'>",
+  "native_compiled_callable": true
+}

@@ -1,0 +1,19 @@
+{
+  "phase": "before-performance",
+  "files": {
+    "megatron/core/datasets/Makefile": {
+      "bytes": 313,
+      "sha256": "0555c53484b55bf1a7e40aa4d2e09329f6767512282d428e2c868c677ed50350"
+    },
+    "megatron/core/datasets/helpers.cpp": {
+      "bytes": 29803,
+      "sha256": "dbc3429a1dac7a86946494a61d14fe5754538399e6413ca6939de46cc530b24b"
+    },
+    "megatron/core/datasets/helpers_cpp.cpython-310-x86_64-linux-gnu.so": {
+      "bytes": 248352,
+      "sha256": "8ac8bb85f0f61c2589c3ea76447fd5c22708077bbcad0c83b73bdcfcb2b6cf38"
+    }
+  },
+  "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
+  "scope": "Extra native dataset build files outside600-file Python/CPP source manifest. Does not claim every installed binary was sealed."
+}

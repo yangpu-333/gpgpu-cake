@@ -1,0 +1,12 @@
+{
+  "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
+  "native_path": "megatron/core/datasets/Makefile",
+  "sha256": "0555c53484b55bf1a7e40aa4d2e09329f6767512282d428e2c868c677ed50350",
+  "bytes": 313,
+  "source_mode": "exact git blob",
+  "build_command": "env PATH=/root/miniconda3/bin:/usr/bin:/bin PYTHONPATH=/usr/local/corex/lib64/python3/dist-packages make -C /tmp/kda-bf16-continuation/megatron-native-5be9626/megatron/core/datasets",
+  "pybind11_source": "existing vendor Python packages,2.13.6",
+  "native600_manifest_unchanged": true,
+  "failed_build_log_retained": "dataset-helper-build-20261008-01.stderr.log",
+  "scope": "Restore missing original build support and compile original C++ data helper; no candidate/model/precision/timer change."
+}

@@ -6,12 +6,14 @@ import sys
 from pathlib import Path
 
 
-EXPECTED_ARCHITECTURE_COUNTS = {"bi-v150": 32, "sm90": 286, "sm100": 379}
+EXPECTED_ARCHITECTURE_COUNTS = {"bi-v150": 34, "sm90": 286, "sm100": 379}
 EXTENSION_PAGE_PATHS = (
     "sources/experiments/bi-v150-corex42-stage30.md",
     "wiki/kernels/swiglu-heldout-megatron-bi-v150.md",
     "sources/experiments/bi-v150-corex42-stage31.md",
     "wiki/kernels/dense-attention-megatron-bi-v150.md",
+    "sources/experiments/bi-v150-corex42-stage32.md",
+    "wiki/kernels/dense-attention-heldout-megatron-bi-v150.md",
 )
 EXTENSION_BUNDLE = "evidence/bi-v150-corex42-stage30-31"
 EXTENSION_EVIDENCE_PATHS = (
@@ -72,7 +74,7 @@ def main():
         if architecture == "bi-v150":
             missing = set(EXTENSION_PAGE_PATHS) - actual
             if missing:
-                raise RuntimeError(f"stage30/31 BI-V150 query pages missing: {sorted(missing)}")
+                raise RuntimeError(f"stage30/31/32 BI-V150 query pages missing: {sorted(missing)}")
         print(f"{architecture}: {len(actual)} paths")
     stage14 = project_skill / "sources" / "experiments" / "bi-v150-corex42-stage14.md"
     if not stage14.is_file():
@@ -105,6 +107,14 @@ def main():
                      *(f"{EXTENSION_BUNDLE}/{path}" for path in EXTENSION_EVIDENCE_PATHS)):
         if not (project_skill / relative).is_file():
             raise RuntimeError(f"stage30/31 Megatron loop evidence missing: {relative}")
+    for relative in ("manifest.json", "PROVENANCE.yaml",
+                     "megatron_bf16/attention_scale/evidence/decision.json",
+                     "megatron_bf16/attention_scale/evidence/cpu-verify-wide-raw.json",
+                     "megatron_bf16/attention_scale/evidence/cpu-verify-deep-raw.json",
+                     "megatron_bf16/attention_scale/evidence/performance-wide-003-complete02.json",
+                     "megatron_bf16/attention_scale/evidence/performance-deep-003-complete02.json"):
+        if not (project_skill / "evidence/bi-v150-corex42-stage32" / relative).is_file():
+            raise RuntimeError(f"stage32 frozen Attention evidence missing: {relative}")
     print("KDA project-level skill integration verified")
 
 

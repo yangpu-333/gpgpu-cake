@@ -1,0 +1,3 @@
+make: Entering directory '/tmp/kda-bf16-continuation/megatron-native-5be9626/megatron/core/datasets'
+g++ -O3 -Wall -shared -std=c++17 -fPIC -fdiagnostics-color  helpers.cpp -o helpers_cpp.cpython-310-x86_64-linux-gnu.so
+make: Leaving directory '/tmp/kda-bf16-continuation/megatron-native-5be9626/megatron/core/datasets'

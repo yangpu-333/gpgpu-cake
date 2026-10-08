@@ -1,0 +1,22 @@
+{
+  "schema": "bi-v150-native-moe-availability-v1",
+  "status": "failed",
+  "wrapper_sha256": "fe3c1047b26769f58045b39736ce91f07cb2462f56f227f277c5c7cdfd246be0",
+  "moe_calls": [],
+  "expert_calls": [],
+  "probability_gradients": [],
+  "training_steps": [],
+  "candidate_enabled": false,
+  "performance_claims": [],
+  "scope": "Only native single-device three-step MoE availability, actual backend/token counts/gradient/optimizer dtype observations; untimed scalar CPU copies. No candidate correctness comparison, GroupedGEMM, throughput, convergence or production claim.",
+  "native_source_sha256": {
+    "megatron/core/transformer/moe/moe_layer.py": "189b0ce590ca1cb9fd8b8c33c2df8e2205e5def7d58dbb8dfd1829a5526553e3",
+    "megatron/core/transformer/moe/experts.py": "32e1a36533a217599b20cdc2a47285f0e8af19716a7a1b10db8fe421c8b24fef",
+    "megatron/core/transformer/moe/router.py": "1a1b6a2b82dc28835d44f637628243f283310e6ae50a2d836b19f19ae56c8f3a",
+    "megatron/core/transformer/moe/token_dispatcher.py": "7af2746153268f5c5f7f03d7a340092541b633fbc8faa10f666d6ddbdf98be0a",
+    "megatron/core/transformer/mlp.py": "f54a7209db5cad4e095143cbbc1eedcbf41e913ea1eec64db3cb1b8408e6ff07"
+  },
+  "error_type": "ValueError",
+  "error": "Error initializing torch.distributed using env:// rendezvous: environment variable MASTER_ADDR expected, but not set",
+  "traceback": "Traceback (most recent call last):\n  File \"/tmp/kda-moe-preflight-stage33/launch_preflight.py\", line 101, in <module>\n    runpy.run_path(str(a.delegate_launcher), run_name='__main__')\n  File \"/root/miniconda3/lib/python3.10/runpy.py\", line 289, in run_path\n    return _run_module_code(code, init_globals, run_name,\n  File \"/root/miniconda3/lib/python3.10/runpy.py\", line 96, in _run_module_code\n    _run_code(code, mod_globals, init_globals,\n  File \"/root/miniconda3/lib/python3.10/runpy.py\", line 86, in _run_code\n    exec(code, run_globals)\n  File \"/tmp/kda-bf16-continuation/megatron_bf16/launch_training.py\", line 180, in <module>\n    main()\n  File \"/tmp/kda-bf16-continuation/megatron_bf16/launch_training.py\", line 161, in main\n    runpy.run_path(str(root/'pretrain_gpt.py'),run_name='__main__')\n  File \"/root/miniconda3/lib/python3.10/runpy.py\", line 289, in run_path\n    return _run_module_code(code, init_globals, run_name,\n  File \"/root/miniconda3/lib/python3.10/runpy.py\", line 96, in _run_module_code\n    _run_code(code, mod_globals, init_globals,\n  File \"/root/miniconda3/lib/python3.10/runpy.py\", line 86, in _run_code\n    exec(code, run_globals)\n  File \"/tmp/kda-bf16-continuation/megatron-native-5be9626/pretrain_gpt.py\", line 523, in <module>\n    pretrain(\n  File \"/tmp/kda-bf16-continuation/megatron-native-5be9626/megatron/training/training.py\", line 1091, in pretrain\n    initialize_megatron(\n  File \"/tmp/kda-bf16-continuation/megatron-native-5be9626/megatron/training/initialize.py\", line 149, in initialize_megatron\n    finish_mpu_init()\n  File \"/tmp/kda-bf16-continuation/megatron-native-5be9626/megatron/training/initialize.py\", line 104, in finish_mpu_init\n    _initialize_distributed(\n  File \"/tmp/kda-bf16-continuation/megatron-native-5be9626/megatron/training/initialize.py\", line 352, in _initialize_distributed\n    torch.distributed.init_process_group(**init_process_group_kwargs)\n  File \"/usr/local/corex/lib64/python3/dist-packages/torch/distributed/c10d_logger.py\", line 79, in wrapper\n    return func(*args, **kwargs)\n  File \"/usr/local/corex/lib64/python3/dist-packages/torch/distributed/c10d_logger.py\", line 93, in wrapper\n    func_return = func(*args, **kwargs)\n  File \"/usr/local/corex/lib64/python3/dist-packages/torch/distributed/distributed_c10d.py\", line 1361, in init_process_group\n    store, rank, world_size = next(rendezvous_iterator)\n  File \"/usr/local/corex/lib64/python3/dist-packages/torch/distributed/rendezvous.py\", line 254, in _env_rendezvous_handler\n    master_addr = _get_env_or_raise(\"MASTER_ADDR\")\n  File \"/usr/local/corex/lib64/python3/dist-packages/torch/distributed/rendezvous.py\", line 231, in _get_env_or_raise\n    raise _env_error(env_var)\nValueError: Error initializing torch.distributed using env:// rendezvous: environment variable MASTER_ADDR expected, but not set\n"
+}

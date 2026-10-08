@@ -1,0 +1,818 @@
+{
+  "schema": "bi-v150-native-moe-availability-v1",
+  "status": "native_available",
+  "wrapper_sha256": "a4e190bbb78a0f933a2eae3292e2a11bdab8f4f17998cb8a987b6e31268e1448",
+  "moe_calls": [
+    {
+      "layer": 1,
+      "experts": "megatron.core.transformer.moe.experts.SequentialMLP",
+      "router": "megatron.core.transformer.moe.router.TopKRouter",
+      "dispatcher": "megatron.core.transformer.moe.token_dispatcher.MoEAllGatherTokenDispatcher",
+      "config": {
+        "num_moe_experts": 4,
+        "moe_router_topk": 2,
+        "moe_grouped_gemm": false,
+        "moe_token_dispatcher_type": "allgather",
+        "moe_apply_probs_on_input": false,
+        "moe_aux_loss_coeff": 0.01,
+        "moe_z_loss_coeff": null,
+        "gated_linear_unit": true,
+        "bias_activation_fusion": true,
+        "masked_softmax_fusion": true
+      }
+    },
+    {
+      "layer": 2,
+      "experts": "megatron.core.transformer.moe.experts.SequentialMLP",
+      "router": "megatron.core.transformer.moe.router.TopKRouter",
+      "dispatcher": "megatron.core.transformer.moe.token_dispatcher.MoEAllGatherTokenDispatcher",
+      "config": {
+        "num_moe_experts": 4,
+        "moe_router_topk": 2,
+        "moe_grouped_gemm": false,
+        "moe_token_dispatcher_type": "allgather",
+        "moe_apply_probs_on_input": false,
+        "moe_aux_loss_coeff": 0.01,
+        "moe_z_loss_coeff": null,
+        "gated_linear_unit": true,
+        "bias_activation_fusion": true,
+        "masked_softmax_fusion": true
+      }
+    },
+    {
+      "layer": 3,
+      "experts": "megatron.core.transformer.moe.experts.SequentialMLP",
+      "router": "megatron.core.transformer.moe.router.TopKRouter",
+      "dispatcher": "megatron.core.transformer.moe.token_dispatcher.MoEAllGatherTokenDispatcher",
+      "config": {
+        "num_moe_experts": 4,
+        "moe_router_topk": 2,
+        "moe_grouped_gemm": false,
+        "moe_token_dispatcher_type": "allgather",
+        "moe_apply_probs_on_input": false,
+        "moe_aux_loss_coeff": 0.01,
+        "moe_z_loss_coeff": null,
+        "gated_linear_unit": true,
+        "bias_activation_fusion": true,
+        "masked_softmax_fusion": true
+      }
+    },
+    {
+      "layer": 4,
+      "experts": "megatron.core.transformer.moe.experts.SequentialMLP",
+      "router": "megatron.core.transformer.moe.router.TopKRouter",
+      "dispatcher": "megatron.core.transformer.moe.token_dispatcher.MoEAllGatherTokenDispatcher",
+      "config": {
+        "num_moe_experts": 4,
+        "moe_router_topk": 2,
+        "moe_grouped_gemm": false,
+        "moe_token_dispatcher_type": "allgather",
+        "moe_apply_probs_on_input": false,
+        "moe_aux_loss_coeff": 0.01,
+        "moe_z_loss_coeff": null,
+        "gated_linear_unit": true,
+        "bias_activation_fusion": true,
+        "masked_softmax_fusion": true
+      }
+    },
+    {
+      "layer": 1,
+      "experts": "megatron.core.transformer.moe.experts.SequentialMLP",
+      "router": "megatron.core.transformer.moe.router.TopKRouter",
+      "dispatcher": "megatron.core.transformer.moe.token_dispatcher.MoEAllGatherTokenDispatcher",
+      "config": {
+        "num_moe_experts": 4,
+        "moe_router_topk": 2,
+        "moe_grouped_gemm": false,
+        "moe_token_dispatcher_type": "allgather",
+        "moe_apply_probs_on_input": false,
+        "moe_aux_loss_coeff": 0.01,
+        "moe_z_loss_coeff": null,
+        "gated_linear_unit": true,
+        "bias_activation_fusion": true,
+        "masked_softmax_fusion": true
+      }
+    },
+    {
+      "layer": 2,
+      "experts": "megatron.core.transformer.moe.experts.SequentialMLP",
+      "router": "megatron.core.transformer.moe.router.TopKRouter",
+      "dispatcher": "megatron.core.transformer.moe.token_dispatcher.MoEAllGatherTokenDispatcher",
+      "config": {
+        "num_moe_experts": 4,
+        "moe_router_topk": 2,
+        "moe_grouped_gemm": false,
+        "moe_token_dispatcher_type": "allgather",
+        "moe_apply_probs_on_input": false,
+        "moe_aux_loss_coeff": 0.01,
+        "moe_z_loss_coeff": null,
+        "gated_linear_unit": true,
+        "bias_activation_fusion": true,
+        "masked_softmax_fusion": true
+      }
+    },
+    {
+      "layer": 3,
+      "experts": "megatron.core.transformer.moe.experts.SequentialMLP",
+      "router": "megatron.core.transformer.moe.router.TopKRouter",
+      "dispatcher": "megatron.core.transformer.moe.token_dispatcher.MoEAllGatherTokenDispatcher",
+      "config": {
+        "num_moe_experts": 4,
+        "moe_router_topk": 2,
+        "moe_grouped_gemm": false,
+        "moe_token_dispatcher_type": "allgather",
+        "moe_apply_probs_on_input": false,
+        "moe_aux_loss_coeff": 0.01,
+        "moe_z_loss_coeff": null,
+        "gated_linear_unit": true,
+        "bias_activation_fusion": true,
+        "masked_softmax_fusion": true
+      }
+    },
+    {
+      "layer": 4,
+      "experts": "megatron.core.transformer.moe.experts.SequentialMLP",
+      "router": "megatron.core.transformer.moe.router.TopKRouter",
+      "dispatcher": "megatron.core.transformer.moe.token_dispatcher.MoEAllGatherTokenDispatcher",
+      "config": {
+        "num_moe_experts": 4,
+        "moe_router_topk": 2,
+        "moe_grouped_gemm": false,
+        "moe_token_dispatcher_type": "allgather",
+        "moe_apply_probs_on_input": false,
+        "moe_aux_loss_coeff": 0.01,
+        "moe_z_loss_coeff": null,
+        "gated_linear_unit": true,
+        "bias_activation_fusion": true,
+        "masked_softmax_fusion": true
+      }
+    },
+    {
+      "layer": 1,
+      "experts": "megatron.core.transformer.moe.experts.SequentialMLP",
+      "router": "megatron.core.transformer.moe.router.TopKRouter",
+      "dispatcher": "megatron.core.transformer.moe.token_dispatcher.MoEAllGatherTokenDispatcher",
+      "config": {
+        "num_moe_experts": 4,
+        "moe_router_topk": 2,
+        "moe_grouped_gemm": false,
+        "moe_token_dispatcher_type": "allgather",
+        "moe_apply_probs_on_input": false,
+        "moe_aux_loss_coeff": 0.01,
+        "moe_z_loss_coeff": null,
+        "gated_linear_unit": true,
+        "bias_activation_fusion": true,
+        "masked_softmax_fusion": true
+      }
+    },
+    {
+      "layer": 2,
+      "experts": "megatron.core.transformer.moe.experts.SequentialMLP",
+      "router": "megatron.core.transformer.moe.router.TopKRouter",
+      "dispatcher": "megatron.core.transformer.moe.token_dispatcher.MoEAllGatherTokenDispatcher",
+      "config": {
+        "num_moe_experts": 4,
+        "moe_router_topk": 2,
+        "moe_grouped_gemm": false,
+        "moe_token_dispatcher_type": "allgather",
+        "moe_apply_probs_on_input": false,
+        "moe_aux_loss_coeff": 0.01,
+        "moe_z_loss_coeff": null,
+        "gated_linear_unit": true,
+        "bias_activation_fusion": true,
+        "masked_softmax_fusion": true
+      }
+    },
+    {
+      "layer": 3,
+      "experts": "megatron.core.transformer.moe.experts.SequentialMLP",
+      "router": "megatron.core.transformer.moe.router.TopKRouter",
+      "dispatcher": "megatron.core.transformer.moe.token_dispatcher.MoEAllGatherTokenDispatcher",
+      "config": {
+        "num_moe_experts": 4,
+        "moe_router_topk": 2,
+        "moe_grouped_gemm": false,
+        "moe_token_dispatcher_type": "allgather",
+        "moe_apply_probs_on_input": false,
+        "moe_aux_loss_coeff": 0.01,
+        "moe_z_loss_coeff": null,
+        "gated_linear_unit": true,
+        "bias_activation_fusion": true,
+        "masked_softmax_fusion": true
+      }
+    },
+    {
+      "layer": 4,
+      "experts": "megatron.core.transformer.moe.experts.SequentialMLP",
+      "router": "megatron.core.transformer.moe.router.TopKRouter",
+      "dispatcher": "megatron.core.transformer.moe.token_dispatcher.MoEAllGatherTokenDispatcher",
+      "config": {
+        "num_moe_experts": 4,
+        "moe_router_topk": 2,
+        "moe_grouped_gemm": false,
+        "moe_token_dispatcher_type": "allgather",
+        "moe_apply_probs_on_input": false,
+        "moe_aux_loss_coeff": 0.01,
+        "moe_z_loss_coeff": null,
+        "gated_linear_unit": true,
+        "bias_activation_fusion": true,
+        "masked_softmax_fusion": true
+      }
+    }
+  ],
+  "expert_calls": [
+    {
+      "hidden_shape": [
+        512,
+        512
+      ],
+      "hidden_dtype": "torch.bfloat16",
+      "tokens_per_expert": [
+        151,
+        84,
+        106,
+        171
+      ],
+      "probability_shape": [
+        512
+      ],
+      "probability_dtype": "torch.bfloat16",
+      "probability_requires_grad": true
+    },
+    {
+      "hidden_shape": [
+        512,
+        512
+      ],
+      "hidden_dtype": "torch.bfloat16",
+      "tokens_per_expert": [
+        159,
+        155,
+        127,
+        71
+      ],
+      "probability_shape": [
+        512
+      ],
+      "probability_dtype": "torch.bfloat16",
+      "probability_requires_grad": true
+    },
+    {
+      "hidden_shape": [
+        512,
+        512
+      ],
+      "hidden_dtype": "torch.bfloat16",
+      "tokens_per_expert": [
+        61,
+        86,
+        190,
+        175
+      ],
+      "probability_shape": [
+        512
+      ],
+      "probability_dtype": "torch.bfloat16",
+      "probability_requires_grad": true
+    },
+    {
+      "hidden_shape": [
+        512,
+        512
+      ],
+      "hidden_dtype": "torch.bfloat16",
+      "tokens_per_expert": [
+        76,
+        157,
+        196,
+        83
+      ],
+      "probability_shape": [
+        512
+      ],
+      "probability_dtype": "torch.bfloat16",
+      "probability_requires_grad": true
+    },
+    {
+      "hidden_shape": [
+        512,
+        512
+      ],
+      "hidden_dtype": "torch.bfloat16",
+      "tokens_per_expert": [
+        145,
+        98,
+        129,
+        140
+      ],
+      "probability_shape": [
+        512
+      ],
+      "probability_dtype": "torch.bfloat16",
+      "probability_requires_grad": true
+    },
+    {
+      "hidden_shape": [
+        512,
+        512
+      ],
+      "hidden_dtype": "torch.bfloat16",
+      "tokens_per_expert": [
+        118,
+        128,
+        212,
+        54
+      ],
+      "probability_shape": [
+        512
+      ],
+      "probability_dtype": "torch.bfloat16",
+      "probability_requires_grad": true
+    },
+    {
+      "hidden_shape": [
+        512,
+        512
+      ],
+      "hidden_dtype": "torch.bfloat16",
+      "tokens_per_expert": [
+        88,
+        154,
+        161,
+        109
+      ],
+      "probability_shape": [
+        512
+      ],
+      "probability_dtype": "torch.bfloat16",
+      "probability_requires_grad": true
+    },
+    {
+      "hidden_shape": [
+        512,
+        512
+      ],
+      "hidden_dtype": "torch.bfloat16",
+      "tokens_per_expert": [
+        113,
+        126,
+        163,
+        110
+      ],
+      "probability_shape": [
+        512
+      ],
+      "probability_dtype": "torch.bfloat16",
+      "probability_requires_grad": true
+    },
+    {
+      "hidden_shape": [
+        512,
+        512
+      ],
+      "hidden_dtype": "torch.bfloat16",
+      "tokens_per_expert": [
+        123,
+        120,
+        117,
+        152
+      ],
+      "probability_shape": [
+        512
+      ],
+      "probability_dtype": "torch.bfloat16",
+      "probability_requires_grad": true
+    },
+    {
+      "hidden_shape": [
+        512,
+        512
+      ],
+      "hidden_dtype": "torch.bfloat16",
+      "tokens_per_expert": [
+        171,
+        161,
+        133,
+        47
+      ],
+      "probability_shape": [
+        512
+      ],
+      "probability_dtype": "torch.bfloat16",
+      "probability_requires_grad": true
+    },
+    {
+      "hidden_shape": [
+        512,
+        512
+      ],
+      "hidden_dtype": "torch.bfloat16",
+      "tokens_per_expert": [
+        79,
+        191,
+        189,
+        53
+      ],
+      "probability_shape": [
+        512
+      ],
+      "probability_dtype": "torch.bfloat16",
+      "probability_requires_grad": true
+    },
+    {
+      "hidden_shape": [
+        512,
+        512
+      ],
+      "hidden_dtype": "torch.bfloat16",
+      "tokens_per_expert": [
+        99,
+        94,
+        186,
+        133
+      ],
+      "probability_shape": [
+        512
+      ],
+      "probability_dtype": "torch.bfloat16",
+      "probability_requires_grad": true
+    }
+  ],
+  "probability_gradients": [
+    {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.bfloat16",
+      "finite": true,
+      "nonzero_elements": 512
+    },
+    {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.bfloat16",
+      "finite": true,
+      "nonzero_elements": 512
+    },
+    {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.bfloat16",
+      "finite": true,
+      "nonzero_elements": 512
+    },
+    {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.bfloat16",
+      "finite": true,
+      "nonzero_elements": 512
+    },
+    {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.bfloat16",
+      "finite": true,
+      "nonzero_elements": 512
+    },
+    {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.bfloat16",
+      "finite": true,
+      "nonzero_elements": 512
+    },
+    {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.bfloat16",
+      "finite": true,
+      "nonzero_elements": 512
+    },
+    {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.bfloat16",
+      "finite": true,
+      "nonzero_elements": 512
+    },
+    {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.bfloat16",
+      "finite": true,
+      "nonzero_elements": 512
+    },
+    {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.bfloat16",
+      "finite": true,
+      "nonzero_elements": 512
+    },
+    {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.bfloat16",
+      "finite": true,
+      "nonzero_elements": 512
+    },
+    {
+      "shape": [
+        512
+      ],
+      "dtype": "torch.bfloat16",
+      "finite": true,
+      "nonzero_elements": 512
+    }
+  ],
+  "training_steps": [
+    {
+      "optimizer_classes": [
+        "Float16OptimizerWithFloat16Params"
+      ],
+      "native_optimizer_classes": [
+        "SGD"
+      ],
+      "parameter_tensors": 56,
+      "parameters": 55652864,
+      "parameter_dtypes": [
+        "torch.bfloat16"
+      ],
+      "main_grad_tensors": 56,
+      "main_grad_dtypes": [
+        "torch.float32"
+      ],
+      "main_grads_finite": true,
+      "master_tensors": 56,
+      "master_dtypes": [
+        "torch.float32"
+      ],
+      "masters_finite": true
+    },
+    {
+      "optimizer_classes": [
+        "Float16OptimizerWithFloat16Params"
+      ],
+      "native_optimizer_classes": [
+        "SGD"
+      ],
+      "parameter_tensors": 56,
+      "parameters": 55652864,
+      "parameter_dtypes": [
+        "torch.bfloat16"
+      ],
+      "main_grad_tensors": 56,
+      "main_grad_dtypes": [
+        "torch.float32"
+      ],
+      "main_grads_finite": true,
+      "master_tensors": 56,
+      "master_dtypes": [
+        "torch.float32"
+      ],
+      "masters_finite": true
+    },
+    {
+      "optimizer_classes": [
+        "Float16OptimizerWithFloat16Params"
+      ],
+      "native_optimizer_classes": [
+        "SGD"
+      ],
+      "parameter_tensors": 56,
+      "parameters": 55652864,
+      "parameter_dtypes": [
+        "torch.bfloat16"
+      ],
+      "main_grad_tensors": 56,
+      "main_grad_dtypes": [
+        "torch.float32"
+      ],
+      "main_grads_finite": true,
+      "master_tensors": 56,
+      "master_dtypes": [
+        "torch.float32"
+      ],
+      "masters_finite": true
+    }
+  ],
+  "candidate_enabled": false,
+  "performance_claims": [],
+  "scope": "Only native single-device three-step MoE availability, actual backend/token counts/gradient/optimizer dtype observations; untimed scalar CPU copies. No candidate correctness comparison, GroupedGEMM, throughput, convergence or production claim.",
+  "bool_sort_compatibility": {
+    "enabled": true,
+    "calls": 12,
+    "probes": [
+      {
+        "length": 0,
+        "mode": "zeros",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 0,
+        "mode": "zeros",
+        "descending": true,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 0,
+        "mode": "ones",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 0,
+        "mode": "ones",
+        "descending": true,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 0,
+        "mode": "alternating",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 0,
+        "mode": "alternating",
+        "descending": true,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 0,
+        "mode": "skewed",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 0,
+        "mode": "skewed",
+        "descending": true,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1,
+        "mode": "zeros",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1,
+        "mode": "zeros",
+        "descending": true,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1,
+        "mode": "ones",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1,
+        "mode": "ones",
+        "descending": true,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1,
+        "mode": "alternating",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1,
+        "mode": "alternating",
+        "descending": true,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1,
+        "mode": "skewed",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1,
+        "mode": "skewed",
+        "descending": true,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 17,
+        "mode": "zeros",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 17,
+        "mode": "zeros",
+        "descending": true,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 17,
+        "mode": "ones",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 17,
+        "mode": "ones",
+        "descending": true,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 17,
+        "mode": "alternating",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 17,
+        "mode": "alternating",
+        "descending": true,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 17,
+        "mode": "skewed",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 17,
+        "mode": "skewed",
+        "descending": true,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1024,
+        "mode": "zeros",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1024,
+        "mode": "zeros",
+        "descending": true,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1024,
+        "mode": "ones",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1024,
+        "mode": "ones",
+        "descending": true,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1024,
+        "mode": "alternating",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1024,
+        "mode": "alternating",
+        "descending": true,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1024,
+        "mode": "skewed",
+        "descending": false,
+        "exact_indices_equal": true
+      },
+      {
+        "length": 1024,
+        "mode": "skewed",
+        "descending": true,
+        "exact_indices_equal": true
+      }
+    ]
+  },
+  "native_source_sha256": {
+    "megatron/core/transformer/moe/moe_layer.py": "189b0ce590ca1cb9fd8b8c33c2df8e2205e5def7d58dbb8dfd1829a5526553e3",
+    "megatron/core/transformer/moe/experts.py": "32e1a36533a217599b20cdc2a47285f0e8af19716a7a1b10db8fe421c8b24fef",
+    "megatron/core/transformer/moe/router.py": "1a1b6a2b82dc28835d44f637628243f283310e6ae50a2d836b19f19ae56c8f3a",
+    "megatron/core/transformer/moe/token_dispatcher.py": "7af2746153268f5c5f7f03d7a340092541b633fbc8faa10f666d6ddbdf98be0a",
+    "megatron/core/transformer/mlp.py": "f54a7209db5cad4e095143cbbc1eedcbf41e913ea1eec64db3cb1b8408e6ff07"
+  }
+}

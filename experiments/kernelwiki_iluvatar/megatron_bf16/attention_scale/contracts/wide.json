@@ -1,0 +1,248 @@
+{
+  "version": "fixed-attention-stage32-wide-v1",
+  "date": "2026-10-08",
+  "objective": "Held-out larger-model formal BF16 training with frozen Attention003 without retuning; fresh original native, CE0008+gradnorm001 control and only additional Attention003. Original default compiled SwiGLU in all arms.",
+  "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
+  "candidate_sha256": "9b22e12b4744b2a41b9209faa280e361e6defe1d5480f5e5683fddd247b7f493",
+  "gpu": "Iluvatar BI-V150",
+  "baseline": "Pinned formal pretrain_gpt.py/localTorch/CoreX4.2 compatibility, original default CUDA causal masked-softmax fusion=True and compiled bias_swiglu_impl. Native data/schedule/DDP/SGD preserved.",
+  "scope": "Declared single BI-V150 larger BF16 MockGPTDataset model, TP/PP/CP1, FP32 main_grad/SGD masters. No SwiGLU004 or RMSNorm candidate. No production, convergence or multiGPU extrapolation.",
+  "correctness": {
+    "comparison_device": "CPU float64 copies",
+    "atol": 0.0003,
+    "rtol": 0.001,
+    "steps": 3,
+    "checks": [
+      "identical initial parameters and input batches",
+      "per-token model loss output",
+      "all native saved main_grad tensors",
+      "all native saved post-SGD parameters",
+      "state_dict keys unchanged",
+      "finite loss and gradients",
+      "actual candidate calls cover every layer/step",
+      "baseline has no candidate installation",
+      "BF16 model and FP32 native master parameters captured at actual start",
+      "all FP32 master parameters after every SGD step"
+    ]
+  },
+  "performance": {
+    "primary": "Native interval-time average iteration ms, GPU-synchronized time.time, original formal loop; log-interval10; report complete intervals excluding first20iterations",
+    "steps": 120,
+    "independent_seeds": [
+      32102,
+      32103,
+      32104
+    ],
+    "arms": [
+      "native",
+      "control",
+      "optimized"
+    ],
+    "order": "Serial three-arm rotation; native synchronization/time.time interval scope unchanged.",
+    "tensor_snapshotting": false,
+    "scope": "Native GPU-synchronized time.time formal training intervals, 120steps/first20excluded/last100retained. CE0008+gradnorm001 control; optimized only adds fixed Attention003. All arms default native compiled SwiGLU, fused causal softmax and native RMSNorm. No tensor audit/profile/checkpoint/eval or extra native softmax/SwiGLU call wrappers during timing.",
+    "process_orders": [
+      [
+        "native",
+        "control",
+        "optimized"
+      ],
+      [
+        "optimized",
+        "control",
+        "native"
+      ],
+      [
+        "control",
+        "native",
+        "optimized"
+      ]
+    ]
+  },
+  "training_argv": [
+    "--num-layers",
+    "4",
+    "--hidden-size",
+    "512",
+    "--ffn-hidden-size",
+    "2048",
+    "--num-attention-heads",
+    "8",
+    "--seq-length",
+    "256",
+    "--max-position-embeddings",
+    "256",
+    "--micro-batch-size",
+    "2",
+    "--global-batch-size",
+    "2",
+    "--tensor-model-parallel-size",
+    "1",
+    "--pipeline-model-parallel-size",
+    "1",
+    "--context-parallel-size",
+    "1",
+    "--transformer-impl",
+    "local",
+    "--normalization",
+    "RMSNorm",
+    "--norm-epsilon",
+    "0.00001",
+    "--position-embedding-type",
+    "learned_absolute",
+    "--untie-embeddings-and-output-weights",
+    "--disable-bias-linear",
+    "--attention-dropout",
+    "0",
+    "--hidden-dropout",
+    "0",
+    "--no-bias-gelu-fusion",
+    "--no-bias-dropout-fusion",
+    "--no-rope-fusion",
+    "--no-gradient-accumulation-fusion",
+    "--no-persist-layer-norm",
+    "--mock-data",
+    "--tokenizer-type",
+    "NullTokenizer",
+    "--vocab-size",
+    "4096",
+    "--make-vocab-size-divisible-by",
+    "128",
+    "--num-workers",
+    "0",
+    "--optimizer",
+    "sgd",
+    "--sgd-momentum",
+    "0",
+    "--weight-decay",
+    "0",
+    "--clip-grad",
+    "0",
+    "--lr",
+    "0.001",
+    "--min-lr",
+    "0.001",
+    "--lr-decay-style",
+    "constant",
+    "--lr-warmup-iters",
+    "0",
+    "--eval-iters",
+    "0",
+    "--eval-interval",
+    "1000000",
+    "--timing-log-level",
+    "0",
+    "--ckpt-format",
+    "torch",
+    "--bf16",
+    "--accumulate-allreduce-grads-in-fp32",
+    "--swiglu"
+  ],
+  "forbidden": [
+    "edit existing accepted candidates/contracts/verifiers",
+    "change model/data/tolerances between arms",
+    "replace native pretrain/train functions with benchmark",
+    "pretend unsupported kernels executed",
+    "claim historical benchmark ratio as formal-entry speedup"
+  ],
+  "model": {
+    "num_layers": 4,
+    "hidden_size": 512,
+    "ffn_hidden_size": 2048,
+    "num_attention_heads": 8,
+    "sequence_length": 256,
+    "micro_batch_size": 2,
+    "global_batch_size": 2,
+    "vocab_size": 4096,
+    "parameters": 21107200,
+    "normalization": "RMSNorm",
+    "epsilon": 1e-05,
+    "bf16": true,
+    "fp32_residual_connection": false,
+    "gated_linear_unit": true,
+    "bias_activation_fusion": true
+  },
+  "swiglu": {
+    "baseline": "Original default bias_swiglu_impl(input,None,False,False), fused.swiglu is torch.compile callable; no bias-swiglu-fusion disabled",
+    "primary_shape": [
+      256,
+      2,
+      4096
+    ],
+    "candidate_enabled": false,
+    "native_compiled_callable_required": true,
+    "observation": "Only untimed three-step audit records original native implementation calls/configurations; performance leaves MLP and bias_swiglu_impl unwrapped in all arms."
+  },
+  "attention": {
+    "native_backend": "Original pinned DotProductAttention/vendor baddbmm/default scaled_upper_triang_masked_softmax_cuda forward+backward/vendor bmm/native layout; masked_softmax_fusion=True",
+    "api": "attention(q,k,v,scale) -> contiguous BF16 [S,B,H*D]",
+    "shape": [
+      256,
+      2,
+      8,
+      64
+    ],
+    "strides": [
+      3072,
+      1536,
+      192,
+      1
+    ],
+    "storage_offsets": [
+      0,
+      64,
+      128
+    ],
+    "mask_shape": [
+      2,
+      1,
+      256,
+      256
+    ],
+    "mask_stride": [
+      65536,
+      65536,
+      256,
+      1
+    ],
+    "scale": 0.125,
+    "precision": "BF16 inputs/output and native full-reference staged scores/probs; FP32 named main_grad and SGD masters retained. Existing tolerances unchanged.",
+    "supported": "Causal self-attention, heads=groups=8,D64,TP/PP/CP1,dropout0,vanilla,offset/window/packed/biasNone,defaultfusionTrue,softmaxFP32False,query-key-layer-scalingFalse",
+    "mask": "Default native causal fused branch ignores provided mask values and applies the causal triangle internally; no arbitrary-mask semantic claim.",
+    "baseline_proof": "Frozen stage31/backend-default.json proves S128/S256/S512 vendor extension forward/backward; fresh audit records actual route for the held-out model.",
+    "control": "CE0008 + gradnorm001; original compiled SwiGLU and RMSNorm remain native in all three arms",
+    "candidate_version": "003",
+    "candidate_sha256": "4881f91c230324f258cf6faf7b1d63a493b043b960df4efdca0dad708195db48",
+    "independent_probe": "Fresh probe-full-0032026100801.json rechecks original unchanged stage31/probe_full.py on restored Pod; numeric trial ID is not candidate version. Historical probe remains an immutable anchor; full output/query/key/value gradients include S256/S512 with original tolerances and exact native capture replay.",
+    "jit_admission": "At candidate import all four stages must be torch.jit.ScriptFunction; actual graph text and SHA recorded once. Silent eager fallback rejects this target path.",
+    "correctness": {
+      "steps": 3,
+      "audit_seed": 32101,
+      "comparison": "CPU float64",
+      "atol": 0.0003,
+      "rtol": 0.001,
+      "full_model_master_checks": "unchanged frozen BF16 comparator"
+    },
+    "promotion": {
+      "minimum_incremental_gain_strictly_greater_than": 0.01,
+      "all_three_seeds_faster": true
+    },
+    "scope": "Declared wide 4-layer 21107200-parameter single-card BF16 mock-data SGD model only; no retuning or production/convergence/multiGPU claim."
+  },
+  "stage32": {
+    "model_name": "wide",
+    "source_contract_sha256": "45d7a6e20198755cf54be0c6026dfa0ca22a979cd89863b47cd7a7e27bee8ccf",
+    "attention_candidate_sha256": "4881f91c230324f258cf6faf7b1d63a493b043b960df4efdca0dad708195db48",
+    "audit_seed": 32101,
+    "swiglu_candidate_enabled": false,
+    "rmsnorm_candidate_enabled": false,
+    "heldout_code_retuned": false,
+    "source_file_count": 600,
+    "change": "Enable default native masked-softmax fusion in all arms, fixed larger model and independent seeds, direct original gradnorm04 delegate; only optimized adds fixed Attention003. No original model/source/timer/precision/tolerance changes.",
+    "probe_trial_label": "0032026100801",
+    "candidate_version": "003",
+    "fresh_native_backend": "backend-current-20261008-01.json",
+    "fresh_probe": "probe-full-0032026100801.json",
+    "independent_verifier_sha256": "7778dc5837265b9fa4def2cf90d07ceeac2b992e583aa6939d74b5e99ad57fd0"
+  }
+}

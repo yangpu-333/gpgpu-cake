@@ -2,3 +2,4 @@ evidence/** -text
 stage*.py -text
 kernelwiki-iluvatar.patch -text -whitespace
 kernelwiki-iluvatar-stage30-31.patch -text -whitespace
+kernelwiki-iluvatar-stage32.patch -text -whitespace

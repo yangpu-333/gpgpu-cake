@@ -1,0 +1,23 @@
+{
+  "status": "native_runtime_available_with_explicit_compatibility",
+  "date": "2026-10-08",
+  "verification_path": "native-03/cpu-verify.json",
+  "verification_sha256": "b85c8a343cabdeb6ec635ec59a7a234beb81d92466ff62c6013157cfd73a2e27",
+  "actual_expert_backend": "SequentialMLP",
+  "parameters": 55652864,
+  "full_updates": 3,
+  "candidate_correctness_compared": false,
+  "performance_claims": [],
+  "prior_attempts": {
+    "native-01": "missing single-process rendezvous environment",
+    "native-02": "vendor CUDA stable bool argsort unsupported"
+  },
+  "compatibility": "Opt-in process-only stable CUDA bool keys cast to exact0/1 uint8;32 CPU-reference index probes,12 actual routing calls; no native source/install modification",
+  "next_actions": [
+    "Freeze native/control/optimized MoE contract after checking CE/gradnorm adapter numerical compatibility.",
+    "Capture exact weighted expert MLP inputs/output/backward probability gradients, routing maps and dynamic token counts.",
+    "Cover balanced/skewed/tail/empty experts and BF16 cast boundaries before candidate generation.",
+    "Then run complete three-update all-gradient/FP32-master comparisons and original120/20 three-seed rotated formal timing."
+  ],
+  "scope": "Runtime prerequisite only; no GroupedGEMM, accepted MoE candidate or speedup."
+}
