@@ -5,3 +5,4 @@ attention/evidence/** -whitespace
 swiglu_scale/evidence/** -whitespace
 attention_scale/evidence/** -whitespace
 moe/evidence/** -whitespace
+moe_weighted/evidence/** -whitespace

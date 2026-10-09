@@ -1,0 +1,76 @@
+{
+  "schema": "weighted-stage34-real-offset-probe-v1",
+  "candidate_sha256": "073f7914357f4ae5d1e51f4823f05575fb8c42bd80373e852e83be872f543665",
+  "verifier_sha256": "a672dc9c1015b38a42416d083dd4f16185459b39fe002a456d8b1e761f370840",
+  "main_probe_sha256": "c5c45eca4ea3f56de0a1cfddf2844deb37c6689cbabe5c48e4ada743cb010387",
+  "reason": "Main probe run() clones inputs, losing original storage offset; this additional gate preserves views. No original tolerance changed.",
+  "atol": 0.0003,
+  "rtol": 0.001,
+  "checks": [
+    {
+      "n": 17,
+      "input_storage_offset": 1,
+      "weights_storage_offset": 1,
+      "pointer_alignment_mod16": [
+        2,
+        2
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "bad_elements": 0,
+          "exact_equal": true,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "passed": true,
+          "bad_elements": 0,
+          "exact_equal": true,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "passed": true,
+          "bad_elements": 0,
+          "exact_equal": true,
+          "max_abs": 0.0
+        }
+      },
+      "no_fallback": true,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "n": 165,
+      "input_storage_offset": 1,
+      "weights_storage_offset": 1,
+      "pointer_alignment_mod16": [
+        2,
+        2
+      ],
+      "checks": {
+        "output": {
+          "passed": true,
+          "bad_elements": 0,
+          "exact_equal": true,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "passed": true,
+          "bad_elements": 0,
+          "exact_equal": true,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "passed": true,
+          "bad_elements": 0,
+          "exact_equal": true,
+          "max_abs": 0.0
+        }
+      },
+      "no_fallback": true,
+      "inputs_unchanged": true,
+      "passed": true
+    }
+  ],
+  "passed": true
+}

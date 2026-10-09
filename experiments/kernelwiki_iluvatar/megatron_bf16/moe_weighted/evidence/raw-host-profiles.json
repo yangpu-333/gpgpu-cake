@@ -1,0 +1,18 @@
+{
+  "schema": "untimed-host-profile-original-data-v1",
+  "files": [
+    {
+      "path": "evidence/host-profile-control-003/profile.pstats",
+      "bytes": 5354591,
+      "sha256": "096557729ba6dafa03552a9463e0291c86b51073752b42e33701bf3d42fb3043",
+      "local_raw_retained": true
+    },
+    {
+      "path": "evidence/host-profile-optimized-003/profile.pstats",
+      "bytes": 5298422,
+      "sha256": "12dbd1a21d3d9e467dae0bd33062fcfb0601e396ad8f10b8082f21e8fc1a0d16",
+      "local_raw_retained": true
+    }
+  ],
+  "timing_claim": false
+}

@@ -1,0 +1,66 @@
+{
+  "same_frozen_controller_bytes": true,
+  "files": [
+    {
+      "path": "contract.json",
+      "sha256": "31a09fd357fbe386b493ea1efa348a870e81326c6cfe3e757bf9ae9b7478e263"
+    },
+    {
+      "path": "launch_weighted.py",
+      "sha256": "65f01f6aa474ae08c3351106df245477ac6c224d951408fc938aa7b19eba48ad"
+    },
+    {
+      "path": "run_case.py",
+      "sha256": "a85cb3dd5a9f32981e0d20e068be31ebe46467266062e93284ff58d3f45fc797"
+    },
+    {
+      "path": "run_performance.py",
+      "sha256": "2775cbd70ce6e21d8b310a666609885f54893c8de53d4918098e9a61318bfd3b"
+    },
+    {
+      "path": "candidates/004/candidate.py",
+      "sha256": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e"
+    },
+    {
+      "path": "audit-004.json",
+      "sha256": "4fa0bbb44a8f29c186507d25df4e4422a924801d12403e8eb9985f5f32b1d32f"
+    },
+    {
+      "path": "probe-004.json",
+      "sha256": "97c5ef79094dd6a9cdf2ab89941bedb77f5085b365cef246d583fd8b8815cbe0"
+    },
+    {
+      "path": "offset-004.json",
+      "sha256": "11026f08f30227b95fb5692ab982aac252e864074bac280e6e3509758c9a63d0"
+    },
+    {
+      "path": "comparison-admission01.json",
+      "sha256": "5b532fc2b763692ca0fc05a9107021239e9c24e50b7704d1534d541fb242455a"
+    },
+    {
+      "path": "comparison-native-004.json",
+      "sha256": "e60618849d443dc3d4fbbe510edd7ec7718629804eda4e14a51da4a9d74dd5e0"
+    },
+    {
+      "path": "comparison-control-004.json",
+      "sha256": "73173112bc20e67b3471cbb2edd582be7a82eab2802e7748953e469dec03f685"
+    },
+    {
+      "path": "probe.py",
+      "sha256": "c5c45eca4ea3f56de0a1cfddf2844deb37c6689cbabe5c48e4ada743cb010387"
+    },
+    {
+      "path": "probe_offset.py",
+      "sha256": "a672dc9c1015b38a42416d083dd4f16185459b39fe002a456d8b1e761f370840"
+    },
+    {
+      "path": "seal_audit.py",
+      "sha256": "3bcfc8abba6b51e0d269fb1103aa0e8cfeb0298374bc9df072d39719ce5bd0dd"
+    },
+    {
+      "path": "compare.py",
+      "sha256": "52481dce035a59c523cc137d968a998eeb4f20ff6f3b3590c3492fa5f7c50635"
+    }
+  ],
+  "reason": "independent full repeat to resolve first control93.94ms vs prior70\u201373ms variance; no changed model/seed/order/timer/gate"
+}

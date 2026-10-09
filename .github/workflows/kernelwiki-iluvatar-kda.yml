@@ -66,6 +66,13 @@ jobs:
           python experiments/kernelwiki_iluvatar/megatron_bf16/attention_scale/verify_receipts.py --model deep --audit-suffix complete02 --run-suffix complete02
           python -m unittest discover -s experiments/kernelwiki_iluvatar/megatron_bf16/attention_scale -p test_runtime_extra.py -v
           python experiments/kernelwiki_iluvatar/megatron_bf16/moe/verify_preflight.py
+      - name: Verify native MoE weighted activation closed-loop receipts
+        run: |
+          python experiments/kernelwiki_iluvatar/megatron_bf16/moe_weighted/verify_receipts.py --version 002
+          python experiments/kernelwiki_iluvatar/megatron_bf16/moe_weighted/verify_receipts.py --version 003
+          python experiments/kernelwiki_iluvatar/megatron_bf16/moe_weighted/verify_receipts.py --version 004
+          python experiments/kernelwiki_iluvatar/megatron_bf16/moe_weighted/verify_receipts.py --version 004 --confirmation
+          python -m unittest discover -s experiments/kernelwiki_iluvatar/megatron_bf16/moe_weighted -p test_verify_receipts.py -v
       - name: Run KernelWiki full test suite
         run: python -m unittest discover -s "$RUNNER_TEMP/kernelwiki-iluvatar/tests" -p "test_*.py" -q
       - name: Load skill into KDA checkout and verify architecture paths

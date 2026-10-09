@@ -1,0 +1,38 @@
+{
+  "source_path": "/tmp/torchinductor_root/da/cda4ewgdc6jebzdqqp2r465jonsesjsrpfhbjgt3p2o2etmm2gji.py",
+  "source_sha256": "1df526ea803e1130c46352133c855d84377d1d07b88d3800eb848a1404c72bb0",
+  "class": "<class 'torch._inductor.runtime.triton_heuristics.CachingAutotuner'>",
+  "configs": [],
+  "launcher_config": [
+    "XBLOCK: 1, RBLOCK: 2048, num_warps: 8, num_stages: 1"
+  ],
+  "kernel_fields": {
+    "fn": "<class 'triton.runtime.jit.JITFunction'>",
+    "device_props": "<class 'torch._inductor.runtime.hints.DeviceProperties'>",
+    "triton_meta": "<class 'dict'>",
+    "inductor_meta": "<class 'dict'>",
+    "save_cache_hook": "<class 'NoneType'>",
+    "mutated_arg_names": "<class 'list'>",
+    "configs": "<class 'NoneType'>",
+    "heuristic_type": "<enum 'HeuristicType'>",
+    "custom_kernel": "<class 'bool'>",
+    "cuda_kernel_saved": "<class 'bool'>",
+    "launchers": "<class 'list'>",
+    "lock": "<class '_thread.lock'>",
+    "size_hints": "<class 'list'>",
+    "coordesc_tuner": "<class 'torch._inductor.runtime.coordinate_descent_tuner.CoordescTuner'>",
+    "filename": "<class 'str'>",
+    "_reload_in_subproc": "<class 'functools.partial'>"
+  },
+  "launcher_fields": [
+    {
+      "config": "<triton.runtime.autotuner.Config object at 0x7f36991d6c50>",
+      "n_regs": "21",
+      "n_spills": "0",
+      "shared": "32",
+      "store_cubin": "False"
+    }
+  ],
+  "launchers": 1,
+  "schema": "original-inductor-weighted-reduction-config-v1"
+}

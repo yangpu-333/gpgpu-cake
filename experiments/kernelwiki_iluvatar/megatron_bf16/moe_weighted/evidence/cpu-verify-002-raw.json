@@ -1,0 +1,43 @@
+{
+  "status": "receipt_verified",
+  "version": "002",
+  "confirmation": false,
+  "comparisons": {
+    "comparison-admission01.json": {
+      "checks": 2627,
+      "tensors": 1289,
+      "all_exact": true
+    },
+    "comparison-native-002.json": {
+      "checks": 2627,
+      "tensors": 1289,
+      "all_exact": true
+    },
+    "comparison-control-002.json": {
+      "checks": 2627,
+      "tensors": 1289,
+      "all_exact": true
+    }
+  },
+  "vs_control": {
+    "ratio": 0.2656689716656515,
+    "gain_percent": -73.43310283343484,
+    "all_seeds_faster": false
+  },
+  "vs_native": {
+    "ratio": 0.27589858211619955,
+    "gain_percent": -72.41014178838005,
+    "all_seeds_faster": false
+  },
+  "promoted": false,
+  "available_original_inputs": 239,
+  "missing_original_inputs": [],
+  "original_byte_coverage_complete": true,
+  "verifier_sha256": "752fc9af187afc31418460197db3cd22dccd423aec97aba785cc69d6b00317bb",
+  "gpu_rerun": false,
+  "arithmetic_replay": false,
+  "scope": "Recorded fixed GPU gates and original logs verified on CPU; missing large raw files stay explicit in CI.",
+  "candidate_sha256": "6b3c8583baaea503eb967fdc18ce68c7dc3407a2dee3e3bebefc2e6d106c0885",
+  "performance_sha256": "28b7593a8c2af3d17a5c07beacc3bcac360c74dbc64e20147d77e5842ac69178",
+  "complete_backup_receipt_sha256": "a321f27f60ee2c81a0aae0cb29d795ad2f65ea70fe76b26c2b3320de47aeaf3b"
+}

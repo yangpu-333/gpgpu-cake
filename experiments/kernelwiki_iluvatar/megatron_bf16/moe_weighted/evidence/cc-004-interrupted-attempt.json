@@ -1,0 +1,8 @@
+{
+  "status": "interrupted",
+  "response_written": false,
+  "running_claude_process_found_on_resume": false,
+  "candidate_created": false,
+  "prompt_preserved": "megatron_bf16/prompts/cc-moe-weighted-004.txt",
+  "next_action": "retry_same_prompt_same_model_with_new_CLI_invocation"
+}

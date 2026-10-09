@@ -1,0 +1,188 @@
+{
+  "schema": "moe-weighted-stage34-final-decision-v1",
+  "date": "2026-10-09",
+  "status": "complete",
+  "selected_candidate": "004",
+  "promoted": true,
+  "decision": "promoted_tested_model_only",
+  "rounds": {
+    "002": {
+      "candidate_sha256": "6b3c8583baaea503eb967fdc18ce68c7dc3407a2dee3e3bebefc2e6d106c0885",
+      "proof_sha256": "f8481301827309e7bacde6090668972c4f78df13dc82b9939f2441eb3644b568",
+      "performance_sha256": "28b7593a8c2af3d17a5c07beacc3bcac360c74dbc64e20147d77e5842ac69178",
+      "comparisons": {
+        "comparison-admission01.json": {
+          "checks": 2627,
+          "tensors": 1289,
+          "all_exact": true
+        },
+        "comparison-native-002.json": {
+          "checks": 2627,
+          "tensors": 1289,
+          "all_exact": true
+        },
+        "comparison-control-002.json": {
+          "checks": 2627,
+          "tensors": 1289,
+          "all_exact": true
+        }
+      },
+      "vs_control": {
+        "ratio": 0.2656689716656515,
+        "gain_percent": -73.43310283343484,
+        "all_seeds_faster": false
+      },
+      "vs_native": {
+        "ratio": 0.27589858211619955,
+        "gain_percent": -72.41014178838005,
+        "all_seeds_faster": false
+      },
+      "promoted": false
+    },
+    "003": {
+      "candidate_sha256": "073f7914357f4ae5d1e51f4823f05575fb8c42bd80373e852e83be872f543665",
+      "proof_sha256": "ce770fc76a945884342e758e03eff3dd12b74ff1fbc0c2615a678b5d4a14e46e",
+      "performance_sha256": "f5fd00a1994576a8892a8321b7a440494277368cc74a75b60ddaead44ec29291",
+      "comparisons": {
+        "comparison-admission01.json": {
+          "checks": 2627,
+          "tensors": 1289,
+          "all_exact": true
+        },
+        "comparison-native-003.json": {
+          "checks": 2627,
+          "tensors": 1289,
+          "all_exact": true
+        },
+        "comparison-control-003.json": {
+          "checks": 2627,
+          "tensors": 1289,
+          "all_exact": true
+        }
+      },
+      "vs_control": {
+        "ratio": 0.2553667220913855,
+        "gain_percent": -74.46332779086144,
+        "all_seeds_faster": false
+      },
+      "vs_native": {
+        "ratio": 0.2640888858080009,
+        "gain_percent": -73.59111141919992,
+        "all_seeds_faster": false
+      },
+      "promoted": false
+    },
+    "004": {
+      "candidate_sha256": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e",
+      "proof_sha256": "3d377a4ccea09b0440dacb90f8f0715f141cb467fc239a91a8617e67e1416604",
+      "performance_sha256": "2fdb4ae51e33516e8f63043b8d47b3bb6d2a18805968cdc29673ff38b128367d",
+      "comparisons": {
+        "comparison-admission01.json": {
+          "checks": 2627,
+          "tensors": 1289,
+          "all_exact": true
+        },
+        "comparison-native-004.json": {
+          "checks": 2627,
+          "tensors": 1289,
+          "all_exact": true
+        },
+        "comparison-control-004.json": {
+          "checks": 2627,
+          "tensors": 1289,
+          "all_exact": true
+        }
+      },
+      "vs_control": {
+        "ratio": 1.1702774724732607,
+        "gain_percent": 17.027747247326076,
+        "all_seeds_faster": true
+      },
+      "vs_native": {
+        "ratio": 1.2619334517892935,
+        "gain_percent": 26.19334517892935,
+        "all_seeds_faster": true
+      },
+      "promoted": true
+    },
+    "004-confirmation": {
+      "candidate_sha256": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e",
+      "proof_sha256": "07a73b27bd14edf55f61294ee5ad751a17ea0d5a5f88c7f2bf6e72a38a83bf1f",
+      "performance_sha256": "c72c8643f269dc5e8e4b8834ce46f44a65924eab8b763cac1f8cbeae6d390cc0",
+      "vs_control": {
+        "ratio": 1.0576864070390748,
+        "gain_percent": 5.768640703907479,
+        "all_seeds_faster": true
+      },
+      "vs_native": {
+        "ratio": 1.0924953565236424,
+        "gain_percent": 9.249535652364237,
+        "all_seeds_faster": true
+      },
+      "promoted": true
+    }
+  },
+  "failed_candidate001": {
+    "reason": "two step3 embedding gradients outside unchanged tolerance",
+    "candidate_sha256": "902049ef4db56861f1261e1a86042cc4dc6ead270d82613eefead32724896108",
+    "comparison_sha256": "e9796c9eff46f33e9ab17e670921d02826ef109babb9d5f770351928bbfab8ae",
+    "diagnostic_sha256": "bdc42d0a8febf8adca27364b3ff1eb01903824aadd88066c7adaa71cb0b7419a"
+  },
+  "baseline": "same-round native pinned SequentialMLP with compiled weighted SwiGLU/default fused causal softmax; common explicit uint8 stable-sort compatibility",
+  "control": "native + frozen CE0008 + gradnorm001; no Dense SwiGLU004/Attention003/RMSNorm candidate",
+  "optimized": "control + MoE weighted SwiGLU004 only",
+  "contract_sha256": "31a09fd357fbe386b493ea1efa348a870e81326c6cfe3e757bf9ae9b7478e263",
+  "model": {
+    "num_layers": 4,
+    "hidden_size": 512,
+    "ffn_hidden_size": 2048,
+    "num_attention_heads": 8,
+    "sequence_length": 128,
+    "micro_batch_size": 2,
+    "global_batch_size": 2,
+    "vocab_size": 1024,
+    "parameters": 55652864,
+    "normalization": "RMSNorm",
+    "epsilon": 1e-05,
+    "bf16": true,
+    "fp32_residual_connection": false,
+    "gated_linear_unit": true,
+    "bias_activation_fusion": true,
+    "num_moe_experts": 4,
+    "moe_router_topk": 2
+  },
+  "performance_sha256": "c72c8643f269dc5e8e4b8834ce46f44a65924eab8b763cac1f8cbeae6d390cc0",
+  "first_round_performance_sha256": "2fdb4ae51e33516e8f63043b8d47b3bb6d2a18805968cdc29673ff38b128367d",
+  "promotion_requires_both_independent_rounds": true,
+  "primary_metric": "Unchanged native GPU-synchronized time.time120 steps/first20 excluded/ten retained interval10 means",
+  "profile_counts_diagnostic_only": {
+    "host-profile-control-003": {
+      "original_sha256": "096557729ba6dafa03552a9463e0291c86b51073752b42e33701bf3d42fb3043",
+      "triton_compile_calls": 8
+    },
+    "host-profile-optimized-003": {
+      "original_sha256": "12dbd1a21d3d9e467dae0bd33062fcfb0601e396ad8f10b8082f21e8fc1a0d16",
+      "triton_compile_calls": 220
+    },
+    "host-profile-optimized-004": {
+      "original_sha256": "da077eac2ab23b33eda8d28f7b02957266b36cd86c945022b4059baee1169d6a",
+      "triton_compile_calls": 11
+    }
+  },
+  "raw_backup": {
+    "receipt_sha256": "a321f27f60ee2c81a0aae0cb29d795ad2f65ea70fe76b26c2b3320de47aeaf3b",
+    "files": 332,
+    "raw_bytes": 17309659631,
+    "unique_files": 101,
+    "unique_bytes": 5161245563,
+    "remote_deleted": false
+  },
+  "scope": "Single BI-V150/CoreX4.2/vendorTorch2.4.1, BF16 weights/intermediates and FP32 main_grad/SGD masters, mock data/dropout0/TP-PP-CP-EP1. Candidate full gates include router probabilities/maps and probability gradients. No production/multiGPU/GroupedGEMM/convergence claim.",
+  "cpu_arithmetic_replay": false,
+  "scope_limits": [
+    "three-update numerical gates are separate from120-step timing",
+    "single GPU mock data, dropout0, SGD; no production/convergence/AdamW/multiGPU/GroupedGEMM/SFT/RL claim"
+  ],
+  "sealer_sha256": "cdae332d92ce8e3f50c948442625f05654277ddaa517601ac3a347da9079a40e",
+  "cpu_verifier_sha256": "752fc9af187afc31418460197db3cd22dccd423aec97aba785cc69d6b00317bb"
+}

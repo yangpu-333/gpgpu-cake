@@ -1,0 +1,15 @@
+{
+  "status": "unchanged",
+  "remote_hashes": {
+    "contract.json": "31a09fd357fbe386b493ea1efa348a870e81326c6cfe3e757bf9ae9b7478e263",
+    "launch_weighted.py": "65f01f6aa474ae08c3351106df245477ac6c224d951408fc938aa7b19eba48ad",
+    "run_case.py": "a85cb3dd5a9f32981e0d20e068be31ebe46467266062e93284ff58d3f45fc797",
+    "compare.py": "52481dce035a59c523cc137d968a998eeb4f20ff6f3b3590c3492fa5f7c50635",
+    "probe.py": "c5c45eca4ea3f56de0a1cfddf2844deb37c6689cbabe5c48e4ada743cb010387",
+    "probe_offset.py": "a672dc9c1015b38a42416d083dd4f16185459b39fe002a456d8b1e761f370840",
+    "seal_audit.py": "3bcfc8abba6b51e0d269fb1103aa0e8cfeb0298374bc9df072d39719ce5bd0dd",
+    "run_performance.py": "2775cbd70ce6e21d8b310a666609885f54893c8de53d4918098e9a61318bfd3b",
+    "candidates/003/candidate.py": "073f7914357f4ae5d1e51f4823f05575fb8c42bd80373e852e83be872f543665"
+  },
+  "validation_date": "2026-10-09"
+}

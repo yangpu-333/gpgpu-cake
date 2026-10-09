@@ -17,3 +17,5 @@ __pycache__/
 # Preserve large raw tensors locally; publish their SHA256 inventories and receipts.
 **/raw-backup/
 **/evidence/**/*.pt
+
+**/evidence/**/*.pstats

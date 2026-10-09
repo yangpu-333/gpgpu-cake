@@ -1,0 +1,7 @@
+{
+  "commit": "5be9626709af2722333bf54797c954c09edeada3",
+  "files": {
+    "megatron/core/fusions/fused_bias_swiglu.py": "5303680596749464c45f9c3ec65f94d1127fb6d49b2aa9ec3ba8c91b1141f08f"
+  },
+  "mode": "exact Git blob; native notices retained"
+}

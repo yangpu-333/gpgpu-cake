@@ -1,0 +1,2089 @@
+{
+  "schema": "weighted-swiglu-stage34-independent-probe-v1",
+  "status": "passed",
+  "version": "002",
+  "candidate_sha256": "6b3c8583baaea503eb967fdc18ce68c7dc3407a2dee3e3bebefc2e6d106c0885",
+  "verifier_sha256": "c5c45eca4ea3f56de0a1cfddf2844deb37c6689cbabe5c48e4ada743cb010387",
+  "runtime": {
+    "torch": "2.4.1",
+    "selected_megatron_source": "/tmp/kda-bf16-continuation/megatron-native-5be9626",
+    "dtensor_namespace_exports": [
+      "DTensor",
+      "DeviceMesh",
+      "Partial",
+      "Placement",
+      "Replicate",
+      "Shard",
+      "distribute_module",
+      "distribute_tensor"
+    ],
+    "typing_override": "typing_extensions.override",
+    "ignored_triton_profiler_launch_metadata": [],
+    "unavailable_restore_value_autotuners": [],
+    "optional_backends_disabled_in_process": [
+      "transformer_engine",
+      "apex"
+    ]
+  },
+  "native_source_sha256": "5303680596749464c45f9c3ec65f94d1127fb6d49b2aa9ec3ba8c91b1141f08f",
+  "atol": 0.0003,
+  "rtol": 0.001,
+  "comparison": "CPU float64",
+  "checks": [
+    {
+      "case": "0-2048-zero",
+      "input_shape": [
+        0,
+        4096
+      ],
+      "weights_shape": [
+        0,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "0-2048-one",
+      "input_shape": [
+        0,
+        4096
+      ],
+      "weights_shape": [
+        0,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "0-2048-probability",
+      "input_shape": [
+        0,
+        4096
+      ],
+      "weights_shape": [
+        0,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "0-2048-signed",
+      "input_shape": [
+        0,
+        4096
+      ],
+      "weights_shape": [
+        0,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "1-2048-zero",
+      "input_shape": [
+        1,
+        4096
+      ],
+      "weights_shape": [
+        1,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "1-2048-one",
+      "input_shape": [
+        1,
+        4096
+      ],
+      "weights_shape": [
+        1,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "1-2048-probability",
+      "input_shape": [
+        1,
+        4096
+      ],
+      "weights_shape": [
+        1,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "1-2048-signed",
+      "input_shape": [
+        1,
+        4096
+      ],
+      "weights_shape": [
+        1,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "17-257-zero",
+      "input_shape": [
+        17,
+        514
+      ],
+      "weights_shape": [
+        17,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "17-257-one",
+      "input_shape": [
+        17,
+        514
+      ],
+      "weights_shape": [
+        17,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "17-257-probability",
+      "input_shape": [
+        17,
+        514
+      ],
+      "weights_shape": [
+        17,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "17-257-signed",
+      "input_shape": [
+        17,
+        514
+      ],
+      "weights_shape": [
+        17,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "38-2048-zero",
+      "input_shape": [
+        38,
+        4096
+      ],
+      "weights_shape": [
+        38,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "38-2048-one",
+      "input_shape": [
+        38,
+        4096
+      ],
+      "weights_shape": [
+        38,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "38-2048-probability",
+      "input_shape": [
+        38,
+        4096
+      ],
+      "weights_shape": [
+        38,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "38-2048-signed",
+      "input_shape": [
+        38,
+        4096
+      ],
+      "weights_shape": [
+        38,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "89-2048-zero",
+      "input_shape": [
+        89,
+        4096
+      ],
+      "weights_shape": [
+        89,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "89-2048-one",
+      "input_shape": [
+        89,
+        4096
+      ],
+      "weights_shape": [
+        89,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "89-2048-probability",
+      "input_shape": [
+        89,
+        4096
+      ],
+      "weights_shape": [
+        89,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "89-2048-signed",
+      "input_shape": [
+        89,
+        4096
+      ],
+      "weights_shape": [
+        89,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "165-2048-zero",
+      "input_shape": [
+        165,
+        4096
+      ],
+      "weights_shape": [
+        165,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "165-2048-one",
+      "input_shape": [
+        165,
+        4096
+      ],
+      "weights_shape": [
+        165,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "165-2048-probability",
+      "input_shape": [
+        165,
+        4096
+      ],
+      "weights_shape": [
+        165,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "165-2048-signed",
+      "input_shape": [
+        165,
+        4096
+      ],
+      "weights_shape": [
+        165,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "256-2048-zero",
+      "input_shape": [
+        256,
+        4096
+      ],
+      "weights_shape": [
+        256,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "256-2048-one",
+      "input_shape": [
+        256,
+        4096
+      ],
+      "weights_shape": [
+        256,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "256-2048-probability",
+      "input_shape": [
+        256,
+        4096
+      ],
+      "weights_shape": [
+        256,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "256-2048-signed",
+      "input_shape": [
+        256,
+        4096
+      ],
+      "weights_shape": [
+        256,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "257-2048-zero",
+      "input_shape": [
+        257,
+        4096
+      ],
+      "weights_shape": [
+        257,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "257-2048-one",
+      "input_shape": [
+        257,
+        4096
+      ],
+      "weights_shape": [
+        257,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "257-2048-probability",
+      "input_shape": [
+        257,
+        4096
+      ],
+      "weights_shape": [
+        257,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "257-2048-signed",
+      "input_shape": [
+        257,
+        4096
+      ],
+      "weights_shape": [
+        257,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "33-769-zero",
+      "input_shape": [
+        33,
+        1538
+      ],
+      "weights_shape": [
+        33,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "33-769-one",
+      "input_shape": [
+        33,
+        1538
+      ],
+      "weights_shape": [
+        33,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "33-769-probability",
+      "input_shape": [
+        33,
+        1538
+      ],
+      "weights_shape": [
+        33,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "33-769-signed",
+      "input_shape": [
+        33,
+        1538
+      ],
+      "weights_shape": [
+        33,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "actual-expert-1",
+      "input_shape": [
+        165,
+        4096
+      ],
+      "weights_shape": [
+        165,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "capture_replay": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "actual-expert-2",
+      "input_shape": [
+        89,
+        4096
+      ],
+      "weights_shape": [
+        89,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "capture_replay": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "actual-expert-3",
+      "input_shape": [
+        148,
+        4096
+      ],
+      "weights_shape": [
+        148,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "capture_replay": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "actual-expert-4",
+      "input_shape": [
+        110,
+        4096
+      ],
+      "weights_shape": [
+        110,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "capture_replay": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "offset-17",
+      "input_shape": [
+        17,
+        4096
+      ],
+      "weights_shape": [
+        17,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "offset-165",
+      "input_shape": [
+        165,
+        4096
+      ],
+      "weights_shape": [
+        165,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "fresh-input-stream-0",
+      "input_shape": [
+        81,
+        4096
+      ],
+      "weights_shape": [
+        81,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    },
+    {
+      "case": "fresh-input-stream-1",
+      "input_shape": [
+        81,
+        4096
+      ],
+      "weights_shape": [
+        81,
+        1
+      ],
+      "dtype": "torch.bfloat16",
+      "weights_dtype": "torch.bfloat16",
+      "checks": {
+        "output": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "input_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        },
+        "weights_grad": {
+          "passed": true,
+          "shape_dtype_match": true,
+          "finite": true,
+          "bad_elements": 0,
+          "max_abs": 0.0,
+          "exact_equal": true
+        }
+      },
+      "native_fallback_calls": 0,
+      "inputs_unchanged": true,
+      "passed": true
+    }
+  ],
+  "guards": [
+    {
+      "device": "cpu",
+      "dtype": "torch.bfloat16",
+      "passed": true
+    },
+    {
+      "device": "cuda",
+      "dtype": "torch.float32",
+      "passed": true
+    }
+  ],
+  "timing": [
+    {
+      "mode": "forward",
+      "shape": [
+        128,
+        4096
+      ],
+      "weights_shape": [
+        128,
+        1
+      ],
+      "raw_pairs": {
+        "native": [
+          0.00924326926469803,
+          0.009577500075101853,
+          0.009396345913410186,
+          0.009439230710268021,
+          0.009439230710268021,
+          0.009508845955133438,
+          0.009439230710268021,
+          0.00909307673573494,
+          0.009300961345434188,
+          0.009439230710268021,
+          0.009439230710268021,
+          0.009369615465402603
+        ],
+        "candidate": [
+          0.009509038180112839,
+          0.00964711531996727,
+          0.009577500075101853,
+          0.009508845955133438,
+          0.009507884830236435,
+          0.009577500075101853,
+          0.01818634569644928,
+          0.00964711531996727,
+          0.009508845955133438,
+          0.009507884830236435,
+          0.009507884830236435,
+          0.020103077590465545
+        ]
+      },
+      "native_median_ms": 0.009439230710268021,
+      "candidate_median_ms": 0.009543269127607345,
+      "metric": "CUDA Event API microbenchmark includes host/autograd submission gaps; not formal training gain"
+    },
+    {
+      "mode": "forward-backward",
+      "shape": [
+        128,
+        4096
+      ],
+      "weights_shape": [
+        128,
+        1
+      ],
+      "raw_pairs": {
+        "native": [
+          0.09744980931282043,
+          0.2882688522338867,
+          0.10787672996520996,
+          0.10695980787277222,
+          0.13181480169296264,
+          0.10494846105575562,
+          0.11862865686416627,
+          0.10666923522949219,
+          0.10207192897796631,
+          0.11505115032196045,
+          0.1434555768966675,
+          0.09558172821998596
+        ],
+        "candidate": [
+          0.15427923202514648,
+          0.15416250228881836,
+          0.13821326494216918,
+          0.1374159574508667,
+          0.1375349998474121,
+          0.14083057641983032,
+          0.20909674167633058,
+          0.15810327529907225,
+          0.15215134620666504,
+          0.47308173179626467,
+          0.15255327224731446,
+          0.22131788730621338
+        ]
+      },
+      "native_median_ms": 0.10741826891899109,
+      "candidate_median_ms": 0.15335788726806643,
+      "metric": "CUDA Event API microbenchmark includes host/autograd submission gaps; not formal training gain"
+    }
+  ],
+  "total_fallback_calls": 0
+}

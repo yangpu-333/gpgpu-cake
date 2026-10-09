@@ -1,0 +1,12 @@
+{
+  "reason": "slow auxiliary transfer paused before GPU timing",
+  "original_script_sha256": "b8c42c4dc8f31d6d4466c39c93ba899975854d867e83738599322a952126bc6d",
+  "partial_files_retained": [
+    {
+      "name": "d67d5124f65c43fc6b272ea8070d6b8d42ce4137c2c7ec277f92235ed19cd40c.partial",
+      "bytes": 74448896
+    }
+  ],
+  "remote_deleted": false,
+  "planned_resume_after_GPU_timing": true
+}

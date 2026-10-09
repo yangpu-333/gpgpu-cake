@@ -1,0 +1,101 @@
+{
+  "comparison_status": "rejected",
+  "failed_tensors": [
+    {
+      "path": "step 3/wgrads/model_chunk0/embedding.position_embeddings.weight",
+      "group": "wgrads",
+      "exact_required": false,
+      "native_shape": [
+        128,
+        512
+      ],
+      "optimized_shape": [
+        128,
+        512
+      ],
+      "native_dtype": "torch.float32",
+      "optimized_dtype": "torch.float32",
+      "native_numel": 65536,
+      "optimized_numel": 65536,
+      "native_sha256": "3ff09353e871a4b2be2df682dac7038a8fc796fba8be988572af73348dabc58a",
+      "optimized_sha256": "e751cd68f1b9c92d068eee38d1646624c70faa2b404a46df4d152ba4fe7f3a67",
+      "shape_dtype_layout_match": true,
+      "all_elements_finite": true,
+      "exact_equal": false,
+      "max_absolute_error": 0.00048828125,
+      "max_relative_error_to_clamped_native": 0.46938775510204084,
+      "max_tolerance_fraction": 1.4136273678258413,
+      "elements_outside_tolerance": 5,
+      "elements_not_exactly_equal": 2774,
+      "atol": 0.0003,
+      "rtol": 0.001,
+      "passed": false
+    },
+    {
+      "path": "step 3/wgrads/model_chunk0/embedding.word_embeddings.weight",
+      "group": "wgrads",
+      "exact_required": false,
+      "native_shape": [
+        1024,
+        512
+      ],
+      "optimized_shape": [
+        1024,
+        512
+      ],
+      "native_dtype": "torch.float32",
+      "optimized_dtype": "torch.float32",
+      "native_numel": 524288,
+      "optimized_numel": 524288,
+      "native_sha256": "d8f0e95c0e6bce9cfe47e6e5ba018070f59d4ee590929dab532c045a381666cb",
+      "optimized_sha256": "391cbe1810261e3756472dbffb437230705d42a4393ea2ee9d813af5ff274ce2",
+      "shape_dtype_layout_match": true,
+      "all_elements_finite": true,
+      "exact_equal": false,
+      "max_absolute_error": 0.00048828125,
+      "max_relative_error_to_clamped_native": 0.34332275390625006,
+      "max_tolerance_fraction": 1.4380212827149843,
+      "elements_outside_tolerance": 3,
+      "elements_not_exactly_equal": 3766,
+      "atol": 0.0003,
+      "rtol": 0.001,
+      "passed": false
+    }
+  ],
+  "non_exact_by_group": {
+    "wgrads": 43,
+    "params": 32,
+    "masters": 42,
+    "routing": 4
+  },
+  "non_exact_route_rows": [
+    {
+      "path": "routing/probability-grad-009.pt",
+      "passed": true,
+      "elements_not_exactly_equal": 17,
+      "elements_outside_tolerance": 0,
+      "max_absolute_error": 2.288818359375e-05
+    },
+    {
+      "path": "routing/probability-grad-010.pt",
+      "passed": true,
+      "elements_not_exactly_equal": 18,
+      "elements_outside_tolerance": 0,
+      "max_absolute_error": 3.814697265625e-06
+    },
+    {
+      "path": "routing/probability-grad-011.pt",
+      "passed": true,
+      "elements_not_exactly_equal": 13,
+      "elements_outside_tolerance": 0,
+      "max_absolute_error": 7.62939453125e-06
+    },
+    {
+      "path": "routing/probability-grad-012.pt",
+      "passed": true,
+      "elements_not_exactly_equal": 1,
+      "elements_outside_tolerance": 0,
+      "max_absolute_error": 9.5367431640625e-07
+    }
+  ]
+}

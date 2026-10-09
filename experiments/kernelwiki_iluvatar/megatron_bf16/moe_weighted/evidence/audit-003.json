@@ -1,0 +1,39 @@
+{
+  "schema": "moe-weighted-stage34-sealed-audit-v1",
+  "passed": true,
+  "candidate_sha256": "073f7914357f4ae5d1e51f4823f05575fb8c42bd80373e852e83be872f543665",
+  "contract_sha256": "31a09fd357fbe386b493ea1efa348a870e81326c6cfe3e757bf9ae9b7478e263",
+  "controller_sha256": {
+    "launch_weighted.py": "65f01f6aa474ae08c3351106df245477ac6c224d951408fc938aa7b19eba48ad",
+    "run_case.py": "a85cb3dd5a9f32981e0d20e068be31ebe46467266062e93284ff58d3f45fc797",
+    "compare.py": "52481dce035a59c523cc137d968a998eeb4f20ff6f3b3590c3492fa5f7c50635",
+    "probe.py": "c5c45eca4ea3f56de0a1cfddf2844deb37c6689cbabe5c48e4ada743cb010387",
+    "probe_offset.py": "a672dc9c1015b38a42416d083dd4f16185459b39fe002a456d8b1e761f370840",
+    "seal_audit.py": "3bcfc8abba6b51e0d269fb1103aa0e8cfeb0298374bc9df072d39719ce5bd0dd",
+    "run_performance.py": "2775cbd70ce6e21d8b310a666609885f54893c8de53d4918098e9a61318bfd3b"
+  },
+  "probe_sha256": "405d0f50a6bc56428224825ee553b75e501b161a2965f24e38f69d90a500ea22",
+  "offset_probe_sha256": "64e123786b4ca65b1239ccc64592731396fe317820664e995888e2ba37e6f217",
+  "comparisons": {
+    "comparison-admission01.json": {
+      "path": "comparison-admission01.json",
+      "sha256": "5b532fc2b763692ca0fc05a9107021239e9c24e50b7704d1534d541fb242455a",
+      "check_count": 2627,
+      "tensor_count": 1289
+    },
+    "comparison-native-003.json": {
+      "path": "comparison-native-003.json",
+      "sha256": "c8eda78931ba668cd633595630dc74c4cafb3987f1a1afc828437146642b627f",
+      "check_count": 2627,
+      "tensor_count": 1289
+    },
+    "comparison-control-003.json": {
+      "path": "comparison-control-003.json",
+      "sha256": "dd2d615f36856a15939be19f01c62f2b6c33c3768c553ea523f6ce4933a62174",
+      "check_count": 2627,
+      "tensor_count": 1289
+    }
+  },
+  "ce_sha256": "9b22e12b4744b2a41b9209faa280e361e6defe1d5480f5e5683fddd247b7f493",
+  "gradnorm_sha256": "84c851ce5af7a49ba97685710790146d2c315f9c8837259366bffd7831f67dc0"
+}

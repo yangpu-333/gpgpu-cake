@@ -1,0 +1,1213 @@
+{
+  "schema": "stage34-separate-host-profile-v1",
+  "arm": "control",
+  "version": "003",
+  "exit_code": 0,
+  "whole_process_seconds": 33.751352120016236,
+  "diagnostic_only": true,
+  "timing_valid_for_formal_gain": false,
+  "profiled_steps": 20,
+  "command": [
+    "/root/miniconda3/bin/python",
+    "-m",
+    "cProfile",
+    "-o",
+    "/tmp/kda-moe-weighted-stage34/host-profile-control-003/profile.pstats",
+    "/tmp/kda-moe-weighted-stage34/launch_weighted.py",
+    "--weighted-receipt",
+    "/tmp/kda-moe-weighted-stage34/host-profile-control-003/weighted.json",
+    "--bf16-root",
+    "/tmp/kda-bf16-continuation/megatron_bf16",
+    "--gradnorm-receipt",
+    "/tmp/kda-moe-weighted-stage34/host-profile-control-003/gradnorm.json",
+    "--megatron-root",
+    "/tmp/kda-bf16-continuation/megatron-native-5be9626",
+    "--contract",
+    "/tmp/kda-moe-weighted-stage34/contract.json",
+    "--entry-evidence",
+    "/tmp/kda-moe-weighted-stage34/host-profile-control-003/entry.json",
+    "--candidate",
+    "/tmp/kda-bf16-continuation/megatron_bf16/candidates/0008/candidate.py",
+    "--gradnorm-candidate",
+    "/tmp/kda-gradnorm-stage26/candidate.py",
+    "--num-layers",
+    "4",
+    "--hidden-size",
+    "512",
+    "--ffn-hidden-size",
+    "2048",
+    "--num-attention-heads",
+    "8",
+    "--seq-length",
+    "128",
+    "--max-position-embeddings",
+    "128",
+    "--micro-batch-size",
+    "2",
+    "--global-batch-size",
+    "2",
+    "--tensor-model-parallel-size",
+    "1",
+    "--pipeline-model-parallel-size",
+    "1",
+    "--context-parallel-size",
+    "1",
+    "--transformer-impl",
+    "local",
+    "--normalization",
+    "RMSNorm",
+    "--norm-epsilon",
+    "0.00001",
+    "--position-embedding-type",
+    "learned_absolute",
+    "--untie-embeddings-and-output-weights",
+    "--disable-bias-linear",
+    "--attention-dropout",
+    "0",
+    "--hidden-dropout",
+    "0",
+    "--no-bias-gelu-fusion",
+    "--no-bias-dropout-fusion",
+    "--no-rope-fusion",
+    "--no-gradient-accumulation-fusion",
+    "--no-persist-layer-norm",
+    "--mock-data",
+    "--tokenizer-type",
+    "NullTokenizer",
+    "--vocab-size",
+    "1024",
+    "--make-vocab-size-divisible-by",
+    "128",
+    "--num-workers",
+    "0",
+    "--optimizer",
+    "sgd",
+    "--sgd-momentum",
+    "0",
+    "--weight-decay",
+    "0",
+    "--clip-grad",
+    "0",
+    "--lr",
+    "0.001",
+    "--min-lr",
+    "0.001",
+    "--lr-decay-style",
+    "constant",
+    "--lr-warmup-iters",
+    "0",
+    "--eval-iters",
+    "0",
+    "--eval-interval",
+    "1000000",
+    "--timing-log-level",
+    "0",
+    "--ckpt-format",
+    "torch",
+    "--bf16",
+    "--accumulate-allreduce-grads-in-fp32",
+    "--swiglu",
+    "--num-experts",
+    "4",
+    "--moe-router-topk",
+    "2",
+    "--expert-model-parallel-size",
+    "1",
+    "--moe-token-dispatcher-type",
+    "allgather",
+    "--moe-router-load-balancing-type",
+    "aux_loss",
+    "--moe-aux-loss-coeff",
+    "0.01",
+    "--train-iters",
+    "20",
+    "--seed",
+    "34110",
+    "--log-interval",
+    "10"
+  ],
+  "top_host_cumulative": [
+    {
+      "file": "/tmp/kda-moe-weighted-stage34/launch_weighted.py",
+      "line": 1,
+      "function": "<module>",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 6.902500000000001e-05,
+      "cumulative_seconds": 27.771756226
+    },
+    {
+      "file": "/tmp/kda-moe-weighted-stage34/launch_weighted.py",
+      "line": 32,
+      "function": "prepare",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 3.5944e-05,
+      "cumulative_seconds": 10.538408496
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/eval_frame.py",
+      "line": 399,
+      "function": "_fn",
+      "primitive_calls": 420,
+      "total_calls": 420,
+      "self_seconds": 0.009210224000000001,
+      "cumulative_seconds": 8.289365158
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/convert_frame.py",
+      "line": 1062,
+      "function": "__call__",
+      "primitive_calls": 11,
+      "total_calls": 11,
+      "self_seconds": 0.000337059,
+      "cumulative_seconds": 8.131684291000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/utils.py",
+      "line": 219,
+      "function": "time_wrapper",
+      "primitive_calls": 11,
+      "total_calls": 92,
+      "self_seconds": 0.0021471800000000003,
+      "cumulative_seconds": 8.060705141
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/convert_frame.py",
+      "line": 938,
+      "function": "__call__",
+      "primitive_calls": 10,
+      "total_calls": 10,
+      "self_seconds": 0.00010520600000000001,
+      "cumulative_seconds": 7.984735803
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/convert_frame.py",
+      "line": 383,
+      "function": "__call__",
+      "primitive_calls": 10,
+      "total_calls": 10,
+      "self_seconds": 0.00035842000000000003,
+      "cumulative_seconds": 7.984625418
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/convert_frame.py",
+      "line": 522,
+      "function": "_compile",
+      "primitive_calls": 10,
+      "total_calls": 10,
+      "self_seconds": 0.0009031330000000001,
+      "cumulative_seconds": 7.982828703000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/convert_frame.py",
+      "line": 606,
+      "function": "compile_inner",
+      "primitive_calls": 10,
+      "total_calls": 10,
+      "self_seconds": 0.00051772,
+      "cumulative_seconds": 7.966607394
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/bytecode_transformation.py",
+      "line": 1177,
+      "function": "transform_code_object",
+      "primitive_calls": 10,
+      "total_calls": 10,
+      "self_seconds": 0.00015579800000000002,
+      "cumulative_seconds": 7.026292051
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/convert_frame.py",
+      "line": 157,
+      "function": "_fn",
+      "primitive_calls": 10,
+      "total_calls": 10,
+      "self_seconds": 0.0005760440000000001,
+      "cumulative_seconds": 7.0216730400000005
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/convert_frame.py",
+      "line": 559,
+      "function": "transform",
+      "primitive_calls": 10,
+      "total_calls": 10,
+      "self_seconds": 0.00028294800000000004,
+      "cumulative_seconds": 7.019294231000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/symbolic_convert.py",
+      "line": 2450,
+      "function": "run",
+      "primitive_calls": 10,
+      "total_calls": 10,
+      "self_seconds": 3.1230000000000004e-05,
+      "cumulative_seconds": 6.996637061
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/symbolic_convert.py",
+      "line": 889,
+      "function": "run",
+      "primitive_calls": 10,
+      "total_calls": 19,
+      "self_seconds": 0.000311198,
+      "cumulative_seconds": 6.996605831
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/symbolic_convert.py",
+      "line": 777,
+      "function": "step",
+      "primitive_calls": 105,
+      "total_calls": 303,
+      "self_seconds": 0.001321635,
+      "cumulative_seconds": 6.99580701
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/symbolic_convert.py",
+      "line": 2641,
+      "function": "RETURN_VALUE",
+      "primitive_calls": 10,
+      "total_calls": 10,
+      "self_seconds": 2.0639e-05,
+      "cumulative_seconds": 6.68154712
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/symbolic_convert.py",
+      "line": 2613,
+      "function": "_return",
+      "primitive_calls": 10,
+      "total_calls": 10,
+      "self_seconds": 0.000190881,
+      "cumulative_seconds": 6.681526481000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/output_graph.py",
+      "line": 957,
+      "function": "compile_subgraph",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.000392756,
+      "cumulative_seconds": 6.679339133
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/output_graph.py",
+      "line": 1247,
+      "function": "compile_and_call_fx_graph",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.0007578620000000001,
+      "cumulative_seconds": 6.676027997
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/output_graph.py",
+      "line": 1361,
+      "function": "call_user_compiler",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.000385039,
+      "cumulative_seconds": 6.647825678
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/repro/after_dynamo.py",
+      "line": 72,
+      "function": "__call__",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.000102712,
+      "cumulative_seconds": 6.646760514
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/compile_fx.py",
+      "line": 1250,
+      "function": "compile_fx",
+      "primitive_calls": 9,
+      "total_calls": 18,
+      "self_seconds": 0.000713126,
+      "cumulative_seconds": 6.646427500000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/backends/common.py",
+      "line": 22,
+      "function": "__call__",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.00035569100000000005,
+      "cumulative_seconds": 6.597806553000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_functorch/aot_autograd.py",
+      "line": 856,
+      "function": "aot_module_simplified",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.00041329500000000005,
+      "cumulative_seconds": 6.596527418
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_functorch/aot_autograd.py",
+      "line": 420,
+      "function": "create_aot_dispatcher_function",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.0011746760000000001,
+      "cumulative_seconds": 6.594143133
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/compile_fx.py",
+      "line": 1344,
+      "function": "fw_compiler_base",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.000279096,
+      "cumulative_seconds": 5.124791421
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/repro/after_aot.py",
+      "line": 67,
+      "function": "debug_wrapper",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.000254742,
+      "cumulative_seconds": 5.109640602000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/debug.py",
+      "line": 301,
+      "function": "inner",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.00010836400000000001,
+      "cumulative_seconds": 5.095078764
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/compile_fx.py",
+      "line": 419,
+      "function": "compile_fx_inner",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.00042515,
+      "cumulative_seconds": 5.092034491000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/compile_fx.py",
+      "line": 678,
+      "function": "fx_codegen_and_compile",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.0010852190000000001,
+      "cumulative_seconds": 5.054272559
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/graph.py",
+      "line": 1724,
+      "function": "compile_to_fn",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 3.2208e-05,
+      "cumulative_seconds": 4.438746483
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/graph.py",
+      "line": 1675,
+      "function": "compile_to_module",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.00046178100000000003,
+      "cumulative_seconds": 4.436818596
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/codecache.py",
+      "line": 3069,
+      "function": "load_by_key_path",
+      "primitive_calls": 9,
+      "total_calls": 19,
+      "self_seconds": 0.000207469,
+      "cumulative_seconds": 3.8406683320000004
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/runtime/compile_tasks.py",
+      "line": 34,
+      "function": "_reload_python_module",
+      "primitive_calls": 9,
+      "total_calls": 16,
+      "self_seconds": 0.000184629,
+      "cumulative_seconds": 3.840528303
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/async_compile.py",
+      "line": 228,
+      "function": "wait",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.0008057240000000001,
+      "cumulative_seconds": 3.7417061470000004
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/codecache.py",
+      "line": 3448,
+      "function": "result",
+      "primitive_calls": 10,
+      "total_calls": 10,
+      "self_seconds": 0.000144126,
+      "cumulative_seconds": 3.7396870740000003
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/autograd/function.py",
+      "line": 558,
+      "function": "apply",
+      "primitive_calls": 2332,
+      "total_calls": 2342,
+      "self_seconds": 0.008091722,
+      "cumulative_seconds": 3.640364223
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_functorch/_aot_autograd/jit_compile_runtime_wrappers.py",
+      "line": 221,
+      "function": "aot_dispatch_autograd",
+      "primitive_calls": 4,
+      "total_calls": 4,
+      "self_seconds": 0.0005850520000000001,
+      "cumulative_seconds": 3.501235636
+    },
+    {
+      "file": "/tmp/kda-moe-weighted-stage34/launch_weighted.py",
+      "line": 66,
+      "function": "call",
+      "primitive_calls": 320,
+      "total_calls": 320,
+      "self_seconds": 0.0041039250000000005,
+      "cumulative_seconds": 3.472742208
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_functorch/_aot_autograd/jit_compile_runtime_wrappers.py",
+      "line": 114,
+      "function": "aot_dispatch_base",
+      "primitive_calls": 5,
+      "total_calls": 5,
+      "self_seconds": 0.00028114300000000003,
+      "cumulative_seconds": 2.7589911320000002
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/__init__.py",
+      "line": 1,
+      "function": "<module>",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 5.1031e-05,
+      "cumulative_seconds": 1.9073105360000002
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/convert_frame.py",
+      "line": 1,
+      "function": "<module>",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 0.00020226400000000001,
+      "cumulative_seconds": 1.904989169
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/trace_rules.py",
+      "line": 1,
+      "function": "<module>",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 0.000227731,
+      "cumulative_seconds": 1.8495956370000002
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/variables/__init__.py",
+      "line": 1,
+      "function": "<module>",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 8.2762e-05,
+      "cumulative_seconds": 1.7569875060000002
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/variables/higher_order_ops.py",
+      "line": 1,
+      "function": "<module>",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 8.926100000000001e-05,
+      "cumulative_seconds": 1.704310148
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/compile_fx.py",
+      "line": 1,
+      "function": "<module>",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 0.00023198600000000002,
+      "cumulative_seconds": 1.419811602
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/async_compile.py",
+      "line": 1,
+      "function": "<module>",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 5.9431e-05,
+      "cumulative_seconds": 1.021992225
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/codecache.py",
+      "line": 1,
+      "function": "<module>",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 0.00019909000000000002,
+      "cumulative_seconds": 1.017661717
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py",
+      "line": 639,
+      "function": "decorator",
+      "primitive_calls": 181,
+      "total_calls": 181,
+      "self_seconds": 0.001094122,
+      "cumulative_seconds": 1.009638917
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py",
+      "line": 509,
+      "function": "__init__",
+      "primitive_calls": 181,
+      "total_calls": 181,
+      "self_seconds": 0.00661282,
+      "cumulative_seconds": 1.007056623
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py",
+      "line": 613,
+      "function": "jit",
+      "primitive_calls": 181,
+      "total_calls": 181,
+      "self_seconds": 0.000239668,
+      "cumulative_seconds": 0.9812800660000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/guards.py",
+      "line": 2076,
+      "function": "__init__",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.0005448860000000001,
+      "cumulative_seconds": 0.9393511940000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/guards.py",
+      "line": 1907,
+      "function": "_set_guard_export_info",
+      "primitive_calls": 96,
+      "total_calls": 96,
+      "self_seconds": 0.0007293450000000001,
+      "cumulative_seconds": 0.886005268
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/guards.py",
+      "line": 1748,
+      "function": "TENSOR_MATCH",
+      "primitive_calls": 20,
+      "total_calls": 20,
+      "self_seconds": 0.0007697740000000001,
+      "cumulative_seconds": 0.881302679
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/compile_fx.py",
+      "line": 1436,
+      "function": "partition_fn",
+      "primitive_calls": 4,
+      "total_calls": 4,
+      "self_seconds": 4.2303000000000005e-05,
+      "cumulative_seconds": 0.65621704
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/eval_frame.py",
+      "line": 596,
+      "function": "_fn",
+      "primitive_calls": 397,
+      "total_calls": 410,
+      "self_seconds": 0.001026647,
+      "cumulative_seconds": 0.612217784
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/graph.py",
+      "line": 1631,
+      "function": "codegen",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.000204457,
+      "cumulative_seconds": 0.5923773250000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_functorch/_aot_autograd/functional_utils.py",
+      "line": 1,
+      "function": "<module>",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 3.9713000000000004e-05,
+      "cumulative_seconds": 0.46610874100000005
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_functorch/_aot_autograd/dispatch_and_compile_graph.py",
+      "line": 40,
+      "function": "_create_graph",
+      "primitive_calls": 9,
+      "total_calls": 9,
+      "self_seconds": 0.00016895000000000001,
+      "cumulative_seconds": 0.43111896400000005
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/runtime/triton_heuristics.py",
+      "line": 222,
+      "function": "precompile",
+      "primitive_calls": 10,
+      "total_calls": 10,
+      "self_seconds": 0.000150852,
+      "cumulative_seconds": 0.40586323900000004
+    }
+  ],
+  "top_host_self": [
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/fx_passes/joint_graph.py",
+      "line": 203,
+      "function": "insertable_tensor_check",
+      "primitive_calls": 2,
+      "total_calls": 2,
+      "self_seconds": 0.043161240000000003,
+      "cumulative_seconds": 0.051653718
+    },
+    {
+      "file": "/tmp/kda-bf16-continuation/megatron_bf16/candidates/0008/candidate.py",
+      "line": 62,
+      "function": "forward",
+      "primitive_calls": 20,
+      "total_calls": 20,
+      "self_seconds": 0.029744076,
+      "cumulative_seconds": 0.043623013
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 524,
+      "function": "__init__",
+      "primitive_calls": 4443,
+      "total_calls": 4443,
+      "self_seconds": 0.01375542,
+      "cumulative_seconds": 0.054560639
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 595,
+      "function": "_match",
+      "primitive_calls": 1573,
+      "total_calls": 3431,
+      "self_seconds": 0.013507725000000002,
+      "cumulative_seconds": 0.035239325
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 443,
+      "function": "__init__",
+      "primitive_calls": 6069,
+      "total_calls": 6069,
+      "self_seconds": 0.013440015000000001,
+      "cumulative_seconds": 0.02321134
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 581,
+      "function": "pretty_print",
+      "primitive_calls": 237,
+      "total_calls": 3393,
+      "self_seconds": 0.011606702,
+      "cumulative_seconds": 0.10325982800000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 461,
+      "function": "fns_repr",
+      "primitive_calls": 6747,
+      "total_calls": 6747,
+      "self_seconds": 0.011532824,
+      "cumulative_seconds": 0.04139136
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/utils.py",
+      "line": 585,
+      "function": "unwrap_with_attr_name_if_wrapper",
+      "primitive_calls": 5385,
+      "total_calls": 5385,
+      "self_seconds": 0.010392031000000001,
+      "cumulative_seconds": 0.136399193
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/trace_rules.py",
+      "line": 2891,
+      "function": "load_object",
+      "primitive_calls": 5326,
+      "total_calls": 5326,
+      "self_seconds": 0.009272714000000001,
+      "cumulative_seconds": 0.28274803400000004
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/eval_frame.py",
+      "line": 399,
+      "function": "_fn",
+      "primitive_calls": 420,
+      "total_calls": 420,
+      "self_seconds": 0.009210224000000001,
+      "cumulative_seconds": 8.289365158
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 938,
+      "function": "memoize",
+      "primitive_calls": 234,
+      "total_calls": 3350,
+      "self_seconds": 0.008755539,
+      "cumulative_seconds": 0.10522593400000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/autograd/function.py",
+      "line": 558,
+      "function": "apply",
+      "primitive_calls": 2332,
+      "total_calls": 2342,
+      "self_seconds": 0.008091722,
+      "cumulative_seconds": 3.640364223
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 543,
+      "function": "simple_flatten",
+      "primitive_calls": 6268,
+      "total_calls": 6268,
+      "self_seconds": 0.007637786000000001,
+      "cumulative_seconds": 0.009823426000000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/utils.py",
+      "line": 568,
+      "function": "is_function",
+      "primitive_calls": 10795,
+      "total_calls": 10795,
+      "self_seconds": 0.0075125850000000004,
+      "cumulative_seconds": 0.008960706
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 927,
+      "function": "pretty_print",
+      "primitive_calls": 377,
+      "total_calls": 7423,
+      "self_seconds": 0.007296566000000001,
+      "cumulative_seconds": 0.10615239600000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/fx_passes/fuse_attention.py",
+      "line": 626,
+      "function": "_get_sfdp_patterns",
+      "primitive_calls": 89,
+      "total_calls": 89,
+      "self_seconds": 0.006695152,
+      "cumulative_seconds": 0.045581461000000004
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py",
+      "line": 509,
+      "function": "__init__",
+      "primitive_calls": 181,
+      "total_calls": 181,
+      "self_seconds": 0.00661282,
+      "cumulative_seconds": 1.007056623
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/trace_rules.py",
+      "line": 2881,
+      "function": "_load_obj_from_str",
+      "primitive_calls": 5326,
+      "total_calls": 5326,
+      "self_seconds": 0.006145614000000001,
+      "cumulative_seconds": 0.13360697600000002
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/utils.py",
+      "line": 846,
+      "function": "writeline",
+      "primitive_calls": 3904,
+      "total_calls": 3904,
+      "self_seconds": 0.006005031,
+      "cumulative_seconds": 0.009458403
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 308,
+      "function": "match",
+      "primitive_calls": 3174,
+      "total_calls": 5164,
+      "self_seconds": 0.005806998000000001,
+      "cumulative_seconds": 0.043578686000000005
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 492,
+      "function": "_match_fns",
+      "primitive_calls": 5032,
+      "total_calls": 5032,
+      "self_seconds": 0.005686343,
+      "cumulative_seconds": 0.008659604000000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/triton/compiler/compiler.py",
+      "line": 428,
+      "function": "compile",
+      "primitive_calls": 8,
+      "total_calls": 8,
+      "self_seconds": 0.005562134000000001,
+      "cumulative_seconds": 0.38888392800000005
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/triton/runtime/jit.py",
+      "line": 577,
+      "function": "__setattr__",
+      "primitive_calls": 4910,
+      "total_calls": 5453,
+      "self_seconds": 0.005003737,
+      "cumulative_seconds": 0.005003737
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 534,
+      "function": "<genexpr>",
+      "primitive_calls": 15343,
+      "total_calls": 15343,
+      "self_seconds": 0.0049428530000000005,
+      "cumulative_seconds": 0.0071030040000000004
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 1652,
+      "function": "apply",
+      "primitive_calls": 72,
+      "total_calls": 72,
+      "self_seconds": 0.004832724,
+      "cumulative_seconds": 0.08297694500000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/autograd/function.py",
+      "line": 328,
+      "function": "__init__",
+      "primitive_calls": 250,
+      "total_calls": 250,
+      "self_seconds": 0.004774016000000001,
+      "cumulative_seconds": 0.004911939000000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_library/autograd.py",
+      "line": 23,
+      "function": "make_autograd_impl",
+      "primitive_calls": 124,
+      "total_calls": 124,
+      "self_seconds": 0.004749352,
+      "cumulative_seconds": 0.08758460700000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/graph.py",
+      "line": 1173,
+      "function": "run_node",
+      "primitive_calls": 115,
+      "total_calls": 115,
+      "self_seconds": 0.0046910450000000005,
+      "cumulative_seconds": 0.295451122
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/trace_rules.py",
+      "line": 2862,
+      "function": "get_torch_obj_rule_map",
+      "primitive_calls": 2,
+      "total_calls": 2,
+      "self_seconds": 0.004675719,
+      "cumulative_seconds": 0.287457419
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py",
+      "line": 185,
+      "function": "runtime_wrapper",
+      "primitive_calls": 340,
+      "total_calls": 340,
+      "self_seconds": 0.004506227000000001,
+      "cumulative_seconds": 0.14002646000000002
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/virtualized.py",
+      "line": 259,
+      "function": "inner",
+      "primitive_calls": 1289,
+      "total_calls": 1289,
+      "self_seconds": 0.004378661000000001,
+      "cumulative_seconds": 0.11437844300000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/virtualized.py",
+      "line": 125,
+      "function": "_get_handler",
+      "primitive_calls": 8973,
+      "total_calls": 8973,
+      "self_seconds": 0.004373364,
+      "cumulative_seconds": 0.006460733000000001
+    },
+    {
+      "file": "/tmp/kda-moe-weighted-stage34/launch_weighted.py",
+      "line": 66,
+      "function": "call",
+      "primitive_calls": 320,
+      "total_calls": 320,
+      "self_seconds": 0.0041039250000000005,
+      "cumulative_seconds": 3.472742208
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/fx_passes/group_batch_fusion.py",
+      "line": 1137,
+      "function": "get_fusion_candidates",
+      "primitive_calls": 522,
+      "total_calls": 522,
+      "self_seconds": 0.004086915,
+      "cumulative_seconds": 0.019708080000000003
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 584,
+      "function": "<genexpr>",
+      "primitive_calls": 719,
+      "total_calls": 10172,
+      "self_seconds": 0.0039425680000000005,
+      "cumulative_seconds": 0.10026228400000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/sizevars.py",
+      "line": 64,
+      "function": "simplify",
+      "primitive_calls": 3139,
+      "total_calls": 3139,
+      "self_seconds": 0.0038163900000000002,
+      "cumulative_seconds": 0.042006133
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/ir.py",
+      "line": 2767,
+      "function": "indexer",
+      "primitive_calls": 541,
+      "total_calls": 541,
+      "self_seconds": 0.0037472100000000004,
+      "cumulative_seconds": 0.09460940400000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 337,
+      "function": "match",
+      "primitive_calls": 3082,
+      "total_calls": 3082,
+      "self_seconds": 0.003515775,
+      "cumulative_seconds": 0.046154089
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/utils.py",
+      "line": 564,
+      "function": "sympy_str",
+      "primitive_calls": 539,
+      "total_calls": 2635,
+      "self_seconds": 0.003427181,
+      "cumulative_seconds": 0.016866285
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/virtualized.py",
+      "line": 315,
+      "function": "graph",
+      "primitive_calls": 5503,
+      "total_calls": 5503,
+      "self_seconds": 0.0033161790000000003,
+      "cumulative_seconds": 0.0069458490000000005
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/utils.py",
+      "line": 624,
+      "function": "sympy_subs",
+      "primitive_calls": 1410,
+      "total_calls": 1410,
+      "self_seconds": 0.0032869,
+      "cumulative_seconds": 0.032878625
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/dependencies.py",
+      "line": 358,
+      "function": "canonicalize",
+      "primitive_calls": 445,
+      "total_calls": 445,
+      "self_seconds": 0.003181768,
+      "cumulative_seconds": 0.039085929000000005
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/utils.py",
+      "line": 877,
+      "function": "splice",
+      "primitive_calls": 191,
+      "total_calls": 191,
+      "self_seconds": 0.002868424,
+      "cumulative_seconds": 0.012476539
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 1861,
+      "function": "stable_topological_sort",
+      "primitive_calls": 76,
+      "total_calls": 76,
+      "self_seconds": 0.002854311,
+      "cumulative_seconds": 0.015729159
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/virtualized.py",
+      "line": 112,
+      "function": "_set_handler",
+      "primitive_calls": 1160,
+      "total_calls": 1160,
+      "self_seconds": 0.002771836,
+      "cumulative_seconds": 0.016744779
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/runtime/triton_heuristics.py",
+      "line": 339,
+      "function": "_precompile_config",
+      "primitive_calls": 8,
+      "total_calls": 8,
+      "self_seconds": 0.002769656,
+      "cumulative_seconds": 0.405700125
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/autograd/grad_mode.py",
+      "line": 184,
+      "function": "__init__",
+      "primitive_calls": 3086,
+      "total_calls": 3086,
+      "self_seconds": 0.0026625520000000003,
+      "cumulative_seconds": 0.004361851
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/variables/builder.py",
+      "line": 438,
+      "function": "_wrap",
+      "primitive_calls": 73,
+      "total_calls": 73,
+      "self_seconds": 0.0026365580000000002,
+      "cumulative_seconds": 0.10245117100000001
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/utils.py",
+      "line": 581,
+      "function": "unwrap_if_wrapper",
+      "primitive_calls": 5360,
+      "total_calls": 5360,
+      "self_seconds": 0.0025762380000000002,
+      "cumulative_seconds": 0.13832866100000002
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/lowering.py",
+      "line": 1,
+      "function": "<module>",
+      "primitive_calls": 1,
+      "total_calls": 1,
+      "self_seconds": 0.0025437980000000003,
+      "cumulative_seconds": 0.210669337
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/utils.py",
+      "line": 794,
+      "function": "getvaluewithlinemap",
+      "primitive_calls": 48,
+      "total_calls": 48,
+      "self_seconds": 0.0023604750000000003,
+      "cumulative_seconds": 0.003930103
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/ops_handler.py",
+      "line": 863,
+      "function": "inner",
+      "primitive_calls": 944,
+      "total_calls": 944,
+      "self_seconds": 0.002337636,
+      "cumulative_seconds": 0.081597211
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 394,
+      "function": "__init__",
+      "primitive_calls": 2445,
+      "total_calls": 2445,
+      "self_seconds": 0.0023055270000000004,
+      "cumulative_seconds": 0.0023107260000000004
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/runtime/triton_heuristics.py",
+      "line": 815,
+      "function": "run",
+      "primitive_calls": 349,
+      "total_calls": 349,
+      "self_seconds": 0.002202917,
+      "cumulative_seconds": 0.103425837
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_dynamo/utils.py",
+      "line": 219,
+      "function": "time_wrapper",
+      "primitive_calls": 11,
+      "total_calls": 92,
+      "self_seconds": 0.0021471800000000003,
+      "cumulative_seconds": 8.060705141
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/lowering.py",
+      "line": 265,
+      "function": "_register_lowering",
+      "primitive_calls": 772,
+      "total_calls": 772,
+      "self_seconds": 0.00211947,
+      "cumulative_seconds": 0.019305963000000002
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 963,
+      "function": "register",
+      "primitive_calls": 360,
+      "total_calls": 1345,
+      "self_seconds": 0.002117686,
+      "cumulative_seconds": 0.0038729520000000003
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/dependencies.py",
+      "line": 490,
+      "function": "extract_read_writes",
+      "primitive_calls": 185,
+      "total_calls": 185,
+      "self_seconds": 0.0021044640000000003,
+      "cumulative_seconds": 0.22925291900000003
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/lowering.py",
+      "line": 187,
+      "function": "get_overloads",
+      "primitive_calls": 803,
+      "total_calls": 803,
+      "self_seconds": 0.002097116,
+      "cumulative_seconds": 0.011216373
+    },
+    {
+      "file": "/usr/local/corex/lib64/python3/dist-packages/torch/_inductor/pattern_matcher.py",
+      "line": 160,
+      "function": "__init__",
+      "primitive_calls": 1904,
+      "total_calls": 1904,
+      "self_seconds": 0.002019326,
+      "cumulative_seconds": 0.002019326
+    }
+  ]
+}
