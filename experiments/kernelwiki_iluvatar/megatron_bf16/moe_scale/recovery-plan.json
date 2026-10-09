@@ -1,0 +1,35 @@
+{
+  "schema": "moe-heldout-stage35-recovery-plan-v1",
+  "date": "2026-10-09",
+  "status": "planned_not_executed",
+  "reason": "Replacement Pod lacks original stage35 /tmp data and runtime while complete raw backup was unfinished",
+  "prerequisites": [
+    "Restore the existing SSH ingress to the current Pod and verify its host identity",
+    "Check whether the platform can recover the original pms7c Pod/node data; compare every recovered file against the immutable old inventory",
+    "Inspect /private NFS mount identity, available capacity and persistence before placing fresh captures there",
+    "Restore exact600 native Git blobs and the pinned local runtime compatibility scripts; fresh allocation/source/sort checks are required"
+  ],
+  "persistent_root_candidate": "/private/kda-biv150-stage35-recovery01",
+  "local_collection_namespace": "moe_scale_recovery01",
+  "overwrite_original_records": false,
+  "original_raw_inventory_may_be_replaced": false,
+  "candidate_sha256": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e",
+  "retuning": false,
+  "models": ["4L/H512/FFN2048/S256/B2/V1024/E4/topk2/55,718,400 parameters", "4L/H512/FFN2048/S512/B2/V1024/E8/topk2/106,189,312 parameters"],
+  "arms": {
+    "native": "Pinned original SequentialMLP/default compiled weighted SwiGLU/RMSNorm/fused causal softmax and common explicit bool-to-uint8 sort compatibility",
+    "control": "native+CE0008+gradnorm001",
+    "optimized": "control+unchanged weighted004"
+  },
+  "correctness": "Unchanged CPU float64 atol3e-4/rtol1e-3. All gradients/BF16 parameters/FP32 SGD masters, router maps/probabilities/probability gradients; original probes and genuine offset views;48/96 actual expert replay. Fresh full audit required.",
+  "formal_timer": "Original GPU-synchronized time.time;120steps/first20excluded/ten retained interval10means;3 seeds and3 rotated arms per model",
+  "promotion_rule": "Strictly greater than1% geometric throughput gain over same-round control and all3 seeds faster",
+  "repeat_policy": "Freeze before new GPU work; if native/control seed-mean CV>=10%, run one complete independent repeat with unchanged code/order/contract, preserve both and require both to pass",
+  "raw_io_barriers": [
+    "Write fresh raw captures/checkpoints directly into the verified NFS namespace",
+    "After both untimed correctness audits and before formal timing, transfer and SHA-verify all original audit raw files locally",
+    "Do not run audit/profile/backup or other large I/O concurrently with any formal timing process",
+    "Keep new and old inventories/receipts separate; a rerun is new evidence, not recovery of the old file hashes"
+  ],
+  "scope": "Single BI-V150/mock data/dropout0/BF16 and FP32 SGD masters/TP-PP-CP-EP1; E8/S512 changes two dimensions jointly. No production, convergence, multiGPU, GroupedGEMM, AdamW, SFT or RL claim."
+}

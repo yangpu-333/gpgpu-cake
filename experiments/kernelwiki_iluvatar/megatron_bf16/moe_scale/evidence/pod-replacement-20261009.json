@@ -1,0 +1,36 @@
+{
+  "schema": "moe-heldout-stage35-pod-replacement-v1",
+  "recorded_utc": "2026-10-09T14:40:34Z",
+  "status": "original_raw_archive_incomplete_recovery_required",
+  "original_pod": "ai-exp-sy2506311-kda1-pod-qpia-8f74fcf5c-pms7c",
+  "replacement_pod": "ai-exp-sy2506311-kda1-pod-qpia-8f74fcf5c-z7g26",
+  "replacement_pod_ip": "10.42.24.221",
+  "user_terminal_observations": {
+    "ssh_command": "ssh -p 41686 root@ic.h3i.buaa.edu.cn",
+    "sshd_running": true,
+    "stage35_directory_present": false,
+    "temporary_runtime_directory_present": false,
+    "private_filesystem_type": "nfs",
+    "private_mount_reported_at": "/mnt",
+    "available_kib": 71794688,
+    "existing_persistent_directories": ["/private/kda-biv150", "/private/kda-biv150-stage3"]
+  },
+  "local_archive": {
+    "original_inventory_sha256": "d3a43e8b6af275716dbb99afc9be936c7b9428bda9466b1a9b0f7e58155c14c9",
+    "prior_pending_receipt_sha256": "6bd69ce4dded97196967216515056fc080a1e93cb82dc777cc85e0cbdc8bae9f",
+    "original_files": 384,
+    "original_raw_bytes": 22291588758,
+    "original_unique_objects": 227,
+    "original_unique_bytes": 9978190705,
+    "verified_downloaded_objects": 27,
+    "verified_downloaded_bytes": 163524176,
+    "all_original_bytes_backed_up": false,
+    "small_gpu_receipts_logs_contracts_candidates_preserved": true
+  },
+  "ssh_external_ingress": "Still refused before authentication in the latest local test",
+  "old_pod_node_data_recoverability": "Unknown; absence is confirmed only in the replacement Pod",
+  "final_decision_written": false,
+  "stage35_skill_published": false,
+  "released_skill_stage": 34,
+  "recovery_policy": "Preserve all original records. First seek recovery of exact original bytes from the old Pod/node. If unavailable, run a new independently named audit and complete timing collection on verified persistent storage; never substitute newly generated files for the old SHA inventory."
+}
