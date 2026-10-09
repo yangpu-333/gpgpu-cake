@@ -1,0 +1,62 @@
+{
+  "schema": "moe-stage35-controller-derivation-v1",
+  "date": "2026-10-09",
+  "candidate004_sha256": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e",
+  "parent_decision_sha256": "de1a510dbc3c20b42b9a936f71a65a619b832893d804cac09feaad808e483aaa",
+  "parent_contract_sha256": "31a09fd357fbe386b493ea1efa348a870e81326c6cfe3e757bf9ae9b7478e263",
+  "frozen_copies": {
+    "launch_weighted.py": "65f01f6aa474ae08c3351106df245477ac6c224d951408fc938aa7b19eba48ad",
+    "run_case.py": "a85cb3dd5a9f32981e0d20e068be31ebe46467266062e93284ff58d3f45fc797",
+    "probe.py": "c5c45eca4ea3f56de0a1cfddf2844deb37c6689cbabe5c48e4ada743cb010387",
+    "probe_offset.py": "a672dc9c1015b38a42416d083dd4f16185459b39fe002a456d8b1e761f370840"
+  },
+  "adaptations": {
+    "long/compare.py": {
+      "original_sha256": "52481dce035a59c523cc137d968a998eeb4f20ff6f3b3590c3492fa5f7c50635",
+      "heldout_sha256": "deb620de8a2323a222b9725e5b1affb466c05d59f2e6ed44cfd4d1f20795933c",
+      "changes": "Shape-derived configuration, dispatch/replay/tensor-coverage counts and predetermined seed list; mathematical tensor comparison and original synchronized timer unchanged."
+    },
+    "long/replay.py": {
+      "original_sha256": "3a740d3a0bbce2a3b77a3b8a1df861e2bfed63d6eb0ab7c1ab837c09013c92d7",
+      "heldout_sha256": "695692ae502fff2d7aaec1c7206fa2934c546b3e06d10de391a3137ce1ae3b6e",
+      "changes": "Shape-derived configuration, dispatch/replay/tensor-coverage counts and predetermined seed list; mathematical tensor comparison and original synchronized timer unchanged."
+    },
+    "long/run_performance.py": {
+      "original_sha256": "2775cbd70ce6e21d8b310a666609885f54893c8de53d4918098e9a61318bfd3b",
+      "heldout_sha256": "8841b7fc77808d2e5640073e84ae31460078bce2244380a9fd3454348a5a2dcb",
+      "changes": "Shape-derived configuration, dispatch/replay/tensor-coverage counts and predetermined seed list; mathematical tensor comparison and original synchronized timer unchanged."
+    },
+    "long/seal_audit.py": {
+      "original_sha256": "3bcfc8abba6b51e0d269fb1103aa0e8cfeb0298374bc9df072d39719ce5bd0dd",
+      "heldout_sha256": "812b3f2eecd87d886b08b507b6749c3c7ef43099a41942e83197f294affe85a4",
+      "changes": "Shape-derived configuration, dispatch/replay/tensor-coverage counts and predetermined seed list; mathematical tensor comparison and original synchronized timer unchanged."
+    },
+    "experts/compare.py": {
+      "original_sha256": "52481dce035a59c523cc137d968a998eeb4f20ff6f3b3590c3492fa5f7c50635",
+      "heldout_sha256": "deb620de8a2323a222b9725e5b1affb466c05d59f2e6ed44cfd4d1f20795933c",
+      "changes": "Shape-derived configuration, dispatch/replay/tensor-coverage counts and predetermined seed list; mathematical tensor comparison and original synchronized timer unchanged."
+    },
+    "experts/replay.py": {
+      "original_sha256": "3a740d3a0bbce2a3b77a3b8a1df861e2bfed63d6eb0ab7c1ab837c09013c92d7",
+      "heldout_sha256": "695692ae502fff2d7aaec1c7206fa2934c546b3e06d10de391a3137ce1ae3b6e",
+      "changes": "Shape-derived configuration, dispatch/replay/tensor-coverage counts and predetermined seed list; mathematical tensor comparison and original synchronized timer unchanged."
+    },
+    "experts/run_performance.py": {
+      "original_sha256": "2775cbd70ce6e21d8b310a666609885f54893c8de53d4918098e9a61318bfd3b",
+      "heldout_sha256": "8841b7fc77808d2e5640073e84ae31460078bce2244380a9fd3454348a5a2dcb",
+      "changes": "Shape-derived configuration, dispatch/replay/tensor-coverage counts and predetermined seed list; mathematical tensor comparison and original synchronized timer unchanged."
+    },
+    "experts/seal_audit.py": {
+      "original_sha256": "3bcfc8abba6b51e0d269fb1103aa0e8cfeb0298374bc9df072d39719ce5bd0dd",
+      "heldout_sha256": "812b3f2eecd87d886b08b507b6749c3c7ef43099a41942e83197f294affe85a4",
+      "changes": "Shape-derived configuration, dispatch/replay/tensor-coverage counts and predetermined seed list; mathematical tensor comparison and original synchronized timer unchanged."
+    }
+  },
+  "review_corrections": {
+    "api_response_sha256": "b952671fb278935084abbfdbdfc09a217ca282717c021786a87c0576124dc7a2",
+    "experts_parameters": 106189312,
+    "router_expansion_parameters": 8192,
+    "review_assertion_parameters_not_a_gate_is_incorrect": "The unchanged original Comparison.metadata and native performance validator do gate model.parameters; corrected before freeze/deployment.",
+    "coverage_gate": "Complete named tensor-group coverage rather than an unproved formula for total metadata-check count; every original tensor/metadata check remains executed and must pass."
+  }
+}

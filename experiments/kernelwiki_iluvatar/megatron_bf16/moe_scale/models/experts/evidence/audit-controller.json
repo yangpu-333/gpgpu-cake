@@ -1,0 +1,18 @@
+{
+  "schema": "stage35-local-ssh-console-v1",
+  "model": "experts",
+  "phase": "audit",
+  "exit_code": 0,
+  "command": [
+    "C:\\Users\\lenovo\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+    "E:\\code\\GPGPU\\experiments\\kernelwiki_iluvatar\\megatron_bf16\\moe_scale\\remote.py",
+    "experts",
+    "run",
+    "run_audit.py",
+    "--model",
+    "experts"
+  ],
+  "stdout_sha256": "e0e70754cd5450f35850f64a44ca5b8e0de11634d57669fd5a107947e200fffd",
+  "stderr_sha256": "df48eeb4e7bd616f23174d52f9214723cd324a4d168a45768674600cd334c2cc",
+  "capture_script_sha256": "780eb0ed78c511010ee6abb2d9e2fc29f01c28879978ed5a17f82a242258981a"
+}

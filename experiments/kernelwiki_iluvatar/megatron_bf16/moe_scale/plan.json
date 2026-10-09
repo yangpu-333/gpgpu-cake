@@ -1,0 +1,20 @@
+{
+  "schema": "moe-weighted-heldout-stage35-plan-v1",
+  "date": "2026-10-09",
+  "status": "frozen_before_gpu_training",
+  "models": [
+    "long:4 experts S256 55,718,400 params",
+    "experts:8 experts S512 106,189,312 params"
+  ],
+  "candidate_sha256": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e",
+  "retuning": false,
+  "native": "same-card pinned default compiled weighted SwiGLU/RMSNorm/fused causal softmax with common explicit stable uint8 mapping",
+  "control": "native+CE0008+gradnorm001",
+  "optimized": "control+frozen weighted004",
+  "correctness": "three-update full all-gradient/BF16-parameter/FP32-master and route/probability-gradient comparisons; CPUfloat64 atol3e-4/rtol1e-3;44 original probe cases+2guards+2genuine offset cases+48/96 actual replay",
+  "performance": "same original synchronized time.time interval10;3 predetermined seeds/rotated3arms/120steps/first20excluded; ten retained intervals; no audit/profile/backup during timing",
+  "promotion": "strictly >1% geometric throughput over same-round control and all3 seeds faster",
+  "repeat_policy": "If a valid first round has coefficient of variation >=10% across native or control seed means, run one complete independent repeat with identical controller/candidate/contract bytes. Preserve both; promotion requires both, repeat becomes headline. Repeated rejection stays rejection.",
+  "scope": "single BI-V150/mock-data/dropout0/SGD/TP-PP-CP-EP1; experts changes S and expert count jointly; no production/convergence/GroupedGEMM/multiGPU/AdamW/SFT/RL claim",
+  "raw_policy": "Keep complete raw and failure evidence; backup only after all formal timing, content-SHA deduplication; no extra standalone Markdown report."
+}

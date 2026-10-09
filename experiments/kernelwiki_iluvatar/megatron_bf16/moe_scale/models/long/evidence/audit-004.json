@@ -1,0 +1,41 @@
+{
+  "schema": "moe-weighted-stage34-sealed-audit-v1",
+  "passed": true,
+  "candidate_sha256": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e",
+  "contract_sha256": "386553c789e135e4b7eaa5be7642f9f36319c2c9ba6a061201cbe628761252c1",
+  "controller_sha256": {
+    "launch_weighted.py": "65f01f6aa474ae08c3351106df245477ac6c224d951408fc938aa7b19eba48ad",
+    "run_case.py": "a85cb3dd5a9f32981e0d20e068be31ebe46467266062e93284ff58d3f45fc797",
+    "compare.py": "deb620de8a2323a222b9725e5b1affb466c05d59f2e6ed44cfd4d1f20795933c",
+    "probe.py": "c5c45eca4ea3f56de0a1cfddf2844deb37c6689cbabe5c48e4ada743cb010387",
+    "probe_offset.py": "a672dc9c1015b38a42416d083dd4f16185459b39fe002a456d8b1e761f370840",
+    "seal_audit.py": "812b3f2eecd87d886b08b507b6749c3c7ef43099a41942e83197f294affe85a4",
+    "run_performance.py": "8841b7fc77808d2e5640073e84ae31460078bce2244380a9fd3454348a5a2dcb"
+  },
+  "replay_sha256": "cb026f97169ae3fccb4d31a16320499875938d530333c8da62765c7bd23136e2",
+  "replay_controller_sha256": "695692ae502fff2d7aaec1c7206fa2934c546b3e06d10de391a3137ce1ae3b6e",
+  "probe_sha256": "5c6b6ca50b7d49241ff829f4c8f4f2c56102138eef4dffd6ec3a467831f07733",
+  "offset_probe_sha256": "11026f08f30227b95fb5692ab982aac252e864074bac280e6e3509758c9a63d0",
+  "comparisons": {
+    "comparison-admission01.json": {
+      "path": "comparison-admission01.json",
+      "sha256": "9b614d0f067a757f2ec3fdbfb4c9bededadf2e239af37a20de9a225c8f0501b7",
+      "check_count": 2627,
+      "tensor_count": 1289
+    },
+    "comparison-native-004.json": {
+      "path": "comparison-native-004.json",
+      "sha256": "5e39ea0466dce94ee713f72d79f2d575363027eb6e0914c3ee2ccbcf76ea398a",
+      "check_count": 2627,
+      "tensor_count": 1289
+    },
+    "comparison-control-004.json": {
+      "path": "comparison-control-004.json",
+      "sha256": "2252ecec9d0fa7cb67161e10df482a468a748227028197f92519d5312df92d5b",
+      "check_count": 2627,
+      "tensor_count": 1289
+    }
+  },
+  "ce_sha256": "9b22e12b4744b2a41b9209faa280e361e6defe1d5480f5e5683fddd247b7f493",
+  "gradnorm_sha256": "84c851ce5af7a49ba97685710790146d2c315f9c8837259366bffd7831f67dc0"
+}

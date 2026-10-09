@@ -1,0 +1,19 @@
+{"case": "native-perf-004-35102", "stage34_arm": "native", "exit_code": 0, "whole_process_elapsed_seconds": 36.02068710495951}
+{"arm": "native", "seed": 35102, "case": "native-perf-004-35102", "mean_iteration_ms": 80.92}
+{"case": "control-perf-004-35102", "stage34_arm": "control", "exit_code": 0, "whole_process_elapsed_seconds": 32.271776906971354}
+{"arm": "control", "seed": 35102, "case": "control-perf-004-35102", "mean_iteration_ms": 78.14}
+{"case": "optimized-perf-004-35102", "stage34_arm": "optimized", "exit_code": 0, "whole_process_elapsed_seconds": 29.978316456021275}
+{"arm": "optimized", "seed": 35102, "case": "optimized-perf-004-35102", "mean_iteration_ms": 71.82}
+{"case": "optimized-perf-004-35103", "stage34_arm": "optimized", "exit_code": 0, "whole_process_elapsed_seconds": 30.11532195599284}
+{"arm": "optimized", "seed": 35103, "case": "optimized-perf-004-35103", "mean_iteration_ms": 72.56}
+{"case": "control-perf-004-35103", "stage34_arm": "control", "exit_code": 0, "whole_process_elapsed_seconds": 32.32000010297634}
+{"arm": "control", "seed": 35103, "case": "control-perf-004-35103", "mean_iteration_ms": 75.86}
+{"case": "native-perf-004-35103", "stage34_arm": "native", "exit_code": 0, "whole_process_elapsed_seconds": 37.18298730504466}
+{"arm": "native", "seed": 35103, "case": "native-perf-004-35103", "mean_iteration_ms": 81.68}
+{"case": "control-perf-004-35104", "stage34_arm": "control", "exit_code": 0, "whole_process_elapsed_seconds": 33.50170198100386}
+{"arm": "control", "seed": 35104, "case": "control-perf-004-35104", "mean_iteration_ms": 77.11}
+{"case": "native-perf-004-35104", "stage34_arm": "native", "exit_code": 0, "whole_process_elapsed_seconds": 34.67333396995673}
+{"arm": "native", "seed": 35104, "case": "native-perf-004-35104", "mean_iteration_ms": 78.31}
+{"case": "optimized-perf-004-35104", "stage34_arm": "optimized", "exit_code": 0, "whole_process_elapsed_seconds": 31.01752176100854}
+{"arm": "optimized", "seed": 35104, "case": "optimized-perf-004-35104", "mean_iteration_ms": 72.44}
+{"status": "validated", "decision": "promoted_tested_model_only", "vs_control": {"ratio": 1.0658398259494286, "gain_percent": 6.583982594942861, "all_seeds_faster": true}, "vs_native": {"ratio": 1.1109365027304439, "gain_percent": 11.093650273044386, "all_seeds_faster": true}, "error": null}

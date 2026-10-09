@@ -75,5 +75,10 @@ jobs:
           python -m unittest discover -s experiments/kernelwiki_iluvatar/megatron_bf16/moe_weighted -p test_verify_receipts.py -v
       - name: Run KernelWiki full test suite
         run: python -m unittest discover -s "$RUNNER_TEMP/kernelwiki-iluvatar/tests" -p "test_*.py" -q
+      - name: Verify frozen MoE heldout training receipts
+        run: |
+          python experiments/kernelwiki_iluvatar/megatron_bf16/moe_scale/verify_receipts.py --model long
+          python experiments/kernelwiki_iluvatar/megatron_bf16/moe_scale/verify_receipts.py --model experts
+          python -m unittest discover -s experiments/kernelwiki_iluvatar/megatron_bf16/moe_scale -p test_verify_receipts.py -v
       - name: Load skill into KDA checkout and verify architecture paths
         run: python experiments/kernelwiki_iluvatar/verify_kda_integration.py --kda "$RUNNER_TEMP/kda" --skill "$RUNNER_TEMP/kernelwiki-iluvatar"

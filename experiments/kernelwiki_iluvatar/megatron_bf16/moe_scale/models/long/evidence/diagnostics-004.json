@@ -1,0 +1,2651 @@
+{
+  "schema": "moe-weighted-stage35-heldout-actual-native-replay-v1",
+  "candidate_sha256": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e",
+  "verifier_sha256": "695692ae502fff2d7aaec1c7206fa2934c546b3e06d10de391a3137ce1ae3b6e",
+  "atol": 0.0003,
+  "rtol": 0.001,
+  "checks": [
+    {
+      "index": 1,
+      "capture_sha256": "9a580425867cc308b239bfbd977f6e558ed5848d8236df688ddcd56304c4d275",
+      "input_shape": [
+        318,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 2,
+      "capture_sha256": "6dcd7292da8725093526f97296dc723ae0e00af6e2d5e3b0f0efc2d84d216368",
+      "input_shape": [
+        230,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 3,
+      "capture_sha256": "117f59b382d6a26114eb72ced33d05fe9a5239465311a6582f896373c5ec5793",
+      "input_shape": [
+        251,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 4,
+      "capture_sha256": "aa67693948517b119d2ec5485aab75f11977c2bf65eedf7206ccb5378de8acc1",
+      "input_shape": [
+        225,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 5,
+      "capture_sha256": "3e515d5064a4e7ad7410b8df3f25cd3f7e21f95582bca40091a0bec6f266b3d6",
+      "input_shape": [
+        162,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 6,
+      "capture_sha256": "4e40aaf02f93ff5d2c9f12723488381b8111275bf8b366d549c17babcedfe50a",
+      "input_shape": [
+        296,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 7,
+      "capture_sha256": "dde288d57d40f2d88617c046db4cf089c873da195567cfb242746a42695caed3",
+      "input_shape": [
+        372,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 8,
+      "capture_sha256": "e441011cca8a44b9aacc5dec9a29e762eb44b1881a21512c439620b2f7b70263",
+      "input_shape": [
+        194,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 9,
+      "capture_sha256": "4bb7cbf7d7f0d812e66c63a09dae7c844fc651e2c6af77737e4f4eec9b8b1dcf",
+      "input_shape": [
+        30,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 10,
+      "capture_sha256": "64e6b11e95bcaaccc1fc42332bc7c72fefc7e8c80c4cb0cc97d4db9fbc845b32",
+      "input_shape": [
+        392,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 11,
+      "capture_sha256": "8260aa33a56f96231f7f6b552ba6f4da5d9b471bfa4ddc0e6ff041c7e0b838c5",
+      "input_shape": [
+        273,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 12,
+      "capture_sha256": "d823f359b0f375fa3b60fc5319df7afc0206ac22797bc7fbcebd80057b2e72fb",
+      "input_shape": [
+        329,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 13,
+      "capture_sha256": "44986013d44d86b046b47b1ee3213e438a85212534cbad827bb1b0c34fd1ddc3",
+      "input_shape": [
+        13,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 14,
+      "capture_sha256": "e98b488be041f66f159bfe9ca0194998dcf799f345ed64f65aa0260e35148638",
+      "input_shape": [
+        504,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 15,
+      "capture_sha256": "b368574f742f714102e6bd865053641ae2dc608211b11f52012e08cd9fb8eec6",
+      "input_shape": [
+        501,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 16,
+      "capture_sha256": "f16e1322800e872d138660507105fd6b7cc05d7b11b8e58d019f29ccc58b3801",
+      "input_shape": [
+        6,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 17,
+      "capture_sha256": "7cc5e2a393a5538bd95991bbe0ec691e1efee9ce42407bb9a4b95e3e23dc2bb1",
+      "input_shape": [
+        314,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 18,
+      "capture_sha256": "702ca052092352aaba8c4318bbbbb9bed2072c09841a0be20345508c7a74dbbc",
+      "input_shape": [
+        214,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 19,
+      "capture_sha256": "4dfce204371c106a53d49b4a1d816ef516e1522c771de6f060fa0793300b0188",
+      "input_shape": [
+        251,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 20,
+      "capture_sha256": "8018a6fb27d2f8119a84df1c099f685bd1fd92b7156eac13b2315061db81c156",
+      "input_shape": [
+        245,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 21,
+      "capture_sha256": "8268bdbc44a96d5675b5792e2399162f393d2f01df9195e71777c34c74a03006",
+      "input_shape": [
+        131,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 22,
+      "capture_sha256": "e97dc0bbbd3eddb5c54f3eb22ab081a0c7f2abe0e669ad869926461201477239",
+      "input_shape": [
+        332,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 23,
+      "capture_sha256": "7fbbecf63ace29d062e873bc34e3ad10433726353b7f2693d7b41d59f4492f6b",
+      "input_shape": [
+        359,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 24,
+      "capture_sha256": "f75c44a1908cfb81f673332882b5983584b283ad540c7f920b41aeb5724ff7f9",
+      "input_shape": [
+        202,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 25,
+      "capture_sha256": "78b8e0632f55adaef388635522b160aca83570ef0835f3b620ff48a0b3c39e17",
+      "input_shape": [
+        132,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 26,
+      "capture_sha256": "6cf7558fe02b8a8416ee7a98fee61857fa6a763cf0af6fb9e6a0ba1432cdafd8",
+      "input_shape": [
+        305,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 27,
+      "capture_sha256": "b5c7bb4e59ca3b9ec2d38663cbf5a5b50ed016a806d569e886fa9c623d1de3fa",
+      "input_shape": [
+        278,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 28,
+      "capture_sha256": "1206f9f7960ad6800f95e83694ba60f216d014f01e55d9382b59c1631a4b287f",
+      "input_shape": [
+        309,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 29,
+      "capture_sha256": "7f0dd96c8281f6c917cb81469b6c2e129d325810cf3412933d60ba92edc1f485",
+      "input_shape": [
+        96,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 30,
+      "capture_sha256": "8ee53d90481be2eaa3517a54f433a3121d72933e61b713d10ba34abf6aaec365",
+      "input_shape": [
+        432,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 31,
+      "capture_sha256": "020156510629a1f5dc862b45638c380fdb6a7e7e09f9819757f5344ff8236c2a",
+      "input_shape": [
+        469,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 32,
+      "capture_sha256": "23bb955f4a1332b2cc45021e91e1c35a253da9f0d2ea381ac4fee0034303c76c",
+      "input_shape": [
+        27,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 33,
+      "capture_sha256": "375f7b67ace795bc4192cf7d7eb8d361c7ee25cb2a9bede457ce4655445ad2c5",
+      "input_shape": [
+        271,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 34,
+      "capture_sha256": "b9d3515e19002c48988a5c7bce0bda68963c0f4d1bb9134dfea875bcbc9c09d7",
+      "input_shape": [
+        250,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 35,
+      "capture_sha256": "9875db400caed4af4d5a1395e92ec13ea91024928f22bfd4a84307e27e063b09",
+      "input_shape": [
+        217,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 36,
+      "capture_sha256": "3bb7e68ad260987edbea84a853b9bfb4f458dcd4f8ecaa32e16fb145dcd70fff",
+      "input_shape": [
+        286,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 37,
+      "capture_sha256": "f4f764c29812f7c9352f9e09425117fab3a08d58d47ef1ba337e45b73ebd1a5b",
+      "input_shape": [
+        167,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 38,
+      "capture_sha256": "766bc2580bcdec64e596ee02f3327380622015974032b7fc18d07413cf3e9de0",
+      "input_shape": [
+        331,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 39,
+      "capture_sha256": "e2288860b4addaa742f5a2646cfe4878bd8db44502f3cf94e9bafb23dd2498b1",
+      "input_shape": [
+        372,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 40,
+      "capture_sha256": "d6d4e22e5708b7665be5b40f296430c51abde1c325a847172a1f095034284cee",
+      "input_shape": [
+        154,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 41,
+      "capture_sha256": "cbb33222ac224f6d996e5038b1cf25abbe8dc786e56d8993eb968e2ea600c3d9",
+      "input_shape": [
+        190,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 42,
+      "capture_sha256": "7438ca18a430e67ede94181557de14288dc970730095de92e69bfc7362db6139",
+      "input_shape": [
+        330,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 43,
+      "capture_sha256": "5eb723d51a2b1333a30a2c84754f6b1f7e5770b9f72c8226b2447f65a4b395bf",
+      "input_shape": [
+        345,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 44,
+      "capture_sha256": "f478e986fb0387ab13023ae2af7acbff01cc52a89cc1c199c5711f7b73ab9fbb",
+      "input_shape": [
+        159,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 45,
+      "capture_sha256": "a70c10db2cf8555a54deb974a79254bcfebef6151d93708cb0187a4f401dc4cd",
+      "input_shape": [
+        166,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 46,
+      "capture_sha256": "5423b67df1984460d0e57709f691ede5784f1968e6e1700ebf5fc710c6a560e9",
+      "input_shape": [
+        366,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 47,
+      "capture_sha256": "108421cb7613413036b37b10215c25825d57b311d9a37d7f784cf5b074bb6525",
+      "input_shape": [
+        388,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    },
+    {
+      "index": 48,
+      "capture_sha256": "e4439bb042b5f509e2e83ef9ab829192cd02f38b152abd6723642f2553b13fe2",
+      "input_shape": [
+        104,
+        4096
+      ],
+      "checks": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "native_replay": {
+        "output": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "input_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        },
+        "weights_grad": {
+          "within_original_tolerance": true,
+          "exact_equal": true,
+          "nonexact_elements": 0,
+          "bad_elements": 0,
+          "max_abs": 0.0
+        }
+      },
+      "fallback_calls": 0
+    }
+  ],
+  "passed": true,
+  "status": "complete"
+}

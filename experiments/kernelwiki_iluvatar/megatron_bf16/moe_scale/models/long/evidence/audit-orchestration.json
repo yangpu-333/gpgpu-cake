@@ -1,0 +1,133 @@
+{
+  "schema": "moe-heldout-stage35-audit-orchestration-v1",
+  "model": "long",
+  "status": "passed",
+  "candidate_sha256": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e",
+  "contract_sha256": "386553c789e135e4b7eaa5be7642f9f36319c2c9ba6a061201cbe628761252c1",
+  "controllers_sha256": "032bb6ab21bee2ff24c74c64c91cb578c442ffee7e44b36fab96a8f660830de6",
+  "backend_sha256": "5922ab355f3b3fcdbb7a04750452db397c996d8809f46d20ee49359365cdf840",
+  "completed": [
+    {
+      "script": "run_case.py",
+      "arguments": [
+        "--case",
+        "native-admission01",
+        "--arm",
+        "native",
+        "--seed",
+        "35101",
+        "--capture-limit",
+        "48"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "run_case.py",
+      "arguments": [
+        "--case",
+        "control-admission01",
+        "--arm",
+        "control",
+        "--seed",
+        "35101"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "compare.py",
+      "arguments": [
+        "--left",
+        "native-admission01",
+        "--right",
+        "control-admission01",
+        "--left-arm",
+        "native",
+        "--right-arm",
+        "control",
+        "--output",
+        "comparison-admission01.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "probe.py",
+      "arguments": [
+        "--version",
+        "004"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "probe_offset.py",
+      "arguments": [
+        "--version",
+        "004"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "replay.py",
+      "arguments": [
+        "--version",
+        "004"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "run_case.py",
+      "arguments": [
+        "--case",
+        "optimized-audit004",
+        "--arm",
+        "optimized",
+        "--seed",
+        "35101",
+        "--candidate",
+        "/tmp/kda-moe-scale-stage35/long/candidates/004/candidate.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "compare.py",
+      "arguments": [
+        "--left",
+        "native-admission01",
+        "--right",
+        "optimized-audit004",
+        "--left-arm",
+        "native",
+        "--right-arm",
+        "optimized",
+        "--output",
+        "comparison-native-004.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "compare.py",
+      "arguments": [
+        "--left",
+        "control-admission01",
+        "--right",
+        "optimized-audit004",
+        "--left-arm",
+        "control",
+        "--right-arm",
+        "optimized",
+        "--output",
+        "comparison-control-004.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "seal_audit.py",
+      "arguments": [
+        "--version",
+        "004"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "started_utc": "2026-10-09T03:50:42.967719+00:00",
+  "finished_utc": "2026-10-09T03:55:22.233968+00:00"
+}

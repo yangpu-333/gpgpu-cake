@@ -1,0 +1,9 @@
+{
+  "schema": "stage35-backup-attempt-failure-v1",
+  "attempt": 1,
+  "error": "range transfer failed: long/native-admission01/activation/capture-026.pt",
+  "source_sha256": "f9e199d6bdc904c30d478cc6ca2e5394ee943b407172e9b04058b40353552ab0",
+  "original_remote_files_deleted": false,
+  "partial_downloads_preserved": true,
+  "gpu_timing_was_complete": true
+}
