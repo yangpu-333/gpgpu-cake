@@ -1,0 +1,37 @@
+{
+  "schema": "stage35-ci-repair-history-v1",
+  "failures": [
+    {
+      "run_id": 38150042618,
+      "head_sha": "e735aba155576c71a8a2cd193285f028ef602539",
+      "conclusion": "failure",
+      "failed_step": "Rebuild BI-V150 skill from pinned KernelWiki commit",
+      "cause": "Git had normalized 4464 embedded CRLF sequences before the patch-specific -text attribute took effect.",
+      "repair_commit": "0dd57e96242ed5b2dae3ceef0813cf27c5faecb1",
+      "expected_patch_sha256": "2c42e206c6c10a987cfdd9ce5068f7b2f64292c643921ca31a337778ef251fda",
+      "incorrect_blob_sha256": "1da545a8429f12016b1dfca4e81ce567eb405c952f5be98f14fe531388794593",
+      "threshold_changed": false,
+      "experiment_data_changed": false,
+      "log_excerpt": [
+        "2026-10-11T15:09:16.2753499Z     raise RuntimeError(\"patch SHA256 differs: \" + row[\"file\"])",
+        "2026-10-11T15:09:16.2754382Z RuntimeError: patch SHA256 differs: kernelwiki-iluvatar-stage35-retry01.patch"
+      ]
+    },
+    {
+      "run_id": 38150231936,
+      "head_sha": "0dd57e96242ed5b2dae3ceef0813cf27c5faecb1",
+      "conclusion": "failure",
+      "failed_step": "Verify fresh recovery GPU numerical receipts and accepted heldout timing",
+      "cause": "Two CI-required Python source files under results/ had been omitted by the repository results ignore rule.",
+      "repair_commit": "d76c01e26d4bfe471175a455d01c4375962f0b1c",
+      "repair": "Commit the exact existing resource wrapper and its four tests; preserve the wrapper hash and workflow gates.",
+      "wrapper_sha256": "0fa42f0d9c3982eb0efb5000a5585912e4ad86a234c0a2373b1f89b943c00dab",
+      "threshold_changed": false,
+      "experiment_data_changed": false,
+      "log_excerpt": [
+        "2026-10-11T15:15:26.4118974Z python: can't open file '/home/runner/work/gpgpu-cake/gpgpu-cake/experiments/kernelwiki_iluvatar/megatron_bf16/moe_scale_recovery01/results/test_resource_guard_v2.py': [Errno 2] No such file or directory"
+      ]
+    }
+  ],
+  "scope": "CI-only publication repairs. Candidate, experimental originals, accepted timing, resource gates and numerical tolerances unchanged."
+}

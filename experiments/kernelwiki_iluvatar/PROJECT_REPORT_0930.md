@@ -23,7 +23,7 @@ KernelWiki 原本收录 NVIDIA Hopper、Blackwell GPU 的算子优化知识。�
 | 知识库扩充 | 阶段35：1079页、1010个来源ID，BI-V150可精确检索38条路径；原1077页字节及SM90/SM100的286/379条路径集合保持一致 |
 | 可复现构建 | 固定上游提交加本项目补丁；整库校验通过，来源与实验数据可追溯 |
 | KDA 项目级加载 | 五份有序补丁独立重建；4923个文件在生成目录、重建目录和KDA项目的 `.claude/skills/` 中逐字节核对，不依赖个人skill安装 |
-| 自动验收 | 本机162项知识库测试通过，含新轮性能来源绑定及证据篡改检查；另有8项新轮数值、计时和资源负面测试通过。[GitHub Actions](https://github.com/yangpu-333/gpgpu-cake/actions/workflows/kernelwiki-iluvatar-kda.yml)增加本轮收据验收步骤，从源码重建、加载并复核记录；CI明确标注大张量是否可用，不替代GPU实验 |
+| 自动验收 | 本机及[Linux CI](https://github.com/yangpu-333/gpgpu-cake/actions/runs/38150632052)的162项知识库测试通过，含新轮性能来源绑定及证据篡改检查；另有8项新轮数值、计时和资源负面测试通过。CI从固定源码重建、加载并复核记录，明确标注大张量是否可用，不替代GPU实验 |
 | 正式训练入口 | 原生模型安装 hook 提供显式优化开关；600 个原生源码文件哈希一致，原生数据、DDP、训练循环、SGD 和 checkpoint 正常运行 |
 
 ## 本期工作归纳
@@ -122,7 +122,9 @@ KernelWiki 原本收录 NVIDIA Hopper、Blackwell GPU 的算子优化知识。�
 
 **两组已完成独立封存。** SSH故障后通过内置浏览器继续实验；每次启动均重新检查其他计算任务，没有停止其他进程。测速期间不并发备份或性能分析。新轮证据进入第五份增量补丁，整库1079页、1010个来源ID、BI-V150检索38条；162项测试通过，4923个文件在生成、独立重建和KDA项目加载目录逐字节一致。原1077页及NVIDIA检索集合保持不变。
 
-证据：[新轮冻结计划](megatron_bf16/moe_scale_recovery01/plan.json)、[控制器继承证明](megatron_bf16/moe_scale_recovery01/provenance.json)、[384份原件归档回执](megatron_bf16/moe_scale_recovery01/evidence/raw-http-backup-retry01-01-receipt.json)、[4专家独立复测](megatron_bf16/moe_scale_recovery01/models-retry01/long/evidence/confirmation/performance-004.json)、[本机完整字节复核](megatron_bf16/moe_scale_recovery01/evidence/completed-formal-long-import-retry01-02.json)、[首轮诊断原件](megatron_bf16/moe_scale_recovery01/evidence/long-primary-diagnostic-import-01.json)。
+**仓库级构建与CI通过。** [Linux CI运行](https://github.com/yangpu-333/gpgpu-cake/actions/runs/38150632052)从提交 `d76c01e` 重建适配版skill，完成整库校验、162项测试、KDA项目级加载，以及新轮数值、计时和资源门禁检查。前两次CI分别发现补丁换行被Git转换、资源测试源码被忽略规则漏交，均已修复；候选、原始实验数据和验收门槛保持不变。见[CI回执](megatron_bf16/moe_scale_recovery01/evidence/ci-stage35-retry01.json)、[完整Linux日志](megatron_bf16/moe_scale_recovery01/evidence/ci-stage35-retry01-linux.log)和[修复记录](megatron_bf16/moe_scale_recovery01/evidence/ci-stage35-retry01-repairs.json)。CI没有大张量或BI-V150，复核记录而不重新运行GPU训练；完整原件已在本机单独验收。
+
+证据：[新轮冻结计划](megatron_bf16/moe_scale_recovery01/plan.json)、[控制器继承证明](megatron_bf16/moe_scale_recovery01/provenance.json)、[384份原件归档回执](megatron_bf16/moe_scale_recovery01/evidence/raw-http-backup-retry01-01-receipt.json)、[4专家独立复测](megatron_bf16/moe_scale_recovery01/models-retry01/long/evidence/confirmation/performance-004.json)、[8专家正式测速](megatron_bf16/moe_scale_recovery01/models-retry01/experts/evidence/performance-004.json)、[两组完整日志字节复核](megatron_bf16/moe_scale_recovery01/evidence/completed-formal-import-retry01-02.json)、[最终封存决定](megatron_bf16/moe_scale_recovery01/evidence/decision-retry01-02.json)、[首轮诊断原件](megatron_bf16/moe_scale_recovery01/evidence/long-primary-diagnostic-import-01.json)。
 
 证据入口：[4专家原始测速](megatron_bf16/moe_scale/models/long/evidence/performance-004.json)、[8专家原始测速](megatron_bf16/moe_scale/models/experts/evidence/performance-004.json)、[冻结实验计划](megatron_bf16/moe_scale/plan.json)、[Pod更替与当前归档状态](megatron_bf16/moe_scale/evidence/pod-replacement-20261009.json)、[恢复计划](megatron_bf16/moe_scale/recovery-plan.json)。先前的归档回执按原样保留，作为状态变化的历史依据。
 
@@ -476,6 +478,7 @@ KDA 可以从项目目录读取这套知识。一次只读 Claude Code 验证实
 - [384份原件完整归档](megatron_bf16/moe_scale_recovery01/evidence/raw-http-backup-retry01-01-receipt.json)
 - [正式日志逐字节导入与复核](megatron_bf16/moe_scale_recovery01/evidence/completed-formal-import-retry01-02.json)
 - [技能构建、独立重建及KDA加载证明](megatron_bf16/moe_scale_recovery01/evidence/skill-provenance-retry01-02.json)
+- [Linux CI验收回执](megatron_bf16/moe_scale_recovery01/evidence/ci-stage35-retry01.json)
 - [五份补丁及SHA清单](skill-patches.json)
 
 ```bash

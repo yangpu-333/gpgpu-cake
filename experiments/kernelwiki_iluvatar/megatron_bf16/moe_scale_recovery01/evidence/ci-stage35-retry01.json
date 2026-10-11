@@ -1,0 +1,186 @@
+{
+  "schema": "stage35-ci-verified-v1",
+  "status": "success",
+  "repository": "yangpu-333/gpgpu-cake",
+  "workflow": ".github/workflows/kernelwiki-iluvatar-kda.yml",
+  "tested_commit": "d76c01e26d4bfe471175a455d01c4375962f0b1c",
+  "run_id": 38150632052,
+  "run_url": "https://github.com/yangpu-333/gpgpu-cake/actions/runs/38150632052",
+  "run_started_at": "2026-10-11T15:17:06Z",
+  "completed_at": "2026-10-11T15:20:08Z",
+  "jobs": [
+    {
+      "id": 114503172919,
+      "name": "rebuild-and-load",
+      "conclusion": "success",
+      "steps": [
+        {
+          "number": 1,
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 2,
+          "name": "Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 3,
+          "name": "Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 4,
+          "name": "Rebuild KDA loader from pinned KDA commit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 5,
+          "name": "Test KDA project-level loader",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 6,
+          "name": "Test opt-in Megatron kernel adapter",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 7,
+          "name": "Test formal-loop performance log validation",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 8,
+          "name": "Install pinned CPU Torch for BF16 evidence verifier tests",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 9,
+          "name": "Test BF16 master-state and performance evidence gates",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 10,
+          "name": "Verify recorded gradient-norm training and raw timing receipts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 11,
+          "name": "Verify recorded native BF16 RMSNorm build and training receipts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 12,
+          "name": "Verify held-out BF16 training receipts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 13,
+          "name": "Verify native default SwiGLU training receipts and rejection gates",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 14,
+          "name": "Rebuild BI-V150 skill from pinned KernelWiki commit",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 15,
+          "name": "Verify fixed heldout SwiGLU and native fused Attention receipts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 16,
+          "name": "Validate BI-V150 corpus",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 17,
+          "name": "Verify frozen larger-model Attention and runtime build receipts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 18,
+          "name": "Verify native MoE weighted activation closed-loop receipts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 19,
+          "name": "Run KernelWiki full test suite",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 20,
+          "name": "Verify frozen MoE heldout training receipts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 21,
+          "name": "Load skill into KDA checkout and verify architecture paths",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 22,
+          "name": "Verify fresh recovery GPU numerical receipts and accepted heldout timing",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 43,
+          "name": "Post Run actions/setup-python@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 44,
+          "name": "Post Run actions/checkout@v7",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "number": 45,
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ]
+    }
+  ],
+  "skill_tests": 162,
+  "fresh_negative_tests": 8,
+  "project_level_load_verified": true,
+  "patch_sha256": "2c42e206c6c10a987cfdd9ce5068f7b2f64292c643921ca31a337778ef251fda",
+  "candidate_sha256": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e",
+  "linux_log": {
+    "relative_path": "ci-stage35-retry01-linux.log",
+    "sha256": "94329cbcbb0fbc47abbb3dcd4bb9b23e3a0efdc51a43a3bcfb7aa7282cf9bc2e",
+    "bytes": 529382,
+    "format": "Connector-decoded GitHub Actions log saved as UTF-8 with LF line endings."
+  },
+  "repair_history_relative": "ci-stage35-retry01-repairs.json",
+  "gpu_jobs_started_by_ci": false,
+  "large_originals_present_in_ci": false,
+  "local_original_archive_receipt_sha256": "188cda588c5bb6ded8cea0033ec587a54b80292c0cb601bf00bf11ddfcfdedcd",
+  "scope": "Ubuntu Python 3.11 rebuild, corpus validation, 162 skill tests, KDA project-level load, recorded GPU numerical/timing receipts and CPU negative/resource tests. Large raw tensors are explicitly absent in CI. The full raw archive was verified separately on the local machine; this CI does not rerun GPU arithmetic or training."
+}
