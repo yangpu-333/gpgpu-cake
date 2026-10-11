@@ -1,0 +1,77 @@
+{
+  "schema": "retry01-formal-wrapper-v2",
+  "parent_wrapper_sha256": "5a59d06701b6e57672e09d5da7968676949007c4cafd05449667aefe8a05113f",
+  "model": "long",
+  "round": "resource_confirmation",
+  "own_pid": 45875,
+  "wrapper_sha256": "0fa42f0d9c3982eb0efb5000a5585912e4ad86a234c0a2373b1f89b943c00dab",
+  "started_utc": "2026-10-11T11:46:52.250557+00:00",
+  "status": "passed",
+  "gpu_started": true,
+  "complete_local_raw_proof_sha256": "188cda588c5bb6ded8cea0033ec587a54b80292c0cb601bf00bf11ddfcfdedcd",
+  "audit_sha256": "2e04c4721331b7309a7f43b38594b852488b0aeea66f8d7df73ededbd76f7303",
+  "backend_sha256": "482f1a472aa70c04723dd0eb3b498090ab294b9443329b0b8e8fa83815c234fb",
+  "primary_performance_sha256": "d512320e8585558bc37c3adf9a4b7f72f7cc26ca02c3bb3230fa3ba65b0b5c0d",
+  "resource_repeat_predecessor_sha256": "335e7016b625a8492b5af9bb46e00a372f55e2c1add54024f574498897e93567",
+  "repeat_reason": "First complete timing retained as diagnosis because post-run process ownership was unresolved",
+  "cpu_before": {
+    "utc": "2026-10-11T11:46:54.368063+00:00",
+    "before": "cpu  210463084 9089 77098272 5432728616 699657 0 706235 0 0 0",
+    "after": "cpu  210463172 9089 77098323 5432750673 699818 0 706236 0 0 0",
+    "outside_formal_timing": true
+  },
+  "occupancy_before": {
+    "utc": "2026-10-11T11:46:54.648446+00:00",
+    "gpu_stdout": "Timestamp    Sun Oct 11 19:46:54 2026\n+-----------------------------------------------------------------------------+\n|  IX-ML: 4.2.0       Driver Version: 4.2.0       CUDA Version: 10.2          |\n|-------------------------------+----------------------+----------------------|\n| GPU  Name                     | Bus-Id               | Clock-SM  Clock-Mem  |\n| Fan  Temp  Perf  Pwr:Usage/Cap|      Memory-Usage    | GPU-Util  Compute M. |\n|===============================+======================+======================|\n| 0    Iluvatar BI-V150         | 00000000:10:00.0     | 1500MHz   1600MHz    |\n| N/A  38C   P0    N/A / N/A    | 116MiB / 32768MiB    | 0%        Default    |\n+-------------------------------+----------------------+----------------------+\n| 1    Iluvatar BI-V150         | 00000000:13:00.0     | 1500MHz   1600MHz    |\n| N/A  39C   P0    105W / 350W  | 116MiB / 32768MiB    | 0%        Default    |\n+-------------------------------+----------------------+----------------------+\n\n+-----------------------------------------------------------------------------+\n| Processes:                                                       GPU Memory |\n|  GPU        PID      Process name                                Usage(MiB) |\n|=============================================================================|\n|  No running processes found                                                 |\n+-----------------------------------------------------------------------------+\n",
+    "process_stdout": "    PID    PPID USER     ELAPSED %CPU %MEM STAT COMMAND\n      1       0 root      163062  0.0  0.0 Ss   bash\n     16       1 root      163062  0.0  0.0 Ss   sshd\n     17       1 root      163062  0.0  0.0 Sl   jupyter-lab\n     23      17 root      162881  0.0  0.0 Ss+  bash\n     24      17 root      162881  0.0  0.0 Ss+  bash\n    132      17 root      161529  0.0  0.0 Ss+  bash\n  14694      17 root      102859  0.0  0.0 Ss+  bash\n  28768      17 root      100522  0.0  0.0 Ss+  bash\n  34612      17 root        1794  0.0  0.0 Ss   bash\n  45875   34612 root           2  5.0  0.0 S+   python\n  45877   45875 root           0  0.0  0.0 R+   ps\n",
+    "both_gpus_idle": true,
+    "foreign_compute_processes": [],
+    "training_port_free": true,
+    "passed": true
+  },
+  "argv": [
+    "/root/miniconda3/bin/python",
+    "-u",
+    "/private/kda-biv150-stage35-recovery01/models-retry01/long/confirmation/run_performance.py",
+    "--version",
+    "004",
+    "--audit",
+    "audit-004.json"
+  ],
+  "exit_code": 0,
+  "post_training_settle_seconds": 5,
+  "cpu_after": {
+    "utc": "2026-10-11T11:51:34.650010+00:00",
+    "before": "cpu  210570052 9089 77120650 5435711043 722081 0 706494 0 0 0",
+    "after": "cpu  210570413 9089 77120795 5435732811 722220 0 706496 0 0 0",
+    "outside_formal_timing": true
+  },
+  "occupancy_after": {
+    "utc": "2026-10-11T11:51:37.951993+00:00",
+    "gpu_stdout": "Timestamp    Sun Oct 11 19:51:37 2026\n+-----------------------------------------------------------------------------+\n|  IX-ML: 4.2.0       Driver Version: 4.2.0       CUDA Version: 10.2          |\n|-------------------------------+----------------------+----------------------|\n| GPU  Name                     | Bus-Id               | Clock-SM  Clock-Mem  |\n| Fan  Temp  Perf  Pwr:Usage/Cap|      Memory-Usage    | GPU-Util  Compute M. |\n|===============================+======================+======================|\n| 0    Iluvatar BI-V150         | 00000000:10:00.0     | 1500MHz   1600MHz    |\n| N/A  39C   P0    N/A / N/A    | 116MiB / 32768MiB    | 0%        Default    |\n+-------------------------------+----------------------+----------------------+\n| 1    Iluvatar BI-V150         | 00000000:13:00.0     | 1500MHz   1600MHz    |\n| N/A  40C   P0    106W / 350W  | 116MiB / 32768MiB    | 0%        Default    |\n+-------------------------------+----------------------+----------------------+\n\n+-----------------------------------------------------------------------------+\n| Processes:                                                       GPU Memory |\n|  GPU        PID      Process name                                Usage(MiB) |\n|=============================================================================|\n|  No running processes found                                                 |\n+-----------------------------------------------------------------------------+\n",
+    "process_stdout": "    PID    PPID USER     ELAPSED %CPU %MEM STAT COMMAND\n      1       0 root      163346  0.0  0.0 Ss   bash\n     16       1 root      163346  0.0  0.0 Ss   sshd\n     17       1 root      163346  0.0  0.0 Sl   jupyter-lab\n     23      17 root      163165  0.0  0.0 Ss+  bash\n     24      17 root      163165  0.0  0.0 Ss+  bash\n    132      17 root      161813  0.0  0.0 Ss+  bash\n  14694      17 root      103143  0.0  0.0 Ss+  bash\n  28768      17 root      100806  0.0  0.0 Ss+  bash\n  34612      17 root        2078  0.0  0.0 Ss   bash\n  45875   34612 root         286  0.0  0.0 S+   python\n  49742   45875 root           0  0.0  0.0 R+   ps\n",
+    "both_gpus_idle": true,
+    "foreign_compute_processes": [],
+    "training_port_free": true,
+    "passed": true
+  },
+  "performance_sha256": "8d16d99f48574cd8a7af204f10c22fb881ac1f550f3b7fc906eacc1052eed1d2",
+  "seed_mean_cv": {
+    "native": 0.009532018317040584,
+    "control": 0.006362178288103074,
+    "optimized": 0.0037967049660148425
+  },
+  "repeat_required": false,
+  "vs_native": {
+    "ratio": 1.0813422132489314,
+    "gain_percent": 8.134221324893144,
+    "all_seeds_faster": true
+  },
+  "vs_control": {
+    "ratio": 1.0450499202360632,
+    "gain_percent": 4.504992023606325,
+    "all_seeds_faster": true
+  },
+  "promoted": true,
+  "finished_utc": "2026-10-11T11:51:37.954475+00:00"
+}

@@ -1,0 +1,1 @@
+{"passed": true, "gpu": "Iluvatar BI-V150", "torch": "2.4.1", "sort_probes": 40, "native_gpu_bool_sort": {"supported": false, "error": "Sort currently does not support bool dtype on CUDA."}}

@@ -16,6 +16,10 @@
     {
       "file": "kernelwiki-iluvatar-stage34.patch",
       "sha256": "317b938317bbd1835316e0939319537815ac22d8a82865bf19dada196efa124a"
+    },
+    {
+      "file": "kernelwiki-iluvatar-stage35-retry01.patch",
+      "sha256": "2c42e206c6c10a987cfdd9ce5068f7b2f64292c643921ca31a337778ef251fda"
     }
   ]
 }

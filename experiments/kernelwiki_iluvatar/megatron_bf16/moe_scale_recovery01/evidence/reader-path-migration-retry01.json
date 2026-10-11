@@ -1,0 +1,83 @@
+{
+  "schema": "stage35-recovery01-retry01-cpu-reader-path-migration-v1",
+  "original_reader": "verify_receipts.py",
+  "original_reader_sha256": "da83e36bba1b18d1e6764b4f866ee708f65b0612a3d5bb21b2833064f28aef02",
+  "derived_reader": "verify_receipts_retry01.py",
+  "derived_reader_sha256": "58dc2b60feacfe9ade41f23bc8a89f3042eee9bb0414696117b5df266fb38217",
+  "derivation_script_sha256": "a3164d5b93ade46ae7a93f8eff33036a44fc824731f0fed3e54df9d4f753979c",
+  "substitutions": [
+    {
+      "old": "REMOTE='/private/kda-biv150-stage35-recovery01/models/'",
+      "new": "REMOTE='/private/kda-biv150-stage35-recovery01/models-retry01/'",
+      "occurrences": 1,
+      "lines": [
+        12
+      ]
+    },
+    {
+      "old": "HERE/'models'",
+      "new": "HERE/'models-retry01'",
+      "occurrences": 4,
+      "lines": [
+        71,
+        84,
+        87
+      ]
+    },
+    {
+      "old": "HERE/'models/controllers.json'",
+      "new": "HERE/'models-retry01/controllers.json'",
+      "occurrences": 1,
+      "lines": [
+        85
+      ]
+    },
+    {
+      "old": "HERE/'models/long/evidence/backend-current.json'",
+      "new": "HERE/'models-retry01/long/evidence/backend-current.json'",
+      "occurrences": 1,
+      "lines": [
+        109
+      ]
+    },
+    {
+      "old": "HERE/'models/long/backend.py'",
+      "new": "HERE/'models-retry01/long/backend.py'",
+      "occurrences": 1,
+      "lines": [
+        117
+      ]
+    },
+    {
+      "old": "HERE/'evidence/raw-backup'",
+      "new": "HERE/'evidence/raw-backup-retry01'",
+      "occurrences": 1,
+      "lines": [
+        71
+      ]
+    }
+  ],
+  "total_occurrences": 9,
+  "reverse_substitution_recovers_original_bytes": true,
+  "normalized_ast_identical": true,
+  "syntax_verified": true,
+  "original_reader_unchanged": true,
+  "controller_count_unchanged": 25,
+  "controllers_manifest_sha256": "533af8c2a305d0c92f03c585505e60d16a47c6998f9f5c8b618d368cb222ec10",
+  "candidate_sha256_unchanged": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e",
+  "remote_models_root": "/private/kda-biv150-stage35-recovery01/models-retry01",
+  "local_models_root": "models-retry01",
+  "local_raw_backup_root": "evidence/raw-backup-retry01",
+  "old_raw_backup_may_satisfy_new_reader": false,
+  "arithmetic_or_admission_gates_changed": false,
+  "gpu_work_executed": false,
+  "scope": "Only six explicit namespace substitutions, covering nine occurrences. Failed models/ records and original reader remain separate. New captures cannot satisfy this reader through the old models/ or raw-backup/ namespace.",
+  "call_convention": {
+    "audit_only": "python verify_receipts_retry01.py --model long --audit-only --require-raw",
+    "formal": "python verify_receipts_retry01.py --model long --require-raw",
+    "experts": "Replace --model long with --model experts.",
+    "metadata_base_default": "models-retry01/<model>/evidence",
+    "backend_default": "models-retry01/long/evidence/backend-current.json",
+    "confirmation": "Add --confirmation only when the new namespace contains a separately completed confirmation run."
+  }
+}

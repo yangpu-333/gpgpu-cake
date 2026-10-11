@@ -1,0 +1,13 @@
+Use the repository-loaded kernelwiki-iluvatar skill to review the independent stage35 recovery collection. Read only; do not generate a replacement candidate or run programs.
+The previous Pod was replaced before all original raw tensors could be copied. Original results and incomplete archive must remain historical records. A new independently collected run is required; the old collection must not be labelled fully archived.
+Read these explicitly authorized experiment files:
+E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/moe_scale_recovery01/plan.json
+E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/moe_scale_recovery01/provenance.json
+E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/moe_scale_recovery01/models/controllers.json
+E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/moe_scale_recovery01/install_runtime.py
+E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/moe_scale_recovery01/models/long/contract.json
+E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/moe_scale_recovery01/models/experts/contract.json
+E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/moe_scale_recovery01/models/long/run_audit.py
+E:/code/GPGPU/experiments/kernelwiki_iluvatar/megatron_bf16/moe_scale_recovery01/models/long/run_performance.py
+All 25 GPU controller files are byte-identical to the previous frozen collection. Runtime native sources remain pinned to 5be9626709af2722333bf54797c954c09edeada3. Runtime is reconstructible at its original /tmp paths; captures and checkpoints are now on /private NFS. Correctness raw data will be completely backed up locally before formal timing. No archive I/O during formal timing.
+Check that contracts preserve the default native fused baseline, existing same-round control, unchanged weighted004, full gradients/FP32 masters/router proofs, and identical formal timer/seeds/gates. Identify material blockers only and distinguish the earlier incomplete collection from new proof. Return your review in a concise structured narrative with explicit accept/reject and scope limitations. Do not read environment files, SSH keys, API credentials, other source files, or unrelated user files.

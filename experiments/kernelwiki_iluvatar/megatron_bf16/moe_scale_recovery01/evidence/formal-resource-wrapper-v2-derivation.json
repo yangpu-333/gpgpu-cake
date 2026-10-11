@@ -1,0 +1,19 @@
+{
+  "schema": "outside-timing-resource-wrapper-derivation-v1",
+  "parent_sha256": "5a59d06701b6e57672e09d5da7968676949007c4cafd05449667aefe8a05113f",
+  "derived_sha256": "0fa42f0d9c3982eb0efb5000a5585912e4ad86a234c0a2373b1f89b943c00dab",
+  "changes": [
+    "Record process state at boundaries",
+    "Exclude only nonexecuting zombies; keep every live foreign computation blocking",
+    "Separate resource failure repeat from the unchanged CV repeat policy",
+    "New immutable outer wrapper namespace",
+    "Preserve parent resource-wrapper identity",
+    "Verify the unchanged original outer wrapper",
+    "Reuse byte-identical controllers in independent result directories",
+    "Bind the known failed resource gate; require CV threshold for statistical repeats",
+    "Five seconds of process-exit settling, wholly outside retained training timing",
+    "Apply the original CV rule to the first accepted resource-repeat collection"
+  ],
+  "frozen_kernel_or_timing_controller_changed": false,
+  "first_failed_wrapper_or_timing_result_overwritten": false
+}

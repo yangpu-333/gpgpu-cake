@@ -1,0 +1,61 @@
+{
+  "schema": "retry01-formal-wrapper-v1",
+  "model": "long",
+  "round": "primary",
+  "own_pid": 34631,
+  "wrapper_sha256": "5a59d06701b6e57672e09d5da7968676949007c4cafd05449667aefe8a05113f",
+  "started_utc": "2026-10-11T11:17:59.786152+00:00",
+  "status": "failed",
+  "gpu_started": true,
+  "complete_local_raw_proof_sha256": "188cda588c5bb6ded8cea0033ec587a54b80292c0cb601bf00bf11ddfcfdedcd",
+  "audit_sha256": "2e04c4721331b7309a7f43b38594b852488b0aeea66f8d7df73ededbd76f7303",
+  "backend_sha256": "482f1a472aa70c04723dd0eb3b498090ab294b9443329b0b8e8fa83815c234fb",
+  "cpu_before": {
+    "utc": "2026-10-11T11:18:01.865709+00:00",
+    "before": "cpu  210253510 9089 77047039 5413745612 561045 0 704891 0 0 0",
+    "after": "cpu  210253656 9089 77047074 5413767686 561209 0 704892 0 0 0",
+    "outside_formal_timing": true
+  },
+  "occupancy_before": {
+    "utc": "2026-10-11T11:18:02.159737+00:00",
+    "gpu_stdout": "Timestamp    Sun Oct 11 19:18:02 2026\n+-----------------------------------------------------------------------------+\n|  IX-ML: 4.2.0       Driver Version: 4.2.0       CUDA Version: 10.2          |\n|-------------------------------+----------------------+----------------------|\n| GPU  Name                     | Bus-Id               | Clock-SM  Clock-Mem  |\n| Fan  Temp  Perf  Pwr:Usage/Cap|      Memory-Usage    | GPU-Util  Compute M. |\n|===============================+======================+======================|\n| 0    Iluvatar BI-V150         | 00000000:10:00.0     | 1500MHz   1600MHz    |\n| N/A  38C   P0    N/A / N/A    | 116MiB / 32768MiB    | 0%        Default    |\n+-------------------------------+----------------------+----------------------+\n| 1    Iluvatar BI-V150         | 00000000:13:00.0     | 1500MHz   1600MHz    |\n| N/A  39C   P0    105W / 350W  | 116MiB / 32768MiB    | 0%        Default    |\n+-------------------------------+----------------------+----------------------+\n\n+-----------------------------------------------------------------------------+\n| Processes:                                                       GPU Memory |\n|  GPU        PID      Process name                                Usage(MiB) |\n|=============================================================================|\n|  No running processes found                                                 |\n+-----------------------------------------------------------------------------+\n",
+    "process_stdout": "    PID    PPID USER     ELAPSED %CPU %MEM COMMAND\n      1       0 root      161330  0.0  0.0 bash\n     16       1 root      161330  0.0  0.0 sshd\n     17       1 root      161330  0.0  0.0 jupyter-lab\n     23      17 root      161149  0.0  0.0 bash\n     24      17 root      161149  0.0  0.0 bash\n    132      17 root      159797  0.0  0.0 bash\n  14694      17 root      101127  0.0  0.0 bash\n  28768      17 root       98790  0.0  0.0 bash\n  34612      17 root          62  0.3  0.0 bash\n  34631   34612 root           2  4.0  0.0 python\n  34633   34631 root           0  0.0  0.0 ps\n",
+    "both_gpus_idle": true,
+    "foreign_compute_processes": [],
+    "training_port_free": true,
+    "passed": true
+  },
+  "argv": [
+    "/root/miniconda3/bin/python",
+    "-u",
+    "/private/kda-biv150-stage35-recovery01/models-retry01/long/run_performance.py",
+    "--version",
+    "004",
+    "--audit",
+    "audit-004.json"
+  ],
+  "exit_code": 0,
+  "occupancy_after": {
+    "utc": "2026-10-11T11:22:54.520361+00:00",
+    "gpu_stdout": "Timestamp    Sun Oct 11 19:22:54 2026\n+-----------------------------------------------------------------------------+\n|  IX-ML: 4.2.0       Driver Version: 4.2.0       CUDA Version: 10.2          |\n|-------------------------------+----------------------+----------------------|\n| GPU  Name                     | Bus-Id               | Clock-SM  Clock-Mem  |\n| Fan  Temp  Perf  Pwr:Usage/Cap|      Memory-Usage    | GPU-Util  Compute M. |\n|===============================+======================+======================|\n| 0    Iluvatar BI-V150         | 00000000:10:00.0     | 1500MHz   1600MHz    |\n| N/A  38C   P0    N/A / N/A    | 116MiB / 32768MiB    | 0%        Default    |\n+-------------------------------+----------------------+----------------------+\n| 1    Iluvatar BI-V150         | 00000000:13:00.0     | 1500MHz   1600MHz    |\n| N/A  40C   P0    107W / 350W  | 116MiB / 32768MiB    | 0%        Default    |\n+-------------------------------+----------------------+----------------------+\n\n+-----------------------------------------------------------------------------+\n| Processes:                                                       GPU Memory |\n|  GPU        PID      Process name                                Usage(MiB) |\n|=============================================================================|\n|  No running processes found                                                 |\n+-----------------------------------------------------------------------------+\n",
+    "process_stdout": "    PID    PPID USER     ELAPSED %CPU %MEM COMMAND\n      1       0 root      161622  0.0  0.0 bash\n     16       1 root      161622  0.0  0.0 sshd\n     17       1 root      161622  0.0  0.0 jupyter-lab\n     23      17 root      161441  0.0  0.0 bash\n     24      17 root      161441  0.0  0.0 bash\n    132      17 root      160089  0.0  0.0 bash\n  14694      17 root      101419  0.0  0.0 bash\n  28768      17 root       99082  0.0  0.0 bash\n  34612      17 root         354  0.0  0.0 bash\n  34631   34612 root         294  0.0  0.0 python\n  43453       1 root          26 45.6  0.0 pt_main_thread\n  45725   34631 root           0  0.0  0.0 ps\n",
+    "both_gpus_idle": true,
+    "foreign_compute_processes": [
+      {
+        "pid": 43453,
+        "command": "pt_main_thread",
+        "cpu_percent": 45.6
+      }
+    ],
+    "training_port_free": true,
+    "passed": false
+  },
+  "cpu_after": {
+    "utc": "2026-10-11T11:22:56.523331+00:00",
+    "before": "cpu  210362259 9089 77070576 5416884796 584741 0 705149 0 0 0",
+    "after": "cpu  210362652 9089 77070684 5416906528 584872 0 705152 0 0 0",
+    "outside_formal_timing": true
+  },
+  "error": "Post-run resources busy; timing needs further examination",
+  "finished_utc": "2026-10-11T11:22:56.523380+00:00"
+}

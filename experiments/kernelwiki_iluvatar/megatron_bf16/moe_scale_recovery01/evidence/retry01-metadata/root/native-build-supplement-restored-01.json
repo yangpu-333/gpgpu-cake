@@ -1,0 +1,23 @@
+{
+  "schema": "stage35-recovery01-native-build-supplement-restoration-v1",
+  "hostname": "ai-exp-sy2506311-kda1-pod-qpia-8f74fcf5c-z7g26",
+  "status": "restored_exact_pinned_git_bytes",
+  "archive_sha256": "724d3fcc87c15b9c8a74d4a10f6c5add7389c9d7b782a27efff43052c2a25e81",
+  "files": [
+    {
+      "path": "megatron/core/datasets/Makefile",
+      "git_blob_oid": "16f251bf9038c12a7d0cc3e780c7e105a071aad9",
+      "bytes": 313,
+      "sha256": "0555c53484b55bf1a7e40aa4d2e09329f6767512282d428e2c868c677ed50350",
+      "restored_path": "/tmp/kda-bf16-continuation/megatron-native-5be9626/megatron/core/datasets/Makefile",
+      "existed_identical": false
+    }
+  ],
+  "native600_and_controllers25_preserved": true,
+  "source_manifest_sha256": "a72ded960488d399ded2255ef55f357257e03532b8fa21a06d958170c5c98c2d",
+  "controllers_manifest_sha256": "533af8c2a305d0c92f03c585505e60d16a47c6998f9f5c8b618d368cb222ec10",
+  "installer_sha256": "5439d255739c44794b95eff174ece2b616174c67ac8fa56653b5fb55bc11b79e",
+  "compiled_in_this_process": false,
+  "gpu_work_executed": false,
+  "baseline_fusions_modified": false
+}

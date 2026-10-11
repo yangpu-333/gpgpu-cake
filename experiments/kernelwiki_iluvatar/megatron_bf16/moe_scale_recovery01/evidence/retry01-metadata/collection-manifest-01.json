@@ -1,0 +1,1014 @@
+{
+  "schema": "stage35-recovery01-retry01-metadata-collection-v1",
+  "completed_utc": "2026-10-10T07:59:58.746682+00:00",
+  "hostname": "ai-exp-sy2506311-kda1-pod-qpia-8f74fcf5c-z7g26",
+  "remote_root": "/private/kda-biv150-stage35-recovery01",
+  "remote_models_root": "/private/kda-biv150-stage35-recovery01/models-retry01",
+  "metadata_only": true,
+  "complete_raw_backup": false,
+  "formal_timing_allowed_by_this_collection": false,
+  "tensor_payloads_included": false,
+  "ssh_or_credentials_included": false,
+  "excluded_tensor_files": 342,
+  "excluded_tensor_bytes": 13547692360,
+  "frozen_controller_files": 25,
+  "controllers_manifest_sha256": "533af8c2a305d0c92f03c585505e60d16a47c6998f9f5c8b618d368cb222ec10",
+  "fresh_backend_sha256": "482f1a472aa70c04723dd0eb3b498090ab294b9443329b0b8e8fa83815c234fb",
+  "fresh_audits": {
+    "long": {
+      "orchestration_sha256": "df3ef91fa45440636e59bc0265d6cc80b6ec547c2693ef1ef761094ff7383c82",
+      "sealed_audit_sha256": "2e04c4721331b7309a7f43b38594b852488b0aeea66f8d7df73ededbd76f7303"
+    },
+    "experts": {
+      "orchestration_sha256": "fbd9342cd14cbcb6d15534994b7a631156fd5f6ef59bbf96c87eda26c1adcc25",
+      "sealed_audit_sha256": "d2051fd22d359f1d2f3266e169c50474f25ea663d479ebb97ada6185c598b2c3"
+    }
+  },
+  "files": [
+    {
+      "archive_path": "payload/browser-backend-current-01.json",
+      "origin_relative": "browser-backend-current-01.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-backend-current-01.json",
+      "collection_bucket": "diagnostic_root_not_fresh_admission",
+      "local_destination_relative": "evidence/retry01-metadata/diagnostic-root/browser-backend-current-01.json",
+      "bytes": 80240,
+      "sha256": "482f1a472aa70c04723dd0eb3b498090ab294b9443329b0b8e8fa83815c234fb"
+    },
+    {
+      "archive_path": "payload/browser-backend-job-01.json",
+      "origin_relative": "browser-backend-job-01.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-backend-job-01.json",
+      "collection_bucket": "diagnostic_root_not_fresh_admission",
+      "local_destination_relative": "evidence/retry01-metadata/diagnostic-root/browser-backend-job-01.json",
+      "bytes": 2794,
+      "sha256": "b0a7b4c87378652fefc8824ef67f8fca1be8155e8b3f941e1dff8ff39bd3ee2e"
+    },
+    {
+      "archive_path": "payload/browser-backend-job-01.stderr.log",
+      "origin_relative": "browser-backend-job-01.stderr.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-backend-job-01.stderr.log",
+      "collection_bucket": "diagnostic_root_not_fresh_admission",
+      "local_destination_relative": "evidence/retry01-metadata/diagnostic-root/browser-backend-job-01.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "payload/browser-backend-job-01.stdout.log",
+      "origin_relative": "browser-backend-job-01.stdout.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-backend-job-01.stdout.log",
+      "collection_bucket": "diagnostic_root_not_fresh_admission",
+      "local_destination_relative": "evidence/retry01-metadata/diagnostic-root/browser-backend-job-01.stdout.log",
+      "bytes": 191,
+      "sha256": "b52e2fe3a39ad08a97f7142a8ce306a9fcf9382e362f0dba0af2047694c8cf31"
+    },
+    {
+      "archive_path": "payload/browser-backend-retry01-job-01.json",
+      "origin_relative": "browser-backend-retry01-job-01.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-backend-retry01-job-01.json",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/browser-backend-retry01-job-01.json",
+      "bytes": 2822,
+      "sha256": "de47576ccfb70989fcec78c8d240de5de36fea3cabee74906a29a013979cf6ee"
+    },
+    {
+      "archive_path": "payload/browser-backend-retry01-job-01.stderr.log",
+      "origin_relative": "browser-backend-retry01-job-01.stderr.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-backend-retry01-job-01.stderr.log",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/browser-backend-retry01-job-01.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "payload/browser-backend-retry01-job-01.stdout.log",
+      "origin_relative": "browser-backend-retry01-job-01.stdout.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-backend-retry01-job-01.stdout.log",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/browser-backend-retry01-job-01.stdout.log",
+      "bytes": 191,
+      "sha256": "b52e2fe3a39ad08a97f7142a8ce306a9fcf9382e362f0dba0af2047694c8cf31"
+    },
+    {
+      "archive_path": "payload/browser-experts-retry01-job-01.json",
+      "origin_relative": "browser-experts-retry01-job-01.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-experts-retry01-job-01.json",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/browser-experts-retry01-job-01.json",
+      "bytes": 2858,
+      "sha256": "15c1cc48a008cf49b83d5f95de722574e8b3d2a5a0518ca796e8386bdf8779b3"
+    },
+    {
+      "archive_path": "payload/browser-experts-retry01-job-01.stderr.log",
+      "origin_relative": "browser-experts-retry01-job-01.stderr.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-experts-retry01-job-01.stderr.log",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/browser-experts-retry01-job-01.stderr.log",
+      "bytes": 6990,
+      "sha256": "4ac58569e032c53d20053b6719d72490c7ddf8790c000eafef66e6c16e39ba37"
+    },
+    {
+      "archive_path": "payload/browser-experts-retry01-job-01.stdout.log",
+      "origin_relative": "browser-experts-retry01-job-01.stdout.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-experts-retry01-job-01.stdout.log",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/browser-experts-retry01-job-01.stdout.log",
+      "bytes": 25573,
+      "sha256": "3339f1ce5e7680de4313a1dd7766443e73f9e2074fa18122e13748752fa31cba"
+    },
+    {
+      "archive_path": "payload/browser-long-job-01.json",
+      "origin_relative": "browser-long-job-01.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-long-job-01.json",
+      "collection_bucket": "diagnostic_root_not_fresh_admission",
+      "local_destination_relative": "evidence/retry01-metadata/diagnostic-root/browser-long-job-01.json",
+      "bytes": 2793,
+      "sha256": "d176e0c281cb32f6150c0b71e6c011ddfaacbe2401da51cf43c6c1597b121b66"
+    },
+    {
+      "archive_path": "payload/browser-long-job-01.stderr.log",
+      "origin_relative": "browser-long-job-01.stderr.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-long-job-01.stderr.log",
+      "collection_bucket": "diagnostic_root_not_fresh_admission",
+      "local_destination_relative": "evidence/retry01-metadata/diagnostic-root/browser-long-job-01.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "payload/browser-long-job-01.stdout.log",
+      "origin_relative": "browser-long-job-01.stdout.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-long-job-01.stdout.log",
+      "collection_bucket": "diagnostic_root_not_fresh_admission",
+      "local_destination_relative": "evidence/retry01-metadata/diagnostic-root/browser-long-job-01.stdout.log",
+      "bytes": 208,
+      "sha256": "6122e1ef5cde308031e16a0d3020bf81b20855e2eebf690920dda7b29d10f353"
+    },
+    {
+      "archive_path": "payload/browser-long-retry01-job-01.json",
+      "origin_relative": "browser-long-retry01-job-01.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-long-retry01-job-01.json",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/browser-long-retry01-job-01.json",
+      "bytes": 2849,
+      "sha256": "caefd2c1fdd680049b5641aac013dea1c8f46805338141ced1f111c00a2e5446"
+    },
+    {
+      "archive_path": "payload/browser-long-retry01-job-01.stderr.log",
+      "origin_relative": "browser-long-retry01-job-01.stderr.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-long-retry01-job-01.stderr.log",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/browser-long-retry01-job-01.stderr.log",
+      "bytes": 6990,
+      "sha256": "c2cf011fe7ddb3a9fac478f49338499f5c4b9584b583d1fdce04bb4e9989ad82"
+    },
+    {
+      "archive_path": "payload/browser-long-retry01-job-01.stdout.log",
+      "origin_relative": "browser-long-retry01-job-01.stdout.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-long-retry01-job-01.stdout.log",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/browser-long-retry01-job-01.stdout.log",
+      "bytes": 25575,
+      "sha256": "96e0300c943c8a9dee79c7840d7179db53cc511cd0dd5bda9164a31d04d56e2e"
+    },
+    {
+      "archive_path": "payload/browser-native-failure-01.json",
+      "origin_relative": "browser-native-failure-01.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-native-failure-01.json",
+      "collection_bucket": "diagnostic_root_not_fresh_admission",
+      "local_destination_relative": "evidence/retry01-metadata/diagnostic-root/browser-native-failure-01.json",
+      "bytes": 56309,
+      "sha256": "63c1db4ca81831b70f6ef7e5432828bcd94892d50f3178ee17ea54b9c55536d5"
+    },
+    {
+      "archive_path": "payload/browser-path-alias-retry01-01.json",
+      "origin_relative": "browser-path-alias-retry01-01.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-path-alias-retry01-01.json",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/browser-path-alias-retry01-01.json",
+      "bytes": 992,
+      "sha256": "1370de2176c4e33b3998181e0c92f48254b3e97387ce2a7db96ab2fc45169b54"
+    },
+    {
+      "archive_path": "payload/browser-retry01-compile-01.stderr.log",
+      "origin_relative": "browser-retry01-compile-01.stderr.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-retry01-compile-01.stderr.log",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/browser-retry01-compile-01.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "payload/browser-retry01-compile-01.stdout.log",
+      "origin_relative": "browser-retry01-compile-01.stdout.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-retry01-compile-01.stdout.log",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/browser-retry01-compile-01.stdout.log",
+      "bytes": 421,
+      "sha256": "f225ddb9a7f1e4f71ec22e0459fc346f203ac7ee9d75538426f14fb312bb3470"
+    },
+    {
+      "archive_path": "payload/browser-retry01-prepare-01.json",
+      "origin_relative": "browser-retry01-prepare-01.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser-retry01-prepare-01.json",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/browser-retry01-prepare-01.json",
+      "bytes": 8599,
+      "sha256": "40bd9d58f0b2473540fcd22ac0f1ad975456efebfd9fe4553b8b38b27b3102a9"
+    },
+    {
+      "archive_path": "payload/browser_job_retry01.py",
+      "origin_relative": "browser_job_retry01.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/browser_job_retry01.py",
+      "collection_bucket": "fresh_browser_wrapper_source",
+      "local_destination_relative": "evidence/retry01-metadata/root/browser_job_retry01.py",
+      "bytes": 4878,
+      "sha256": "e5de91bba37c0613061fb6a4fbb3b1b8e9ff680dac592975c3f1c75dad1af8a2"
+    },
+    {
+      "archive_path": "payload/minimum-allocation-01.json",
+      "origin_relative": "minimum-allocation-01.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/minimum-allocation-01.json",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/minimum-allocation-01.json",
+      "bytes": 783,
+      "sha256": "f96d9e53e0f0b5450ce2885db896a6d547202562c3b2da6d2a4d49e21f83605c"
+    },
+    {
+      "archive_path": "payload/minimum-allocation-01.stderr.log",
+      "origin_relative": "minimum-allocation-01.stderr.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/minimum-allocation-01.stderr.log",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/minimum-allocation-01.stderr.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "archive_path": "payload/minimum-allocation-01.stdout.log",
+      "origin_relative": "minimum-allocation-01.stdout.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/minimum-allocation-01.stdout.log",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/minimum-allocation-01.stdout.log",
+      "bytes": 268,
+      "sha256": "69f3abcd7ec03e87abdf574e027c4d52b3fb99814e1d0056bd43f4b5db152f18"
+    },
+    {
+      "archive_path": "payload/models-retry01/controllers.json",
+      "origin_relative": "models-retry01/controllers.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/controllers.json",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/controllers.json",
+      "bytes": 2692,
+      "sha256": "533af8c2a305d0c92f03c585505e60d16a47c6998f9f5c8b618d368cb222ec10"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/audit-004.json",
+      "origin_relative": "models-retry01/experts/audit-004.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/audit-004.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/audit-004.json",
+      "bytes": 2144,
+      "sha256": "d2051fd22d359f1d2f3266e169c50474f25ea663d479ebb97ada6185c598b2c3"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/audit-orchestration.json",
+      "origin_relative": "models-retry01/experts/audit-orchestration.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/audit-orchestration.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/audit-orchestration.json",
+      "bytes": 2914,
+      "sha256": "fbd9342cd14cbcb6d15534994b7a631156fd5f6ef59bbf96c87eda26c1adcc25"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/candidates/004/candidate.py",
+      "origin_relative": "models-retry01/experts/candidates/004/candidate.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/candidates/004/candidate.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/experts/candidates/004/candidate.py",
+      "bytes": 6737,
+      "sha256": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/candidates/004/generation.json",
+      "origin_relative": "models-retry01/experts/candidates/004/generation.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/candidates/004/generation.json",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/experts/candidates/004/generation.json",
+      "bytes": 8549,
+      "sha256": "f9e2f5828bdf484401994993541e8d852e34b5fc6c869aa59cec9a543ad6906f"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/compare.py",
+      "origin_relative": "models-retry01/experts/compare.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/compare.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/experts/compare.py",
+      "bytes": 6002,
+      "sha256": "deb620de8a2323a222b9725e5b1affb466c05d59f2e6ed44cfd4d1f20795933c"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/comparison-admission01.json",
+      "origin_relative": "models-retry01/experts/comparison-admission01.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/comparison-admission01.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/comparison-admission01.json",
+      "bytes": 2615440,
+      "sha256": "8ec6a89635bec901c63a7c4c15e85c9f7614c3fafc03f1cce4d66172b086d0ae"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/comparison-control-004.json",
+      "origin_relative": "models-retry01/experts/comparison-control-004.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/comparison-control-004.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/comparison-control-004.json",
+      "bytes": 2615521,
+      "sha256": "78f4097e7bb8ac3e0e8cf35a25454954faf85498c57d94952841c3d5e20f9d25"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/comparison-native-004.json",
+      "origin_relative": "models-retry01/experts/comparison-native-004.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/comparison-native-004.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/comparison-native-004.json",
+      "bytes": 2615401,
+      "sha256": "bc30026a990590d6cbfc69f9c85d78e1a8cd8cbcb18b363f9079c831d8e60518"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/contract.json",
+      "origin_relative": "models-retry01/experts/contract.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/contract.json",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/experts/contract.json",
+      "bytes": 5255,
+      "sha256": "b13e0594df237fee9ee8dd622efc5b6291b1554aec8427a99ca160333436ad0c"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/control-admission01/command.json",
+      "origin_relative": "models-retry01/experts/control-admission01/command.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/control-admission01/command.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/control-admission01/command.json",
+      "bytes": 3819,
+      "sha256": "175b910875bbd7c564dfc3cf439082a05597006f0e79836ed669edd389989f90"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/control-admission01/entry.json",
+      "origin_relative": "models-retry01/experts/control-admission01/entry.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/control-admission01/entry.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/control-admission01/entry.json",
+      "bytes": 98540,
+      "sha256": "d9f3c5ae8ccd82dae76c574324963a6706c0e6d5b4cae37f91f593dd327f9942"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/control-admission01/gradnorm.json",
+      "origin_relative": "models-retry01/experts/control-admission01/gradnorm.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/control-admission01/gradnorm.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/control-admission01/gradnorm.json",
+      "bytes": 762,
+      "sha256": "6a3297963da1fd6d04089803d97ca6fb8a514a7b4896a60dd48b25ef2578d7c4"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/control-admission01/stderr.log",
+      "origin_relative": "models-retry01/experts/control-admission01/stderr.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/control-admission01/stderr.log",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/control-admission01/stderr.log",
+      "bytes": 8916,
+      "sha256": "013c0d6fd8b865faeeb37a8c033d2ecb0e222b6fe5cb22f38a23184164932085"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/control-admission01/stdout.log",
+      "origin_relative": "models-retry01/experts/control-admission01/stdout.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/control-admission01/stdout.log",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/control-admission01/stdout.log",
+      "bytes": 70660,
+      "sha256": "75eed074057abe1f1998428b661a2c81636a7fe1124326f35865360f45c49450"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/control-admission01/weighted.json",
+      "origin_relative": "models-retry01/experts/control-admission01/weighted.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/control-admission01/weighted.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/control-admission01/weighted.json",
+      "bytes": 14694,
+      "sha256": "0dc6d7333d305e7a1088ccee8a9630548e8218b6739b38cb022fe7ba1786c225"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/diagnostics-004.json",
+      "origin_relative": "models-retry01/experts/diagnostics-004.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/diagnostics-004.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/diagnostics-004.json",
+      "bytes": 140195,
+      "sha256": "58b76a622aea2caeb810c10df5cf7f057ab2c9da98aaf0a4a19c3124e186e633"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/launch_weighted.py",
+      "origin_relative": "models-retry01/experts/launch_weighted.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/launch_weighted.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/experts/launch_weighted.py",
+      "bytes": 7490,
+      "sha256": "65f01f6aa474ae08c3351106df245477ac6c224d951408fc938aa7b19eba48ad"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/native-admission01/command.json",
+      "origin_relative": "models-retry01/experts/native-admission01/command.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/native-admission01/command.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/native-admission01/command.json",
+      "bytes": 3641,
+      "sha256": "cc2d7dc0e72b5d2354a3dbab42bc0d2177e221442a562986693ef1f6ef83b393"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/native-admission01/entry.json",
+      "origin_relative": "models-retry01/experts/native-admission01/entry.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/native-admission01/entry.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/native-admission01/entry.json",
+      "bytes": 96468,
+      "sha256": "1d56d9be2a11c06965c0a57bebf89620cb16c8c3a52288890d84553744844304"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/native-admission01/gradnorm.json",
+      "origin_relative": "models-retry01/experts/native-admission01/gradnorm.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/native-admission01/gradnorm.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/native-admission01/gradnorm.json",
+      "bytes": 321,
+      "sha256": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/native-admission01/stderr.log",
+      "origin_relative": "models-retry01/experts/native-admission01/stderr.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/native-admission01/stderr.log",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/native-admission01/stderr.log",
+      "bytes": 8916,
+      "sha256": "45d0a5eb3b96f1e2cb8ffd77bc87e3180e1753b48e010a7dfd09086ad5d20c9d"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/native-admission01/stdout.log",
+      "origin_relative": "models-retry01/experts/native-admission01/stdout.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/native-admission01/stdout.log",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/native-admission01/stdout.log",
+      "bytes": 70655,
+      "sha256": "9a6af9afff49894bf6adde9f87d07649da055c1457fcf4f2b8d3dff5ec9ff1f9"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/native-admission01/weighted.json",
+      "origin_relative": "models-retry01/experts/native-admission01/weighted.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/native-admission01/weighted.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/native-admission01/weighted.json",
+      "bytes": 29003,
+      "sha256": "41b7131306c67d2d1e0b393bbde33ec28986e876f4e09d89cb610e0dc666d0e7"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/offset-004.json",
+      "origin_relative": "models-retry01/experts/offset-004.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/offset-004.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/offset-004.json",
+      "bytes": 1952,
+      "sha256": "11026f08f30227b95fb5692ab982aac252e864074bac280e6e3509758c9a63d0"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/optimized-audit004/command.json",
+      "origin_relative": "models-retry01/experts/optimized-audit004/command.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/optimized-audit004/command.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/optimized-audit004/command.json",
+      "bytes": 3999,
+      "sha256": "54f63ae785ecb4758a25dff6d7a2a796c9980c0345e065d592de78b8d35ff698"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/optimized-audit004/entry.json",
+      "origin_relative": "models-retry01/experts/optimized-audit004/entry.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/optimized-audit004/entry.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/optimized-audit004/entry.json",
+      "bytes": 98539,
+      "sha256": "783f136855c83981cabeaa531d354de78c29a70b5b8166b071d1790ad18a6836"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/optimized-audit004/gradnorm.json",
+      "origin_relative": "models-retry01/experts/optimized-audit004/gradnorm.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/optimized-audit004/gradnorm.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/optimized-audit004/gradnorm.json",
+      "bytes": 762,
+      "sha256": "6a3297963da1fd6d04089803d97ca6fb8a514a7b4896a60dd48b25ef2578d7c4"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/optimized-audit004/stderr.log",
+      "origin_relative": "models-retry01/experts/optimized-audit004/stderr.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/optimized-audit004/stderr.log",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/optimized-audit004/stderr.log",
+      "bytes": 10266,
+      "sha256": "a9adfb0f51a3440e584a84001e5cafd16a399345207a1bf64bd5ecadb139bf8b"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/optimized-audit004/stdout.log",
+      "origin_relative": "models-retry01/experts/optimized-audit004/stdout.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/optimized-audit004/stdout.log",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/optimized-audit004/stdout.log",
+      "bytes": 70655,
+      "sha256": "06d1af8c6136e99d545fca3b6cf922b5ec0e0404f90c2d666198129d7e4d8230"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/optimized-audit004/weighted.json",
+      "origin_relative": "models-retry01/experts/optimized-audit004/weighted.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/optimized-audit004/weighted.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/optimized-audit004/weighted.json",
+      "bytes": 14755,
+      "sha256": "9019181c228b352d49777720e27bdac00a0daf7b3702244264d71ec23d4ccc53"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/probe-004.json",
+      "origin_relative": "models-retry01/experts/probe-004.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/probe-004.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/experts/evidence/probe-004.json",
+      "bytes": 49028,
+      "sha256": "d1d4833d1da3327f107b8367f5ee4f0c18fed79c16da217f5eef4fa23a0040fa"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/probe.py",
+      "origin_relative": "models-retry01/experts/probe.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/probe.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/experts/probe.py",
+      "bytes": 8262,
+      "sha256": "c5c45eca4ea3f56de0a1cfddf2844deb37c6689cbabe5c48e4ada743cb010387"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/probe_offset.py",
+      "origin_relative": "models-retry01/experts/probe_offset.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/probe_offset.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/experts/probe_offset.py",
+      "bytes": 3482,
+      "sha256": "a672dc9c1015b38a42416d083dd4f16185459b39fe002a456d8b1e761f370840"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/replay.py",
+      "origin_relative": "models-retry01/experts/replay.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/replay.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/experts/replay.py",
+      "bytes": 3535,
+      "sha256": "695692ae502fff2d7aaec1c7206fa2934c546b3e06d10de391a3137ce1ae3b6e"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/run_audit.py",
+      "origin_relative": "models-retry01/experts/run_audit.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/run_audit.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/experts/run_audit.py",
+      "bytes": 3822,
+      "sha256": "084e7003a46e2166f0d5d10273b91b35a7e2263763b096033b184235e9827c3b"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/run_case.py",
+      "origin_relative": "models-retry01/experts/run_case.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/run_case.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/experts/run_case.py",
+      "bytes": 4314,
+      "sha256": "a85cb3dd5a9f32981e0d20e068be31ebe46467266062e93284ff58d3f45fc797"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/run_performance.py",
+      "origin_relative": "models-retry01/experts/run_performance.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/run_performance.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/experts/run_performance.py",
+      "bytes": 8959,
+      "sha256": "8841b7fc77808d2e5640073e84ae31460078bce2244380a9fd3454348a5a2dcb"
+    },
+    {
+      "archive_path": "payload/models-retry01/experts/seal_audit.py",
+      "origin_relative": "models-retry01/experts/seal_audit.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/experts/seal_audit.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/experts/seal_audit.py",
+      "bytes": 3792,
+      "sha256": "812b3f2eecd87d886b08b507b6749c3c7ef43099a41942e83197f294affe85a4"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/audit-004.json",
+      "origin_relative": "models-retry01/long/audit-004.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/audit-004.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/audit-004.json",
+      "bytes": 2144,
+      "sha256": "2e04c4721331b7309a7f43b38594b852488b0aeea66f8d7df73ededbd76f7303"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/audit-orchestration.json",
+      "origin_relative": "models-retry01/long/audit-orchestration.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/audit-orchestration.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/audit-orchestration.json",
+      "bytes": 2908,
+      "sha256": "df3ef91fa45440636e59bc0265d6cc80b6ec547c2693ef1ef761094ff7383c82"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/backend-current.json",
+      "origin_relative": "models-retry01/long/backend-current.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/backend-current.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/backend-current.json",
+      "bytes": 80240,
+      "sha256": "482f1a472aa70c04723dd0eb3b498090ab294b9443329b0b8e8fa83815c234fb"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/backend.py",
+      "origin_relative": "models-retry01/long/backend.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/backend.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/long/backend.py",
+      "bytes": 2916,
+      "sha256": "9368a281fdbfb393a1e5ce33dc9766457993d865662c621f53139ed315df264c"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/candidates/004/candidate.py",
+      "origin_relative": "models-retry01/long/candidates/004/candidate.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/candidates/004/candidate.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/long/candidates/004/candidate.py",
+      "bytes": 6737,
+      "sha256": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/candidates/004/generation.json",
+      "origin_relative": "models-retry01/long/candidates/004/generation.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/candidates/004/generation.json",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/long/candidates/004/generation.json",
+      "bytes": 8549,
+      "sha256": "f9e2f5828bdf484401994993541e8d852e34b5fc6c869aa59cec9a543ad6906f"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/compare.py",
+      "origin_relative": "models-retry01/long/compare.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/compare.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/long/compare.py",
+      "bytes": 6002,
+      "sha256": "deb620de8a2323a222b9725e5b1affb466c05d59f2e6ed44cfd4d1f20795933c"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/comparison-admission01.json",
+      "origin_relative": "models-retry01/long/comparison-admission01.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/comparison-admission01.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/comparison-admission01.json",
+      "bytes": 1696152,
+      "sha256": "417fffeb27a932de000904e8fe06285b09dda9ab181d6298fa626feb0d46d369"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/comparison-control-004.json",
+      "origin_relative": "models-retry01/long/comparison-control-004.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/comparison-control-004.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/comparison-control-004.json",
+      "bytes": 1696233,
+      "sha256": "c752129db6c79029185b17b74a3e47f91e5bf8b489a9c75c287a7062b121ca0f"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/comparison-native-004.json",
+      "origin_relative": "models-retry01/long/comparison-native-004.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/comparison-native-004.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/comparison-native-004.json",
+      "bytes": 1696113,
+      "sha256": "60248093b621201f4e0a6200222c86166cabdf7eaf3ff7c3d9cbe1aad7935535"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/contract.json",
+      "origin_relative": "models-retry01/long/contract.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/contract.json",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/long/contract.json",
+      "bytes": 5251,
+      "sha256": "386553c789e135e4b7eaa5be7642f9f36319c2c9ba6a061201cbe628761252c1"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/control-admission01/command.json",
+      "origin_relative": "models-retry01/long/control-admission01/command.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/control-admission01/command.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/control-admission01/command.json",
+      "bytes": 3798,
+      "sha256": "8adb78bc46c0b7ea914865e32b4e091f77d8e900689ea4fd7337b178f49dae7d"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/control-admission01/entry.json",
+      "origin_relative": "models-retry01/long/control-admission01/entry.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/control-admission01/entry.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/control-admission01/entry.json",
+      "bytes": 91237,
+      "sha256": "3ea8e2978cd0b2416bfaec816c98f3203cbcd591d7a31884672ca42ade436b7b"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/control-admission01/gradnorm.json",
+      "origin_relative": "models-retry01/long/control-admission01/gradnorm.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/control-admission01/gradnorm.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/control-admission01/gradnorm.json",
+      "bytes": 756,
+      "sha256": "03daa66d03e0ac5f35b59ebc648fca117a53280ad6c35d29c692f3b13f0f7351"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/control-admission01/stderr.log",
+      "origin_relative": "models-retry01/long/control-admission01/stderr.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/control-admission01/stderr.log",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/control-admission01/stderr.log",
+      "bytes": 8916,
+      "sha256": "8a8b851b831cd5fa1f8366ad15d0c320336c4f88c934c50b887979084e9fbe5e"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/control-admission01/stdout.log",
+      "origin_relative": "models-retry01/long/control-admission01/stdout.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/control-admission01/stdout.log",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/control-admission01/stdout.log",
+      "bytes": 67136,
+      "sha256": "fb5976467799feb53b5bc4f5635411de503361e639869490c427aa625e6d1b19"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/control-admission01/weighted.json",
+      "origin_relative": "models-retry01/long/control-admission01/weighted.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/control-admission01/weighted.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/control-admission01/weighted.json",
+      "bytes": 11477,
+      "sha256": "48b3d4f64b910b7b68f3cda5cbc45c95d87beda07a1fbb3f31aa6bdc4425d4f6"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/diagnostics-004.json",
+      "origin_relative": "models-retry01/long/diagnostics-004.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/diagnostics-004.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/diagnostics-004.json",
+      "bytes": 70266,
+      "sha256": "cb026f97169ae3fccb4d31a16320499875938d530333c8da62765c7bd23136e2"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/launch_weighted.py",
+      "origin_relative": "models-retry01/long/launch_weighted.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/launch_weighted.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/long/launch_weighted.py",
+      "bytes": 7490,
+      "sha256": "65f01f6aa474ae08c3351106df245477ac6c224d951408fc938aa7b19eba48ad"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/native-admission01/command.json",
+      "origin_relative": "models-retry01/long/native-admission01/command.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/native-admission01/command.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/native-admission01/command.json",
+      "bytes": 3619,
+      "sha256": "4c860a279c32cf88c04885f5b6e53eacde9df5c01be30760cbfc7828289ba0c9"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/native-admission01/entry.json",
+      "origin_relative": "models-retry01/long/native-admission01/entry.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/native-admission01/entry.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/native-admission01/entry.json",
+      "bytes": 89165,
+      "sha256": "fdaf4f3d36f1e18c711e1d1fb68a7111394b23c25d2ce56f61fe27804e3d029d"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/native-admission01/gradnorm.json",
+      "origin_relative": "models-retry01/long/native-admission01/gradnorm.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/native-admission01/gradnorm.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/native-admission01/gradnorm.json",
+      "bytes": 321,
+      "sha256": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/native-admission01/stderr.log",
+      "origin_relative": "models-retry01/long/native-admission01/stderr.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/native-admission01/stderr.log",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/native-admission01/stderr.log",
+      "bytes": 8916,
+      "sha256": "252af078356a29d6539b1b58c493458f37befb8c85c60fdd2ba74be611e969eb"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/native-admission01/stdout.log",
+      "origin_relative": "models-retry01/long/native-admission01/stdout.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/native-admission01/stdout.log",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/native-admission01/stdout.log",
+      "bytes": 67139,
+      "sha256": "781f5ea2fe0d96a67f5b3cd198357297490eefcd68ef41df276ad2473069a779"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/native-admission01/weighted.json",
+      "origin_relative": "models-retry01/long/native-admission01/weighted.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/native-admission01/weighted.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/native-admission01/weighted.json",
+      "bytes": 18629,
+      "sha256": "c94ee254eaa172c137978afa0755e106912f42b7445c8e83ef878cb0cfc30248"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/offset-004.json",
+      "origin_relative": "models-retry01/long/offset-004.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/offset-004.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/offset-004.json",
+      "bytes": 1952,
+      "sha256": "11026f08f30227b95fb5692ab982aac252e864074bac280e6e3509758c9a63d0"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/optimized-audit004/command.json",
+      "origin_relative": "models-retry01/long/optimized-audit004/command.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/optimized-audit004/command.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/optimized-audit004/command.json",
+      "bytes": 3975,
+      "sha256": "1bdde938d2c399dafc2a41163a638647dee320fc13467a3dca2d7f587d97f527"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/optimized-audit004/entry.json",
+      "origin_relative": "models-retry01/long/optimized-audit004/entry.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/optimized-audit004/entry.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/optimized-audit004/entry.json",
+      "bytes": 91236,
+      "sha256": "81011d6346f77bcecdec30320ae405131e45f7cdaa73c2eef67333cb0569f02c"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/optimized-audit004/gradnorm.json",
+      "origin_relative": "models-retry01/long/optimized-audit004/gradnorm.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/optimized-audit004/gradnorm.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/optimized-audit004/gradnorm.json",
+      "bytes": 756,
+      "sha256": "03daa66d03e0ac5f35b59ebc648fca117a53280ad6c35d29c692f3b13f0f7351"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/optimized-audit004/stderr.log",
+      "origin_relative": "models-retry01/long/optimized-audit004/stderr.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/optimized-audit004/stderr.log",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/optimized-audit004/stderr.log",
+      "bytes": 10536,
+      "sha256": "7cb2b8bcf57c0f0933880e126fb794cb95b0d951c19a36960d79bc25f74cdf5d"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/optimized-audit004/stdout.log",
+      "origin_relative": "models-retry01/long/optimized-audit004/stdout.log",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/optimized-audit004/stdout.log",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/optimized-audit004/stdout.log",
+      "bytes": 67133,
+      "sha256": "22ff769bdb31bd6062995144bfee5a81498770cc23b8f40de29da78c89263ba2"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/optimized-audit004/weighted.json",
+      "origin_relative": "models-retry01/long/optimized-audit004/weighted.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/optimized-audit004/weighted.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/optimized-audit004/weighted.json",
+      "bytes": 11538,
+      "sha256": "786293a6bb002b86bf3837854bcbf1900dd624bf7be1cc5cd2f53a6c7dfd672b"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/probe-004.json",
+      "origin_relative": "models-retry01/long/probe-004.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/probe-004.json",
+      "collection_bucket": "fresh_audit_metadata",
+      "local_destination_relative": "models-retry01/long/evidence/probe-004.json",
+      "bytes": 49034,
+      "sha256": "444efc86f5050d49187775f8e21a68d31db24c5e97c4b0174797adfc6abeeff9"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/probe.py",
+      "origin_relative": "models-retry01/long/probe.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/probe.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/long/probe.py",
+      "bytes": 8262,
+      "sha256": "c5c45eca4ea3f56de0a1cfddf2844deb37c6689cbabe5c48e4ada743cb010387"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/probe_offset.py",
+      "origin_relative": "models-retry01/long/probe_offset.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/probe_offset.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/long/probe_offset.py",
+      "bytes": 3482,
+      "sha256": "a672dc9c1015b38a42416d083dd4f16185459b39fe002a456d8b1e761f370840"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/replay.py",
+      "origin_relative": "models-retry01/long/replay.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/replay.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/long/replay.py",
+      "bytes": 3535,
+      "sha256": "695692ae502fff2d7aaec1c7206fa2934c546b3e06d10de391a3137ce1ae3b6e"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/run_audit.py",
+      "origin_relative": "models-retry01/long/run_audit.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/run_audit.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/long/run_audit.py",
+      "bytes": 3822,
+      "sha256": "084e7003a46e2166f0d5d10273b91b35a7e2263763b096033b184235e9827c3b"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/run_case.py",
+      "origin_relative": "models-retry01/long/run_case.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/run_case.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/long/run_case.py",
+      "bytes": 4314,
+      "sha256": "a85cb3dd5a9f32981e0d20e068be31ebe46467266062e93284ff58d3f45fc797"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/run_performance.py",
+      "origin_relative": "models-retry01/long/run_performance.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/run_performance.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/long/run_performance.py",
+      "bytes": 8959,
+      "sha256": "8841b7fc77808d2e5640073e84ae31460078bce2244380a9fd3454348a5a2dcb"
+    },
+    {
+      "archive_path": "payload/models-retry01/long/seal_audit.py",
+      "origin_relative": "models-retry01/long/seal_audit.py",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/models-retry01/long/seal_audit.py",
+      "collection_bucket": "frozen_controller",
+      "local_destination_relative": "models-retry01/long/seal_audit.py",
+      "bytes": 3792,
+      "sha256": "812b3f2eecd87d886b08b507b6749c3c7ef43099a41942e83197f294affe85a4"
+    },
+    {
+      "archive_path": "payload/native-build-supplement-restored-01.json",
+      "origin_relative": "native-build-supplement-restored-01.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/native-build-supplement-restored-01.json",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/native-build-supplement-restored-01.json",
+      "bytes": 1107,
+      "sha256": "353e3463e7939a1e7f29f1dfa62eafb2a36fc9fb18f8791a16d4605159a4952b"
+    },
+    {
+      "archive_path": "payload/occupancy-20261010-01.json",
+      "origin_relative": "occupancy-20261010-01.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/occupancy-20261010-01.json",
+      "collection_bucket": "diagnostic_root_not_fresh_admission",
+      "local_destination_relative": "evidence/retry01-metadata/diagnostic-root/occupancy-20261010-01.json",
+      "bytes": 2960,
+      "sha256": "54f26b93597ff0c0e6b5cf977627d97c874ec8a8b6e2c6d0885d7259fa023538"
+    },
+    {
+      "archive_path": "payload/plan.json",
+      "origin_relative": "plan.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/plan.json",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/plan.json",
+      "bytes": 3182,
+      "sha256": "e1590620b868f4a9c5e10c44e2ec19255f0b23a6cc0de38b391265619c0a9df6"
+    },
+    {
+      "archive_path": "payload/provenance.json",
+      "origin_relative": "provenance.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/provenance.json",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/provenance.json",
+      "bytes": 465,
+      "sha256": "9c5df8081ea8146ccde291e33c9634b8df9173a101e26f49807f7690b8f6ad8c"
+    },
+    {
+      "archive_path": "payload/runtime-restored-01.json",
+      "origin_relative": "runtime-restored-01.json",
+      "origin_absolute": "/private/kda-biv150-stage35-recovery01/runtime-restored-01.json",
+      "collection_bucket": "fresh_restoration_root",
+      "local_destination_relative": "evidence/retry01-metadata/root/runtime-restored-01.json",
+      "bytes": 199494,
+      "sha256": "b23d4bd2f9e182119de605ba870070bd091507b388e282d328c98f253421d2d0"
+    }
+  ],
+  "file_count": 109,
+  "uncompressed_bytes": 15084825,
+  "collector_sha256": "ff32ac5a25033b0f4a10a228a69fca67bb6804f0d7f3fe7353d1ab2a5b1f691e",
+  "scope": "Metadata and exact frozen controller copies only. Original *.pt payloads remain on NFS; formal timing waits for separate complete raw transfer and SHA verification. Prior namespace diagnostics are archived separately and do not provide new admission."
+}

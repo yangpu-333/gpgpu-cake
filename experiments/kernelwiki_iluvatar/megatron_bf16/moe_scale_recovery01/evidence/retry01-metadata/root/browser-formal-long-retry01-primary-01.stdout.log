@@ -1,0 +1,19 @@
+{"case": "native-perf-004-35102", "stage34_arm": "native", "exit_code": 0, "whole_process_elapsed_seconds": 31.020009567961097}
+{"arm": "native", "seed": 35102, "case": "native-perf-004-35102", "mean_iteration_ms": 76.69}
+{"case": "control-perf-004-35102", "stage34_arm": "control", "exit_code": 0, "whole_process_elapsed_seconds": 29.771032038028352}
+{"arm": "control", "seed": 35102, "case": "control-perf-004-35102", "mean_iteration_ms": 73.21}
+{"case": "optimized-perf-004-35102", "stage34_arm": "optimized", "exit_code": 0, "whole_process_elapsed_seconds": 30.17534188204445}
+{"arm": "optimized", "seed": 35102, "case": "optimized-perf-004-35102", "mean_iteration_ms": 71.62}
+{"case": "optimized-perf-004-35103", "stage34_arm": "optimized", "exit_code": 0, "whole_process_elapsed_seconds": 29.215844362974167}
+{"arm": "optimized", "seed": 35103, "case": "optimized-perf-004-35103", "mean_iteration_ms": 69.91}
+{"case": "control-perf-004-35103", "stage34_arm": "control", "exit_code": 0, "whole_process_elapsed_seconds": 30.768275659007486}
+{"arm": "control", "seed": 35103, "case": "control-perf-004-35103", "mean_iteration_ms": 73.8}
+{"case": "native-perf-004-35103", "stage34_arm": "native", "exit_code": 0, "whole_process_elapsed_seconds": 30.518570335989352}
+{"arm": "native", "seed": 35103, "case": "native-perf-004-35103", "mean_iteration_ms": 76.61}
+{"case": "control-perf-004-35104", "stage34_arm": "control", "exit_code": 0, "whole_process_elapsed_seconds": 30.570405768987257}
+{"arm": "control", "seed": 35104, "case": "control-perf-004-35104", "mean_iteration_ms": 73.6}
+{"case": "native-perf-004-35104", "stage34_arm": "native", "exit_code": 0, "whole_process_elapsed_seconds": 30.020517033990473}
+{"arm": "native", "seed": 35104, "case": "native-perf-004-35104", "mean_iteration_ms": 75.64}
+{"case": "optimized-perf-004-35104", "stage34_arm": "optimized", "exit_code": 0, "whole_process_elapsed_seconds": 29.8166483080131}
+{"arm": "optimized", "seed": 35104, "case": "optimized-perf-004-35104", "mean_iteration_ms": 69.89}
+{"status": "validated", "decision": "promoted_tested_model_only", "vs_control": {"ratio": 1.0435308866001058, "gain_percent": 4.3530886600105845, "all_seeds_faster": true}, "vs_native": {"ratio": 1.0829182854825241, "gain_percent": 8.291828548252411, "all_seeds_faster": true}, "error": null}

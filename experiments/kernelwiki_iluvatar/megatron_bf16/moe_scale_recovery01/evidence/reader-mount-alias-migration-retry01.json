@@ -1,0 +1,97 @@
+{
+  "schema": "stage35-recovery01-retry01-cpu-reader-mount-alias-migration-v1",
+  "source_reader": "verify_receipts_retry01.py",
+  "source_reader_sha256": "58dc2b60feacfe9ade41f23bc8a89f3042eee9bb0414696117b5df266fb38217",
+  "derived_reader": "verify_receipts_retry01_mount.py",
+  "derived_reader_sha256": "3fd76e863e5a3c0d6372941d97f9e8914913a6bc0421d09e332d77bf1c5b8321",
+  "derivation_script_sha256": "b0a95f9c0b466b0bf091d61b524aad0d0d63eef74b8d5dc706c783d0ec337ce1",
+  "operations": [
+    {
+      "old": "REMOTE='/private/kda-biv150-stage35-recovery01/models-retry01/'",
+      "new": "REMOTE='/mnt/kda-biv150-stage35-recovery01/models-retry01/'",
+      "occurrences": 1,
+      "reason": "Use the observed resolved model root as the unique raw identity prefix.",
+      "lines_before_operation": [
+        12
+      ]
+    },
+    {
+      "old": "def local_original(value,base):",
+      "new": "REMOTE_ALIAS='/private/kda-biv150-stage35-recovery01/models-retry01/'\nALIAS_RECEIPT=HERE/'evidence/retry01-metadata/root/browser-path-alias-retry01-01.json'\n\n\ndef canonical_model_origin(value):\n    \"\"\"Normalize only the two evidence-backed prefixes; preserve original receipts.\"\"\"\n    prefix=next((root for root in (REMOTE,REMOTE_ALIAS) if value.startswith(root)),None)\n    if prefix is None:return value\n    rel=PurePosixPath(value[len(prefix):])\n    require(not rel.is_absolute() and '..' not in rel.parts,'unsafe raw path')\n    require(rel.parts and rel.parts[0] in MODELS,'unexpected heldout model path')\n    evidence=read(ALIAS_RECEIPT)\n    require(evidence['declared_root']=='/private/kda-biv150-stage35-recovery01'\n            and evidence['resolved_root']=='/mnt/kda-biv150-stage35-recovery01'\n            and evidence['resolved_models']=='/mnt/kda-biv150-stage35-recovery01/models-retry01'\n            and evidence['gpu_work_executed'] is False,\n            'observed exact private/mnt model-root alias required')\n    return REMOTE+rel.as_posix()\n\n\ndef local_original(value,base):",
+      "occurrences": 1,
+      "reason": "Add only two exact allowed model-root prefixes, guarded by the imported observed alias receipt.",
+      "lines_before_operation": [
+        67
+      ]
+    },
+    {
+      "old": "def local_original(value,base):\n    if value.startswith(REMOTE):",
+      "new": "def local_original(value,base):\n    value=canonical_model_origin(value)\n    if value.startswith(REMOTE):",
+      "occurrences": 1,
+      "reason": "Locate model originals through the exact alias mapping; other dependency roots remain unchanged.",
+      "lines_before_operation": [
+        87
+      ]
+    },
+    {
+      "old": "previous = raw_rows.setdefault(row['path'], row)",
+      "new": "previous = raw_rows.setdefault(canonical_model_origin(row['path']), row)",
+      "occurrences": 1,
+      "reason": "Use canonical identity keys without altering original row path, bytes or hashes.",
+      "lines_before_operation": [
+        174
+      ]
+    },
+    {
+      "old": "            raw_rows[value]=dict(row,path=value)",
+      "new": "            previous=raw_rows.setdefault(value,dict(row,path=value))\n            require(previous['bytes']==row['bytes'] and previous['sha256']==row['sha256'],\n                    'same original identity differs across observed aliases')",
+      "occurrences": 1,
+      "reason": "Deduplicate weighted captures against comparison inputs and reject conflicting byte identities.",
+      "lines_before_operation": [
+        210
+      ]
+    },
+    {
+      "old": "'arithmetic_replay':False,'gpu_rerun':False}",
+      "new": "'arithmetic_replay':False,'gpu_rerun':False,'remote_models_canonical_root':REMOTE,'verified_model_root_aliases':[REMOTE,REMOTE_ALIAS],'alias_receipt_sha256':sha(ALIAS_RECEIPT),'raw_identity_deduplicated':True}",
+      "occurrences": 1,
+      "reason": "Report the exact alias evidence and identity policy in the audit-only result.",
+      "lines_before_operation": [
+        235
+      ]
+    },
+    {
+      "old": "        'gpu_rerun':False,'arithmetic_replay':False,",
+      "new": "        'gpu_rerun':False,'arithmetic_replay':False,\n        'remote_models_canonical_root':REMOTE,'verified_model_root_aliases':[REMOTE,REMOTE_ALIAS],\n        'alias_receipt_sha256':sha(ALIAS_RECEIPT),'raw_identity_deduplicated':True,",
+      "occurrences": 1,
+      "reason": "Report the exact alias evidence and identity policy in the complete receipt result.",
+      "lines_before_operation": [
+        299
+      ]
+    }
+  ],
+  "all_reverse_operations_recover_source_bytes": true,
+  "reverse_ast_identical": true,
+  "syntax_verified": true,
+  "source_reader_preserved": true,
+  "allowed_model_root_prefixes": [
+    "/mnt/kda-biv150-stage35-recovery01/models-retry01/",
+    "/private/kda-biv150-stage35-recovery01/models-retry01/"
+  ],
+  "canonical_identity_prefix": "/mnt/kda-biv150-stage35-recovery01/models-retry01/",
+  "alias_evidence_origin": "/private/kda-biv150-stage35-recovery01/browser-path-alias-retry01-01.json",
+  "alias_evidence_local": "evidence/retry01-metadata/root/browser-path-alias-retry01-01.json",
+  "alias_evidence_sha256": null,
+  "alias_evidence_sha256_status": "Pending exact import; the reader validates observed root fields and emits actual imported receipt SHA.",
+  "observed_parent_message_example": "/mnt/kda-biv150-stage35-recovery01/models-retry01/long/native-admission01/snapshots/model0-initial.pt",
+  "model_namespace_scope": "Only long and experts within the exact retry01 roots; traversal and all other absolute model roots are rejected.",
+  "original_json_bytes_or_path_values_modified": false,
+  "original_recorded_hashes_modified": false,
+  "duplicate_identity_requires_same_bytes_and_sha256": true,
+  "numerical_tolerance_model_candidate_timing_or_promotion_conditions_changed": false,
+  "frozen_controller_files_changed": false,
+  "gpu_work_executed": false,
+  "audit_call": "python verify_receipts_retry01_mount.py --model long --audit-only --require-raw",
+  "formal_call": "python verify_receipts_retry01_mount.py --model long --require-raw",
+  "scope": "Exact observed mount alias handling and raw identity deduplication only. No receipt content rewrite or numerical/performance relaxation."
+}

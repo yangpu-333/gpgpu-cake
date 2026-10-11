@@ -1,0 +1,19 @@
+{"case": "native-perf-004-35102", "stage34_arm": "native", "exit_code": 0, "whole_process_elapsed_seconds": 30.017337873985525}
+{"arm": "native", "seed": 35102, "case": "native-perf-004-35102", "mean_iteration_ms": 76.23}
+{"case": "control-perf-004-35102", "stage34_arm": "control", "exit_code": 0, "whole_process_elapsed_seconds": 29.968152121000458}
+{"arm": "control", "seed": 35102, "case": "control-perf-004-35102", "mean_iteration_ms": 74.31}
+{"case": "optimized-perf-004-35102", "stage34_arm": "optimized", "exit_code": 0, "whole_process_elapsed_seconds": 25.66034399700584}
+{"arm": "optimized", "seed": 35102, "case": "optimized-perf-004-35102", "mean_iteration_ms": 70.57000000000001}
+{"case": "optimized-perf-004-35103", "stage34_arm": "optimized", "exit_code": 0, "whole_process_elapsed_seconds": 25.661712531000376}
+{"arm": "optimized", "seed": 35103, "case": "optimized-perf-004-35103", "mean_iteration_ms": 70.95}
+{"case": "control-perf-004-35103", "stage34_arm": "control", "exit_code": 0, "whole_process_elapsed_seconds": 29.867530740972143}
+{"arm": "control", "seed": 35103, "case": "control-perf-004-35103", "mean_iteration_ms": 73.52}
+{"case": "native-perf-004-35103", "stage34_arm": "native", "exit_code": 0, "whole_process_elapsed_seconds": 30.618308961973526}
+{"arm": "native", "seed": 35103, "case": "native-perf-004-35103", "mean_iteration_ms": 77.48}
+{"case": "control-perf-004-35104", "stage34_arm": "control", "exit_code": 0, "whole_process_elapsed_seconds": 30.017235335020814}
+{"arm": "control", "seed": 35104, "case": "control-perf-004-35104", "mean_iteration_ms": 74.36}
+{"case": "native-perf-004-35104", "stage34_arm": "native", "exit_code": 0, "whole_process_elapsed_seconds": 30.216514451021794}
+{"arm": "native", "seed": 35104, "case": "native-perf-004-35104", "mean_iteration_ms": 76.2}
+{"case": "optimized-perf-004-35104", "stage34_arm": "optimized", "exit_code": 0, "whole_process_elapsed_seconds": 25.711166954017244}
+{"arm": "optimized", "seed": 35104, "case": "optimized-perf-004-35104", "mean_iteration_ms": 71.09}
+{"status": "validated", "decision": "promoted_tested_model_only", "vs_control": {"ratio": 1.0450499202360632, "gain_percent": 4.504992023606325, "all_seeds_faster": true}, "vs_native": {"ratio": 1.0813422132489314, "gain_percent": 8.134221324893144, "all_seeds_faster": true}, "error": null}

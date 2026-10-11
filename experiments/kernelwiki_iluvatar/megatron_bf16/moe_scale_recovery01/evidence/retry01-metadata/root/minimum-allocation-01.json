@@ -1,0 +1,28 @@
+{
+  "hostname": "ai-exp-sy2506311-kda1-pod-qpia-8f74fcf5c-z7g26",
+  "script_sha256": "d265e035304eb81ff4049578fbfe79bb59eb2b4819ba3227d999b08451a051bc",
+  "timeout_seconds": 35,
+  "gpu_timing": false,
+  "exit_code": 0,
+  "stdout_sha256": "69f3abcd7ec03e87abdf574e027c4d52b3fb99814e1d0056bd43f4b5db152f18",
+  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "passed": true,
+  "allocation": {
+    "torch": "2.4.1",
+    "gpu": "Iluvatar BI-V150",
+    "selected_gpu": 0,
+    "allocated_values": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "total_memory": 34359738368,
+    "cuda_compatibility_label": "10.2",
+    "scope": "Untimed8-value allocation only; no training performance result."
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schema": "retry01-path-alias-observation-v1",
+  "hostname": "ai-exp-sy2506311-kda1-pod-qpia-8f74fcf5c-z7g26",
+  "declared_root": "/private/kda-biv150-stage35-recovery01",
+  "resolved_root": "/mnt/kda-biv150-stage35-recovery01",
+  "declared_models": "/private/kda-biv150-stage35-recovery01/models-retry01",
+  "resolved_models": "/mnt/kda-biv150-stage35-recovery01/models-retry01",
+  "comparison_sha256": "60248093b621201f4e0a6200222c86166cabdf7eaf3ff7c3d9cbe1aad7935535",
+  "raw_path_count": 64,
+  "raw_path_examples": [
+    "/mnt/kda-biv150-stage35-recovery01/models-retry01/long/native-admission01/snapshots/model0-initial.pt",
+    "/mnt/kda-biv150-stage35-recovery01/models-retry01/long/optimized-audit004/snapshots/model0-initial.pt",
+    "/mnt/kda-biv150-stage35-recovery01/models-retry01/long/native-admission01/snapshots/actual-start.pt",
+    "/mnt/kda-biv150-stage35-recovery01/models-retry01/long/optimized-audit004/snapshots/actual-start.pt"
+  ],
+  "gpu_work_executed": false
+}

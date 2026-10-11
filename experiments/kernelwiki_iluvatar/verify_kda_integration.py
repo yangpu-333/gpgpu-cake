@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 
-EXPECTED_ARCHITECTURE_COUNTS = {"bi-v150": 36, "sm90": 286, "sm100": 379}
+EXPECTED_ARCHITECTURE_COUNTS = {"bi-v150": 38, "sm90": 286, "sm100": 379}
 EXTENSION_PAGE_PATHS = (
     "sources/experiments/bi-v150-corex42-stage30.md",
     "wiki/kernels/swiglu-heldout-megatron-bi-v150.md",
@@ -16,6 +16,8 @@ EXTENSION_PAGE_PATHS = (
     "wiki/kernels/dense-attention-heldout-megatron-bi-v150.md",
     "sources/experiments/bi-v150-corex42-stage34.md",
     "wiki/kernels/weighted-swiglu-moe-megatron-bi-v150.md",
+    "sources/experiments/bi-v150-corex42-stage35-retry01.md",
+    "wiki/kernels/weighted-swiglu-heldout-megatron-bi-v150.md",
 )
 EXTENSION_BUNDLE = "evidence/bi-v150-corex42-stage30-31"
 EXTENSION_EVIDENCE_PATHS = (
@@ -76,7 +78,7 @@ def main():
         if architecture == "bi-v150":
             missing = set(EXTENSION_PAGE_PATHS) - actual
             if missing:
-                raise RuntimeError(f"stage30/31/32/34 BI-V150 query pages missing: {sorted(missing)}")
+                raise RuntimeError(f"stage30/31/32/34/35 BI-V150 query pages missing: {sorted(missing)}")
         print(f"{architecture}: {len(actual)} paths")
     stage14 = project_skill / "sources" / "experiments" / "bi-v150-corex42-stage14.md"
     if not stage14.is_file():
@@ -128,6 +130,15 @@ def main():
                      "megatron_bf16/moe_weighted/candidates/004/candidate.py"):
         if not (project_skill / "evidence/bi-v150-corex42-stage34" / relative).is_file():
             raise RuntimeError(f"stage34 weighted MoE evidence missing: {relative}")
+    for relative in ("manifest.json", "PROVENANCE.yaml",
+                     "megatron_bf16/moe_scale_recovery01/evidence/decision-retry01-02.json",
+                     "megatron_bf16/moe_scale_recovery01/evidence/completed-formal-import-retry01-02.json",
+                     "megatron_bf16/moe_scale_recovery01/evidence/raw-http-backup-retry01-01-receipt.json",
+                     "megatron_bf16/moe_scale_recovery01/evidence/long-primary-diagnostic-import-01.json",
+                     "megatron_bf16/moe_scale_recovery01/models-retry01/long/evidence/confirmation/performance-004.json",
+                     "megatron_bf16/moe_scale_recovery01/models-retry01/experts/evidence/performance-004.json"):
+        if not (project_skill / "evidence/bi-v150-corex42-stage35-retry01" / relative).is_file():
+            raise RuntimeError(f"stage35 fresh heldout evidence missing: {relative}")
     print("KDA project-level skill integration verified")
 
 

@@ -1,0 +1,1 @@
+{"torch": "2.4.1", "gpu": "Iluvatar BI-V150", "selected_gpu": 0, "allocated_values": [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0], "total_memory": 34359738368, "cuda_compatibility_label": "10.2", "scope": "Untimed8-value allocation only; no training performance result."}

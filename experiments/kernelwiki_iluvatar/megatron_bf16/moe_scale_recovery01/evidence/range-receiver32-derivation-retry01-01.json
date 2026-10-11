@@ -1,0 +1,6 @@
+{
+  "schema": "retry01-range-size-derivation-v1",
+  "source_sha256": "a8ef487f98420ddd1c6d2b11221c6e5683f460970e37e1170f5c5811d2eff26d",
+  "derived_sha256": "0d8ef4bc27af4328bef8ff7bb967ab040aae406cc704ca21e7527ec1d7326886",
+  "changes": "Transport block size8MiB->32MiB, per-request guard60->150s; same three workers, plan, originals, full SHA gates and resume partials. No frozen experimental code or original data changed."
+}

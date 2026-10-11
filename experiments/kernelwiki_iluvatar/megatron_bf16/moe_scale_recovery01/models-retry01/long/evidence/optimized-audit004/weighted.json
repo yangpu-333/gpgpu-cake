@@ -1,0 +1,356 @@
+{
+  "schema": "moe-weighted-stage34-dispatch-v1",
+  "enabled": true,
+  "candidate_sha256": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e",
+  "wrapper_sha256": "65f01f6aa474ae08c3351106df245477ac6c224d951408fc938aa7b19eba48ad",
+  "calls": 48,
+  "candidate_calls": 48,
+  "native_calls": 0,
+  "fallback_calls": 0,
+  "sort_compat_calls": 12,
+  "shapes": {
+    "((318, 4096), 'torch.bfloat16', (318, 1), 'torch.bfloat16')": 1,
+    "((230, 4096), 'torch.bfloat16', (230, 1), 'torch.bfloat16')": 1,
+    "((251, 4096), 'torch.bfloat16', (251, 1), 'torch.bfloat16')": 2,
+    "((225, 4096), 'torch.bfloat16', (225, 1), 'torch.bfloat16')": 1,
+    "((162, 4096), 'torch.bfloat16', (162, 1), 'torch.bfloat16')": 1,
+    "((296, 4096), 'torch.bfloat16', (296, 1), 'torch.bfloat16')": 1,
+    "((372, 4096), 'torch.bfloat16', (372, 1), 'torch.bfloat16')": 2,
+    "((194, 4096), 'torch.bfloat16', (194, 1), 'torch.bfloat16')": 1,
+    "((30, 4096), 'torch.bfloat16', (30, 1), 'torch.bfloat16')": 1,
+    "((392, 4096), 'torch.bfloat16', (392, 1), 'torch.bfloat16')": 1,
+    "((273, 4096), 'torch.bfloat16', (273, 1), 'torch.bfloat16')": 1,
+    "((329, 4096), 'torch.bfloat16', (329, 1), 'torch.bfloat16')": 1,
+    "((13, 4096), 'torch.bfloat16', (13, 1), 'torch.bfloat16')": 1,
+    "((504, 4096), 'torch.bfloat16', (504, 1), 'torch.bfloat16')": 1,
+    "((501, 4096), 'torch.bfloat16', (501, 1), 'torch.bfloat16')": 1,
+    "((6, 4096), 'torch.bfloat16', (6, 1), 'torch.bfloat16')": 1,
+    "((314, 4096), 'torch.bfloat16', (314, 1), 'torch.bfloat16')": 1,
+    "((214, 4096), 'torch.bfloat16', (214, 1), 'torch.bfloat16')": 1,
+    "((245, 4096), 'torch.bfloat16', (245, 1), 'torch.bfloat16')": 1,
+    "((131, 4096), 'torch.bfloat16', (131, 1), 'torch.bfloat16')": 1,
+    "((332, 4096), 'torch.bfloat16', (332, 1), 'torch.bfloat16')": 1,
+    "((359, 4096), 'torch.bfloat16', (359, 1), 'torch.bfloat16')": 1,
+    "((202, 4096), 'torch.bfloat16', (202, 1), 'torch.bfloat16')": 1,
+    "((132, 4096), 'torch.bfloat16', (132, 1), 'torch.bfloat16')": 1,
+    "((305, 4096), 'torch.bfloat16', (305, 1), 'torch.bfloat16')": 1,
+    "((278, 4096), 'torch.bfloat16', (278, 1), 'torch.bfloat16')": 1,
+    "((309, 4096), 'torch.bfloat16', (309, 1), 'torch.bfloat16')": 1,
+    "((96, 4096), 'torch.bfloat16', (96, 1), 'torch.bfloat16')": 1,
+    "((432, 4096), 'torch.bfloat16', (432, 1), 'torch.bfloat16')": 1,
+    "((469, 4096), 'torch.bfloat16', (469, 1), 'torch.bfloat16')": 1,
+    "((27, 4096), 'torch.bfloat16', (27, 1), 'torch.bfloat16')": 1,
+    "((271, 4096), 'torch.bfloat16', (271, 1), 'torch.bfloat16')": 1,
+    "((250, 4096), 'torch.bfloat16', (250, 1), 'torch.bfloat16')": 1,
+    "((217, 4096), 'torch.bfloat16', (217, 1), 'torch.bfloat16')": 1,
+    "((286, 4096), 'torch.bfloat16', (286, 1), 'torch.bfloat16')": 1,
+    "((167, 4096), 'torch.bfloat16', (167, 1), 'torch.bfloat16')": 1,
+    "((331, 4096), 'torch.bfloat16', (331, 1), 'torch.bfloat16')": 1,
+    "((154, 4096), 'torch.bfloat16', (154, 1), 'torch.bfloat16')": 1,
+    "((190, 4096), 'torch.bfloat16', (190, 1), 'torch.bfloat16')": 1,
+    "((330, 4096), 'torch.bfloat16', (330, 1), 'torch.bfloat16')": 1,
+    "((345, 4096), 'torch.bfloat16', (345, 1), 'torch.bfloat16')": 1,
+    "((159, 4096), 'torch.bfloat16', (159, 1), 'torch.bfloat16')": 1,
+    "((166, 4096), 'torch.bfloat16', (166, 1), 'torch.bfloat16')": 1,
+    "((366, 4096), 'torch.bfloat16', (366, 1), 'torch.bfloat16')": 1,
+    "((388, 4096), 'torch.bfloat16', (388, 1), 'torch.bfloat16')": 1,
+    "((104, 4096), 'torch.bfloat16', (104, 1), 'torch.bfloat16')": 1
+  },
+  "expert_calls": [
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        318,
+        230,
+        251,
+        225
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        162,
+        296,
+        372,
+        194
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        30,
+        392,
+        273,
+        329
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        13,
+        504,
+        501,
+        6
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        314,
+        214,
+        251,
+        245
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        131,
+        332,
+        359,
+        202
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        132,
+        305,
+        278,
+        309
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        96,
+        432,
+        469,
+        27
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        271,
+        250,
+        217,
+        286
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        167,
+        331,
+        372,
+        154
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        190,
+        330,
+        345,
+        159
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        166,
+        366,
+        388,
+        104
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    }
+  ],
+  "router_calls": 12,
+  "captures": [],
+  "configurations": [
+    {
+      "num_moe_experts": 4,
+      "moe_router_topk": 2,
+      "moe_grouped_gemm": false,
+      "moe_token_dispatcher_type": "allgather",
+      "moe_apply_probs_on_input": false,
+      "moe_aux_loss_coeff": 0.01,
+      "gated_linear_unit": true,
+      "bias_activation_fusion": true,
+      "masked_softmax_fusion": true,
+      "use_te_activation_func": false
+    }
+  ],
+  "raw_files": {
+    "routing/router-001.pt": {
+      "bytes": 7658,
+      "sha256": "2b0c4d44bd26aa8652ae45d3c4a15c2caa871692753762904885a28ca247551e"
+    },
+    "routing/probability-grad-010.pt": {
+      "bytes": 5341,
+      "sha256": "0d780d6d1916a4bb1296ac15c715ae684e69193fce2395c57413e8970506d7ca"
+    },
+    "routing/probability-grad-012.pt": {
+      "bytes": 5341,
+      "sha256": "648f1faaaded38ecb929beed034ec9758ae18479968f8516581ecae184e5df4d"
+    },
+    "routing/probability-grad-007.pt": {
+      "bytes": 5341,
+      "sha256": "95fc486ad3df373ac9909d9eb54279f8fbf3ec2878b63e045cf91c49a56a98f0"
+    },
+    "routing/probability-grad-005.pt": {
+      "bytes": 5341,
+      "sha256": "24a7df2cf2d9923d5966f52d152eec44612ca72c73fb4d42864f24307a2a6547"
+    },
+    "routing/probability-grad-006.pt": {
+      "bytes": 5341,
+      "sha256": "d8d8b638fdf5b2c615754239793d9f1bce2807a8a8d8f2c8294d244c049ef08f"
+    },
+    "routing/router-010.pt": {
+      "bytes": 7658,
+      "sha256": "b66be2050fb5c4cca9f573bdd72f2b2dd64d02dea1652254f1ecb567e06b9824"
+    },
+    "routing/probability-grad-009.pt": {
+      "bytes": 5341,
+      "sha256": "d8572a9a7cd2e55cddcedfdb7e227bcb93306a25d34e3d6d5acc8c3f656cbe5f"
+    },
+    "routing/router-002.pt": {
+      "bytes": 7658,
+      "sha256": "6b439f3fa6947839aff468a66f59fb57231caa190309f02f808e9c697c38528d"
+    },
+    "routing/probability-grad-003.pt": {
+      "bytes": 5341,
+      "sha256": "d2287b2f64784248015bcbeeee0b5b4dd79aca9bcade71ac4bb78c49ea26ec35"
+    },
+    "routing/router-007.pt": {
+      "bytes": 7658,
+      "sha256": "3c95dc911030bf112c02e31a9f42505c9448e0b2dc07a18963697cf1ae1a44df"
+    },
+    "routing/router-008.pt": {
+      "bytes": 7658,
+      "sha256": "3fa1ea57d91c4f28cc7c275556aba6c52e9494064651def9bd477b9b0bcc7d56"
+    },
+    "routing/router-006.pt": {
+      "bytes": 7658,
+      "sha256": "97f15d2b3bbad467cc0676fee6ee19c4d8e3b70077a236b41dbd0ee93349972b"
+    },
+    "routing/probability-grad-002.pt": {
+      "bytes": 5341,
+      "sha256": "a6e124cb95c72bccc3e5c1b61fd447340942cc3d0a56c3f6cca0d928948cbf20"
+    },
+    "routing/probability-grad-004.pt": {
+      "bytes": 5341,
+      "sha256": "be539c83ad95bffc27f2992fb1160f1a81840cfd0fa2e7540732ab7fbe72d502"
+    },
+    "routing/router-009.pt": {
+      "bytes": 7658,
+      "sha256": "3435fecf79615242c1580c62ef27ca6d7be1dcc684b16bc15dac18ab05e6ee66"
+    },
+    "routing/router-004.pt": {
+      "bytes": 7658,
+      "sha256": "1e7d25f8fb96313e8256da070178ab28f57db411f99f3e0d00a7ca420e837b04"
+    },
+    "routing/router-011.pt": {
+      "bytes": 7658,
+      "sha256": "01572c43ccd7505e9c62f00209ceb8dd068210a46a4c1c14ca0a9c5e8dc3b008"
+    },
+    "routing/probability-grad-001.pt": {
+      "bytes": 5341,
+      "sha256": "8e5643aa846e8d0c81ca381bc66f745373ef2d7723ef7be2c487990ed3d8589d"
+    },
+    "routing/probability-grad-011.pt": {
+      "bytes": 5341,
+      "sha256": "0f45fc3d584388fe97b24a8a61e48477e7dbadb6e38659234cefc8e2e346ae49"
+    },
+    "routing/probability-grad-008.pt": {
+      "bytes": 5341,
+      "sha256": "09c1b1829144a80eb07cad8d21d83eba1dab2eb8b9674f39b15817958dab7594"
+    },
+    "routing/router-005.pt": {
+      "bytes": 7658,
+      "sha256": "d80a128986885a581a198af95680262e5673f902046ad40ae58e3e94327e84bb"
+    },
+    "routing/router-012.pt": {
+      "bytes": 7658,
+      "sha256": "59abf6fcccd3246c260b0115c4e086af8f59d78adbf3874f9afdee48574f0db8"
+    },
+    "routing/router-003.pt": {
+      "bytes": 7658,
+      "sha256": "72dd99cb9b77c6750c3c897518a52db101cbf0d9c54daa4031823c5e44b4962e"
+    }
+  },
+  "scope": "Native SequentialMLP weighted_bias_swiglu call only. Common explicit bool-to0/1-uint8 stable sort compatibility; no candidate GEMM, RMSNorm, attention or router changes. Raw tensors/config/token/probability-gradient observation only in untimed audit/capture.",
+  "native_source_sha256": {
+    "megatron/core/fusions/fused_bias_swiglu.py": "5303680596749464c45f9c3ec65f94d1127fb6d49b2aa9ec3ba8c91b1141f08f",
+    "megatron/core/transformer/mlp.py": "f54a7209db5cad4e095143cbbc1eedcbf41e913ea1eec64db3cb1b8408e6ff07",
+    "megatron/core/transformer/moe/experts.py": "32e1a36533a217599b20cdc2a47285f0e8af19716a7a1b10db8fe421c8b24fef",
+    "megatron/core/transformer/moe/router.py": "1a1b6a2b82dc28835d44f637628243f283310e6ae50a2d836b19f19ae56c8f3a",
+    "megatron/core/transformer/moe/token_dispatcher.py": "7af2746153268f5c5f7f03d7a340092541b633fbc8faa10f666d6ddbdf98be0a",
+    "megatron/core/transformer/moe/moe_utils.py": "b20192e71b54ed07b00f9e3d0bbd7daf470cb9ea3dc3037c20f544528e56f14f"
+  },
+  "native_compiled_callables": {
+    "weighted_swiglu": true,
+    "weighted_swiglu_back": true
+  }
+}

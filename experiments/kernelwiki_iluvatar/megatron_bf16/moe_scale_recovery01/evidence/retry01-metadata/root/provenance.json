@@ -1,0 +1,8 @@
+{
+  "schema": "stage35-recovery01-controller-provenance-v1",
+  "parent_controllers_sha256": "032bb6ab21bee2ff24c74c64c91cb578c442ffee7e44b36fab96a8f660830de6",
+  "pod_replacement_record_sha256": "68c6d68adad1a2554ee489815874988a8a2d1a3497b0c7f163332e72909ac21f",
+  "all25_model_controller_files_byte_identical": true,
+  "retuned": false,
+  "scope": "New collection namespace and raw backup before timing; mathematical gates, defaults and native timer unchanged."
+}

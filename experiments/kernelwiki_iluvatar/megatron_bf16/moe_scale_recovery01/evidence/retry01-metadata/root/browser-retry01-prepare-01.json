@@ -1,0 +1,164 @@
+{
+  "schema": "browser-retry01-cpu-preparation-v1",
+  "own_pid": 15371,
+  "started_utc": "2026-10-10T07:43:24.066106+00:00",
+  "status": "prepared_no_gpu",
+  "compile_started": true,
+  "gpu_started": false,
+  "bootstrap_sha256": "26fe743a0b3e0d67e294eb611ab8ebcafc7008e42033ab8d7f082cfb21229786",
+  "occupancy": {
+    "utc": "2026-10-10T07:43:24.360274+00:00",
+    "gpu": {
+      "argv": [
+        "/usr/local/corex/bin/ixsmi"
+      ],
+      "exit_code": 0,
+      "stdout": "Timestamp    Sat Oct 10 15:43:24 2026\n+-----------------------------------------------------------------------------+\n|  IX-ML: 4.2.0       Driver Version: 4.2.0       CUDA Version: 10.2          |\n|-------------------------------+----------------------+----------------------|\n| GPU  Name                     | Bus-Id               | Clock-SM  Clock-Mem  |\n| Fan  Temp  Perf  Pwr:Usage/Cap|      Memory-Usage    | GPU-Util  Compute M. |\n|===============================+======================+======================|\n| 0    Iluvatar BI-V150         | 00000000:10:00.0     | 1500MHz   1600MHz    |\n| N/A  38C   P0    N/A / N/A    | 116MiB / 32768MiB    | 0%        Default    |\n+-------------------------------+----------------------+----------------------+\n| 1    Iluvatar BI-V150         | 00000000:13:00.0     | 1500MHz   1600MHz    |\n| N/A  39C   P0    104W / 350W  | 116MiB / 32768MiB    | 0%        Default    |\n+-------------------------------+----------------------+----------------------+\n\n+-----------------------------------------------------------------------------+\n| Processes:                                                       GPU Memory |\n|  GPU        PID      Process name                                Usage(MiB) |\n|=============================================================================|\n|  No running processes found                                                 |\n+-----------------------------------------------------------------------------+\n",
+      "stderr": ""
+    },
+    "processes": {
+      "argv": [
+        "ps",
+        "-eo",
+        "pid,ppid,user,etimes,pcpu,pmem,comm"
+      ],
+      "exit_code": 0,
+      "stdout": "    PID    PPID USER     ELAPSED %CPU %MEM COMMAND\n      1       0 root       62052  0.0  0.0 bash\n     16       1 root       62052  0.0  0.0 sshd\n     17       1 root       62052  0.0  0.0 jupyter-lab\n     23      17 root       61871  0.0  0.0 bash\n     24      17 root       61871  0.0  0.0 bash\n    132      17 root       60519  0.0  0.0 bash\n  14694      17 root        1849  0.0  0.0 bash\n  15371   14694 root           0  0.0  0.0 python\n  15373   15371 root           0  0.0  0.0 ps\n",
+      "stderr": ""
+    }
+  },
+  "foreign_compute_processes": [],
+  "preserved_failed_records_before": {
+    "models/long/audit-orchestration.json": {
+      "bytes": 921,
+      "sha256": "f4af356ccca38d4617b1cd74018421b0429e560721448af0d4397a60a9397e61"
+    },
+    "models/long/native-admission01/gradnorm.json": {
+      "bytes": 321,
+      "sha256": "4400a9b4ba54186d4e1757d7de739f743d87c713b1b47e49f807c1db7d544713"
+    },
+    "models/long/native-admission01/command.json": {
+      "bytes": 3564,
+      "sha256": "458f61caf39e9585f4feab253192d6012945126b6f50be532c577200f6b064a2"
+    },
+    "models/long/native-admission01/stdout.log": {
+      "bytes": 48377,
+      "sha256": "d1bbffcdd60e05d643a98ad50a7248bda1827debefbdccd169dfe3bc05184b98"
+    },
+    "models/long/native-admission01/weighted.json": {
+      "bytes": 1520,
+      "sha256": "5174089ed6d33539650a2cc1bf3ef201a2c58361fb8f168032a92855d71fcd4d"
+    },
+    "models/long/native-admission01/stderr.log": {
+      "bytes": 7140,
+      "sha256": "aae65702bc4f3a01f233bfcf99120eef2cbbfbbcb5ba9efa4519d8a7ea1505fc"
+    },
+    "models/long/native-admission01/entry.json": {
+      "bytes": 79831,
+      "sha256": "353e380b6beda60f8ba6687645cbdfc7127bc59bcb2ec8544b56f16614bb9bae"
+    }
+  },
+  "controllers_manifest_sha256": "533af8c2a305d0c92f03c585505e60d16a47c6998f9f5c8b618d368cb222ec10",
+  "source_manifest_sha256": "a72ded960488d399ded2255ef55f357257e03532b8fa21a06d958170c5c98c2d",
+  "supplement_restore": {
+    "argv": [
+      "/root/miniconda3/bin/python",
+      "/mnt/kda-biv150-stage35-recovery01/retry01-bootstrap-inputs/install_native_supplement01.py",
+      "--archive",
+      "/mnt/kda-biv150-stage35-recovery01/retry01-bootstrap-inputs/native-build-supplement01.zip",
+      "--sha256",
+      "724d3fcc87c15b9c8a74d4a10f6c5add7389c9d7b782a27efff43052c2a25e81"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"status\": \"restored_exact_pinned_git_bytes\", \"files\": 1, \"output\": \"/private/kda-biv150-stage35-recovery01/native-build-supplement-restored-01.json\"}\n",
+    "stderr": ""
+  },
+  "build_environment": {
+    "python3": {
+      "argv": [
+        "python3",
+        "-c",
+        "import json,sys,sysconfig,pybind11;assert sys.version_info[:2]==(3,10);print(json.dumps({'executable':sys.executable,'version':sys.version,'extension_suffix':sysconfig.get_config_var('EXT_SUFFIX'),'pybind11_include':pybind11.get_include()}))"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"executable\": \"/root/miniconda3/bin/python3\", \"version\": \"3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]\", \"extension_suffix\": \".cpython-310-x86_64-linux-gnu.so\", \"pybind11_include\": \"/usr/local/corex/lib64/python3/dist-packages/pybind11/include\"}\n",
+      "stderr": ""
+    },
+    "python3_config": {
+      "argv": [
+        "python3-config",
+        "--extension-suffix"
+      ],
+      "exit_code": 0,
+      "stdout": ".cpython-310-x86_64-linux-gnu.so\n",
+      "stderr": ""
+    },
+    "pybind11_includes": {
+      "argv": [
+        "python3",
+        "-m",
+        "pybind11",
+        "--includes"
+      ],
+      "exit_code": 0,
+      "stdout": "-I/root/miniconda3/include/python3.10 -I/usr/local/corex/lib64/python3/dist-packages/pybind11/include\n",
+      "stderr": ""
+    },
+    "g++": {
+      "argv": [
+        "g++",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "g++ (Ubuntu 9.4.0-1ubuntu1~20.04.2) 9.4.0\nCopyright (C) 2019 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+      "stderr": ""
+    },
+    "explicit_python": {
+      "argv": [
+        "/root/miniconda3/bin/python",
+        "-c",
+        "import json,sys,sysconfig;assert sys.version_info[:2]==(3,10);print(json.dumps({'version':sys.version,'extension_suffix':sysconfig.get_config_var('EXT_SUFFIX')}))"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"version\": \"3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]\", \"extension_suffix\": \".cpython-310-x86_64-linux-gnu.so\"}\n",
+      "stderr": ""
+    },
+    "path_prepend_in_this_process": "/root/miniconda3/bin"
+  },
+  "compile_argv": [
+    "timeout",
+    "180",
+    "make",
+    "-C",
+    "/tmp/kda-bf16-continuation/megatron-native-5be9626/megatron/core/datasets"
+  ],
+  "compile_started_utc": "2026-10-10T07:43:24.658237+00:00",
+  "compile_exit_code": 0,
+  "compile_finished_utc": "2026-10-10T07:43:31.295387+00:00",
+  "compile_log_sha256": {
+    "browser-retry01-compile-01.stdout.log": "f225ddb9a7f1e4f71ec22e0459fc346f203ac7ee9d75538426f14fb312bb3470",
+    "browser-retry01-compile-01.stderr.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "compiled_helper_import": {
+    "argv": [
+      "python3",
+      "-c",
+      "import sys,json;from pathlib import Path;sys.path.insert(0,'/tmp/kda-bf16-continuation/megatron-native-5be9626/megatron/core/datasets');import helpers_cpp;print(json.dumps({'module_file':helpers_cpp.__file__,'cpu_only':True}))"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"module_file\": \"/tmp/kda-bf16-continuation/megatron-native-5be9626/megatron/core/datasets/helpers_cpp.cpython-310-x86_64-linux-gnu.so\", \"cpu_only\": true}\n",
+    "stderr": ""
+  },
+  "compiled_helper": {
+    "path": "/tmp/kda-bf16-continuation/megatron-native-5be9626/megatron/core/datasets/helpers_cpp.cpython-310-x86_64-linux-gnu.so",
+    "bytes": 248352,
+    "sha256": "8ac8bb85f0f61c2589c3ea76447fd5c22708077bbcad0c83b73bdcfcb2b6cf38"
+  },
+  "frozen_controller_files_copied": 25,
+  "retry_models_root": "/private/kda-biv150-stage35-recovery01/models-retry01",
+  "browser_job_retry01_sha256": "e5de91bba37c0613061fb6a4fbb3b1b8e9ff680dac592975c3f1c75dad1af8a2",
+  "failed_records_preserved": true,
+  "baseline_fusions_modified": false,
+  "native600_and_controllers25_preserved": true,
+  "finished_utc": "2026-10-10T07:43:31.488034+00:00"
+}

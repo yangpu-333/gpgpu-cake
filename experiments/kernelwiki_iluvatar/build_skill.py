@@ -25,7 +25,8 @@ def ordered_patches():
     if manifest["upstream_sha"] != UPSTREAM_SHA:
         raise RuntimeError("patch manifest upstream does not match the fixed commit")
     expected_names = ["kernelwiki-iluvatar.patch", "kernelwiki-iluvatar-stage30-31.patch",
-                      "kernelwiki-iluvatar-stage32.patch", "kernelwiki-iluvatar-stage34.patch"]
+                      "kernelwiki-iluvatar-stage32.patch", "kernelwiki-iluvatar-stage34.patch",
+                      "kernelwiki-iluvatar-stage35-retry01.patch"]
     rows = manifest["patches"]
     if [row["file"] for row in rows] != expected_names:
         raise RuntimeError("unexpected patch order")

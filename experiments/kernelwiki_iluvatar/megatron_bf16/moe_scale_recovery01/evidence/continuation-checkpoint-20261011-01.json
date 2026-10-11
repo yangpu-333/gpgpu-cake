@@ -1,0 +1,40 @@
+{
+  "schema": "stage35-recovery01-continuation-checkpoint-v1",
+  "recorded_utc": "2026-10-11T11:04:19.618354+00:00",
+  "status": "raw_archival_complete_formal_timing_not_started",
+  "raw_receipt_relative": "evidence/raw-http-backup-retry01-01-receipt.json",
+  "raw_receipt_sha256": "188cda588c5bb6ded8cea0033ec587a54b80292c0cb601bf00bf11ddfcfdedcd",
+  "original_files_present_with_expected_sizes": 384,
+  "original_bytes": 22291589014,
+  "unique_objects": 227,
+  "unique_bytes": 9978190961,
+  "numerical_receipt_status": {
+    "long": "numerical_receipt_verified",
+    "experts": "numerical_receipt_verified"
+  },
+  "pending_script_sha256": {
+    "results/browser_formal_retry01.py": "5a59d06701b6e57672e09d5da7968676949007c4cafd05449667aefe8a05113f",
+    "results/collect_formal_retry01.py": "b1c35d34e7b445ba4c8788f741f88b457c025268fb6827c572a94d6a1affa15d",
+    "results/install_formal_retry01.py": "61ae658622fc7eeb53189c1ab007587ebcb376659851020cd15dabad4af8bddb",
+    "results/package_raw_transport_retry01.py": "c40b5c0cfe273e311a779686c702881a2664eae24c5663bb1d43415b53208775",
+    "results/receive_raw_transport_retry01.py": "5087ee2bbeacd8e6bec4e631fba2d8a886b6f861b27f8d21289da623dbb74ebf",
+    "results/receive_retry01_raw_http.py": "9c9637ba7c8698bce92934df48fd14b4a2d96cc763b84cd74e3e6f50181c4dcf"
+  },
+  "pending_script_syntax_parsed": true,
+  "gpu_formal_jobs_started": 0,
+  "fresh_throughput_available": false,
+  "old_collection_replaced_or_claimed_recovered": false,
+  "other_compute_jobs_stopped": false,
+  "blockers": [
+    "SSH refused before authentication",
+    "Reopened Jupyter browser controls still time out"
+  ],
+  "next_steps": [
+    "Restore remote terminal control; check both GPUs and other compute processes again",
+    "Upload exact raw receipt as local-raw-backup-retry01-01-receipt.json and verify SHA256",
+    "Run long then experts formal wrapper serially; independently repeat when CV threshold is reached",
+    "Import completed formal metadata, run full CPU receipt gates and seal the independent collection",
+    "Build and verify the fifth skill patch, KDA repository loading and CI before releasing it"
+  ],
+  "released_skill_stage": 34
+}

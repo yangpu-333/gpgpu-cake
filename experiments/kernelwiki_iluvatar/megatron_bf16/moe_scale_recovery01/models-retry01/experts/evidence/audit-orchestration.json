@@ -1,0 +1,133 @@
+{
+  "schema": "moe-heldout-stage35-audit-orchestration-v1",
+  "model": "experts",
+  "status": "passed",
+  "candidate_sha256": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e",
+  "contract_sha256": "b13e0594df237fee9ee8dd622efc5b6291b1554aec8427a99ca160333436ad0c",
+  "controllers_sha256": "533af8c2a305d0c92f03c585505e60d16a47c6998f9f5c8b618d368cb222ec10",
+  "backend_sha256": "482f1a472aa70c04723dd0eb3b498090ab294b9443329b0b8e8fa83815c234fb",
+  "completed": [
+    {
+      "script": "run_case.py",
+      "arguments": [
+        "--case",
+        "native-admission01",
+        "--arm",
+        "native",
+        "--seed",
+        "35201",
+        "--capture-limit",
+        "96"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "run_case.py",
+      "arguments": [
+        "--case",
+        "control-admission01",
+        "--arm",
+        "control",
+        "--seed",
+        "35201"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "compare.py",
+      "arguments": [
+        "--left",
+        "native-admission01",
+        "--right",
+        "control-admission01",
+        "--left-arm",
+        "native",
+        "--right-arm",
+        "control",
+        "--output",
+        "comparison-admission01.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "probe.py",
+      "arguments": [
+        "--version",
+        "004"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "probe_offset.py",
+      "arguments": [
+        "--version",
+        "004"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "replay.py",
+      "arguments": [
+        "--version",
+        "004"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "run_case.py",
+      "arguments": [
+        "--case",
+        "optimized-audit004",
+        "--arm",
+        "optimized",
+        "--seed",
+        "35201",
+        "--candidate",
+        "/mnt/kda-biv150-stage35-recovery01/models-retry01/experts/candidates/004/candidate.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "compare.py",
+      "arguments": [
+        "--left",
+        "native-admission01",
+        "--right",
+        "optimized-audit004",
+        "--left-arm",
+        "native",
+        "--right-arm",
+        "optimized",
+        "--output",
+        "comparison-native-004.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "compare.py",
+      "arguments": [
+        "--left",
+        "control-admission01",
+        "--right",
+        "optimized-audit004",
+        "--left-arm",
+        "control",
+        "--right-arm",
+        "optimized",
+        "--output",
+        "comparison-control-004.json"
+      ],
+      "exit_code": 0
+    },
+    {
+      "script": "seal_audit.py",
+      "arguments": [
+        "--version",
+        "004"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "started_utc": "2026-10-10T07:50:51.144495+00:00",
+  "finished_utc": "2026-10-10T07:57:22.472194+00:00"
+}

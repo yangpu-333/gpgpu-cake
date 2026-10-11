@@ -1,0 +1,548 @@
+{
+  "schema": "moe-weighted-stage34-dispatch-v1",
+  "enabled": false,
+  "candidate_sha256": null,
+  "wrapper_sha256": "65f01f6aa474ae08c3351106df245477ac6c224d951408fc938aa7b19eba48ad",
+  "calls": 48,
+  "candidate_calls": 0,
+  "native_calls": 48,
+  "fallback_calls": 0,
+  "sort_compat_calls": 12,
+  "shapes": {
+    "((318, 4096), 'torch.bfloat16', (318, 1), 'torch.bfloat16')": 1,
+    "((230, 4096), 'torch.bfloat16', (230, 1), 'torch.bfloat16')": 1,
+    "((251, 4096), 'torch.bfloat16', (251, 1), 'torch.bfloat16')": 2,
+    "((225, 4096), 'torch.bfloat16', (225, 1), 'torch.bfloat16')": 1,
+    "((162, 4096), 'torch.bfloat16', (162, 1), 'torch.bfloat16')": 1,
+    "((296, 4096), 'torch.bfloat16', (296, 1), 'torch.bfloat16')": 1,
+    "((372, 4096), 'torch.bfloat16', (372, 1), 'torch.bfloat16')": 2,
+    "((194, 4096), 'torch.bfloat16', (194, 1), 'torch.bfloat16')": 1,
+    "((30, 4096), 'torch.bfloat16', (30, 1), 'torch.bfloat16')": 1,
+    "((392, 4096), 'torch.bfloat16', (392, 1), 'torch.bfloat16')": 1,
+    "((273, 4096), 'torch.bfloat16', (273, 1), 'torch.bfloat16')": 1,
+    "((329, 4096), 'torch.bfloat16', (329, 1), 'torch.bfloat16')": 1,
+    "((13, 4096), 'torch.bfloat16', (13, 1), 'torch.bfloat16')": 1,
+    "((504, 4096), 'torch.bfloat16', (504, 1), 'torch.bfloat16')": 1,
+    "((501, 4096), 'torch.bfloat16', (501, 1), 'torch.bfloat16')": 1,
+    "((6, 4096), 'torch.bfloat16', (6, 1), 'torch.bfloat16')": 1,
+    "((314, 4096), 'torch.bfloat16', (314, 1), 'torch.bfloat16')": 1,
+    "((214, 4096), 'torch.bfloat16', (214, 1), 'torch.bfloat16')": 1,
+    "((245, 4096), 'torch.bfloat16', (245, 1), 'torch.bfloat16')": 1,
+    "((131, 4096), 'torch.bfloat16', (131, 1), 'torch.bfloat16')": 1,
+    "((332, 4096), 'torch.bfloat16', (332, 1), 'torch.bfloat16')": 1,
+    "((359, 4096), 'torch.bfloat16', (359, 1), 'torch.bfloat16')": 1,
+    "((202, 4096), 'torch.bfloat16', (202, 1), 'torch.bfloat16')": 1,
+    "((132, 4096), 'torch.bfloat16', (132, 1), 'torch.bfloat16')": 1,
+    "((305, 4096), 'torch.bfloat16', (305, 1), 'torch.bfloat16')": 1,
+    "((278, 4096), 'torch.bfloat16', (278, 1), 'torch.bfloat16')": 1,
+    "((309, 4096), 'torch.bfloat16', (309, 1), 'torch.bfloat16')": 1,
+    "((96, 4096), 'torch.bfloat16', (96, 1), 'torch.bfloat16')": 1,
+    "((432, 4096), 'torch.bfloat16', (432, 1), 'torch.bfloat16')": 1,
+    "((469, 4096), 'torch.bfloat16', (469, 1), 'torch.bfloat16')": 1,
+    "((27, 4096), 'torch.bfloat16', (27, 1), 'torch.bfloat16')": 1,
+    "((271, 4096), 'torch.bfloat16', (271, 1), 'torch.bfloat16')": 1,
+    "((250, 4096), 'torch.bfloat16', (250, 1), 'torch.bfloat16')": 1,
+    "((217, 4096), 'torch.bfloat16', (217, 1), 'torch.bfloat16')": 1,
+    "((286, 4096), 'torch.bfloat16', (286, 1), 'torch.bfloat16')": 1,
+    "((167, 4096), 'torch.bfloat16', (167, 1), 'torch.bfloat16')": 1,
+    "((331, 4096), 'torch.bfloat16', (331, 1), 'torch.bfloat16')": 1,
+    "((154, 4096), 'torch.bfloat16', (154, 1), 'torch.bfloat16')": 1,
+    "((190, 4096), 'torch.bfloat16', (190, 1), 'torch.bfloat16')": 1,
+    "((330, 4096), 'torch.bfloat16', (330, 1), 'torch.bfloat16')": 1,
+    "((345, 4096), 'torch.bfloat16', (345, 1), 'torch.bfloat16')": 1,
+    "((159, 4096), 'torch.bfloat16', (159, 1), 'torch.bfloat16')": 1,
+    "((166, 4096), 'torch.bfloat16', (166, 1), 'torch.bfloat16')": 1,
+    "((366, 4096), 'torch.bfloat16', (366, 1), 'torch.bfloat16')": 1,
+    "((388, 4096), 'torch.bfloat16', (388, 1), 'torch.bfloat16')": 1,
+    "((104, 4096), 'torch.bfloat16', (104, 1), 'torch.bfloat16')": 1
+  },
+  "expert_calls": [
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        318,
+        230,
+        251,
+        225
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        162,
+        296,
+        372,
+        194
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        30,
+        392,
+        273,
+        329
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        13,
+        504,
+        501,
+        6
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        314,
+        214,
+        251,
+        245
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        131,
+        332,
+        359,
+        202
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        132,
+        305,
+        278,
+        309
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        96,
+        432,
+        469,
+        27
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        271,
+        250,
+        217,
+        286
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        167,
+        331,
+        372,
+        154
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        190,
+        330,
+        345,
+        159
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        166,
+        366,
+        388,
+        104
+      ],
+      "hidden_shape": [
+        1024,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    }
+  ],
+  "router_calls": 12,
+  "captures": [],
+  "configurations": [
+    {
+      "num_moe_experts": 4,
+      "moe_router_topk": 2,
+      "moe_grouped_gemm": false,
+      "moe_token_dispatcher_type": "allgather",
+      "moe_apply_probs_on_input": false,
+      "moe_aux_loss_coeff": 0.01,
+      "gated_linear_unit": true,
+      "bias_activation_fusion": true,
+      "masked_softmax_fusion": true,
+      "use_te_activation_func": false
+    }
+  ],
+  "raw_files": {
+    "activation/capture-036.pt": {
+      "bytes": 7032304,
+      "sha256": "3bb7e68ad260987edbea84a853b9bfb4f458dcd4f8ecaa32e16fb145dcd70fff"
+    },
+    "activation/capture-007.pt": {
+      "bytes": 9146224,
+      "sha256": "dde288d57d40f2d88617c046db4cf089c873da195567cfb242746a42695caed3"
+    },
+    "activation/capture-008.pt": {
+      "bytes": 4771056,
+      "sha256": "e441011cca8a44b9aacc5dec9a29e762eb44b1881a21512c439620b2f7b70263"
+    },
+    "activation/capture-015.pt": {
+      "bytes": 12317040,
+      "sha256": "b368574f742f714102e6bd865053641ae2dc608211b11f52012e08cd9fb8eec6"
+    },
+    "activation/capture-022.pt": {
+      "bytes": 8163056,
+      "sha256": "e97dc0bbbd3eddb5c54f3eb22ab081a0c7f2abe0e669ad869926461201477239"
+    },
+    "activation/capture-018.pt": {
+      "bytes": 5262576,
+      "sha256": "702ca052092352aaba8c4318bbbbb9bed2072c09841a0be20345508c7a74dbbc"
+    },
+    "activation/capture-017.pt": {
+      "bytes": 7720560,
+      "sha256": "7cc5e2a393a5538bd95991bbe0ec691e1efee9ce42407bb9a4b95e3e23dc2bb1"
+    },
+    "activation/capture-023.pt": {
+      "bytes": 8826736,
+      "sha256": "7fbbecf63ace29d062e873bc34e3ad10433726353b7f2693d7b41d59f4492f6b"
+    },
+    "activation/capture-026.pt": {
+      "bytes": 7499376,
+      "sha256": "6cf7558fe02b8a8416ee7a98fee61857fa6a763cf0af6fb9e6a0ba1432cdafd8"
+    },
+    "activation/capture-028.pt": {
+      "bytes": 7597680,
+      "sha256": "1206f9f7960ad6800f95e83694ba60f216d014f01e55d9382b59c1631a4b287f"
+    },
+    "activation/capture-003.pt": {
+      "bytes": 6172016,
+      "sha256": "117f59b382d6a26114eb72ced33d05fe9a5239465311a6582f896373c5ec5793"
+    },
+    "activation/capture-037.pt": {
+      "bytes": 4107376,
+      "sha256": "f4f764c29812f7c9352f9e09425117fab3a08d58d47ef1ba337e45b73ebd1a5b"
+    },
+    "activation/capture-002.pt": {
+      "bytes": 5655920,
+      "sha256": "6dcd7292da8725093526f97296dc723ae0e00af6e2d5e3b0f0efc2d84d216368"
+    },
+    "activation/capture-046.pt": {
+      "bytes": 8998768,
+      "sha256": "5423b67df1984460d0e57709f691ede5784f1968e6e1700ebf5fc710c6a560e9"
+    },
+    "activation/capture-035.pt": {
+      "bytes": 5336304,
+      "sha256": "9875db400caed4af4d5a1395e92ec13ea91024928f22bfd4a84307e27e063b09"
+    },
+    "activation/capture-034.pt": {
+      "bytes": 6147440,
+      "sha256": "b9d3515e19002c48988a5c7bce0bda68963c0f4d1bb9134dfea875bcbc9c09d7"
+    },
+    "activation/capture-031.pt": {
+      "bytes": 11530480,
+      "sha256": "020156510629a1f5dc862b45638c380fdb6a7e7e09f9819757f5344ff8236c2a"
+    },
+    "activation/capture-039.pt": {
+      "bytes": 9146224,
+      "sha256": "e2288860b4addaa742f5a2646cfe4878bd8db44502f3cf94e9bafb23dd2498b1"
+    },
+    "activation/capture-013.pt": {
+      "bytes": 322032,
+      "sha256": "44986013d44d86b046b47b1ee3213e438a85212534cbad827bb1b0c34fd1ddc3"
+    },
+    "activation/capture-020.pt": {
+      "bytes": 6024560,
+      "sha256": "8018a6fb27d2f8119a84df1c099f685bd1fd92b7156eac13b2315061db81c156"
+    },
+    "activation/capture-043.pt": {
+      "bytes": 8482544,
+      "sha256": "5eb723d51a2b1333a30a2c84754f6b1f7e5770b9f72c8226b2447f65a4b395bf"
+    },
+    "activation/capture-029.pt": {
+      "bytes": 2362224,
+      "sha256": "7f0dd96c8281f6c917cb81469b6c2e129d325810cf3412933d60ba92edc1f485"
+    },
+    "activation/capture-025.pt": {
+      "bytes": 3247088,
+      "sha256": "78b8e0632f55adaef388635522b160aca83570ef0835f3b620ff48a0b3c39e17"
+    },
+    "activation/capture-004.pt": {
+      "bytes": 5533040,
+      "sha256": "aa67693948517b119d2ec5485aab75f11977c2bf65eedf7206ccb5378de8acc1"
+    },
+    "activation/capture-001.pt": {
+      "bytes": 7818864,
+      "sha256": "9a580425867cc308b239bfbd977f6e558ed5848d8236df688ddcd56304c4d275"
+    },
+    "activation/capture-005.pt": {
+      "bytes": 3984496,
+      "sha256": "3e515d5064a4e7ad7410b8df3f25cd3f7e21f95582bca40091a0bec6f266b3d6"
+    },
+    "activation/capture-042.pt": {
+      "bytes": 8113904,
+      "sha256": "7438ca18a430e67ede94181557de14288dc970730095de92e69bfc7362db6139"
+    },
+    "activation/capture-040.pt": {
+      "bytes": 3787760,
+      "sha256": "d6d4e22e5708b7665be5b40f296430c51abde1c325a847172a1f095034284cee"
+    },
+    "activation/capture-009.pt": {
+      "bytes": 739824,
+      "sha256": "4bb7cbf7d7f0d812e66c63a09dae7c844fc651e2c6af77737e4f4eec9b8b1dcf"
+    },
+    "activation/capture-016.pt": {
+      "bytes": 150000,
+      "sha256": "f16e1322800e872d138660507105fd6b7cc05d7b11b8e58d019f29ccc58b3801"
+    },
+    "activation/capture-012.pt": {
+      "bytes": 8089328,
+      "sha256": "d823f359b0f375fa3b60fc5319df7afc0206ac22797bc7fbcebd80057b2e72fb"
+    },
+    "activation/capture-047.pt": {
+      "bytes": 9539568,
+      "sha256": "108421cb7613413036b37b10215c25825d57b311d9a37d7f784cf5b074bb6525"
+    },
+    "activation/capture-021.pt": {
+      "bytes": 3222512,
+      "sha256": "8268bdbc44a96d5675b5792e2399162f393d2f01df9195e71777c34c74a03006"
+    },
+    "activation/capture-006.pt": {
+      "bytes": 7278192,
+      "sha256": "4e40aaf02f93ff5d2c9f12723488381b8111275bf8b366d549c17babcedfe50a"
+    },
+    "activation/capture-030.pt": {
+      "bytes": 10621040,
+      "sha256": "8ee53d90481be2eaa3517a54f433a3121d72933e61b713d10ba34abf6aaec365"
+    },
+    "activation/capture-038.pt": {
+      "bytes": 8138480,
+      "sha256": "766bc2580bcdec64e596ee02f3327380622015974032b7fc18d07413cf3e9de0"
+    },
+    "activation/capture-019.pt": {
+      "bytes": 6172016,
+      "sha256": "4dfce204371c106a53d49b4a1d816ef516e1522c771de6f060fa0793300b0188"
+    },
+    "activation/capture-027.pt": {
+      "bytes": 6835696,
+      "sha256": "b5c7bb4e59ca3b9ec2d38663cbf5a5b50ed016a806d569e886fa9c623d1de3fa"
+    },
+    "activation/capture-032.pt": {
+      "bytes": 666096,
+      "sha256": "23bb955f4a1332b2cc45021e91e1c35a253da9f0d2ea381ac4fee0034303c76c"
+    },
+    "activation/capture-033.pt": {
+      "bytes": 6663664,
+      "sha256": "375f7b67ace795bc4192cf7d7eb8d361c7ee25cb2a9bede457ce4655445ad2c5"
+    },
+    "activation/capture-024.pt": {
+      "bytes": 4967664,
+      "sha256": "f75c44a1908cfb81f673332882b5983584b283ad540c7f920b41aeb5724ff7f9"
+    },
+    "activation/capture-011.pt": {
+      "bytes": 6712816,
+      "sha256": "8260aa33a56f96231f7f6b552ba6f4da5d9b471bfa4ddc0e6ff041c7e0b838c5"
+    },
+    "activation/capture-014.pt": {
+      "bytes": 12390768,
+      "sha256": "e98b488be041f66f159bfe9ca0194998dcf799f345ed64f65aa0260e35148638"
+    },
+    "activation/capture-044.pt": {
+      "bytes": 3910768,
+      "sha256": "f478e986fb0387ab13023ae2af7acbff01cc52a89cc1c199c5711f7b73ab9fbb"
+    },
+    "activation/capture-010.pt": {
+      "bytes": 9637872,
+      "sha256": "64e6b11e95bcaaccc1fc42332bc7c72fefc7e8c80c4cb0cc97d4db9fbc845b32"
+    },
+    "activation/capture-041.pt": {
+      "bytes": 4672624,
+      "sha256": "cbb33222ac224f6d996e5038b1cf25abbe8dc786e56d8993eb968e2ea600c3d9"
+    },
+    "activation/capture-048.pt": {
+      "bytes": 2558832,
+      "sha256": "e4439bb042b5f509e2e83ef9ab829192cd02f38b152abd6723642f2553b13fe2"
+    },
+    "activation/capture-045.pt": {
+      "bytes": 4082800,
+      "sha256": "a70c10db2cf8555a54deb974a79254bcfebef6151d93708cb0187a4f401dc4cd"
+    },
+    "routing/router-001.pt": {
+      "bytes": 7658,
+      "sha256": "2b0c4d44bd26aa8652ae45d3c4a15c2caa871692753762904885a28ca247551e"
+    },
+    "routing/probability-grad-010.pt": {
+      "bytes": 5341,
+      "sha256": "0d780d6d1916a4bb1296ac15c715ae684e69193fce2395c57413e8970506d7ca"
+    },
+    "routing/probability-grad-012.pt": {
+      "bytes": 5341,
+      "sha256": "648f1faaaded38ecb929beed034ec9758ae18479968f8516581ecae184e5df4d"
+    },
+    "routing/probability-grad-007.pt": {
+      "bytes": 5341,
+      "sha256": "95fc486ad3df373ac9909d9eb54279f8fbf3ec2878b63e045cf91c49a56a98f0"
+    },
+    "routing/probability-grad-005.pt": {
+      "bytes": 5341,
+      "sha256": "24a7df2cf2d9923d5966f52d152eec44612ca72c73fb4d42864f24307a2a6547"
+    },
+    "routing/probability-grad-006.pt": {
+      "bytes": 5341,
+      "sha256": "d8d8b638fdf5b2c615754239793d9f1bce2807a8a8d8f2c8294d244c049ef08f"
+    },
+    "routing/router-010.pt": {
+      "bytes": 7658,
+      "sha256": "b66be2050fb5c4cca9f573bdd72f2b2dd64d02dea1652254f1ecb567e06b9824"
+    },
+    "routing/probability-grad-009.pt": {
+      "bytes": 5341,
+      "sha256": "d8572a9a7cd2e55cddcedfdb7e227bcb93306a25d34e3d6d5acc8c3f656cbe5f"
+    },
+    "routing/router-002.pt": {
+      "bytes": 7658,
+      "sha256": "6b439f3fa6947839aff468a66f59fb57231caa190309f02f808e9c697c38528d"
+    },
+    "routing/probability-grad-003.pt": {
+      "bytes": 5341,
+      "sha256": "d2287b2f64784248015bcbeeee0b5b4dd79aca9bcade71ac4bb78c49ea26ec35"
+    },
+    "routing/router-007.pt": {
+      "bytes": 7658,
+      "sha256": "3c95dc911030bf112c02e31a9f42505c9448e0b2dc07a18963697cf1ae1a44df"
+    },
+    "routing/router-008.pt": {
+      "bytes": 7658,
+      "sha256": "3fa1ea57d91c4f28cc7c275556aba6c52e9494064651def9bd477b9b0bcc7d56"
+    },
+    "routing/router-006.pt": {
+      "bytes": 7658,
+      "sha256": "97f15d2b3bbad467cc0676fee6ee19c4d8e3b70077a236b41dbd0ee93349972b"
+    },
+    "routing/probability-grad-002.pt": {
+      "bytes": 5341,
+      "sha256": "a6e124cb95c72bccc3e5c1b61fd447340942cc3d0a56c3f6cca0d928948cbf20"
+    },
+    "routing/probability-grad-004.pt": {
+      "bytes": 5341,
+      "sha256": "be539c83ad95bffc27f2992fb1160f1a81840cfd0fa2e7540732ab7fbe72d502"
+    },
+    "routing/router-009.pt": {
+      "bytes": 7658,
+      "sha256": "3435fecf79615242c1580c62ef27ca6d7be1dcc684b16bc15dac18ab05e6ee66"
+    },
+    "routing/router-004.pt": {
+      "bytes": 7658,
+      "sha256": "1e7d25f8fb96313e8256da070178ab28f57db411f99f3e0d00a7ca420e837b04"
+    },
+    "routing/router-011.pt": {
+      "bytes": 7658,
+      "sha256": "01572c43ccd7505e9c62f00209ceb8dd068210a46a4c1c14ca0a9c5e8dc3b008"
+    },
+    "routing/probability-grad-001.pt": {
+      "bytes": 5341,
+      "sha256": "8e5643aa846e8d0c81ca381bc66f745373ef2d7723ef7be2c487990ed3d8589d"
+    },
+    "routing/probability-grad-011.pt": {
+      "bytes": 5341,
+      "sha256": "0f45fc3d584388fe97b24a8a61e48477e7dbadb6e38659234cefc8e2e346ae49"
+    },
+    "routing/probability-grad-008.pt": {
+      "bytes": 5341,
+      "sha256": "09c1b1829144a80eb07cad8d21d83eba1dab2eb8b9674f39b15817958dab7594"
+    },
+    "routing/router-005.pt": {
+      "bytes": 7658,
+      "sha256": "d80a128986885a581a198af95680262e5673f902046ad40ae58e3e94327e84bb"
+    },
+    "routing/router-012.pt": {
+      "bytes": 7658,
+      "sha256": "59abf6fcccd3246c260b0115c4e086af8f59d78adbf3874f9afdee48574f0db8"
+    },
+    "routing/router-003.pt": {
+      "bytes": 7658,
+      "sha256": "72dd99cb9b77c6750c3c897518a52db101cbf0d9c54daa4031823c5e44b4962e"
+    }
+  },
+  "scope": "Native SequentialMLP weighted_bias_swiglu call only. Common explicit bool-to0/1-uint8 stable sort compatibility; no candidate GEMM, RMSNorm, attention or router changes. Raw tensors/config/token/probability-gradient observation only in untimed audit/capture.",
+  "native_source_sha256": {
+    "megatron/core/fusions/fused_bias_swiglu.py": "5303680596749464c45f9c3ec65f94d1127fb6d49b2aa9ec3ba8c91b1141f08f",
+    "megatron/core/transformer/mlp.py": "f54a7209db5cad4e095143cbbc1eedcbf41e913ea1eec64db3cb1b8408e6ff07",
+    "megatron/core/transformer/moe/experts.py": "32e1a36533a217599b20cdc2a47285f0e8af19716a7a1b10db8fe421c8b24fef",
+    "megatron/core/transformer/moe/router.py": "1a1b6a2b82dc28835d44f637628243f283310e6ae50a2d836b19f19ae56c8f3a",
+    "megatron/core/transformer/moe/token_dispatcher.py": "7af2746153268f5c5f7f03d7a340092541b633fbc8faa10f666d6ddbdf98be0a",
+    "megatron/core/transformer/moe/moe_utils.py": "b20192e71b54ed07b00f9e3d0bbd7daf470cb9ea3dc3037c20f544528e56f14f"
+  },
+  "native_compiled_callables": {
+    "weighted_swiglu": true,
+    "weighted_swiglu_back": true
+  }
+}

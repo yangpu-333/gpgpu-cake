@@ -1,0 +1,575 @@
+{
+  "schema": "fresh-heldout-completion-verified-v2",
+  "status": "complete",
+  "candidate_sha256": "b9a2ca76c294481e38e2422332ccb821224bd64b8bb7cd61d972a5e2a4a9133e",
+  "retuned": false,
+  "models": {
+    "long": {
+      "primary": {
+        "round": "resource_confirmation",
+        "performance_relative": "models-retry01/long/evidence/confirmation/performance-004.json",
+        "wrapper_relative": "evidence/retry01-metadata/root/browser-formal-long-retry01-resource_confirmation-02.json",
+        "performance_sha256": "8d16d99f48574cd8a7af204f10c22fb881ac1f550f3b7fc906eacc1052eed1d2",
+        "wrapper_sha256": "4bf43a8a321d209325eeb1f577042e5a5ba3a00d6070f81cf4b829fe0f53fbbd",
+        "seed_mean_cv": {
+          "native": 0.009532018317040584,
+          "control": 0.006362178288103074,
+          "optimized": 0.0037967049660148425
+        },
+        "status": "receipt_verified",
+        "version": "004",
+        "model": "long",
+        "confirmation": true,
+        "comparisons": {
+          "comparison-admission01.json": {
+            "checks": 2627,
+            "tensors": 1289,
+            "all_exact": true
+          },
+          "comparison-native-004.json": {
+            "checks": 2627,
+            "tensors": 1289,
+            "all_exact": true
+          },
+          "comparison-control-004.json": {
+            "checks": 2627,
+            "tensors": 1289,
+            "all_exact": true
+          }
+        },
+        "vs_control": {
+          "ratio": 1.0450499202360632,
+          "gain_percent": 4.504992023606325,
+          "all_seeds_faster": true
+        },
+        "vs_native": {
+          "ratio": 1.0813422132489314,
+          "gain_percent": 8.134221324893144,
+          "all_seeds_faster": true
+        },
+        "promoted": true,
+        "available_original_inputs": 171,
+        "missing_original_inputs": [],
+        "original_byte_coverage_complete": true,
+        "verifier_sha256": "3fd76e863e5a3c0d6372941d97f9e8914913a6bc0421d09e332d77bf1c5b8321",
+        "loss_print_comparisons": [
+          {
+            "seed": 35102,
+            "printed_intervals": 12,
+            "iterations": [
+              10,
+              20,
+              30,
+              40,
+              50,
+              60,
+              70,
+              80,
+              90,
+              100,
+              110,
+              120
+            ],
+            "native_control_equal": true,
+            "native_optimized_equal": true,
+            "scope": "Printed lm_loss and router_loss strings only; no120-step tensor/convergence assertion."
+          },
+          {
+            "seed": 35103,
+            "printed_intervals": 12,
+            "iterations": [
+              10,
+              20,
+              30,
+              40,
+              50,
+              60,
+              70,
+              80,
+              90,
+              100,
+              110,
+              120
+            ],
+            "native_control_equal": true,
+            "native_optimized_equal": true,
+            "scope": "Printed lm_loss and router_loss strings only; no120-step tensor/convergence assertion."
+          },
+          {
+            "seed": 35104,
+            "printed_intervals": 12,
+            "iterations": [
+              10,
+              20,
+              30,
+              40,
+              50,
+              60,
+              70,
+              80,
+              90,
+              100,
+              110,
+              120
+            ],
+            "native_control_equal": true,
+            "native_optimized_equal": true,
+            "scope": "Printed lm_loss and router_loss strings only; no120-step tensor/convergence assertion."
+          }
+        ],
+        "backend_receipt_sha256": "482f1a472aa70c04723dd0eb3b498090ab294b9443329b0b8e8fa83815c234fb",
+        "gpu_rerun": false,
+        "arithmetic_replay": false,
+        "remote_models_canonical_root": "/mnt/kda-biv150-stage35-recovery01/models-retry01/",
+        "verified_model_root_aliases": [
+          "/mnt/kda-biv150-stage35-recovery01/models-retry01/",
+          "/private/kda-biv150-stage35-recovery01/models-retry01/"
+        ],
+        "alias_receipt_sha256": "1370de2176c4e33b3998181e0c92f48254b3e97387ce2a7db96ab2fc45169b54",
+        "raw_identity_deduplicated": true,
+        "scope": "Recorded fixed GPU gates and original logs verified on CPU; missing large raw files stay explicit in CI."
+      },
+      "rounds": [
+        {
+          "round": "resource_confirmation",
+          "performance_relative": "models-retry01/long/evidence/confirmation/performance-004.json",
+          "wrapper_relative": "evidence/retry01-metadata/root/browser-formal-long-retry01-resource_confirmation-02.json",
+          "performance_sha256": "8d16d99f48574cd8a7af204f10c22fb881ac1f550f3b7fc906eacc1052eed1d2",
+          "wrapper_sha256": "4bf43a8a321d209325eeb1f577042e5a5ba3a00d6070f81cf4b829fe0f53fbbd",
+          "seed_mean_cv": {
+            "native": 0.009532018317040584,
+            "control": 0.006362178288103074,
+            "optimized": 0.0037967049660148425
+          },
+          "status": "receipt_verified",
+          "version": "004",
+          "model": "long",
+          "confirmation": true,
+          "comparisons": {
+            "comparison-admission01.json": {
+              "checks": 2627,
+              "tensors": 1289,
+              "all_exact": true
+            },
+            "comparison-native-004.json": {
+              "checks": 2627,
+              "tensors": 1289,
+              "all_exact": true
+            },
+            "comparison-control-004.json": {
+              "checks": 2627,
+              "tensors": 1289,
+              "all_exact": true
+            }
+          },
+          "vs_control": {
+            "ratio": 1.0450499202360632,
+            "gain_percent": 4.504992023606325,
+            "all_seeds_faster": true
+          },
+          "vs_native": {
+            "ratio": 1.0813422132489314,
+            "gain_percent": 8.134221324893144,
+            "all_seeds_faster": true
+          },
+          "promoted": true,
+          "available_original_inputs": 171,
+          "missing_original_inputs": [],
+          "original_byte_coverage_complete": true,
+          "verifier_sha256": "3fd76e863e5a3c0d6372941d97f9e8914913a6bc0421d09e332d77bf1c5b8321",
+          "loss_print_comparisons": [
+            {
+              "seed": 35102,
+              "printed_intervals": 12,
+              "iterations": [
+                10,
+                20,
+                30,
+                40,
+                50,
+                60,
+                70,
+                80,
+                90,
+                100,
+                110,
+                120
+              ],
+              "native_control_equal": true,
+              "native_optimized_equal": true,
+              "scope": "Printed lm_loss and router_loss strings only; no120-step tensor/convergence assertion."
+            },
+            {
+              "seed": 35103,
+              "printed_intervals": 12,
+              "iterations": [
+                10,
+                20,
+                30,
+                40,
+                50,
+                60,
+                70,
+                80,
+                90,
+                100,
+                110,
+                120
+              ],
+              "native_control_equal": true,
+              "native_optimized_equal": true,
+              "scope": "Printed lm_loss and router_loss strings only; no120-step tensor/convergence assertion."
+            },
+            {
+              "seed": 35104,
+              "printed_intervals": 12,
+              "iterations": [
+                10,
+                20,
+                30,
+                40,
+                50,
+                60,
+                70,
+                80,
+                90,
+                100,
+                110,
+                120
+              ],
+              "native_control_equal": true,
+              "native_optimized_equal": true,
+              "scope": "Printed lm_loss and router_loss strings only; no120-step tensor/convergence assertion."
+            }
+          ],
+          "backend_receipt_sha256": "482f1a472aa70c04723dd0eb3b498090ab294b9443329b0b8e8fa83815c234fb",
+          "gpu_rerun": false,
+          "arithmetic_replay": false,
+          "remote_models_canonical_root": "/mnt/kda-biv150-stage35-recovery01/models-retry01/",
+          "verified_model_root_aliases": [
+            "/mnt/kda-biv150-stage35-recovery01/models-retry01/",
+            "/private/kda-biv150-stage35-recovery01/models-retry01/"
+          ],
+          "alias_receipt_sha256": "1370de2176c4e33b3998181e0c92f48254b3e97387ce2a7db96ab2fc45169b54",
+          "raw_identity_deduplicated": true,
+          "scope": "Recorded fixed GPU gates and original logs verified on CPU; missing large raw files stay explicit in CI."
+        }
+      ],
+      "repeat_required": false,
+      "promoted": true,
+      "configuration": {
+        "num_layers": 4,
+        "hidden_size": 512,
+        "ffn_hidden_size": 2048,
+        "num_attention_heads": 8,
+        "sequence_length": 256,
+        "micro_batch_size": 2,
+        "global_batch_size": 2,
+        "vocab_size": 1024,
+        "parameters": 55718400,
+        "normalization": "RMSNorm",
+        "epsilon": 1e-05,
+        "bf16": true,
+        "fp32_residual_connection": false,
+        "gated_linear_unit": true,
+        "bias_activation_fusion": true,
+        "num_moe_experts": 4,
+        "moe_router_topk": 2
+      }
+    },
+    "experts": {
+      "primary": {
+        "round": "primary",
+        "performance_relative": "models-retry01/experts/evidence/performance-004.json",
+        "wrapper_relative": "evidence/retry01-metadata/root/browser-formal-experts-retry01-primary-02.json",
+        "performance_sha256": "3d88ce996aa28da213c617e1ee43c64da7f7941cb6be45bc7d5f95a5b91f9dee",
+        "wrapper_sha256": "6205601b2df7ac72964064d8618779f335253a1f9b77295cf62b8eecc5ee9e3e",
+        "seed_mean_cv": {
+          "native": 0.00458487715897088,
+          "control": 0.007626680928604046,
+          "optimized": 0.0027790485501589545
+        },
+        "status": "receipt_verified",
+        "version": "004",
+        "model": "experts",
+        "confirmation": false,
+        "comparisons": {
+          "comparison-admission01.json": {
+            "checks": 3843,
+            "tensors": 1993,
+            "all_exact": true
+          },
+          "comparison-native-004.json": {
+            "checks": 3843,
+            "tensors": 1993,
+            "all_exact": true
+          },
+          "comparison-control-004.json": {
+            "checks": 3843,
+            "tensors": 1993,
+            "all_exact": true
+          }
+        },
+        "vs_control": {
+          "ratio": 1.0600419305155586,
+          "gain_percent": 6.004193051555862,
+          "all_seeds_faster": true
+        },
+        "vs_native": {
+          "ratio": 1.0934428962154503,
+          "gain_percent": 9.344289621545032,
+          "all_seeds_faster": true
+        },
+        "promoted": true,
+        "available_original_inputs": 219,
+        "missing_original_inputs": [],
+        "original_byte_coverage_complete": true,
+        "verifier_sha256": "3fd76e863e5a3c0d6372941d97f9e8914913a6bc0421d09e332d77bf1c5b8321",
+        "loss_print_comparisons": [
+          {
+            "seed": 35202,
+            "printed_intervals": 12,
+            "iterations": [
+              10,
+              20,
+              30,
+              40,
+              50,
+              60,
+              70,
+              80,
+              90,
+              100,
+              110,
+              120
+            ],
+            "native_control_equal": true,
+            "native_optimized_equal": true,
+            "scope": "Printed lm_loss and router_loss strings only; no120-step tensor/convergence assertion."
+          },
+          {
+            "seed": 35203,
+            "printed_intervals": 12,
+            "iterations": [
+              10,
+              20,
+              30,
+              40,
+              50,
+              60,
+              70,
+              80,
+              90,
+              100,
+              110,
+              120
+            ],
+            "native_control_equal": true,
+            "native_optimized_equal": true,
+            "scope": "Printed lm_loss and router_loss strings only; no120-step tensor/convergence assertion."
+          },
+          {
+            "seed": 35204,
+            "printed_intervals": 12,
+            "iterations": [
+              10,
+              20,
+              30,
+              40,
+              50,
+              60,
+              70,
+              80,
+              90,
+              100,
+              110,
+              120
+            ],
+            "native_control_equal": true,
+            "native_optimized_equal": true,
+            "scope": "Printed lm_loss and router_loss strings only; no120-step tensor/convergence assertion."
+          }
+        ],
+        "backend_receipt_sha256": "482f1a472aa70c04723dd0eb3b498090ab294b9443329b0b8e8fa83815c234fb",
+        "gpu_rerun": false,
+        "arithmetic_replay": false,
+        "remote_models_canonical_root": "/mnt/kda-biv150-stage35-recovery01/models-retry01/",
+        "verified_model_root_aliases": [
+          "/mnt/kda-biv150-stage35-recovery01/models-retry01/",
+          "/private/kda-biv150-stage35-recovery01/models-retry01/"
+        ],
+        "alias_receipt_sha256": "1370de2176c4e33b3998181e0c92f48254b3e97387ce2a7db96ab2fc45169b54",
+        "raw_identity_deduplicated": true,
+        "scope": "Recorded fixed GPU gates and original logs verified on CPU; missing large raw files stay explicit in CI."
+      },
+      "rounds": [
+        {
+          "round": "primary",
+          "performance_relative": "models-retry01/experts/evidence/performance-004.json",
+          "wrapper_relative": "evidence/retry01-metadata/root/browser-formal-experts-retry01-primary-02.json",
+          "performance_sha256": "3d88ce996aa28da213c617e1ee43c64da7f7941cb6be45bc7d5f95a5b91f9dee",
+          "wrapper_sha256": "6205601b2df7ac72964064d8618779f335253a1f9b77295cf62b8eecc5ee9e3e",
+          "seed_mean_cv": {
+            "native": 0.00458487715897088,
+            "control": 0.007626680928604046,
+            "optimized": 0.0027790485501589545
+          },
+          "status": "receipt_verified",
+          "version": "004",
+          "model": "experts",
+          "confirmation": false,
+          "comparisons": {
+            "comparison-admission01.json": {
+              "checks": 3843,
+              "tensors": 1993,
+              "all_exact": true
+            },
+            "comparison-native-004.json": {
+              "checks": 3843,
+              "tensors": 1993,
+              "all_exact": true
+            },
+            "comparison-control-004.json": {
+              "checks": 3843,
+              "tensors": 1993,
+              "all_exact": true
+            }
+          },
+          "vs_control": {
+            "ratio": 1.0600419305155586,
+            "gain_percent": 6.004193051555862,
+            "all_seeds_faster": true
+          },
+          "vs_native": {
+            "ratio": 1.0934428962154503,
+            "gain_percent": 9.344289621545032,
+            "all_seeds_faster": true
+          },
+          "promoted": true,
+          "available_original_inputs": 219,
+          "missing_original_inputs": [],
+          "original_byte_coverage_complete": true,
+          "verifier_sha256": "3fd76e863e5a3c0d6372941d97f9e8914913a6bc0421d09e332d77bf1c5b8321",
+          "loss_print_comparisons": [
+            {
+              "seed": 35202,
+              "printed_intervals": 12,
+              "iterations": [
+                10,
+                20,
+                30,
+                40,
+                50,
+                60,
+                70,
+                80,
+                90,
+                100,
+                110,
+                120
+              ],
+              "native_control_equal": true,
+              "native_optimized_equal": true,
+              "scope": "Printed lm_loss and router_loss strings only; no120-step tensor/convergence assertion."
+            },
+            {
+              "seed": 35203,
+              "printed_intervals": 12,
+              "iterations": [
+                10,
+                20,
+                30,
+                40,
+                50,
+                60,
+                70,
+                80,
+                90,
+                100,
+                110,
+                120
+              ],
+              "native_control_equal": true,
+              "native_optimized_equal": true,
+              "scope": "Printed lm_loss and router_loss strings only; no120-step tensor/convergence assertion."
+            },
+            {
+              "seed": 35204,
+              "printed_intervals": 12,
+              "iterations": [
+                10,
+                20,
+                30,
+                40,
+                50,
+                60,
+                70,
+                80,
+                90,
+                100,
+                110,
+                120
+              ],
+              "native_control_equal": true,
+              "native_optimized_equal": true,
+              "scope": "Printed lm_loss and router_loss strings only; no120-step tensor/convergence assertion."
+            }
+          ],
+          "backend_receipt_sha256": "482f1a472aa70c04723dd0eb3b498090ab294b9443329b0b8e8fa83815c234fb",
+          "gpu_rerun": false,
+          "arithmetic_replay": false,
+          "remote_models_canonical_root": "/mnt/kda-biv150-stage35-recovery01/models-retry01/",
+          "verified_model_root_aliases": [
+            "/mnt/kda-biv150-stage35-recovery01/models-retry01/",
+            "/private/kda-biv150-stage35-recovery01/models-retry01/"
+          ],
+          "alias_receipt_sha256": "1370de2176c4e33b3998181e0c92f48254b3e97387ce2a7db96ab2fc45169b54",
+          "raw_identity_deduplicated": true,
+          "scope": "Recorded fixed GPU gates and original logs verified on CPU; missing large raw files stay explicit in CI."
+        }
+      ],
+      "repeat_required": false,
+      "promoted": true,
+      "configuration": {
+        "num_layers": 4,
+        "hidden_size": 512,
+        "ffn_hidden_size": 2048,
+        "num_attention_heads": 8,
+        "sequence_length": 512,
+        "micro_batch_size": 2,
+        "global_batch_size": 2,
+        "vocab_size": 1024,
+        "parameters": 106189312,
+        "normalization": "RMSNorm",
+        "epsilon": 1e-05,
+        "bf16": true,
+        "fp32_residual_connection": false,
+        "gated_linear_unit": true,
+        "bias_activation_fusion": true,
+        "num_moe_experts": 8,
+        "moe_router_topk": 2
+      }
+    }
+  },
+  "long_only": false,
+  "accepted_formal_processes": 18,
+  "accepted_timed_steps": 2160,
+  "accepted_retained_steps": 1800,
+  "diagnostic_processes": 9,
+  "all_timing_processes": 27,
+  "diagnostic_round_excluded_from_promotion": true,
+  "raw_original_file_count": 384,
+  "raw_original_bytes": 22291589014,
+  "raw_unique_objects": 227,
+  "raw_unique_bytes": 9978190961,
+  "original_byte_coverage_complete": true,
+  "require_raw": true,
+  "raw_backup_receipt_sha256": "188cda588c5bb6ded8cea0033ec587a54b80292c0cb601bf00bf11ddfcfdedcd",
+  "formal_import_sha256": "765d2f03f546e88df8ca087cbd2e714650c6dbbd1bfbb5a9f223bf844f636861",
+  "completion_reader_sha256": "4ecf7bfc961df409409ce607d33d640b082e3f2eb198c610e493662a474ffc2e",
+  "numerical_reader_sha256": "3fd76e863e5a3c0d6372941d97f9e8914913a6bc0421d09e332d77bf1c5b8321",
+  "old_collection_or_inventory_overwritten": false,
+  "gpu_work_executed": false,
+  "scope": "Fresh replacement-Pod collection. Single BI-V150; four-layer BF16 MoE with FP32 SGD masters, mock data, dropout0, TP/PP/CP/EP1. CPU checks recorded GPU receipts and logs, not GPU arithmetic. Printed loss equality is not a convergence or 120-step all-tensor proof; no production, AdamW, GroupedGEMM, multiGPU, SFT/RL claim.",
+  "sealed_utc": "2026-10-11T13:50:41.150795+00:00"
+}

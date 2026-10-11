@@ -1,0 +1,44 @@
+{
+  "schema": "biv150-occupancy-v1",
+  "utc": "2026-10-10T07:06:32.018303+00:00",
+  "hostname": {
+    "args": [
+      "hostname"
+    ],
+    "returncode": 0,
+    "stdout": "ai-exp-sy2506311-kda1-pod-qpia-8f74fcf5c-z7g26\n",
+    "stderr": ""
+  },
+  "nfs": {
+    "args": [
+      "df",
+      "-T",
+      "-h",
+      "/private/kda-biv150-stage35-recovery01"
+    ],
+    "returncode": 0,
+    "stdout": "Filesystem                                                 Type  Size  Used Avail Use% Mounted on\ninspurnas.com:/ic_storage/6789216a24f848efacd72a57cd0901e7 nfs   100G   32G   69G  32% /mnt\n",
+    "stderr": ""
+  },
+  "processes": {
+    "args": [
+      "ps",
+      "-eo",
+      "pid,ppid,user,etimes,pcpu,pmem,comm",
+      "--sort=-pcpu"
+    ],
+    "returncode": 0,
+    "stdout": "    PID    PPID USER     ELAPSED %CPU %MEM COMMAND\n      1       0 root       59840  0.0  0.0 bash\n     16       1 root       59840  0.0  0.0 sshd\n     17       1 root       59840  0.0  0.0 jupyter-lab\n     23      17 root       59659  0.0  0.0 bash\n     24      17 root       59659  0.0  0.0 bash\n    132      17 root       58307  0.0  0.0 bash\n  14651      23 root           0  0.0  0.0 python\n  14654   14651 root           0  0.0  0.0 ps\n",
+    "stderr": ""
+  },
+  "gpu_tool": "/usr/local/corex/bin/ixsmi",
+  "gpu": {
+    "args": [
+      "/usr/local/corex/bin/ixsmi"
+    ],
+    "returncode": 0,
+    "stdout": "Timestamp    Sat Oct 10 15:06:32 2026\n+-----------------------------------------------------------------------------+\n|  IX-ML: 4.2.0       Driver Version: 4.2.0       CUDA Version: 10.2          |\n|-------------------------------+----------------------+----------------------|\n| GPU  Name                     | Bus-Id               | Clock-SM  Clock-Mem  |\n| Fan  Temp  Perf  Pwr:Usage/Cap|      Memory-Usage    | GPU-Util  Compute M. |\n|===============================+======================+======================|\n| 0    Iluvatar BI-V150         | 00000000:10:00.0     | 1500MHz   1600MHz    |\n| N/A  38C   P0    N/A / N/A    | 116MiB / 32768MiB    | 0%        Default    |\n+-------------------------------+----------------------+----------------------+\n| 1    Iluvatar BI-V150         | 00000000:13:00.0     | 1500MHz   1600MHz    |\n| N/A  39C   P0    105W / 350W  | 116MiB / 32768MiB    | 0%        Default    |\n+-------------------------------+----------------------+----------------------+\n\n+-----------------------------------------------------------------------------+\n| Processes:                                                       GPU Memory |\n|  GPU        PID      Process name                                Usage(MiB) |\n|=============================================================================|\n|  No running processes found                                                 |\n+-----------------------------------------------------------------------------+\n",
+    "stderr": ""
+  },
+  "gpu_experiment_started": false
+}

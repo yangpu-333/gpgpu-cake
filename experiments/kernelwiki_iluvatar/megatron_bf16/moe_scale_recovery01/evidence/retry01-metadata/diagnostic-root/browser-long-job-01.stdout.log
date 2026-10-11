@@ -1,0 +1,2 @@
+{"case": "native-admission01", "stage34_arm": "native", "exit_code": 1, "whole_process_elapsed_seconds": 13.442956417973619}
+{"model": "long", "status": "rejected", "error": "run_case.py failed with exit 1"}

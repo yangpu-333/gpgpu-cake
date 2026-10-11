@@ -1,0 +1,29 @@
+{
+  "schema": "browser-recovery-step-v1",
+  "step": "long",
+  "started_utc": "2026-10-10T07:24:01.962952+00:00",
+  "controller_sha256": "0d2870a26460b507b4f765c26a22d91ba2b12f358f36b4e277870f7c3d8558e7",
+  "status": "failed",
+  "gpu_started": true,
+  "occupancy": {
+    "utc": "2026-10-10T07:24:02.248049+00:00",
+    "gpu_returncode": 0,
+    "gpu_stdout": "Timestamp    Sat Oct 10 15:24:02 2026\n+-----------------------------------------------------------------------------+\n|  IX-ML: 4.2.0       Driver Version: 4.2.0       CUDA Version: 10.2          |\n|-------------------------------+----------------------+----------------------|\n| GPU  Name                     | Bus-Id               | Clock-SM  Clock-Mem  |\n| Fan  Temp  Perf  Pwr:Usage/Cap|      Memory-Usage    | GPU-Util  Compute M. |\n|===============================+======================+======================|\n| 0    Iluvatar BI-V150         | 00000000:10:00.0     | 1500MHz   1600MHz    |\n| N/A  37C   P0    N/A / N/A    | 116MiB / 32768MiB    | 0%        Default    |\n+-------------------------------+----------------------+----------------------+\n| 1    Iluvatar BI-V150         | 00000000:13:00.0     | 1500MHz   1600MHz    |\n| N/A  39C   P0    104W / 350W  | 116MiB / 32768MiB    | 0%        Default    |\n+-------------------------------+----------------------+----------------------+\n\n+-----------------------------------------------------------------------------+\n| Processes:                                                       GPU Memory |\n|  GPU        PID      Process name                                Usage(MiB) |\n|=============================================================================|\n|  No running processes found                                                 |\n+-----------------------------------------------------------------------------+\n",
+    "gpu_stderr": "",
+    "process_returncode": 0,
+    "process_stdout": "    PID    PPID USER     ELAPSED %CPU %MEM COMMAND\n      1       0 root       60890  0.0  0.0 bash\n     16       1 root       60890  0.0  0.0 sshd\n     17       1 root       60890  0.0  0.0 jupyter-lab\n     23      17 root       60709  0.0  0.0 bash\n     24      17 root       60709  0.0  0.0 bash\n    132      17 root       59357  0.0  0.0 bash\n  14694      17 root         687  0.0  0.0 bash\n  14907   14694 root           0  0.0  0.0 python\n  14909   14907 root           0  0.0  0.0 ps\n"
+  },
+  "foreign_compute_processes": [],
+  "argv": [
+    "timeout",
+    "3600",
+    "/root/miniconda3/bin/python",
+    "-u",
+    "/private/kda-biv150-stage35-recovery01/models/long/run_audit.py",
+    "--model",
+    "long"
+  ],
+  "exit_code": 1,
+  "error": "Frozen controller failed; inspect owned logs",
+  "finished_utc": "2026-10-10T07:24:15.841735+00:00"
+}

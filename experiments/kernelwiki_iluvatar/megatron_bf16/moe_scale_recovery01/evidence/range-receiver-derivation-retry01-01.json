@@ -1,0 +1,8 @@
+{
+  "schema": "retry01-range-receiver-derivation-v1",
+  "source_sha256": "9c9637ba7c8698bce92934df48fd14b4a2d96cc763b84cd74e3e6f50181c4dcf",
+  "derived_sha256": "a8ef487f98420ddd1c6d2b11221c6e5683f460970e37e1170f5c5811d2eff26d",
+  "plan_sha256": "93366e057a1814c484a6bc0f7baa3bb05b5e21c8fb59faa5a2c58e8fbd3ea6cb",
+  "changes": "Only whole-file transfer loop replaced by bounded 8MiB HTTP ranges; range readback and complete original SHA required. Fixed source paths, 384-file plan, source metadata, local gates and all immutable receipts unchanged.",
+  "original_sources_modified": false
+}

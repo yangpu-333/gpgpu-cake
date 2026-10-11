@@ -1,0 +1,17 @@
+results/*
+!results/browser_formal_retry01.py
+!results/browser_formal_retry01_v2.py
+!results/derive_formal_wrapper_v2.py
+!results/collect_formal_retry01_v2.py
+!results/collect_long_primary_diagnostic.py
+!results/test_resource_guard_v2.py
+!results/collect_formal_retry01.py
+!results/install_formal_retry01.py
+!results/package_raw_transport_retry01.py
+!results/receive_raw_transport_retry01.py
+!results/receive_retry01_raw_http.py
+__pycache__/
+evidence/ssh-*
+diagnose_ssh*.ps1
+parse_ndis_trace.ps1
+parse_ndis_icmp.ps1

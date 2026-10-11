@@ -1,0 +1,22 @@
+{
+  "schema": "fresh-final-resource-original-import-v1",
+  "files": [
+    {
+      "filename": "browser-preformal-experts-20261011-01.json",
+      "bytes": 2576,
+      "sha256": "ceb9133b430db6fa6388e1d1411c4337271d98f7363de58209267c6bb81dddec"
+    },
+    {
+      "filename": "browser-postformal-completion-20261011-01.json",
+      "bytes": 2473,
+      "sha256": "77f725ca66bf9c3d6e5bbe7366a21d5e03a4798335a41afb3be3c3a33e7361b6"
+    },
+    {
+      "filename": "browser-postformal-long-state-01.json",
+      "bytes": 2599,
+      "sha256": "f78f38032d2310d6145330c5f8e82e6da1a569e05ef8ce5908c61078f05af9a6"
+    }
+  ],
+  "original_files_overwritten": false,
+  "gpu_work_executed": false
+}

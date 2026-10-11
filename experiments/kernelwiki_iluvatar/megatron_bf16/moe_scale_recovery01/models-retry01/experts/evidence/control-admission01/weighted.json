@@ -1,0 +1,441 @@
+{
+  "schema": "moe-weighted-stage34-dispatch-v1",
+  "enabled": false,
+  "candidate_sha256": null,
+  "wrapper_sha256": "65f01f6aa474ae08c3351106df245477ac6c224d951408fc938aa7b19eba48ad",
+  "calls": 96,
+  "candidate_calls": 0,
+  "native_calls": 96,
+  "fallback_calls": 0,
+  "sort_compat_calls": 12,
+  "shapes": {
+    "((264, 4096), 'torch.bfloat16', (264, 1), 'torch.bfloat16')": 2,
+    "((303, 4096), 'torch.bfloat16', (303, 1), 'torch.bfloat16')": 2,
+    "((247, 4096), 'torch.bfloat16', (247, 1), 'torch.bfloat16')": 1,
+    "((331, 4096), 'torch.bfloat16', (331, 1), 'torch.bfloat16')": 1,
+    "((218, 4096), 'torch.bfloat16', (218, 1), 'torch.bfloat16')": 1,
+    "((260, 4096), 'torch.bfloat16', (260, 1), 'torch.bfloat16')": 2,
+    "((168, 4096), 'torch.bfloat16', (168, 1), 'torch.bfloat16')": 1,
+    "((257, 4096), 'torch.bfloat16', (257, 1), 'torch.bfloat16')": 1,
+    "((345, 4096), 'torch.bfloat16', (345, 1), 'torch.bfloat16')": 1,
+    "((283, 4096), 'torch.bfloat16', (283, 1), 'torch.bfloat16')": 3,
+    "((347, 4096), 'torch.bfloat16', (347, 1), 'torch.bfloat16')": 1,
+    "((223, 4096), 'torch.bfloat16', (223, 1), 'torch.bfloat16')": 2,
+    "((157, 4096), 'torch.bfloat16', (157, 1), 'torch.bfloat16')": 2,
+    "((209, 4096), 'torch.bfloat16', (209, 1), 'torch.bfloat16')": 2,
+    "((181, 4096), 'torch.bfloat16', (181, 1), 'torch.bfloat16')": 1,
+    "((289, 4096), 'torch.bfloat16', (289, 1), 'torch.bfloat16')": 1,
+    "((480, 4096), 'torch.bfloat16', (480, 1), 'torch.bfloat16')": 1,
+    "((233, 4096), 'torch.bfloat16', (233, 1), 'torch.bfloat16')": 1,
+    "((416, 4096), 'torch.bfloat16', (416, 1), 'torch.bfloat16')": 1,
+    "((115, 4096), 'torch.bfloat16', (115, 1), 'torch.bfloat16')": 1,
+    "((177, 4096), 'torch.bfloat16', (177, 1), 'torch.bfloat16')": 1,
+    "((90, 4096), 'torch.bfloat16', (90, 1), 'torch.bfloat16')": 1,
+    "((248, 4096), 'torch.bfloat16', (248, 1), 'torch.bfloat16')": 2,
+    "((160, 4096), 'torch.bfloat16', (160, 1), 'torch.bfloat16')": 2,
+    "((133, 4096), 'torch.bfloat16', (133, 1), 'torch.bfloat16')": 1,
+    "((200, 4096), 'torch.bfloat16', (200, 1), 'torch.bfloat16')": 1,
+    "((21, 4096), 'torch.bfloat16', (21, 1), 'torch.bfloat16')": 1,
+    "((635, 4096), 'torch.bfloat16', (635, 1), 'torch.bfloat16')": 1,
+    "((74, 4096), 'torch.bfloat16', (74, 1), 'torch.bfloat16')": 1,
+    "((187, 4096), 'torch.bfloat16', (187, 1), 'torch.bfloat16')": 2,
+    "((638, 4096), 'torch.bfloat16', (638, 1), 'torch.bfloat16')": 1,
+    "((309, 4096), 'torch.bfloat16', (309, 1), 'torch.bfloat16')": 2,
+    "((302, 4096), 'torch.bfloat16', (302, 1), 'torch.bfloat16')": 1,
+    "((258, 4096), 'torch.bfloat16', (258, 1), 'torch.bfloat16')": 2,
+    "((245, 4096), 'torch.bfloat16', (245, 1), 'torch.bfloat16')": 1,
+    "((119, 4096), 'torch.bfloat16', (119, 1), 'torch.bfloat16')": 1,
+    "((192, 4096), 'torch.bfloat16', (192, 1), 'torch.bfloat16')": 1,
+    "((242, 4096), 'torch.bfloat16', (242, 1), 'torch.bfloat16')": 1,
+    "((343, 4096), 'torch.bfloat16', (343, 1), 'torch.bfloat16')": 1,
+    "((262, 4096), 'torch.bfloat16', (262, 1), 'torch.bfloat16')": 1,
+    "((308, 4096), 'torch.bfloat16', (308, 1), 'torch.bfloat16')": 1,
+    "((226, 4096), 'torch.bfloat16', (226, 1), 'torch.bfloat16')": 1,
+    "((690, 4096), 'torch.bfloat16', (690, 1), 'torch.bfloat16')": 1,
+    "((102, 4096), 'torch.bfloat16', (102, 1), 'torch.bfloat16')": 1,
+    "((198, 4096), 'torch.bfloat16', (198, 1), 'torch.bfloat16')": 1,
+    "((332, 4096), 'torch.bfloat16', (332, 1), 'torch.bfloat16')": 1,
+    "((243, 4096), 'torch.bfloat16', (243, 1), 'torch.bfloat16')": 1,
+    "((56, 4096), 'torch.bfloat16', (56, 1), 'torch.bfloat16')": 1,
+    "((201, 4096), 'torch.bfloat16', (201, 1), 'torch.bfloat16')": 1,
+    "((66, 4096), 'torch.bfloat16', (66, 1), 'torch.bfloat16')": 1,
+    "((19, 4096), 'torch.bfloat16', (19, 1), 'torch.bfloat16')": 1,
+    "((9, 4096), 'torch.bfloat16', (9, 1), 'torch.bfloat16')": 1,
+    "((701, 4096), 'torch.bfloat16', (701, 1), 'torch.bfloat16')": 1,
+    "((72, 4096), 'torch.bfloat16', (72, 1), 'torch.bfloat16')": 1,
+    "((371, 4096), 'torch.bfloat16', (371, 1), 'torch.bfloat16')": 1,
+    "((623, 4096), 'torch.bfloat16', (623, 1), 'torch.bfloat16')": 1,
+    "((255, 4096), 'torch.bfloat16', (255, 1), 'torch.bfloat16')": 1,
+    "((363, 4096), 'torch.bfloat16', (363, 1), 'torch.bfloat16')": 1,
+    "((210, 4096), 'torch.bfloat16', (210, 1), 'torch.bfloat16')": 1,
+    "((328, 4096), 'torch.bfloat16', (328, 1), 'torch.bfloat16')": 1,
+    "((256, 4096), 'torch.bfloat16', (256, 1), 'torch.bfloat16')": 1,
+    "((267, 4096), 'torch.bfloat16', (267, 1), 'torch.bfloat16')": 1,
+    "((103, 4096), 'torch.bfloat16', (103, 1), 'torch.bfloat16')": 1,
+    "((266, 4096), 'torch.bfloat16', (266, 1), 'torch.bfloat16')": 1,
+    "((375, 4096), 'torch.bfloat16', (375, 1), 'torch.bfloat16')": 1,
+    "((318, 4096), 'torch.bfloat16', (318, 1), 'torch.bfloat16')": 1,
+    "((205, 4096), 'torch.bfloat16', (205, 1), 'torch.bfloat16')": 1,
+    "((244, 4096), 'torch.bfloat16', (244, 1), 'torch.bfloat16')": 1,
+    "((173, 4096), 'torch.bfloat16', (173, 1), 'torch.bfloat16')": 1,
+    "((676, 4096), 'torch.bfloat16', (676, 1), 'torch.bfloat16')": 1,
+    "((212, 4096), 'torch.bfloat16', (212, 1), 'torch.bfloat16')": 1,
+    "((211, 4096), 'torch.bfloat16', (211, 1), 'torch.bfloat16')": 1,
+    "((208, 4096), 'torch.bfloat16', (208, 1), 'torch.bfloat16')": 1,
+    "((104, 4096), 'torch.bfloat16', (104, 1), 'torch.bfloat16')": 1,
+    "((232, 4096), 'torch.bfloat16', (232, 1), 'torch.bfloat16')": 1,
+    "((40, 4096), 'torch.bfloat16', (40, 1), 'torch.bfloat16')": 1,
+    "((779, 4096), 'torch.bfloat16', (779, 1), 'torch.bfloat16')": 1,
+    "((20, 4096), 'torch.bfloat16', (20, 1), 'torch.bfloat16')": 1,
+    "((63, 4096), 'torch.bfloat16', (63, 1), 'torch.bfloat16')": 1,
+    "((566, 4096), 'torch.bfloat16', (566, 1), 'torch.bfloat16')": 1,
+    "((88, 4096), 'torch.bfloat16', (88, 1), 'torch.bfloat16')": 1,
+    "((322, 4096), 'torch.bfloat16', (322, 1), 'torch.bfloat16')": 1,
+    "((170, 4096), 'torch.bfloat16', (170, 1), 'torch.bfloat16')": 1
+  },
+  "expert_calls": [
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        264,
+        303,
+        247,
+        331,
+        218,
+        260,
+        168,
+        257
+      ],
+      "hidden_shape": [
+        2048,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        345,
+        283,
+        347,
+        303,
+        223,
+        157,
+        209,
+        181
+      ],
+      "hidden_shape": [
+        2048,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        289,
+        480,
+        233,
+        416,
+        115,
+        177,
+        90,
+        248
+      ],
+      "hidden_shape": [
+        2048,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        160,
+        133,
+        200,
+        21,
+        635,
+        74,
+        187,
+        638
+      ],
+      "hidden_shape": [
+        2048,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        309,
+        302,
+        223,
+        309,
+        258,
+        245,
+        119,
+        283
+      ],
+      "hidden_shape": [
+        2048,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        258,
+        192,
+        242,
+        343,
+        283,
+        262,
+        308,
+        160
+      ],
+      "hidden_shape": [
+        2048,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        226,
+        690,
+        102,
+        198,
+        332,
+        243,
+        56,
+        201
+      ],
+      "hidden_shape": [
+        2048,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        66,
+        187,
+        19,
+        9,
+        701,
+        72,
+        371,
+        623
+      ],
+      "hidden_shape": [
+        2048,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        255,
+        363,
+        210,
+        328,
+        256,
+        267,
+        103,
+        266
+      ],
+      "hidden_shape": [
+        2048,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        260,
+        264,
+        209,
+        375,
+        318,
+        205,
+        244,
+        173
+      ],
+      "hidden_shape": [
+        2048,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        248,
+        676,
+        212,
+        157,
+        211,
+        208,
+        104,
+        232
+      ],
+      "hidden_shape": [
+        2048,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    },
+    {
+      "class": "SequentialMLP",
+      "tokens_per_expert": [
+        40,
+        779,
+        20,
+        63,
+        566,
+        88,
+        322,
+        170
+      ],
+      "hidden_shape": [
+        2048,
+        512
+      ],
+      "probability_dtype": "torch.bfloat16"
+    }
+  ],
+  "router_calls": 12,
+  "captures": [],
+  "configurations": [
+    {
+      "num_moe_experts": 8,
+      "moe_router_topk": 2,
+      "moe_grouped_gemm": false,
+      "moe_token_dispatcher_type": "allgather",
+      "moe_apply_probs_on_input": false,
+      "moe_aux_loss_coeff": 0.01,
+      "gated_linear_unit": true,
+      "bias_activation_fusion": true,
+      "masked_softmax_fusion": true,
+      "use_te_activation_func": false
+    }
+  ],
+  "raw_files": {
+    "routing/router-001.pt": {
+      "bytes": 26090,
+      "sha256": "a8a58f0cdede13f67dc5729651a0108cd0671442eb2918d1d281ac78ed43ed80"
+    },
+    "routing/probability-grad-010.pt": {
+      "bytes": 17629,
+      "sha256": "e7d821626850d485e2d41e63b4b541309c4b12db1e000d350aee350ddec258c3"
+    },
+    "routing/probability-grad-012.pt": {
+      "bytes": 17629,
+      "sha256": "90406fec06ed33f8bf50f95f2ff1d295853919c12be5b0845200a0780c599436"
+    },
+    "routing/probability-grad-007.pt": {
+      "bytes": 17629,
+      "sha256": "48e43283c33f1df00755c8f5dd575fba2170cff4c46cf526f3c24643f0dbb13b"
+    },
+    "routing/probability-grad-005.pt": {
+      "bytes": 17629,
+      "sha256": "f05524d613acc1dd9e28e758140ec5a0f08947b786e4510e01f552ce97a32671"
+    },
+    "routing/probability-grad-006.pt": {
+      "bytes": 17629,
+      "sha256": "10e92d87d12caf89f5deead9a4a110c8463ca50a2ac6cc5fa5f978955d418148"
+    },
+    "routing/router-010.pt": {
+      "bytes": 26090,
+      "sha256": "f21e77bdb831952e75e32022d52a3c34fae2649fc86c7109a26805f7ee95dcb8"
+    },
+    "routing/probability-grad-009.pt": {
+      "bytes": 17629,
+      "sha256": "046de8d3ee77155aed17bfd07cb300c078594396973f4fd809a146fe17a7666e"
+    },
+    "routing/router-002.pt": {
+      "bytes": 26090,
+      "sha256": "4d515944eb485bbfde18838a2e07f9fba1b95de18c22237303464d3df9cae9e3"
+    },
+    "routing/probability-grad-003.pt": {
+      "bytes": 17629,
+      "sha256": "4cb09227c6e6e0fedcf78af75e42d33464723be58f92a21f69ce7491dc9a85e3"
+    },
+    "routing/router-007.pt": {
+      "bytes": 26090,
+      "sha256": "9a502c4565e1e14c6e7dd462fdf5865b29df32b987b50f6f37bdcc989498c62d"
+    },
+    "routing/router-008.pt": {
+      "bytes": 26090,
+      "sha256": "232953380883d8d5372fa8185fc9c18e7d0e0d95bac4da90aa539c307eb4ffc7"
+    },
+    "routing/router-006.pt": {
+      "bytes": 26090,
+      "sha256": "33e197f395603ad2b48953a9605a7859f0d59a69725793b86f58279c74a215b2"
+    },
+    "routing/probability-grad-002.pt": {
+      "bytes": 17629,
+      "sha256": "c7810b941e61d1ae6883d610e186147cef66457008cbbe5e6ca81bc3a34bdcaf"
+    },
+    "routing/probability-grad-004.pt": {
+      "bytes": 17629,
+      "sha256": "5e50a16835e2abb3e94dd6a1e23412ce85c85285e5e07cc4c470e0efc50cb6c6"
+    },
+    "routing/router-009.pt": {
+      "bytes": 26090,
+      "sha256": "f0e04b3c2fade43d2ae2f9edf37ec33de1ab59430749fe3a4c4949232788d556"
+    },
+    "routing/router-004.pt": {
+      "bytes": 26090,
+      "sha256": "4521fb13ddea800edcee38dc68771f9b36dbcff81f19f5362d0e951114339a60"
+    },
+    "routing/router-011.pt": {
+      "bytes": 26090,
+      "sha256": "3bec6fbc9896d27cdac13dc6861e5308242f5502ab0d310b08bf9bc204f23fa8"
+    },
+    "routing/probability-grad-001.pt": {
+      "bytes": 17629,
+      "sha256": "9dcbfed17d502cbcba96edc2d0664481b8da7c058266874bcd9f8f45a6404107"
+    },
+    "routing/probability-grad-011.pt": {
+      "bytes": 17629,
+      "sha256": "426d8a53da6424e4e9866760fb83ab9a0338a087812bc5eb66b4ed8221f85283"
+    },
+    "routing/probability-grad-008.pt": {
+      "bytes": 17629,
+      "sha256": "f0f5401f56074456924033ade12b3a8ed895584fc7086f74bd46fe8e7e69f01f"
+    },
+    "routing/router-005.pt": {
+      "bytes": 26090,
+      "sha256": "ea600fe1c3cbb22f5d57478cefc8b1985060002552f62242c58ebe4e7a22cf48"
+    },
+    "routing/router-012.pt": {
+      "bytes": 26090,
+      "sha256": "824354fcc625703c9374ceed165e35b6da1b70e6ef9cc9f7191b223a993dc1ed"
+    },
+    "routing/router-003.pt": {
+      "bytes": 26090,
+      "sha256": "2424c92cd85613840ae8bb5de2f0a3d2aae883e2d2c646875d36526d4ea4184b"
+    }
+  },
+  "scope": "Native SequentialMLP weighted_bias_swiglu call only. Common explicit bool-to0/1-uint8 stable sort compatibility; no candidate GEMM, RMSNorm, attention or router changes. Raw tensors/config/token/probability-gradient observation only in untimed audit/capture.",
+  "native_source_sha256": {
+    "megatron/core/fusions/fused_bias_swiglu.py": "5303680596749464c45f9c3ec65f94d1127fb6d49b2aa9ec3ba8c91b1141f08f",
+    "megatron/core/transformer/mlp.py": "f54a7209db5cad4e095143cbbc1eedcbf41e913ea1eec64db3cb1b8408e6ff07",
+    "megatron/core/transformer/moe/experts.py": "32e1a36533a217599b20cdc2a47285f0e8af19716a7a1b10db8fe421c8b24fef",
+    "megatron/core/transformer/moe/router.py": "1a1b6a2b82dc28835d44f637628243f283310e6ae50a2d836b19f19ae56c8f3a",
+    "megatron/core/transformer/moe/token_dispatcher.py": "7af2746153268f5c5f7f03d7a340092541b633fbc8faa10f666d6ddbdf98be0a",
+    "megatron/core/transformer/moe/moe_utils.py": "b20192e71b54ed07b00f9e3d0bbd7daf470cb9ea3dc3037c20f544528e56f14f"
+  },
+  "native_compiled_callables": {
+    "weighted_swiglu": true,
+    "weighted_swiglu_back": true
+  }
+}
