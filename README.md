@@ -61,6 +61,7 @@
 ### 仓库与实验依据
 
 - [GitHub项目仓库](https://github.com/yangpu-333/gpgpu-cake)
+- [独立Word技术报告](deliverables/KernelWiki_BI-V150_技术简报.docx)
 - [详细技术报告与复现方法](experiments/kernelwiki_iluvatar/PROJECT_REPORT_0930.md)
 - [两组MoE复验决定](experiments/kernelwiki_iluvatar/megatron_bf16/moe_scale_recovery01/evidence/decision-retry01-02.json) · [Dense GPT验收](experiments/kernelwiki_iluvatar/megatron_bf16/attention/evidence/decision.json)
 - [原始数据归档回执](experiments/kernelwiki_iluvatar/megatron_bf16/moe_scale_recovery01/evidence/raw-http-backup-retry01-01-receipt.json) · [已通过的Linux CI](https://github.com/yangpu-333/gpgpu-cake/actions/runs/38150991570)
