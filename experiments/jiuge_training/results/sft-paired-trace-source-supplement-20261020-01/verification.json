@@ -1,0 +1,21 @@
+{
+  "schema": "jiuge7b-sft-paired-key-source-supplement-v1",
+  "passed": true,
+  "reason": "The pre-existing bounded key exporter excludes .sh suffixes; raw ACT source snapshot includes them unchanged",
+  "files": {
+    "bootstrap_sft_pinning_20261020.sh": {
+      "sha256": "f2aab10d9c444a71ca2197174a47264d39594196b655b50dd1e9b75d3a7e6b6a",
+      "bytes": 2067
+    },
+    "bootstrap_sft_pinning_formal_20261020.sh": {
+      "sha256": "4028416eeccb27ab61243fea1f6474d082fb0000cb92cb6f9335cc44e096dadc",
+      "bytes": 2825
+    },
+    "bootstrap_sft_paired_trace_20261020.sh": {
+      "sha256": "411c6733ed0ff1bb33ed109b0e9f12e63ca69826126261f31cf0b6b1c5434018",
+      "bytes": 2742
+    }
+  },
+  "old_closed_key_bundle_modified": false,
+  "scientific_sources_modified": false
+}

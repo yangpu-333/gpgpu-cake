@@ -1,0 +1,38 @@
+{
+  "passed": true,
+  "source_files_verified": 58,
+  "old53_unchanged": true,
+  "probe": {
+    "schema": "jiuge7b-sft-TP-reader-metadata-regression-v1",
+    "passed": true,
+    "checks": [
+      "Native TP2 reader35/receiver0 dataset-log roles accepted",
+      "Missing reader log rejected",
+      "Receiver unexpectedly consuming its own dataset rejected",
+      "Empty supervised batch rejected",
+      "Different sampler IDs rejected",
+      "Reader metadata different from paired reference rejected"
+    ],
+    "GPU_used": false,
+    "raw_receiver_tensor_equivalence_claimed": false,
+    "formal_performance_evidence": false
+  },
+  "actual_first_case_metadata": [
+    {
+      "rank": 0,
+      "dataset_reader": true,
+      "recorded_dataset_batches": 35,
+      "metadata_gate_passed": true,
+      "raw_receiver_tensor_equivalence_claimed": false
+    },
+    {
+      "rank": 1,
+      "dataset_reader": false,
+      "recorded_dataset_batches": 0,
+      "metadata_gate_passed": true,
+      "raw_receiver_tensor_equivalence_claimed": false
+    }
+  ],
+  "GPU_work_started": false,
+  "preparation_stdin_import_path_corrected": true
+}

@@ -1,0 +1,5 @@
+# Frozen experiment sources must retain the exact bytes tested on ACT.
+*.py -text -eol
+*.sh -text -eol
+*.json -text -eol
+*.patch -text -eol

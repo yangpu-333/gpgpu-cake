@@ -1,0 +1,445 @@
+{
+  "schema": "jiuge7b-sft-numa-trace-delivery-verification-v1",
+  "passed": true,
+  "bundle": "/home/huids25/kda-jiuge-prep-20261014/sft-numa-delivery-20261021-02/Jiuge7B-SFT-S2048-pinned-NUMA-v2-traces.zip",
+  "bundle_bytes": 217181114,
+  "bundle_sha256": "f8b5580d224b030bfe1ae7c83f65e19cfff517e4ca92dd85f1a56571354a4684",
+  "verified_files": 487,
+  "verified_raw_traces": 24,
+  "compressed_and_decompressed_SHA_passed": true,
+  "bundle_downloaded_to_local": false,
+  "traces": [
+    {
+      "case": "sft-numa-v2-20261021-a1-unbound",
+      "policy": "unbound",
+      "tag": "a1",
+      "rank": 0,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-a1-unbound/window-01/rank-0.json.gz",
+      "compressed_sha256": "c1a2b2836579ee0dbfaa99e6a7a41b248990a2fea7d6c7a7f2d11ea19995f1f1",
+      "decompressed_sha256": "d219b40e35808d0073f8220abb908c4e8851f28f4ce7b763b73d07b1ee437edc",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-a1-unbound",
+      "policy": "unbound",
+      "tag": "a1",
+      "rank": 1,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-a1-unbound/window-01/rank-1.json.gz",
+      "compressed_sha256": "f4a8ebce635e6be290cce20fc757daab7c3263537f9c8d49849747fa85e39956",
+      "decompressed_sha256": "287ae592150c4c009eabe5683776d0e5c1862236efeaec8b8dfd0d44e9948f5c",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-a1-unbound",
+      "policy": "unbound",
+      "tag": "a1",
+      "rank": 0,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-a1-unbound/window-02/rank-0.json.gz",
+      "compressed_sha256": "a5857aebe8e69843cf48266422e7826d4c7952fad1530e230d2bce7adf6fac64",
+      "decompressed_sha256": "b60639840e80264d666de1a350ca1938636d21716463052904579e4cf61d18d2",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-a1-unbound",
+      "policy": "unbound",
+      "tag": "a1",
+      "rank": 1,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-a1-unbound/window-02/rank-1.json.gz",
+      "compressed_sha256": "523d17fc7070040ee03e900a0d022a6060552ec4e7430216388d9c82501460cc",
+      "decompressed_sha256": "f98618806d89047bc2cc5e5149909c70f1304e673cc2d43bd86717bb57476e1f",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-b1-gpu-local8",
+      "policy": "gpu-local8",
+      "tag": "b1",
+      "rank": 0,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-b1-gpu-local8/window-01/rank-0.json.gz",
+      "compressed_sha256": "2febcaee37c2a8965ba95e02a6d731c04dc420233cd16a78036126806b64de7a",
+      "decompressed_sha256": "ec7da2275bb85faa65a66828b4cb53a93c33e088b1121778313691c4e3e4b97c",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-b1-gpu-local8",
+      "policy": "gpu-local8",
+      "tag": "b1",
+      "rank": 1,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-b1-gpu-local8/window-01/rank-1.json.gz",
+      "compressed_sha256": "b24f8d425c323687284fa1f1b3a609ec3997fe8e5d0748eaab1c266b588a6e93",
+      "decompressed_sha256": "aa4d89bc0a9cea0a7a9b5e716f19c5f50d91e3b19c8c7f384f85a5f320f9f8bb",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-b1-gpu-local8",
+      "policy": "gpu-local8",
+      "tag": "b1",
+      "rank": 0,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-b1-gpu-local8/window-02/rank-0.json.gz",
+      "compressed_sha256": "4f90bf87774c5e082349bb6f49bdf95cef2e82df81eff0dcd4500abfaa5682be",
+      "decompressed_sha256": "17fd9e1f73c9fb2ba29e6b8d3419ff7c3c079ff34ace723516e44c05120759dc",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-b1-gpu-local8",
+      "policy": "gpu-local8",
+      "tag": "b1",
+      "rank": 1,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-b1-gpu-local8/window-02/rank-1.json.gz",
+      "compressed_sha256": "4e4b8db243a17f082dbdbc205acca2c8876832331b89e8af931c8b777c64a022",
+      "decompressed_sha256": "9da69c8a9c2ac45bdc3126e4bfb29712f32075194f6a300617f20f25ac808d15",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-c1-socket-split8",
+      "policy": "socket-split8",
+      "tag": "c1",
+      "rank": 0,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-c1-socket-split8/window-01/rank-0.json.gz",
+      "compressed_sha256": "418e970b93d1854d035d943e5f2db85917e779cea7046f74e62db84debb42e5e",
+      "decompressed_sha256": "6937d57c102e9d7fd4c36338c102bbb41830b773443ec43b93e6442d4612d3b9",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-c1-socket-split8",
+      "policy": "socket-split8",
+      "tag": "c1",
+      "rank": 1,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-c1-socket-split8/window-01/rank-1.json.gz",
+      "compressed_sha256": "8c680f67f68ed165b52fd40233c38eea7308e42586f84cc5701b4ceafd5b081d",
+      "decompressed_sha256": "f93517f2ed8959753e408e600cd66a07113a4c91a0a5b512dfe4949868dbf784",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-c1-socket-split8",
+      "policy": "socket-split8",
+      "tag": "c1",
+      "rank": 0,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-c1-socket-split8/window-02/rank-0.json.gz",
+      "compressed_sha256": "9eb8a9b92ffe6ef34087916133ba2ecfe971c3f7e364e31ab08f007e3a549dd3",
+      "decompressed_sha256": "e9767778f22fad3728398200facb5bcc46b39bde9598e0076d0fe4b33ea49870",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-c1-socket-split8",
+      "policy": "socket-split8",
+      "tag": "c1",
+      "rank": 1,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-c1-socket-split8/window-02/rank-1.json.gz",
+      "compressed_sha256": "9b10b2377cea0d1889bf1aeedf3536fdf57f8a995300d54dd454e828f8d59948",
+      "decompressed_sha256": "813eebf91ee33feb97f591320a0bc948a054a610a9bca892564f304a7972241d",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-c2-socket-split8",
+      "policy": "socket-split8",
+      "tag": "c2",
+      "rank": 0,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-c2-socket-split8/window-01/rank-0.json.gz",
+      "compressed_sha256": "3912fddac8988cae014c62a3d2f649c7c504f09cb4f04c557d64cb57089283a1",
+      "decompressed_sha256": "9172a26f024e61b85f090b94a6ebd951bc6feb87092a147cd87f7fa282ab7750",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-c2-socket-split8",
+      "policy": "socket-split8",
+      "tag": "c2",
+      "rank": 1,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-c2-socket-split8/window-01/rank-1.json.gz",
+      "compressed_sha256": "89f066ebd5ed4115c32c497105915a5033c9d8dc8a92c31479cb72cf2fe98439",
+      "decompressed_sha256": "02f2de20ecc868db666f1aa8dfe1d0b2a68309ba48e7cc1fd7c814adb75e2cee",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-c2-socket-split8",
+      "policy": "socket-split8",
+      "tag": "c2",
+      "rank": 0,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-c2-socket-split8/window-02/rank-0.json.gz",
+      "compressed_sha256": "564e0d2a961f52eb67d798c6953d5a3a19666480798abf0ade0fd31ab5c0e526",
+      "decompressed_sha256": "eacb29312c69ec171272a7c3e6c187ecd85bf915c2d3242580d20801d8fece34",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-c2-socket-split8",
+      "policy": "socket-split8",
+      "tag": "c2",
+      "rank": 1,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-c2-socket-split8/window-02/rank-1.json.gz",
+      "compressed_sha256": "e213a7f80baf7069bbd1701deb38606da55b6a41d3347878547d727962eb0cb4",
+      "decompressed_sha256": "5ee6ec9c46ec749fae7db5a1210806aa2c0db15939f461702f2e8b54aa401712",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-b2-gpu-local8",
+      "policy": "gpu-local8",
+      "tag": "b2",
+      "rank": 0,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-b2-gpu-local8/window-01/rank-0.json.gz",
+      "compressed_sha256": "14b3e24c3d8ad52eb11fd429ef6867300c6e4a501c1111e63afc4b0ea0e6ae72",
+      "decompressed_sha256": "3aa36b39b94c1215e3449e2c506322100dc51e786d97e738ce3b464dd17e43df",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-b2-gpu-local8",
+      "policy": "gpu-local8",
+      "tag": "b2",
+      "rank": 1,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-b2-gpu-local8/window-01/rank-1.json.gz",
+      "compressed_sha256": "c6c5ac05f19b9496a2204f32e3585c8ff0a9e6f52ec49014f708db76cba12e6c",
+      "decompressed_sha256": "1d5d67b6873b71a7efbb3bc608dcb53acb708276bfbad1d77cbeb1d26c98f0d0",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-b2-gpu-local8",
+      "policy": "gpu-local8",
+      "tag": "b2",
+      "rank": 0,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-b2-gpu-local8/window-02/rank-0.json.gz",
+      "compressed_sha256": "1c17aa4cdd0d622faaac965533672c352b0b1fd1a9c9dd9e21ab7586f799bd6f",
+      "decompressed_sha256": "d78649011184b866a6d8d15cbf028a13eb6e488ab914e3145f9ee25fe7f5e37d",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-b2-gpu-local8",
+      "policy": "gpu-local8",
+      "tag": "b2",
+      "rank": 1,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-b2-gpu-local8/window-02/rank-1.json.gz",
+      "compressed_sha256": "8a166a08d5114baab064c782ed0171bdd227bc2a6006c190133410c4bdc07cde",
+      "decompressed_sha256": "9390a0a37d4f27c21d9757e1799763669d1a3970d8bcbef793d50a67b5167481",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-a2-unbound",
+      "policy": "unbound",
+      "tag": "a2",
+      "rank": 0,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-a2-unbound/window-01/rank-0.json.gz",
+      "compressed_sha256": "5e4721be7119156ffb0777ebacda51b62f63a108b38def29477db1b7d21db43e",
+      "decompressed_sha256": "3169395b181c0e1c7a412a73d6c94a38491dbb31362e461edf1c11859140360c",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-a2-unbound",
+      "policy": "unbound",
+      "tag": "a2",
+      "rank": 1,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-a2-unbound/window-01/rank-1.json.gz",
+      "compressed_sha256": "1db0a905df8a5d08af0227180df1aaa289d3fd31edf1e922c0792e70a277764e",
+      "decompressed_sha256": "c25991bf4d2656bfd8c6b7b0a80caa25ddcd76c57dcb26cc5418e1b2809d3897",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-a2-unbound",
+      "policy": "unbound",
+      "tag": "a2",
+      "rank": 0,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-a2-unbound/window-02/rank-0.json.gz",
+      "compressed_sha256": "013527b53b3ecba1111de41acee632070f7399495ec4255b20cdf4f639850f74",
+      "decompressed_sha256": "2c421c31be85ac2f082ee47c8000b98764dd7665a8a768c45d9d2dd8cd2a49c6",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-numa-v2-20261021-a2-unbound",
+      "policy": "unbound",
+      "tag": "a2",
+      "rank": 1,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-numa-v2-20261021-a2-unbound/window-02/rank-1.json.gz",
+      "compressed_sha256": "c93965d15a1148339baf96379e8fbd938d95045bed7d570b181c0fb2a8f0499e",
+      "decompressed_sha256": "0e46325dc087d08a95b206c7ac96cc1359bf8ef4a49c201f2848d32506dc1eb1",
+      "NCCL_kernel_events": 922
+    }
+  ]
+}

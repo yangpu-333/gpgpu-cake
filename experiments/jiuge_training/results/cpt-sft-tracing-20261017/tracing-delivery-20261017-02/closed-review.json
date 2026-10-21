@@ -1,0 +1,185 @@
+{
+  "schema": "jiuge7b-CPT-SFT-closed-delivery-review-v1",
+  "utc": "2026-10-17T13:59:48.126734+00:00",
+  "passed": true,
+  "cases": [
+    {
+      "case": "sft-native-admission-20261017-01",
+      "steps_each_rank": 3,
+      "optimizer_steps_each_rank": 3,
+      "ACT_original_files_verified": 39,
+      "ACT_original_bytes": 26032999
+    },
+    {
+      "case": "sft-native-profile-20261017-01",
+      "steps_each_rank": 35,
+      "optimizer_steps_each_rank": 35,
+      "ACT_original_files_verified": 42,
+      "ACT_original_bytes": 33895040
+    },
+    {
+      "case": "cpt-native-admission-20261017-01",
+      "steps_each_rank": 3,
+      "optimizer_steps_each_rank": 3,
+      "ACT_original_files_verified": 29,
+      "ACT_original_bytes": 26017688
+    },
+    {
+      "case": "cpt-native-profile-20261017-01",
+      "steps_each_rank": 35,
+      "optimizer_steps_each_rank": 35,
+      "ACT_original_files_verified": 34,
+      "ACT_original_bytes": 33889159
+    }
+  ],
+  "source_files_verified": 24,
+  "trace_windows": 8,
+  "actual_input_tokens_labels_positions_attention_equal_except_task_loss_mask": true,
+  "full_model_training_each_task": true,
+  "original_bundle": "/home/huids25/kda-jiuge-prep-20261014/tracing-delivery-20261017-02/Jiuge7B-native-CPT-SFT-S2048-traces.zip",
+  "original_bundle_bytes": 67633445,
+  "original_bundle_sha256": "d7603aa99887f5c8eab117a8b4f4f42c553b0f6278a62c0a9c921d5187872921",
+  "original_bundle_files_verified": 59,
+  "traces": [
+    {
+      "case": "sft-native-profile-20261017-01",
+      "window": 1,
+      "rank": 0,
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path": "runs/sft-native-profile-20261017-01/window-01/rank-0.json.gz",
+      "compressed_sha256": "427b9c1849ba0c2c8c1315b14f1305fe31cce8826896cf198357a96ef819c4b8",
+      "decompressed_sha256": "b48514ba9d411be7dbd0a2e83b2d890ec6eeb17482cd671a4da1a3dddea88d36",
+      "kernels": 30359,
+      "NCCL_kernels": 922
+    },
+    {
+      "case": "sft-native-profile-20261017-01",
+      "window": 1,
+      "rank": 1,
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path": "runs/sft-native-profile-20261017-01/window-01/rank-1.json.gz",
+      "compressed_sha256": "0bf6b0b2ac7888f71f30c1fac6c8e372d9e032f9b3bdd85a2eaa59036bc79f95",
+      "decompressed_sha256": "49239feb58caeeac5ca8b5d034cbd22b51667a2de2b4c01dc4fbd3bf7c31a691",
+      "kernels": 30074,
+      "NCCL_kernels": 922
+    },
+    {
+      "case": "sft-native-profile-20261017-01",
+      "window": 2,
+      "rank": 0,
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path": "runs/sft-native-profile-20261017-01/window-02/rank-0.json.gz",
+      "compressed_sha256": "8a88d8906bea82d88f27c671a89e88f1e2b376df987c5a1d5816f77a4aedabe8",
+      "decompressed_sha256": "8ff99d32c087cb1842df89d706fecbb5dbacd7b73feacdd03ae000dd51f89e1a",
+      "kernels": 30359,
+      "NCCL_kernels": 922
+    },
+    {
+      "case": "sft-native-profile-20261017-01",
+      "window": 2,
+      "rank": 1,
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path": "runs/sft-native-profile-20261017-01/window-02/rank-1.json.gz",
+      "compressed_sha256": "d7b218ca2b3405798a7fa7360acb4d87641ae9e2b3367a7ac6dac5995c5568d7",
+      "decompressed_sha256": "f8ebd666e303dac966a59faf16c3648eebe1394a9b48cb4850125d6c51652af6",
+      "kernels": 30074,
+      "NCCL_kernels": 922
+    },
+    {
+      "case": "cpt-native-profile-20261017-01",
+      "window": 1,
+      "rank": 0,
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path": "runs/cpt-native-profile-20261017-01/window-01/rank-0.json.gz",
+      "compressed_sha256": "edd1273082cba998324f71b35c1cde6492694359556d78d3faf5d3e3b2fba6f4",
+      "decompressed_sha256": "974d8cdc260bbea4e7e374709a486a16900c0888105e5dc5697231523c7ffd0b",
+      "kernels": 30359,
+      "NCCL_kernels": 922
+    },
+    {
+      "case": "cpt-native-profile-20261017-01",
+      "window": 1,
+      "rank": 1,
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path": "runs/cpt-native-profile-20261017-01/window-01/rank-1.json.gz",
+      "compressed_sha256": "ffc8772cab82be12cd220ad4017424e364d0c087e661f438e7fff2f9369e7225",
+      "decompressed_sha256": "4e15a71a4ae888c4bd6336bc662117d43512b7d6cc400541bbed2db7dc81e201",
+      "kernels": 30074,
+      "NCCL_kernels": 922
+    },
+    {
+      "case": "cpt-native-profile-20261017-01",
+      "window": 2,
+      "rank": 0,
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path": "runs/cpt-native-profile-20261017-01/window-02/rank-0.json.gz",
+      "compressed_sha256": "a4e5162f9a9e2053739b35e90678574593d98807d713dc370e5e2fb24a298605",
+      "decompressed_sha256": "f5fa6d480e0c0ecaa620909fdf388fcc802a6667794e3f878e73f419e130b7c0",
+      "kernels": 30359,
+      "NCCL_kernels": 922
+    },
+    {
+      "case": "cpt-native-profile-20261017-01",
+      "window": 2,
+      "rank": 1,
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path": "runs/cpt-native-profile-20261017-01/window-02/rank-1.json.gz",
+      "compressed_sha256": "de5a6ccec6d136cf2426ad3345971dbb268a370ce964a43f1fdc1b897b9bb43b",
+      "decompressed_sha256": "7b1fe6cf07be0af53fad6cdd1cf38eefbef2b715467bfe3d5e1ed83e5c9f2c22",
+      "kernels": 30074,
+      "NCCL_kernels": 922
+    }
+  ],
+  "formal_speedup_evidence": false,
+  "full_gradient_optimizer_equivalence_claimed": false,
+  "originals_downloaded_to_local": false,
+  "old_V100_modified_or_stopped": false
+}

@@ -1,0 +1,11 @@
+{
+  "schema": "jiuge-pinning-local-key-verification-v1",
+  "bundle": "E:\\code\\GPGPU\\experiments\\jiuge_training\\results\\sft-numa-failure-audit-20261021-01\\key-results.zip",
+  "bundle_sha256": "7b12b611c9c9f666772743ac2120dcd62cb21f1ed830d49b38e84aa54567c51a",
+  "primary_root": "/home/huids25/kda-jiuge-prep-20261014",
+  "verified_key_files": 128,
+  "verified_key_bytes": 3304385,
+  "passed": true,
+  "full_raw_local_copy_verified": false,
+  "originals_location": "ACT persistent directory; excluded from this local bundle"
+}

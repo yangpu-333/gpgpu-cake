@@ -1,0 +1,137 @@
+{
+  "schema": "jiuge7b-sft-direct-zero-proposal-admission-v3",
+  "passed": true,
+  "frozen_sources": 93,
+  "original73_unchanged": true,
+  "CPU_regression": {
+    "schema": "jiuge7b-sft-direct-zero-CPU-preparation-v3",
+    "passed": true,
+    "ACT_root": "/home/huids25/kda-jiuge-prep-20261014/sft-moment-direct-zero-preparation-20261021-01",
+    "CPU_regression": {
+      "schema": "jiuge7b-sft-direct-zero-moments-CPU-regression-v3",
+      "passed": true,
+      "ACT_root": "/home/huids25/kda-jiuge-prep-20261014/sft-moment-direct-zero-preparation-20261021-01/cpu-regression",
+      "source_sha256": {
+        "check_sft_local_moments_v3_20261021.py": "4c4ef4e69ccf387f49f2117e6d58012b8b19a907586290786a9e2851e2357d84",
+        "sft_local_moments_v3_20261021.py": "73fff646de66d5ec36ce2d3376bea771b8fe2e74e5f2b55673d5f72b9e3c48e4"
+      },
+      "manifest_sha256": "1e20cce344a32cf379184988b5049e09e3abd1109a1b0f358611bc0585c0a131",
+      "ACT_verified_files": 16,
+      "ACT_bytes": 8929631,
+      "nodes": [
+        {
+          "node": 0,
+          "five_updates_full_state_exact": true,
+          "native_resume_next_step_exact": true,
+          "compared_tensor_fields": 109,
+          "max_absolute_error": 0.0,
+          "placement_events": 16,
+          "direct_zero_events": 8,
+          "native_resume_copy_events": 8,
+          "mmap_view_lifetime_checked": true
+        },
+        {
+          "node": 1,
+          "five_updates_full_state_exact": true,
+          "native_resume_next_step_exact": true,
+          "compared_tensor_fields": 109,
+          "max_absolute_error": 0.0,
+          "placement_events": 16,
+          "direct_zero_events": 8,
+          "native_resume_copy_events": 8,
+          "mmap_view_lifetime_checked": true
+        }
+      ],
+      "GPU_used": false,
+      "new_SFT_acceptance": false,
+      "formal_performance_evidence": false
+    },
+    "memory_comparisons": [
+      {
+        "node": 0,
+        "old_copy_peak_increase_bytes": 407814144,
+        "direct_zero_peak_increase_bytes": 273465344,
+        "observed_peak_reduction_bytes": 134348800,
+        "at_least_half_one_parameter_buffer_reduction": true
+      },
+      {
+        "node": 1,
+        "old_copy_peak_increase_bytes": 407814144,
+        "direct_zero_peak_increase_bytes": 273448960,
+        "observed_peak_reduction_bytes": 134365184,
+        "at_least_half_one_parameter_buffer_reduction": true
+      }
+    ],
+    "GPU_used": false,
+    "original73_sources_unchanged": true,
+    "new_candidate_7B_OOM_fixed": false,
+    "new_SFT_acceptance": false,
+    "formal_performance_evidence": false,
+    "ACT_verified_files": 113,
+    "ACT_bytes": 9363046,
+    "manifest_sha256": "1d8b890d1f1104c826cd15b8e906d728f6521f1ee8237db926df86add089d811"
+  },
+  "guarded_CPU_regression": {
+    "schema": "jiuge7b-sft-direct-zero-moments-CPU-regression-v3",
+    "passed": true,
+    "ACT_root": "/home/huids25/kda-jiuge-prep-20261014/sft-moment-direct-zero-preparation-20261021-01/guarded-regression-v2",
+    "source_sha256": {
+      "check_sft_moment_direct_zero_guard_v2_20261021.py": "76974ee5586c8ac4351f73f50a611fa3d29d28bc117a885a06790ce1093f322a",
+      "sft_local_moments_v3_20261021.py": "73fff646de66d5ec36ce2d3376bea771b8fe2e74e5f2b55673d5f72b9e3c48e4"
+    },
+    "manifest_sha256": "2ea670aace3d97d0b37fa6ddb04c0f74916e6a1632444257917d8fcf87abf4c2",
+    "ACT_verified_files": 16,
+    "ACT_bytes": 8928914,
+    "nodes": [
+      {
+        "node": 0,
+        "five_updates_full_state_exact": true,
+        "native_resume_next_step_exact": true,
+        "compared_tensor_fields": 109,
+        "max_absolute_error": 0.0,
+        "placement_events": 16,
+        "direct_zero_events": 8,
+        "native_resume_copy_events": 8,
+        "mmap_view_lifetime_checked": true
+      },
+      {
+        "node": 1,
+        "five_updates_full_state_exact": true,
+        "native_resume_next_step_exact": true,
+        "compared_tensor_fields": 109,
+        "max_absolute_error": 0.0,
+        "placement_events": 16,
+        "direct_zero_events": 8,
+        "native_resume_copy_events": 8,
+        "mmap_view_lifetime_checked": true
+      }
+    ],
+    "GPU_used": false,
+    "new_SFT_acceptance": false,
+    "formal_performance_evidence": false
+  },
+  "CPU_guard_fixture_reserve_bytes": 536870912,
+  "SFT_production_reserve_bytes": 8589934592,
+  "production8GiB_guard_correct_refusal_in_CPU16GiB_fixture_preserved": true,
+  "generated_program_probe": {
+    "passed": true,
+    "GPU_used": false,
+    "Torch_imported": false,
+    "fully_generated_launch_entry_controller_review_compile": true,
+    "production_reserve_bytes": 8589934592,
+    "insufficient_memory_rejected_before_allocation": true,
+    "rejected_invalid_live_receipts": [
+      "wrong-node",
+      "migration",
+      "old-copy-path",
+      "source-copy-bytes"
+    ],
+    "new_7B_SFT_acceptance": false,
+    "formal_performance_evidence": false
+  },
+  "ACT_source_snapshot": "/home/huids25/kda-jiuge-prep-20261014/sft-moment-direct-zero-preparation-20261021-01/source-proposal",
+  "manifest_sha256": "d765ffcefbd63340817c0e11c1d0f9e3e69b4e77833d8aa4eda1a29bfde909b3",
+  "new_GPU_allocation_submitted": false,
+  "new_7B_OOM_fixed": false,
+  "formal_performance_evidence": false
+}

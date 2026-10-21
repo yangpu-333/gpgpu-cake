@@ -1,0 +1,301 @@
+{
+  "schema": "jiuge7b-sft-paired-trace-delivery-verification-v1",
+  "passed": true,
+  "bundle": "/home/huids25/kda-jiuge-prep-20261014/sft-paired-trace-delivery-20261020-01/Jiuge7B-SFT-S2048-native-and-pinned-ABBA-traces.zip",
+  "bundle_bytes": 136655848,
+  "bundle_sha256": "702a18531f5d5325482ebe609fbe3a1117b58cd2a57b7859dcbe27a77bdcc5bc",
+  "verified_files": 285,
+  "verified_raw_traces": 16,
+  "compressed_and_decompressed_SHA_passed": true,
+  "bundle_downloaded_to_local": false,
+  "traces": [
+    {
+      "case": "sft-paired-trace-20261020-a1-native",
+      "arm": "native",
+      "tag": "a1",
+      "rank": 0,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-a1-native/window-01/rank-0.json.gz",
+      "compressed_sha256": "f74ec9f48a44d21caa1fc4786516556e2f875165ce76f3256a0e2a824ac26911",
+      "decompressed_sha256": "c71d50d3cf231be3d99e569be09233e1d7f8bc6f6d3b0a5b591c32bd1a8da7cb",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-paired-trace-20261020-a1-native",
+      "arm": "native",
+      "tag": "a1",
+      "rank": 1,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-a1-native/window-01/rank-1.json.gz",
+      "compressed_sha256": "b0a6e4b07e2c6cbfc612ff644611e77e2c43067cbbc9461740abde15b9d90beb",
+      "decompressed_sha256": "b3c32d1c024e4954d8070e066048a5c578cda0b0cc3f7803889f2047ea90a573",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-paired-trace-20261020-a1-native",
+      "arm": "native",
+      "tag": "a1",
+      "rank": 0,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-a1-native/window-02/rank-0.json.gz",
+      "compressed_sha256": "d8c28518675eadd67ece358382121f6c757a009aaa90882b49da706c52288813",
+      "decompressed_sha256": "32279560f4600d764036d068c94d6230676c66c9fee002f27522036dba606235",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-paired-trace-20261020-a1-native",
+      "arm": "native",
+      "tag": "a1",
+      "rank": 1,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-a1-native/window-02/rank-1.json.gz",
+      "compressed_sha256": "342734045192fd85cd26d98162d9f4fca6ed9dbf186fb7da7cf5228f4820d815",
+      "decompressed_sha256": "94363c0472a1d85b748108ea11af515d6d1939fccbdb6ede1abb162e0011f4fc",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-paired-trace-20261020-b1-optimized",
+      "arm": "optimized",
+      "tag": "b1",
+      "rank": 0,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-b1-optimized/window-01/rank-0.json.gz",
+      "compressed_sha256": "a19fedc930c2b81de97b578f35d1a0a79ca9f169a95a51397a35edf68110088f",
+      "decompressed_sha256": "b4f339099494dac32a81369781e950df6316b6e4884db4a1ed0c183e985cfbc9",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-paired-trace-20261020-b1-optimized",
+      "arm": "optimized",
+      "tag": "b1",
+      "rank": 1,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-b1-optimized/window-01/rank-1.json.gz",
+      "compressed_sha256": "b52c87252a364d539f0717304ea93893c23c3758b1ff2a9a7d2c2cac6047ea75",
+      "decompressed_sha256": "29b0708976fb1380d85d2d8e0b4fd610388398c5cf2afb77ba5d1eadc695e400",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-paired-trace-20261020-b1-optimized",
+      "arm": "optimized",
+      "tag": "b1",
+      "rank": 0,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-b1-optimized/window-02/rank-0.json.gz",
+      "compressed_sha256": "d4256a6e3c3477e1d983f649cef1efc1cdb987c6518cf5169654e21c350e5a5d",
+      "decompressed_sha256": "100d43cc8ebfa63270d3b106509f10ddccf8e6e607e752b084480f0a9fcad16e",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-paired-trace-20261020-b1-optimized",
+      "arm": "optimized",
+      "tag": "b1",
+      "rank": 1,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-b1-optimized/window-02/rank-1.json.gz",
+      "compressed_sha256": "f2fe55c59c8dcad75eb88362bc41664376b6aeb218ebd436c65c1e56dc34b0b0",
+      "decompressed_sha256": "a9f7b19e572dfa64cc9e9310e559ffc7e82923d34398e596f56d0919ff625d67",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-paired-trace-20261020-b2-optimized",
+      "arm": "optimized",
+      "tag": "b2",
+      "rank": 0,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-b2-optimized/window-01/rank-0.json.gz",
+      "compressed_sha256": "ada5a89cd9e19502be5d2ab92da24b77c2f2072bbd30496cea4736a9fb561e08",
+      "decompressed_sha256": "2c7935a8765befd560cc72f154d98e6d8554911ccdb42a062ab5ae2162b35e79",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-paired-trace-20261020-b2-optimized",
+      "arm": "optimized",
+      "tag": "b2",
+      "rank": 1,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-b2-optimized/window-01/rank-1.json.gz",
+      "compressed_sha256": "517f6004c3d9495279a2e46c474b2bf8d4b340f6f08dd46cea2a8cdddf880b5c",
+      "decompressed_sha256": "42fa5d7700961d59c3246e590f406038cc560ab926a8c450c73b1581ff592024",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-paired-trace-20261020-b2-optimized",
+      "arm": "optimized",
+      "tag": "b2",
+      "rank": 0,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-b2-optimized/window-02/rank-0.json.gz",
+      "compressed_sha256": "624bb724273fb627ef0e24ff486d031c7db535587e173eddca6c230a220a2f1a",
+      "decompressed_sha256": "37236380f1b01e9d9267850532c8ffa8b5e4616603e015c5862c7f04d259c40b",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-paired-trace-20261020-b2-optimized",
+      "arm": "optimized",
+      "tag": "b2",
+      "rank": 1,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-b2-optimized/window-02/rank-1.json.gz",
+      "compressed_sha256": "41748fb59863c371d00b8f01ea81c96a747cc3303a83596d474335cb93d16614",
+      "decompressed_sha256": "070b9a48e1df8e6e8b072de239ccf3b666177d329f9b12a77a5bbb112985cb83",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-paired-trace-20261020-a2-native",
+      "arm": "native",
+      "tag": "a2",
+      "rank": 0,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-a2-native/window-01/rank-0.json.gz",
+      "compressed_sha256": "3dd2a5c9267d1cdcda1df3f070962a114c0dcfadbd9e259cbe5076d2c835bf05",
+      "decompressed_sha256": "b0d54ce28c809c02cbee777cd10cc7b8929d392762d423502f04bc4ef8e0a645",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-paired-trace-20261020-a2-native",
+      "arm": "native",
+      "tag": "a2",
+      "rank": 1,
+      "window": "window-01",
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-a2-native/window-01/rank-1.json.gz",
+      "compressed_sha256": "dcca6fe360e6563f785bb7ebc332ef21c784d65fa5313e66cdb5a920239bc642",
+      "decompressed_sha256": "6ffa341f96704b4e8ea6192c89d8b0bf26aa394ea6b54bbc435ea4e2fa608f80",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-paired-trace-20261020-a2-native",
+      "arm": "native",
+      "tag": "a2",
+      "rank": 0,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-a2-native/window-02/rank-0.json.gz",
+      "compressed_sha256": "6ad02155462b296124b8a422afcd3c9a4d1df8d4567d0d28ff4451d158bb7cff",
+      "decompressed_sha256": "c79fb7ffa9280f537e6606d1a20ae35c2fe42ea3dbad20d3b2a97f6d3b93f5e2",
+      "NCCL_kernel_events": 922
+    },
+    {
+      "case": "sft-paired-trace-20261020-a2-native",
+      "arm": "native",
+      "tag": "a2",
+      "rank": 1,
+      "window": "window-02",
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "path_in_bundle": "runs/sft-paired-trace-20261020-a2-native/window-02/rank-1.json.gz",
+      "compressed_sha256": "758df64484a6302073fe4ba5e1fbbdf1d34c6d8491d45bf8c8dadbb58225237b",
+      "decompressed_sha256": "d8dd8cef7d65be986aab695b5923a35e6f7cdca6eda24c5567ab6896b6bc0e47",
+      "NCCL_kernel_events": 922
+    }
+  ]
+}

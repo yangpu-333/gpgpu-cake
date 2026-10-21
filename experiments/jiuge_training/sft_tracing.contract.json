@@ -1,0 +1,112 @@
+{
+  "schema": "jiuge7b-training-and-sft-tracing-contract-v1",
+  "date": "2026-10-17",
+  "delivery_deadline_assumption": "2026-10-18T00:00:00+08:00",
+  "target": "Actual Jiuge 9G7B_MHA full-parameter CPT and answer-only SFT stable whole-training-step timelines",
+  "model": {
+    "unique_parameters": 7668831744,
+    "layers": 28,
+    "hidden_size": 3584,
+    "ffn_size": 18944,
+    "attention_heads_and_KV_heads": 28,
+    "vocab_size": 73448,
+    "native_megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
+    "native_source_files_verified": 600,
+    "architecture_or_operator_optimization_in_this_capture": false
+  },
+  "configuration": {
+    "TP": 2,
+    "PP": 1,
+    "CP": 1,
+    "DP": 1,
+    "sequence_length": 2048,
+    "micro_batch_and_global_batch": 1,
+    "BF16_parameters_FP32_gradients_master_and_moments": true,
+    "native_AdamW_CPU_offload_fraction": 1.0,
+    "native_overlap_CPU_optimizer_D2H_H2D": true,
+    "OMP_threads_each_rank": 8,
+    "TF32": false,
+    "full_recompute_one_layer": true,
+    "dropout": 0,
+    "learning_rate": 1e-05,
+    "betas": [
+      0.9,
+      0.95
+    ],
+    "epsilon": 1e-08,
+    "weight_decay": 0.1,
+    "clip_grad": 1.0,
+    "seed": 63100
+  },
+  "dataset": {
+    "source": "https://github.com/Instruction-Tuning-with-GPT-4/GPT-4-LLM/blob/80cda626ea305004be42426671c66efebbf22144/data/alpaca_gpt4_data_zh.json",
+    "source_sha256": "6fcb98c6d79691d1f9a88ef513335da9124e7fdeef5103343f5d9f9a6e8f4903",
+    "records": 48818,
+    "CPT_and_SFT_tokens_bitwise_identical": true,
+    "CPT": "All document next-token labels supervised",
+    "SFT": "Instruction/input/prompt labels masked; answer and EOD supervised",
+    "layout": "Native GPTDataset dense causal document packing, no attention/position reset across documents",
+    "SFT_adapter": "External GPTDataset subclass reads parallel source-validated answer masks; native model, sampler, optimizer and pretrain_gpt.py remain frozen",
+    "native_packed_sft_flag": false,
+    "input_slots_and_supervised_target_counts_reported_separately": true
+  },
+  "gates": [
+    "Only assigned GPUs; no other compute processes on assigned cards",
+    "Three real non-skipped updates at S2048 for each task, actual 199 AdamW states/rank at step3",
+    "Reconstruct actual SFT batches from original documents; verify next-token shift, binary answer mask, causal attention, identical TP inputs",
+    "Same-allocation CPT/SFT profiles: 35 actual updates, discard20 warmup, capture21-25 and31-35 on both ranks",
+    "Verify compressed and decompressed trace SHA256, whole-window GPU drain, launch/kernel accounting, GPU NCCL presence",
+    "All ACT original archives hash-verified; local key-only budget64MiB per bundle"
+  ],
+  "allocation": {
+    "job": "sg-huids25-261017-e2bcb",
+    "node": "xfusion-2",
+    "GPUs": "2 A100, actual UUID and topology must be recorded by preflight",
+    "CPU": 16,
+    "memory_GiB": 224,
+    "memory_reason": "Original node temporarily unavailable; native S2048 profile previously sampled about192.4GiB. This is a fresh admission, not full-checkpoint-restore capacity certification.",
+    "shared_host_has_another_allocated_A100_job": true,
+    "GPU_ownership_isolation_required": true,
+    "CPU_or_host_memory_bandwidth_exclusive": false,
+    "max_charge_points": 0,
+    "startup_limit_seconds": 21600,
+    "platform_free_minutes": 720,
+    "stop_after_completion": true,
+    "keep_old_V100": true,
+    "image": "library/ubuntu:22.04",
+    "previous_image_pull_failed_job": "sg-huids25-261017-5453d; cancelled;0.00points;noGPUtraining",
+    "runtime": "Existing .venv Python3.12.14/Torch2.6.0+cu118;PYTHONPATH/PYTHONHOME cleared;no native code or optimizer changes",
+    "startup_command": "exec timeout --signal=KILL 21600 bash /home/huids25/kda-jiuge-prep-20261014/bootstrap_sft_ubuntu.sh",
+    "previous_image_pull_failed_jobs": [
+      "5453d:HEADmanifestEOF;stopped0points;deletedwithuserconfirmation",
+      "3879e:blobGETEOF;stopped0points;retainedrecord"
+    ],
+    "auto_run_and_exit": true,
+    "bootstrap": "Container-only officialUbuntuAPT systempackages;restoreauthorizedUID/GID;key-onlySSH;fixedexistingvenv;exacthostname/sourceSHAgate;independent6hcap"
+  },
+  "analysis": {
+    "priorities": [
+      "whole-step CPU/GPU phases",
+      "CPU AdamW and D2H/H2D",
+      "GPU compute/communication overlap",
+      "rank wait and collective signature candidates"
+    ],
+    "GPU_idle_and_nonoverlap_are_descriptive_proxies_not_causal_critical_path": true,
+    "CPU_and_GPU_ranges_not_additive": true,
+    "same_host_clock_common_base_preserved": true,
+    "native_collective_sequence_numbers_not_yet_verified": true,
+    "profiler_drop_count_unavailable": true,
+    "single_node_TP2_does_not_validate_multinode_or_DP_scaling": true
+  },
+  "formal_performance": {
+    "new_formal_speedup_claim_from_this_trace": false,
+    "previous_uniform_120step_20warmup_3seed_3arm_CV_repeat_gates_unchanged": true,
+    "NUMA_formal_campaign_postponed_for_trace_delivery": true,
+    "prior_pinned_repair_accepted_results_preserved": true
+  },
+  "storage": {
+    "raw": "/home/huids25/kda-jiuge-prep-20261014/ on ACT Ceph",
+    "local": "Only source, summaries, logs and hash receipts",
+    "single_human_report": "experiments/jiuge_training/README.md"
+  }
+}

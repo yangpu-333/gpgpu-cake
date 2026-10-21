@@ -1,0 +1,17 @@
+[
+  {
+    "Path": "E:\\code\\GPGPU\\experiments\\jiuge_training\\__pycache__",
+    "Bytes": 784957.0,
+    "Reason": "regenerable Python bytecode only"
+  },
+  {
+    "Path": "E:\\code\\GPGPU\\experiments\\jiuge_training\\results\\pinning-validation-20261015-01\\__pycache__",
+    "Bytes": 46260.0,
+    "Reason": "regenerable Python bytecode only"
+  },
+  {
+    "Path": "E:\\code\\GPGPU\\experiments\\jiuge_training\\results\\pinning-validation-20261015-02\\__pycache__",
+    "Bytes": 23203.0,
+    "Reason": "regenerable Python bytecode only"
+  }
+]

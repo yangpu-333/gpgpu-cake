@@ -1,0 +1,23 @@
+{
+  "schema": "jiuge7b-sft-paired-trace-contract-v1",
+  "purpose": "Compare accepted pinned-master repair with native answer-only SFT, emphasizing CPU AdamW, offload copies, compute/communication overlap and rank skew",
+  "model": "official 9G7B_MHA; 7668831744 unique parameters; native Megatron 5be9626709af2722333bf54797c954c09edeada3",
+  "fixed_training": "TP2 PP1 CP1 DP1; S2048; micro/global batch1; BF16 parameters; FP32 gradient/master/moments; 100 percent CPU AdamW offload with native D2H/H2D overlap; full one-layer uniform recompute; no dropout; seed63100; native Torch backend",
+  "data": "Chinese GPT4 Alpaca; exact accepted dense causal answer/EOD-only SFT mask; unchanged deterministic native sampler",
+  "case_order": ["native-a1", "optimized-b1", "optimized-b2", "native-a2"],
+  "steps_per_case": 35,
+  "capture_windows": [[21, 25], [31, 35]],
+  "ranks": [0, 1],
+  "expected_trace_files": 16,
+  "same_assigned_gpu_pair_across_cases": true,
+  "source_freeze_before_training": true,
+  "gpu_gate": "Refuse if assigned pair changes or any foreign compute process is present; never stop others",
+  "profiling": "Torch CPU+CUDA Kineto, symmetric host ranges, no shapes/stacks, whole-window boundary drain only, no extra per-step synchronization",
+  "verification": "600 native source files and real official weight-shard bytes; all 35 non-skipped updates; 199 master/moment states per rank; actual pinned0 native vs199 repaired; exact paired SFT sample/mask counts and all35 finite logged losses; compressed/decompressed trace SHA and launch/kernel correlation coverage",
+  "numeric_and_resume_acceptance": "Already closed in separate SFT campaign; unchanged patch/data/math. Profiling does not replace full-state/resume or formal timing acceptance",
+  "performance_acceptance_unchanged": "Earlier unprofiled three seeds x native/control/optimized x120 updates, exclude20, aligned slow-rank GPU-synchronized time.time, baseline CV>=10 percent triggers complete9-case repeat",
+  "profiling_durations_are_formal_speedup": false,
+  "analysis_limits": ["CPU phase ranges and device time are not additive", "Runtime API span is not independently proven exposed wait", "GPU idle/non-overlap are interval proxies, not hardware utilization or proven critical path", "Ordered collective signature matching is not verified native sequence numbering", "Single-node TP2 cannot establish multi-node behavior", "Torch collector drop count is unavailable"],
+  "storage": "Full raw traces, logs and manifests stay on ACT Ceph; local key export limit32MiB",
+  "resource": {"gpu_count": 2, "gpu_type": "A100", "cpu_cores": 16, "memory_gib": 300, "maximum_seconds": 10800, "maximum_charge_points": 0, "platform_free_minutes": 720, "stop_on_completion": true, "keep_old_V100": true}
+}

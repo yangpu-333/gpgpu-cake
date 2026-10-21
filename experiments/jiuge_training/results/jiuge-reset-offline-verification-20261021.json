@@ -1,0 +1,58 @@
+{
+  "schema": "jiuge7b-reset-local-offline-verification-v1",
+  "verified_utc": "2026-10-21T12:42:45.687597+00:00",
+  "passed": true,
+  "trace_delivery_bundles": [
+    {
+      "ACT": "/home/huids25/kda-jiuge-prep-20261014/sft-moment-screen-failure-20261021-01/Jiuge7B-SFT-local-moments-interrupted-OOM-evidence.zip",
+      "local": "E:\\code\\GPGPU\\experiments\\jiuge_training\\results\\reset-backup-20261021\\Jiuge7B-SFT-local-moments-interrupted-OOM-evidence.zip",
+      "bytes": 73324713,
+      "sha256": "9d93d18e8136ab1ce6fd0e371249aec9874ed835a0b3bac2b5d0290b7639a8b0"
+    },
+    {
+      "ACT": "/home/huids25/kda-jiuge-prep-20261014/sft-paired-trace-delivery-20261020-01/Jiuge7B-SFT-S2048-native-and-pinned-ABBA-traces.zip",
+      "local": "E:\\code\\GPGPU\\experiments\\jiuge_training\\results\\reset-backup-20261021\\Jiuge7B-SFT-S2048-native-and-pinned-ABBA-traces.zip",
+      "bytes": 136655848,
+      "sha256": "702a18531f5d5325482ebe609fbe3a1117b58cd2a57b7859dcbe27a77bdcc5bc"
+    },
+    {
+      "ACT": "/home/huids25/kda-jiuge-prep-20261014/sft-numa-delivery-20261021-02/Jiuge7B-SFT-S2048-pinned-NUMA-v2-traces.zip",
+      "local": "E:\\code\\GPGPU\\experiments\\jiuge_training\\results\\reset-backup-20261021\\Jiuge7B-SFT-S2048-pinned-NUMA-v2-traces.zip",
+      "bytes": 217181114,
+      "sha256": "f8b5580d224b030bfe1ae7c83f65e19cfff517e4ca92dd85f1a56571354a4684"
+    },
+    {
+      "ACT": "/home/huids25/kda-jiuge-prep-20261014/tracing-delivery-20261017-02/Jiuge7B-native-CPT-SFT-S2048-traces.zip",
+      "local": "E:\\code\\GPGPU\\experiments\\jiuge_training\\results\\reset-backup-20261021\\Jiuge7B-native-CPT-SFT-S2048-traces.zip",
+      "bytes": 67633445,
+      "sha256": "d7603aa99887f5c8eab117a8b4f4f42c553b0f6278a62c0a9c921d5187872921"
+    },
+    {
+      "ACT": "/home/huids25/kda-jiuge-prep-20261014/tracing-delivery-20261017-01/Jiuge7B-CPT-S2048-native-and-pinned-traces.zip",
+      "local": "E:\\code\\GPGPU\\experiments\\jiuge_training\\results\\reset-backup-20261021\\Jiuge7B-CPT-S2048-native-and-pinned-traces.zip",
+      "bytes": 67939630,
+      "sha256": "741169a78b1ca2f24127cf5d57f2b617f5867e0616df7e1be923d06aede0ec9b"
+    }
+  ],
+  "recovery_archive": {
+    "schema": "jiuge7b-reset-recovery-verification-v1",
+    "passed": true,
+    "ACT_bundle": "/home/huids25/kda-jiuge-prep-20261014/reset-recovery-20261021-01/Jiuge7B-source-dataset-CPU-fixtures-recovery.zip",
+    "bytes": 76662522,
+    "sha256": "ee958c47209d9ac080dc4a74948f4d936c65951c47fc9768a018b1ed51ba655c",
+    "verified_files": 3708,
+    "uncompressed_bytes": 247235601,
+    "local_bundle": "experiments\\jiuge_training\\results\\reset-backup-20261021\\Jiuge7B-source-dataset-CPU-fixtures-recovery.zip",
+    "local_SHA_verified": true
+  },
+  "archive_count": 6,
+  "verified_total_bytes": 639397272,
+  "recovery_member_sha_verified": 3708,
+  "frozen_candidate_sources_recoverable": 93,
+  "full_training_checkpoints_locally_backed_up": false,
+  "checkpoint_originals_location": "ACT shared Ceph;not container temporary directory",
+  "GPU_used": false,
+  "new_GPU_experiment_started": false,
+  "new_7B_OOM_fix_validated": false,
+  "formal_performance_evidence_for_new_candidate": false
+}

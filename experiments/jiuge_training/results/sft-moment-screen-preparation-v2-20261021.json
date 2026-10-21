@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "source_files": 73,
+  "original71_unchanged": true,
+  "GPU_training_started": false,
+  "ACT_snapshot": "/home/huids25/kda-jiuge-prep-20261014/sft-moment-placement-preparation-20261021-01/source-proposal-v2",
+  "manifest_sha256": "d874c4a97190e6b990852feb2a52357e497ee8a94c6b7d989ab85787690725c8"
+}

@@ -1,0 +1,14 @@
+{
+  "job": "sg-huids25-261021-ef034",
+  "status": "completed",
+  "points": 0,
+  "controller_exit_code": 0,
+  "container_exit_code": 0,
+  "container_exit_reason": "Completed",
+  "observed_utc": "2026-10-21T03:17:47.621943+00:00",
+  "source": "ACT rendered job page and container log via in-app browser",
+  "url": "https://crater.act.buaa.edu.cn/portal/jobs/detail/sg-huids25-261021-ef034?tab=base",
+  "screenshot": "sft-numa-v2-completed-zero-points-20261021.png",
+  "screenshot_sha256": "b7c516b31a28dd101c56b4e5ed4002ad8dfb017066f0c913c8036fd817521130",
+  "prior_V100_retained": true
+}

@@ -1,0 +1,301 @@
+{
+  "schema": "jiuge7b-sft-pinning-independent-completion-review-v1",
+  "utc": "2026-10-20T12:01:24.219827+00:00",
+  "all_validation_stages_completed": true,
+  "formal_performance_passed": true,
+  "rounds": [
+    {
+      "round": "primary",
+      "arms": {
+        "native": {
+          "mean_seconds_per_step": 6.563319898446401,
+          "aggregate_input_token_slots_per_second": 312.0372055131399,
+          "aggregate_supervised_answer_targets_per_second": 263.3306558381291
+        },
+        "control": {
+          "mean_seconds_per_step": 6.474713263511657,
+          "aggregate_input_token_slots_per_second": 316.30744353445493,
+          "aggregate_supervised_answer_targets_per_second": 266.93434334356164
+        },
+        "optimized": {
+          "mean_seconds_per_step": 3.412721984386444,
+          "aggregate_input_token_slots_per_second": 600.1074829329233,
+          "aggregate_supervised_answer_targets_per_second": 506.43543225630197
+        }
+      },
+      "formal_logged_loss_checks": [
+        {
+          "arm": "native",
+          "seed": 63100,
+          "intervals": 13,
+          "regular_intervals": 12,
+          "logged_iterations": [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          "extra_first_step_checked": true,
+          "logged_loss_max_abs": 0.0,
+          "passed": true,
+          "scope": "posthoc aggregate loss check; no extra synchronization or GPU capture"
+        },
+        {
+          "arm": "native",
+          "seed": 63101,
+          "intervals": 13,
+          "regular_intervals": 12,
+          "logged_iterations": [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          "extra_first_step_checked": true,
+          "logged_loss_max_abs": 0.0,
+          "passed": true,
+          "scope": "posthoc aggregate loss check; no extra synchronization or GPU capture"
+        },
+        {
+          "arm": "native",
+          "seed": 63102,
+          "intervals": 13,
+          "regular_intervals": 12,
+          "logged_iterations": [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          "extra_first_step_checked": true,
+          "logged_loss_max_abs": 0.0,
+          "passed": true,
+          "scope": "posthoc aggregate loss check; no extra synchronization or GPU capture"
+        },
+        {
+          "arm": "control",
+          "seed": 63100,
+          "intervals": 13,
+          "regular_intervals": 12,
+          "logged_iterations": [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          "extra_first_step_checked": true,
+          "logged_loss_max_abs": 0.0,
+          "passed": true,
+          "scope": "posthoc aggregate loss check; no extra synchronization or GPU capture"
+        },
+        {
+          "arm": "control",
+          "seed": 63101,
+          "intervals": 13,
+          "regular_intervals": 12,
+          "logged_iterations": [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          "extra_first_step_checked": true,
+          "logged_loss_max_abs": 0.0,
+          "passed": true,
+          "scope": "posthoc aggregate loss check; no extra synchronization or GPU capture"
+        },
+        {
+          "arm": "control",
+          "seed": 63102,
+          "intervals": 13,
+          "regular_intervals": 12,
+          "logged_iterations": [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          "extra_first_step_checked": true,
+          "logged_loss_max_abs": 0.0,
+          "passed": true,
+          "scope": "posthoc aggregate loss check; no extra synchronization or GPU capture"
+        },
+        {
+          "arm": "optimized",
+          "seed": 63100,
+          "intervals": 13,
+          "regular_intervals": 12,
+          "logged_iterations": [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          "extra_first_step_checked": true,
+          "logged_loss_max_abs": 0.0,
+          "passed": true,
+          "scope": "posthoc aggregate loss check; no extra synchronization or GPU capture"
+        },
+        {
+          "arm": "optimized",
+          "seed": 63101,
+          "intervals": 13,
+          "regular_intervals": 12,
+          "logged_iterations": [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          "extra_first_step_checked": true,
+          "logged_loss_max_abs": 0.0,
+          "passed": true,
+          "scope": "posthoc aggregate loss check; no extra synchronization or GPU capture"
+        },
+        {
+          "arm": "optimized",
+          "seed": 63102,
+          "intervals": 13,
+          "regular_intervals": 12,
+          "logged_iterations": [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          "extra_first_step_checked": true,
+          "logged_loss_max_abs": 0.0,
+          "passed": true,
+          "scope": "posthoc aggregate loss check; no extra synchronization or GPU capture"
+        }
+      ],
+      "schema": "jiuge7b-pinning-formal-round-v1",
+      "seed_mean_cv": {
+        "native": 0.016615676088611437,
+        "control": 0.004121553899155234,
+        "optimized": 0.09235236420146993
+      },
+      "vs_native": {
+        "seed_throughput_ratios": [
+          1.7362090083618429,
+          2.1322519630722727,
+          1.9375653599486875
+        ],
+        "geomean_throughput_ratio": 1.9285561884581284,
+        "all_seeds_faster": true
+      },
+      "vs_control": {
+        "seed_throughput_ratios": [
+          1.735872221113173,
+          2.106775028787087,
+          1.8834958887353659
+        ],
+        "geomean_throughput_ratio": 1.9026848667698706,
+        "all_seeds_faster": true
+      },
+      "gain_vs_control": 0.9026848667698706,
+      "round_promotion_passed": true,
+      "repeat_required": false,
+      "all_expected_cases_verified": true,
+      "formal_performance_passed": false,
+      "note": "Round result only. Final promotion also requires any predeclared independent repeat."
+    }
+  ],
+  "repeat_performed": false,
+  "primary_full_numeric_and_resume_verified": true,
+  "semantic_source_reconstruction_verified": true,
+  "maximum_numeric_error": 0.0,
+  "ACT_unique_original_chunks_verified": 18601,
+  "verified_local_key_files": 726,
+  "verified_local_key_bytes": 34398873,
+  "local_large_raw_copy": false,
+  "formal_throughput_unit": "input token slots/s;2048perstep;notTPsum",
+  "old_CPT_84_4_percent_reused_as_SFT_result": false,
+  "exact_original_physical_GPU_pair_preserved": true,
+  "complete_SFT_parent_reused_without_CPT_numeric_references": true,
+  "resource_handoff_only_no_mathematical_or_timing_standard_change": true,
+  "postprocessing_recovery": "Megatron logs iteration1 in addition to 10..120; all13 checked",
+  "failed_original_review_preserved": true,
+  "existing_extracted_keys_reverified_without_overwrite": true
+}

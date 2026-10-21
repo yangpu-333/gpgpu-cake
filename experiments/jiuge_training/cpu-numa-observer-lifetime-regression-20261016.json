@@ -1,0 +1,37 @@
+{
+  "schema": "jiuge7b-observer-lifetime-regression-v1",
+  "passed": true,
+  "rows": [
+    {
+      "entry": "numa_entry.py",
+      "initialization_dummy_update": false,
+      "replaced_optimizer_collected_before_real_update": false,
+      "active_optimizer_collected_after_model_release": false
+    },
+    {
+      "entry": "numa_entry.py",
+      "initialization_dummy_update": true,
+      "replaced_optimizer_collected_before_real_update": false,
+      "active_optimizer_collected_after_model_release": false
+    },
+    {
+      "entry": "numa_observation_v2_entry.py",
+      "initialization_dummy_update": false,
+      "replaced_optimizer_collected_before_real_update": true,
+      "active_optimizer_collected_after_model_release": true
+    },
+    {
+      "entry": "numa_observation_v2_entry.py",
+      "initialization_dummy_update": true,
+      "replaced_optimizer_collected_before_real_update": true,
+      "active_optimizer_collected_after_model_release": true
+    }
+  ],
+  "source_sha256": {
+    "numa_entry.py": "4a72c1ea74875e2b1fa42537f7576262c7ed971f2e516fb7dbf7e1dbb19687b0",
+    "numa_observation_v2_entry.py": "eb02bbaa11ddb33c68de8797b29b7f68623ecbaf703d8d2a9c48813e83e38281",
+    "numa_placement.py": "82021bc6c0eb4337ed9699c9ecc7cc57e07af4a401d46bc4edb94a8b778c4b0a",
+    "check_numa_observer_lifetime.py": "70d4132ec45102ed8ea0b67251d2c5fa31334e653e16b9d4a3c67f8fd0f81790"
+  },
+  "scope": "Actual entry hooks with simulated optimizer replacement; no Torch/CUDA, numeric or performance proof."
+}

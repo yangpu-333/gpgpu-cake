@@ -1,0 +1,23 @@
+{
+  "schema": "jiuge7b-sft-local-moments-platform-failure-v1",
+  "verified_utc": "2026-10-21T11:08:57.280259+00:00",
+  "job": "sg-huids25-261021-95919",
+  "status": "failed",
+  "platform_reason": "OOMKilled",
+  "exit_code": 137,
+  "charge_points": 0,
+  "platform_run_time_display": "29 minutes",
+  "platform_peak_CPU_memory_display_GB": 265.12,
+  "peak_metric_is_sampled_not_OOM_limit": true,
+  "max_memory_bytes": 322123595776,
+  "completed_cases": 2,
+  "raw_traces_in_completed_cases": 8,
+  "failed_case": "sft-moment-screen-20261021-c1-local-moments",
+  "candidate_first_update_completed": false,
+  "six_case_screen_completed": false,
+  "new_SFT_acceptance": false,
+  "formal_performance_evidence": false,
+  "no_new_resources_without_authorization": true,
+  "keep_old_V100": true,
+  "screenshot": "sft-local-moments-R2-OOM-zero-points-20261021.png"
+}

@@ -1,0 +1,35 @@
+{
+  "schema": "jiuge7b-sft-local-moments-CPU-regression-v1",
+  "passed": true,
+  "ACT_root": "/home/huids25/kda-jiuge-prep-20261014/sft-moment-placement-preparation-20261021-01/cpu-regression",
+  "source_sha256": {
+    "check_sft_local_moments_20261021.py": "6cd4dc7b695f4f7fd8fe62fbdee315f03886ae846b0744e3c2a187c0fcfc09f0",
+    "sft_local_moments_20261021.py": "6ce5438aff739e7cf4140ed25ee5fef73460c0b2fd16aa59abead5723dbcf279"
+  },
+  "manifest_sha256": "3d807993fe0f645db4feb06b83e685bd4d338a018b33e9f2af059cc6c8a8119b",
+  "ACT_verified_files": 16,
+  "ACT_bytes": 8929547,
+  "nodes": [
+    {
+      "node": 0,
+      "five_updates_full_state_exact": true,
+      "native_resume_next_step_exact": true,
+      "compared_tensor_fields": 109,
+      "max_absolute_error": 0.0,
+      "placement_events": 16,
+      "mmap_view_lifetime_checked": true
+    },
+    {
+      "node": 1,
+      "five_updates_full_state_exact": true,
+      "native_resume_next_step_exact": true,
+      "compared_tensor_fields": 109,
+      "max_absolute_error": 0.0,
+      "placement_events": 16,
+      "mmap_view_lifetime_checked": true
+    }
+  ],
+  "GPU_used": false,
+  "new_SFT_acceptance": false,
+  "formal_performance_evidence": false
+}

@@ -1,0 +1,136 @@
+{
+  "schema": "jiuge7b-CPT-SFT-independent-key-review-v1",
+  "utc": "2026-10-17T14:02:02.211016+00:00",
+  "passed": true,
+  "local_bundle_sha256": "7bf30f0d05cbc62c235853d5188bc1668066e337e1db0e262dabd592fadf6bc7",
+  "cases": [
+    {
+      "case": "sft-native-admission-20261017-01",
+      "updates_each_rank": 3,
+      "ACT_primary_verified_files": 39,
+      "ACT_primary_verified_bytes": 26032999
+    },
+    {
+      "case": "sft-native-profile-20261017-01",
+      "updates_each_rank": 35,
+      "ACT_primary_verified_files": 42,
+      "ACT_primary_verified_bytes": 33895040
+    },
+    {
+      "case": "cpt-native-admission-20261017-01",
+      "updates_each_rank": 3,
+      "ACT_primary_verified_files": 29,
+      "ACT_primary_verified_bytes": 26017688
+    },
+    {
+      "case": "cpt-native-profile-20261017-01",
+      "updates_each_rank": 35,
+      "ACT_primary_verified_files": 34,
+      "ACT_primary_verified_bytes": 33889159
+    }
+  ],
+  "tasks": [
+    {
+      "objective": "CPT",
+      "ranges_across_two_windows_two_ranks": {
+        "host_optimizer_offload_seconds_per_step": {
+          "min": 3.4535424438,
+          "max": 4.3140181268
+        },
+        "host_optimizer_offload_window_fraction": {
+          "min": 0.5585516200688322,
+          "max": 0.6390695100675758
+        },
+        "GPU_compute_seconds_per_step": {
+          "min": 0.6926149113769531,
+          "max": 0.7405480862304687
+        },
+        "GPU_compute_window_fraction": {
+          "min": 0.10310226358363134,
+          "max": 0.12084574378652599
+        },
+        "GPU_memcpy_seconds_per_step": {
+          "min": 2.235773347607422,
+          "max": 2.521872134619141
+        },
+        "GPU_NCCL_seconds_per_step": {
+          "min": 0.19694077451171876,
+          "max": 1.3294599450683593
+        },
+        "NCCL_overlap_with_compute_fraction": {
+          "min": 0.03827235041831167,
+          "max": 0.24024510985660374
+        },
+        "GPU_idle_proxy_fraction": {
+          "min": 0.3198162036692787,
+          "max": 0.45389542364458707
+        }
+      },
+      "largest_ordered_signature_start_skew_candidate_seconds": 1.4780819689941407,
+      "native_collective_sequence_verified": false,
+      "recorded_HtoD_Pageable_GiB_each_rank_step_window01": 14.284692788124085,
+      "input_slots_per_window_not_summed_across_TP": 10240,
+      "supervised_targets_per_window": [
+        10240,
+        10240
+      ],
+      "sampled_memory_peak_GiB": 187.73279571533203
+    },
+    {
+      "objective": "SFT",
+      "ranges_across_two_windows_two_ranks": {
+        "host_optimizer_offload_seconds_per_step": {
+          "min": 3.0274714476,
+          "max": 3.5939541952
+        },
+        "host_optimizer_offload_window_fraction": {
+          "min": 0.5882832046975264,
+          "max": 0.6777306290744392
+        },
+        "GPU_compute_seconds_per_step": {
+          "min": 0.6986108973632813,
+          "max": 0.7134338146484375
+        },
+        "GPU_compute_window_fraction": {
+          "min": 0.13453592387193883,
+          "max": 0.13776459001524194
+        },
+        "GPU_memcpy_seconds_per_step": {
+          "min": 1.9705540064453124,
+          "max": 2.241950173730469
+        },
+        "GPU_NCCL_seconds_per_step": {
+          "min": 0.3193914532226563,
+          "max": 0.8129492565917968
+        },
+        "NCCL_overlap_with_compute_fraction": {
+          "min": 0.05729604657254186,
+          "max": 0.15689392929118734
+        },
+        "GPU_idle_proxy_fraction": {
+          "min": 0.3318270653260822,
+          "max": 0.392211997947122
+        }
+      },
+      "largest_ordered_signature_start_skew_candidate_seconds": 0.9724839541015625,
+      "native_collective_sequence_verified": false,
+      "recorded_HtoD_Pageable_GiB_each_rank_step_window01": 14.284692788124085,
+      "input_slots_per_window_not_summed_across_TP": 10240,
+      "supervised_targets_per_window": [
+        8783,
+        8748
+      ],
+      "sampled_memory_peak_GiB": 175.5342559814453
+    }
+  ],
+  "source_files_verified": 24,
+  "raw_traces_verified_on_ACT": 8,
+  "ACT_primary_verified_files": 144,
+  "ACT_primary_verified_bytes": 119834886,
+  "full_raw_originals_downloaded": false,
+  "full_gradient_optimizer_equivalence_claimed": false,
+  "formal_speedup_evidence": false,
+  "causal_critical_path_proven": false,
+  "raw_bundle": "/home/huids25/kda-jiuge-prep-20261014/tracing-delivery-20261017-02/Jiuge7B-native-CPT-SFT-S2048-traces.zip",
+  "raw_bundle_sha256": "d7603aa99887f5c8eab117a8b4f4f42c553b0f6278a62c0a9c921d5187872921"
+}

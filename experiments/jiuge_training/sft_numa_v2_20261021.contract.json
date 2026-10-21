@@ -1,0 +1,70 @@
+{
+  "schema": "jiuge7b-sft-numa-diagnostic-contract-v2",
+  "purpose": "Isolate CPU placement, actual buffer NUMA location and rank imbalance after the accepted pinned-memory repair",
+  "baseline": "Accepted pinned FP32 CPU masters with unchanged unbound worker affinity; NOT original pageable masters",
+  "fixed": "Official full 9G7B_MHA weights; native Megatron 5be9626; answer/EOD-only Chinese Alpaca SFT; TP2 S2048 BF16; FP32 gradients/master/Adam moments; full recompute; 100% CPU AdamW offload; OMP8 per rank; all accepted hyperparameters unchanged",
+  "policies": {
+    "unbound": "No affinity mutation; same wrapper and observer",
+    "gpu-local8": "Eight distinct allowed physical cores per rank on its actual GPU NUMA node; ranks use disjoint cores even when both GPUs share one node",
+    "socket-split8": "Eight physical cores per rank on different NUMA nodes, minimizing remote-GPU ranks; omit when identical to gpu-local8"
+  },
+  "forbidden": [
+    "Infer GPU NUMA node from rank",
+    "Count SMT siblings as distinct physical cores",
+    "Change global memory policy or migrate pages",
+    "Reuse CPT tensors as SFT reference",
+    "Treat diagnostic timing as formal speedup"
+  ],
+  "order_with_two_distinct_candidates": [
+    "unbound-a1",
+    "gpu-local8-b1",
+    "socket-split8-c1",
+    "socket-split8-c2",
+    "gpu-local8-b2",
+    "unbound-a2"
+  ],
+  "order_with_one_distinct_candidate": [
+    "unbound-a1",
+    "gpu-local8-b1",
+    "gpu-local8-b2",
+    "unbound-a2"
+  ],
+  "steps": 35,
+  "seed": 63100,
+  "trace_windows": [
+    [
+      21,
+      25
+    ],
+    [
+      31,
+      35
+    ]
+  ],
+  "observations": "Actual master/gradient/moment sampled page locations and all worker affinities after step1 and after step35, outside trace windows; weak optimizer reference only",
+  "checks": "Frozen source/official weight bytes; actual 35 updates and all199 optimizer groups per rank; all199 masters remain pinned; identical paired35 sample IDs, mask counts and finite logged losses; raw compressed/decompressed trace SHA; symmetric995 AdamW function ranges per five-step window/rank; actual topology and affinity receipts",
+  "communication_limits": "NCCL interval and ordered-signature rank-skew candidates only; native sequence and causal critical path remain unverified unless separately established",
+  "next_gate": "Only a candidate that beats both fresh unbound observations advances to new full-state SFT numeric/resume verification. Earlier CPT validation and profile timing do not substitute for SFT acceptance.",
+  "formal_standard_unchanged": "Three seeds; baseline/no-op-control/candidate rotated;120 updates exclude20; GPU-synchronized native time.time; aligned slow-rank; >1% paired geomean over control, all seeds faster; native/control CV>=10% triggers one complete9-case repeat; no profiler or intrusive observer during formal",
+  "resource": {
+    "gpus": 2,
+    "gpu_type": "A100",
+    "cpu": 16,
+    "memory_gib": 300,
+    "maximum_seconds": 10800,
+    "maximum_charge_points": 0,
+    "free_window_minutes": 720,
+    "exit_on_completion": true,
+    "keep_old_V100": true
+  },
+  "gates": "Assigned two-GPU identities fixed across all cases; refuse foreign compute before/after every case; shared experiment lock; independent process timeout and absolute deadline; source SHA freeze before any GPU launch",
+  "storage": {
+    "raw": "ACT persistent Ceph only",
+    "local": "Bounded key results at most32MiB; no raw tensor/checkpoint/trace bodies"
+  },
+  "formal_performance_passed": false,
+  "metadata_gate_repair": "Native TP rank0 reads35 dataset batches; TP rank1 receives native broadcast and has zero local dataset rows. Receiver raw tensor equality is not newly claimed by profiling.",
+  "original_failed_attempt": "Preserve V1 controller failure,53 frozen sources and successful first35-step baseline/4traces; no overwrite or reuse in the primary fresh six-run comparison.",
+  "absolute_stop_before_epoch": 1792558731,
+  "new_resource_approval_required": true
+}

@@ -1,0 +1,209 @@
+{
+  "schema": "jiuge7b-sft-full-native-checkpoint-resume-milestone-v1",
+  "utc": "2026-10-20T07:13:07.118584+00:00",
+  "controller_phase": "hash-native-SFT-checkpoint",
+  "error": null,
+  "all_resume_numeric_passed": true,
+  "resumes": [
+    {
+      "schema": "jiuge7b-native-checkpoint-resume-audit-v1",
+      "rank": 0,
+      "restored_iteration": 2,
+      "completed_steps": [
+        3
+      ],
+      "runs": [
+        {
+          "arm": "resume-restored",
+          "fields": 995,
+          "expected_fields": 995,
+          "complete": true,
+          "numerical_passed": true,
+          "max_abs": 0
+        },
+        {
+          "arm": "resume-next-step",
+          "fields": 1195,
+          "expected_fields": 1195,
+          "complete": true,
+          "numerical_passed": true,
+          "max_abs": 0
+        }
+      ],
+      "passed": true,
+      "native_checkpoint_loader_used": true,
+      "formal_performance_passed": false
+    },
+    {
+      "schema": "jiuge7b-native-checkpoint-resume-audit-v1",
+      "rank": 1,
+      "restored_iteration": 2,
+      "completed_steps": [
+        3
+      ],
+      "runs": [
+        {
+          "arm": "resume-restored",
+          "fields": 995,
+          "expected_fields": 995,
+          "complete": true,
+          "numerical_passed": true,
+          "max_abs": 0
+        },
+        {
+          "arm": "resume-next-step",
+          "fields": 1195,
+          "expected_fields": 1195,
+          "complete": true,
+          "numerical_passed": true,
+          "max_abs": 0
+        }
+      ],
+      "passed": true,
+      "native_checkpoint_loader_used": true,
+      "formal_performance_passed": false
+    }
+  ],
+  "semantic_gate": {
+    "schema": "jiuge7b-pinning-semantics-verification-v1",
+    "root": "/home/huids25/kda-jiuge-prep-20261014/sft-pinning-validation-20261020-01/semantics",
+    "runs": [
+      {
+        "arm": "control",
+        "rank": 0,
+        "native_steps": [
+          1,
+          2,
+          3
+        ],
+        "per_token_loss_max_abs": 0,
+        "inputs_masks_scheduler_exact": true,
+        "rng_exact_checked": true,
+        "passed": true
+      },
+      {
+        "arm": "optimized",
+        "rank": 0,
+        "native_steps": [
+          1,
+          2,
+          3
+        ],
+        "per_token_loss_max_abs": 0,
+        "inputs_masks_scheduler_exact": true,
+        "rng_exact_checked": true,
+        "passed": true
+      },
+      {
+        "arm": "native-checkpoint-save",
+        "rank": 0,
+        "native_steps": [
+          1,
+          2
+        ],
+        "per_token_loss_max_abs": 0,
+        "inputs_masks_scheduler_exact": true,
+        "rng_exact_checked": true,
+        "passed": true
+      },
+      {
+        "arm": "native-resume-vs-continuous",
+        "rank": 0,
+        "native_steps": [
+          3
+        ],
+        "per_token_loss_max_abs": 0,
+        "inputs_masks_scheduler_exact": true,
+        "rng_exact_checked": false,
+        "passed": true,
+        "reason": "CPU DataLoader iterator startup is separately observed; exact RNG restoration and same-restart RNG remain required"
+      },
+      {
+        "arm": "optimized-vs-native-resume",
+        "rank": 0,
+        "native_steps": [
+          3
+        ],
+        "per_token_loss_max_abs": 0,
+        "inputs_masks_scheduler_exact": true,
+        "rng_exact_checked": true,
+        "passed": true
+      },
+      {
+        "arm": "control",
+        "rank": 1,
+        "native_steps": [
+          1,
+          2,
+          3
+        ],
+        "per_token_loss_max_abs": 0,
+        "inputs_masks_scheduler_exact": true,
+        "rng_exact_checked": true,
+        "passed": true
+      },
+      {
+        "arm": "optimized",
+        "rank": 1,
+        "native_steps": [
+          1,
+          2,
+          3
+        ],
+        "per_token_loss_max_abs": 0,
+        "inputs_masks_scheduler_exact": true,
+        "rng_exact_checked": true,
+        "passed": true
+      },
+      {
+        "arm": "native-checkpoint-save",
+        "rank": 1,
+        "native_steps": [
+          1,
+          2
+        ],
+        "per_token_loss_max_abs": 0,
+        "inputs_masks_scheduler_exact": true,
+        "rng_exact_checked": true,
+        "passed": true
+      },
+      {
+        "arm": "native-resume-vs-continuous",
+        "rank": 1,
+        "native_steps": [
+          3
+        ],
+        "per_token_loss_max_abs": 0,
+        "inputs_masks_scheduler_exact": true,
+        "rng_exact_checked": false,
+        "passed": true,
+        "reason": "CPU DataLoader iterator startup is separately observed; exact RNG restoration and same-restart RNG remain required"
+      },
+      {
+        "arm": "optimized-vs-native-resume",
+        "rank": 1,
+        "native_steps": [
+          3
+        ],
+        "per_token_loss_max_abs": 0,
+        "inputs_masks_scheduler_exact": true,
+        "rng_exact_checked": true,
+        "passed": true
+      }
+    ],
+    "passed": true,
+    "full_model_native_checkpoint_resume_verified": true,
+    "tp_actual_inputs_equal": true,
+    "comparison_dtype": "CPU float64",
+    "atol": 0.0003,
+    "rtol": 0.001,
+    "formal_performance_passed": false,
+    "objective": "answer_only_SFT",
+    "sft_mask_gate": true,
+    "sft_data_receipt_sha256": "1e30f6af3c21d31ee6fae117bfec9c25120bb1b14fe86d815d4f059fdc7a8d08"
+  },
+  "checkpoint_SHA_gate_closed": false,
+  "primary_raw_SHA_gate_closed": false,
+  "formal_performance_started": false,
+  "raw_originals_downloaded_to_local": false
+}

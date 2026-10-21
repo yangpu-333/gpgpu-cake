@@ -1,0 +1,211 @@
+{
+  "schema": "jiuge-kda-training-v1",
+  "created_on": "2026-10-14",
+  "status": "draft_inputs_and_load_validation_required",
+  "goal": "Validate native versus optimized continued pretraining and full-parameter SFT of the selected real Jiuge 8B checkpoint on Iluvatar",
+  "reference": {
+    "project_document": "https://buaa-ci-lab.feishu.cn/docx/K6LkdtN0Uow152xW9JKcyfRIn0X",
+    "document_revision": 2288,
+    "model_repository": "https://www.osredm.com/jiuyuan/CPM-9G-8B",
+    "legacy_master_commit": "d0e90e99ff6e34c58a088b9cb052db92a6afffb3",
+    "current_default_commit": "bdec452e7e21ce4dde2533cff206d0991079fa1d",
+    "registry_candidate": "Jiuge/9G8B_thinking",
+    "registry_files_observation": "The ACT file page reports resource files unavailable in storage; checkpoint readability and version are unverified",
+    "public_model_reference": {
+      "archive_url": "https://thunlp-model.oss-cn-wulanchabu.aliyuncs.com/9g_8b_v2_thinking.tar",
+      "architecture": "dense",
+      "parameter_elements": 8185253888,
+      "model": {
+        "num_layers": 32,
+        "hidden_size": 4096,
+        "ffn_hidden_size": 16384,
+        "num_attention_heads": 32,
+        "num_query_groups": 2,
+        "head_dim": 128,
+        "vocab_size": 73448,
+        "rms_norm_eps": 1e-06,
+        "position_embedding_type": "longrope",
+        "max_position_embeddings": 65536,
+        "scale_emb": 12,
+        "scale_depth": 1.4,
+        "dim_model_base": 256,
+        "residual_branch_multiplier": 0.2474873734152916,
+        "hidden_multiplier_before_lm_head": 0.0625,
+        "tie_word_embeddings": false
+      },
+      "config_sha256": "2b48373caf9dc54e3b3bf451079050f79a8cbb00042b05ab3b84ae0192c7cc43",
+      "four_shard_json_headers_verified": true,
+      "full_checkpoint_verified": false,
+      "ACT_registry_content_match_verified": false
+    }
+  },
+  "framework": {
+    "name": "Megatron-LM",
+    "commit": "5be9626709af2722333bf54797c954c09edeada3",
+    "checkout_path": "/tmp/kda-bf16-continuation/megatron-native-5be9626",
+    "source_manifest_sha256": "a72ded960488d399ded2255ef55f357257e03532b8fa21a06d958170c5c98c2d",
+    "native_backend": "Megatron local implementation with vendor Torch; Jiuge semantic bridge pending",
+    "conversion_code_sha256": null
+  },
+  "model": {
+    "checkpoint_variant": null,
+    "checkpoint_path": null,
+    "checkpoint_manifest_sha256": null,
+    "config_path": null,
+    "config_sha256": null,
+    "tokenizer_path": null,
+    "tokenizer_manifest_sha256": null,
+    "architecture": null,
+    "num_parameters": null,
+    "num_layers": null,
+    "hidden_size": null,
+    "ffn_hidden_size": null,
+    "num_attention_heads": null,
+    "num_query_groups": null,
+    "vocab_size": null,
+    "position_embedding_type": null,
+    "checkpoint_conversion_and_loading_verified": false
+  },
+  "runtime": {
+    "gpu_model": "Iluvatar BI-V150",
+    "corex_version": "4.2.0",
+    "torch_version": "2.4.1+corex.4.2.0",
+    "triton_version": "2.1.0+corex.4.2.0",
+    "container_identifier": null,
+    "persistent_evidence_root": "/private/kda-jiuge-prepare-20261014"
+  },
+  "topology": {
+    "pilot_tp": null,
+    "pilot_pp": null,
+    "pilot_dp": null,
+    "available_gpus": 2,
+    "memory_strategy": null,
+    "fit_verified": false,
+    "project_target_interpretation": {
+      "tp": 8,
+      "pp": 4,
+      "dp": 2,
+      "world_size": 64,
+      "kv_replication_supported_by_pinned_config": true
+    },
+    "project_target_resources_confirmed": false
+  },
+  "tasks": {
+    "continued_pretraining": {
+      "dataset_path": null,
+      "dataset_manifest_sha256": null,
+      "preprocessing_code_sha256": null,
+      "sequence_length": null,
+      "micro_batch_size": null,
+      "global_batch_size": null,
+      "optimizer": null,
+      "optimizer_config_sha256": null,
+      "precision": null,
+      "activation_recompute": null,
+      "offload_strategy": null,
+      "training_argv": null,
+      "mock_data": false
+    },
+    "sft": {
+      "method": "full_parameter_sft",
+      "dataset_path": null,
+      "dataset_manifest_sha256": null,
+      "preprocessing_code_sha256": null,
+      "loss_mask_code_sha256": null,
+      "sequence_length": null,
+      "micro_batch_size": null,
+      "global_batch_size": null,
+      "optimizer": null,
+      "optimizer_config_sha256": null,
+      "precision": null,
+      "activation_recompute": null,
+      "offload_strategy": null,
+      "training_argv": null,
+      "mock_data": false
+    }
+  },
+  "benchmark": {
+    "correctness_steps": 3,
+    "comparison_dtype": "CPU float64",
+    "atol": 0.0003,
+    "rtol": 0.001,
+    "formal_timer": "native GPU-synchronized time.time",
+    "steps_per_process": 120,
+    "excluded_initial_steps": 20,
+    "retained_interval_steps": 10,
+    "independent_seeds": 3,
+    "arms": [
+      "native",
+      "control",
+      "optimized"
+    ],
+    "rotated_arm_orders": [
+      [
+        "native",
+        "control",
+        "optimized"
+      ],
+      [
+        "optimized",
+        "control",
+        "native"
+      ],
+      [
+        "control",
+        "native",
+        "optimized"
+      ]
+    ],
+    "promotion_gain_vs_control_strictly_greater_than": 0.01,
+    "all_seeds_faster_vs_control_required": true,
+    "native_or_control_cv_repeat_trigger": 0.1,
+    "full_raw_backup_before_formal_timing_required": true,
+    "audit_profile_checkpoint_backup_excluded_from_timing": true,
+    "resource_gates_before_and_after_required": true
+  },
+  "task_state_checks": [
+    "same original checkpoint and RNG",
+    "same inputs and attention/loss masks",
+    "per-token and reduced losses",
+    "all gradients and updated weights",
+    "FP32 master weights when used",
+    "optimizer moments and scheduler state",
+    "resume from the same native checkpoint",
+    "candidate dispatch hits and exact native fallback coverage"
+  ],
+  "operators": [
+    {
+      "name": "Dense Fused Attention",
+      "status": "requires_actual_model_dispatch_and_shapes"
+    },
+    {
+      "name": "Vocab-parallel Cross Entropy",
+      "status": "single-rank_candidate_requires_fresh_admission; TP_collectives_unverified"
+    },
+    {
+      "name": "SwiGLU",
+      "status": "requires_actual_activation_and_shapes"
+    },
+    {
+      "name": "Residual Add RMSNorm",
+      "status": "requires_actual_residual_and_normalization_semantics"
+    },
+    {
+      "name": "MoE Grouped GEMM",
+      "status": "not_applicable_to_public_8b_thinking_dense_reference; actual_selected_checkpoint_still_requires_identity_verification"
+    }
+  ],
+  "delivery_targets_from_project_document": {
+    "training_throughput_gain": 0.15,
+    "training_time_reduction": 0.12,
+    "sft_throughput_gain": 0.17,
+    "sft_time_reduction": 0.15
+  },
+  "external_model_service": {
+    "model_id": "Claude-Opus-4.8",
+    "endpoint": "https://llmapi.paratera.com",
+    "client": "Claude Code CLI",
+    "skill": "project-local kernelwiki-iluvatar",
+    "internal_reference_sent": false
+  }
+}

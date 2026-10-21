@@ -1,0 +1,130 @@
+{
+  "schema": "jiuge7b-sft-pinning-validation-contract-v1",
+  "model": "9G7B_MHA / 7,668,831,744parameters / full parameter answer-only SFT",
+  "megatron_commit": "5be9626709af2722333bf54797c954c09edeada3",
+  "native_hdo_sha256": "6a7f96e2afd0081991aff86424e5fdd9c07bce8c2636728baa0b8b2c8b4f2be2",
+  "candidate_sha256": "8c83ed05b1333b6775abea19bb2ff07f5966938764654ab133613fd52573ca88",
+  "candidate_patch_sha256": "552ca3b523724854ee0c06e38d58c9dbf299baeab59e0abf12a1235014976e19",
+  "configuration": {
+    "sequence_length": 2048,
+    "micro_batch_size": 1,
+    "global_batch_size": 1,
+    "tp": 2,
+    "pp": 1,
+    "cp": 1,
+    "dp": 1,
+    "precision": "BF16 parameters, FP32 gradients/master/moments",
+    "optimizer": "Native HDO and Torch AdamW, CPU offload fraction 1.0",
+    "recompute": "full uniform, one layer",
+    "unchanged_training_argv_source": "run_native_case.py; exact derivation changes only objective prefix and observation mode",
+    "unchanged_runner_sha256": "82c444f9ba77e70562430f51a17357179f39acb58d639a4d7b919719930bc345"
+  },
+  "arms": {
+    "native": "Unchanged frozen native HDO method",
+    "control": "Independent byte-identical native method copy",
+    "optimized": "Control with pinning after final FP32 conversion"
+  },
+  "correctness": {
+    "steps": 3,
+    "comparison_dtype": "CPU float64",
+    "atol": 0.0003,
+    "rtol": 0.001,
+    "finite_values_required": true,
+    "all_actual_optimizer_parameter_tensors_per_rank": 199,
+    "all_actual_optimizer_elements_per_rank": 3834518016,
+    "full_raw_fields": [
+      "loss",
+      "all gradients",
+      "updated BF16 parameters",
+      "FP32 master",
+      "AdamW exp_avg",
+      "AdamW exp_avg_sq",
+      "AdamW step"
+    ],
+    "additional_required_checks": [
+      "per-token loss",
+      "actual input and masks",
+      "scheduler and RNG",
+      "resume from the same native checkpoint"
+    ]
+  },
+  "benchmark": {
+    "formal_timer": "native GPU-synchronized time.time",
+    "steps_per_process": 120,
+    "excluded_initial_steps": 20,
+    "retained_interval_steps": 10,
+    "seeds": [
+      63100,
+      63101,
+      63102
+    ],
+    "rotated_arm_orders": [
+      [
+        "native",
+        "control",
+        "optimized"
+      ],
+      [
+        "optimized",
+        "control",
+        "native"
+      ],
+      [
+        "control",
+        "native",
+        "optimized"
+      ]
+    ],
+    "promotion_gain_vs_control_strictly_greater_than": 0.01,
+    "all_seeds_faster_vs_control_required": true,
+    "native_or_control_cv_repeat_trigger": 0.1,
+    "repeat_policy": "One complete independent unchanged repeat when the existing CV trigger fires; preserve both and require both to pass",
+    "audit_profile_checkpoint_backup_excluded_from_timing": true,
+    "resource_gates_before_and_after_required": true
+  },
+  "storage_policy": {
+    "user_instruction_date": "2026-10-15",
+    "user_instruction": "不要在本机存放过多内容，只保留关键结果",
+    "complete_original_values": "ACT persistent shared directory",
+    "verify_all_original_values_at_primary": true,
+    "local_files": [
+      "summary",
+      "raw timing and training logs",
+      "source and patch identities",
+      "numeric error and coverage receipts",
+      "SHA256 inventories",
+      "small representative state samples"
+    ],
+    "local_complete_large_raw_copy_required": false,
+    "source_raw_values_may_be_deleted": false,
+    "mathematical_and_timing_acceptance_changed": false
+  },
+  "formal_performance_passed": false,
+  "allocation_conditions": {
+    "formal_hardware": "Same two assigned A100-PCIE-40GB physical UUIDs; record actual topology; prefer idle inspur-gpu-04",
+    "formal_cpu_request": 16,
+    "formal_host_memory_gib": 300,
+    "same_resource_limit_for_all_three_arms": true,
+    "max_charge_points": 0,
+    "startup_limit_seconds": 39600,
+    "stop_on_completion": true,
+    "absolute_deadline_required": true,
+    "keep_old_V100": true,
+    "no_new_login_identity_or_SSH_service": true,
+    "controller_uid_gid": [
+      1001,
+      1001
+    ]
+  },
+  "date": "2026-10-20",
+  "objective": "answer_only_SFT",
+  "SFT": {
+    "adapter": "sft_dataset_adapter.py",
+    "adapter_sha256": "41f595e733b3ffbeeb457b087294391cbf364972bcac4f12f99e6bf1e34719c1",
+    "data_receipt": "datasets/alpaca-sft-answer-v1-receipt.json",
+    "new_full_SFT_numeric_references_required": true,
+    "CPT_numeric_reference_reuse": false,
+    "independent_source_document_mask_reconstruction_required": true,
+    "throughput_unit": "2048 input token slots/step; TP ranks are not additive; supervised answer targets separately counted"
+  }
+}

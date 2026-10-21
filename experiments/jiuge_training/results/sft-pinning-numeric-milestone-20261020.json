@@ -1,0 +1,216 @@
+{
+  "schema": "jiuge7b-sft-closed-numeric-milestone-v1",
+  "utc": "2026-10-20T06:59:21.343349+00:00",
+  "current_stage": "sft-pinning-optimized-resume-20261020-01",
+  "all_three_arms_full_numeric_passed": true,
+  "all_three_arms_actual_SFT_source_passed": true,
+  "runs": [
+    {
+      "arm": "native",
+      "rank": 0,
+      "field_count": 3585,
+      "coverage_validated": true,
+      "passed": true,
+      "max_abs_error": 0,
+      "final_master_parameter_count": 199,
+      "actual_FP32_pinned_count": 0,
+      "dtype_counts": {
+        "torch.float32": 199
+      },
+      "actual_elements": 3834518016,
+      "raw_pack_bytes": 153256259524
+    },
+    {
+      "arm": "native",
+      "rank": 1,
+      "field_count": 3585,
+      "coverage_validated": true,
+      "passed": true,
+      "max_abs_error": 0,
+      "final_master_parameter_count": 199,
+      "actual_FP32_pinned_count": 0,
+      "dtype_counts": {
+        "torch.float32": 199
+      },
+      "actual_elements": 3834518016,
+      "raw_pack_bytes": 153131037504
+    },
+    {
+      "arm": "control",
+      "rank": 0,
+      "field_count": 3585,
+      "coverage_validated": true,
+      "passed": true,
+      "max_abs_error": 0,
+      "final_master_parameter_count": 199,
+      "actual_FP32_pinned_count": 0,
+      "dtype_counts": {
+        "torch.float32": 199
+      },
+      "actual_elements": 3834518016,
+      "raw_pack_bytes": 0
+    },
+    {
+      "arm": "control",
+      "rank": 1,
+      "field_count": 3585,
+      "coverage_validated": true,
+      "passed": true,
+      "max_abs_error": 0,
+      "final_master_parameter_count": 199,
+      "actual_FP32_pinned_count": 0,
+      "dtype_counts": {
+        "torch.float32": 199
+      },
+      "actual_elements": 3834518016,
+      "raw_pack_bytes": 0
+    },
+    {
+      "arm": "optimized",
+      "rank": 0,
+      "field_count": 3585,
+      "coverage_validated": true,
+      "passed": true,
+      "max_abs_error": 0,
+      "final_master_parameter_count": 199,
+      "actual_FP32_pinned_count": 199,
+      "dtype_counts": {
+        "torch.float32": 199
+      },
+      "actual_elements": 3834518016,
+      "raw_pack_bytes": 0
+    },
+    {
+      "arm": "optimized",
+      "rank": 1,
+      "field_count": 3585,
+      "coverage_validated": true,
+      "passed": true,
+      "max_abs_error": 0,
+      "final_master_parameter_count": 199,
+      "actual_FP32_pinned_count": 199,
+      "dtype_counts": {
+        "torch.float32": 199
+      },
+      "actual_elements": 3834518016,
+      "raw_pack_bytes": 0
+    }
+  ],
+  "SFT_source": [
+    {
+      "arm": "native",
+      "passed": true,
+      "source_reconstructed": true,
+      "losses": [
+        3.344123,
+        2.905044,
+        1.717039
+      ],
+      "supervised_targets": [
+        1833,
+        1809,
+        1726
+      ],
+      "case_exit_code": 0,
+      "occupancy_gate_empty": true
+    },
+    {
+      "arm": "control",
+      "passed": true,
+      "source_reconstructed": true,
+      "losses": [
+        3.344123,
+        2.905044,
+        1.717039
+      ],
+      "supervised_targets": [
+        1833,
+        1809,
+        1726
+      ],
+      "case_exit_code": 0,
+      "occupancy_gate_empty": true
+    },
+    {
+      "arm": "optimized",
+      "passed": true,
+      "source_reconstructed": true,
+      "losses": [
+        3.344123,
+        2.905044,
+        1.717039
+      ],
+      "supervised_targets": [
+        1833,
+        1809,
+        1726
+      ],
+      "case_exit_code": 0,
+      "occupancy_gate_empty": true
+    }
+  ],
+  "checkpoint_iteration": "2",
+  "resumes": [
+    {
+      "arm": "native",
+      "case_closed": true,
+      "exit_code": 0,
+      "ranks": [
+        {
+          "rank": 0,
+          "completed": true,
+          "actual_optimizer_state": {
+            "schema": "jiuge7b-actual-optimizer-evidence-v1",
+            "optimizers": [
+              {
+                "class": "megatron.core.optimizer.cpu_offloading.hybrid_optimizer.HybridDeviceOptimizer",
+                "adam_state_entries": 199,
+                "elements_with_both_adam_moments": 3834518016,
+                "elements_with_master_param": 3834518016,
+                "min_step": 3,
+                "max_step": 3,
+                "offload_fraction": 1
+              }
+            ],
+            "all_state_saved": false,
+            "selected_raw_state_samples_saved": true
+          },
+          "native_common_load_calls": 2,
+          "native_sharded_load_calls": 1,
+          "HDO_placeholder_initializations": 1
+        },
+        {
+          "rank": 1,
+          "completed": true,
+          "actual_optimizer_state": {
+            "schema": "jiuge7b-actual-optimizer-evidence-v1",
+            "optimizers": [
+              {
+                "class": "megatron.core.optimizer.cpu_offloading.hybrid_optimizer.HybridDeviceOptimizer",
+                "adam_state_entries": 199,
+                "elements_with_both_adam_moments": 3834518016,
+                "elements_with_master_param": 3834518016,
+                "min_step": 3,
+                "max_step": 3,
+                "offload_fraction": 1
+              }
+            ],
+            "all_state_saved": false,
+            "selected_raw_state_samples_saved": true
+          },
+          "native_common_load_calls": 2,
+          "native_sharded_load_calls": 1,
+          "HDO_placeholder_initializations": 1
+        }
+      ]
+    },
+    {
+      "arm": "optimized",
+      "case_closed": false
+    }
+  ],
+  "full_ACT_raw_SHA_verification_finished": false,
+  "formal_performance_started": false,
+  "formal_performance_accepted": false,
+  "raw_originals_downloaded_to_local": false
+}

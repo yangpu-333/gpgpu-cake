@@ -1,0 +1,91 @@
+{
+  "schema": "jiuge7b-sft-direct-zero-moments-screen-v3",
+  "stage": "prepared diagnostic screen; no new GPU job submitted",
+  "model": "official9G7B_MHA,7668831744 unique parameters",
+  "dataset_receipt_sha256": "1e30f6af3c21d31ee6fae117bfec9c25120bb1b14fe86d815d4f059fdc7a8d08",
+  "baseline": "accepted pinned SFT repair,unbound CPU placement",
+  "arm_modes": {
+    "baseline": "unbound",
+    "affinity-control": "gpu-local8",
+    "local-moments": "gpu-local8"
+  },
+  "candidate_change": "Replace only the two native AdamW fresh moment zeros_like factories with direct MPOL_BIND-before-zero private mappings; no original fresh moment or copy; native loaded state uses guarded tested copy path",
+  "order": [
+    "baseline-a1",
+    "affinity-control-b1",
+    "local-moments-c1",
+    "local-moments-c2",
+    "affinity-control-b2",
+    "baseline-a2"
+  ],
+  "steps_per_run": 35,
+  "seed": 63100,
+  "sequence_length": 2048,
+  "TP": 2,
+  "micro_and_global_batch": 1,
+  "OMP_threads_per_rank": 8,
+  "expected_traces": 24,
+  "capture_windows": [
+    [
+      21,
+      25
+    ],
+    [
+      31,
+      35
+    ]
+  ],
+  "physical_gpu_pair_must_match_prior_SFT": false,
+  "max_charge_points": 0,
+  "maximum_allocation_seconds_including_setup": 10800,
+  "create_login_identity": false,
+  "raw_storage": "ACT Ceph only",
+  "local_key_limit_mib": 32,
+  "screen_acceptance": "both candidate runs faster than both baseline runs AND both affinity-control runs;descriptive only",
+  "new_SFT_full_state_acceptance": false,
+  "formal_performance_accepted": false,
+  "subsequent_required_acceptance": {
+    "full_state": "own3-step SFT audit,199 groups/rank,FP32 gradients/master/moments/step/loss,CPUfloat64 atol3e-4 rtol1e-3",
+    "resume": "original nativeiteration2 checkpoint,next update,state,RNG,scheduler,input and answer mask",
+    "archive": "ACT complete originals SHA and bounded local key gate before formal tests",
+    "formal": "3seeds,3arms,120steps exclude20;GPU synchronizedtime.time,aligned slow TP rank;no profiler/audit/checkpoint IO",
+    "repeat": "baseline/control seed-mean CV>=10% requires one complete9-case repeat,both rounds pass",
+    "gain": "all paired seeds faster and geometric-mean improvement>1% versus both incremental baseline and affinity-control"
+  },
+  "physical_gpu_pair_must_be_identical_across_all_six_fresh_cases": true,
+  "expected_topology": "single-node A100 pair; NODE; both same NUMA node; actual identities frozen before any training",
+  "prior_historical_performance_reused": false,
+  "allocation_guard": {
+    "read_only_cgroup_headroom": true,
+    "minimum_reserve_bytes": 8589934592,
+    "additional_reserve_times_current_allocation_bytes": 2,
+    "not_an_atomic_reservation_or_NUMA_capacity_guarantee": true
+  },
+  "memory_evidence": {
+    "before_first_update": true,
+    "after_first_update": true,
+    "after_training": true,
+    "initialization_objects_recorded": [
+      1,
+      50,
+      100,
+      150,
+      200,
+      250,
+      300,
+      350,
+      398
+    ],
+    "cgroup_peak_is_cumulative": true
+  },
+  "full_six_case_reinitialization_required": true,
+  "previous_two_completed_controls_reused": false,
+  "proposed_resource": {
+    "A100": 2,
+    "CPU": 16,
+    "memory_GiB": 300,
+    "maximum_seconds": 10800,
+    "charge_points_cap": 0
+  },
+  "new_allocation_submitted": false
+}

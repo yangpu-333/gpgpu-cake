@@ -1,0 +1,83 @@
+{
+  "schema": "jiuge7b-sft-moment-failed-screen-independent-key-review-v1",
+  "verified_utc": "2026-10-21T11:14:56.832591+00:00",
+  "local_key_SHA_passed": true,
+  "verified_key_files": 261,
+  "verified_key_bytes": 6556555,
+  "frozen_sources_verified": 73,
+  "completed_controls_verified": 2,
+  "completed_updates_each_rank_each_control": 35,
+  "original_weight_and_source_byte_checks_verified": true,
+  "paired35_sample_counts_logged_losses_equal_between_controls": true,
+  "ACT_raw_bundle_verification": {
+    "schema": "jiuge7b-sft-moment-failure-preservation-verification-v1",
+    "preservation_passed": true,
+    "scientific_screen_completed": false,
+    "bundle": "/home/huids25/kda-jiuge-prep-20261014/sft-moment-screen-failure-20261021-01/Jiuge7B-SFT-local-moments-interrupted-OOM-evidence.zip",
+    "bundle_bytes": 73324713,
+    "bundle_sha256": "9d93d18e8136ab1ce6fd0e371249aec9874ed835a0b3bac2b5d0290b7639a8b0",
+    "verified_files": 275,
+    "verified_raw_traces": 8,
+    "completed_cases": 2,
+    "compressed_and_decompressed_SHA_passed": true,
+    "raw_downloaded_to_local": false,
+    "key_bundle": "/home/huids25/kda-jiuge-prep-20261014/sft-moment-screen-failure-keys-20261021.zip",
+    "key_bundle_bytes": 932865,
+    "key_bundle_sha256": "07116a7130d8328a130bb9aad64ea8945bdd62db91ea069de411999a2e4b560d",
+    "key_files": 261,
+    "key_uncompressed_bytes": 6556555
+  },
+  "candidate_first_update_completed": false,
+  "candidate_comparison_available": false,
+  "six_case_screen_passed": false,
+  "formal_performance_evidence": false,
+  "raw_originals_downloaded_to_local": false,
+  "cases": [
+    {
+      "case": "sft-moment-screen-20261021-a1-baseline",
+      "policy": "baseline",
+      "tag": "a1",
+      "gate_before": {
+        "cards": "GPU-4ce9cbee-8444-67c3-2ead-dfda2618ccdf, 00000000:AF:00.0, 0 MiB, 0 %\nGPU-08efa9c6-c2b6-09d7-95ad-8b214dc49ab2, 00000000:D8:00.0, 0 MiB, 0 %\n",
+        "compute_apps": "",
+        "utc": "2026-10-21T10:41:28.079258+00:00"
+      },
+      "gate_after": {
+        "cards": "GPU-4ce9cbee-8444-67c3-2ead-dfda2618ccdf, 00000000:AF:00.0, 0 MiB, 0 %\nGPU-08efa9c6-c2b6-09d7-95ad-8b214dc49ab2, 00000000:D8:00.0, 0 MiB, 0 %\n",
+        "compute_apps": "",
+        "utc": "2026-10-21T10:50:47.749557+00:00"
+      },
+      "completed_updates_each_rank": 35,
+      "verified_raw_traces": 4,
+      "diagnostic_window_slow_rank_seconds_per_step": [
+        3.4277338642089843,
+        2.8740694518066405
+      ],
+      "diagnostic_mean_seconds_per_step": 3.1509016580078124,
+      "full_candidate_comparison_available": false
+    },
+    {
+      "case": "sft-moment-screen-20261021-b1-affinity-control",
+      "policy": "affinity-control",
+      "tag": "b1",
+      "gate_before": {
+        "cards": "GPU-4ce9cbee-8444-67c3-2ead-dfda2618ccdf, 00000000:AF:00.0, 0 MiB, 0 %\nGPU-08efa9c6-c2b6-09d7-95ad-8b214dc49ab2, 00000000:D8:00.0, 0 MiB, 0 %\n",
+        "compute_apps": "",
+        "utc": "2026-10-21T10:50:47.947307+00:00"
+      },
+      "gate_after": {
+        "cards": "GPU-4ce9cbee-8444-67c3-2ead-dfda2618ccdf, 00000000:AF:00.0, 0 MiB, 0 %\nGPU-08efa9c6-c2b6-09d7-95ad-8b214dc49ab2, 00000000:D8:00.0, 0 MiB, 0 %\n",
+        "compute_apps": "",
+        "utc": "2026-10-21T10:56:20.767993+00:00"
+      },
+      "completed_updates_each_rank": 35,
+      "verified_raw_traces": 4,
+      "diagnostic_window_slow_rank_seconds_per_step": [
+        3.7542236870117187,
+        3.7578984505859374
+      ],
+      "diagnostic_mean_seconds_per_step": 3.756061068798828,
+      "full_candidate_comparison_available": false
+    }
+  ]
+}

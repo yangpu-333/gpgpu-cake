@@ -7,6 +7,13 @@
 > 当前成果的核心关键词是 **自动化算子优化**。Poly 调度和 Halide IR 规范化仍是后续接入方向，
 > 目前没有将参数搜索或 Triton 源码处理包装成已完成的 Poly/Halide 成果。
 
+## 九格7B训练与微调追踪
+
+九格`9G7B_MHA`已在ACT双A100、Megatron TP2及CPU AdamW offload配置下完成继续预训练与全参数微调的端到端tracing。pinned memory修复相对各自任务原生后端的正式吞吐提升分别为**84.4%（CPT）和92.9%（SFT）**；这两项A100结果有各自全状态、原生恢复与三种子对照，适用范围见报告。后续moment页放置候选曾首步OOM，降低创建峰值的CPU修复已通过小样本检查，7B重跑尚未开始；当前按用户要求保存材料并暂停。
+
+- [九格7B简报](experiments/jiuge_training/BRIEF.md)
+- [完整验证、OOM记录和重置后恢复方法](experiments/jiuge_training/README.md)
+
 ## KernelWiki 天数 BI-V150 适配
 
 **技术简报｜工作范围：2026年9月30日至10月11日｜整理日期：2026年10月13日**
