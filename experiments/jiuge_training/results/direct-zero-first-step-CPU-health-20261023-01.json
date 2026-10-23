@@ -1,0 +1,14 @@
+{
+  "health": null,
+  "stdout.log": "d_dataset:\tExtract the sequence pointers\nINFO:megatron.core.datasets.indexed_dataset:\tExtract the document indices\nINFO:megatron.core.datasets.indexed_dataset:> total number of sequences: 48818\nINFO:megatron.core.datasets.indexed_dataset:> total number of documents: 48818\n> finished creating GPT datasets ...\n[after dataloaders are built] datetime: 2026-10-23 02:13:32.278728 \ndone with setup ...\ntraining ...\nINFO:megatron.core.timers:(min, max) time across ranks (ms):\n    model-and-optimizer-setup ......................: (220701.05, 220701.31)\n    train/valid/test-data-iterators-setup ..........: (406.54, 420.26)\nOverwriting rerun_state_machine.current_iteration from -1 to 0...\n[before the start of training step] datetime: 2026-10-23 02:13:32.281657 \n{\"native_step_start\": 1, \"rank\": 1}{\"native_step_start\": 1, \"rank\": 0}\n\nWARNING:megatron.core.rerun_state_machine:Result validation enabled\n",
+  "stderr.log": "rm barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.\n[rank1]:[W1023 02:09:30.868429431 ProcessGroupNCCL.cpp:4561] [PG ID 0 PG GUID 0 Rank 1]  using GPU 1 to perform barrier as devices used by this process are currently unknown. This can potentially cause a hang if this rank to GPU mapping is incorrect. Specify device_ids in barrier() to force use of a particular device, or call init_process_group() with a device_id.\n/home/huids25/kda-jiuge-prep-20261014/megatron-native-5be9626/megatron/core/models/mimo/config/base_configs.py:12: UserWarning: MimoModelConfig is experimental and still under active development. The API may change without notice in future releases.\n  class MimoModelConfig:\n",
+  "single_status": {
+    "status": "running_one_update",
+    "hostname": "sg-huids25-261023-f53a4-default0-0",
+    "stop_before_epoch": 1792731328,
+    "max_charge_points": 0,
+    "full_SFT_correctness_acceptance": false,
+    "formal_performance_evidence": false,
+    "case": "sft-direct-zero-first-step-20261023-02"
+  }
+}

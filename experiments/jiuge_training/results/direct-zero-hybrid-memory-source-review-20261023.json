@@ -1,0 +1,97 @@
+{
+  "path": "/home/huids25/kda-jiuge-prep-20261014/megatron-native-5be9626/megatron/core/optimizer/cpu_offloading/hybrid_optimizer.py",
+  "matches": [
+    {
+      "line": 52,
+      "context": "        cpu_optimizer_cls=None,\n        gpu_optimizer_cls=None,\n        param_update_in_fp32: bool = False,\n        pin_cpu_grads: bool = True,\n        pin_cpu_params: bool = True,\n        overlap_cpu_optimizer_d2h_h2d: bool = True,\n        **kwargs,\n    ):"
+    },
+    {
+      "line": 53,
+      "context": "        gpu_optimizer_cls=None,\n        param_update_in_fp32: bool = False,\n        pin_cpu_grads: bool = True,\n        pin_cpu_params: bool = True,\n        overlap_cpu_optimizer_d2h_h2d: bool = True,\n        **kwargs,\n    ):\n        super(HybridDeviceOptimizer, self).__init__("
+    },
+    {
+      "line": 64,
+      "context": "                \"cpu_optimizer_cls\": cpu_optimizer_cls,\n                \"gpu_optimizer_cls\": gpu_optimizer_cls,\n                \"param_update_in_fp32\": param_update_in_fp32,\n                \"pin_cpu_grads\": pin_cpu_grads,\n                \"pin_cpu_params\": pin_cpu_params,\n                \"overlap_cpu_optimizer_d2h_h2d\": overlap_cpu_optimizer_d2h_h2d,\n                **kwargs,\n            },"
+    },
+    {
+      "line": 65,
+      "context": "                \"gpu_optimizer_cls\": gpu_optimizer_cls,\n                \"param_update_in_fp32\": param_update_in_fp32,\n                \"pin_cpu_grads\": pin_cpu_grads,\n                \"pin_cpu_params\": pin_cpu_params,\n                \"overlap_cpu_optimizer_d2h_h2d\": overlap_cpu_optimizer_d2h_h2d,\n                **kwargs,\n            },\n        )"
+    },
+    {
+      "line": 74,
+      "context": "        self.offload_fraction = offload_fraction\n        self.cpu_optimizer_cls = cpu_optimizer_cls\n        self.gpu_optimizer_cls = gpu_optimizer_cls\n        self.pin_cpu_grads = pin_cpu_grads\n        self.pin_cpu_params = pin_cpu_params\n        self.overlap_cpu_optimizer_d2h_h2d = overlap_cpu_optimizer_d2h_h2d\n        self.param_update_in_fp32 = param_update_in_fp32\n        self.sub_optimizer_kwargs = kwargs"
+    },
+    {
+      "line": 75,
+      "context": "        self.cpu_optimizer_cls = cpu_optimizer_cls\n        self.gpu_optimizer_cls = gpu_optimizer_cls\n        self.pin_cpu_grads = pin_cpu_grads\n        self.pin_cpu_params = pin_cpu_params\n        self.overlap_cpu_optimizer_d2h_h2d = overlap_cpu_optimizer_d2h_h2d\n        self.param_update_in_fp32 = param_update_in_fp32\n        self.sub_optimizer_kwargs = kwargs\n"
+    },
+    {
+      "line": 110,
+      "context": "                param.requires_grad = False\n                if param not in self.cpu_copy_map_grad:\n                    self.cpu_copy_map_grad[param] = torch.empty(\n                        param.shape, dtype=param.dtype, pin_memory=self.pin_cpu_grads, device=\"cpu\"\n                    )\n                    param.grad = self.cpu_copy_map_grad[param]\n\n                self.cpu_copy_map_grad[param].data.copy_(grad, non_blocking=True)"
+    },
+    {
+      "line": 183,
+      "context": "\n    def _init_sub_optimizers(self):\n        (\n            self.cpu_param_groups,\n            self.gpu_param_groups,\n            self.gpu_params_map_cpu_copy,\n            self.cpu_copys_map_gpu_param,\n            self.param_to_fp32_param,"
+    },
+    {
+      "line": 206,
+      "context": "        self.cpu_optimizers = []\n        if self.overlap_cpu_optimizer_d2h_h2d:\n            self.cpu_optimizers = self.build_cpu_optimizer_list(\n                self.cpu_optimizer_cls, self.cpu_param_groups\n            )\n        elif len(self.cpu_param_groups) > 0:\n            self.cpu_optimizers = [self.cpu_optimizer_cls(self.cpu_param_groups)]\n"
+    },
+    {
+      "line": 208,
+      "context": "            self.cpu_optimizers = self.build_cpu_optimizer_list(\n                self.cpu_optimizer_cls, self.cpu_param_groups\n            )\n        elif len(self.cpu_param_groups) > 0:\n            self.cpu_optimizers = [self.cpu_optimizer_cls(self.cpu_param_groups)]\n\n        if len(self.gpu_param_groups) > 0:\n            self.gpu_optimizer = self.gpu_optimizer_cls(self.gpu_param_groups)"
+    },
+    {
+      "line": 209,
+      "context": "                self.cpu_optimizer_cls, self.cpu_param_groups\n            )\n        elif len(self.cpu_param_groups) > 0:\n            self.cpu_optimizers = [self.cpu_optimizer_cls(self.cpu_param_groups)]\n\n        if len(self.gpu_param_groups) > 0:\n            self.gpu_optimizer = self.gpu_optimizer_cls(self.gpu_param_groups)\n        else:"
+    },
+    {
+      "line": 227,
+      "context": "        self._register_param_copy_back_gpu_hook()\n\n    @staticmethod\n    def build_cpu_optimizer_list(cpu_optimizer_cls, cpu_param_groups):\n        \"\"\"Build several cpu optimizers to enable overlap. Currently we naively\n        assign each parameter to an individual optimizer.\n\n        Args:"
+    },
+    {
+      "line": 233,
+      "context": "\n        Args:\n            cpu_optimizer_cls (Type[torch.optim.Optimizer]): A torch optimizer class\n            cpu_param_groups (List[Dict[str, Any]]): The CPU parameter groups\n        \"\"\"\n        cpu_optimizers = []\n\n        if len(cpu_param_groups) == 0:"
+    },
+    {
+      "line": 237,
+      "context": "        \"\"\"\n        cpu_optimizers = []\n\n        if len(cpu_param_groups) == 0:\n            return cpu_optimizers\n\n        for group in cpu_param_groups:\n            group_defaults = group.copy()"
+    },
+    {
+      "line": 240,
+      "context": "        if len(cpu_param_groups) == 0:\n            return cpu_optimizers\n\n        for group in cpu_param_groups:\n            group_defaults = group.copy()\n            params = group_defaults.pop(\"params\")\n            if isinstance(params, torch.Tensor):\n                params = [params]"
+    },
+    {
+      "line": 246,
+      "context": "            if isinstance(params, torch.Tensor):\n                params = [params]\n            for param in params:\n                _cpu_param_group = group_defaults.copy()\n                _cpu_param_group[\"params\"] = [param]\n                cpu_optimizers.append(cpu_optimizer_cls([_cpu_param_group]))\n        return cpu_optimizers\n"
+    },
+    {
+      "line": 247,
+      "context": "                params = [params]\n            for param in params:\n                _cpu_param_group = group_defaults.copy()\n                _cpu_param_group[\"params\"] = [param]\n                cpu_optimizers.append(cpu_optimizer_cls([_cpu_param_group]))\n        return cpu_optimizers\n\n    def _get_sub_optimizer_param_groups(self, offload_fraction: float):"
+    },
+    {
+      "line": 248,
+      "context": "            for param in params:\n                _cpu_param_group = group_defaults.copy()\n                _cpu_param_group[\"params\"] = [param]\n                cpu_optimizers.append(cpu_optimizer_cls([_cpu_param_group]))\n        return cpu_optimizers\n\n    def _get_sub_optimizer_param_groups(self, offload_fraction: float):\n        params = []"
+    },
+    {
+      "line": 257,
+      "context": "            params.extend(group[\"params\"])\n        params_total_numel = sum([param.numel() for param in params])\n        gpu_params_total_numel = sum([param.numel() for param in params if param.is_cuda])\n        cpu_params_total_numel = params_total_numel - gpu_params_total_numel\n        offload_threshold = gpu_params_total_numel * offload_fraction\n        offload_params_numel = 0\n        cpu_param_groups = []\n        gpu_param_groups = []"
+    },
+    {
+      "line": 260,
+      "context": "        cpu_params_total_numel = params_total_numel - gpu_params_total_numel\n        offload_threshold = gpu_params_total_numel * offload_fraction\n        offload_params_numel = 0\n        cpu_param_groups = []\n        gpu_param_groups = []\n        gpu_params_map_cpu_copy = {}\n        cpu_copys_map_gpu_param = {}\n        param_to_fp32_param = {}"
+    },
+    {
+      "line": 274,
+      "context": "                orig_param = param\n                cpu_copy = False\n                if offload_params_numel < offload_threshold and param.is_cuda:\n                    param = param.detach().clone().cpu().pin_memory()\n                    offload_params_numel += param.numel()\n                    cpu_copy = True\n                if self.param_update_in_fp32 and param.dtype != torch.float32:\n                    param = param.detach().clone().float()"
+    },
+    {
+      "line": 292,
+      "context": "            if len(gpu_group[\"params\"]) != 0:\n                gpu_param_groups.append(gpu_group)\n            if len(cpu_group[\"params\"]) != 0:\n                cpu_param_groups.append(cpu_group)\n\n        return (\n            cpu_param_groups,\n            gpu_param_groups,"
+    },
+    {
+      "line": 295,
+      "context": "                cpu_param_groups.append(cpu_group)\n\n        return (\n            cpu_param_groups,\n            gpu_param_groups,\n            gpu_params_map_cpu_copy,\n            cpu_copys_map_gpu_param,\n            param_to_fp32_param,"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "schema": "jiuge7b-interrupted-memory-admission-preservation-receipt-v1",
+  "passed": true,
+  "ACT_bundle": "/home/huids25/kda-jiuge-prep-20261014/sft-direct-zero-failure-preservation-20261023-01/Jiuge7B-SFT-direct-zero-interrupted-and-phased-CPU-evidence.zip",
+  "bundle_bytes": 5858068,
+  "bundle_sha256": "aefda1665d0e14f43ec0b749ceb2a51d1b10bc527d5ecafc78ee54b92b21d4d4",
+  "manifest_sha256": "c18db1ccb5cc30df40d076955b91d138d1a8bcf30a7fc30f7c5e67c8a61d9f6f",
+  "verified_files": 380,
+  "original_bytes": 28509668,
+  "compressed_and_decompressed_SHA_passed": true,
+  "raw_originals_downloaded_to_local": false,
+  "GPU_used": false,
+  "originals_modified": false
+}

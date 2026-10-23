@@ -1,0 +1,54 @@
+{
+  "passed": true,
+  "CPU_only": true,
+  "actual_opposite_to_local_thread_switch_verified": true,
+  "full_state_resume": {
+    "schema": "jiuge7b-sft-direct-zero-moments-CPU-regression-v3",
+    "passed": true,
+    "ACT_root": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-moment-preparation-20261023-03/cpu-regression-v2",
+    "source_sha256": {
+      "check_sft_phased_moments_20261023.py": "bc9c44198cd4ba8f8b8cbf1546e8c2b229a790c62b4ef7e3d778d5d60831d2e5",
+      "sft_local_moments_v3_20261021.py": "73fff646de66d5ec36ce2d3376bea771b8fe2e74e5f2b55673d5f72b9e3c48e4"
+    },
+    "manifest_sha256": "c565432edbc4961c09f46198d48e44ab254b36be73876d75b06dd9fc25b76c1d",
+    "ACT_verified_files": 20,
+    "ACT_bytes": 8968198,
+    "nodes": [
+      {
+        "node": 0,
+        "actual_thread_phase_switch_verified": true,
+        "five_updates_full_state_exact": true,
+        "native_resume_next_step_exact": true,
+        "compared_tensor_fields": 109,
+        "max_absolute_error": 0.0,
+        "placement_events": 16,
+        "direct_zero_events": 8,
+        "native_resume_copy_events": 8,
+        "mmap_view_lifetime_checked": true
+      },
+      {
+        "node": 1,
+        "actual_thread_phase_switch_verified": true,
+        "five_updates_full_state_exact": true,
+        "native_resume_next_step_exact": true,
+        "compared_tensor_fields": 109,
+        "max_absolute_error": 0.0,
+        "placement_events": 16,
+        "direct_zero_events": 8,
+        "native_resume_copy_events": 8,
+        "mmap_view_lifetime_checked": true
+      }
+    ],
+    "GPU_used": false,
+    "new_SFT_acceptance": false,
+    "formal_performance_evidence": false
+  },
+  "new_sources_sha256": {
+    "sft_phased_placement_20261023.py": "286ecff2c518b58e6de96b9d7744116e1de227a5322ea79778e5ed8d2bf4a255",
+    "sft_phased_moment_entry_20261023.py": "b2bd8776859f79a0c219cbd75466028d591e73148433198dfa53f6e1f5d745a7",
+    "check_sft_phased_moments_20261023.py": "bc9c44198cd4ba8f8b8cbf1546e8c2b229a790c62b4ef7e3d778d5d60831d2e5"
+  },
+  "fixture_original_failure_preserved": "OMP_NUM_THREADS was not set by the CPU test parent;v2 environment matches production8",
+  "new_7B_accepted": false,
+  "formal_performance_evidence": false
+}

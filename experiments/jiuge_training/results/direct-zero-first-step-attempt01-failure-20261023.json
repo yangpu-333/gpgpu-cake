@@ -1,0 +1,16 @@
+{
+  "first_step_log": "{\"case\": \"sft-direct-zero-first-step-20261023-01\", \"exit_code\": 1, \"directory\": \"/home/huids25/kda-jiuge-prep-20261014/runs/sft-direct-zero-first-step-20261023-01\"}\n",
+  "case_exists": true,
+  "case_files": [
+    "case-start.json",
+    "sft-numa-binding-rank-1.json",
+    "sft-numa-binding-rank-0.json",
+    "source",
+    "stdout.log",
+    "moment-initialization-memory-rank-0.jsonl",
+    "case.json",
+    "moment-initialization-memory-rank-1.jsonl",
+    "stderr.log"
+  ],
+  "bootstrap_tail": "4, 5, 6, 7], [16, 17, 18, 19, 20, 21, 22, 23]]}, \"threads_per_rank\": 8, \"memory_policy_changed\": false, \"page_migration_used\": false, \"actual_page_location_inferred_from_affinity\": false}, \"cards\": \"0, NVIDIA A100-PCIE-40GB, GPU-4ce9cbee-8444-67c3-2ead-dfda2618ccdf, 40960 MiB, 0 MiB, 0 %\\n1, NVIDIA A100-PCIE-40GB, GPU-08efa9c6-c2b6-09d7-95ad-8b214dc49ab2, 40960 MiB, 0 MiB, 0 %\\n\", \"gpu_topology\": \"\\t\\u001b[4mGPU0\\tGPU1\\tCPU Affinity\\tNUMA Affinity\\tGPU NUMA ID\\u001b[0m\\nGPU0\\t X \\tNODE\\t16-31,48-63\\t1\\t\\tN/A\\nGPU1\\tNODE\\t X \\t16-31,48-63\\t1\\t\\tN/A\\n\\nLegend:\\n\\n  X    = Self\\n  SYS  = Connection traversing PCIe as well as the SMP interconnect between NUMA nodes (e.g., QPI/UPI)\\n  NODE = Connection traversing PCIe as well as the interconnect between PCIe Host Bridges within a NUMA node\\n  PHB  = Connection traversing PCIe as well as a PCIe Host Bridge (typically the CPU)\\n  PXB  = Connection traversing multiple PCIe bridges (without traversing the PCIe Host Bridge)\\n  PIX  = Connection traversing at most a single PCIe bridge\\n  NV#  = Connection traversing a bonded set of # NVLinks\\n\", \"compute_apps\": \"\", \"cgroup\": {\"cpu.max\": \"1601000 100000\", \"memory.max\": \"322123595776\", \"memory.current\": \"709750784\", \"memory.events\": \"low 0\\nhigh 0\\nmax 0\\noom 0\\noom_kill 0\", \"cpuset.mems.effective\": \"0-1\"}, \"persistent_free_bytes\": 2677761114112, \"GPU_initialized\": false, \"other_processes_stopped\": false}\nexact-job-and-frozen-source-gate-passed\ncontroller_exit_code=1\n2026-10-23T01:59:59Z\n"
+}

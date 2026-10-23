@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "frozen_count": 112,
+  "all_original98_unchanged": true,
+  "observer_live_CPU_checked": true,
+  "kernel_peak_available": false,
+  "GPU_used": false,
+  "manifest_sha256": "6aa4ed0ffaaf0c1943666795e1b067f1ad94fd8dbaaa248a3a893d89b9292d9d"
+}

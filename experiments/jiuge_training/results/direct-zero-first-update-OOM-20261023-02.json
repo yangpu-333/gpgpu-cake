@@ -1,0 +1,29 @@
+{
+  "schema": "jiuge7b-direct-zero-first-update-ACT-OOM-v1",
+  "verified_utc": "2026-10-23T02:20:45.008762+00:00",
+  "job": "sg-huids25-261023-f53a4",
+  "status": "failed",
+  "platform_reason": "OOMKilled",
+  "platform_exit_code": 137,
+  "platform_points": 0,
+  "model_initialization_passed": true,
+  "native_first_update_started_both_ranks": true,
+  "native_first_update_completed": false,
+  "six_case_controller_started": false,
+  "last_logged_moments_each_rank": 50,
+  "source_copy_bytes_each_rank": 0,
+  "last_logged_cgroup_current_GiB": [
+    192.82839965820312,
+    193.11531448364258
+  ],
+  "kernel_memory_peak_available": false,
+  "last_record_is_not_OOM_peak_or_termination_counter": true,
+  "observed_shmem_NUMA1_bytes": 170332393472,
+  "shmem_already_included_in_file_category": true,
+  "NUMA_capacity_hypothesis_not_yet_verified": true,
+  "remaining_original_deadline_epoch": 1792731328,
+  "original112_preserved": true,
+  "other_processes_stopped": false,
+  "raw_storage": "ACT Ceph",
+  "local_keys_only": true
+}

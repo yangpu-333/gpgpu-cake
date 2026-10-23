@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "memory_peak_missing_explicit_null": true,
+  "memory_peak_available_preserved": true,
+  "required_memory_current_still_mandatory": true,
+  "generated_launchers_and_controllers_compile": true,
+  "GPU_used": false,
+  "first_attempt_preserved": true,
+  "unchanged_V3_optimizer_science": true,
+  "production8GiB_guard_unchanged": true,
+  "original_global_deadline_reused": 1792731328,
+  "formal_performance_evidence": false
+}

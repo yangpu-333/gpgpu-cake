@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "new_window_first_job": "sg-huids25-261023-f1dfb",
+  "first_start_epoch": 1792761041,
+  "stop_before_epoch": 1792771841,
+  "budget_file": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-moments-bootstrap-20261023-04/campaign-first-start.epoch",
+  "retries_do_not_reset_budget": true,
+  "max_charge_points": 0,
+  "GPU_launched": false
+}

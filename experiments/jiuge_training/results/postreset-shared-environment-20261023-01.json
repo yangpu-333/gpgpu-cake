@@ -1,0 +1,70 @@
+{
+  "hostname": "sg-huids25-260917-94135-default0-0",
+  "frozen_source_count": 93,
+  "source_differences": [],
+  "SFT_data_receipt_SHA": "1e30f6af3c21d31ee6fae117bfec9c25120bb1b14fe86d815d4f059fdc7a8d08",
+  "runtime_exists": true,
+  "torch": "2.6.0+cu118",
+  "venv_python": "3.12.14 (main, Sep  1 2026, 14:16:52) [Clang 22.1.3 ]",
+  "model_files": [
+    {
+      "name": "tokenizer.model",
+      "bytes": 1181204
+    },
+    {
+      "name": "tokenization_fm9g.py",
+      "bytes": 17903
+    },
+    {
+      "name": "pytorch_model.bin",
+      "bytes": 15337798301
+    },
+    {
+      "name": "README.md",
+      "bytes": 10330
+    },
+    {
+      "name": "modeling_fm9g.py",
+      "bytes": 62198
+    },
+    {
+      "name": "tokenizer.json",
+      "bytes": 3676758
+    },
+    {
+      "name": "upload.py",
+      "bytes": 4368
+    },
+    {
+      "name": "config.json",
+      "bytes": 1023
+    },
+    {
+      "name": "generation_config.json",
+      "bytes": 161
+    },
+    {
+      "name": "configuration_fm9g.py",
+      "bytes": 6209
+    },
+    {
+      "name": "added_tokens.json",
+      "bytes": 216
+    },
+    {
+      "name": "tokenizer_config.json",
+      "bytes": 2890
+    },
+    {
+      "name": "special_tokens_map.json",
+      "bytes": 1632
+    }
+  ],
+  "persistent_free_bytes": 2690503409664,
+  "new_campaign_roots_existing": {
+    "sft-moment-direct-zero-screen-20261021-01": false,
+    "sft-moment-direct-zero-approved-20261021.json": false,
+    "sft-moment-direct-zero-bootstrap-20261021-01": false,
+    "sft-direct-zero-first-step-20261023-01": false
+  }
+}

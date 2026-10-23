@@ -1,0 +1,25 @@
+{
+  "schema": "jiuge7b-phased-moments-new-window-human-authorization-v1",
+  "recorded_utc": "2026-10-23T13:06:54.839276+00:00",
+  "user_answer": "授权新增3小时，费用上限0点",
+  "authorized": true,
+  "maximum_total_seconds_including_setup_waiting_retries": 10800,
+  "max_charge_points": 0,
+  "A100": 2,
+  "CPU": 16,
+  "memory_GiB": 300,
+  "root_dependency_installation_authorized": true,
+  "training_uid_gid": [
+    1001,
+    1001
+  ],
+  "create_login_identity": false,
+  "old_V100_retained": true,
+  "stop_after_completion": true,
+  "originals_ACT_only_local_key_results_only": true,
+  "old_window_not_reused": true,
+  "new_campaign_budget_file": "sft-phased-moments-bootstrap-20261023-04/campaign-first-start.epoch",
+  "source_manifest": "results/sft-phased-moments-resume-source-manifest-20261023-04.json",
+  "source_manifest_sha256": "8897b229e21220bbd6319710821b94eb8c25c98f20b45f41dc5fc297246a5f35",
+  "resource_submitted": false
+}

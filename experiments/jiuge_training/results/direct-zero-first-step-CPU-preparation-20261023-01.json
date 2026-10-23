@@ -1,0 +1,29 @@
+{
+  "schema": "jiuge7b-one-update-CPU-preparation-v1",
+  "passed": true,
+  "utc": "2026-10-23T01:42:14.638379+00:00",
+  "original93_unchanged": true,
+  "new_sources": {
+    "sft_direct_zero_first_step_entry_20261023.py": "f776d0a03b2602fa4f5d04eb0610c9c07b1a8c9c97f41acc3352ab0a838b1c1b",
+    "run_sft_direct_zero_first_step_20261023.py": "7e9e0f4040b8ae482e241f423013f4ce5de61f322cf9812a78c596b35534ae26"
+  },
+  "generated_entry_and_launcher_compile": true,
+  "actual_launch_command_model_and_training_flags_checked": true,
+  "rejected_configurations": [
+    "35_steps",
+    "profiler_requested",
+    "baseline_arm",
+    "unbound"
+  ],
+  "training_steps": 1,
+  "seq_length": 2048,
+  "TP": 2,
+  "candidate": "V3 direct-zero; accepted pinned repair; GPU-local8",
+  "profiler_enabled": false,
+  "GPU_used": false,
+  "remote_environment_verified": false,
+  "new_7B_OOM_fixed": false,
+  "full_SFT_correctness_accepted": false,
+  "formal_performance_evidence": false,
+  "all_raw_data_remain_ACT": true
+}

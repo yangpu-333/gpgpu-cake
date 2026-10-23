@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "exact_job": "sg-huids25-261023-f53a4",
+  "source_count": 112,
+  "gate_sha256": "d1d0171ef8af11b7892091a7d9c4e58a7d36a9ac32f2d275d7426b12c526ae11",
+  "stop_before_epoch": 1792731328,
+  "max_charge_points": 0
+}

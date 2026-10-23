@@ -1,0 +1,16 @@
+{
+  "schema": "jiuge7b-phased-moments-pending-window-ACT-preparation-v2",
+  "passed": true,
+  "verified_utc": "2026-10-23T13:04:11.387434+00:00",
+  "source_files": 131,
+  "manifest_sha256": "8897b229e21220bbd6319710821b94eb8c25c98f20b45f41dc5fc297246a5f35",
+  "all_local_ACT_source_bytes_equal": true,
+  "Python_and_Bash_syntax_passed": true,
+  "generated_first_step_six_case_and_review_programs_compile": true,
+  "previous_127_unchanged": true,
+  "future_roots_and_approval_still_uncreated": true,
+  "CUDA_initialized": false,
+  "GPU_resource_submitted": false,
+  "new_resource_authorization_pending": true,
+  "morning_window_expired": true
+}

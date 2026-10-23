@@ -1,0 +1,22 @@
+{
+  "schema": "jiuge7b-phased-moments-authorized-ACT-job-form-v1",
+  "name": "Jiuge7B-SFT-PhasedMoments-FirstStep",
+  "fromJob": "sg-huids25-261023-f53a4",
+  "GPU_type": "a100",
+  "GPU_count": 2,
+  "CPU": 16,
+  "memory_GiB": 300,
+  "node_whitelist": [
+    "inspur-gpu-04"
+  ],
+  "image": "crater-harbor.act.buaa.edu.cn/library/ubuntu:22.04",
+  "shell": "bash ROOT 用户",
+  "platform_CPU_binding": false,
+  "startup_command": "timeout --signal=KILL 10800 /bin/bash /home/huids25/kda-jiuge-prep-20261014/bootstrap_sft_phased_moments_resume_20261023_04.sh",
+  "maximum_total_seconds": 10800,
+  "free_minutes_required": 720,
+  "max_charge_points": 0,
+  "new_login_identity": false,
+  "scientific_admission": "allocation identities/no foreign GPU process/frozen source/live CPU gates/one real7B update before six fresh cases",
+  "submitted": false
+}
