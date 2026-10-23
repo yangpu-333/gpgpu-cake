@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "source_count": 146,
+  "manifest_sha256": "af4c4cf010fc4f2c2208aff7268daf2d2266391afea0fae9b7f67b5088f35701",
+  "previous131_unchanged": true,
+  "generated_programs_compile": true,
+  "same_absolute_stop_epoch": 1792771841,
+  "GPU_used": false,
+  "new_GPU_allocation_submitted": false
+}

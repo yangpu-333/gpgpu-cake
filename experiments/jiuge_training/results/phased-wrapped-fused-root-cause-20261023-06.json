@@ -1,0 +1,9 @@
+{
+  "old_V3_same_wrapped_fused_branch_reproduced": true,
+  "error": "name '_device_dtype_check_for_fused' is not defined",
+  "native_globals_module": "torch.optim.adamw",
+  "wrapper_globals_module": "torch._dynamo.eval_frame",
+  "native_helper_present": true,
+  "wrapper_helper_absent": true,
+  "GPU_initialized": false
+}

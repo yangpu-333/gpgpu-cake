@@ -1040,3 +1040,15 @@ CPU亲和性不能证明缓冲区的实际页位置，仍需逐对象采样核�
 两次中止及CPU准备的380份原件、28,509,668 bytes已留在ACT并完成压缩、解压及逐文件SHA核验。归档包约5.86MB，SHA256为`aefda1665d0e14f43ec0b749ceb2a51d1b10bc527d5ecafc78ee54b92b21d4d4`，本机只取[小型校验收据](results/sft-direct-zero-failure-preservation-ACT-verification-20261023.json)。该包位于ACT的`sft-direct-zero-failure-preservation-20261023-01/`，原目录和失败证据均保留。
 
 截至本次更新，新候选尚未通过7B首步，更未完成六组筛选。若筛选通过，仍须候选自身的全状态正确性、原生Megatron恢复、完整原件SHA及三种子/三臂/120步剔除20步的正式性能验收；原CV复测规则保持不变。既有CPT +84.4%和SFT +92.9%分别保留。
+
+### 22.4 原生初始化器包装兼容修复
+
+`3e329`完成两阶段实际线程切换后，在首个AdamW更新中遇到`_device_dtype_check_for_fused`未定义，应用退出码1，平台累计0.00点。本次没有创建moment或完成更新，六组未放行；此结果既不能证明OOM仍发生，也不能证明OOM已经解决。
+
+根因已在CPU小样本复现：`inspect.getsource`展开Dynamo包装，取得原生`_init_group`的函数体，而V3复制的是外层包装器的全局命名空间。fused分支所需的辅助函数存在于`torch.optim.adamw`，不在`torch._dynamo.eval_frame`。V4使用`inspect.unwrap`取得原生执行环境，并为派生函数保留已观察到的Dynamo禁用包装；只替换两个moment工厂，保持原生更新数学。见[根因复现](results/phased-wrapped-fused-root-cause-20261023-06.json)。
+
+补充CPU回归明确覆盖包装后的初始化器，分别使用fused=False/True、两个NUMA节点，共四项五步全状态和原生CPU恢复/下一步比较，各109项字段最大误差均为0；实际线程切换和映射寿命检查通过。遗漏能力收据的首次夹具失败保留，成功夹具明确记录同宿主已有能力收据的复用来源。见[扩展CPU回归](results/phased-wrapped-initializer-CPU-preparation-20261023-06.json)。
+
+V4及全新首步/六组路径共冻结146份来源，原131份未改。接续作业`24c7a`仍为2×A100、16核、300GiB，启动检查C9/AF两卡空闲且无其他计算进程；新容器的8GiB保护及上述四项CPU回归再次通过。正在执行`sft-phased-first-step-20261023-07`，通过后才释放全新六组。**仍沿用原00:10:41截止，不延长授权、不复用旧对照。** 见[ACT准备收据](results/phased-native-globals-ACT-preparation-20261023-07.json)及[精确分配门禁](results/sft-phased-moments-allocation-approved-20261023-07.json)。
+
+`3e329`与补充CPU准备的283份原件、37,067,636 bytes已在ACT归档；压缩包7,376,181 bytes，SHA256为`7417e4922e7d166900681c2fe472e83b43a9227f8012747d4f19328278c57a39`。本机只保存[归档收据](results/phased-initializer-failure-and-CPU-ACT-archive-20261023-04.json)。新候选的7B首步、完整六组及后续统一验收均须以各自实际结果确认。

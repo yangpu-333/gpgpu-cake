@@ -1,0 +1,11 @@
+{
+  "torch": "2.6.0+cu118",
+  "file_SHA": "e680a255db9c53c4248a55f414b7af9aab90bb672312ac960bb459903a161c1d",
+  "init_globals_module": "torch.optim.adamw",
+  "helper_before_construct": true,
+  "source_context": [
+    "from torch import Tensor\n\nfrom .optimizer import (\n    _capturable_doc,\n    _default_to_fused_or_foreach,\n    _device_dtype_check_for_fused,\n    _differentiable_doc,\n    _disable_dynamo_if_unsupported,\n    _foreach_doc,\n    _fused_doc,",
+    "            state = self.state[p]\n\n            # State initialization\n            if len(state) == 0:\n                if group[\"fused\"]:\n                    _device_dtype_check_for_fused(p)\n                # note(crcrpar): Deliberately host `step` on CPU if both capturable and fused are off.\n                # This is because kernel launches are costly on CUDA and XLA.\n                state[\"step\"] = (\n                    torch.zeros("
+  ],
+  "GPU_initialized": false
+}

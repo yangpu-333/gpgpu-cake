@@ -1,0 +1,14 @@
+{
+  "schema": "jiuge7b-interrupted-memory-admission-preservation-receipt-v1",
+  "passed": true,
+  "ACT_bundle": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-wrapped-initializer-failure-20261023-04/Jiuge7B-SFT-direct-zero-interrupted-and-phased-CPU-evidence.zip",
+  "bundle_bytes": 7376181,
+  "bundle_sha256": "7417e4922e7d166900681c2fe472e83b43a9227f8012747d4f19328278c57a39",
+  "manifest_sha256": "dadde2b64348207bbdba5e874b442dbf62147e3da9dd657bf01f140f99ac81b7",
+  "verified_files": 283,
+  "original_bytes": 37067636,
+  "compressed_and_decompressed_SHA_passed": true,
+  "raw_originals_downloaded_to_local": false,
+  "GPU_used": false,
+  "originals_modified": false
+}

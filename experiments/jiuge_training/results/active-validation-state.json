@@ -6,9 +6,9 @@
   "host": "sg-huids25-260917-94135-default0-0",
   "remote_root": "/home/huids25/kda-jiuge-prep-20261014",
   "runtime": ".venv/bin/python",
-  "resource": "new3e329 2A10016CPU300GiB; retainedV100",
+  "resource": "24c7a 2A10016CPU300GiB plus retainedV100;fixed00:10:41cutoff",
   "resource_extension_authorized": true,
-  "current_actual_progress": "Morning optional-peak failure and true7Bfirst-updateOOM archived380filesSHA;phased5CPUupdates+nativeCPUresume exact;131sources verified ACT/local;new7Bfirstupdate not run",
+  "current_actual_progress": "3e329failedbeforemoments duewrappedglobals,0points;CPUfused andnonfused bothnodes pass;146frozen;24c7ainstalling",
   "numeric_controller": "pinning-validation-20261015-04/controller.json",
   "followup_controller": "pinning-recovery-20261016-04/controller.json",
   "local_driver_state": "results/pinning-driver-20261016-05/status.json",
@@ -78,7 +78,7 @@
     "final_gpu_snapshot_has_no_compute_processes": true,
     "raw_originals_downloaded": false
   },
-  "current_task": "Live allocation probe,CPU admission,one7B update,then six fresh phased-local-moment cases before fixed00:10:41 cutoff",
+  "current_task": "Native unwrap globals+Dynamo wrapper V4; one new7B update before six fresh cases",
   "cpu_numa_contract": "cpu_numa.contract.json",
   "cpu_numa_controller": "ACT cpu-numa-validation-20261016-02/controller.json",
   "cpu_numa_frozen_sources": [
@@ -772,10 +772,10 @@
     "NUMA_capacity_readonly_receipt": "results/direct-zero-NUMA-capacity-readonly-20261023-01.json"
   },
   "sft_phased_moments_20261023": {
-    "status": "live_CPU_admission_passed_first_7B_update_initializing",
-    "updated_utc": "2026-10-23T13:25:42.442353+00:00",
-    "source_manifest": "results/sft-phased-moments-resume-source-manifest-20261023-04.json",
-    "source_count": 131,
+    "status": "V4_live_CPU_fused_nonfused_passed_first7B_initializing",
+    "updated_utc": "2026-10-23T13:49:51.957927+00:00",
+    "source_manifest": "results/sft-phased-moments-source-manifest-20261023-07.json",
+    "source_count": 146,
     "original127_unchanged": true,
     "ACT_source_SHA_passed": true,
     "CPU_five_step_state_and_native_resume_passed": true,
@@ -801,8 +801,8 @@
     "new_budget_started": true,
     "allocation_blocker": null,
     "job_form": "results/sft-phased-moments-ACT-job-form-20261023-04.json",
-    "job": "sg-huids25-261023-3e329",
-    "hostname": "sg-huids25-261023-3e329-default0-0",
+    "job": "sg-huids25-261023-24c7a",
+    "hostname": "sg-huids25-261023-24c7a-default0-0",
     "node": "inspur-gpu-04",
     "first_start_epoch": 1792761041,
     "stop_before_epoch": 1792771841,
@@ -815,19 +815,33 @@
       "platform_points": 0
     },
     "actual_allocated_pair": [
-      "GPU-4ce9cbee-8444-67c3-2ead-dfda2618ccdf",
-      "GPU-08efa9c6-c2b6-09d7-95ad-8b214dc49ab2"
+      "GPU-c9db5c06-61c6-01b7-b9aa-20307600482c",
+      "GPU-4ce9cbee-8444-67c3-2ead-dfda2618ccdf"
     ],
     "foreign_compute_apps": [],
     "live_8GiB_CPU_guard_passed": true,
     "live_CPU_five_step_and_native_resume_passed": true,
     "live_thread_phase_switch_passed": true,
-    "driver_pid": 9240,
-    "CPU_postprocess_pid": 40328,
-    "local_driver": "results/sft-phased-moments-driver-20261023-03",
-    "local_postprocess": "results/sft-phased-moments-postprocess-20261023-03",
+    "driver_pid": 20392,
+    "CPU_postprocess_pid": 42768,
+    "local_driver": "results/sft-phased-moments-driver-20261023-07",
+    "local_postprocess": "results/sft-phased-moments-postprocess-20261023-07",
     "heartbeat": "ACTIVE;current131source3hourwindow;pause after closure",
-    "ACT_first_step": "sft-phased-first-step-20261023-03/status.json",
-    "ACT_screen": "sft-phased-moments-screen-20261023-03/controller.json"
+    "ACT_first_step": "sft-phased-first-step-20261023-07/status.json",
+    "ACT_screen": "sft-phased-moments-screen-20261023-07/controller.json",
+    "manifest_SHA256": "af4c4cf010fc4f2c2208aff7268daf2d2266391afea0fae9b7f67b5088f35701",
+    "previous131_unchanged": true,
+    "prior_3e329": {
+      "status": "failed_NameError_native_disabled_initializer_globals",
+      "exit_code": 1,
+      "platform_points": 0,
+      "moment_created": false,
+      "six_case_released": false,
+      "local_observers_stopped_by_exact_ID": true,
+      "ACT_archive": "results/phased-initializer-failure-and-CPU-ACT-archive-20261023-04.json"
+    },
+    "wrapped_fused_CPU_proof": "results/phased-wrapped-initializer-CPU-preparation-20261023-06.json",
+    "old_V3_wrapped_fused_root_cause": "results/phased-wrapped-fused-root-cause-20261023-06.json",
+    "live_wrapped_fused_and_nonfused_passed": true
   }
 }
