@@ -4,6 +4,8 @@
 
 **官方九格7B在ACT双A100上完成训练与全参数微调的原生tracing，并新增16份SFT原生/修复版对照时间线。优化对象是CPU AdamW offload中的FP32主参数pinned memory问题：SFT正式吞吐相对原生Megatron提升92.9%，此前CPT的独立正式提升为84.4%。新时间线显示，主要变化是HtoD主机调用耗时缩短，CPU AdamW可与HtoD搬运重叠；模型计算和AdamW更新公式保持不变。**
 
+10月23日的新候选已解决本次整模型首步内存准入问题，并完成六组35步对照、24份新时间线。相对已验收pinned基线，诊断窗口由3.859降至3.533秒/步，倒数比改善约9.2%；相对同样绑核的control约3.3%。**新增数据属于筛选，尚未通过正式吞吐验收。** 本阶段已结束并暂停。
+
 ## 1. 实验配置与采集结果
 
 模型为官方九格 `9G7B_MHA`，28层、约76.69亿参数。采用Megatron、双A100 40GB、TP2、BF16、序列长度2048、micro/global batch均为1，使用原生AdamW CPU offload。数据为48,818条中文Alpaca指令数据。
@@ -14,6 +16,7 @@
 | 全参数微调 SFT | 仅答案和结束标记参与loss，提示部分被mask | 3步准入检查＋35步真实参数更新，4份trace |
 | SFT原生/修复配对 | 同一官方模型和SFT数据，原生—修复—修复—原生 | 每次35步，共16份双rank窗口trace；样本编号、监督目标计数及35条日志loss一致 |
 | SFT NUMA对照 | 在已验收pinned版本上比较不绑核、GPU本地绑核、两插槽分散绑核 | 六次独立初始化、每次35步，共24份trace；样本、监督计数和日志loss一致 |
+| SFT内存修复后筛选 | 比较不绑核、两阶段绑核、同样绑核＋直接创建moment | 六次全新初始化、每次35步，共24份trace；候选两次均快于另两臂各两次 |
 
 每次采集第21–25、31–35步，两个rank各保留两个窗口。时间线包含完整训练步中的前向、反向、优化器更新、GPU计算、搬运和NCCL通信；覆盖GEMM、MHA attention、RMSNorm、SwiGLU、RoPE、交叉熵及CPU AdamW。SFT实际输入和答案mask已独立核验，所有参数参与更新。
 
@@ -110,18 +113,30 @@ r = 同一种子的修复版吞吐 / 原生吞吐
 
 本轮两项NUMA候选均未通过筛选，**没有新增正式加速比**，暂不直接进入大规模验收。既有SFT +92.9%和CPT +84.4%结论不变。双卡作业已完成、退出码0、累计0.00点，24份原始时间线及完整日志留在ACT，压缩和解压SHA均已核验；本机仅保留关键结果。
 
-新候选将AdamW的两个moment状态放到执行CPU所在节点，保留既有pinned修复和更新公式。CPU小样本及原生CPU恢复检查均逐位一致，但7B双卡实验在候选第1次更新时发生OOM，作业已结束、累计0.00点。此前两组对照各完成35步，共8份时间线；完整六组筛选未完成，**没有新增性能结论**。73份冻结来源及失败日志保留，下一项先排查并降低状态创建与复制时的内存峰值，再考虑重新筛选。[诊断与失败记录](README.md#二十adamw状态页就近放置候选10月21日候选首步oom)
+### 4.1 最新候选：内存修复与六组筛选（10月23日）
 
-这8份时间线和失败原件共73.3MB，仅保存在ACT，压缩及解压SHA已核验；本机关键包不足1MB。[失败材料与两组完成状态复核](results/sft-moment-screen-failure-independent-key-review-20261021.json)
+此前候选在创建AdamW的两个moment状态时发生整模型首步OOM。修复取消“先分配再复制”的临时状态，并让控制组与候选组先在GPU对侧初始化、更新前再切到本地CPU核，增加实际NUMA容量检查。原生初始化器包装的兼容错误也已修复；fused/非fused、两个NUMA节点的CPU五步状态与原生CPU恢复比较最大误差均为0。
 
-**10月21日晚更新：** 已改为在目标NUMA映射中直接创建moment，取消新状态的重复分配和复制。128MiB参数的CPU初始化测试中，RSS峰值增量由约389MiB降至261MiB；两个NUMA节点的五步状态与原生CPU恢复对照最大误差均为0。93份源码及六组重跑程序已准备，实际SFT保留8GiB内存保护，尚未重跑7B，不能声称整模型OOM已解决或有新增提速。
+真实九格7B随后通过首步和全新六组对照。候选每rank398个moment直接创建、源moment复制量为0，受检OOM事件前后为0；六组均完成35次真实更新，样本、监督计数与日志loss一致。原生源码、权重加载字节、实际线程亲和性和状态页采样通过检查。
 
-按作业重置前保存要求，五份时间线包和源码/数据/CPU原件恢复包已保存本机，共约639MB并核验SHA；上文“原件仅在ACT”为当时归档状态，本机备份现已补齐。百GiB检查点仍在ACT共享Ceph。[保存范围与恢复方法](README.md#二十一作业重置前保存与暂停10月21日晚)
+| 方案 | 两次慢rank窗口耗时 | CPU AdamW范围均值 |
+|---|---:|---:|
+| 已验收pinned版本，不绑核 | 3.738 / 3.980秒/步 | 2.524秒/步 |
+| 两阶段绑核，原生moment分配 | 3.737 / 3.565秒/步 | 2.368秒/步 |
+| 同样绑核，直接创建本地moment | **3.534 / 3.533秒/步** | **2.237秒/步** |
 
-**10月23日更新：** 重置后的共享数据、权重和环境仍在。直接创建moment的版本进入7B首步后仍发生OOM，六组筛选未启动。记录显示，大量共享缓冲区与计划中的约57GiB moment会集中到同一个约189GiB的NUMA节点，存在容量约束。新方案让控制组和候选组都先在GPU对侧初始化，再切回GPU本地更新，并增加节点容量检查。两节点CPU五步数值与恢复检查误差为0，131份来源已与ACT核验；这仍不能替代7B验收，也没有新增提速数据。
+每臂仅两次独立初始化，均开启profiler。候选两次均快于另外两臂各自的两次，达到预定筛选条件；**约9.2%与3.3%来自各臂平均诊断耗时的倒数比，不是正式吞吐，也不与旧92.9%或84.4%合并。**
 
-两阶段方案的首轮准入遇到原生初始化器包装兼容错误，已退出、累计0.00点。V4修复执行环境，并补齐fused与非fused的CPU回归，四项数值及恢复检查误差均为0。新双卡`24c7a`已通过空闲卡与新容器CPU准入，正在重试真实7B首步；通过后才重跑六组，**尚不能声称整模型OOM已修复**。统一截止仍为北京时间10月24日00:10:41，费用上限0点。今天各次中止及CPU准备原件已在ACT归档并核验SHA，本机只保留关键收据。[首步OOM与接续设计](README.md#二十二作业重置后的首步内存验证10月23日)
+时间线中，GPU计算仍约0.66秒/步、搬运量相同；候选的CPU AdamW与HtoD重叠从1.668增至1.912秒/步，GPU活动空档从10.8%降至4.6%。NCCL与计算重叠仅由12.9%变为14.1%，未观察到NCCL与memcpy重叠，通信仍需继续分析。单向搬运区间反而更长，因此不能把改善解释为所有搬运都更快。
+
+仅绑核control与候选的moment采样都已在本地；新增3.3%不能单独归因于NUMA页位置。原生通信序号、跨rank时钟及完整因果关键路径也仍待补证。当前日志loss一致不等于该候选已通过完整数值验收。
+
+![内存修复后的六组诊断](results/sft-phased-moments-comparison-20261023-07.png)
+
+**下一项是候选自身的完整验收：** 7B三步全状态、原生第2步检查点恢复及下一步、ACT完整原件SHA，然后三种子/三臂/120步剔除20步的无profiler正式测试，沿用GPU同步计时、两rank慢端及原CV复测规则。本阶段按要求暂停，没有继续申请资源。
+
+双卡作业`24c7a`已完成、退出码0、累计0.00点，旧V100保留，未停止他人进程。新增24份trace归档约219.5MB，只在ACT；本机新增关键包约2.33MB，展开后19.36MB。146份冻结来源、图表、两份报告和关键复核同步保留。此前为作业重置准备的约639MB本机恢复包继续保留，百GiB检查点仍在ACT共享Ceph。[完整过程与原件路径](README.md#二十二作业重置后的内存修复与六组筛选10月23日)
 
 项目：[GitHub](https://github.com/yangpu-333/gpgpu-cake) · [GitLab](https://gitlab.ci-lab.net/yangpu/gpgpu-cake)
 
-复核材料：[完整报告及可视化方法](README.md) · [SFT配对时间线复核](results/sft-paired-trace-independent-review-v2-20261020.json) · [NUMA对照复核](results/sft-numa-independent-review-v2-20261021.json) · [24份NUMA trace的ACT归档收据](results/sft-numa-delivery-verification-v2-20261021.json) · [CPT正式性能复核](results/pinning-driver-20261016-05/formal-independent-review.json) · [SFT正式性能复核](results/sft-pinning-independent-review-20261020-continuation-v2.json)
+复核材料：[完整报告及可视化方法](README.md) · [最新六组独立复核](results/sft-phased-moments-independent-review-20261023-07.json) · [最新24份trace的ACT归档收据](results/sft-phased-moments-delivery-verification-20261023-07.json) · [SFT配对时间线复核](results/sft-paired-trace-independent-review-v2-20261020.json) · [CPT正式性能复核](results/pinning-driver-20261016-05/formal-independent-review.json) · [SFT正式性能复核](results/sft-pinning-independent-review-20261020-continuation-v2.json)

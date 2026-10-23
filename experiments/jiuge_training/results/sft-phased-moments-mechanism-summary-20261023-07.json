@@ -1,0 +1,488 @@
+{
+  "schema": "jiuge7b-sft-numa-mechanism-key-summary-v1",
+  "passed": true,
+  "GPU_used": false,
+  "raw_traces_downloaded_or_reparsed": false,
+  "formal_performance_evidence": false,
+  "native_collective_sequence_verified": false,
+  "critical_path_proven": false,
+  "physical_wire_bytes_measured": false,
+  "CPU_API_is_exposed_wait": false,
+  "categories_are_additive": false,
+  "scope": "Pinned bulk HtoD/DtoH copy groups; 2runs/policy, one seed, eight correlated rank-window observations",
+  "source_mechanism_SHA256": {
+    "sft-phased-moments-20261023-07-a1-baseline": "311c5646c8b9d76bba8a3307caf90a68d094e948a41c981a88809c2e9a5cab44",
+    "sft-phased-moments-20261023-07-b1-affinity-control": "bd72f3509f20a8aed4b319cdab4f510df74371a81881f65976be591038688800",
+    "sft-phased-moments-20261023-07-c1-local-moments": "49f2247d74a2f90bfd9a53ab192e3587ea7067679a50ee48670785dee44de1b3",
+    "sft-phased-moments-20261023-07-c2-local-moments": "6678eacc4c497e3804947a6280dd5e8384fc069de49a8f27d4d59bd8565449fa",
+    "sft-phased-moments-20261023-07-b2-affinity-control": "570f9e4ca34833b486739f7538abc090e0ee8f95717d48556c7ce4087658a9d1",
+    "sft-phased-moments-20261023-07-a2-baseline": "e89346cb331137d4b98891d046db203fa44f9935775dc9d4081b21ee47368340"
+  },
+  "policies": {
+    "baseline": {
+      "HtoD_GPU_seconds_per_rank_step": {
+        "mean": 1.8142251703247072,
+        "min": 1.4816607311523438,
+        "max": 2.374651483447266
+      },
+      "HtoD_CPU_API_seconds_per_rank_step": {
+        "mean": 0.004623414758300781,
+        "min": 0.003703935791015625,
+        "max": 0.0057827533203125
+      },
+      "HtoD_recorded_GiB_per_rank_step": {
+        "mean": 14.286672592163086,
+        "min": 14.284692764282227,
+        "max": 14.288652420043945
+      },
+      "DtoH_GPU_seconds_per_rank_step": {
+        "mean": 1.867154625439453,
+        "min": 1.5109227345703125,
+        "max": 2.4181207908691404
+      },
+      "DtoH_CPU_API_seconds_per_rank_step": {
+        "mean": 0.002694345764160156,
+        "min": 0.00204994462890625,
+        "max": 0.003699806689453125
+      },
+      "DtoH_recorded_GiB_per_rank_step": {
+        "mean": 14.284693433716892,
+        "min": 14.284693327546119,
+        "max": 14.284693539887666
+      },
+      "NCCL_overlap_compute_fraction": {
+        "mean": 0.12906739001981937,
+        "min": 0.07603397822377418,
+        "max": 0.1634733053273646
+      },
+      "NCCL_overlap_memcpy_seconds_per_rank_step": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "affinity-control": {
+      "HtoD_GPU_seconds_per_rank_step": {
+        "mean": 1.8510466656433104,
+        "min": 1.6299469161621094,
+        "max": 2.1209083706054686
+      },
+      "HtoD_CPU_API_seconds_per_rank_step": {
+        "mean": 0.008944075140380859,
+        "min": 0.0079753521484375,
+        "max": 0.009803646435546876
+      },
+      "HtoD_recorded_GiB_per_rank_step": {
+        "mean": 14.286672592163086,
+        "min": 14.284692764282227,
+        "max": 14.288652420043945
+      },
+      "DtoH_GPU_seconds_per_rank_step": {
+        "mean": 1.9251625486083985,
+        "min": 1.7072077303222657,
+        "max": 2.170838808544922
+      },
+      "DtoH_CPU_API_seconds_per_rank_step": {
+        "mean": 0.0028860029052734373,
+        "min": 0.00204238720703125,
+        "max": 0.003537931298828125
+      },
+      "DtoH_recorded_GiB_per_rank_step": {
+        "mean": 14.284693433716892,
+        "min": 14.284693327546119,
+        "max": 14.284693539887666
+      },
+      "NCCL_overlap_compute_fraction": {
+        "mean": 0.1361972354941669,
+        "min": 0.1143247170876993,
+        "max": 0.16465697883334196
+      },
+      "NCCL_overlap_memcpy_seconds_per_rank_step": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    },
+    "local-moments": {
+      "HtoD_GPU_seconds_per_rank_step": {
+        "mean": 2.09342330413208,
+        "min": 1.9366819786132812,
+        "max": 2.2524223641113283
+      },
+      "HtoD_CPU_API_seconds_per_rank_step": {
+        "mean": 0.008843820574951172,
+        "min": 0.00839467568359375,
+        "max": 0.00931542001953125
+      },
+      "HtoD_recorded_GiB_per_rank_step": {
+        "mean": 14.286672592163086,
+        "min": 14.284692764282227,
+        "max": 14.288652420043945
+      },
+      "DtoH_GPU_seconds_per_rank_step": {
+        "mean": 2.1516695044128418,
+        "min": 2.0124934971679687,
+        "max": 2.293278365234375
+      },
+      "DtoH_CPU_API_seconds_per_rank_step": {
+        "mean": 0.002548066961669922,
+        "min": 0.002221553271484375,
+        "max": 0.002850572216796875
+      },
+      "DtoH_recorded_GiB_per_rank_step": {
+        "mean": 14.284693433716892,
+        "min": 14.284693327546119,
+        "max": 14.284693539887666
+      },
+      "NCCL_overlap_compute_fraction": {
+        "mean": 0.14074733290548896,
+        "min": 0.1177568603902187,
+        "max": 0.16483181406520817
+      },
+      "NCCL_overlap_memcpy_seconds_per_rank_step": {
+        "mean": 0.0,
+        "min": 0.0,
+        "max": 0.0
+      }
+    }
+  },
+  "windows": [
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "policy": "baseline",
+      "rank": 0,
+      "window": "window-01",
+      "HtoD_GPU_seconds_per_rank_step": 2.0912258177246095,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.0037139701171875,
+      "HtoD_recorded_GiB_per_rank_step": 14.288652420043945,
+      "DtoH_GPU_seconds_per_rank_step": 2.1799434522460936,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.002367621142578125,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693539887666,
+      "NCCL_overlap_compute_fraction": 0.1168275878171539,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "policy": "baseline",
+      "rank": 1,
+      "window": "window-01",
+      "HtoD_GPU_seconds_per_rank_step": 1.8941548404296875,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.00469157744140625,
+      "HtoD_recorded_GiB_per_rank_step": 14.284692764282227,
+      "DtoH_GPU_seconds_per_rank_step": 1.9567091928222655,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.002148159033203125,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693327546119,
+      "NCCL_overlap_compute_fraction": 0.14364424211160445,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "policy": "baseline",
+      "rank": 0,
+      "window": "window-02",
+      "HtoD_GPU_seconds_per_rank_step": 2.374651483447266,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.003703935791015625,
+      "HtoD_recorded_GiB_per_rank_step": 14.288652420043945,
+      "DtoH_GPU_seconds_per_rank_step": 2.4181207908691404,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.002521215185546875,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693539887666,
+      "NCCL_overlap_compute_fraction": 0.14235916926107325,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "policy": "baseline",
+      "rank": 1,
+      "window": "window-02",
+      "HtoD_GPU_seconds_per_rank_step": 2.0438279875488283,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.004406041552734375,
+      "HtoD_recorded_GiB_per_rank_step": 14.284692764282227,
+      "DtoH_GPU_seconds_per_rank_step": 2.1263843705078127,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.00204994462890625,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693327546119,
+      "NCCL_overlap_compute_fraction": 0.1440968244437213,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "policy": "affinity-control",
+      "rank": 0,
+      "window": "window-01",
+      "HtoD_GPU_seconds_per_rank_step": 1.8194315036132813,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.009437945654296875,
+      "HtoD_recorded_GiB_per_rank_step": 14.288652420043945,
+      "DtoH_GPU_seconds_per_rank_step": 1.9041088131835937,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.003100920849609375,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693539887666,
+      "NCCL_overlap_compute_fraction": 0.1456892139862826,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "policy": "affinity-control",
+      "rank": 1,
+      "window": "window-01",
+      "HtoD_GPU_seconds_per_rank_step": 1.6308450652832032,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.00906808525390625,
+      "HtoD_recorded_GiB_per_rank_step": 14.284692764282227,
+      "DtoH_GPU_seconds_per_rank_step": 1.7098793814453126,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.003213769384765625,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693327546119,
+      "NCCL_overlap_compute_fraction": 0.11934206414524397,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "policy": "affinity-control",
+      "rank": 0,
+      "window": "window-02",
+      "HtoD_GPU_seconds_per_rank_step": 1.8261304824707032,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.009507147021484376,
+      "HtoD_recorded_GiB_per_rank_step": 14.288652420043945,
+      "DtoH_GPU_seconds_per_rank_step": 1.9034836471191405,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.003537931298828125,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693539887666,
+      "NCCL_overlap_compute_fraction": 0.1447827749235707,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "policy": "affinity-control",
+      "rank": 1,
+      "window": "window-02",
+      "HtoD_GPU_seconds_per_rank_step": 1.6299469161621094,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.009803646435546876,
+      "HtoD_recorded_GiB_per_rank_step": 14.284692764282227,
+      "DtoH_GPU_seconds_per_rank_step": 1.7072077303222657,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.00322237607421875,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693327546119,
+      "NCCL_overlap_compute_fraction": 0.1143247170876993,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "policy": "local-moments",
+      "rank": 0,
+      "window": "window-01",
+      "HtoD_GPU_seconds_per_rank_step": 2.2413372973632812,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.008531061572265625,
+      "HtoD_recorded_GiB_per_rank_step": 14.288652420043945,
+      "DtoH_GPU_seconds_per_rank_step": 2.2821011966308595,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.002581097998046875,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693539887666,
+      "NCCL_overlap_compute_fraction": 0.16483181406520817,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "policy": "local-moments",
+      "rank": 1,
+      "window": "window-01",
+      "HtoD_GPU_seconds_per_rank_step": 1.9366819786132812,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.00931542001953125,
+      "HtoD_recorded_GiB_per_rank_step": 14.284692764282227,
+      "DtoH_GPU_seconds_per_rank_step": 2.0139084639160156,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.002221553271484375,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693327546119,
+      "NCCL_overlap_compute_fraction": 0.1177568603902187,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "policy": "local-moments",
+      "rank": 0,
+      "window": "window-02",
+      "HtoD_GPU_seconds_per_rank_step": 2.2470677732421875,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.00839467568359375,
+      "HtoD_recorded_GiB_per_rank_step": 14.288652420043945,
+      "DtoH_GPU_seconds_per_rank_step": 2.2871173447753907,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.00279539384765625,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693539887666,
+      "NCCL_overlap_compute_fraction": 0.16377805811559526,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "policy": "local-moments",
+      "rank": 1,
+      "window": "window-02",
+      "HtoD_GPU_seconds_per_rank_step": 1.942477836328125,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.009057879345703125,
+      "HtoD_recorded_GiB_per_rank_step": 14.284692764282227,
+      "DtoH_GPU_seconds_per_rank_step": 2.01761274296875,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.002562318701171875,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693327546119,
+      "NCCL_overlap_compute_fraction": 0.11824274696106965,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "policy": "local-moments",
+      "rank": 0,
+      "window": "window-01",
+      "HtoD_GPU_seconds_per_rank_step": 2.2524223641113283,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.008432850732421875,
+      "HtoD_recorded_GiB_per_rank_step": 14.288652420043945,
+      "DtoH_GPU_seconds_per_rank_step": 2.293278365234375,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.00259559375,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693539887666,
+      "NCCL_overlap_compute_fraction": 0.16135978151160105,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "policy": "local-moments",
+      "rank": 1,
+      "window": "window-01",
+      "HtoD_GPU_seconds_per_rank_step": 1.9469312461914063,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.00925272080078125,
+      "HtoD_recorded_GiB_per_rank_step": 14.284692764282227,
+      "DtoH_GPU_seconds_per_rank_step": 2.0248836135253905,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.00224338037109375,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693327546119,
+      "NCCL_overlap_compute_fraction": 0.11798905476030944,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "policy": "local-moments",
+      "rank": 0,
+      "window": "window-02",
+      "HtoD_GPU_seconds_per_rank_step": 2.2434131001464843,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.008493158984375,
+      "HtoD_recorded_GiB_per_rank_step": 14.288652420043945,
+      "DtoH_GPU_seconds_per_rank_step": 2.281960811083984,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.002850572216796875,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693539887666,
+      "NCCL_overlap_compute_fraction": 0.16133807505094466,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "policy": "local-moments",
+      "rank": 1,
+      "window": "window-02",
+      "HtoD_GPU_seconds_per_rank_step": 1.937054837060547,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.0092727974609375,
+      "HtoD_recorded_GiB_per_rank_step": 14.284692764282227,
+      "DtoH_GPU_seconds_per_rank_step": 2.0124934971679687,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.002534625537109375,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693327546119,
+      "NCCL_overlap_compute_fraction": 0.1206822723889647,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "policy": "affinity-control",
+      "rank": 0,
+      "window": "window-01",
+      "HtoD_GPU_seconds_per_rank_step": 2.1202086481933593,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.008945141552734376,
+      "HtoD_recorded_GiB_per_rank_step": 14.288652420043945,
+      "DtoH_GPU_seconds_per_rank_step": 2.1652197611328123,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.00295517177734375,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693539887666,
+      "NCCL_overlap_compute_fraction": 0.16465697883334196,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "policy": "affinity-control",
+      "rank": 1,
+      "window": "window-01",
+      "HtoD_GPU_seconds_per_rank_step": 1.8336176170898437,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.00867586044921875,
+      "HtoD_recorded_GiB_per_rank_step": 14.284692764282227,
+      "DtoH_GPU_seconds_per_rank_step": 1.9188947462402344,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.00204238720703125,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693327546119,
+      "NCCL_overlap_compute_fraction": 0.11831627698590895,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "policy": "affinity-control",
+      "rank": 0,
+      "window": "window-02",
+      "HtoD_GPU_seconds_per_rank_step": 2.1209083706054686,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.0079753521484375,
+      "HtoD_recorded_GiB_per_rank_step": 14.288652420043945,
+      "DtoH_GPU_seconds_per_rank_step": 2.170838808544922,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.002827541650390625,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693539887666,
+      "NCCL_overlap_compute_fraction": 0.16094012414334138,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "policy": "affinity-control",
+      "rank": 1,
+      "window": "window-02",
+      "HtoD_GPU_seconds_per_rank_step": 1.8272847217285155,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.008139422607421875,
+      "HtoD_recorded_GiB_per_rank_step": 14.284692764282227,
+      "DtoH_GPU_seconds_per_rank_step": 1.9216675008789061,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.002187925,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693327546119,
+      "NCCL_overlap_compute_fraction": 0.12152573384794642,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "policy": "baseline",
+      "rank": 0,
+      "window": "window-01",
+      "HtoD_GPU_seconds_per_rank_step": 1.5018030817871093,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.00568789833984375,
+      "HtoD_recorded_GiB_per_rank_step": 14.288652420043945,
+      "DtoH_GPU_seconds_per_rank_step": 1.5228669894042968,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.00343887041015625,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693539887666,
+      "NCCL_overlap_compute_fraction": 0.07603397822377418,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "policy": "baseline",
+      "rank": 1,
+      "window": "window-01",
+      "HtoD_GPU_seconds_per_rank_step": 1.4816607311523438,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.004897841796875,
+      "HtoD_recorded_GiB_per_rank_step": 14.284692764282227,
+      "DtoH_GPU_seconds_per_rank_step": 1.5109227345703125,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.0024476931640625,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693327546119,
+      "NCCL_overlap_compute_fraction": 0.1344270184160618,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "policy": "baseline",
+      "rank": 0,
+      "window": "window-02",
+      "HtoD_GPU_seconds_per_rank_step": 1.5711655407226564,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.0057827533203125,
+      "HtoD_recorded_GiB_per_rank_step": 14.288652420043945,
+      "DtoH_GPU_seconds_per_rank_step": 1.6133188192382812,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.003699806689453125,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693539887666,
+      "NCCL_overlap_compute_fraction": 0.1634733053273646,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "policy": "baseline",
+      "rank": 1,
+      "window": "window-02",
+      "HtoD_GPU_seconds_per_rank_step": 1.5553118797851562,
+      "HtoD_CPU_API_seconds_per_rank_step": 0.00410329970703125,
+      "HtoD_recorded_GiB_per_rank_step": 14.284692764282227,
+      "DtoH_GPU_seconds_per_rank_step": 1.6089706538574218,
+      "DtoH_CPU_API_seconds_per_rank_step": 0.002881455859375,
+      "DtoH_recorded_GiB_per_rank_step": 14.284693327546119,
+      "NCCL_overlap_compute_fraction": 0.11167699455780147,
+      "NCCL_overlap_memcpy_seconds_per_rank_step": 0.0
+    }
+  ],
+  "script_sha256": "b3abd38030a5e6960ae25dd80d3d1fb0d81607deb538bcc051e99c86c0c630cf"
+}

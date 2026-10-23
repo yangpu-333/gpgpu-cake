@@ -1,0 +1,19 @@
+{
+  "schema": "jiuge7b-sft-numa-CPU-postprocessing-v1",
+  "pid": 42768,
+  "status": "scientific_postprocessing_completed_reports_pending",
+  "GPU_used": false,
+  "raw_originals_downloaded": false,
+  "updated_utc": "2026-10-23T14:35:18.550200+00:00",
+  "driver_status": "observing",
+  "completed_cases": 6,
+  "CPU_source_sha256": {
+    "review_sft_phased_moments_v2_20261023.py": "b46e16198b99cc46c6314779f46f7d2666c20a88f34f56ae1d39f9229a48529f",
+    "package_sft_phased_moments_v2_20261023.py": "3d3e0326960de4592740d4e3e2e8e3dfcd3268cf7e4e0ef676e4e722b2e3b499",
+    "plot_sft_phased_moments_v2_20261023.py": "39fc922b4d7497a1af79025acd1df157cbfb8ab5e8f9a316065f2ce4fdabea1f",
+    "finish_sft_phased_moments_v2_20261023.py": "d336457ee2b3c26d742105ee26b4e5ca90447a32ab5129964687aeeb2e62bae6"
+  },
+  "raw_trace_count": 24,
+  "ACT_raw_bundle": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-moments-delivery-20261023-07/Jiuge7B-SFT-S2048-direct-zero-moments-ABC-CBA-traces.zip",
+  "ACT_raw_bundle_sha256": "7abe2cf4852e2af4e761d229cd1837a9ef0a63ce6d527e576d3461600802e2fe"
+}

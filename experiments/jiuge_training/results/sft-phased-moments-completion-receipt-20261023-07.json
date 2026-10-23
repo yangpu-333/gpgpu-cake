@@ -1,0 +1,501 @@
+{
+  "schema": "jiuge7b-sft-phased-moments-completion-v1",
+  "utc": "2026-10-23T14:48:11.761365+00:00",
+  "requested_diagnostic_completed": true,
+  "fresh_cases": 6,
+  "raw_trace_count": 24,
+  "diagnostic_baseline": "accepted pinned SFT repair; fresh unbound runs",
+  "candidate_screens": {
+    "affinity-control": {
+      "both_candidate_runs_faster_than_both_unbound_runs": true,
+      "descriptive_ratio_of_means": 1.057035580013044,
+      "formal_performance_evidence": false
+    },
+    "local-moments": {
+      "both_candidate_runs_faster_than_both_unbound_runs": true,
+      "descriptive_ratio_of_means": 1.0921609376711467,
+      "formal_performance_evidence": false,
+      "both_candidate_runs_faster_than_both_affinity_control_runs": true,
+      "eligible_for_own_full_SFT_acceptance": true
+    }
+  },
+  "new_full_state_resume_and_formal_still_required_for_any_candidate": true,
+  "new_formal_performance_passed": false,
+  "ACT_raw_archive": {
+    "schema": "jiuge7b-sft-moment-trace-delivery-verification-v1",
+    "passed": true,
+    "bundle": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-moments-delivery-20261023-07/Jiuge7B-SFT-S2048-direct-zero-moments-ABC-CBA-traces.zip",
+    "bundle_bytes": 219495424,
+    "bundle_sha256": "7abe2cf4852e2af4e761d229cd1837a9ef0a63ce6d527e576d3461600802e2fe",
+    "verified_files": 636,
+    "verified_raw_traces": 24,
+    "compressed_and_decompressed_SHA_passed": true,
+    "bundle_downloaded_to_local": false,
+    "traces": [
+      {
+        "case": "sft-phased-moments-20261023-07-a1-baseline",
+        "policy": "baseline",
+        "tag": "a1",
+        "rank": 0,
+        "window": "window-01",
+        "steps": [
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-a1-baseline/window-01/rank-0.json.gz",
+        "compressed_sha256": "54f5e59175ab2f7bd26f56e3217d109407a9f4ee84c1eca979357c3d6ab71051",
+        "decompressed_sha256": "d9e9d803821aa9958cd03de1c7db4a5a17380513b6fd2c7acacc2aacb4161aec",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-a1-baseline",
+        "policy": "baseline",
+        "tag": "a1",
+        "rank": 1,
+        "window": "window-01",
+        "steps": [
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-a1-baseline/window-01/rank-1.json.gz",
+        "compressed_sha256": "98038038361100de43c19396c97c0fb94a6ffb4f764e3e45a2555991b2eca55a",
+        "decompressed_sha256": "818ba4c1a0b6a67ad1ff9321719c400be866b881f6d3cad96a3f542911e158eb",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-a1-baseline",
+        "policy": "baseline",
+        "tag": "a1",
+        "rank": 0,
+        "window": "window-02",
+        "steps": [
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-a1-baseline/window-02/rank-0.json.gz",
+        "compressed_sha256": "d4f13c2ff9e754c8b087cb38e8b82eb37ca1429449d8f98d1070542717e1841a",
+        "decompressed_sha256": "54d1deed62a56753649df13a148bb6bb9049382fda2a4357177e27d909729b1a",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-a1-baseline",
+        "policy": "baseline",
+        "tag": "a1",
+        "rank": 1,
+        "window": "window-02",
+        "steps": [
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-a1-baseline/window-02/rank-1.json.gz",
+        "compressed_sha256": "90ce44fd049ecb05c4dd6d0714e5e691f37d285f8eef3593a0df4e646ae50804",
+        "decompressed_sha256": "dc25d4b4bb3909bfbde47e1551f5792382261c5324a6a0f36170d476f9fd5103",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+        "policy": "affinity-control",
+        "tag": "b1",
+        "rank": 0,
+        "window": "window-01",
+        "steps": [
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-b1-affinity-control/window-01/rank-0.json.gz",
+        "compressed_sha256": "4cb1174de8c08c9008f5e4dc3dded64b1abc8ada59b8adff4a436f7bfc66b0c8",
+        "decompressed_sha256": "d72809f4c9e57ada07d0dca863fae390fdb158f53a8f1701f286f7148215b1a9",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+        "policy": "affinity-control",
+        "tag": "b1",
+        "rank": 1,
+        "window": "window-01",
+        "steps": [
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-b1-affinity-control/window-01/rank-1.json.gz",
+        "compressed_sha256": "5b34aa153dff5b072b3f701c299b2181620a4f76ac454b2d2529f8d0bbca7f13",
+        "decompressed_sha256": "7d2574e0eb696039f358864f19b5c395479e05efdff09c79ac6a1f3239d0963b",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+        "policy": "affinity-control",
+        "tag": "b1",
+        "rank": 0,
+        "window": "window-02",
+        "steps": [
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-b1-affinity-control/window-02/rank-0.json.gz",
+        "compressed_sha256": "4414cfaf3d39596c32aeeee5d28e1bf99ec5e2807722764c59ef60c3d68d2766",
+        "decompressed_sha256": "60722863c8f70249e7b89ffbdb0050252cb9348581ff931999aefb0d40127718",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+        "policy": "affinity-control",
+        "tag": "b1",
+        "rank": 1,
+        "window": "window-02",
+        "steps": [
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-b1-affinity-control/window-02/rank-1.json.gz",
+        "compressed_sha256": "4b156c38ee911d98f15ff64d32e848b69fec5c83731da390bd0235062f3c2263",
+        "decompressed_sha256": "0a93e8652149fbb5d4c58df25a4b051f0f9c1ab906dd234c3a3c7dd60de1d561",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-c1-local-moments",
+        "policy": "local-moments",
+        "tag": "c1",
+        "rank": 0,
+        "window": "window-01",
+        "steps": [
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-c1-local-moments/window-01/rank-0.json.gz",
+        "compressed_sha256": "1c8f7f552ba83a60ee3a8e119d9645625686c344bb49c7f7af47b3bf2c031765",
+        "decompressed_sha256": "46e4a84d0808b342feba1b4a4d29aa6818ad8957d3b654737900e0e56241e449",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-c1-local-moments",
+        "policy": "local-moments",
+        "tag": "c1",
+        "rank": 1,
+        "window": "window-01",
+        "steps": [
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-c1-local-moments/window-01/rank-1.json.gz",
+        "compressed_sha256": "1e58884910fbef2510e3031e73092cf7dad804caad8c8cdf2ea583d47106d4a4",
+        "decompressed_sha256": "cced1f3f550b8ea741cf6616d60cf568fc638b5aef2227982c32864e9cbaa5f4",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-c1-local-moments",
+        "policy": "local-moments",
+        "tag": "c1",
+        "rank": 0,
+        "window": "window-02",
+        "steps": [
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-c1-local-moments/window-02/rank-0.json.gz",
+        "compressed_sha256": "cf4a442b8c9c27a0909d371fddaa8bce30660600326d08459b0c55b4f7958f96",
+        "decompressed_sha256": "a1429d7afee9e675f5513d3d5873b1e80db73e4b3174a5b9cfa9e380c255a4b7",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-c1-local-moments",
+        "policy": "local-moments",
+        "tag": "c1",
+        "rank": 1,
+        "window": "window-02",
+        "steps": [
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-c1-local-moments/window-02/rank-1.json.gz",
+        "compressed_sha256": "ddefe123a45a2c71b0fa44dc4aadf0f7648487a6122c2546834a2cdda61ac89c",
+        "decompressed_sha256": "16c64af713ddf883beccfcea5104ad2eaae4ca93dafe71745f3178f3dfa5e191",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-c2-local-moments",
+        "policy": "local-moments",
+        "tag": "c2",
+        "rank": 0,
+        "window": "window-01",
+        "steps": [
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-c2-local-moments/window-01/rank-0.json.gz",
+        "compressed_sha256": "563dd5ab1f85d82fda47bed14a970b6f1dfdd7e67c60027524c9cb17d6434a41",
+        "decompressed_sha256": "61d423bfc9fd7bc5dd48615efd86bd0f61e30d23b348b0b3535313603f053c5f",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-c2-local-moments",
+        "policy": "local-moments",
+        "tag": "c2",
+        "rank": 1,
+        "window": "window-01",
+        "steps": [
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-c2-local-moments/window-01/rank-1.json.gz",
+        "compressed_sha256": "3f08e64099cb55864292c6850592d163bf5ae2df7fd8c50361709c182f71b479",
+        "decompressed_sha256": "364d33a13293fa61dc0322b4e44b6bf8e080b47e87f519fea264499485ec4e9f",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-c2-local-moments",
+        "policy": "local-moments",
+        "tag": "c2",
+        "rank": 0,
+        "window": "window-02",
+        "steps": [
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-c2-local-moments/window-02/rank-0.json.gz",
+        "compressed_sha256": "3e4ce73a33c8539626def2128efffd25e7695063794635ad7bab6812278e9e10",
+        "decompressed_sha256": "ee1e77bde1aaec45abf0d80b30e1d03563e7ecd5174172aa496393545f1d165a",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-c2-local-moments",
+        "policy": "local-moments",
+        "tag": "c2",
+        "rank": 1,
+        "window": "window-02",
+        "steps": [
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-c2-local-moments/window-02/rank-1.json.gz",
+        "compressed_sha256": "9228c43d27d21110e13dfe3ba46a6bb062ff68cc19cec8297ee7a423272b24df",
+        "decompressed_sha256": "b618f5e5cea54c407403e64888896839e3f3d8ad466cecb8e745636707467de6",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+        "policy": "affinity-control",
+        "tag": "b2",
+        "rank": 0,
+        "window": "window-01",
+        "steps": [
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-b2-affinity-control/window-01/rank-0.json.gz",
+        "compressed_sha256": "4f9ffe078ab8c96f4bfa326940f760e2f2b87b182fd8969c50280eca64ca28aa",
+        "decompressed_sha256": "d998fd87870e5394297c276499c23af1dbcc0e180d57a9b8a8ca25a34a29c129",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+        "policy": "affinity-control",
+        "tag": "b2",
+        "rank": 1,
+        "window": "window-01",
+        "steps": [
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-b2-affinity-control/window-01/rank-1.json.gz",
+        "compressed_sha256": "ddf9f8d84a271b2684fc1a7ad36683206c73ca9c5ffe6d04b2dbe35eaee769f3",
+        "decompressed_sha256": "83c53c0d6d9832ad702a4021e7bf8226a0a245f36f9315304da32f134fee32c6",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+        "policy": "affinity-control",
+        "tag": "b2",
+        "rank": 0,
+        "window": "window-02",
+        "steps": [
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-b2-affinity-control/window-02/rank-0.json.gz",
+        "compressed_sha256": "db142806b83d97fb12974de924127873e3872958dc3db08d6aaa8f7cdf06ed1c",
+        "decompressed_sha256": "21602d2948426e4c61cffaaf33253ba07c46c4b332f19a2aa0deb6284477ce9f",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+        "policy": "affinity-control",
+        "tag": "b2",
+        "rank": 1,
+        "window": "window-02",
+        "steps": [
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-b2-affinity-control/window-02/rank-1.json.gz",
+        "compressed_sha256": "22529ed5d58b9a1018de66fef84ef48104126753dd7d00e076f20e31bdbfc7f5",
+        "decompressed_sha256": "f566015658d4a4fe17488281e4170faeace094a729c2d30ed5f11115baf3418c",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-a2-baseline",
+        "policy": "baseline",
+        "tag": "a2",
+        "rank": 0,
+        "window": "window-01",
+        "steps": [
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-a2-baseline/window-01/rank-0.json.gz",
+        "compressed_sha256": "1fb14888cf74f6c2e36ed1e5acb21bf12b5164fe356d955eed5490f1641bd5aa",
+        "decompressed_sha256": "4eef8e7c11ce7513b891994710c79b724094604739ec6ec7df214ee25eaa1f34",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-a2-baseline",
+        "policy": "baseline",
+        "tag": "a2",
+        "rank": 1,
+        "window": "window-01",
+        "steps": [
+          21,
+          22,
+          23,
+          24,
+          25
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-a2-baseline/window-01/rank-1.json.gz",
+        "compressed_sha256": "fe1ef78d64fcce29e3355873c2542f1ff4729ab29e94d6f52f380057f992546d",
+        "decompressed_sha256": "34d0085d9ae5a79dd34725c3471156a24592d87873d4a769f5f2c83c7dfc82e0",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-a2-baseline",
+        "policy": "baseline",
+        "tag": "a2",
+        "rank": 0,
+        "window": "window-02",
+        "steps": [
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-a2-baseline/window-02/rank-0.json.gz",
+        "compressed_sha256": "45cb424139c5aba597b8bfb47965c762f5f3a54703547750e062abf660d91a6e",
+        "decompressed_sha256": "e1eb786866c9538b9a2f14712642a9876dfe4f374795cd32b7893be1a300e7fa",
+        "NCCL_kernel_events": 922
+      },
+      {
+        "case": "sft-phased-moments-20261023-07-a2-baseline",
+        "policy": "baseline",
+        "tag": "a2",
+        "rank": 1,
+        "window": "window-02",
+        "steps": [
+          31,
+          32,
+          33,
+          34,
+          35
+        ],
+        "path_in_bundle": "runs/sft-phased-moments-20261023-07-a2-baseline/window-02/rank-1.json.gz",
+        "compressed_sha256": "820a3b7cad3675081248d9979daa80ab965f982654c6108d577481af41826d48",
+        "decompressed_sha256": "3f33de7819ca6a23839417bfd11e09f05757efccbba41b8564131d85d886fd60",
+        "NCCL_kernel_events": 922
+      }
+    ]
+  },
+  "ACT_final_review": {
+    "passed": true,
+    "folder": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-moments-delivery-20261023-07/final-review",
+    "files": 234,
+    "bytes": 4460917,
+    "manifest_sha256": "75b577e3c8b5d191c27db36934e0db5dcceaf82d42fd24ebc73c7ffc92e6130a",
+    "originals_modified": false
+  },
+  "platform": {
+    "schema": "jiuge7b-sft-phased-platform-completion-v1",
+    "verified_utc": "2026-10-23T14:40:13.370885+00:00",
+    "job": "sg-huids25-261023-24c7a",
+    "status": "completed",
+    "points": 0,
+    "controller_exit_code": 0,
+    "platform_container_reason": "Completed",
+    "container_terminated": true,
+    "duration_UI": "50 minutes",
+    "budget_stop_epoch": 1792771841,
+    "old_V100_retained": true,
+    "other_users_processes_stopped": false,
+    "platform_utilization_aggregate_not_used_for_scientific_results": true,
+    "GPU_execution_verified_by_native_updates_and_raw_CUPTI_traces": true,
+    "screenshot": "sft-phased-moments-platform-completed-20261023-07.jpg"
+  },
+  "raw_originals_remain_ACT": true,
+  "local_only_bounded_keys": true,
+  "two_human_reports": [
+    "README.md",
+    "BRIEF.md"
+  ],
+  "keep_old_V100": true
+}

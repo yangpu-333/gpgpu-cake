@@ -1,0 +1,17 @@
+{
+  "schema": "jiuge7b-sft-phased-platform-completion-v1",
+  "verified_utc": "2026-10-23T14:40:13.370885+00:00",
+  "job": "sg-huids25-261023-24c7a",
+  "status": "completed",
+  "points": 0,
+  "controller_exit_code": 0,
+  "platform_container_reason": "Completed",
+  "container_terminated": true,
+  "duration_UI": "50 minutes",
+  "budget_stop_epoch": 1792771841,
+  "old_V100_retained": true,
+  "other_users_processes_stopped": false,
+  "platform_utilization_aggregate_not_used_for_scientific_results": true,
+  "GPU_execution_verified_by_native_updates_and_raw_CUPTI_traces": true,
+  "screenshot": "sft-phased-moments-platform-completed-20261023-07.jpg"
+}

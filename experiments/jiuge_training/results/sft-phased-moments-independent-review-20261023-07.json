@@ -1,0 +1,3149 @@
+{
+  "schema": "jiuge7b-sft-moment-screen-independent-review-v1",
+  "passed": true,
+  "utc": "2026-10-23T14:34:30.314073+00:00",
+  "baseline": "accepted pinned repair; fresh unbound SFT runs; affinity-only additional control",
+  "cases": [
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "policy": "baseline",
+      "diagnostic_slow_rank_mean_seconds_per_step": 3.7378375619140627,
+      "raw_archive_verified_files": 67,
+      "raw_archive_verified_bytes": 36321182
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "policy": "affinity-control",
+      "diagnostic_slow_rank_mean_seconds_per_step": 3.7368879570068363,
+      "raw_archive_verified_files": 67,
+      "raw_archive_verified_bytes": 36178611
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "policy": "local-moments",
+      "diagnostic_slow_rank_mean_seconds_per_step": 3.5338263395996092,
+      "raw_archive_verified_files": 67,
+      "raw_archive_verified_bytes": 36696791
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "policy": "local-moments",
+      "diagnostic_slow_rank_mean_seconds_per_step": 3.532920371704102,
+      "raw_archive_verified_files": 67,
+      "raw_archive_verified_bytes": 36696089
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "policy": "affinity-control",
+      "diagnostic_slow_rank_mean_seconds_per_step": 3.564687184301758,
+      "raw_archive_verified_files": 67,
+      "raw_archive_verified_bytes": 36052876
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "policy": "baseline",
+      "diagnostic_slow_rank_mean_seconds_per_step": 3.9801871525878907,
+      "raw_archive_verified_files": 67,
+      "raw_archive_verified_bytes": 36416597
+    }
+  ],
+  "policies": {
+    "baseline": {
+      "profiled_seconds_per_rank_step": {
+        "mean": 3.852289017480469,
+        "min": 3.616468494824219,
+        "max": 4.238955413183594
+      },
+      "CPU_AdamW_seconds_per_rank_step": {
+        "mean": 2.523589344769287,
+        "min": 2.0042009325683594,
+        "max": 2.994572066015625
+      },
+      "CPU_optimizer_seconds_per_rank_step": {
+        "mean": 2.7978818690856935,
+        "min": 2.6178084587402344,
+        "max": 3.2306027978515623
+      },
+      "GPU_compute_seconds_per_rank_step": {
+        "mean": 0.6606040629882812,
+        "min": 0.6547442170410156,
+        "max": 0.6655623176269532
+      },
+      "GPU_memcpy_seconds_per_rank_step": {
+        "mean": 2.3665727922302247,
+        "min": 2.165271260449219,
+        "max": 2.5504843248046876
+      },
+      "GPU_NCCL_seconds_per_rank_step": {
+        "mean": 0.4664928438476562,
+        "min": 0.36449813642578127,
+        "max": 0.7854800754394531
+      },
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": {
+        "mean": 1.6678888137939454,
+        "min": 1.3908785012695313,
+        "max": 1.9697740502441405
+      },
+      "GPU_idle_proxy_fraction": {
+        "mean": 0.1081075947164303,
+        "min": 0.018561510305536585,
+        "max": 0.22653508362168523
+      },
+      "maximum_collective_start_skew_candidate_ms": {
+        "mean": 396.31460052490235,
+        "min": 137.79265502929687,
+        "max": 752.589041015625
+      }
+    },
+    "affinity-control": {
+      "profiled_seconds_per_rank_step": {
+        "mean": 3.650201127032471,
+        "min": 3.5535857456054685,
+        "max": 3.738694189990235
+      },
+      "CPU_AdamW_seconds_per_rank_step": {
+        "mean": 2.367616486767578,
+        "min": 2.287625838623047,
+        "max": 2.4464636552734373
+      },
+      "CPU_optimizer_seconds_per_rank_step": {
+        "mean": 2.651694813671875,
+        "min": 2.553203853076172,
+        "max": 2.7349924063964846
+      },
+      "GPU_compute_seconds_per_rank_step": {
+        "mean": 0.6594831470458984,
+        "min": 0.6532233009277344,
+        "max": 0.6659660338867187
+      },
+      "GPU_memcpy_seconds_per_rank_step": {
+        "mean": 2.327033233959961,
+        "min": 2.241819129248047,
+        "max": 2.4262731921386718
+      },
+      "GPU_NCCL_seconds_per_rank_step": {
+        "mean": 0.4144110528076172,
+        "min": 0.3689185597167969,
+        "max": 0.4500431799804688
+      },
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": {
+        "mean": 1.702464376385498,
+        "min": 1.483819650390625,
+        "max": 1.9581215420410156
+      },
+      "GPU_idle_proxy_fraction": {
+        "mean": 0.08647835931732278,
+        "min": 0.04672671912664153,
+        "max": 0.12386430430417196
+      },
+      "maximum_collective_start_skew_candidate_ms": {
+        "mean": 163.90253881835937,
+        "min": 128.0974130859375,
+        "max": 215.817208984375
+      }
+    },
+    "local-moments": {
+      "profiled_seconds_per_rank_step": {
+        "mean": 3.532819758026123,
+        "min": 3.530641372998047,
+        "max": 3.5349148832031245
+      },
+      "CPU_AdamW_seconds_per_rank_step": {
+        "mean": 2.237048128503418,
+        "min": 2.2296540330078125,
+        "max": 2.2519293095214845
+      },
+      "CPU_optimizer_seconds_per_rank_step": {
+        "mean": 2.5461893767578125,
+        "min": 2.5137211100097656,
+        "max": 2.57754986640625
+      },
+      "GPU_compute_seconds_per_rank_step": {
+        "mean": 0.6594417905151367,
+        "min": 0.6536847716796875,
+        "max": 0.6656880411621093
+      },
+      "GPU_memcpy_seconds_per_rank_step": {
+        "mean": 2.3776502496032714,
+        "min": 2.277223501855469,
+        "max": 2.4796718045410158
+      },
+      "GPU_NCCL_seconds_per_rank_step": {
+        "mean": 0.402360709375,
+        "min": 0.3673292723144531,
+        "max": 0.4394205916015625
+      },
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": {
+        "mean": 1.912023649456787,
+        "min": 1.7894982379882813,
+        "max": 2.035985532910156
+      },
+      "GPU_idle_proxy_fraction": {
+        "mean": 0.04639996147527683,
+        "min": 0.026816946155983193,
+        "max": 0.06662103833364355
+      },
+      "maximum_collective_start_skew_candidate_ms": {
+        "mean": 75.54108551025391,
+        "min": 74.42382397460938,
+        "max": 77.08596411132812
+      }
+    }
+  },
+  "windows": [
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "policy": "baseline",
+      "rank": 0,
+      "window": "window-01",
+      "profiled_seconds_per_rank_step": 3.857359118798828,
+      "CPU_AdamW_seconds_per_rank_step": 2.532106887890625,
+      "CPU_optimizer_seconds_per_rank_step": 2.7669658211425783,
+      "GPU_compute_seconds_per_rank_step": 0.6639146712890625,
+      "GPU_memcpy_seconds_per_rank_step": 2.5504843248046876,
+      "GPU_NCCL_seconds_per_rank_step": 0.5022229813964844,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.9697740502441405,
+      "GPU_idle_proxy_fraction": 0.05493667606579878,
+      "maximum_collective_start_skew_candidate_ms": 426.29548217773436,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "policy": "baseline",
+      "rank": 1,
+      "window": "window-01",
+      "profiled_seconds_per_rank_step": 3.859179426611328,
+      "CPU_AdamW_seconds_per_rank_step": 2.6978613253417967,
+      "CPU_optimizer_seconds_per_rank_step": 2.911455827392578,
+      "GPU_compute_seconds_per_rank_step": 0.6547442170410156,
+      "GPU_memcpy_seconds_per_rank_step": 2.450164671923828,
+      "GPU_NCCL_seconds_per_rank_step": 0.3658933876953125,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.8033185073242188,
+      "GPU_idle_proxy_fraction": 0.11705955449983804,
+      "maximum_collective_start_skew_candidate_ms": 426.29548217773436,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "policy": "baseline",
+      "rank": 0,
+      "window": "window-02",
+      "profiled_seconds_per_rank_step": 3.616468494824219,
+      "CPU_AdamW_seconds_per_rank_step": 2.0042009325683594,
+      "CPU_optimizer_seconds_per_rank_step": 2.6178084587402344,
+      "GPU_compute_seconds_per_rank_step": 0.6640211017578125,
+      "GPU_memcpy_seconds_per_rank_step": 2.5476041928222655,
+      "GPU_NCCL_seconds_per_rank_step": 0.41228785986328126,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.8747051157226562,
+      "GPU_idle_proxy_fraction": 0.018561510305536585,
+      "maximum_collective_start_skew_candidate_ms": 137.79265502929687,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "policy": "baseline",
+      "rank": 1,
+      "window": "window-02",
+      "profiled_seconds_per_rank_step": 3.616495697216797,
+      "CPU_AdamW_seconds_per_rank_step": 2.448958406347656,
+      "CPU_optimizer_seconds_per_rank_step": 2.6708211244140627,
+      "GPU_compute_seconds_per_rank_step": 0.6549733283203125,
+      "GPU_memcpy_seconds_per_rank_step": 2.4250993640625,
+      "GPU_NCCL_seconds_per_rank_step": 0.36449813642578127,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.9388080187011718,
+      "GPU_idle_proxy_fraction": 0.06581809330061923,
+      "maximum_collective_start_skew_candidate_ms": 137.79265502929687,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "policy": "affinity-control",
+      "rank": 0,
+      "window": "window-01",
+      "profiled_seconds_per_rank_step": 3.7350817240234377,
+      "CPU_AdamW_seconds_per_rank_step": 2.4428727258789062,
+      "CPU_optimizer_seconds_per_rank_step": 2.726530927734375,
+      "GPU_compute_seconds_per_rank_step": 0.6645088125,
+      "GPU_memcpy_seconds_per_rank_step": 2.371677059277344,
+      "GPU_NCCL_seconds_per_rank_step": 0.4115184392089844,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.6732013245605468,
+      "GPU_idle_proxy_fraction": 0.09608736427232,
+      "maximum_collective_start_skew_candidate_ms": 215.817208984375,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "policy": "affinity-control",
+      "rank": 1,
+      "window": "window-01",
+      "profiled_seconds_per_rank_step": 3.7339000744140627,
+      "CPU_AdamW_seconds_per_rank_step": 2.422552971826172,
+      "CPU_optimizer_seconds_per_rank_step": 2.7126267043945314,
+      "GPU_compute_seconds_per_rank_step": 0.6537234794921875,
+      "GPU_memcpy_seconds_per_rank_step": 2.241819129248047,
+      "GPU_NCCL_seconds_per_rank_step": 0.4388536937011719,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.4868469661621093,
+      "GPU_idle_proxy_fraction": 0.12386430430417196,
+      "maximum_collective_start_skew_candidate_ms": 215.817208984375,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "policy": "affinity-control",
+      "rank": 0,
+      "window": "window-02",
+      "profiled_seconds_per_rank_step": 3.737886352001953,
+      "CPU_AdamW_seconds_per_rank_step": 2.4464636552734373,
+      "CPU_optimizer_seconds_per_rank_step": 2.7349924063964846,
+      "GPU_compute_seconds_per_rank_step": 0.665015976953125,
+      "GPU_memcpy_seconds_per_rank_step": 2.3654623564453123,
+      "GPU_NCCL_seconds_per_rank_step": 0.41745977685546876,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.6804012993652344,
+      "GPU_idle_proxy_fraction": 0.09684829349058172,
+      "maximum_collective_start_skew_candidate_ms": 176.17985913085937,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "policy": "affinity-control",
+      "rank": 1,
+      "window": "window-02",
+      "profiled_seconds_per_rank_step": 3.738694189990235,
+      "CPU_AdamW_seconds_per_rank_step": 2.403286915136719,
+      "CPU_optimizer_seconds_per_rank_step": 2.701394454980469,
+      "GPU_compute_seconds_per_rank_step": 0.6535895083496094,
+      "GPU_memcpy_seconds_per_rank_step": 2.2487896635253906,
+      "GPU_NCCL_seconds_per_rank_step": 0.4500431799804688,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.483819650390625,
+      "GPU_idle_proxy_fraction": 0.11989879072110743,
+      "maximum_collective_start_skew_candidate_ms": 176.17985913085937,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "policy": "local-moments",
+      "rank": 0,
+      "window": "window-01",
+      "profiled_seconds_per_rank_step": 3.530641372998047,
+      "CPU_AdamW_seconds_per_rank_step": 2.2519293095214845,
+      "CPU_optimizer_seconds_per_rank_step": 2.5742777830078123,
+      "GPU_compute_seconds_per_rank_step": 0.6656880411621093,
+      "GPU_memcpy_seconds_per_rank_step": 2.4745534786132812,
+      "GPU_NCCL_seconds_per_rank_step": 0.3678573578125,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 2.035985532910156,
+      "GPU_idle_proxy_fraction": 0.027828434438025434,
+      "maximum_collective_start_skew_candidate_ms": 75.23106616210937,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "policy": "local-moments",
+      "rank": 1,
+      "window": "window-01",
+      "profiled_seconds_per_rank_step": 3.5327377959960935,
+      "CPU_AdamW_seconds_per_rank_step": 2.2296540330078125,
+      "CPU_optimizer_seconds_per_rank_step": 2.5137211100097656,
+      "GPU_compute_seconds_per_rank_step": 0.6537136304199219,
+      "GPU_memcpy_seconds_per_rank_step": 2.277223501855469,
+      "GPU_NCCL_seconds_per_rank_step": 0.4394205916015625,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.7894982379882813,
+      "GPU_idle_proxy_fraction": 0.06462537871548349,
+      "maximum_collective_start_skew_candidate_ms": 75.23106616210937,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "policy": "local-moments",
+      "rank": 0,
+      "window": "window-02",
+      "profiled_seconds_per_rank_step": 3.5349148832031245,
+      "CPU_AdamW_seconds_per_rank_step": 2.232221441748047,
+      "CPU_optimizer_seconds_per_rank_step": 2.57754986640625,
+      "GPU_compute_seconds_per_rank_step": 0.665596261328125,
+      "GPU_memcpy_seconds_per_rank_step": 2.4791905072265625,
+      "GPU_NCCL_seconds_per_rank_step": 0.36984574560546873,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 2.0200061841796875,
+      "GPU_idle_proxy_fraction": 0.027150963666110313,
+      "maximum_collective_start_skew_candidate_ms": 77.08596411132812,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "policy": "local-moments",
+      "rank": 1,
+      "window": "window-02",
+      "profiled_seconds_per_rank_step": 3.534893929003906,
+      "CPU_AdamW_seconds_per_rank_step": 2.2335286986328127,
+      "CPU_optimizer_seconds_per_rank_step": 2.516180236425781,
+      "GPU_compute_seconds_per_rank_step": 0.6536847716796875,
+      "GPU_memcpy_seconds_per_rank_step": 2.2775014323242186,
+      "GPU_NCCL_seconds_per_rank_step": 0.4375665681640625,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.7980349517089844,
+      "GPU_idle_proxy_fraction": 0.06569146075232195,
+      "maximum_collective_start_skew_candidate_ms": 77.08596411132812,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "policy": "local-moments",
+      "rank": 0,
+      "window": "window-01",
+      "profiled_seconds_per_rank_step": 3.532186856591797,
+      "CPU_AdamW_seconds_per_rank_step": 2.2416605877441405,
+      "CPU_optimizer_seconds_per_rank_step": 2.57638273125,
+      "GPU_compute_seconds_per_rank_step": 0.66461648046875,
+      "GPU_memcpy_seconds_per_rank_step": 2.4796718045410158,
+      "GPU_NCCL_seconds_per_rank_step": 0.3676144123046875,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 2.0353113629882813,
+      "GPU_idle_proxy_fraction": 0.026816946155983193,
+      "maximum_collective_start_skew_candidate_ms": 75.42348779296876,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "policy": "local-moments",
+      "rank": 1,
+      "window": "window-01",
+      "profiled_seconds_per_rank_step": 3.5344886547851564,
+      "CPU_AdamW_seconds_per_rank_step": 2.2338868650390626,
+      "CPU_optimizer_seconds_per_rank_step": 2.5154420282226564,
+      "GPU_compute_seconds_per_rank_step": 0.6540321256347656,
+      "GPU_memcpy_seconds_per_rank_step": 2.280373479394531,
+      "GPU_NCCL_seconds_per_rank_step": 0.43906690180664065,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.8023020751953125,
+      "GPU_idle_proxy_fraction": 0.06427463764284498,
+      "maximum_collective_start_skew_candidate_ms": 75.42348779296876,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "policy": "local-moments",
+      "rank": 0,
+      "window": "window-02",
+      "profiled_seconds_per_rank_step": 3.531352088623047,
+      "CPU_AdamW_seconds_per_rank_step": 2.235291327783203,
+      "CPU_optimizer_seconds_per_rank_step": 2.5755712001953124,
+      "GPU_compute_seconds_per_rank_step": 0.6643951470703126,
+      "GPU_memcpy_seconds_per_rank_step": 2.47445583515625,
+      "GPU_NCCL_seconds_per_rank_step": 0.3673292723144531,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 2.0215953365722656,
+      "GPU_idle_proxy_fraction": 0.028190832097801724,
+      "maximum_collective_start_skew_candidate_ms": 74.42382397460938,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "policy": "local-moments",
+      "rank": 1,
+      "window": "window-02",
+      "profiled_seconds_per_rank_step": 3.531342483007813,
+      "CPU_AdamW_seconds_per_rank_step": 2.238212764550781,
+      "CPU_optimizer_seconds_per_rank_step": 2.5203900585449217,
+      "GPU_compute_seconds_per_rank_step": 0.6538078663574218,
+      "GPU_memcpy_seconds_per_rank_step": 2.2782319577148438,
+      "GPU_NCCL_seconds_per_rank_step": 0.430184825390625,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.7934555141113282,
+      "GPU_idle_proxy_fraction": 0.06662103833364355,
+      "maximum_collective_start_skew_candidate_ms": 74.42382397460938,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "policy": "affinity-control",
+      "rank": 0,
+      "window": "window-01",
+      "profiled_seconds_per_rank_step": 3.5730865616210936,
+      "CPU_AdamW_seconds_per_rank_step": 2.3252387118164064,
+      "CPU_optimizer_seconds_per_rank_step": 2.622283376171875,
+      "GPU_compute_seconds_per_rank_step": 0.6657750804199218,
+      "GPU_memcpy_seconds_per_rank_step": 2.4262731921386718,
+      "GPU_NCCL_seconds_per_rank_step": 0.3689185597167969,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.950474860986328,
+      "GPU_idle_proxy_fraction": 0.052373217079259266,
+      "maximum_collective_start_skew_candidate_ms": 128.0974130859375,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "policy": "affinity-control",
+      "rank": 1,
+      "window": "window-01",
+      "profiled_seconds_per_rank_step": 3.5757859720214844,
+      "CPU_AdamW_seconds_per_rank_step": 2.3022769671875,
+      "CPU_optimizer_seconds_per_rank_step": 2.5717990854003907,
+      "GPU_compute_seconds_per_rank_step": 0.6532233009277344,
+      "GPU_memcpy_seconds_per_rank_step": 2.271813762548828,
+      "GPU_NCCL_seconds_per_rank_step": 0.4282926928222656,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.6954997796875,
+      "GPU_idle_proxy_fraction": 0.08003125722931514,
+      "maximum_collective_start_skew_candidate_ms": 128.0974130859375,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "policy": "affinity-control",
+      "rank": 0,
+      "window": "window-02",
+      "profiled_seconds_per_rank_step": 3.5535857456054685,
+      "CPU_AdamW_seconds_per_rank_step": 2.3106141083984375,
+      "CPU_optimizer_seconds_per_rank_step": 2.590727701220703,
+      "GPU_compute_seconds_per_rank_step": 0.6659660338867187,
+      "GPU_memcpy_seconds_per_rank_step": 2.4181945906738282,
+      "GPU_NCCL_seconds_per_rank_step": 0.37873647353515627,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.9581215420410156,
+      "GPU_idle_proxy_fraction": 0.04672671912664153,
+      "maximum_collective_start_skew_candidate_ms": 135.51567407226563,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "policy": "affinity-control",
+      "rank": 1,
+      "window": "window-02",
+      "profiled_seconds_per_rank_step": 3.553588396582031,
+      "CPU_AdamW_seconds_per_rank_step": 2.287625838623047,
+      "CPU_optimizer_seconds_per_rank_step": 2.553203853076172,
+      "GPU_compute_seconds_per_rank_step": 0.6540629838378906,
+      "GPU_memcpy_seconds_per_rank_step": 2.2722361178222656,
+      "GPU_NCCL_seconds_per_rank_step": 0.421465606640625,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.691349587890625,
+      "GPU_idle_proxy_fraction": 0.07599692831518526,
+      "maximum_collective_start_skew_candidate_ms": 135.51567407226563,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "policy": "baseline",
+      "rank": 0,
+      "window": "window-01",
+      "profiled_seconds_per_rank_step": 4.187891650195313,
+      "CPU_AdamW_seconds_per_rank_step": 2.569347820800781,
+      "CPU_optimizer_seconds_per_rank_step": 2.8038208145507815,
+      "GPU_compute_seconds_per_rank_step": 0.6651314352539063,
+      "GPU_memcpy_seconds_per_rank_step": 2.254942953466797,
+      "GPU_NCCL_seconds_per_rank_step": 0.7854800754394531,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.4085182655761719,
+      "GPU_idle_proxy_fraction": 0.13125293015126246,
+      "maximum_collective_start_skew_candidate_ms": 752.589041015625,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "policy": "baseline",
+      "rank": 1,
+      "window": "window-01",
+      "profiled_seconds_per_rank_step": 4.238955413183594,
+      "CPU_AdamW_seconds_per_rank_step": 2.994572066015625,
+      "CPU_optimizer_seconds_per_rank_step": 3.2306027978515623,
+      "GPU_compute_seconds_per_rank_step": 0.658263654296875,
+      "GPU_memcpy_seconds_per_rank_step": 2.259908123486328,
+      "GPU_NCCL_seconds_per_rank_step": 0.4250707232421875,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.3908785012695313,
+      "GPU_idle_proxy_fraction": 0.22653508362168523,
+      "maximum_collective_start_skew_candidate_ms": 752.589041015625,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "policy": "baseline",
+      "rank": 0,
+      "window": "window-02",
+      "profiled_seconds_per_rank_step": 3.720543447021485,
+      "CPU_AdamW_seconds_per_rank_step": 2.5207336286621094,
+      "CPU_optimizer_seconds_per_rank_step": 2.751942009423828,
+      "GPU_compute_seconds_per_rank_step": 0.6655623176269532,
+      "GPU_memcpy_seconds_per_rank_step": 2.279107446826172,
+      "GPU_NCCL_seconds_per_rank_step": 0.36577018530273436,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.4800200084472657,
+      "GPU_idle_proxy_fraction": 0.12860093430995256,
+      "maximum_collective_start_skew_candidate_ms": 268.5812238769531,
+      "native_collective_sequence_verified": false
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "policy": "baseline",
+      "rank": 1,
+      "window": "window-02",
+      "profiled_seconds_per_rank_step": 3.7214188919921876,
+      "CPU_AdamW_seconds_per_rank_step": 2.4209336905273435,
+      "CPU_optimizer_seconds_per_rank_step": 2.629638099169922,
+      "GPU_compute_seconds_per_rank_step": 0.6582217783203125,
+      "GPU_memcpy_seconds_per_rank_step": 2.165271260449219,
+      "GPU_NCCL_seconds_per_rank_step": 0.5107194014160156,
+      "CPU_AdamW_overlap_HtoD_seconds_per_rank_step": 1.4770880430664062,
+      "GPU_idle_proxy_fraction": 0.12209597547674955,
+      "maximum_collective_start_skew_candidate_ms": 268.5812238769531,
+      "native_collective_sequence_verified": false
+    }
+  ],
+  "page_snapshots": [
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "policy": "baseline",
+      "rank": 0,
+      "phase": "after-first-update",
+      "CPU_affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 194,
+            "0": 5
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 0.9748743718592965
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 1073,
+            "0": 1184
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.39353153895835025
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 1066,
+            "0": 1189
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.3845729830572792
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "policy": "baseline",
+      "rank": 0,
+      "phase": "after-training",
+      "CPU_affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "0": 198,
+            "1": 1
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 0.005025125628140704
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "0": 2257
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "0": 2255
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "policy": "baseline",
+      "rank": 1,
+      "phase": "after-first-update",
+      "CPU_affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 835,
+            "0": 1418
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.23662233537932084
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 828,
+            "0": 1426
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.22956372517405849
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "policy": "baseline",
+      "rank": 1,
+      "phase": "after-training",
+      "CPU_affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 1481,
+            "0": 772
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.6238262476845273
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 1514,
+            "0": 740
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.6325570451042573
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "policy": "affinity-control",
+      "rank": 0,
+      "phase": "after-first-update",
+      "CPU_affinity": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2128,
+            "0": 92
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999785026437075
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2255
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2252
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "policy": "affinity-control",
+      "rank": 0,
+      "phase": "after-training",
+      "CPU_affinity": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2128,
+            "0": 92
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999785026437075
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2255
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2252
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "policy": "affinity-control",
+      "rank": 1,
+      "phase": "after-first-update",
+      "CPU_affinity": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2118,
+            "0": 102
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999761659745453
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2250
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2256
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "policy": "affinity-control",
+      "rank": 1,
+      "phase": "after-training",
+      "CPU_affinity": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2118,
+            "0": 102
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999761659745453
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2250
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2256
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "policy": "local-moments",
+      "rank": 0,
+      "phase": "after-first-update",
+      "CPU_affinity": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2128,
+            "0": 92
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999785026437075
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "policy": "local-moments",
+      "rank": 0,
+      "phase": "after-training",
+      "CPU_affinity": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2128,
+            "0": 92
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999785026437075
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "policy": "local-moments",
+      "rank": 1,
+      "phase": "after-first-update",
+      "CPU_affinity": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2118,
+            "0": 102
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999761659745453
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "policy": "local-moments",
+      "rank": 1,
+      "phase": "after-training",
+      "CPU_affinity": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2118,
+            "0": 102
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999761659745453
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "policy": "local-moments",
+      "rank": 0,
+      "phase": "after-first-update",
+      "CPU_affinity": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2128,
+            "0": 92
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999785026437075
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "policy": "local-moments",
+      "rank": 0,
+      "phase": "after-training",
+      "CPU_affinity": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2128,
+            "0": 92
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999785026437075
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "policy": "local-moments",
+      "rank": 1,
+      "phase": "after-first-update",
+      "CPU_affinity": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2118,
+            "0": 102
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999761659745453
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "policy": "local-moments",
+      "rank": 1,
+      "phase": "after-training",
+      "CPU_affinity": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2118,
+            "0": 102
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999761659745453
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "policy": "affinity-control",
+      "rank": 0,
+      "phase": "after-first-update",
+      "CPU_affinity": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2128,
+            "0": 92
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999785026437075
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2262
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2250
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "policy": "affinity-control",
+      "rank": 0,
+      "phase": "after-training",
+      "CPU_affinity": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2128,
+            "0": 92
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999785026437075
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2262
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2250
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "policy": "affinity-control",
+      "rank": 1,
+      "phase": "after-first-update",
+      "CPU_affinity": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2118,
+            "0": 102
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999761659745453
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2258
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2254
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "policy": "affinity-control",
+      "rank": 1,
+      "phase": "after-training",
+      "CPU_affinity": [
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "1": 2118,
+            "0": 102
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.9999761659745453
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2258
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2254
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "policy": "baseline",
+      "rank": 0,
+      "phase": "after-first-update",
+      "CPU_affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 513,
+            "1": 1707
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.7517120774951654
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 1363,
+            "0": 884
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.5029773838465126
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 1374,
+            "0": 885
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.5028727010680447
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "policy": "baseline",
+      "rank": 0,
+      "phase": "after-training",
+      "CPU_affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 513,
+            "1": 1707
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.7517120774951654
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2247
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "1": 2259
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 1.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "policy": "baseline",
+      "rank": 1,
+      "phase": "after-first-update",
+      "CPU_affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "0": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "0": 1374,
+            "1": 880
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.4966038850396159
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "0": 1369,
+            "1": 884
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.49702261615348736
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "policy": "baseline",
+      "rank": 1,
+      "phase": "after-training",
+      "CPU_affinity": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63
+      ],
+      "assigned_gpu_node": 1,
+      "categories": {
+        "master": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "gradient": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2220
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "step": {
+          "tensors": 199,
+          "elements": 199,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "0": 199
+          },
+          "elements_with_valid_samples": 199,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "exp_avg": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "0": 2254
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "exp_avg_sq": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 0,
+          "sample_nodes": {
+            "0": 2253
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        },
+        "master_param": {
+          "tensors": 199,
+          "elements": 3834518016,
+          "pinned_tensors": 199,
+          "sample_nodes": {
+            "0": 2228
+          },
+          "elements_with_valid_samples": 3834518016,
+          "element_weighted_GPU_local_sample_fraction": 0.0
+        }
+      }
+    }
+  ],
+  "candidate_screens": {
+    "affinity-control": {
+      "both_candidate_runs_faster_than_both_unbound_runs": true,
+      "descriptive_ratio_of_means": 1.057035580013044,
+      "formal_performance_evidence": false
+    },
+    "local-moments": {
+      "both_candidate_runs_faster_than_both_unbound_runs": true,
+      "descriptive_ratio_of_means": 1.0921609376711467,
+      "formal_performance_evidence": false,
+      "both_candidate_runs_faster_than_both_affinity_control_runs": true,
+      "eligible_for_own_full_SFT_acceptance": true
+    }
+  },
+  "raw_trace_index": [
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "window": "window-01",
+      "rank": 0,
+      "trace_sha256": "54f5e59175ab2f7bd26f56e3217d109407a9f4ee84c1eca979357c3d6ab71051",
+      "decompressed_sha256": "d9e9d803821aa9958cd03de1c7db4a5a17380513b6fd2c7acacc2aacb4161aec"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "window": "window-01",
+      "rank": 1,
+      "trace_sha256": "98038038361100de43c19396c97c0fb94a6ffb4f764e3e45a2555991b2eca55a",
+      "decompressed_sha256": "818ba4c1a0b6a67ad1ff9321719c400be866b881f6d3cad96a3f542911e158eb"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "window": "window-02",
+      "rank": 0,
+      "trace_sha256": "d4f13c2ff9e754c8b087cb38e8b82eb37ca1429449d8f98d1070542717e1841a",
+      "decompressed_sha256": "54d1deed62a56753649df13a148bb6bb9049382fda2a4357177e27d909729b1a"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a1-baseline",
+      "window": "window-02",
+      "rank": 1,
+      "trace_sha256": "90ce44fd049ecb05c4dd6d0714e5e691f37d285f8eef3593a0df4e646ae50804",
+      "decompressed_sha256": "dc25d4b4bb3909bfbde47e1551f5792382261c5324a6a0f36170d476f9fd5103"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "window": "window-01",
+      "rank": 0,
+      "trace_sha256": "4cb1174de8c08c9008f5e4dc3dded64b1abc8ada59b8adff4a436f7bfc66b0c8",
+      "decompressed_sha256": "d72809f4c9e57ada07d0dca863fae390fdb158f53a8f1701f286f7148215b1a9"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "window": "window-01",
+      "rank": 1,
+      "trace_sha256": "5b34aa153dff5b072b3f701c299b2181620a4f76ac454b2d2529f8d0bbca7f13",
+      "decompressed_sha256": "7d2574e0eb696039f358864f19b5c395479e05efdff09c79ac6a1f3239d0963b"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "window": "window-02",
+      "rank": 0,
+      "trace_sha256": "4414cfaf3d39596c32aeeee5d28e1bf99ec5e2807722764c59ef60c3d68d2766",
+      "decompressed_sha256": "60722863c8f70249e7b89ffbdb0050252cb9348581ff931999aefb0d40127718"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b1-affinity-control",
+      "window": "window-02",
+      "rank": 1,
+      "trace_sha256": "4b156c38ee911d98f15ff64d32e848b69fec5c83731da390bd0235062f3c2263",
+      "decompressed_sha256": "0a93e8652149fbb5d4c58df25a4b051f0f9c1ab906dd234c3a3c7dd60de1d561"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "window": "window-01",
+      "rank": 0,
+      "trace_sha256": "1c8f7f552ba83a60ee3a8e119d9645625686c344bb49c7f7af47b3bf2c031765",
+      "decompressed_sha256": "46e4a84d0808b342feba1b4a4d29aa6818ad8957d3b654737900e0e56241e449"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "window": "window-01",
+      "rank": 1,
+      "trace_sha256": "1e58884910fbef2510e3031e73092cf7dad804caad8c8cdf2ea583d47106d4a4",
+      "decompressed_sha256": "cced1f3f550b8ea741cf6616d60cf568fc638b5aef2227982c32864e9cbaa5f4"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "window": "window-02",
+      "rank": 0,
+      "trace_sha256": "cf4a442b8c9c27a0909d371fddaa8bce30660600326d08459b0c55b4f7958f96",
+      "decompressed_sha256": "a1429d7afee9e675f5513d3d5873b1e80db73e4b3174a5b9cfa9e380c255a4b7"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c1-local-moments",
+      "window": "window-02",
+      "rank": 1,
+      "trace_sha256": "ddefe123a45a2c71b0fa44dc4aadf0f7648487a6122c2546834a2cdda61ac89c",
+      "decompressed_sha256": "16c64af713ddf883beccfcea5104ad2eaae4ca93dafe71745f3178f3dfa5e191"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "window": "window-01",
+      "rank": 0,
+      "trace_sha256": "563dd5ab1f85d82fda47bed14a970b6f1dfdd7e67c60027524c9cb17d6434a41",
+      "decompressed_sha256": "61d423bfc9fd7bc5dd48615efd86bd0f61e30d23b348b0b3535313603f053c5f"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "window": "window-01",
+      "rank": 1,
+      "trace_sha256": "3f08e64099cb55864292c6850592d163bf5ae2df7fd8c50361709c182f71b479",
+      "decompressed_sha256": "364d33a13293fa61dc0322b4e44b6bf8e080b47e87f519fea264499485ec4e9f"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "window": "window-02",
+      "rank": 0,
+      "trace_sha256": "3e4ce73a33c8539626def2128efffd25e7695063794635ad7bab6812278e9e10",
+      "decompressed_sha256": "ee1e77bde1aaec45abf0d80b30e1d03563e7ecd5174172aa496393545f1d165a"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-c2-local-moments",
+      "window": "window-02",
+      "rank": 1,
+      "trace_sha256": "9228c43d27d21110e13dfe3ba46a6bb062ff68cc19cec8297ee7a423272b24df",
+      "decompressed_sha256": "b618f5e5cea54c407403e64888896839e3f3d8ad466cecb8e745636707467de6"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "window": "window-01",
+      "rank": 0,
+      "trace_sha256": "4f9ffe078ab8c96f4bfa326940f760e2f2b87b182fd8969c50280eca64ca28aa",
+      "decompressed_sha256": "d998fd87870e5394297c276499c23af1dbcc0e180d57a9b8a8ca25a34a29c129"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "window": "window-01",
+      "rank": 1,
+      "trace_sha256": "ddf9f8d84a271b2684fc1a7ad36683206c73ca9c5ffe6d04b2dbe35eaee769f3",
+      "decompressed_sha256": "83c53c0d6d9832ad702a4021e7bf8226a0a245f36f9315304da32f134fee32c6"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "window": "window-02",
+      "rank": 0,
+      "trace_sha256": "db142806b83d97fb12974de924127873e3872958dc3db08d6aaa8f7cdf06ed1c",
+      "decompressed_sha256": "21602d2948426e4c61cffaaf33253ba07c46c4b332f19a2aa0deb6284477ce9f"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-b2-affinity-control",
+      "window": "window-02",
+      "rank": 1,
+      "trace_sha256": "22529ed5d58b9a1018de66fef84ef48104126753dd7d00e076f20e31bdbfc7f5",
+      "decompressed_sha256": "f566015658d4a4fe17488281e4170faeace094a729c2d30ed5f11115baf3418c"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "window": "window-01",
+      "rank": 0,
+      "trace_sha256": "1fb14888cf74f6c2e36ed1e5acb21bf12b5164fe356d955eed5490f1641bd5aa",
+      "decompressed_sha256": "4eef8e7c11ce7513b891994710c79b724094604739ec6ec7df214ee25eaa1f34"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "window": "window-01",
+      "rank": 1,
+      "trace_sha256": "fe1ef78d64fcce29e3355873c2542f1ff4729ab29e94d6f52f380057f992546d",
+      "decompressed_sha256": "34d0085d9ae5a79dd34725c3471156a24592d87873d4a769f5f2c83c7dfc82e0"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "window": "window-02",
+      "rank": 0,
+      "trace_sha256": "45cb424139c5aba597b8bfb47965c762f5f3a54703547750e062abf660d91a6e",
+      "decompressed_sha256": "e1eb786866c9538b9a2f14712642a9876dfe4f374795cd32b7893be1a300e7fa"
+    },
+    {
+      "case": "sft-phased-moments-20261023-07-a2-baseline",
+      "window": "window-02",
+      "rank": 1,
+      "trace_sha256": "820a3b7cad3675081248d9979daa80ab965f982654c6108d577481af41826d48",
+      "decompressed_sha256": "3f33de7819ca6a23839417bfd11e09f05757efccbba41b8564131d85d886fd60"
+    }
+  ],
+  "paired_all35_sample_IDs_mask_counts_and_logged_losses_equal": true,
+  "formal_performance_passed": false,
+  "new_full_state_and_resume_required": true,
+  "collector_drop_count_verified": false,
+  "critical_path_proven": false,
+  "native_collective_sequence_verified": false,
+  "sampled_page_locations_are_complete_inventory": false,
+  "CPU_and_GPU_categories_additive": false,
+  "statistical_scope": "Two independent runs/policy, one seed, two windows/rank; eight correlated observations, not eight seeds",
+  "local_key_bundle_sha256": "e3165c6cfec5383fd2c99858655de261be32feb389f8fdce0b5d32ebb6d221f7"
+}

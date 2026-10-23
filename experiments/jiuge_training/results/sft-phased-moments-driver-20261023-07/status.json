@@ -1,0 +1,13 @@
+{
+  "schema": "jiuge7b-sft-moment-local-driver-v1",
+  "pid": 20392,
+  "status": "completed",
+  "raw_originals_downloaded": false,
+  "local_key_limit_bytes": 33554432,
+  "updated_utc": "2026-10-23T14:34:23.595571+00:00",
+  "remote_status": "completed",
+  "completed_cases": 6,
+  "verified_key_files": 623,
+  "verified_key_bytes": 19355398,
+  "bundle_sha256": "e3165c6cfec5383fd2c99858655de261be32feb389f8fdce0b5d32ebb6d221f7"
+}

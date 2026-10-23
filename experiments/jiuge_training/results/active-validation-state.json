@@ -1,14 +1,14 @@
 {
   "schema": "jiuge7b-active-experiment-handoff-v1",
-  "as_of_local": "2026-10-23T21:06:54.842021+08:00",
+  "as_of_local": "2026-10-23T22:48:12.819262+08:00",
   "user_steering": "2026-10-23 user resumed: check reset ACT and two GPUs,no other users;admit one real7B update before six fresh cases;unchanged standards,0points,raw ACT,local keys only",
   "ssh": "ssh -i C:/Users/lenovo/.ssh/id_ed25519 -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes -p30353 huids25@192.168.5.200",
   "host": "sg-huids25-260917-94135-default0-0",
   "remote_root": "/home/huids25/kda-jiuge-prep-20261014",
   "runtime": ".venv/bin/python",
-  "resource": "24c7a 2A10016CPU300GiB plus retainedV100;fixed00:10:41cutoff",
+  "resource": "24c7a completed0points; oldV100 retained",
   "resource_extension_authorized": true,
-  "current_actual_progress": "3e329failedbeforemoments duewrappedglobals,0points;CPUfused andnonfused bothnodes pass;146frozen;24c7ainstalling",
+  "current_actual_progress": "All six NUMA diagnostic cases,24traces, independent review, ACT raw/archive and two reports closed",
   "numeric_controller": "pinning-validation-20261015-04/controller.json",
   "followup_controller": "pinning-recovery-20261016-04/controller.json",
   "local_driver_state": "results/pinning-driver-20261016-05/status.json",
@@ -121,10 +121,7 @@
   "new_validation_contract": "cpu_numa.contract.json",
   "source_warnings": "Do not change numa_entry.py or numa_placement.py after diagnostic freeze; new admission requires same identities",
   "next_actions": [
-    "Submit authorized new3h0point2A100ACTjob with fresh budget bootstrap; no budget reset across retries",
-    "Before any training verify exact allocated pair and no foreign GPU processes,131sources and live CPU state/resume",
-    "Admit one real7B update with unchanged8GiBcgroup plus newNUMAcapacity reserve; release six fresh cases only on full admission",
-    "Keep raw ACT; no new performance claim without own unchanged full acceptance"
+    "No active GPU work; any NUMA candidate requires its own full SFT acceptance"
   ],
   "cpu_numa_local_review": "results/cpu-numa-independent-diagnostic-review-20261016.json",
   "cpu_numa_analysis_status": "completed_diagnostic_analysis",
@@ -350,7 +347,7 @@
     "local_key": "results/sft-admission-verification-20261017.json"
   },
   "user_requested_pause_after_delivery": false,
-  "experiments_running_for_this_campaign": true,
+  "experiments_running_for_this_campaign": false,
   "final_CPT_SFT_ACT_review_archive": {
     "schema": "jiuge7b-CPT-SFT-final-review-ACT-verification-v1",
     "passed": true,
@@ -772,8 +769,8 @@
     "NUMA_capacity_readonly_receipt": "results/direct-zero-NUMA-capacity-readonly-20261023-01.json"
   },
   "sft_phased_moments_20261023": {
-    "status": "V4_live_CPU_fused_nonfused_passed_first7B_initializing",
-    "updated_utc": "2026-10-23T13:49:51.957927+00:00",
+    "status": "completed",
+    "updated_utc": "2026-10-23T13:56:48.177637+00:00",
     "source_manifest": "results/sft-phased-moments-source-manifest-20261023-07.json",
     "source_count": 146,
     "original127_unchanged": true,
@@ -782,8 +779,8 @@
     "CPU_max_absolute_error": 0,
     "CPU_proof": "results/phased-moments-CPU-preparation-20261023-03-v2.json",
     "new_GPU_allocation_submitted": true,
-    "new_7B_first_step_completed": false,
-    "six_case_started": false,
+    "new_7B_first_step_completed": true,
+    "six_case_started": true,
     "new_SFT_full_state_acceptance": false,
     "formal_performance_evidence": false,
     "new_window_authorized": true,
@@ -826,7 +823,7 @@
     "CPU_postprocess_pid": 42768,
     "local_driver": "results/sft-phased-moments-driver-20261023-07",
     "local_postprocess": "results/sft-phased-moments-postprocess-20261023-07",
-    "heartbeat": "ACTIVE;current131source3hourwindow;pause after closure",
+    "heartbeat": "completion closed; pause automation next",
     "ACT_first_step": "sft-phased-first-step-20261023-07/status.json",
     "ACT_screen": "sft-phased-moments-screen-20261023-07/controller.json",
     "manifest_SHA256": "af4c4cf010fc4f2c2208aff7268daf2d2266391afea0fae9b7f67b5088f35701",
@@ -842,6 +839,41 @@
     },
     "wrapped_fused_CPU_proof": "results/phased-wrapped-initializer-CPU-preparation-20261023-06.json",
     "old_V3_wrapped_fused_root_cause": "results/phased-wrapped-fused-root-cause-20261023-06.json",
-    "live_wrapped_fused_and_nonfused_passed": true
+    "live_wrapped_fused_and_nonfused_passed": true,
+    "one_update_memory_feasibility_accepted": true,
+    "moment_objects_each_rank": 398,
+    "AdamW_groups_each_rank": 199,
+    "moment_page_sampling_gate_passed": true,
+    "first_step_key_receipt": "results/phased-V4-first-update-admission-20261023-07.json",
+    "full_SFT_correctness_acceptance": false,
+    "job_status": "completed",
+    "verified_raw_traces": 24,
+    "completion_receipt": "results/sft-phased-moments-completion-receipt-20261023-07.json",
+    "reports_complete": true,
+    "final_ACT_review": {
+      "passed": true,
+      "folder": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-moments-delivery-20261023-07/final-review",
+      "files": 234,
+      "bytes": 4460917,
+      "manifest_sha256": "75b577e3c8b5d191c27db36934e0db5dcceaf82d42fd24ebc73c7ffc92e6130a",
+      "originals_modified": false
+    },
+    "candidate_screens": {
+      "affinity-control": {
+        "both_candidate_runs_faster_than_both_unbound_runs": true,
+        "descriptive_ratio_of_means": 1.057035580013044,
+        "formal_performance_evidence": false
+      },
+      "local-moments": {
+        "both_candidate_runs_faster_than_both_unbound_runs": true,
+        "descriptive_ratio_of_means": 1.0921609376711467,
+        "formal_performance_evidence": false,
+        "both_candidate_runs_faster_than_both_affinity_control_runs": true,
+        "eligible_for_own_full_SFT_acceptance": true
+      }
+    },
+    "raw_package": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-moments-delivery-20261023-07/Jiuge7B-SFT-S2048-direct-zero-moments-ABC-CBA-traces.zip",
+    "raw_zip_local_downloaded": false,
+    "new_formal_performance_passed": false
   }
 }
