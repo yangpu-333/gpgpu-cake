@@ -1144,8 +1144,18 @@ V4及全新首步/六组路径共冻结146份来源，原131份未改。接续�
 
 新容器的实际8GiB保护CPU数值/恢复检查，以及fused和非fused、两NUMA节点的原生包装初始化器检查均通过，受检CPU数值最大误差0。随后增量基线和control均完成3次真实SFT更新、每rank3585项完整字段；control相对同轮基线的最大绝对误差为0，实际数据与答案mask重建也通过。
 
-候选在第一次AdamW moment分配前触发内存保护：当时cgroup可用空间约2.93GB，要求约9.64GB，因此主动抛出MemoryError、退出码1；两个rank均为0次完整更新、0个新moment对象。这与已证明的数值错误或平台OOMKilled并不相同。失败作业网页确认已结束、累计0.00点；原件保留ACT，本机仅取约4.19MB关键包并验SHA。见[失败与归档证据](results/sft-phased-acceptance-failure-preservation-20261024-01.json)。**候选全状态、原生恢复及正式性能尚未通过。**
+候选首次尝试在第一次AdamW moment分配前触发内存保护：当时cgroup可用空间约2.93GB，要求约9.64GB，因此主动抛出MemoryError、退出码1；该次两个rank均为0次完整更新、0个新moment对象。这与已证明的数值错误或平台OOMKilled并不相同。失败作业网页确认已结束、累计0.00点；原件保留ACT，本机仅取约4.19MB关键包并验SHA。见[失败与归档证据](results/sft-phased-acceptance-failure-preservation-20261024-01.json)。
 
 版本化恢复只调整不计时的审计观测：对本轮私有参考压缩包和本轮检查点的干净文件缓存发送回收建议，并记录cgroup内存前后值。不修改张量或AdamW数学，不使用全局drop_caches，不降低8GiB容器保护或16GiB NUMA保护；正式计时不安装该观测器。失败时没有memory.stat，文件缓存是否为主因仍须新记录验证。CPU小样本比较误差0、原件SHA不变、越界路径被拒绝、原保护仍拒绝低内存案例；这不是7B候选数值验收。见[恢复CPU回归](results/sft-phased-recovery-CPU-preparation-20261024-02.json)。
 
 接续作业`Jiuge7B-SFT-AuditCache-Resume`（`sg-huids25-261024-efbc8`）沿用原22:59:13截止，不重置11小时预算。169份来源中原158份逐字节不变；同一轮已完成的基线/control原件以同inode别名保留来源证明，候选从头重做，所有恢复、完整原件SHA及正式计时门槛仍须依次通过，没有复用历史性能。见[版本化来源](results/sft-phased-acceptance-source-manifest-20261024-02.json)。ACT新控制器为`sft-phased-acceptance-20261024-02/controller.json`，本机新观察目录为`results/sft-phased-acceptance-driver-20261024-02/`；旧观察器已结束，不重复启动。独立CPU复核将在最终关键包SHA通过后重算计时、CV、三种子配对比和日志loss。科学来源冻结，失败记录和原件不覆盖，不启动并行GPU实验，不停止他人进程。
+
+### 23.3 候选三步全状态通过，原生恢复验证进行中
+
+北京时间18:07，接续候选完成3次真实SFT更新，退出码0，案例前后均未发现其他计算进程。两rank各3585项字段覆盖全部199组的gradient、BF16更新参数、FP32 master、两个moment及step和loss；CPU float64比较的最大绝对误差均为**0**，沿用atol=3e-4、rtol=1e-3。每rank实际创建398个moment对象，实际数据与答案mask重建检查通过。见[三步完整字段复核](results/sft-phased-candidate-three-step-review-20261024-02.json)。
+
+本次保留原8GiB容器及16GiB NUMA保护。首更新前cgroup采样可用空间约146–156GB，两个rank共用同一cgroup，采样并非同时发生；不能将两次值相加。最终保存的观测记录包含每rank3587次私有文件缓存回收建议，但首次更新前单次建议的内存变化不足9MB。新容器与持续审计缓存处理共同改变了运行条件，**现有证据不能证明缓存是首次失败的唯一原因，也不能把审计耗时用作训练吞吐**。
+
+控制器已继续创建真正原生SFT iteration2检查点；原生与候选的恢复值及下一步、完整原件SHA和三种子正式性能尚待验证。三步全状态通过是已闭合的数值阶段，**不是完整验收或新增加速比**。
+
+闭合数值阶段的23份关键文件已在ACT与本机双端验SHA，压缩约3.92MB、解压23.41MB；未下载原始张量。本机另独立检查了三臂、两rank的完整字段集合、容差及最大误差，见[关键包独立复核](results/sft-phased-numeric-stage-independent-keys-review-20261024-02.json)与[双端归档收据](results/sft-phased-numeric-stage-preservation-20261024-02-v2.json)。该关键包校验不能替代仍待完成的ACT完整原始数值SHA门禁。

@@ -1,0 +1,125 @@
+{
+  "utc": "2026-10-24T10:13:51.766993+00:00",
+  "case": "phased-audit-optimized-20261024-02",
+  "formal_performance_started": false,
+  "full_checkpoint_resume_acceptance": false,
+  "raw_tensors_downloaded": false,
+  "ranks": [
+    {
+      "rank": 0,
+      "completion": {
+        "arm": "optimized",
+        "rank": 0,
+        "steps": 3,
+        "complete_fields": true,
+        "passed": true,
+        "local_raw_copy_verified": false,
+        "checkpoint_resume_tested": false,
+        "formal_performance_passed": false
+      },
+      "fields": 3585,
+      "max_absolute_error": 0.0,
+      "comparison_dtype": "CPU float64",
+      "atol": 0.0003,
+      "rtol": 0.001,
+      "manifest_sha256": "282d6931a1a5be9f45712a0c4804c3af9a873d6b77e36027584abc121411c267",
+      "moment_objects": 398,
+      "cache_advice_calls": 3587,
+      "first_update_memory": [
+        {
+          "before": {
+            "current": 176355467264,
+            "max": 322123595776,
+            "stat": {
+              "anon": 7033401344,
+              "file": 168614522880,
+              "kernel": null,
+              "shmem": 123501723648,
+              "file_dirty": 229376,
+              "file_writeback": 0,
+              "inactive_file": 42260316160,
+              "active_file": 2852429824
+            },
+            "events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\n"
+          },
+          "after": {
+            "current": 176361103360,
+            "max": 322123595776,
+            "stat": {
+              "anon": 7033401344,
+              "file": 168619470848,
+              "kernel": null,
+              "shmem": 123506671616,
+              "file_dirty": 229376,
+              "file_writeback": 0,
+              "inactive_file": 42260369408,
+              "active_file": 2852429824
+            },
+            "events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\n"
+          }
+        }
+      ]
+    },
+    {
+      "rank": 1,
+      "completion": {
+        "arm": "optimized",
+        "rank": 1,
+        "steps": 3,
+        "complete_fields": true,
+        "passed": true,
+        "local_raw_copy_verified": false,
+        "checkpoint_resume_tested": false,
+        "formal_performance_passed": false
+      },
+      "fields": 3585,
+      "max_absolute_error": 0.0,
+      "comparison_dtype": "CPU float64",
+      "atol": 0.0003,
+      "rtol": 0.001,
+      "manifest_sha256": "7525eff9427759162d9f03a5ffbccb8699e34c9f1c078de623c92b6c0684a0d8",
+      "moment_objects": 398,
+      "cache_advice_calls": 3587,
+      "first_update_memory": [
+        {
+          "before": {
+            "current": 166591774720,
+            "max": 322123595776,
+            "stat": {
+              "anon": 7032647680,
+              "file": 158891679744,
+              "kernel": null,
+              "shmem": 113770520576,
+              "file_dirty": 237568,
+              "file_writeback": 0,
+              "inactive_file": 42268643328,
+              "active_file": 2852429824
+            },
+            "events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\n"
+          },
+          "after": {
+            "current": 166583250944,
+            "max": 322123595776,
+            "stat": {
+              "anon": 7032647680,
+              "file": 158883291136,
+              "kernel": null,
+              "shmem": 113770520576,
+              "file_dirty": 237568,
+              "file_writeback": 0,
+              "inactive_file": 42260340736,
+              "active_file": 2852429824
+            },
+            "events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\n"
+          }
+        }
+      ]
+    }
+  ],
+  "case_exit_code": 0,
+  "resource_gate_before": "",
+  "resource_gate_after": "",
+  "candidate_three_step_full_state_passed": true,
+  "SFT_actual_source_and_mask_reconstruction_passed": true,
+  "current_stage": "phased-native-checkpoint-20261024-02"
+}

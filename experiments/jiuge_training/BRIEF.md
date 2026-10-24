@@ -139,6 +139,6 @@ r = 同一种子的修复版吞吐 / 原生吞吐
 
 项目：[GitHub](https://github.com/yangpu-333/gpgpu-cake) · [GitLab](https://gitlab.ci-lab.net/yangpu/gpgpu-cake)
 
-**10月24日验收进度：** 增量基线与control均完成三步全状态比较，最大绝对误差0；候选在首次moment创建前因容器可用空间约3GB触发原有内存保护，尚未完成一步，未放行恢复或正式测速。失败原件已保留、关键包SHA通过，旧双卡累计0.00点。版本化恢复增加私有审计文件缓存回收建议，CPU回归通过；不改AdamW数学、不降低内存保护，正式计时不加入该观测器。接续仍受原11小时预算约束，最晚今天22:59:13退出、费用上限0点；候选须完成自身全状态、原生恢复及全部原件门禁，再进行三种子/三臂/120步正式计时。**尚无新增正式加速结论。** [当前证据与边界](README.md#二十三新候选的独立全状态恢复与正式验收10月24日执行中)
+**10月24日验收进度：** 增量基线、control及接续候选的三步全状态比较均已通过；候选两rank各3585项字段，最大绝对误差0，实际数据与答案mask重建通过。首次尝试曾因可用内存约3GB触发保护；版本化恢复保留原数学和内存保护，候选现已完成3次更新，正在继续原生检查点恢复验证。新容器和审计缓存处理共同改变了运行条件，尚不能将首次失败单独归因于缓存。恢复、完整原件SHA及三种子/三臂/120步正式测速仍待完成，**尚无新增正式加速结论**。最晚今天22:59:13退出、费用上限0点，原始数据留ACT。[当前证据与边界](README.md#233-候选三步全状态通过原生恢复验证进行中)
 
 复核材料：[完整报告及可视化方法](README.md) · [最新六组独立复核](results/sft-phased-moments-independent-review-20261023-07.json) · [最新24份trace的ACT归档收据](results/sft-phased-moments-delivery-verification-20261023-07.json) · [SFT配对时间线复核](results/sft-paired-trace-independent-review-v2-20261020.json) · [CPT正式性能复核](results/pinning-driver-20261016-05/formal-independent-review.json) · [SFT正式性能复核](results/sft-pinning-independent-review-20261020-continuation-v2.json)

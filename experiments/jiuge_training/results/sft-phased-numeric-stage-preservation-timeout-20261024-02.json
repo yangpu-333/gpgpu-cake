@@ -1,0 +1,8 @@
+{
+  "status": "recursive inventory SSH command exceeded120s",
+  "target": "sft-phased-numeric-stage-delivery-20261024-02",
+  "partial_target_preserved": true,
+  "replacement": "preserve_sft_phased_numeric_stage_v2_20261024.py",
+  "frozen_scientific_sources_changed": false,
+  "GPU_experiments_restarted": false
+}

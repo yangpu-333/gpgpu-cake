@@ -1,0 +1,55 @@
+{
+  "passed": true,
+  "utc": "2026-10-24T10:20:08.322483+00:00",
+  "review": "independent local key manifests, not full ACT raw values",
+  "rows": [
+    {
+      "arm": "native",
+      "rank": 0,
+      "fields": 3585,
+      "max_abs": 0.0,
+      "manifest_sha256": "fc0d6a3e7b60fa3b95f45048965d6086d2817b19bc5cbe4cb2b34f264ff763f6"
+    },
+    {
+      "arm": "native",
+      "rank": 1,
+      "fields": 3585,
+      "max_abs": 0.0,
+      "manifest_sha256": "44ada2f7c7a6469a4094c06443b7fca254c145074d86e7919f00e878c92eec56"
+    },
+    {
+      "arm": "control",
+      "rank": 0,
+      "fields": 3585,
+      "max_abs": 0.0,
+      "manifest_sha256": "2dfba2d276b6ea78a2edf329b472b5bdd4762fac2c4fa0e2f8e1c321b62cefe4"
+    },
+    {
+      "arm": "control",
+      "rank": 1,
+      "fields": 3585,
+      "max_abs": 0.0,
+      "manifest_sha256": "aea23774e5ae30190412f194f963b769ca90d1769ae1456fffeeeca6bc078cc9"
+    },
+    {
+      "arm": "optimized",
+      "rank": 0,
+      "fields": 3585,
+      "max_abs": 0.0,
+      "manifest_sha256": "282d6931a1a5be9f45712a0c4804c3af9a873d6b77e36027584abc121411c267"
+    },
+    {
+      "arm": "optimized",
+      "rank": 1,
+      "fields": 3585,
+      "max_abs": 0.0,
+      "manifest_sha256": "7525eff9427759162d9f03a5ffbccb8699e34c9f1c078de623c92b6c0684a0d8"
+    }
+  ],
+  "candidate_own_three_step_passed": true,
+  "native_checkpoint_resume_acceptance": false,
+  "full_ACT_raw_SHA_gate": false,
+  "formal_performance_acceptance": false,
+  "bundle_sha256": "4e97b2325ba98650be01adf0d6a665162d734bfe1833e575e04316472d4abb67",
+  "raw_tensors_downloaded": false
+}
