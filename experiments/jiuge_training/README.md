@@ -1142,6 +1142,10 @@ V4及全新首步/六组路径共冻结146份来源，原131份未改。接续�
 
 158份来源已在本机和ACT逐文件核验，原146份字节保持不变，见[源码清单](results/sft-phased-acceptance-source-manifest-20261024-01.json)。CPU接线检查覆盖三臂均使用pinned后端、生成程序语法、首步仅切换一次、优化器弱引用释放、保护按逆序恢复，以及低于1%收益/单种子倒退/触发CV复测的拒绝门禁；它不是数值或GPU性能证据。另用此前9份真实正式日志检查了第1步及12段常规loss的解析，见[CPU准备](results/sft-phased-acceptance-CPU-preparation-20261024-01.json)和[日志解析回归](results/sft-phased-acceptance-log-parser-regression-20261024-01.json)。
 
-新容器的实际8GiB保护CPU数值/恢复检查，以及fused和非fused、两NUMA节点的原生包装初始化器检查均通过，受检CPU数值最大误差0。当前控制器已进入全新pinned基线的三步全状态案例，**尚无本轮完整数值、原生恢复或正式吞吐结论**。只有全部门禁通过，才会自动继续后续阶段。
+新容器的实际8GiB保护CPU数值/恢复检查，以及fused和非fused、两NUMA节点的原生包装初始化器检查均通过，受检CPU数值最大误差0。随后增量基线和control均完成3次真实SFT更新、每rank3585项完整字段；control相对同轮基线的最大绝对误差为0，实际数据与答案mask重建也通过。
 
-ACT控制器为`sft-phased-acceptance-20261024-01/controller.json`；本机唯一观察器为`results/sft-phased-acceptance-driver-20261024-01/`，只取精简关键包。独立CPU复核程序将在最终包SHA通过后，重新计算原始计时、CV、三种子配对比和日志loss。科学来源在执行期间保持冻结，失败记录和原件不覆盖；不启动并行GPU实验，不停止他人进程。
+候选在第一次AdamW moment分配前触发内存保护：当时cgroup可用空间约2.93GB，要求约9.64GB，因此主动抛出MemoryError、退出码1；两个rank均为0次完整更新、0个新moment对象。这与已证明的数值错误或平台OOMKilled并不相同。失败作业网页确认已结束、累计0.00点；原件保留ACT，本机仅取约4.19MB关键包并验SHA。见[失败与归档证据](results/sft-phased-acceptance-failure-preservation-20261024-01.json)。**候选全状态、原生恢复及正式性能尚未通过。**
+
+版本化恢复只调整不计时的审计观测：对本轮私有参考压缩包和本轮检查点的干净文件缓存发送回收建议，并记录cgroup内存前后值。不修改张量或AdamW数学，不使用全局drop_caches，不降低8GiB容器保护或16GiB NUMA保护；正式计时不安装该观测器。失败时没有memory.stat，文件缓存是否为主因仍须新记录验证。CPU小样本比较误差0、原件SHA不变、越界路径被拒绝、原保护仍拒绝低内存案例；这不是7B候选数值验收。见[恢复CPU回归](results/sft-phased-recovery-CPU-preparation-20261024-02.json)。
+
+接续作业`Jiuge7B-SFT-AuditCache-Resume`（`sg-huids25-261024-efbc8`）沿用原22:59:13截止，不重置11小时预算。169份来源中原158份逐字节不变；同一轮已完成的基线/control原件以同inode别名保留来源证明，候选从头重做，所有恢复、完整原件SHA及正式计时门槛仍须依次通过，没有复用历史性能。见[版本化来源](results/sft-phased-acceptance-source-manifest-20261024-02.json)。ACT新控制器为`sft-phased-acceptance-20261024-02/controller.json`，本机新观察目录为`results/sft-phased-acceptance-driver-20261024-02/`；旧观察器已结束，不重复启动。独立CPU复核将在最终关键包SHA通过后重算计时、CV、三种子配对比和日志loss。科学来源冻结，失败记录和原件不覆盖，不启动并行GPU实验，不停止他人进程。

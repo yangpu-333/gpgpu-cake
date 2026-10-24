@@ -1,0 +1,8 @@
+{
+  "files": {
+    "review_sft_phased_acceptance_v2_20261024.py": "f52253d342a8a9cca1e79e0871f1f7b037e726bed3d7839dc1cc48cacc3e1564",
+    "finish_sft_phased_acceptance_v2_20261024.py": "d1c5b52a2fbc1dfae48327b6a07e3af844cb6526ced1dab34a9ad2d50bf4715f"
+  },
+  "GPU_used": false,
+  "outside_frozen169_scientific_set": true
+}

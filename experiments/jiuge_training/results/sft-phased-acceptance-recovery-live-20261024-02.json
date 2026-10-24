@@ -1,0 +1,13 @@
+{
+  "status": "phased-audit-optimized-20261024-02",
+  "completed_cases": [
+    "phased-audit-native-20261024-01",
+    "phased-audit-control-20261024-01"
+  ],
+  "formal_started": false,
+  "same_inode_reference_files": 92,
+  "all_same_inode": true,
+  "original_controller_sha256": "21b955402c6cfd04b8b663860194496d627559ab7e4e1fe0b0f231b44f3440d8",
+  "live_CPU_and_cache_regressions": "{\"passed\": true, \"hostname\": \"sg-huids25-261024-efbc8-default0-0\", \"ACT_root\": \"/home/huids25/kda-jiuge-prep-20261014/sft-moment-direct-zero-runtime-sg-huids25-261024-efbc8-default0-0\", \"GPU_used\": false, \"same_cpu_regression_on_new_allocation\": {\"schema\": \"jiuge7b-sft-direct-zero-moments-CPU-regression-v3\", \"passed\": true, \"ACT_root\": \"/home/huids25/kda-jiuge-prep-20261014/sft-moment-direct-zero-runtime-sg-huids25-261024-efbc8-default0-0/cpu-regression\", \"source_sha256\": {\"sft-direct-zero-CPU-runtime-sg-huids25-261024-efbc8-default0-0.py\": \"7a7319e0f1e1e79ca141aa7dfa0c4e930c928debe08238aedeb00cea1f04f1a0\", \"sft_local_moments_v3_20261021.py\": \"73fff646de66d5ec36ce2d3376bea771b8fe2e74e5f2b55673d5f72b9e3c48e4\"}, \"manifest_sha256\": \"5645bcb80fc236ff60614c6b6884938d6be39c38d88160f96710fee46b826723\", \"ACT_verified_files\": 16, \"ACT_bytes\": 8936374, \"nodes\": [{\"node\": 0, \"five_updates_full_state_exact\": true, \"native_resume_next_step_exact\": true, \"compared_tensor_fields\": 109, \"max_absolute_error\": 0.0, \"placement_events\": 16, \"direct_zero_events\": 8, \"native_resume_copy_events\": 8, \"mmap_view_lifetime_checked\": true}, {\"node\": 1, \"five_updates_full_state_exact\": true, \"native_resume_next_step_exact\": true, \"compared_tensor_fields\": 109, \"max_absolute_error\": 0.0, \"placement_events\": 16, \"direct_zero_events\": 8, \"native_resume_copy_events\": 8, \"mmap_view_lifetime_checked\": true}], \"GPU_used\": false, \"new_SFT_acceptance\": false, \"formal_performance_evidence\": false}, \"allocation_guard_active\": true, \"new_7B_SFT_acceptance\": false}\n{\"passed\": true, \"actual_thread_phase_switch_verified\": true, \"wrapped_fused_and_nonfused_passed\": true, \"GPU_used\": false}\n{\"passed\": true, \"GPU_used\": false, \"toy_numeric_max_abs\": 0, \"archive_SHA_unchanged\": true, \"foreign_path_rejected\": true, \"original8GiB_guard_still_rejects_recorded_low_headroom\": true, \"old_full_audit_restored\": true, \"advice_calls\": 2, \"full7B_acceptance\": false}\n",
+  "controller_sha256_at_read": "de3007d0cc1d3239b01784f88692a974abbc9b2cfb38bf34b5e38eda5ec233ff"
+}

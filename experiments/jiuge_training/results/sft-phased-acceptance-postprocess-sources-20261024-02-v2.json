@@ -1,0 +1,8 @@
+{
+  "files": {
+    "review_sft_phased_acceptance_v2_20261024.py": "3d1d954807410a9f60e029c609dea14eb2e36b84e060f7b2076b3bed71c75fa6",
+    "finish_sft_phased_acceptance_v2_20261024.py": "d1c5b52a2fbc1dfae48327b6a07e3af844cb6526ced1dab34a9ad2d50bf4715f"
+  },
+  "pre_execution_derivation_verified": true,
+  "outside_frozen169_scientific_set": true
+}

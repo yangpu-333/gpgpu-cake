@@ -1,0 +1,7 @@
+{
+  "exit_code": 0,
+  "stdout": "{\"passed\": true, \"GPU_used\": false, \"toy_numeric_max_abs\": 0, \"archive_SHA_unchanged\": true, \"foreign_path_rejected\": true, \"original8GiB_guard_still_rejects_recorded_low_headroom\": true, \"old_full_audit_restored\": true, \"advice_calls\": 2, \"full7B_acceptance\": false}\n{\"passed\": true, \"source_files\": 169, \"old158_unchanged\": true, \"GPU_used\": false}\n",
+  "stderr": "",
+  "source_manifest_sha256": "951c80a806f6413cb389d96986012f50b6fc376afc3542d7762c8277408210b8",
+  "GPU_experiment_launched": false
+}

@@ -1,6 +1,6 @@
 {
   "schema": "jiuge7b-active-experiment-handoff-v1",
-  "as_of_local": "2026-10-24T12:07:22.012603+08:00",
+  "as_of_local": "2026-10-24T15:30:01.570179+08:00",
   "user_steering": "2026-10-23 user resumed: check reset ACT and two GPUs,no other users;admit one real7B update before six fresh cases;unchanged standards,0points,raw ACT,local keys only",
   "ssh": "ssh -i C:/Users/lenovo/.ssh/id_ed25519 -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes -p30353 huids25@192.168.5.200",
   "host": "sg-huids25-260917-94135-default0-0",
@@ -8,7 +8,7 @@
   "runtime": ".venv/bin/python",
   "resource": "sg-huids25-261024-6d26e;2A10016CPU300GiB;oldV100 retained",
   "resource_extension_authorized": true,
-  "current_actual_progress": "New container CPU state/resume,fused/nonfused and wiring passed;fresh SFT baseline full-state audit running;formal blocked",
+  "current_actual_progress": "Fresh pinned baseline and affinity control completed3steps/3585fields each rank;control maximum difference0;candidate full-state run started;native resume/formal remain blocked",
   "numeric_controller": "pinning-validation-20261015-04/controller.json",
   "followup_controller": "pinning-recovery-20261016-04/controller.json",
   "local_driver_state": "results/pinning-driver-20261016-05/status.json",
@@ -877,8 +877,8 @@
     "new_formal_performance_passed": false
   },
   "sft_phased_acceptance_20261024": {
-    "status": "running-fresh-numeric-baseline",
-    "job": "sg-huids25-261024-6d26e",
+    "status": "running-candidate-full-state-comparison-v2",
+    "job": "sg-huids25-261024-efbc8",
     "authorization": {
       "schema": "jiuge7b-phased-full-acceptance-authorization-v1",
       "utc": "2026-10-24T04:00:42.221167+00:00",
@@ -902,12 +902,12 @@
       "raw_storage": "ACTsharedCeph",
       "local": "bounded keys only"
     },
-    "source_manifest": "results/sft-phased-acceptance-source-manifest-20261024-01.json",
+    "source_manifest": "results/sft-phased-acceptance-source-manifest-20261024-02.json",
     "CPU_preparation_passed": true,
     "formal_performance_started": false,
     "formal_performance_passed": false,
-    "driver": "results/sft-phased-acceptance-driver-20261024-01/status.json",
-    "ACT_controller": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-acceptance-20261024-01/controller.json",
+    "driver": "results/sft-phased-acceptance-driver-20261024-02/status.json",
+    "ACT_controller": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-acceptance-20261024-02/controller.json",
     "approved_GPU_uuids": [
       "GPU-c9db5c06-61c6-01b7-b9aa-20307600482c",
       "GPU-4ce9cbee-8444-67c3-2ead-dfda2618ccdf"
@@ -915,11 +915,38 @@
     "no_foreign_compute_at_admission": true,
     "stop_before_epoch": 1792853953,
     "stop_before_Beijing": "2026-10-24T22:59:13+08:00",
-    "sources": 158,
+    "sources": 169,
     "old146_unchanged": true,
     "live_guarded_CPU_state_resume_and_wrapped_fused_checks_passed": true,
-    "driver_pid": 8224,
-    "postprocess_pid": 38568,
-    "postprocess": "results/sft-phased-acceptance-postprocess-20261024-01/status.json"
+    "driver_pid": 37844,
+    "postprocess_pid": 14868,
+    "postprocess": "results/sft-phased-acceptance-postprocess-20261024-02/status.json",
+    "native_reference_complete": true,
+    "native_steps_each_rank": 3,
+    "native_fields_each_rank": 3585,
+    "completed_cases": [
+      "phased-audit-native-20261024-01",
+      "phased-audit-control-20261024-01"
+    ],
+    "current_case": "phased-audit-optimized-20261024-02",
+    "candidate_full_correctness_passed": false,
+    "control_full_state_complete": true,
+    "control_steps_each_rank": 3,
+    "control_fields_each_rank": 3585,
+    "control_max_absolute_error": 0,
+    "prior_job": "sg-huids25-261024-6d26e",
+    "prior_job_status": "failed-exit1-confirmed0points",
+    "prior_driver_closed": true,
+    "prior_postprocess_closed": true,
+    "prior_failure": "MemoryError before first moment; cgroup free2931544064 required9642885120; originalguard unchanged",
+    "prior_failure_evidence": "results/sft-phased-acceptance-failure-preservation-20261024-01.json",
+    "recovery_CPU_preparation": "results/sft-phased-recovery-CPU-preparation-20261024-02.json",
+    "recovery_CPU_passed": true,
+    "old158_unchanged": true,
+    "recovery_allocation_admitted": true,
+    "updated_utc": "2026-10-24T08:10:29.175335+00:00",
+    "live_owned_cache_CPU_regression_passed": true,
+    "same_campaign_reference_aliases": 92,
+    "recovery_live_receipt": "results/sft-phased-acceptance-recovery-live-20261024-02.json"
   }
 }
