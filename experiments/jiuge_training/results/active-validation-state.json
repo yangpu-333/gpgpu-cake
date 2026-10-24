@@ -1,14 +1,14 @@
 {
   "schema": "jiuge7b-active-experiment-handoff-v1",
-  "as_of_local": "2026-10-23T22:48:12.819262+08:00",
+  "as_of_local": "2026-10-24T12:07:22.012603+08:00",
   "user_steering": "2026-10-23 user resumed: check reset ACT and two GPUs,no other users;admit one real7B update before six fresh cases;unchanged standards,0points,raw ACT,local keys only",
   "ssh": "ssh -i C:/Users/lenovo/.ssh/id_ed25519 -o StrictHostKeyChecking=yes -o IdentitiesOnly=yes -p30353 huids25@192.168.5.200",
   "host": "sg-huids25-260917-94135-default0-0",
   "remote_root": "/home/huids25/kda-jiuge-prep-20261014",
   "runtime": ".venv/bin/python",
-  "resource": "24c7a completed0points; oldV100 retained",
+  "resource": "sg-huids25-261024-6d26e;2A10016CPU300GiB;oldV100 retained",
   "resource_extension_authorized": true,
-  "current_actual_progress": "All six NUMA diagnostic cases,24traces, independent review, ACT raw/archive and two reports closed",
+  "current_actual_progress": "New container CPU state/resume,fused/nonfused and wiring passed;fresh SFT baseline full-state audit running;formal blocked",
   "numeric_controller": "pinning-validation-20261015-04/controller.json",
   "followup_controller": "pinning-recovery-20261016-04/controller.json",
   "local_driver_state": "results/pinning-driver-20261016-05/status.json",
@@ -78,7 +78,7 @@
     "final_gpu_snapshot_has_no_compute_processes": true,
     "raw_originals_downloaded": false
   },
-  "current_task": "Native unwrap globals+Dynamo wrapper V4; one new7B update before six fresh cases",
+  "current_task": "Fresh phased moment candidate full SFT acceptance; GPU stage awaits exact allocation gate",
   "cpu_numa_contract": "cpu_numa.contract.json",
   "cpu_numa_controller": "ACT cpu-numa-validation-20261016-02/controller.json",
   "cpu_numa_frozen_sources": [
@@ -347,7 +347,7 @@
     "local_key": "results/sft-admission-verification-20261017.json"
   },
   "user_requested_pause_after_delivery": false,
-  "experiments_running_for_this_campaign": false,
+  "experiments_running_for_this_campaign": true,
   "final_CPT_SFT_ACT_review_archive": {
     "schema": "jiuge7b-CPT-SFT-final-review-ACT-verification-v1",
     "passed": true,
@@ -875,5 +875,51 @@
     "raw_package": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-moments-delivery-20261023-07/Jiuge7B-SFT-S2048-direct-zero-moments-ABC-CBA-traces.zip",
     "raw_zip_local_downloaded": false,
     "new_formal_performance_passed": false
+  },
+  "sft_phased_acceptance_20261024": {
+    "status": "running-fresh-numeric-baseline",
+    "job": "sg-huids25-261024-6d26e",
+    "authorization": {
+      "schema": "jiuge7b-phased-full-acceptance-authorization-v1",
+      "utc": "2026-10-24T04:00:42.221167+00:00",
+      "user_explicit_answer": "授权11小时，费用上限0点",
+      "job": "sg-huids25-261024-6d26e",
+      "GPU": 2,
+      "GPU_model": "A100",
+      "CPU": 16,
+      "memory_GiB": 300,
+      "startup_limit_seconds": 39600,
+      "max_points": 0,
+      "including_setup_wait_and_retries": true,
+      "same_campaign_deadline_across_retries": true,
+      "complete_early_and_exit": true,
+      "keep_old_V100": true,
+      "create_login_identity": false,
+      "ROOT_dependencies_training_UID_GID": [
+        1001,
+        1001
+      ],
+      "raw_storage": "ACTsharedCeph",
+      "local": "bounded keys only"
+    },
+    "source_manifest": "results/sft-phased-acceptance-source-manifest-20261024-01.json",
+    "CPU_preparation_passed": true,
+    "formal_performance_started": false,
+    "formal_performance_passed": false,
+    "driver": "results/sft-phased-acceptance-driver-20261024-01/status.json",
+    "ACT_controller": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-acceptance-20261024-01/controller.json",
+    "approved_GPU_uuids": [
+      "GPU-c9db5c06-61c6-01b7-b9aa-20307600482c",
+      "GPU-4ce9cbee-8444-67c3-2ead-dfda2618ccdf"
+    ],
+    "no_foreign_compute_at_admission": true,
+    "stop_before_epoch": 1792853953,
+    "stop_before_Beijing": "2026-10-24T22:59:13+08:00",
+    "sources": 158,
+    "old146_unchanged": true,
+    "live_guarded_CPU_state_resume_and_wrapped_fused_checks_passed": true,
+    "driver_pid": 8224,
+    "postprocess_pid": 38568,
+    "postprocess": "results/sft-phased-acceptance-postprocess-20261024-01/status.json"
   }
 }

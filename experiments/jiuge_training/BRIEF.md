@@ -1,10 +1,10 @@
 # 九格7B训练与微调 tracing 简报
 
-截至2026年10月23日；已验收的正式性能数据截至10月20日。
+截至2026年10月24日；已验收的正式性能数据截至10月20日。
 
 **官方九格7B在ACT双A100上完成训练与全参数微调的原生tracing，并新增16份SFT原生/修复版对照时间线。优化对象是CPU AdamW offload中的FP32主参数pinned memory问题：SFT正式吞吐相对原生Megatron提升92.9%，此前CPT的独立正式提升为84.4%。新时间线显示，主要变化是HtoD主机调用耗时缩短，CPU AdamW可与HtoD搬运重叠；模型计算和AdamW更新公式保持不变。**
 
-10月23日的新候选已解决本次整模型首步内存准入问题，并完成六组35步对照、24份新时间线。相对已验收pinned基线，诊断窗口由3.859降至3.533秒/步，倒数比改善约9.2%；相对同样绑核的control约3.3%。**新增数据属于筛选，尚未通过正式吞吐验收。** 本阶段已结束并暂停。
+10月23日的新候选已解决本次整模型首步内存准入问题，并完成六组35步对照、24份新时间线。相对已验收pinned基线，诊断窗口由3.859降至3.533秒/步，倒数比改善约9.2%；相对同样绑核的control约3.3%。**新增数据属于筛选，尚未通过正式吞吐验收。** 10月24日已开始候选自身的完整验收。
 
 ## 1. 实验配置与采集结果
 
@@ -138,5 +138,7 @@ r = 同一种子的修复版吞吐 / 原生吞吐
 双卡作业`24c7a`已完成、退出码0、累计0.00点，旧V100保留，未停止他人进程。新增24份trace归档约219.5MB，只在ACT；本机新增关键包约2.33MB，展开后19.36MB。146份冻结来源、图表、两份报告和关键复核同步保留。此前为作业重置准备的约639MB本机恢复包继续保留，百GiB检查点仍在ACT共享Ceph。[完整过程与原件路径](README.md#二十二作业重置后的内存修复与六组筛选10月23日)
 
 项目：[GitHub](https://github.com/yangpu-333/gpgpu-cake) · [GitLab](https://gitlab.ci-lab.net/yangpu/gpgpu-cake)
+
+**10月24日验收进度：** 新双卡作业取得相同C9/AF A100卡对，启动时空闲、无其他计算进程；新容器CPU数值、恢复和接线检查通过，正在执行三步全状态基线。随后依次检查三臂完整状态、真正原生的SFT检查点恢复、ACT原件和本机精简包；全部通过后才开始三种子/三臂/120步正式计时。此次三臂都保留pinned修复，衡量的是新增策略的收益。授权上限11小时、0点，最晚北京时间今天22:59:13退出，原始数据留ACT。[当前验收范围](README.md#二十三新候选的独立全状态恢复与正式验收10月24日执行中)
 
 复核材料：[完整报告及可视化方法](README.md) · [最新六组独立复核](results/sft-phased-moments-independent-review-20261023-07.json) · [最新24份trace的ACT归档收据](results/sft-phased-moments-delivery-verification-20261023-07.json) · [SFT配对时间线复核](results/sft-paired-trace-independent-review-v2-20261020.json) · [CPT正式性能复核](results/pinning-driver-20261016-05/formal-independent-review.json) · [SFT正式性能复核](results/sft-pinning-independent-review-20261020-continuation-v2.json)

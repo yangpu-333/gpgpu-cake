@@ -1,0 +1,23 @@
+{
+  "schema": "jiuge7b-phased-full-acceptance-authorization-v1",
+  "utc": "2026-10-24T04:00:42.221167+00:00",
+  "user_explicit_answer": "授权11小时，费用上限0点",
+  "job": "sg-huids25-261024-6d26e",
+  "GPU": 2,
+  "GPU_model": "A100",
+  "CPU": 16,
+  "memory_GiB": 300,
+  "startup_limit_seconds": 39600,
+  "max_points": 0,
+  "including_setup_wait_and_retries": true,
+  "same_campaign_deadline_across_retries": true,
+  "complete_early_and_exit": true,
+  "keep_old_V100": true,
+  "create_login_identity": false,
+  "ROOT_dependencies_training_UID_GID": [
+    1001,
+    1001
+  ],
+  "raw_storage": "ACTsharedCeph",
+  "local": "bounded keys only"
+}

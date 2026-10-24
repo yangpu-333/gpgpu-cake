@@ -1,0 +1,9 @@
+{
+  "schema": "jiuge7b-phased-acceptance-preparation-v1",
+  "exit_code": 0,
+  "stdout": "{\"passed\": true, \"source_files\": 158, \"old146_unchanged\": true, \"CPU_checks\": {\"passed\": true, \"GPU_used\": false, \"generated_backend_and_runner_compile\": true, \"all_incremental_arms_use_pinned\": true, \"both_baseline_and_control_promotion_threshold_enforced\": true, \"one_losing_seed_rejected\": true, \"original_CV_repeat_preserved\": true, \"first_step_dispatch_once\": true, \"replaced_optimizer_released\": true, \"guards_removed_in_reverse_order\": true, \"fake_HDO_test_is_wiring_only_not_numeric_evidence\": true}}\n",
+  "stderr": "",
+  "source_manifest_sha256": "1e0cad4fe8102e4128062c02e410e6e563753771715ea449fb3152a62f2d0d50",
+  "GPU_experiment_launched": false,
+  "resource_submitted": false
+}

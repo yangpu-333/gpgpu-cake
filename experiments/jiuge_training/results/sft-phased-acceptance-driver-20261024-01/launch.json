@@ -1,0 +1,7 @@
+{
+  "script": "drive_sft_phased_acceptance_20261024.py",
+  "pid": 8224,
+  "job": "sg-huids25-261024-6d26e",
+  "GPU_experiments_launched_by_driver": false,
+  "started_utc": "2026-10-24T04:00:39.2522046Z"
+}

@@ -1,0 +1,8 @@
+{
+  "files": {
+    "review_sft_phased_acceptance_20261024.py": "3fb3b600c1dacc6ead47833a9945c5e3ae36a1cfef9afa58e3bc7073ae2f9283",
+    "finish_sft_phased_acceptance_20261024.py": "4bb4996a813a01d1db27051eceaa7ef4393bc67394137a3e6d30ab0f13deffd5"
+  },
+  "historical_formal_logs_CPU_parser_checks": 9,
+  "GPU_used": false
+}

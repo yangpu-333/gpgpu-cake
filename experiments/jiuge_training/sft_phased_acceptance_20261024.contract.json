@@ -1,0 +1,20 @@
+{
+  "schema": "jiuge7b-phased-SFT-full-acceptance-v1",
+  "date": "2026-10-24",
+  "screen_reference": "sft-phased-moments-independent-review-20261023-07.json; diagnostic only",
+  "model": "official9G7B_MHA,7668831744parameters,339BF16source tensors",
+  "configuration": "native Megatron5be9626,600files,S2048,TP2,PP1,DP1,micro/globalbatch1,FP32master/gradient/moments,BF16parameters,fullCPUAdamWoffload,fullrecompute",
+  "objective": "all48818AlpacaChinese documents;answer/EOD-only full-parameter SFT",
+  "baseline": "accepted pinned repair;unbound throughout;fresh numeric and formal references",
+  "control": "same pinned repair;opposite-NUMA setup,all rank threads to GPU-local8physical cores before first update;native moment allocation",
+  "candidate": "same control affinity;frozen V4 native initializer and two moment factory replacements;direct local-zero or native-resume-copy",
+  "old146sources_must_remain_unchanged": true,
+  "correctness": {"steps": 3,"groups_per_rank":199,"elements_per_rank":3834518016,"comparison":"CPUfloat64","atol":0.0003,"rtol":0.001,"finite":true,"fields":"allgradient,updatedBF16parameter,FP32master,exp_avg,exp_avg_sq,step,loss;per-tokenloss,input,mask,RNG,scheduler"},
+  "checkpoint": "new unmodified native SFT iteration2 checkpoint;both native and candidate resume to step3;full restored state and next update comparison",
+  "formal": {"seeds":[63100,63101,63102],"arms":["native_role_pinned_baseline","control_phase_affinity","optimized_role_V4_moments"],"steps":120,"exclude_initial":20,"timer":"unchanged GPU-synchronized time.time;max aligned TP rank/window","token_count":"2048inputslots/step,TP is not additive;answer-mask targets separate","profiler":false,"audit_or_checkpoint_IO":false,"repeat":"native/control seed meanCV>=10% => exactly one complete9-case confirmation;both rounds must pass","promotion":"all paired seeds faster and geometric mean>1% versus BOTH incremental baseline and control"},
+  "admission_before_formal":"fresh full-state and original native restore;ACT complete raw SHA;SFT semantics;bounded local key SHA;all frozen sources and same allocation",
+  "memory_guards":{"cgroup_reserve_bytes":8589934592,"node_reserve_bytes":17179869184,"two_rank_moments_bytes":61352288256,"do_not_reduce_guards":true},
+  "resource":{"gpus":2,"GPU_model":"A100-PCIE-40GB","CPU":16,"memory_GiB":300,"same_physical_pair_for_all_formal_arms":true,"same_NUMA_NODE_pair_required":true,"max_points":0,"proposed_max_seconds_including_setup":39600,"old_V100":"retain","no_new_identities":true,"ROOT":"existing root installs official system dependencies only;trainingUID/GID1001"},
+  "storage":{"raw":"ACTsharedCeph","local":"key results only,64MiBcap","no_original_deletion":true},
+  "formal_passed": false
+}
