@@ -877,7 +877,7 @@
     "new_formal_performance_passed": false
   },
   "sft_phased_acceptance_20261024": {
-    "status": "CPU-only-semantic-and-full-raw-verification-after-resume-counter-gate",
+    "status": "correctness-complete-formal-requires-new-authorization",
     "job": "sg-huids25-261024-efbc8",
     "authorization": {
       "schema": "jiuge7b-phased-full-acceptance-authorization-v1",
@@ -947,7 +947,7 @@
     "recovery_CPU_passed": true,
     "old158_unchanged": true,
     "recovery_allocation_admitted": true,
-    "updated_utc": "2026-10-24T12:22:44.136992+00:00",
+    "updated_utc": "2026-10-24T12:53:54.543720+00:00",
     "live_owned_cache_CPU_regression_passed": true,
     "same_campaign_reference_aliases": 92,
     "recovery_live_receipt": "results/sft-phased-acceptance-recovery-live-20261024-02.json",
@@ -958,8 +958,8 @@
     "candidate_moment_objects_each_rank": 398,
     "candidate_SFT_source_mask_reconstruction_passed": true,
     "candidate_numeric_review": "results/sft-phased-candidate-three-step-review-20261024-02.json",
-    "full_checkpoint_resume_passed": false,
-    "full_raw_SHA_gate_passed": false,
+    "full_checkpoint_resume_passed": true,
+    "full_raw_SHA_gate_passed": true,
     "numeric_stage_key_preservation": "results/sft-phased-numeric-stage-preservation-20261024-02-v2.json",
     "numeric_stage_independent_keys_review": "results/sft-phased-numeric-stage-independent-keys-review-20261024-02.json",
     "original_native_checkpoint_created": true,
@@ -991,9 +991,24 @@
     "CPU_remote_timeout_pid": 72491,
     "CPU_remote_worker_pid": 72492,
     "CPU_postprocess_source_manifest": "results/sft-phased-correctness-postprocess-source-20261024-03.json",
-    "CPU_postprocess_active": true,
+    "CPU_postprocess_active": false,
     "full_SFT_semantics_and_checkpoint_resume_values_passed": true,
     "full_SFT_semantics_receipt": "results/sft-phased-resume-semantic-proof-20261024-03.json",
-    "CPU_stage": "checkpoint-SHA"
+    "CPU_stage": "completed",
+    "checkpoint_SHA_manifest_created": true,
+    "CPU_archive_verifier_pid": 73159,
+    "delivery_finalizer_path": "close_sft_phased_correctness_20261024.py",
+    "delivery_finalizer_prepared": true,
+    "delivery_finalizer_executed": true,
+    "local_independent_review_passed": true,
+    "correctness_completed_utc": "2026-10-24T14:54:26.841271+00:00",
+    "raw_chunks_verified": 18601,
+    "reports_complete": true,
+    "next_step_requires_new_resource_authorization": true,
+    "closure_receipt": "results/sft-phased-correctness-closure-20261024-03.json",
+    "local_observer_closed": true,
+    "remote_CPU_worker_closed": true,
+    "final_process_budget_receipt": "results/sft-phased-correctness-budget-process-final-20261024-03.json",
+    "final_ACT_delivery_receipt": "results/sft-phased-correctness-final-ACT-preservation-20261024-03.json"
   }
 }

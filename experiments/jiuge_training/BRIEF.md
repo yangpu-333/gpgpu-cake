@@ -139,6 +139,6 @@ r = 同一种子的修复版吞吐 / 原生吞吐
 
 项目：[GitHub](https://github.com/yangpu-333/gpgpu-cake) · [GitLab](https://gitlab.ci-lab.net/yangpu/gpgpu-cake)
 
-**10月24日验收进度：** 三臂三步全状态比较通过；候选两rank各3585项字段，最大误差0。原生检查点恢复后，每rank995项恢复字段和1195项下一步字段也完整、误差0，最终moment页采样符合本地放置要求。控制器误把恢复初始化虚拟步计入真实训练次数而中止，版本化CPU复核已区分两类调用并通过12项拒绝回归，旧证据和科学源码不覆盖。完整SFT语义校验已通过，检查点和数值原件SHA仍在CPU后处理中。双卡已结束、累计0.00点；本窗口不足规定的3小时正式测速预留，**不再启动GPU测速，尚无新增正式加速结论**。原始数据留ACT，本机只保留关键结果。[当前证据与边界](README.md#234-恢复字段比较通过编排计数误判后的cpu复核)
+**10月24日验收结论：** 新候选的三步全状态、原生检查点恢复及下一步、完整SFT语义均已通过，全部受检字段最大误差为0。ACT已核验18,601个唯一原始数值块，本机最终关键包及10份数值清单的独立复核通过。恢复初始化虚拟步的编排计数误判已通过版本化CPU复核纠正，旧记录与科学来源不覆盖。**正式吞吐仍待另一个获授权的同卡对双卡窗口，本轮没有新增加速比。** 双卡已结束、累计0.00点，原始数据留ACT，本机只保留关键结果；本阶段收尾后暂停。[完整证据与后续标准](README.md#235-正确性与原件校验闭合正式性能待新窗口)
 
 复核材料：[完整报告及可视化方法](README.md) · [最新六组独立复核](results/sft-phased-moments-independent-review-20261023-07.json) · [最新24份trace的ACT归档收据](results/sft-phased-moments-delivery-verification-20261023-07.json) · [SFT配对时间线复核](results/sft-paired-trace-independent-review-v2-20261020.json) · [CPT正式性能复核](results/pinning-driver-20261016-05/formal-independent-review.json) · [SFT正式性能复核](results/sft-pinning-independent-review-20261020-continuation-v2.json)

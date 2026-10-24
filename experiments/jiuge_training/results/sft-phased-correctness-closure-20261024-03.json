@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "completed_utc": "2026-10-24T14:54:26.841271+00:00",
+  "full_state_and_native_resume_semantics_passed": true,
+  "all10_numeric_runs_max_absolute_error": 0,
+  "ACT_raw_chunks_verified": 18601,
+  "checkpoint_files": 5,
+  "checkpoint_bytes": 107368611274,
+  "local_key_zip_bytes": 4770459,
+  "local_key_files": 47,
+  "local_key_uncompressed_bytes": 28674041,
+  "key_bundle_sha256": "26dada4e9e162803b23b5be0260007444d0da5bdb2dd31b10439a3ed2d84f272",
+  "raw_tensors_downloaded": false,
+  "formal_performance_started": false,
+  "formal_performance_passed": false,
+  "formal_blocker": "new explicitly authorized same-card time window required; original3h reserve expired",
+  "all_new_double_GPU_jobs_closed": true,
+  "double_GPU_cumulative_points": "0.00",
+  "old_V100_retained": true
+}

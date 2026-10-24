@@ -1,0 +1,17 @@
+{
+  "pid": 25920,
+  "raw_originals_downloaded": false,
+  "status": "completed",
+  "updated_utc": "2026-10-24T14:54:42.415790+00:00",
+  "remote_status": "completed",
+  "completed_cases": [
+    "phased-audit-native-20261024-01",
+    "phased-audit-control-20261024-01",
+    "phased-audit-optimized-20261024-02",
+    "phased-native-checkpoint-20261024-02",
+    "phased-resume-native-20261024-02"
+  ],
+  "formal_performance_passed": false,
+  "key_files": 47,
+  "key_bytes": 28674041
+}

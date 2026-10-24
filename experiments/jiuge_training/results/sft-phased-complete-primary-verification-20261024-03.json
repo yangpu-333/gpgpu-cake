@@ -1,0 +1,85 @@
+{
+  "schema": "jiuge7b-pinning-full-archive-verification-v1",
+  "root": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-acceptance-20261024-02/numeric",
+  "hostname": "sg-huids25-260917-94135-default0-0",
+  "os_name": "posix",
+  "runs": [
+    {
+      "arm": "native",
+      "rank": 0,
+      "field_count": 3585,
+      "max_abs_error": 0.0,
+      "manifest_sha256": "fc0d6a3e7b60fa3b95f45048965d6086d2817b19bc5cbe4cb2b34f264ff763f6"
+    },
+    {
+      "arm": "native",
+      "rank": 1,
+      "field_count": 3585,
+      "max_abs_error": 0.0,
+      "manifest_sha256": "44ada2f7c7a6469a4094c06443b7fca254c145074d86e7919f00e878c92eec56"
+    },
+    {
+      "arm": "control",
+      "rank": 0,
+      "field_count": 3585,
+      "max_abs_error": 0.0,
+      "manifest_sha256": "2dfba2d276b6ea78a2edf329b472b5bdd4762fac2c4fa0e2f8e1c321b62cefe4"
+    },
+    {
+      "arm": "control",
+      "rank": 1,
+      "field_count": 3585,
+      "max_abs_error": 0.0,
+      "manifest_sha256": "aea23774e5ae30190412f194f963b769ca90d1769ae1456fffeeeca6bc078cc9"
+    },
+    {
+      "arm": "optimized",
+      "rank": 0,
+      "field_count": 3585,
+      "max_abs_error": 0.0,
+      "manifest_sha256": "282d6931a1a5be9f45712a0c4804c3af9a873d6b77e36027584abc121411c267"
+    },
+    {
+      "arm": "optimized",
+      "rank": 1,
+      "field_count": 3585,
+      "max_abs_error": 0.0,
+      "manifest_sha256": "7525eff9427759162d9f03a5ffbccb8699e34c9f1c078de623c92b6c0684a0d8"
+    },
+    {
+      "arm": "resume-restored",
+      "rank": 0,
+      "field_count": 995,
+      "max_abs_error": 0.0,
+      "manifest_sha256": "8d6bddb9258f162048d4a35cfcc6a576ea12c9d3fde6408f2f33ab4031ae1fc8"
+    },
+    {
+      "arm": "resume-next-step",
+      "rank": 0,
+      "field_count": 1195,
+      "max_abs_error": 0.0,
+      "manifest_sha256": "40057b2736672743821730247bc7c44ae7bc71dfd7c89c6df492cf0b79a91a19"
+    },
+    {
+      "arm": "resume-restored",
+      "rank": 1,
+      "field_count": 995,
+      "max_abs_error": 0.0,
+      "manifest_sha256": "4337d45a0574039b256af8c44f62bac04d917e3bf0d71885795ede2da29d4487"
+    },
+    {
+      "arm": "resume-next-step",
+      "rank": 1,
+      "field_count": 1195,
+      "max_abs_error": 0.0,
+      "manifest_sha256": "1d5523d8408b22a62bc1d7461f24a647f10cd171ab7b209e5ee55bcdc3d97bec"
+    }
+  ],
+  "unique_raw_chunks_verified": 18601,
+  "passed": true,
+  "primary_complete_raw_values_verified": true,
+  "storage_policy": "Complete numeric originals at ACT; local key results only",
+  "local_windows_raw_copy_verified": false,
+  "checkpoint_resume_tested": true,
+  "formal_performance_passed": false
+}

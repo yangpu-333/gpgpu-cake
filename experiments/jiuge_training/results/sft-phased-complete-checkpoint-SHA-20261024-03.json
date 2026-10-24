@@ -1,0 +1,30 @@
+{
+  "checkpoint": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-acceptance-20261024-02/checkpoints/native-step2",
+  "files": [
+    {
+      "file": "iter_0000002/.metadata",
+      "bytes": 471054,
+      "sha256": "e20846624849e54274c3de1146e1510ac85740d574c844bb61c82cb1ad229bff"
+    },
+    {
+      "file": "iter_0000002/__0_0.distcp",
+      "bytes": 53684371660,
+      "sha256": "638da6d843796b2acd83a65cdec1dcb053b84d6106ffdcc48e0a91387715df47"
+    },
+    {
+      "file": "iter_0000002/__1_0.distcp",
+      "bytes": 53683768496,
+      "sha256": "272f2d972177bc85f2c832474a389344ed65a0f4f2ef443eacee2bb81f4c85c1"
+    },
+    {
+      "file": "iter_0000002/metadata.json",
+      "bytes": 63,
+      "sha256": "56b32e2dfbc0255db319bddf6880c9dfd3475135ca8d5ace23b8a6a384ed63c6"
+    },
+    {
+      "file": "latest_checkpointed_iteration.txt",
+      "bytes": 1,
+      "sha256": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35"
+    }
+  ]
+}
