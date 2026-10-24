@@ -1,0 +1,48 @@
+{
+  "passed": true,
+  "GPU_used": false,
+  "scientific169_sources_modified": false,
+  "original_controller_failure_preserved": true,
+  "gate_correction": "separate native checkpoint initialization from one real update; require both398-event phases",
+  "ranks": [
+    {
+      "rank": 0,
+      "native_initialization_plus_real_update": 2,
+      "actual_training_updates": 1,
+      "real_optimizer_iteration": 3,
+      "initialization_moment_events": 398,
+      "resume_copy_events": 398,
+      "final_moment_objects": 398,
+      "final_sampled_moment_pages_local": true,
+      "resume_max_abs": 0.0,
+      "passed": true
+    },
+    {
+      "rank": 1,
+      "native_initialization_plus_real_update": 2,
+      "actual_training_updates": 1,
+      "real_optimizer_iteration": 3,
+      "initialization_moment_events": 398,
+      "resume_copy_events": 398,
+      "final_moment_objects": 398,
+      "final_sampled_moment_pages_local": true,
+      "resume_max_abs": 0.0,
+      "passed": true
+    }
+  ],
+  "negative_gate_regressions_rejected": 12,
+  "native_source_provenance": {
+    "megatron/core/optimizer/cpu_offloading/hybrid_optimizer.py": {
+      "sha256": "6a7f96e2afd0081991aff86424e5fdd9c07bce8c2636728baa0b8b2c8b4f2be2",
+      "method": "dummy_step",
+      "line": 453
+    },
+    "megatron/core/optimizer/distrib_optimizer.py": {
+      "sha256": "40cae307ccb2a3f484ebd5d28ee8549eb572d1b0ba6e91dc5661c137bf560907",
+      "method": "load_state_dict",
+      "line": 887
+    }
+  },
+  "full_semantics_and_raw_SHA_pending": true,
+  "formal_performance_passed": false
+}

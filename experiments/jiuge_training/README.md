@@ -1159,3 +1159,15 @@ V4及全新首步/六组路径共冻结146份来源，原131份未改。接续�
 控制器已继续创建真正原生SFT iteration2检查点；原生与候选的恢复值及下一步、完整原件SHA和三种子正式性能尚待验证。三步全状态通过是已闭合的数值阶段，**不是完整验收或新增加速比**。
 
 闭合数值阶段的23份关键文件已在ACT与本机双端验SHA，压缩约3.92MB、解压23.41MB；未下载原始张量。本机另独立检查了三臂、两rank的完整字段集合、容差及最大误差，见[关键包独立复核](results/sft-phased-numeric-stage-independent-keys-review-20261024-02.json)与[双端归档收据](results/sft-phased-numeric-stage-preservation-20261024-02-v2.json)。该关键包校验不能替代仍待完成的ACT完整原始数值SHA门禁。
+
+### 23.4 恢复字段比较通过，编排计数误判后的CPU复核
+
+候选恢复程序完成、退出码0；两rank均在原生iteration2恢复后比较全部995项状态字段，再对真实第3步比较1195项字段，字段覆盖完整、最大绝对误差均为0。最终各rank仍为199组、398个moment对象，两个moment字段各覆盖3,834,518,016元素，受检moment页均位于本地NUMA节点。
+
+控制器随后被编排门禁错误中止。Megatron的`DistributedOptimizer.load_state_dict`会调用原生HDO的`dummy_step()`初始化状态，再用检查点覆盖这些值；恢复后的真实训练只有一次更新。因此，策略观测器记录2次HDO调用、398次初始化事件及398次恢复复制事件，而原门禁错误地要求总调用1次、总事件398次。原生源码SHA、单次实际训练记录、optimizer iteration3、恢复数值和最终页采样共同支持上述判断。见[原始失败与恢复字段记录](results/sft-phased-resume-policy-failure-20261024-02.json)。
+
+版本化CPU复核要求两类事件各398项、只有1次真实训练、最终step3及全部页位置证明；额外调用、缺失事件、额外训练、错误step、失败数值或异地页等12项负例均被拒绝。旧控制器的失败记录和169份科学源码保留，不覆盖，也不重跑GPU。见[复核回归](results/sft-phased-resume-policy-CPU-preparation-20261024-03.json)。
+
+双卡作业已结束，网页确认累计0.00点，旧V100保留。当前通过旧V100仅执行原有CPU语义校验、原生检查点SHA及完整原始数值SHA，输入、答案mask、per-token loss、RNG和scheduler仍按原标准检查。原正式测速要求保留3小时，最晚放行时刻19:59:13已经过去；**本窗口不再启动GPU测速，也没有新增加速结论**。CPU后处理仍受22:59:13原截止保护，原件留ACT，本机只取64MiB以内关键包。
+
+截至本次更新，未经修改的SFT语义校验器已通过：真实input/答案mask/per-token loss、原生检查点RNG与scheduler恢复、同一恢复路径的RNG一致性及TP实际输入一致性均满足原门槛。见[原语义校验收据](results/sft-phased-resume-semantic-proof-20261024-03.json)。检查点和完整数值原件的SHA仍在CPU后处理中；本收据不替代原件完整性或正式性能验收。

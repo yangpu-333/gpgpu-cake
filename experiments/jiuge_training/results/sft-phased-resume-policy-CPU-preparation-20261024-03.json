@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "stdout": "{\"passed\": true, \"negative_regressions\": 12, \"ranks\": [{\"rank\": 0, \"native_initialization_plus_real_update\": 2, \"actual_training_updates\": 1, \"real_optimizer_iteration\": 3, \"initialization_moment_events\": 398, \"resume_copy_events\": 398, \"final_moment_objects\": 398, \"final_sampled_moment_pages_local\": true, \"resume_max_abs\": 0.0, \"passed\": true}, {\"rank\": 1, \"native_initialization_plus_real_update\": 2, \"actual_training_updates\": 1, \"real_optimizer_iteration\": 3, \"initialization_moment_events\": 398, \"resume_copy_events\": 398, \"final_moment_objects\": 398, \"final_sampled_moment_pages_local\": true, \"resume_max_abs\": 0.0, \"passed\": true}], \"GPU_used\": false}\n",
+  "stderr": "",
+  "GPU_used": false
+}

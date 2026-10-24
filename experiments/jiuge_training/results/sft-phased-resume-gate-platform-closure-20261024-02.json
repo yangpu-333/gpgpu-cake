@@ -1,0 +1,11 @@
+{
+  "job": "sg-huids25-261024-efbc8",
+  "platform_status": "failed",
+  "cumulative_points": "0.00",
+  "verification": "ACT job detail header via in-app browser",
+  "screenshot": "results/sft-phased-resume-gate-stopped-0points-20261024-02.jpg",
+  "old_V100_retained": true,
+  "no_new_GPU_job_created": true,
+  "CPU_only_continuation": true,
+  "formal_started": false
+}

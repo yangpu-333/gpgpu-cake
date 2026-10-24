@@ -1,0 +1,1 @@
+{"passed": true, "folder": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-correctness-postprocess-20261024-03/delivery-initial", "files": 12, "bytes": 371345, "bundle_sha256": "5ffe3a5a5a14f98fe6c389d129e1ecb7cf91637544fcc66ede765ac5b13f357e", "raw_tensors_downloaded": false, "full_correctness_pending": true, "formal_performance_passed": false}
