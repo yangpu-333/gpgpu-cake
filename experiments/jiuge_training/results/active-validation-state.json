@@ -1010,5 +1010,48 @@
     "remote_CPU_worker_closed": true,
     "final_process_budget_receipt": "results/sft-phased-correctness-budget-process-final-20261024-03.json",
     "final_ACT_delivery_receipt": "results/sft-phased-correctness-final-ACT-preservation-20261024-03.json"
+  },
+  "sft_phased_formal_20261025": {
+    "job": "sg-huids25-261025-ec72b",
+    "hostname": "sg-huids25-261025-ec72b-default0-0",
+    "user_explicit_authorization": "继续，授权新一轮双A100正式性能验收，费用上限0点，统一标准不变。先检查有没有其他人在用卡，原始数据留ACT，本机只保留关键结果，完成后停止双卡并暂停。",
+    "max_charge_points": 0,
+    "GPU": 2,
+    "CPU": 16,
+    "memory_GiB": 300,
+    "campaign_start_epoch": 1792892990,
+    "stop_before_epoch": 1792914590,
+    "stop_before_Beijing": "2026-10-25T15:49:50+08:00",
+    "startup_limit_seconds": 21600,
+    "all_retries_share_deadline": true,
+    "free_minutes_observed": 720,
+    "complete_early_and_exit": true,
+    "keep_old_V100": true,
+    "no_new_identity": true,
+    "root_dependencies_only_training_UID_GID": [
+      1001,
+      1001
+    ],
+    "originals": "ACT Ceph",
+    "local": "64MiB bounded keys only",
+    "status": "admitted-live-CPU-runtime-checks",
+    "driver": "results/sft-phased-formal-driver-20261025-01/status.json",
+    "ACT_controller": "/home/huids25/kda-jiuge-prep-20261014/sft-phased-formal-20261025-01/controller.json",
+    "source_manifest": "results/sft-phased-formal-source-manifest-20261025-01.json",
+    "source_files": 179,
+    "old169_unchanged": true,
+    "formal_performance_started": false,
+    "formal_performance_passed": false,
+    "correctness_already_closed": true,
+    "allocation_GPU_process_gate_pending": false,
+    "platform_preflight": "inspur-gpu-04 four A100 unallocated, no active user Pods",
+    "updated_utc": "2026-10-25T01:50:43.982042+00:00",
+    "driver_pid": 28592,
+    "ordered_gpu_uuids": [
+      "GPU-c9db5c06-61c6-01b7-b9aa-20307600482c",
+      "GPU-4ce9cbee-8444-67c3-2ead-dfda2618ccdf"
+    ],
+    "no_foreign_compute_at_admission": true,
+    "allocation_probe": "results/sft-phased-formal-live-allocation-20261025-01.json"
   }
 }
