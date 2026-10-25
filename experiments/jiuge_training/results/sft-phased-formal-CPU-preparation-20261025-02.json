@@ -1,0 +1,10 @@
+{
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"<stdin>\", line 21, in <module>\nAttributeError: module 'run_sft_phased_formal_20261025' has no attribute 'derive_generated'\n",
+  "old169_and_new179_unchanged": true,
+  "missing_CPU_template_supplied": {
+    "review_sft_phased_acceptance_20261024.py": "3fb3b600c1dacc6ead47833a9945c5e3ae36a1cfef9afa58e3bc7073ae2f9283"
+  },
+  "GPU_used": false
+}

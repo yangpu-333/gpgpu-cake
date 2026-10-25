@@ -1,0 +1,7 @@
+{
+  "pid": 28592,
+  "script": "drive_sft_phased_formal_20261025.py",
+  "window_style": "Hidden",
+  "GPU_experiments_launched_by_driver": false,
+  "stop_before_epoch": 1792914590
+}

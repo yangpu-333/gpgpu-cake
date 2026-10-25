@@ -1,0 +1,10 @@
+{
+  "exit_code": 0,
+  "stdout": "{\"passed\": true, \"source_files\": 179, \"old169_unchanged\": true, \"closed_correctness_revalidated\": true, \"full_raw_SHA_recomputed\": false, \"formal_derivations_compiled\": true, \"both_comparators_and_CV_negative_checks_passed\": true, \"GPU_used\": false, \"resource_submitted\": false}\n",
+  "stderr": "",
+  "old169_and_new179_unchanged": true,
+  "missing_CPU_template_supplied": {
+    "review_sft_phased_acceptance_20261024.py": "3fb3b600c1dacc6ead47833a9945c5e3ae36a1cfef9afa58e3bc7073ae2f9283"
+  },
+  "GPU_used": false
+}
