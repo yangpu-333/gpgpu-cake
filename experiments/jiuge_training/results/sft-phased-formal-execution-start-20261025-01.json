@@ -1,0 +1,15 @@
+{
+  "formal_performance_started": true,
+  "first_case": "pinning-formal-phased20261025primary-63100-native",
+  "actual_controller_status_utc": "2026-10-25T01:55:12.319278+00:00",
+  "source_files": 179,
+  "old169_unchanged": true,
+  "same_original_C9_AF": true,
+  "no_foreign_compute_at_admission": true,
+  "new_container_CPU_gates_passed": true,
+  "driver_pid": 28592,
+  "automation_id": "7b-sft-moment",
+  "hard_stop_epoch": 1792914590,
+  "max_charge_points": 0,
+  "full_raw_data_downloaded": false
+}
