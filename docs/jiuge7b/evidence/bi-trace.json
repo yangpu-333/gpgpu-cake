@@ -1,0 +1,244 @@
+{
+  "platform": "Data Thinking BI-V150 TP2 CoreX4.4",
+  "objective": "answer_only_SFT",
+  "source_analysis_SHA256": "32cd5463bec583bdfb3146981a788b2499637f674908b977a02d7d5b7cf4b1a7",
+  "trace_windows": [
+    {
+      "window": "window-01",
+      "rank": 0,
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "trace_sha256": "21458ece0945ca06d5366b46a9de1ed32e149b982d3271414eeb2867c274e466",
+      "decompressed_sha256": "39508b48063fe5e72bb9454ad05bb366d829c1d75c0c0d9514d980e58ae1fb41",
+      "case": "corex-S2048-trace-native-sl02"
+    },
+    {
+      "window": "window-01",
+      "rank": 1,
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "trace_sha256": "3d48fa04f3d88945ad13a3536243c5205161b6bd5071f75fb68488c83798bd90",
+      "decompressed_sha256": "f2ae7bf88841b9be09b41995830f7e408a1221482e28e5fe623442e92791967c",
+      "case": "corex-S2048-trace-native-sl02"
+    },
+    {
+      "window": "window-02",
+      "rank": 0,
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "trace_sha256": "20a36bd5980514b7bd001260201a17ceeb81ccc4bfeac0a11d2fc7ff23e1782b",
+      "decompressed_sha256": "bca367c2ca7dc9f865aa567e9d40c850dabdddccd018ea6d2689999e1e52e327",
+      "case": "corex-S2048-trace-native-sl02"
+    },
+    {
+      "window": "window-02",
+      "rank": 1,
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "trace_sha256": "09e9348ea567ea25d16926f6a20cc630537aebf355ec3648eb59fc4790f93f79",
+      "decompressed_sha256": "eef4c1507fbed83d24580f55a4942358989f83711347063a3fc9393a523d188c",
+      "case": "corex-S2048-trace-native-sl02"
+    },
+    {
+      "window": "window-01",
+      "rank": 0,
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "trace_sha256": "46d5fd892540296e46bbd587281bf69834f2ff7e10c4648cd223a7e16e33fc6f",
+      "decompressed_sha256": "bd245ba050345760dc7380774701320986219295587b2ebc7ae0303460c39d46",
+      "case": "corex-S2048-trace-control-sl02"
+    },
+    {
+      "window": "window-01",
+      "rank": 1,
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "trace_sha256": "b6d5b6e8731390b5ab432d2b806e4d1d20fcb7cd817e81db746c7e553b84433e",
+      "decompressed_sha256": "98874fc301e974b953faae9393163f6da69d55ff8f5e7f8558dc4ec83e2f71cb",
+      "case": "corex-S2048-trace-control-sl02"
+    },
+    {
+      "window": "window-02",
+      "rank": 0,
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "trace_sha256": "1ec7f4281c74ad1612d7cacf0abf9786df8106faf32396b96f733db858e2339a",
+      "decompressed_sha256": "ce26a4eb268f973b4bac0764faf64adfb28656daa7447a972d380d2925581ec7",
+      "case": "corex-S2048-trace-control-sl02"
+    },
+    {
+      "window": "window-02",
+      "rank": 1,
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "trace_sha256": "eb1339fa5a3dcc9b17ee569e2a037603613fffe8f8fbcbfac56c02c05578c10f",
+      "decompressed_sha256": "4624c3dd356f2cd49b89f72bde95ecdc61f65f2a70a4098abe52eb4328646e80",
+      "case": "corex-S2048-trace-control-sl02"
+    },
+    {
+      "window": "window-01",
+      "rank": 0,
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "trace_sha256": "f6ef6567f2ec9a2bb9c935dd3052c717ff265a1d14f75b58a0366df41cbae2f1",
+      "decompressed_sha256": "a25879b5acd380f67437689c5b5064b3403a1782c8174b79e4e62c8ed4ad7a49",
+      "case": "corex-S2048-trace-optimized-fu01"
+    },
+    {
+      "window": "window-01",
+      "rank": 1,
+      "steps": [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      "trace_sha256": "c455d9441f708f3f2f7c0b70966e7d694e69b0e4e34bdc97b622142dbc96bd3d",
+      "decompressed_sha256": "10ce9cfcae9367f4746d33894c072b23b917c74ea5ad2712c3219c2e3c4c1707",
+      "case": "corex-S2048-trace-optimized-fu01"
+    },
+    {
+      "window": "window-02",
+      "rank": 0,
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "trace_sha256": "d5977f3d0b667923596e25ea6391164ea66011e77b49d266b5416592b215f481",
+      "decompressed_sha256": "265888ec38e3660215ca478e621e424c133cf3c9009496d3e5e1b28de5bee46e",
+      "case": "corex-S2048-trace-optimized-fu01"
+    },
+    {
+      "window": "window-02",
+      "rank": 1,
+      "steps": [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      "trace_sha256": "84abe88accf66ab2a88bd7704a63508348efa341ea83dfba340e8bb7113fe6f5",
+      "decompressed_sha256": "dbbb7ea5fdd7f21f5ed04b5d14544beb582a3b941349a1c135d0cb56f091fe37",
+      "case": "corex-S2048-trace-optimized-fu01"
+    }
+  ],
+  "summaries": [
+    {
+      "case": "corex-S2048-trace-native-sl02",
+      "rank_window_observations": 4,
+      "window_step_seconds_mean": 6.879624096057129,
+      "CPUAdamW_seconds_per_rank_step": 2.0868928639404296,
+      "optimizer_seconds_per_rank_step": 4.082399140686035,
+      "optimizer_outside_AdamW_seconds_per_rank_step": 1.9955062767456055,
+      "GPU_compute_seconds_per_rank_step": 1.7012239693237303,
+      "HtoD_seconds_per_rank_step": 0.6795936127563477,
+      "GPU_idle_proxy_percent_range": [
+        32.73941597742518,
+        47.02506349952989
+      ],
+      "all_CPUAdamW_HtoD_recorded_overlap_zero": true,
+      "all_compute_collective_recorded_overlap_zero": true,
+      "collective_seconds_per_rank_step": {
+        "0": 0.20695556286621095,
+        "1": 1.0768614037841797
+      }
+    },
+    {
+      "case": "corex-S2048-trace-control-sl02",
+      "rank_window_observations": 4,
+      "window_step_seconds_mean": 5.809531743054199,
+      "CPUAdamW_seconds_per_rank_step": 1.5389487947021485,
+      "optimizer_seconds_per_rank_step": 3.5750690804077148,
+      "optimizer_outside_AdamW_seconds_per_rank_step": 2.0361202857055662,
+      "GPU_compute_seconds_per_rank_step": 1.7021800504272462,
+      "HtoD_seconds_per_rank_step": 0.7238684170043945,
+      "GPU_idle_proxy_percent_range": [
+        32.610777075736195,
+        36.08110556458591
+      ],
+      "all_CPUAdamW_HtoD_recorded_overlap_zero": true,
+      "all_compute_collective_recorded_overlap_zero": true,
+      "collective_seconds_per_rank_step": {
+        "0": 0.22462256286621093,
+        "1": 0.31284826892089845
+      }
+    },
+    {
+      "case": "corex-S2048-trace-optimized-fu01",
+      "rank_window_observations": 4,
+      "window_step_seconds_mean": 5.625814999658203,
+      "CPUAdamW_seconds_per_rank_step": 1.3369099299682619,
+      "optimizer_seconds_per_rank_step": 3.446460483190918,
+      "optimizer_outside_AdamW_seconds_per_rank_step": 2.109550553222656,
+      "GPU_compute_seconds_per_rank_step": 1.7018729405639648,
+      "HtoD_seconds_per_rank_step": 0.7846714262939454,
+      "GPU_idle_proxy_percent_range": [
+        30.586543210176544,
+        33.786194779801384
+      ],
+      "all_CPUAdamW_HtoD_recorded_overlap_zero": true,
+      "all_compute_collective_recorded_overlap_zero": true,
+      "collective_seconds_per_rank_step": {
+        "0": 0.18815748044433594,
+        "1": 0.24668251774902344
+      }
+    }
+  ],
+  "cross_window_attribution_only": true,
+  "rank_windows_are_not_independent_seeds": true,
+  "range_categories_are_not_additive_wall_time": true,
+  "idle_is_unrecorded_activity_proxy_not_hardware_utilization": true,
+  "formal_performance_accepted": false,
+  "strict_repair_new_trace_collected": false,
+  "created_epoch": 1793092583.8759742
+}

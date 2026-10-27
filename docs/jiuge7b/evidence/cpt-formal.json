@@ -1,0 +1,266 @@
+{
+  "schema": "jiuge7b-pinning-local-formal-review-v1",
+  "all_9_cases_and_both_actual_ranks_verified": true,
+  "all_adamw_states_reached_120": true,
+  "no_skipped_steps": true,
+  "case_gpu_occupancy_gates_passed": true,
+  "source_analyzer_sha256": "cc956fd4f68f0f9535f706f7a54046d9cd6c95c071661f31b138c5aebf4005d6",
+  "cases": [
+    {
+      "case": "pinning-formal-primary-63100-native",
+      "seed": 63100,
+      "arm": "native",
+      "retained_interval_seconds_per_step": [
+        6.487945604324341,
+        6.435611987113953,
+        6.558213067054749,
+        6.747781872749329,
+        6.696613502502442,
+        6.45647280216217,
+        6.530529737472534,
+        6.616345524787903,
+        6.632964015007019,
+        6.80341260433197
+      ],
+      "mean_seconds_per_step": 6.596589071750641,
+      "effective_tokens_per_second": 310.4634800991916,
+      "retained_steps": 100,
+      "rank_aggregation": "max seconds per aligned 10-step window",
+      "interval_cv": 0.01894344072345723
+    },
+    {
+      "case": "pinning-formal-primary-63100-control",
+      "seed": 63100,
+      "arm": "control",
+      "retained_interval_seconds_per_step": [
+        7.140278625488281,
+        6.387320423126221,
+        6.359623289108276,
+        6.327520251274109,
+        6.354228115081787,
+        6.649939632415771,
+        6.91784439086914,
+        6.6538749694824215,
+        6.786618852615357,
+        6.598909616470337
+      ],
+      "mean_seconds_per_step": 6.61761581659317,
+      "effective_tokens_per_second": 309.4770166114502,
+      "retained_steps": 100,
+      "rank_aggregation": "max seconds per aligned 10-step window",
+      "interval_cv": 0.041159591056001074
+    },
+    {
+      "case": "pinning-formal-primary-63100-optimized",
+      "seed": 63100,
+      "arm": "optimized",
+      "retained_interval_seconds_per_step": [
+        3.2948030471801757,
+        3.29657039642334,
+        3.2896162033081056,
+        3.287817692756653,
+        3.140045142173767,
+        2.7996667623519897,
+        2.7977221727371218,
+        2.8005772113800047,
+        2.8021171569824217,
+        2.80965518951416
+      ],
+      "mean_seconds_per_step": 3.031859097480774,
+      "effective_tokens_per_second": 675.4931328113895,
+      "retained_steps": 100,
+      "rank_aggregation": "max seconds per aligned 10-step window",
+      "interval_cv": 0.08133221565323437
+    },
+    {
+      "case": "pinning-formal-primary-63101-native",
+      "seed": 63101,
+      "arm": "native",
+      "retained_interval_seconds_per_step": [
+        6.832960796356201,
+        6.746096897125244,
+        6.622026324272156,
+        6.5955328941345215,
+        6.377528691291809,
+        6.349135255813598,
+        6.461628460884095,
+        6.3850359439849855,
+        6.334228992462158,
+        6.5771328687667845
+      ],
+      "mean_seconds_per_step": 6.528130712509156,
+      "effective_tokens_per_second": 313.71920848270355,
+      "retained_steps": 100,
+      "rank_aggregation": "max seconds per aligned 10-step window",
+      "interval_cv": 0.026699040126395998
+    },
+    {
+      "case": "pinning-formal-primary-63101-control",
+      "seed": 63101,
+      "arm": "control",
+      "retained_interval_seconds_per_step": [
+        6.47738242149353,
+        6.551250553131103,
+        6.704895710945129,
+        6.387695455551148,
+        6.495565056800842,
+        6.503013610839844,
+        6.474786376953125,
+        6.643029999732971,
+        6.6171023607254025,
+        6.36587438583374
+      ],
+      "mean_seconds_per_step": 6.522059593200684,
+      "effective_tokens_per_second": 314.01123690054317,
+      "retained_steps": 100,
+      "rank_aggregation": "max seconds per aligned 10-step window",
+      "interval_cv": 0.016615497908307207
+    },
+    {
+      "case": "pinning-formal-primary-63101-optimized",
+      "seed": 63101,
+      "arm": "optimized",
+      "retained_interval_seconds_per_step": [
+        4.343968105316162,
+        3.9865413427352907,
+        3.826153540611267,
+        3.859147047996521,
+        3.8847460031509398,
+        3.8868401527404783,
+        3.868663954734802,
+        3.8840732097625734,
+        3.856518864631653,
+        3.8297977447509766
+      ],
+      "mean_seconds_per_step": 3.9226449966430663,
+      "effective_tokens_per_second": 522.0966979557528,
+      "retained_steps": 100,
+      "rank_aggregation": "max seconds per aligned 10-step window",
+      "interval_cv": 0.03940681272340352
+    },
+    {
+      "case": "pinning-formal-primary-63102-native",
+      "seed": 63102,
+      "arm": "native",
+      "retained_interval_seconds_per_step": [
+        7.596609139442444,
+        7.082291221618652,
+        6.4757061958312985,
+        6.411815214157104,
+        6.357697534561157,
+        6.307601451873779,
+        6.307801008224487,
+        6.362488508224487,
+        6.380314230918884,
+        6.890558552742005
+      ],
+      "mean_seconds_per_step": 6.61728830575943,
+      "effective_tokens_per_second": 309.49233362214255,
+      "retained_steps": 100,
+      "rank_aggregation": "max seconds per aligned 10-step window",
+      "interval_cv": 0.06553139077342222
+    },
+    {
+      "case": "pinning-formal-primary-63102-control",
+      "seed": 63102,
+      "arm": "control",
+      "retained_interval_seconds_per_step": [
+        7.160420489311218,
+        7.436274123191834,
+        6.795439767837524,
+        6.470556354522705,
+        6.499416637420654,
+        6.513255500793457,
+        6.7990007400512695,
+        6.854710125923157,
+        6.438434672355652,
+        6.334926128387451
+      ],
+      "mean_seconds_per_step": 6.730243453979492,
+      "effective_tokens_per_second": 304.29805608132176,
+      "retained_steps": 100,
+      "rank_aggregation": "max seconds per aligned 10-step window",
+      "interval_cv": 0.05235035772157111
+    },
+    {
+      "case": "pinning-formal-primary-63102-optimized",
+      "seed": 63102,
+      "arm": "optimized",
+      "retained_interval_seconds_per_step": [
+        3.8703490018844606,
+        3.8051167249679567,
+        3.81312096118927,
+        3.816561150550842,
+        3.8212250232696534,
+        3.826675009727478,
+        3.8166300296783446,
+        3.8151211977005004,
+        3.8138670206069945,
+        3.813059949874878
+      ],
+      "mean_seconds_per_step": 3.821172606945038,
+      "effective_tokens_per_second": 535.9611330505535,
+      "retained_steps": 100,
+      "rank_aggregation": "max seconds per aligned 10-step window",
+      "interval_cv": 0.00475315139141113
+    }
+  ],
+  "seed_means": {
+    "63100": {
+      "native": 6.596589071750641,
+      "control": 6.61761581659317,
+      "optimized": 3.031859097480774
+    },
+    "63101": {
+      "native": 6.528130712509156,
+      "control": 6.522059593200684,
+      "optimized": 3.9226449966430663
+    },
+    "63102": {
+      "native": 6.61728830575943,
+      "control": 6.730243453979492,
+      "optimized": 3.821172606945038
+    }
+  },
+  "arm_aggregate": {
+    "native": {
+      "mean_seconds_per_step": 6.580669363339742,
+      "effective_tokens_per_second": 311.21454170136633
+    },
+    "control": {
+      "mean_seconds_per_step": 6.623306287924448,
+      "effective_tokens_per_second": 309.21112673498055
+    },
+    "optimized": {
+      "mean_seconds_per_step": 3.591892233689626,
+      "effective_tokens_per_second": 570.1730081963719
+    }
+  },
+  "seed_mean_cv": {
+    "native": 0.0070907756949103815,
+    "control": 0.01573361060640571,
+    "optimized": 0.13576394534239222
+  },
+  "vs_native": {
+    "seed_throughput_ratios": [
+      2.1757571376690508,
+      1.66421654727762,
+      1.731742840857911
+    ],
+    "geomean_throughput_ratio": 1.8440295855043458,
+    "all_seeds_faster": true
+  },
+  "vs_control": {
+    "seed_throughput_ratios": [
+      2.182692402193712,
+      1.6626688366605065,
+      1.761303177393027
+    ],
+    "geomean_throughput_ratio": 1.8558554105992549,
+    "all_seeds_faster": true
+  },
+  "gain_vs_control": 0.8558554105992549,
+  "round_promotion_passed": true,
+  "repeat_required": false,
+  "formal_performance_passed": true
+}

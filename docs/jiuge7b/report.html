@@ -1,0 +1,1928 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>九格7B研究报告</title><style>html{scroll-behavior:smooth}body{margin:0;background:#f6f7f9;color:#18232f;font:16px/1.75 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1100px;margin:24px auto;padding:36px 44px;background:#fff;border:1px solid #e5e9ed;border-radius:12px}h1{font-size:30px;line-height:1.35}h2{font-size:22px;margin-top:36px;border-bottom:1px solid #e5e9ed;padding-bottom:8px}a{color:#145ac7}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:9px 12px;border:1px solid #dbe2ea;text-align:left}th{background:#eef3f8}.table-wrap{overflow-x:auto;margin:18px 0}code{background:#f1f4f7;padding:2px 4px;font-size:13px}pre{padding:18px;background:#101923;color:#d9e5f2;overflow:auto;max-height:640px}pre code{background:transparent;padding:0;color:inherit}summary{cursor:pointer;font-weight:600;color:#145ac7}details{margin:14px 0;padding:12px 16px;border:1px solid #dbe2ea;border-radius:7px}hr{border:0;border-top:1px solid #dbe2ea;margin:32px 0}@media(max-width:700px){main{margin:0;padding:20px 16px;border:0;border-radius:0}h1{font-size:25px}}</style></head><body><main><a id="report-top"></a><h1>九格7B训练与微调性能优化研究报告</h1><p>截至2026年10月27日。研究对象为官方九格7B，采用Megatron、TP2、BF16、S2048及CPU AdamW offload，覆盖继续预训练（CPT）与全参数指令微调（SFT）。</p><h2>已验证成果：双A100</h2><p>定位并修复FP32主参数在CPU复制、转换后丢失pinned属性的问题，改善主机到GPU的搬运与重叠，保持模型、数据和AdamW更新公式不变。</p><div class="table-wrap"><table><thead><tr><th>任务</th><th>step耗时：原生→修复</th><th>输入吞吐：原生→修复</th><th>配对吞吐提升</th></tr></thead><tbody><tr><td>CPT</td><td>6.581→3.592秒</td><td>311.2→570.2 tokens/s</td><td><strong>84.4%</strong></td></tr><tr><td>SFT</td><td>6.563→3.413秒</td><td>312.0→600.1 tokens/s</td><td><strong>92.9%</strong></td></tr></tbody></table></div><p>SFT配对时间线中，HtoD主机调用范围由约2.90秒/步降至4.33毫秒/步，CPU AdamW与HtoD重叠由0增至1.58秒/步，搬运量相同。三步全状态、原生保存恢复及真实下一步比较均通过，受检状态最大误差为0。</p><p>正式测量为三种子×三臂，每例120步、剔除前20步，关闭profiler，使用GPU同步计时及两rank慢端。提升为逐种子配对比的几何平均，与表内合并吞吐口径不同；CPT/SFT修复组种子均值CV分别为13.6%/9.24%。SFT答案监督吞吐为263.3→506.4 targets/s。</p><h2>国产GPU研究：双BI-V150</h2><p>完成CoreX 4.4真实7B迁移及三臂各35步采集，获得12个rank/window观测。现有证据支持三个研究判断：</p><p>- <strong>CPU offload与同步是端到端优先方向。</strong> GPU计算区间约1.70秒/步；本地moment候选optimizer范围仍约3.45秒，其中AdamW数学之外约2.11秒。12窗口未记录到CPU AdamW与HtoD重叠。</p><p>- <strong>NUMA预算必须覆盖完整工作集。</strong> 识别两rank约28.57GiB延后分配的FP32梯度及新增审计文件缓存，建立节点预算、实际页位置与容量验证方法。</p><p>- <strong>重复前反向不能替代连续训练验证。</strong> 输入与RNG一致时，捕获到embedding梯度微差及后续传播；严格模式固定权重16次重复通过，连续更新与旧参考的兼容检查仍未通过。</p><p>上述时间来自profiler窗口，仅用于归因；范围存在重叠，不可相加或换算正式加速比。BI-V150原执行配置已通过完整数值和原生恢复；新增NUMA/严格路径尚未完成验收，<strong>目前没有新增BI-V150正式端到端加速结论</strong>。</p><p><strong>新增算子基准。</strong> 双BI-V150已顺序完成7B形状<code>[1,14,S,S]</code>的scale/mask/softmax前后向：S2048/S4096×BF16/FP32输入共8例、8份GPU trace。全输出与梯度有限，12行CPU float64抽样对照通过。BF16输入、FP32中间计算的子链中位耗时分别为11.54–11.60毫秒、44.40–44.66毫秒，每次13个GPU kernel，可用于下一步融合研究。输入为合成数据，不含QK/PV矩阵乘、整模型更新或TP通信，不代表训练性能通过。</p><h2>下一阶段目标</h2><div class="table-wrap"><table><thead><tr><th>优先级</th><th>研究任务</th><th>交付与验收</th></tr></thead><tbody><tr><td>1</td><td>定位跨独立进程的embedding及连续更新差异；控制新增审计文件缓存</td><td>可复现的首个分歧证据；缓存写回前后内容与驻留验证，保留原数值标准</td></tr><tr><td>2</td><td>统一现有trace的算子、shape、搬运及同步归因；必要时用ixSYS补充短时间线</td><td>CPU offload关键路径与GPU热点表，明确统计分母和未归因项</td></tr><tr><td>3</td><td>端到端优先验证offload回传/同步编排；GPU首选7B真实shape的mask/scale/softmax前后向融合</td><td>单一候选的语义、边界正确性及微基准；GEMM先建立真实shape基准再选题</td></tr><tr><td>4</td><td>完成三臂全状态、SFT语义、原生保存恢复，再做正式对照</td><td>无profiler的step延迟、有效输入tokens/s、答案targets/s，沿用原三种子协议</td></tr></tbody></table></div><p>同组提供的7B/8B/4B原始trace、分析器及ixSYS资料用于交叉分析，既有工作归原作者。已独立核验172项文件哈希、复算四份SFT trace并通过分析器9项测试；7B/4B的BF16对齐未通过，8B仅通过短前向检查，不能直接继承其训练正确性或性能结论。截图中的8B GEMM形状不作为7B目标。</p><p><a href="#appendix-operator">算子基准复核</a> · <a href="#appendix-plan">详细计划与验收标准</a> · <a href="#appendix-cpt">CPT正式结果</a> · <a href="#appendix-sft">SFT正式结果</a></p><p><a href="#report-top">下载离线单文件HTML</a> · <a href="https://github.com/yangpu-333/gpgpu-cake/blob/main/docs/project-overview-20261027.md">其他项目历史概览</a></p><hr><h2>完整内容与复核证据</h2><p>以下内容均在本文件内。表格用于阅读，折叠区保留完整关键复核JSON；也可从GitHub下载对应JSON。</p><a id="appendix-plan"></a><h2>详细研究计划与验收标准</h2><div class="table-wrap"><table><thead><tr><th>顺序</th><th>要做什么</th><th>交付与准入</th></tr></thead><tbody><tr><td>P0 数值与内存</td><td>固定初始权重、实际输入和RNG，沿embedding梯度→首步更新→次步前向定位跨独立进程差异；为新增自有审计pack做有界写回/退缓存</td><td>可复现的分歧证据；内容SHA、inode和驻留检查。保留旧参考、原容差与内存保护</td></tr><tr><td>P1 同口径分析</td><td>复用runtime关联、exclusive归因和区间并集方法分析现有trace；必要时用ixSYS采短CUDA/NVTX窗口</td><td>算子/shape热点、搬运及同步依赖表，明确分母与未归因项</td></tr><tr><td>P2 单一候选</td><td>端到端优先研究offload回传/批次/同步；GPU方向验证7B真实shape的mask/scale/softmax前后向融合</td><td>保留mask、cast、缩放舍入、重计算和梯度语义；先通过边界正确性与隔离微基准</td></tr><tr><td>P3 模型验收</td><td>三臂完整数值/SFT、原生恢复通过后，补必要的新trace与无profiler正式对照</td><td>分别报告step延迟、有效输入tokens/s及答案targets/s</td></tr></tbody></table></div><p>真实7B配置：官方9G7B_MHA，7,668,831,744参数、28层、hidden=3584、FFN=18944、28个MHA头；TP2、BF16、S2048、micro/global batch=1、CPU AdamW offload。数据为48,818条中文Alpaca；CPT监督全文，SFT只监督答案及结束标记。</p><p>attention目标为每rank <code>[1,14,S,S]</code>，覆盖S2048/S4096。GEMM先对FC1 <code>[S,3584]×[3584,18944]</code>、FC2 <code>[S,9472]×[9472,3584]</code>及对应反向建基准，再决定是否优化。</p><p>验收标准：</p><p>1. 三臂各3次真实S2048 BF16更新，每rank199组、3585字段；原FullAudit逐块有限性/CPU float64比较，<code>atol=3e-4, rtol=1e-3</code>。覆盖source、answer mask、逐token loss、RNG、scheduler和TP；新增raw独立核验。</p><p>2. 原生iteration2保存，native与optimized恢复并真实执行step3；995项恢复、1195项下一步字段，以及HDO调用、398个moment恢复和原12项负例均须通过。</p><p>3. 三种子×三臂轮换，每例120步、剔除20步，GPU同步计时取两rank慢端，13条loss精确一致。native/control种子CV≥10%须完整九例确认；两baseline所有配对更快且各几何平均收益&gt;1%，才接受收益。</p><p>4. GPU实验先核对资源与他人占用，保留NUMA/RSS/host保护。费用优先抵扣券；正式实验保留初始3小时，诊断与微基准不替代正式结果。</p><a id="appendix-cpt"></a><h2>CPT正式结果：双A100</h2><div class="table-wrap"><table><thead><tr><th>seed</th><th>arm</th><th>秒/步</th><th>有效输入tokens/s</th><th>保留步数</th></tr></thead><tbody><tr><td>63100</td><td>native</td><td>6.596589</td><td>310.463</td><td>100</td></tr><tr><td>63100</td><td>control</td><td>6.617616</td><td>309.477</td><td>100</td></tr><tr><td>63100</td><td>optimized</td><td>3.031859</td><td>675.493</td><td>100</td></tr><tr><td>63101</td><td>native</td><td>6.528131</td><td>313.719</td><td>100</td></tr><tr><td>63101</td><td>control</td><td>6.522060</td><td>314.011</td><td>100</td></tr><tr><td>63101</td><td>optimized</td><td>3.922645</td><td>522.097</td><td>100</td></tr><tr><td>63102</td><td>native</td><td>6.617288</td><td>309.492</td><td>100</td></tr><tr><td>63102</td><td>control</td><td>6.730243</td><td>304.298</td><td>100</td></tr><tr><td>63102</td><td>optimized</td><td>3.821173</td><td>535.961</td><td>100</td></tr></tbody></table></div><p>配对吞吐提升为84.4%。合并吞吐与逐种子几何平均是不同统计量；修复组种子均值CV为13.6%。该结果不外推到BI-V150。</p><p><a href="#appendix-cpt">独立JSON文件</a></p><details><summary>展开完整复核数据</summary><pre><code>{
+  &quot;schema&quot;: &quot;jiuge7b-pinning-local-formal-review-v1&quot;,
+  &quot;all_9_cases_and_both_actual_ranks_verified&quot;: true,
+  &quot;all_adamw_states_reached_120&quot;: true,
+  &quot;no_skipped_steps&quot;: true,
+  &quot;case_gpu_occupancy_gates_passed&quot;: true,
+  &quot;source_analyzer_sha256&quot;: &quot;cc956fd4f68f0f9535f706f7a54046d9cd6c95c071661f31b138c5aebf4005d6&quot;,
+  &quot;cases&quot;: [
+    {
+      &quot;case&quot;: &quot;pinning-formal-primary-63100-native&quot;,
+      &quot;seed&quot;: 63100,
+      &quot;arm&quot;: &quot;native&quot;,
+      &quot;retained_interval_seconds_per_step&quot;: [
+        6.487945604324341,
+        6.435611987113953,
+        6.558213067054749,
+        6.747781872749329,
+        6.696613502502442,
+        6.45647280216217,
+        6.530529737472534,
+        6.616345524787903,
+        6.632964015007019,
+        6.80341260433197
+      ],
+      &quot;mean_seconds_per_step&quot;: 6.596589071750641,
+      &quot;effective_tokens_per_second&quot;: 310.4634800991916,
+      &quot;retained_steps&quot;: 100,
+      &quot;rank_aggregation&quot;: &quot;max seconds per aligned 10-step window&quot;,
+      &quot;interval_cv&quot;: 0.01894344072345723
+    },
+    {
+      &quot;case&quot;: &quot;pinning-formal-primary-63100-control&quot;,
+      &quot;seed&quot;: 63100,
+      &quot;arm&quot;: &quot;control&quot;,
+      &quot;retained_interval_seconds_per_step&quot;: [
+        7.140278625488281,
+        6.387320423126221,
+        6.359623289108276,
+        6.327520251274109,
+        6.354228115081787,
+        6.649939632415771,
+        6.91784439086914,
+        6.6538749694824215,
+        6.786618852615357,
+        6.598909616470337
+      ],
+      &quot;mean_seconds_per_step&quot;: 6.61761581659317,
+      &quot;effective_tokens_per_second&quot;: 309.4770166114502,
+      &quot;retained_steps&quot;: 100,
+      &quot;rank_aggregation&quot;: &quot;max seconds per aligned 10-step window&quot;,
+      &quot;interval_cv&quot;: 0.041159591056001074
+    },
+    {
+      &quot;case&quot;: &quot;pinning-formal-primary-63100-optimized&quot;,
+      &quot;seed&quot;: 63100,
+      &quot;arm&quot;: &quot;optimized&quot;,
+      &quot;retained_interval_seconds_per_step&quot;: [
+        3.2948030471801757,
+        3.29657039642334,
+        3.2896162033081056,
+        3.287817692756653,
+        3.140045142173767,
+        2.7996667623519897,
+        2.7977221727371218,
+        2.8005772113800047,
+        2.8021171569824217,
+        2.80965518951416
+      ],
+      &quot;mean_seconds_per_step&quot;: 3.031859097480774,
+      &quot;effective_tokens_per_second&quot;: 675.4931328113895,
+      &quot;retained_steps&quot;: 100,
+      &quot;rank_aggregation&quot;: &quot;max seconds per aligned 10-step window&quot;,
+      &quot;interval_cv&quot;: 0.08133221565323437
+    },
+    {
+      &quot;case&quot;: &quot;pinning-formal-primary-63101-native&quot;,
+      &quot;seed&quot;: 63101,
+      &quot;arm&quot;: &quot;native&quot;,
+      &quot;retained_interval_seconds_per_step&quot;: [
+        6.832960796356201,
+        6.746096897125244,
+        6.622026324272156,
+        6.5955328941345215,
+        6.377528691291809,
+        6.349135255813598,
+        6.461628460884095,
+        6.3850359439849855,
+        6.334228992462158,
+        6.5771328687667845
+      ],
+      &quot;mean_seconds_per_step&quot;: 6.528130712509156,
+      &quot;effective_tokens_per_second&quot;: 313.71920848270355,
+      &quot;retained_steps&quot;: 100,
+      &quot;rank_aggregation&quot;: &quot;max seconds per aligned 10-step window&quot;,
+      &quot;interval_cv&quot;: 0.026699040126395998
+    },
+    {
+      &quot;case&quot;: &quot;pinning-formal-primary-63101-control&quot;,
+      &quot;seed&quot;: 63101,
+      &quot;arm&quot;: &quot;control&quot;,
+      &quot;retained_interval_seconds_per_step&quot;: [
+        6.47738242149353,
+        6.551250553131103,
+        6.704895710945129,
+        6.387695455551148,
+        6.495565056800842,
+        6.503013610839844,
+        6.474786376953125,
+        6.643029999732971,
+        6.6171023607254025,
+        6.36587438583374
+      ],
+      &quot;mean_seconds_per_step&quot;: 6.522059593200684,
+      &quot;effective_tokens_per_second&quot;: 314.01123690054317,
+      &quot;retained_steps&quot;: 100,
+      &quot;rank_aggregation&quot;: &quot;max seconds per aligned 10-step window&quot;,
+      &quot;interval_cv&quot;: 0.016615497908307207
+    },
+    {
+      &quot;case&quot;: &quot;pinning-formal-primary-63101-optimized&quot;,
+      &quot;seed&quot;: 63101,
+      &quot;arm&quot;: &quot;optimized&quot;,
+      &quot;retained_interval_seconds_per_step&quot;: [
+        4.343968105316162,
+        3.9865413427352907,
+        3.826153540611267,
+        3.859147047996521,
+        3.8847460031509398,
+        3.8868401527404783,
+        3.868663954734802,
+        3.8840732097625734,
+        3.856518864631653,
+        3.8297977447509766
+      ],
+      &quot;mean_seconds_per_step&quot;: 3.9226449966430663,
+      &quot;effective_tokens_per_second&quot;: 522.0966979557528,
+      &quot;retained_steps&quot;: 100,
+      &quot;rank_aggregation&quot;: &quot;max seconds per aligned 10-step window&quot;,
+      &quot;interval_cv&quot;: 0.03940681272340352
+    },
+    {
+      &quot;case&quot;: &quot;pinning-formal-primary-63102-native&quot;,
+      &quot;seed&quot;: 63102,
+      &quot;arm&quot;: &quot;native&quot;,
+      &quot;retained_interval_seconds_per_step&quot;: [
+        7.596609139442444,
+        7.082291221618652,
+        6.4757061958312985,
+        6.411815214157104,
+        6.357697534561157,
+        6.307601451873779,
+        6.307801008224487,
+        6.362488508224487,
+        6.380314230918884,
+        6.890558552742005
+      ],
+      &quot;mean_seconds_per_step&quot;: 6.61728830575943,
+      &quot;effective_tokens_per_second&quot;: 309.49233362214255,
+      &quot;retained_steps&quot;: 100,
+      &quot;rank_aggregation&quot;: &quot;max seconds per aligned 10-step window&quot;,
+      &quot;interval_cv&quot;: 0.06553139077342222
+    },
+    {
+      &quot;case&quot;: &quot;pinning-formal-primary-63102-control&quot;,
+      &quot;seed&quot;: 63102,
+      &quot;arm&quot;: &quot;control&quot;,
+      &quot;retained_interval_seconds_per_step&quot;: [
+        7.160420489311218,
+        7.436274123191834,
+        6.795439767837524,
+        6.470556354522705,
+        6.499416637420654,
+        6.513255500793457,
+        6.7990007400512695,
+        6.854710125923157,
+        6.438434672355652,
+        6.334926128387451
+      ],
+      &quot;mean_seconds_per_step&quot;: 6.730243453979492,
+      &quot;effective_tokens_per_second&quot;: 304.29805608132176,
+      &quot;retained_steps&quot;: 100,
+      &quot;rank_aggregation&quot;: &quot;max seconds per aligned 10-step window&quot;,
+      &quot;interval_cv&quot;: 0.05235035772157111
+    },
+    {
+      &quot;case&quot;: &quot;pinning-formal-primary-63102-optimized&quot;,
+      &quot;seed&quot;: 63102,
+      &quot;arm&quot;: &quot;optimized&quot;,
+      &quot;retained_interval_seconds_per_step&quot;: [
+        3.8703490018844606,
+        3.8051167249679567,
+        3.81312096118927,
+        3.816561150550842,
+        3.8212250232696534,
+        3.826675009727478,
+        3.8166300296783446,
+        3.8151211977005004,
+        3.8138670206069945,
+        3.813059949874878
+      ],
+      &quot;mean_seconds_per_step&quot;: 3.821172606945038,
+      &quot;effective_tokens_per_second&quot;: 535.9611330505535,
+      &quot;retained_steps&quot;: 100,
+      &quot;rank_aggregation&quot;: &quot;max seconds per aligned 10-step window&quot;,
+      &quot;interval_cv&quot;: 0.00475315139141113
+    }
+  ],
+  &quot;seed_means&quot;: {
+    &quot;63100&quot;: {
+      &quot;native&quot;: 6.596589071750641,
+      &quot;control&quot;: 6.61761581659317,
+      &quot;optimized&quot;: 3.031859097480774
+    },
+    &quot;63101&quot;: {
+      &quot;native&quot;: 6.528130712509156,
+      &quot;control&quot;: 6.522059593200684,
+      &quot;optimized&quot;: 3.9226449966430663
+    },
+    &quot;63102&quot;: {
+      &quot;native&quot;: 6.61728830575943,
+      &quot;control&quot;: 6.730243453979492,
+      &quot;optimized&quot;: 3.821172606945038
+    }
+  },
+  &quot;arm_aggregate&quot;: {
+    &quot;native&quot;: {
+      &quot;mean_seconds_per_step&quot;: 6.580669363339742,
+      &quot;effective_tokens_per_second&quot;: 311.21454170136633
+    },
+    &quot;control&quot;: {
+      &quot;mean_seconds_per_step&quot;: 6.623306287924448,
+      &quot;effective_tokens_per_second&quot;: 309.21112673498055
+    },
+    &quot;optimized&quot;: {
+      &quot;mean_seconds_per_step&quot;: 3.591892233689626,
+      &quot;effective_tokens_per_second&quot;: 570.1730081963719
+    }
+  },
+  &quot;seed_mean_cv&quot;: {
+    &quot;native&quot;: 0.0070907756949103815,
+    &quot;control&quot;: 0.01573361060640571,
+    &quot;optimized&quot;: 0.13576394534239222
+  },
+  &quot;vs_native&quot;: {
+    &quot;seed_throughput_ratios&quot;: [
+      2.1757571376690508,
+      1.66421654727762,
+      1.731742840857911
+    ],
+    &quot;geomean_throughput_ratio&quot;: 1.8440295855043458,
+    &quot;all_seeds_faster&quot;: true
+  },
+  &quot;vs_control&quot;: {
+    &quot;seed_throughput_ratios&quot;: [
+      2.182692402193712,
+      1.6626688366605065,
+      1.761303177393027
+    ],
+    &quot;geomean_throughput_ratio&quot;: 1.8558554105992549,
+    &quot;all_seeds_faster&quot;: true
+  },
+  &quot;gain_vs_control&quot;: 0.8558554105992549,
+  &quot;round_promotion_passed&quot;: true,
+  &quot;repeat_required&quot;: false,
+  &quot;formal_performance_passed&quot;: true
+}</code></pre></details><a id="appendix-sft"></a><h2>SFT正式结果：双A100</h2><div class="table-wrap"><table><thead><tr><th>arm</th><th>秒/步</th><th>输入tokens/s</th><th>答案targets/s</th></tr></thead><tbody><tr><td>native</td><td>6.563320</td><td>312.037</td><td>263.331</td></tr><tr><td>control</td><td>6.474713</td><td>316.307</td><td>266.934</td></tr><tr><td>optimized</td><td>3.412722</td><td>600.107</td><td>506.435</td></tr></tbody></table></div><p>配对吞吐提升为92.9%，三种子均更快，修复组CV为9.24%。完整数值和原生恢复最大误差为0。复核JSON的round字段只记录当轮统计，最终验收以顶层<code>formal_performance_passed=true</code>为准。</p><p><a href="#appendix-sft">独立JSON文件</a></p><details><summary>展开完整复核数据</summary><pre><code>{
+  &quot;schema&quot;: &quot;jiuge7b-sft-pinning-independent-completion-review-v1&quot;,
+  &quot;utc&quot;: &quot;2026-10-20T12:01:24.219827+00:00&quot;,
+  &quot;all_validation_stages_completed&quot;: true,
+  &quot;formal_performance_passed&quot;: true,
+  &quot;rounds&quot;: [
+    {
+      &quot;round&quot;: &quot;primary&quot;,
+      &quot;arms&quot;: {
+        &quot;native&quot;: {
+          &quot;mean_seconds_per_step&quot;: 6.563319898446401,
+          &quot;aggregate_input_token_slots_per_second&quot;: 312.0372055131399,
+          &quot;aggregate_supervised_answer_targets_per_second&quot;: 263.3306558381291
+        },
+        &quot;control&quot;: {
+          &quot;mean_seconds_per_step&quot;: 6.474713263511657,
+          &quot;aggregate_input_token_slots_per_second&quot;: 316.30744353445493,
+          &quot;aggregate_supervised_answer_targets_per_second&quot;: 266.93434334356164
+        },
+        &quot;optimized&quot;: {
+          &quot;mean_seconds_per_step&quot;: 3.412721984386444,
+          &quot;aggregate_input_token_slots_per_second&quot;: 600.1074829329233,
+          &quot;aggregate_supervised_answer_targets_per_second&quot;: 506.43543225630197
+        }
+      },
+      &quot;formal_logged_loss_checks&quot;: [
+        {
+          &quot;arm&quot;: &quot;native&quot;,
+          &quot;seed&quot;: 63100,
+          &quot;intervals&quot;: 13,
+          &quot;regular_intervals&quot;: 12,
+          &quot;logged_iterations&quot;: [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          &quot;extra_first_step_checked&quot;: true,
+          &quot;logged_loss_max_abs&quot;: 0.0,
+          &quot;passed&quot;: true,
+          &quot;scope&quot;: &quot;posthoc aggregate loss check; no extra synchronization or GPU capture&quot;
+        },
+        {
+          &quot;arm&quot;: &quot;native&quot;,
+          &quot;seed&quot;: 63101,
+          &quot;intervals&quot;: 13,
+          &quot;regular_intervals&quot;: 12,
+          &quot;logged_iterations&quot;: [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          &quot;extra_first_step_checked&quot;: true,
+          &quot;logged_loss_max_abs&quot;: 0.0,
+          &quot;passed&quot;: true,
+          &quot;scope&quot;: &quot;posthoc aggregate loss check; no extra synchronization or GPU capture&quot;
+        },
+        {
+          &quot;arm&quot;: &quot;native&quot;,
+          &quot;seed&quot;: 63102,
+          &quot;intervals&quot;: 13,
+          &quot;regular_intervals&quot;: 12,
+          &quot;logged_iterations&quot;: [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          &quot;extra_first_step_checked&quot;: true,
+          &quot;logged_loss_max_abs&quot;: 0.0,
+          &quot;passed&quot;: true,
+          &quot;scope&quot;: &quot;posthoc aggregate loss check; no extra synchronization or GPU capture&quot;
+        },
+        {
+          &quot;arm&quot;: &quot;control&quot;,
+          &quot;seed&quot;: 63100,
+          &quot;intervals&quot;: 13,
+          &quot;regular_intervals&quot;: 12,
+          &quot;logged_iterations&quot;: [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          &quot;extra_first_step_checked&quot;: true,
+          &quot;logged_loss_max_abs&quot;: 0.0,
+          &quot;passed&quot;: true,
+          &quot;scope&quot;: &quot;posthoc aggregate loss check; no extra synchronization or GPU capture&quot;
+        },
+        {
+          &quot;arm&quot;: &quot;control&quot;,
+          &quot;seed&quot;: 63101,
+          &quot;intervals&quot;: 13,
+          &quot;regular_intervals&quot;: 12,
+          &quot;logged_iterations&quot;: [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          &quot;extra_first_step_checked&quot;: true,
+          &quot;logged_loss_max_abs&quot;: 0.0,
+          &quot;passed&quot;: true,
+          &quot;scope&quot;: &quot;posthoc aggregate loss check; no extra synchronization or GPU capture&quot;
+        },
+        {
+          &quot;arm&quot;: &quot;control&quot;,
+          &quot;seed&quot;: 63102,
+          &quot;intervals&quot;: 13,
+          &quot;regular_intervals&quot;: 12,
+          &quot;logged_iterations&quot;: [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          &quot;extra_first_step_checked&quot;: true,
+          &quot;logged_loss_max_abs&quot;: 0.0,
+          &quot;passed&quot;: true,
+          &quot;scope&quot;: &quot;posthoc aggregate loss check; no extra synchronization or GPU capture&quot;
+        },
+        {
+          &quot;arm&quot;: &quot;optimized&quot;,
+          &quot;seed&quot;: 63100,
+          &quot;intervals&quot;: 13,
+          &quot;regular_intervals&quot;: 12,
+          &quot;logged_iterations&quot;: [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          &quot;extra_first_step_checked&quot;: true,
+          &quot;logged_loss_max_abs&quot;: 0.0,
+          &quot;passed&quot;: true,
+          &quot;scope&quot;: &quot;posthoc aggregate loss check; no extra synchronization or GPU capture&quot;
+        },
+        {
+          &quot;arm&quot;: &quot;optimized&quot;,
+          &quot;seed&quot;: 63101,
+          &quot;intervals&quot;: 13,
+          &quot;regular_intervals&quot;: 12,
+          &quot;logged_iterations&quot;: [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          &quot;extra_first_step_checked&quot;: true,
+          &quot;logged_loss_max_abs&quot;: 0.0,
+          &quot;passed&quot;: true,
+          &quot;scope&quot;: &quot;posthoc aggregate loss check; no extra synchronization or GPU capture&quot;
+        },
+        {
+          &quot;arm&quot;: &quot;optimized&quot;,
+          &quot;seed&quot;: 63102,
+          &quot;intervals&quot;: 13,
+          &quot;regular_intervals&quot;: 12,
+          &quot;logged_iterations&quot;: [
+            1,
+            10,
+            20,
+            30,
+            40,
+            50,
+            60,
+            70,
+            80,
+            90,
+            100,
+            110,
+            120
+          ],
+          &quot;extra_first_step_checked&quot;: true,
+          &quot;logged_loss_max_abs&quot;: 0.0,
+          &quot;passed&quot;: true,
+          &quot;scope&quot;: &quot;posthoc aggregate loss check; no extra synchronization or GPU capture&quot;
+        }
+      ],
+      &quot;schema&quot;: &quot;jiuge7b-pinning-formal-round-v1&quot;,
+      &quot;seed_mean_cv&quot;: {
+        &quot;native&quot;: 0.016615676088611437,
+        &quot;control&quot;: 0.004121553899155234,
+        &quot;optimized&quot;: 0.09235236420146993
+      },
+      &quot;vs_native&quot;: {
+        &quot;seed_throughput_ratios&quot;: [
+          1.7362090083618429,
+          2.1322519630722727,
+          1.9375653599486875
+        ],
+        &quot;geomean_throughput_ratio&quot;: 1.9285561884581284,
+        &quot;all_seeds_faster&quot;: true
+      },
+      &quot;vs_control&quot;: {
+        &quot;seed_throughput_ratios&quot;: [
+          1.735872221113173,
+          2.106775028787087,
+          1.8834958887353659
+        ],
+        &quot;geomean_throughput_ratio&quot;: 1.9026848667698706,
+        &quot;all_seeds_faster&quot;: true
+      },
+      &quot;gain_vs_control&quot;: 0.9026848667698706,
+      &quot;round_promotion_passed&quot;: true,
+      &quot;repeat_required&quot;: false,
+      &quot;all_expected_cases_verified&quot;: true,
+      &quot;formal_performance_passed&quot;: false,
+      &quot;note&quot;: &quot;Round result only. Final promotion also requires any predeclared independent repeat.&quot;
+    }
+  ],
+  &quot;repeat_performed&quot;: false,
+  &quot;primary_full_numeric_and_resume_verified&quot;: true,
+  &quot;semantic_source_reconstruction_verified&quot;: true,
+  &quot;maximum_numeric_error&quot;: 0.0,
+  &quot;ACT_unique_original_chunks_verified&quot;: 18601,
+  &quot;verified_local_key_files&quot;: 726,
+  &quot;verified_local_key_bytes&quot;: 34398873,
+  &quot;local_large_raw_copy&quot;: false,
+  &quot;formal_throughput_unit&quot;: &quot;input token slots/s;2048perstep;notTPsum&quot;,
+  &quot;old_CPT_84_4_percent_reused_as_SFT_result&quot;: false,
+  &quot;exact_original_physical_GPU_pair_preserved&quot;: true,
+  &quot;complete_SFT_parent_reused_without_CPT_numeric_references&quot;: true,
+  &quot;resource_handoff_only_no_mathematical_or_timing_standard_change&quot;: true,
+  &quot;postprocessing_recovery&quot;: &quot;Megatron logs iteration1 in addition to 10..120; all13 checked&quot;,
+  &quot;failed_original_review_preserved&quot;: true,
+  &quot;existing_extracted_keys_reverified_without_overwrite&quot;: true
+}</code></pre></details><a id="appendix-bi"></a><h2>BI-V150原执行配置的正确性与恢复</h2><p>旧执行配置三臂各3次真实更新，每rank3585字段最大差0；原生保存、两条真实恢复路径与下一步比较通过。该结论只对其原执行路径有效，不能直接套用到新增NUMA布局和严格执行路径。</p><p><a href="#appendix-bi">独立JSON文件</a></p><details><summary>展开完整复核数据</summary><pre><code>{
+  &quot;passed&quot;: true,
+  &quot;utc&quot;: &quot;2026-10-26T14:05:38.646955+00:00&quot;,
+  &quot;rows&quot;: [
+    {
+      &quot;arm&quot;: &quot;native&quot;,
+      &quot;rank&quot;: 0,
+      &quot;complete_fields&quot;: 3585,
+      &quot;max_abs&quot;: 0.0,
+      &quot;manifest_SHA256_matches_remote_raw_gate&quot;: true
+    },
+    {
+      &quot;arm&quot;: &quot;native&quot;,
+      &quot;rank&quot;: 1,
+      &quot;complete_fields&quot;: 3585,
+      &quot;max_abs&quot;: 0.0,
+      &quot;manifest_SHA256_matches_remote_raw_gate&quot;: true
+    },
+    {
+      &quot;arm&quot;: &quot;control&quot;,
+      &quot;rank&quot;: 0,
+      &quot;complete_fields&quot;: 3585,
+      &quot;max_abs&quot;: 0.0,
+      &quot;manifest_SHA256_matches_remote_raw_gate&quot;: true
+    },
+    {
+      &quot;arm&quot;: &quot;control&quot;,
+      &quot;rank&quot;: 1,
+      &quot;complete_fields&quot;: 3585,
+      &quot;max_abs&quot;: 0.0,
+      &quot;manifest_SHA256_matches_remote_raw_gate&quot;: true
+    },
+    {
+      &quot;arm&quot;: &quot;optimized&quot;,
+      &quot;rank&quot;: 0,
+      &quot;complete_fields&quot;: 3585,
+      &quot;max_abs&quot;: 0.0,
+      &quot;manifest_SHA256_matches_remote_raw_gate&quot;: true
+    },
+    {
+      &quot;arm&quot;: &quot;optimized&quot;,
+      &quot;rank&quot;: 1,
+      &quot;complete_fields&quot;: 3585,
+      &quot;max_abs&quot;: 0.0,
+      &quot;manifest_SHA256_matches_remote_raw_gate&quot;: true
+    },
+    {
+      &quot;arm&quot;: &quot;resume-restored&quot;,
+      &quot;rank&quot;: 0,
+      &quot;complete_fields&quot;: 995,
+      &quot;max_abs&quot;: 0.0,
+      &quot;manifest_SHA256_matches_remote_raw_gate&quot;: true
+    },
+    {
+      &quot;arm&quot;: &quot;resume-restored&quot;,
+      &quot;rank&quot;: 1,
+      &quot;complete_fields&quot;: 995,
+      &quot;max_abs&quot;: 0.0,
+      &quot;manifest_SHA256_matches_remote_raw_gate&quot;: true
+    },
+    {
+      &quot;arm&quot;: &quot;resume-next-step&quot;,
+      &quot;rank&quot;: 0,
+      &quot;complete_fields&quot;: 1195,
+      &quot;max_abs&quot;: 0.0,
+      &quot;manifest_SHA256_matches_remote_raw_gate&quot;: true
+    },
+    {
+      &quot;arm&quot;: &quot;resume-next-step&quot;,
+      &quot;rank&quot;: 1,
+      &quot;complete_fields&quot;: 1195,
+      &quot;max_abs&quot;: 0.0,
+      &quot;manifest_SHA256_matches_remote_raw_gate&quot;: true
+    }
+  ],
+  &quot;source_reconstruction&quot;: [
+    {
+      &quot;arm&quot;: &quot;native&quot;,
+      &quot;source_reconstructed_batches&quot;: 3,
+      &quot;both_ranks&quot;: true
+    },
+    {
+      &quot;arm&quot;: &quot;control&quot;,
+      &quot;source_reconstructed_batches&quot;: 3,
+      &quot;both_ranks&quot;: true
+    },
+    {
+      &quot;arm&quot;: &quot;optimized&quot;,
+      &quot;source_reconstructed_batches&quot;: 3,
+      &quot;both_ranks&quot;: true
+    }
+  ],
+  &quot;resume_policy_recomputed_locally&quot;: {
+    &quot;passed&quot;: true,
+    &quot;GPU_used&quot;: false,
+    &quot;ranks&quot;: [
+      {
+        &quot;rank&quot;: 0,
+        &quot;native_initialization_plus_real_update&quot;: 2,
+        &quot;actual_training_updates&quot;: 1,
+        &quot;real_optimizer_iteration&quot;: 3,
+        &quot;initialization_moment_events&quot;: 398,
+        &quot;resume_copy_events&quot;: 398,
+        &quot;final_moment_objects&quot;: 398,
+        &quot;final_sampled_moment_pages_local&quot;: true,
+        &quot;resume_max_abs&quot;: 0.0,
+        &quot;passed&quot;: true
+      },
+      {
+        &quot;rank&quot;: 1,
+        &quot;native_initialization_plus_real_update&quot;: 2,
+        &quot;actual_training_updates&quot;: 1,
+        &quot;real_optimizer_iteration&quot;: 3,
+        &quot;initialization_moment_events&quot;: 398,
+        &quot;resume_copy_events&quot;: 398,
+        &quot;final_moment_objects&quot;: 398,
+        &quot;final_sampled_moment_pages_local&quot;: true,
+        &quot;resume_max_abs&quot;: 0.0,
+        &quot;passed&quot;: true
+      }
+    ],
+    &quot;negative_gate_regressions_rejected&quot;: 12,
+    &quot;native_CoreX_no_dist_API_used_without_redirect&quot;: true,
+    &quot;real_training_updates_per_resume&quot;: 1,
+    &quot;optimizer_iteration&quot;: 3,
+    &quot;formal_performance_passed&quot;: false
+  },
+  &quot;full_raw_SHA_verified_on_DataThinking&quot;: true,
+  &quot;raw_chunk_count&quot;: 18603,
+  &quot;local_review_scope&quot;: &quot;independent key/coverage/policy/source/SHA recomputation; tensor originals remain Data Thinking&quot;,
+  &quot;full_raw_local_copy_verified&quot;: false,
+  &quot;raw_tensors_downloaded&quot;: false,
+  &quot;full_model_correctness_and_native_resume_passed&quot;: true,
+  &quot;formal_performance_passed&quot;: false,
+  &quot;key_review_source_parent_SHA256&quot;: &quot;d2116ab8cc6fef112871eeec5ef0919109f9ed27941f7d5e0bd59f67be79963d&quot;,
+  &quot;key_review_derived_SHA256&quot;: &quot;c2a761cd42281dba5b24e70ec8bcb422744c1ee7c8fdabfe244d9c64a34efbdb&quot;,
+  &quot;same_window_raw_reuse_locally_recomputed&quot;: true,
+  &quot;raw_reuse_regression_negative_cases&quot;: 12,
+  &quot;original_resume_archive_AST_unchanged&quot;: true,
+  &quot;cross_Python_AST_serialization_proof&quot;: {
+    &quot;passed&quot;: true,
+    &quot;same_original_verifier_SHA256&quot;: &quot;079624580909b92008a382ec4ca69c153d4e575cb150faffc3d13d53e43cece8&quot;,
+    &quot;Python313_compact_AST_SHA256&quot;: &quot;e0df4e1b5b3f819d3fac5f64625d84db053240b0c89cb3f4c35873b0e961bf06&quot;,
+    &quot;Python312_expanded_AST_SHA256&quot;: &quot;cc6493201290e222dfedd443dd0f1a365cbf1b911eeb18f529b827912eea6d26&quot;,
+    &quot;only_empty_AST_field_serialization_differs&quot;: true
+  },
+  &quot;corrupt_AST_proof_negative_cases_rejected&quot;: 2,
+  &quot;versioned_local_review_SHA256&quot;: &quot;21a9ba9bc5bf2ac70b366c0814da73a4ecfd463eb568083d931c392cfcbc21ba&quot;,
+  &quot;host_cache_actual_7B_reclamation&quot;: [
+    {
+      &quot;rank&quot;: 0,
+      &quot;record_SHA256&quot;: &quot;4561a99cd1fc0acde922335bc3be9082e273bf2ac93bb487b4d84cd5051735ca&quot;,
+      &quot;records&quot;: [
+        {
+          &quot;label&quot;: &quot;before-HDO-call-0&quot;,
+          &quot;reserved_before&quot;: 56643584011,
+          &quot;reserved_after&quot;: 28321792000,
+          &quot;RSS_before&quot;: 58613854208,
+          &quot;RSS_after&quot;: 30199865344
+        },
+        {
+          &quot;label&quot;: &quot;resume-restored:after&quot;,
+          &quot;reserved_before&quot;: 113287168009,
+          &quot;reserved_after&quot;: 56643584000,
+          &quot;RSS_before&quot;: 145886392320,
+          &quot;RSS_after&quot;: 89218527232
+        },
+        {
+          &quot;label&quot;: &quot;resume-next-step:before&quot;,
+          &quot;reserved_before&quot;: 56647835660,
+          &quot;reserved_after&quot;: 56647835648,
+          &quot;RSS_before&quot;: 89754091520,
+          &quot;RSS_after&quot;: 89691160576
+        },
+        {
+          &quot;label&quot;: &quot;before-HDO-call-1&quot;,
+          &quot;reserved_before&quot;: 56647835648,
+          &quot;reserved_after&quot;: 56647835648,
+          &quot;RSS_before&quot;: 89691160576,
+          &quot;RSS_after&quot;: 89691160576
+        },
+        {
+          &quot;label&quot;: &quot;resume-next-step:after&quot;,
+          &quot;reserved_before&quot;: 84969627648,
+          &quot;reserved_after&quot;: 56647835648,
+          &quot;RSS_before&quot;: 118072897536,
+          &quot;RSS_after&quot;: 89693855744
+        }
+      ]
+    },
+    {
+      &quot;rank&quot;: 1,
+      &quot;record_SHA256&quot;: &quot;83aa18bbc567b04143c5943844837391889839bc48a68c0e05faaae8a6fc37fd&quot;,
+      &quot;records&quot;: [
+        {
+          &quot;label&quot;: &quot;before-HDO-call-0&quot;,
+          &quot;reserved_before&quot;: 56643584011,
+          &quot;reserved_after&quot;: 28321792000,
+          &quot;RSS_before&quot;: 58612621312,
+          &quot;RSS_after&quot;: 30198616064
+        },
+        {
+          &quot;label&quot;: &quot;resume-restored:after&quot;,
+          &quot;reserved_before&quot;: 113287168009,
+          &quot;reserved_after&quot;: 56643584000,
+          &quot;RSS_before&quot;: 145885093888,
+          &quot;RSS_after&quot;: 89217196032
+        },
+        {
+          &quot;label&quot;: &quot;resume-next-step:before&quot;,
+          &quot;reserved_before&quot;: 56643584012,
+          &quot;reserved_after&quot;: 56643584000,
+          &quot;RSS_before&quot;: 89722871808,
+          &quot;RSS_after&quot;: 89658060800
+        },
+        {
+          &quot;label&quot;: &quot;before-HDO-call-1&quot;,
+          &quot;reserved_before&quot;: 56643584000,
+          &quot;reserved_after&quot;: 56643584000,
+          &quot;RSS_before&quot;: 89658060800,
+          &quot;RSS_after&quot;: 89658060800
+        },
+        {
+          &quot;label&quot;: &quot;resume-next-step:after&quot;,
+          &quot;reserved_before&quot;: 84965376000,
+          &quot;reserved_after&quot;: 56643584000,
+          &quot;RSS_before&quot;: 118042738688,
+          &quot;RSS_after&quot;: 89660956672
+        }
+      ]
+    }
+  ],
+  &quot;host_cache_small_probe_and_original_guard_regressions_passed&quot;: true,
+  &quot;bundle_SHA256&quot;: &quot;fb77e04ff66f66964b3b4de2971ec5e5ae8d8687323bb6452e90d46c3b30a97c&quot;,
+  &quot;key_zip_bytes&quot;: 5186022,
+  &quot;key_file_count&quot;: 134,
+  &quot;key_uncompressed_bytes&quot;: 31620664,
+  &quot;max_points&quot;: 0,
+  &quot;campaign_start_epoch&quot;: 1793005196,
+  &quot;deadline_epoch&quot;: 1793026796,
+  &quot;existing_key_bundle_reused_without_GPU_or_raw_verifier_rerun&quot;: true
+}</code></pre></details><a id="appendix-trace"></a><h2>BI-V150十二窗口瓶颈分析</h2><div class="table-wrap"><table><thead><tr><th>臂</th><th>窗口耗时</th><th>CPU AdamW</th><th>optimizer整体</th><th>AdamW之外</th><th>GPU计算并集</th></tr></thead><tbody><tr><td>pinned基线</td><td>6.880</td><td>2.087</td><td>4.082</td><td>1.996</td><td>1.701</td></tr><tr><td>绑核对照</td><td>5.810</td><td>1.539</td><td>3.575</td><td>2.036</td><td>1.702</td></tr><tr><td>本地moment候选</td><td>5.626</td><td>1.337</td><td>3.446</td><td>2.110</td><td>1.702</td></tr></tbody></table></div><p>单位为秒/rank/步。各臂35步，采第21–25和31–35步、两rank，共12个rank/window。它们不是独立种子；范围可重叠，不可相加为step耗时，不用于正式加速判断。12窗口CPU AdamW/HtoD记录重叠均为0。候选未记录GPU活动空档代理30.6%–33.8%，不等于硬件利用率；rank间collective时长差不能全归因为链路慢。</p><p><a href="#appendix-trace">独立JSON文件</a></p><details><summary>展开完整复核数据</summary><pre><code>{
+  &quot;platform&quot;: &quot;Data Thinking BI-V150 TP2 CoreX4.4&quot;,
+  &quot;objective&quot;: &quot;answer_only_SFT&quot;,
+  &quot;source_analysis_SHA256&quot;: &quot;32cd5463bec583bdfb3146981a788b2499637f674908b977a02d7d5b7cf4b1a7&quot;,
+  &quot;trace_windows&quot;: [
+    {
+      &quot;window&quot;: &quot;window-01&quot;,
+      &quot;rank&quot;: 0,
+      &quot;steps&quot;: [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      &quot;trace_sha256&quot;: &quot;21458ece0945ca06d5366b46a9de1ed32e149b982d3271414eeb2867c274e466&quot;,
+      &quot;decompressed_sha256&quot;: &quot;39508b48063fe5e72bb9454ad05bb366d829c1d75c0c0d9514d980e58ae1fb41&quot;,
+      &quot;case&quot;: &quot;corex-S2048-trace-native-sl02&quot;
+    },
+    {
+      &quot;window&quot;: &quot;window-01&quot;,
+      &quot;rank&quot;: 1,
+      &quot;steps&quot;: [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      &quot;trace_sha256&quot;: &quot;3d48fa04f3d88945ad13a3536243c5205161b6bd5071f75fb68488c83798bd90&quot;,
+      &quot;decompressed_sha256&quot;: &quot;f2ae7bf88841b9be09b41995830f7e408a1221482e28e5fe623442e92791967c&quot;,
+      &quot;case&quot;: &quot;corex-S2048-trace-native-sl02&quot;
+    },
+    {
+      &quot;window&quot;: &quot;window-02&quot;,
+      &quot;rank&quot;: 0,
+      &quot;steps&quot;: [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      &quot;trace_sha256&quot;: &quot;20a36bd5980514b7bd001260201a17ceeb81ccc4bfeac0a11d2fc7ff23e1782b&quot;,
+      &quot;decompressed_sha256&quot;: &quot;bca367c2ca7dc9f865aa567e9d40c850dabdddccd018ea6d2689999e1e52e327&quot;,
+      &quot;case&quot;: &quot;corex-S2048-trace-native-sl02&quot;
+    },
+    {
+      &quot;window&quot;: &quot;window-02&quot;,
+      &quot;rank&quot;: 1,
+      &quot;steps&quot;: [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      &quot;trace_sha256&quot;: &quot;09e9348ea567ea25d16926f6a20cc630537aebf355ec3648eb59fc4790f93f79&quot;,
+      &quot;decompressed_sha256&quot;: &quot;eef4c1507fbed83d24580f55a4942358989f83711347063a3fc9393a523d188c&quot;,
+      &quot;case&quot;: &quot;corex-S2048-trace-native-sl02&quot;
+    },
+    {
+      &quot;window&quot;: &quot;window-01&quot;,
+      &quot;rank&quot;: 0,
+      &quot;steps&quot;: [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      &quot;trace_sha256&quot;: &quot;46d5fd892540296e46bbd587281bf69834f2ff7e10c4648cd223a7e16e33fc6f&quot;,
+      &quot;decompressed_sha256&quot;: &quot;bd245ba050345760dc7380774701320986219295587b2ebc7ae0303460c39d46&quot;,
+      &quot;case&quot;: &quot;corex-S2048-trace-control-sl02&quot;
+    },
+    {
+      &quot;window&quot;: &quot;window-01&quot;,
+      &quot;rank&quot;: 1,
+      &quot;steps&quot;: [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      &quot;trace_sha256&quot;: &quot;b6d5b6e8731390b5ab432d2b806e4d1d20fcb7cd817e81db746c7e553b84433e&quot;,
+      &quot;decompressed_sha256&quot;: &quot;98874fc301e974b953faae9393163f6da69d55ff8f5e7f8558dc4ec83e2f71cb&quot;,
+      &quot;case&quot;: &quot;corex-S2048-trace-control-sl02&quot;
+    },
+    {
+      &quot;window&quot;: &quot;window-02&quot;,
+      &quot;rank&quot;: 0,
+      &quot;steps&quot;: [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      &quot;trace_sha256&quot;: &quot;1ec7f4281c74ad1612d7cacf0abf9786df8106faf32396b96f733db858e2339a&quot;,
+      &quot;decompressed_sha256&quot;: &quot;ce26a4eb268f973b4bac0764faf64adfb28656daa7447a972d380d2925581ec7&quot;,
+      &quot;case&quot;: &quot;corex-S2048-trace-control-sl02&quot;
+    },
+    {
+      &quot;window&quot;: &quot;window-02&quot;,
+      &quot;rank&quot;: 1,
+      &quot;steps&quot;: [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      &quot;trace_sha256&quot;: &quot;eb1339fa5a3dcc9b17ee569e2a037603613fffe8f8fbcbfac56c02c05578c10f&quot;,
+      &quot;decompressed_sha256&quot;: &quot;4624c3dd356f2cd49b89f72bde95ecdc61f65f2a70a4098abe52eb4328646e80&quot;,
+      &quot;case&quot;: &quot;corex-S2048-trace-control-sl02&quot;
+    },
+    {
+      &quot;window&quot;: &quot;window-01&quot;,
+      &quot;rank&quot;: 0,
+      &quot;steps&quot;: [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      &quot;trace_sha256&quot;: &quot;f6ef6567f2ec9a2bb9c935dd3052c717ff265a1d14f75b58a0366df41cbae2f1&quot;,
+      &quot;decompressed_sha256&quot;: &quot;a25879b5acd380f67437689c5b5064b3403a1782c8174b79e4e62c8ed4ad7a49&quot;,
+      &quot;case&quot;: &quot;corex-S2048-trace-optimized-fu01&quot;
+    },
+    {
+      &quot;window&quot;: &quot;window-01&quot;,
+      &quot;rank&quot;: 1,
+      &quot;steps&quot;: [
+        21,
+        22,
+        23,
+        24,
+        25
+      ],
+      &quot;trace_sha256&quot;: &quot;c455d9441f708f3f2f7c0b70966e7d694e69b0e4e34bdc97b622142dbc96bd3d&quot;,
+      &quot;decompressed_sha256&quot;: &quot;10ce9cfcae9367f4746d33894c072b23b917c74ea5ad2712c3219c2e3c4c1707&quot;,
+      &quot;case&quot;: &quot;corex-S2048-trace-optimized-fu01&quot;
+    },
+    {
+      &quot;window&quot;: &quot;window-02&quot;,
+      &quot;rank&quot;: 0,
+      &quot;steps&quot;: [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      &quot;trace_sha256&quot;: &quot;d5977f3d0b667923596e25ea6391164ea66011e77b49d266b5416592b215f481&quot;,
+      &quot;decompressed_sha256&quot;: &quot;265888ec38e3660215ca478e621e424c133cf3c9009496d3e5e1b28de5bee46e&quot;,
+      &quot;case&quot;: &quot;corex-S2048-trace-optimized-fu01&quot;
+    },
+    {
+      &quot;window&quot;: &quot;window-02&quot;,
+      &quot;rank&quot;: 1,
+      &quot;steps&quot;: [
+        31,
+        32,
+        33,
+        34,
+        35
+      ],
+      &quot;trace_sha256&quot;: &quot;84abe88accf66ab2a88bd7704a63508348efa341ea83dfba340e8bb7113fe6f5&quot;,
+      &quot;decompressed_sha256&quot;: &quot;dbbb7ea5fdd7f21f5ed04b5d14544beb582a3b941349a1c135d0cb56f091fe37&quot;,
+      &quot;case&quot;: &quot;corex-S2048-trace-optimized-fu01&quot;
+    }
+  ],
+  &quot;summaries&quot;: [
+    {
+      &quot;case&quot;: &quot;corex-S2048-trace-native-sl02&quot;,
+      &quot;rank_window_observations&quot;: 4,
+      &quot;window_step_seconds_mean&quot;: 6.879624096057129,
+      &quot;CPUAdamW_seconds_per_rank_step&quot;: 2.0868928639404296,
+      &quot;optimizer_seconds_per_rank_step&quot;: 4.082399140686035,
+      &quot;optimizer_outside_AdamW_seconds_per_rank_step&quot;: 1.9955062767456055,
+      &quot;GPU_compute_seconds_per_rank_step&quot;: 1.7012239693237303,
+      &quot;HtoD_seconds_per_rank_step&quot;: 0.6795936127563477,
+      &quot;GPU_idle_proxy_percent_range&quot;: [
+        32.73941597742518,
+        47.02506349952989
+      ],
+      &quot;all_CPUAdamW_HtoD_recorded_overlap_zero&quot;: true,
+      &quot;all_compute_collective_recorded_overlap_zero&quot;: true,
+      &quot;collective_seconds_per_rank_step&quot;: {
+        &quot;0&quot;: 0.20695556286621095,
+        &quot;1&quot;: 1.0768614037841797
+      }
+    },
+    {
+      &quot;case&quot;: &quot;corex-S2048-trace-control-sl02&quot;,
+      &quot;rank_window_observations&quot;: 4,
+      &quot;window_step_seconds_mean&quot;: 5.809531743054199,
+      &quot;CPUAdamW_seconds_per_rank_step&quot;: 1.5389487947021485,
+      &quot;optimizer_seconds_per_rank_step&quot;: 3.5750690804077148,
+      &quot;optimizer_outside_AdamW_seconds_per_rank_step&quot;: 2.0361202857055662,
+      &quot;GPU_compute_seconds_per_rank_step&quot;: 1.7021800504272462,
+      &quot;HtoD_seconds_per_rank_step&quot;: 0.7238684170043945,
+      &quot;GPU_idle_proxy_percent_range&quot;: [
+        32.610777075736195,
+        36.08110556458591
+      ],
+      &quot;all_CPUAdamW_HtoD_recorded_overlap_zero&quot;: true,
+      &quot;all_compute_collective_recorded_overlap_zero&quot;: true,
+      &quot;collective_seconds_per_rank_step&quot;: {
+        &quot;0&quot;: 0.22462256286621093,
+        &quot;1&quot;: 0.31284826892089845
+      }
+    },
+    {
+      &quot;case&quot;: &quot;corex-S2048-trace-optimized-fu01&quot;,
+      &quot;rank_window_observations&quot;: 4,
+      &quot;window_step_seconds_mean&quot;: 5.625814999658203,
+      &quot;CPUAdamW_seconds_per_rank_step&quot;: 1.3369099299682619,
+      &quot;optimizer_seconds_per_rank_step&quot;: 3.446460483190918,
+      &quot;optimizer_outside_AdamW_seconds_per_rank_step&quot;: 2.109550553222656,
+      &quot;GPU_compute_seconds_per_rank_step&quot;: 1.7018729405639648,
+      &quot;HtoD_seconds_per_rank_step&quot;: 0.7846714262939454,
+      &quot;GPU_idle_proxy_percent_range&quot;: [
+        30.586543210176544,
+        33.786194779801384
+      ],
+      &quot;all_CPUAdamW_HtoD_recorded_overlap_zero&quot;: true,
+      &quot;all_compute_collective_recorded_overlap_zero&quot;: true,
+      &quot;collective_seconds_per_rank_step&quot;: {
+        &quot;0&quot;: 0.18815748044433594,
+        &quot;1&quot;: 0.24668251774902344
+      }
+    }
+  ],
+  &quot;cross_window_attribution_only&quot;: true,
+  &quot;rank_windows_are_not_independent_seeds&quot;: true,
+  &quot;range_categories_are_not_additive_wall_time&quot;: true,
+  &quot;idle_is_unrecorded_activity_proxy_not_hardware_utilization&quot;: true,
+  &quot;formal_performance_accepted&quot;: false,
+  &quot;strict_repair_new_trace_collected&quot;: false,
+  &quot;created_epoch&quot;: 1793092583.8759742
+}</code></pre></details><a id="appendix-operator"></a><h2>新增八例算子基准与GPU trace</h2><div class="table-wrap"><table><thead><tr><th>GPU</th><th>S</th><th>输入</th><th>无profiler中位毫秒</th><th>kernel数</th><th>抽样前向最大差</th><th>抽样反向最大差</th></tr></thead><tbody><tr><td>0</td><td>2048</td><td>bfloat16</td><td>11.540</td><td>13</td><td>1.81e-10</td><td>0</td></tr><tr><td>0</td><td>2048</td><td>float32</td><td>9.846</td><td>9</td><td>2.47e-10</td><td>5.82e-11</td></tr><tr><td>0</td><td>4096</td><td>bfloat16</td><td>44.398</td><td>13</td><td>8.98e-11</td><td>0</td></tr><tr><td>0</td><td>4096</td><td>float32</td><td>36.784</td><td>9</td><td>1.25e-10</td><td>2.91e-11</td></tr><tr><td>1</td><td>2048</td><td>bfloat16</td><td>11.596</td><td>13</td><td>1.81e-10</td><td>0</td></tr><tr><td>1</td><td>2048</td><td>float32</td><td>9.596</td><td>9</td><td>2.47e-10</td><td>5.82e-11</td></tr><tr><td>1</td><td>4096</td><td>bfloat16</td><td>44.655</td><td>13</td><td>8.98e-11</td><td>0</td></tr><tr><td>1</td><td>4096</td><td>float32</td><td>36.575</td><td>9</td><td>1.25e-10</td><td>2.91e-11</td></tr></tbody></table></div><p>子链为BF16/FP32输入→FP32缩放→有限值-10000因果mask→FP32 softmax及反向；合成输入，shape为<code>[1,14,S,S]</code>。每例2次预热、7次无profiler同步计时，另采1次GPU trace。全输出/梯度有限，每例12行CPU float64抽样比较通过原容差。BF16输入路径记录13次kernel启动，FP32为9次，支持进一步研究cast和中间矩阵搬运；不能把两条精度路径的差异称为优化收益。未包含QK/PV矩阵乘、整模型更新或TP通信。</p><p><a href="#appendix-operator">独立JSON文件</a></p><details><summary>展开完整复核数据</summary><pre><code>{
+  &quot;passed_resource_and_isolated_operator_validation&quot;: true,
+  &quot;full_model_training_accepted&quot;: false,
+  &quot;TP2_communication_validated&quot;: false,
+  &quot;optimization_speedup_accepted&quot;: false,
+  &quot;scope&quot;: &quot;synthetic-input actual7B attention shapes; sampled CPU float64 rows, not complete tensor/full model gate&quot;,
+  &quot;closed_cases&quot;: 8,
+  &quot;closed_GPU_traces&quot;: 8,
+  &quot;raw_traces_remain_DT&quot;: true,
+  &quot;double_end_key_SHA256&quot;: &quot;ef8f6166ec326d6b2fa8423c6f2170df56ca95723fc5d7ae4bea07346c29858c&quot;,
+  &quot;key_evidence&quot;: &quot;results/datathinking-ssh-20261025-01/resource-minimal-attention-closed-keys-20261027-02.json&quot;,
+  &quot;source_end_SHA_equal&quot;: true,
+  &quot;all_own_probe_processes_ended&quot;: true,
+  &quot;post_GPU_idle&quot;: true,
+  &quot;summary&quot;: [
+    {
+      &quot;device&quot;: 0,
+      &quot;S&quot;: 2048,
+      &quot;dtype&quot;: &quot;torch.bfloat16&quot;,
+      &quot;median_ms&quot;: 11.540129780769348,
+      &quot;kernels&quot;: 13,
+      &quot;forward_error&quot;: 1.807562036246907e-10,
+      &quot;backward_error&quot;: 0.0,
+      &quot;max_GPU_reserved_GiB&quot;: 1.060546875
+    },
+    {
+      &quot;device&quot;: 0,
+      &quot;S&quot;: 2048,
+      &quot;dtype&quot;: &quot;torch.float32&quot;,
+      &quot;median_ms&quot;: 9.846318513154984,
+      &quot;kernels&quot;: 9,
+      &quot;forward_error&quot;: 2.466347000761038e-10,
+      &quot;backward_error&quot;: 5.820766091346741e-11,
+      &quot;max_GPU_reserved_GiB&quot;: 1.279296875
+    },
+    {
+      &quot;device&quot;: 0,
+      &quot;S&quot;: 4096,
+      &quot;dtype&quot;: &quot;torch.bfloat16&quot;,
+      &quot;median_ms&quot;: 44.397871010005474,
+      &quot;kernels&quot;: 13,
+      &quot;forward_error&quot;: 8.982778724412471e-11,
+      &quot;backward_error&quot;: 0.0,
+      &quot;max_GPU_reserved_GiB&quot;: 4.189453125
+    },
+    {
+      &quot;device&quot;: 0,
+      &quot;S&quot;: 4096,
+      &quot;dtype&quot;: &quot;torch.float32&quot;,
+      &quot;median_ms&quot;: 36.78358066827059,
+      &quot;kernels&quot;: 9,
+      &quot;forward_error&quot;: 1.2461759846694315e-10,
+      &quot;backward_error&quot;: 2.9103830456733704e-11,
+      &quot;max_GPU_reserved_GiB&quot;: 5.064453125
+    },
+    {
+      &quot;device&quot;: 1,
+      &quot;S&quot;: 2048,
+      &quot;dtype&quot;: &quot;torch.bfloat16&quot;,
+      &quot;median_ms&quot;: 11.5959532558918,
+      &quot;kernels&quot;: 13,
+      &quot;forward_error&quot;: 1.807562036246907e-10,
+      &quot;backward_error&quot;: 0.0,
+      &quot;max_GPU_reserved_GiB&quot;: 1.060546875
+    },
+    {
+      &quot;device&quot;: 1,
+      &quot;S&quot;: 2048,
+      &quot;dtype&quot;: &quot;torch.float32&quot;,
+      &quot;median_ms&quot;: 9.596055373549461,
+      &quot;kernels&quot;: 9,
+      &quot;forward_error&quot;: 2.466347000761038e-10,
+      &quot;backward_error&quot;: 5.820766091346741e-11,
+      &quot;max_GPU_reserved_GiB&quot;: 1.279296875
+    },
+    {
+      &quot;device&quot;: 1,
+      &quot;S&quot;: 4096,
+      &quot;dtype&quot;: &quot;torch.bfloat16&quot;,
+      &quot;median_ms&quot;: 44.655460864305496,
+      &quot;kernels&quot;: 13,
+      &quot;forward_error&quot;: 8.982778724412471e-11,
+      &quot;backward_error&quot;: 0.0,
+      &quot;max_GPU_reserved_GiB&quot;: 4.189453125
+    },
+    {
+      &quot;device&quot;: 1,
+      &quot;S&quot;: 4096,
+      &quot;dtype&quot;: &quot;torch.float32&quot;,
+      &quot;median_ms&quot;: 36.57521586865187,
+      &quot;kernels&quot;: 9,
+      &quot;forward_error&quot;: 1.2461759846694315e-10,
+      &quot;backward_error&quot;: 2.9103830456733704e-11,
+      &quot;max_GPU_reserved_GiB&quot;: 5.064453125
+    }
+  ],
+  &quot;minimal_validation_elapsed_seconds&quot;: 20.970463037490845,
+  &quot;private_source_guard_byte_identical_to_prior_control&quot;: true
+}</code></pre></details><a id="appendix-failures"></a><h2>失败原因与未完成项</h2><div class="table-wrap"><table><thead><tr><th>问题</th><th>已确定的事实</th><th>目前结论</th></tr></thead><tbody><tr><td>NUMA工作集</td><td>两rank约28.57GiB延后分配的FP32梯度未完整纳入早期预算；新增审计pack也形成大量文件缓存</td><td>公共预分配与容量探针有证据；新增完整路径仍须通过原保护</td></tr><tr><td>连续更新差异</td><td>实际输入/RNG相同，已捕获embedding梯度微差；严格固定权重重复通过，真实连续更新对旧参考仍失败</td><td>不能指认具体kernel或声称长训练修好，保留原数值标准</td></tr><tr><td>审计布局与入口</td><td>出现过参考符号链接越界、整块缓冲峰值及模块路径错误</td><td>失败保留，CPU修复版本化；不把编排修复当训练优化</td></tr><tr><td>检查器断档</td><td>Windows关机导致本机观察器中断；远端持久监督与故障终态探针随后通过</td><td>与NUMA拒绝、数值失败分别记录</td></tr><tr><td>资源准入</td><td>当前新增GPU配额为0，现有GPU本地节点余量不足整模型80GiB准入；ACT暂不可达</td><td>先在现有卡做独立算子研究；不动不明归属环境</td></tr></tbody></table></div><p>最近严格native尝试在原NUMA16GiB保护下停止。首步受检字段在原容差内，第二步部分梯度和逐token loss超原容差；三臂完整数值、原生恢复、长loss与正式性能均未接受。预算结束和安全停止是执行边界，不替代数值失败的结论。</p><p><a href="#appendix-failures">独立JSON文件</a></p><details><summary>展开完整复核数据</summary><pre><code>{
+  &quot;local_failed_keys_review_passed&quot;: true,
+  &quot;both_ends_ZIP_and_key_SHA_verified&quot;: true,
+  &quot;key_receipt&quot;: {
+    &quot;ZIP_SHA256&quot;: &quot;782251e48fb54d240e3bf73adfd74c7c2e06628ece77a90b4162ea421293f947&quot;,
+    &quot;ZIP_bytes&quot;: 2213323,
+    &quot;expanded_bytes&quot;: 13455807,
+    &quot;key_count&quot;: 32,
+    &quot;failed_partial_case_only&quot;: true,
+    &quot;no_raw_tensor_payload_downloaded&quot;: true
+  },
+  &quot;original_NUMA16_guard_correctly_stopped&quot;: true,
+  &quot;stop&quot;: {
+    &quot;RSS_bytes&quot;: 181257265152,
+    &quot;host_available&quot;: 882955321344,
+    &quot;node1_MemFree_bytes&quot;: 16996687872,
+    &quot;epoch&quot;: 1793091408.9477134
+  },
+  &quot;comparisons&quot;: [
+    {
+      &quot;rank&quot;: 0,
+      &quot;closed_fields&quot;: 1831,
+      &quot;per_step_phase&quot;: {
+        &quot;step-1/gradient&quot;: {
+          &quot;fields&quot;: 199,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 1,
+          &quot;max_abs&quot;: 9.597133612260222e-06
+        },
+        &quot;step-1/updated_parameter&quot;: {
+          &quot;fields&quot;: 199,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 1,
+          &quot;max_abs&quot;: 1.52587890625e-05
+        },
+        &quot;step-1/master_param&quot;: {
+          &quot;fields&quot;: 199,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 1,
+          &quot;max_abs&quot;: 1.9613653421401978e-05
+        },
+        &quot;step-1/exp_avg&quot;: {
+          &quot;fields&quot;: 199,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 1,
+          &quot;max_abs&quot;: 9.597133612260222e-07
+        },
+        &quot;step-1/exp_avg_sq&quot;: {
+          &quot;fields&quot;: 199,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 1,
+          &quot;max_abs&quot;: 1.6924273094076625e-10
+        },
+        &quot;step-1/step&quot;: {
+          &quot;fields&quot;: 199,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 0,
+          &quot;max_abs&quot;: 0.0
+        },
+        &quot;step-1/lm loss&quot;: {
+          &quot;fields&quot;: 1,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 0,
+          &quot;max_abs&quot;: 0.0
+        },
+        &quot;step-2/gradient&quot;: {
+          &quot;fields&quot;: 199,
+          &quot;failed&quot;: 24,
+          &quot;SHA_different&quot;: 199,
+          &quot;max_abs&quot;: 0.0017784093506634235
+        },
+        &quot;step-2/updated_parameter&quot;: {
+          &quot;fields&quot;: 88,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 88,
+          &quot;max_abs&quot;: 3.0517578125e-05
+        },
+        &quot;step-2/master_param&quot;: {
+          &quot;fields&quot;: 88,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 88,
+          &quot;max_abs&quot;: 1.7212238162755966e-05
+        },
+        &quot;step-2/exp_avg&quot;: {
+          &quot;fields&quot;: 87,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 87,
+          &quot;max_abs&quot;: 0.00017784094234229997
+        },
+        &quot;step-2/exp_avg_sq&quot;: {
+          &quot;fields&quot;: 87,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 87,
+          &quot;max_abs&quot;: 4.92474646307528e-06
+        },
+        &quot;step-2/step&quot;: {
+          &quot;fields&quot;: 87,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 0,
+          &quot;max_abs&quot;: 0.0
+        }
+      },
+      &quot;failed_fields&quot;: [
+        {
+          &quot;field&quot;: &quot;step-2/0/gradient&quot;,
+          &quot;max_abs&quot;: 0.00031440809834748507
+        },
+        {
+          &quot;field&quot;: &quot;step-2/3/gradient&quot;,
+          &quot;max_abs&quot;: 0.0017784093506634235
+        },
+        {
+          &quot;field&quot;: &quot;step-2/6/gradient&quot;,
+          &quot;max_abs&quot;: 0.0003581121563911438
+        },
+        {
+          &quot;field&quot;: &quot;step-2/7/gradient&quot;,
+          &quot;max_abs&quot;: 0.0007656477391719818
+        },
+        {
+          &quot;field&quot;: &quot;step-2/15/gradient&quot;,
+          &quot;max_abs&quot;: 0.0005323805380612612
+        },
+        {
+          &quot;field&quot;: &quot;step-2/39/gradient&quot;,
+          &quot;max_abs&quot;: 0.0004611470067175105
+        },
+        {
+          &quot;field&quot;: &quot;step-2/43/gradient&quot;,
+          &quot;max_abs&quot;: 0.0005700588226318359
+        },
+        {
+          &quot;field&quot;: &quot;step-2/47/gradient&quot;,
+          &quot;max_abs&quot;: 0.0003679213114082813
+        },
+        {
+          &quot;field&quot;: &quot;step-2/51/gradient&quot;,
+          &quot;max_abs&quot;: 0.001479336991906166
+        },
+        {
+          &quot;field&quot;: &quot;step-2/55/gradient&quot;,
+          &quot;max_abs&quot;: 0.0003939089656341821
+        },
+        {
+          &quot;field&quot;: &quot;step-2/59/gradient&quot;,
+          &quot;max_abs&quot;: 0.0003328805323690176
+        },
+        {
+          &quot;field&quot;: &quot;step-2/67/gradient&quot;,
+          &quot;max_abs&quot;: 0.0005953796207904816
+        },
+        {
+          &quot;field&quot;: &quot;step-2/74/gradient&quot;,
+          &quot;max_abs&quot;: 0.0003711602184921503
+        },
+        {
+          &quot;field&quot;: &quot;step-2/79/gradient&quot;,
+          &quot;max_abs&quot;: 0.0005403314717113972
+        },
+        {
+          &quot;field&quot;: &quot;step-2/86/gradient&quot;,
+          &quot;max_abs&quot;: 0.000524252318427898
+        },
+        {
+          &quot;field&quot;: &quot;step-2/87/gradient&quot;,
+          &quot;max_abs&quot;: 0.0007179213571362197
+        },
+        {
+          &quot;field&quot;: &quot;step-2/90/gradient&quot;,
+          &quot;max_abs&quot;: 0.00042681791819632053
+        },
+        {
+          &quot;field&quot;: &quot;step-2/91/gradient&quot;,
+          &quot;max_abs&quot;: 0.0006246936973184347
+        },
+        {
+          &quot;field&quot;: &quot;step-2/94/gradient&quot;,
+          &quot;max_abs&quot;: 0.0006553097628057003
+        },
+        {
+          &quot;field&quot;: &quot;step-2/98/gradient&quot;,
+          &quot;max_abs&quot;: 0.000535621540620923
+        },
+        {
+          &quot;field&quot;: &quot;step-2/102/gradient&quot;,
+          &quot;max_abs&quot;: 0.0007324641337618232
+        },
+        {
+          &quot;field&quot;: &quot;step-2/106/gradient&quot;,
+          &quot;max_abs&quot;: 0.0008764492231421173
+        },
+        {
+          &quot;field&quot;: &quot;step-2/107/gradient&quot;,
+          &quot;max_abs&quot;: 0.0004175463691353798
+        },
+        {
+          &quot;field&quot;: &quot;step-2/183/gradient&quot;,
+          &quot;max_abs&quot;: 0.0006536913570016623
+        }
+      ],
+      &quot;complete_three_step_gate_passed&quot;: false
+    },
+    {
+      &quot;rank&quot;: 1,
+      &quot;closed_fields&quot;: 1819,
+      &quot;per_step_phase&quot;: {
+        &quot;step-1/gradient&quot;: {
+          &quot;fields&quot;: 199,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 1,
+          &quot;max_abs&quot;: 1.1996398825431243e-06
+        },
+        &quot;step-1/updated_parameter&quot;: {
+          &quot;fields&quot;: 199,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 1,
+          &quot;max_abs&quot;: 3.0517578125e-05
+        },
+        &quot;step-1/master_param&quot;: {
+          &quot;fields&quot;: 199,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 1,
+          &quot;max_abs&quot;: 1.6383826732635498e-05
+        },
+        &quot;step-1/exp_avg&quot;: {
+          &quot;fields&quot;: 199,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 1,
+          &quot;max_abs&quot;: 1.1996417015325278e-07
+        },
+        &quot;step-1/exp_avg_sq&quot;: {
+          &quot;fields&quot;: 199,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 1,
+          &quot;max_abs&quot;: 7.57360840708543e-12
+        },
+        &quot;step-1/step&quot;: {
+          &quot;fields&quot;: 199,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 0,
+          &quot;max_abs&quot;: 0.0
+        },
+        &quot;step-1/lm loss&quot;: {
+          &quot;fields&quot;: 1,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 0,
+          &quot;max_abs&quot;: 0.0
+        },
+        &quot;step-2/gradient&quot;: {
+          &quot;fields&quot;: 199,
+          &quot;failed&quot;: 18,
+          &quot;SHA_different&quot;: 199,
+          &quot;max_abs&quot;: 0.0013362369500100613
+        },
+        &quot;step-2/updated_parameter&quot;: {
+          &quot;fields&quot;: 85,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 85,
+          &quot;max_abs&quot;: 3.0517578125e-05
+        },
+        &quot;step-2/master_param&quot;: {
+          &quot;fields&quot;: 85,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 85,
+          &quot;max_abs&quot;: 1.703668385744095e-05
+        },
+        &quot;step-2/exp_avg&quot;: {
+          &quot;fields&quot;: 85,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 85,
+          &quot;max_abs&quot;: 7.956300396472216e-05
+        },
+        &quot;step-2/exp_avg_sq&quot;: {
+          &quot;fields&quot;: 85,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 85,
+          &quot;max_abs&quot;: 5.046128990215948e-07
+        },
+        &quot;step-2/step&quot;: {
+          &quot;fields&quot;: 85,
+          &quot;failed&quot;: 0,
+          &quot;SHA_different&quot;: 0,
+          &quot;max_abs&quot;: 0.0
+        }
+      },
+      &quot;failed_fields&quot;: [
+        {
+          &quot;field&quot;: &quot;step-2/35/gradient&quot;,
+          &quot;max_abs&quot;: 0.0003128617536276579
+        },
+        {
+          &quot;field&quot;: &quot;step-2/43/gradient&quot;,
+          &quot;max_abs&quot;: 0.00035820365883409977
+        },
+        {
+          &quot;field&quot;: &quot;step-2/47/gradient&quot;,
+          &quot;max_abs&quot;: 0.0003736679209396243
+        },
+        {
+          &quot;field&quot;: &quot;step-2/51/gradient&quot;,
+          &quot;max_abs&quot;: 0.00045449123717844486
+        },
+        {
+          &quot;field&quot;: &quot;step-2/55/gradient&quot;,
+          &quot;max_abs&quot;: 0.0003031713713426143
+        },
+        {
+          &quot;field&quot;: &quot;step-2/63/gradient&quot;,
+          &quot;max_abs&quot;: 0.0005680056056007743
+        },
+        {
+          &quot;field&quot;: &quot;step-2/67/gradient&quot;,
+          &quot;max_abs&quot;: 0.0003699129447340965
+        },
+        {
+          &quot;field&quot;: &quot;step-2/74/gradient&quot;,
+          &quot;max_abs&quot;: 0.0007956298068165779
+        },
+        {
+          &quot;field&quot;: &quot;step-2/83/gradient&quot;,
+          &quot;max_abs&quot;: 0.00030204118229448795
+        },
+        {
+          &quot;field&quot;: &quot;step-2/86/gradient&quot;,
+          &quot;max_abs&quot;: 0.0006420603021979332
+        },
+        {
+          &quot;field&quot;: &quot;step-2/90/gradient&quot;,
+          &quot;max_abs&quot;: 0.00038238835986703634
+        },
+        {
+          &quot;field&quot;: &quot;step-2/94/gradient&quot;,
+          &quot;max_abs&quot;: 0.0005819958169013262
+        },
+        {
+          &quot;field&quot;: &quot;step-2/95/gradient&quot;,
+          &quot;max_abs&quot;: 0.00034148678241763264
+        },
+        {
+          &quot;field&quot;: &quot;step-2/98/gradient&quot;,
+          &quot;max_abs&quot;: 0.0005733107682317495
+        },
+        {
+          &quot;field&quot;: &quot;step-2/102/gradient&quot;,
+          &quot;max_abs&quot;: 0.0013362369500100613
+        },
+        {
+          &quot;field&quot;: &quot;step-2/106/gradient&quot;,
+          &quot;max_abs&quot;: 0.0009331400506198406
+        },
+        {
+          &quot;field&quot;: &quot;step-2/107/gradient&quot;,
+          &quot;max_abs&quot;: 0.0003070463426411152
+        },
+        {
+          &quot;field&quot;: &quot;step-2/183/gradient&quot;,
+          &quot;max_abs&quot;: 0.0006536913570016623
+        }
+      ],
+      &quot;complete_three_step_gate_passed&quot;: false
+    }
+  ],
+  &quot;native_full_case_exit0&quot;: false,
+  &quot;control_optimized_not_started&quot;: true,
+  &quot;native_against_accepted_prior_reference_passed&quot;: false,
+  &quot;three_arm_numeric_SFT_accepted&quot;: false,
+  &quot;native_resume_accepted&quot;: false,
+  &quot;long_loss_accepted&quot;: false,
+  &quot;formal_performance_accepted&quot;: false,
+  &quot;max_points&quot;: 0,
+  &quot;deadline_epoch&quot;: 1793109373,
+  &quot;epoch&quot;: 1793091974.8066723
+}</code></pre></details><a id="appendix-peer"></a><h2>外部参考与研究归因</h2><div class="table-wrap"><table><thead><tr><th>参考内容</th><th>可用价值</th><th>边界</th></tr></thead><tbody><tr><td>同组7B/8B trace</td><td>原始日志、实际shape与算子分析，支持交叉分析</td><td>S4096短采样，与我方S2048正式训练配置不同</td></tr><tr><td>4B分析器</td><td>runtime关联、exclusive归因、并集/重叠计算、未归因保留</td><td>热点百分比不能直接外推到7B</td></tr><tr><td>ixSYS资料</td><td>CPU API、GPU kernel、memcpy及同步依赖分析</td><td>提供PDF较旧；现有环境实查V4.4.0，以实际help与短探针为准</td></tr></tbody></table></div><p>同组7B BF16短前向相对RMS约12.98%，未达其3%门槛；4B最终BF16对齐也未通过。8B仅达到相对RMS&lt;3%、top-1≥90%的短前向标准，约1.88%/90.62%，不等于完整训练与恢复正确性。其checkpoint缺少optimizer/RNG，不能替代精确断点恢复。</p><p>我方独立核验172项文件哈希、重算四份SFT rank trace，主要热点排序一致；不同选步边界导致累计kernel时长差不超过约0.011%。分析器9项测试通过。7B S4096的GEMM/BMM约占设备kernel累计时间37.20%，copy/cast约24.59%；该分母不是端到端墙钟。</p><p>既有采集和实现归原作者；本报告新增贡献为独立核验与适用范围判断。截图的hidden=4096、FFN=16384与8B相符，不作为7B优化目标。</p><p><a href="#appendix-peer">独立JSON文件</a></p><details><summary>展开完整复核数据</summary><pre><code>{
+  &quot;scope&quot;: &quot;offline independent audit of supplied colleague evidence; no model training or GPU work&quot;,
+  &quot;source_authorship&quot;: &quot;third-party supplied work; not claimed as our experiment&quot;,
+  &quot;four_SFT_rank_traces_recomputed&quot;: [
+    {
+      &quot;model&quot;: &quot;7B&quot;,
+      &quot;rank&quot;: 0,
+      &quot;raw_trace_SHA256&quot;: &quot;f6d850723c264c72c89ce7c3515b1b238456dc09fe35ad5c5b7e29da24a45935&quot;,
+      &quot;analyzer_SHA256&quot;: &quot;47fc7e21a243d0a02df3c7011fa42825b3fbb01380fd914eaab9e555db18863f&quot;,
+      &quot;selected_step_names&quot;: [
+        &quot;ProfilerStep#4&quot;,
+        &quot;ProfilerStep#5&quot;,
+        &quot;ProfilerStep#6&quot;,
+        &quot;ProfilerStep#7&quot;
+      ],
+      &quot;published_kernel_sum_us&quot;: 17608057.323999964,
+      &quot;recomputed_kernel_sum_us&quot;: 17609869.417,
+      &quot;selected_kernel_count&quot;: 25468,
+      &quot;raw_kernel_count&quot;: 25468,
+      &quot;selection_status_counts&quot;: {
+        &quot;correlated&quot;: 29664
+      },
+      &quot;attribution_coverage_percent&quot;: 89.77252366072992,
+      &quot;top_ops&quot;: [
+        {
+          &quot;op&quot;: &quot;aten::mm&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 1580,
+          &quot;device_self_us&quot;: 4931079.515000006,
+          &quot;selected_kernel_duration_share_pct&quot;: 28.001794892582797
+        },
+        {
+          &quot;op&quot;: &quot;aten::copy_&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 4196,
+          &quot;device_self_us&quot;: 2480272.3809999856,
+          &quot;selected_kernel_duration_share_pct&quot;: 14.08455862032464
+        },
+        {
+          &quot;op&quot;: &quot;aten::mul&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 6344,
+          &quot;device_self_us&quot;: 1615954.9659999756,
+          &quot;selected_kernel_duration_share_pct&quot;: 9.176416518114467
+        },
+        {
+          &quot;op&quot;: &quot;aten::masked_fill_&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 356,
+          &quot;device_self_us&quot;: 1250923.1749999986,
+          &quot;selected_kernel_duration_share_pct&quot;: 7.103534645137106
+        },
+        {
+          &quot;op&quot;: &quot;aten::bmm&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 672,
+          &quot;device_self_us&quot;: 835429.4930000001,
+          &quot;selected_kernel_duration_share_pct&quot;: 4.744098171412353
+        },
+        {
+          &quot;op&quot;: &quot;aten::_softmax&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 224,
+          &quot;device_self_us&quot;: 725832.0079999999,
+          &quot;selected_kernel_duration_share_pct&quot;: 4.1217341867356785
+        },
+        {
+          &quot;op&quot;: &quot;aten::div&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 568,
+          &quot;device_self_us&quot;: 604240.5269999999,
+          &quot;selected_kernel_duration_share_pct&quot;: 3.43126069076177
+        }
+      ],
+      &quot;devices&quot;: [
+        {
+          &quot;device&quot;: &quot;0&quot;,
+          &quot;window_start_us&quot;: 1560521239508.596,
+          &quot;window_end_us&quot;: 1560557083048.4111,
+          &quot;host_step_envelope_us&quot;: 35843539.81518555,
+          &quot;wall_window_with_device_completion_us&quot;: 35843539.81518555,
+          &quot;device_completion_tail_us&quot;: 0.0,
+          &quot;kernel_duration_sum_us&quot;: 17609869.417,
+          &quot;activity_duration_sum_us&quot;: 25512270.833,
+          &quot;activity_union_us&quot;: 25512232.75366211,
+          &quot;activity_window_coverage_pct&quot;: 71.17665522213169,
+          &quot;recognized_compute_union_us&quot;: 15430116.25415039,
+          &quot;communication_union_us&quot;: 1801045.2219238281,
+          &quot;recognized_compute_communication_overlap_us&quot;: 0.0,
+          &quot;communication_not_overlapped_with_recognized_compute_us&quot;: 1801045.2219238281,
+          &quot;unknown_kernel_union_us&quot;: 378707.67236328125
+        }
+      ]
+    },
+    {
+      &quot;model&quot;: &quot;7B&quot;,
+      &quot;rank&quot;: 1,
+      &quot;raw_trace_SHA256&quot;: &quot;e194af76a4c0ff4d5c5476080c6eb7491b93691716ff8f9d9e20b596fa8b9c0b&quot;,
+      &quot;analyzer_SHA256&quot;: &quot;47fc7e21a243d0a02df3c7011fa42825b3fbb01380fd914eaab9e555db18863f&quot;,
+      &quot;selected_step_names&quot;: [
+        &quot;ProfilerStep#4&quot;,
+        &quot;ProfilerStep#5&quot;,
+        &quot;ProfilerStep#6&quot;,
+        &quot;ProfilerStep#7&quot;
+      ],
+      &quot;published_kernel_sum_us&quot;: 17213806.33399996,
+      &quot;recomputed_kernel_sum_us&quot;: 17213863.843,
+      &quot;selected_kernel_count&quot;: 25236,
+      &quot;raw_kernel_count&quot;: 25236,
+      &quot;selection_status_counts&quot;: {
+        &quot;correlated&quot;: 29196
+      },
+      &quot;attribution_coverage_percent&quot;: 91.8122987618891,
+      &quot;top_ops&quot;: [
+        {
+          &quot;op&quot;: &quot;aten::mm&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 1580,
+          &quot;device_self_us&quot;: 4931321.673999998,
+          &quot;selected_kernel_duration_share_pct&quot;: 28.647383986398356
+        },
+        {
+          &quot;op&quot;: &quot;aten::copy_&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 4196,
+          &quot;device_self_us&quot;: 2479230.9189999867,
+          &quot;selected_kernel_duration_share_pct&quot;: 14.402524277012704
+        },
+        {
+          &quot;op&quot;: &quot;aten::mul&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 6344,
+          &quot;device_self_us&quot;: 1616546.726999978,
+          &quot;selected_kernel_duration_share_pct&quot;: 9.390958019325483
+        },
+        {
+          &quot;op&quot;: &quot;aten::masked_fill_&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 356,
+          &quot;device_self_us&quot;: 1250908.3299999994,
+          &quot;selected_kernel_duration_share_pct&quot;: 7.266865483594957
+        },
+        {
+          &quot;op&quot;: &quot;aten::bmm&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 672,
+          &quot;device_self_us&quot;: 836198.6469999993,
+          &quot;selected_kernel_duration_share_pct&quot;: 4.857704549231919
+        },
+        {
+          &quot;op&quot;: &quot;aten::_softmax&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 224,
+          &quot;device_self_us&quot;: 725884.4210000001,
+          &quot;selected_kernel_duration_share_pct&quot;: 4.216859315377822
+        },
+        {
+          &quot;op&quot;: &quot;aten::div&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 568,
+          &quot;device_self_us&quot;: 604162.3180000003,
+          &quot;selected_kernel_duration_share_pct&quot;: 3.5097426325100294
+        }
+      ],
+      &quot;devices&quot;: [
+        {
+          &quot;device&quot;: &quot;1&quot;,
+          &quot;window_start_us&quot;: 1560521239610.146,
+          &quot;window_end_us&quot;: 1560557083222.593,
+          &quot;host_step_envelope_us&quot;: 35843612.447021484,
+          &quot;wall_window_with_device_completion_us&quot;: 35843612.447021484,
+          &quot;device_completion_tail_us&quot;: 0.0,
+          &quot;kernel_duration_sum_us&quot;: 17213863.843,
+          &quot;activity_duration_sum_us&quot;: 25117532.789,
+          &quot;activity_union_us&quot;: 25117492.545166016,
+          &quot;activity_window_coverage_pct&quot;: 70.07522632460896,
+          &quot;recognized_compute_union_us&quot;: 15426357.74243164,
+          &quot;communication_union_us&quot;: 1409419.7348632812,
+          &quot;recognized_compute_communication_overlap_us&quot;: 0.0,
+          &quot;communication_not_overlapped_with_recognized_compute_us&quot;: 1409419.7348632812,
+          &quot;unknown_kernel_union_us&quot;: 378086.10498046875
+        }
+      ]
+    },
+    {
+      &quot;model&quot;: &quot;8B&quot;,
+      &quot;rank&quot;: 0,
+      &quot;raw_trace_SHA256&quot;: &quot;39fe3f5e7886171d2eb01ade45e8fb3da68a948e0d6f03712411a97588fbd6a5&quot;,
+      &quot;analyzer_SHA256&quot;: &quot;47fc7e21a243d0a02df3c7011fa42825b3fbb01380fd914eaab9e555db18863f&quot;,
+      &quot;selected_step_names&quot;: [
+        &quot;ProfilerStep#4&quot;,
+        &quot;ProfilerStep#5&quot;,
+        &quot;ProfilerStep#6&quot;,
+        &quot;ProfilerStep#7&quot;
+      ],
+      &quot;published_kernel_sum_us&quot;: 21401672.148999963,
+      &quot;recomputed_kernel_sum_us&quot;: 21403994.006,
+      &quot;selected_kernel_count&quot;: 30412,
+      &quot;raw_kernel_count&quot;: 30412,
+      &quot;selection_status_counts&quot;: {
+        &quot;correlated&quot;: 34656
+      },
+      &quot;attribution_coverage_percent&quot;: 87.29652586223939,
+      &quot;top_ops&quot;: [
+        {
+          &quot;op&quot;: &quot;aten::mm&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 2060,
+          &quot;device_self_us&quot;: 5606448.7289999975,
+          &quot;selected_kernel_duration_share_pct&quot;: 26.193469907664845
+        },
+        {
+          &quot;op&quot;: &quot;aten::copy_&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 5684,
+          &quot;device_self_us&quot;: 3319326.08200001,
+          &quot;selected_kernel_duration_share_pct&quot;: 15.507975198785475
+        },
+        {
+          &quot;op&quot;: &quot;aten::mul&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 7888,
+          &quot;device_self_us&quot;: 1976212.8599999542,
+          &quot;selected_kernel_duration_share_pct&quot;: 9.232916340034384
+        },
+        {
+          &quot;op&quot;: &quot;aten::masked_fill_&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 404,
+          &quot;device_self_us&quot;: 1635523.9109999973,
+          &quot;selected_kernel_duration_share_pct&quot;: 7.641208975023655
+        },
+        {
+          &quot;op&quot;: &quot;aten::bmm&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 768,
+          &quot;device_self_us&quot;: 1088172.0789999997,
+          &quot;selected_kernel_duration_share_pct&quot;: 5.083967406713726
+        },
+        {
+          &quot;op&quot;: &quot;aten::_softmax&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 256,
+          &quot;device_self_us&quot;: 947381.3989999995,
+          &quot;selected_kernel_duration_share_pct&quot;: 4.4261897977285365
+        },
+        {
+          &quot;op&quot;: &quot;aten::div&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 656,
+          &quot;device_self_us&quot;: 785784.4930000006,
+          &quot;selected_kernel_duration_share_pct&quot;: 3.6712049759485463
+        }
+      ],
+      &quot;devices&quot;: [
+        {
+          &quot;device&quot;: &quot;0&quot;,
+          &quot;window_start_us&quot;: 1563806409578.872,
+          &quot;window_end_us&quot;: 1563846662517.842,
+          &quot;host_step_envelope_us&quot;: 40252938.9699707,
+          &quot;wall_window_with_device_completion_us&quot;: 40252938.9699707,
+          &quot;device_completion_tail_us&quot;: 0.0,
+          &quot;kernel_duration_sum_us&quot;: 21403994.006,
+          &quot;activity_duration_sum_us&quot;: 30016027.212,
+          &quot;activity_union_us&quot;: 30015985.205810547,
+          &quot;activity_window_coverage_pct&quot;: 74.56843145839096,
+          &quot;recognized_compute_union_us&quot;: 18419535.583007812,
+          &quot;communication_union_us&quot;: 2719050.8359375,
+          &quot;recognized_compute_communication_overlap_us&quot;: 0.0,
+          &quot;communication_not_overlapped_with_recognized_compute_us&quot;: 2719050.8359375,
+          &quot;unknown_kernel_union_us&quot;: 265407.2666015625
+        }
+      ]
+    },
+    {
+      &quot;model&quot;: &quot;8B&quot;,
+      &quot;rank&quot;: 1,
+      &quot;raw_trace_SHA256&quot;: &quot;8565f78459ad2e15fc1eae153c4264a75d2506169dae86c84fae29cc42ce830e&quot;,
+      &quot;analyzer_SHA256&quot;: &quot;47fc7e21a243d0a02df3c7011fa42825b3fbb01380fd914eaab9e555db18863f&quot;,
+      &quot;selected_step_names&quot;: [
+        &quot;ProfilerStep#4&quot;,
+        &quot;ProfilerStep#5&quot;,
+        &quot;ProfilerStep#6&quot;,
+        &quot;ProfilerStep#7&quot;
+      ],
+      &quot;published_kernel_sum_us&quot;: 20236372.03399996,
+      &quot;recomputed_kernel_sum_us&quot;: 20236431.311,
+      &quot;selected_kernel_count&quot;: 30148,
+      &quot;raw_kernel_count&quot;: 30148,
+      &quot;selection_status_counts&quot;: {
+        &quot;correlated&quot;: 34124
+      },
+      &quot;attribution_coverage_percent&quot;: 92.31183603427972,
+      &quot;top_ops&quot;: [
+        {
+          &quot;op&quot;: &quot;aten::mm&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 2060,
+          &quot;device_self_us&quot;: 5606624.800000004,
+          &quot;selected_kernel_duration_share_pct&quot;: 27.705600428433186
+        },
+        {
+          &quot;op&quot;: &quot;aten::copy_&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 5684,
+          &quot;device_self_us&quot;: 3317624.7650000043,
+          &quot;selected_kernel_duration_share_pct&quot;: 16.39431732805887
+        },
+        {
+          &quot;op&quot;: &quot;aten::mul&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 7888,
+          &quot;device_self_us&quot;: 1977868.0119999566,
+          &quot;selected_kernel_duration_share_pct&quot;: 9.773798460822677
+        },
+        {
+          &quot;op&quot;: &quot;aten::masked_fill_&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 404,
+          &quot;device_self_us&quot;: 1635472.1099999992,
+          &quot;selected_kernel_duration_share_pct&quot;: 8.08182077593394
+        },
+        {
+          &quot;op&quot;: &quot;aten::bmm&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 768,
+          &quot;device_self_us&quot;: 1088246.7479999992,
+          &quot;selected_kernel_duration_share_pct&quot;: 5.377661363683509
+        },
+        {
+          &quot;op&quot;: &quot;aten::_softmax&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 256,
+          &quot;device_self_us&quot;: 947343.7899999998,
+          &quot;selected_kernel_duration_share_pct&quot;: 4.681377736226882
+        },
+        {
+          &quot;op&quot;: &quot;aten::div&quot;,
+          &quot;cpu_event_category&quot;: &quot;cpu_op&quot;,
+          &quot;kernel_count&quot;: 656,
+          &quot;device_self_us&quot;: 786013.4159999993,
+          &quot;selected_kernel_duration_share_pct&quot;: 3.8841503421245163
+        }
+      ],
+      &quot;devices&quot;: [
+        {
+          &quot;device&quot;: &quot;1&quot;,
+          &quot;window_start_us&quot;: 1563806409803.324,
+          &quot;window_end_us&quot;: 1563846662869.167,
+          &quot;host_step_envelope_us&quot;: 40253065.84301758,
+          &quot;wall_window_with_device_completion_us&quot;: 40253065.84301758,
+          &quot;device_completion_tail_us&quot;: 0.0,
+          &quot;kernel_duration_sum_us&quot;: 20236431.311,
+          &quot;activity_duration_sum_us&quot;: 28727039.21,
+          &quot;activity_union_us&quot;: 28726996.739257812,
+          &quot;activity_window_coverage_pct&quot;: 71.36598452224699,
+          &quot;recognized_compute_union_us&quot;: 18415659.967773438,
+          &quot;communication_union_us&quot;: 1555810.0095214844,
+          &quot;recognized_compute_communication_overlap_us&quot;: 0.0,
+          &quot;communication_not_overlapped_with_recognized_compute_us&quot;: 1555810.0095214844,
+          &quot;unknown_kernel_union_us&quot;: 264961.00537109375
+        }
+      ]
+    }
+  ],
+  &quot;artifact_manifest_checks&quot;: [
+    {
+      &quot;model&quot;: &quot;7B&quot;,
+      &quot;checked&quot;: 81,
+      &quot;manifest_entries&quot;: 81,
+      &quot;failures&quot;: []
+    },
+    {
+      &quot;model&quot;: &quot;8B&quot;,
+      &quot;checked&quot;: 91,
+      &quot;manifest_entries&quot;: 91,
+      &quot;failures&quot;: []
+    }
+  ],
+  &quot;provided_4B_analyzer_unit_tests_observed&quot;: {
+    &quot;tests&quot;: 9,
+    &quot;passed&quot;: 9,
+    &quot;source_SHA256&quot;: &quot;3cf77d3c078e00416ded40e092630692e51892f809de9c47aa18bcd79b8cf7a7&quot;
+  },
+  &quot;formal_speedup_accepted&quot;: false,
+  &quot;epoch&quot;: 1793108137.140385,
+  &quot;max_kernel_sum_difference_percent&quot;: 0.010848951352366742,
+  &quot;scope_difference&quot;: &quot;Recomputation selects runtime launches enclosed by ProfilerStep; supplied 7B/8B analyzer selects device starts in explicit train_step envelope. Small boundary differences are retained, not called exact reproduction.&quot;,
+  &quot;source_manifest_items_verified&quot;: 172,
+  &quot;installed_ixsys_proof&quot;: &quot;results/peer-ixsys-capability-20261027.json&quot;,
+  &quot;screenshotted_shapes_match_8B_not_7B&quot;: true,
+  &quot;next_GPU_target&quot;: {
+    &quot;task&quot;: &quot;7B attention mask/scale/softmax semantic-preserving fusion&quot;,
+    &quot;shapes&quot;: [
+      &quot;[1,14,2048,2048]&quot;,
+      &quot;[1,14,4096,4096]&quot;
+    ],
+    &quot;status&quot;: &quot;proposal only; no kernel or training launched&quot;,
+    &quot;preserve&quot;: [
+      &quot;mask semantics&quot;,
+      &quot;cast boundaries&quot;,
+      &quot;scale rounding&quot;,
+      &quot;backward&quot;,
+      &quot;recomputation&quot;,
+      &quot;original tolerances&quot;
+    ]
+  },
+  &quot;no_old_reference_gate_removed&quot;: true
+}</code></pre></details><a id="appendix-provenance"></a><h2>来源与复核范围</h2><p>模型权重、完整数值张量、检查点及全量原trace继续保留在实验原存储；本文件内嵌的是关键复核结果与SHA，不宣称这些大型原件已上传GitHub。</p><div class="table-wrap"><table><thead><tr><th>证据</th><th>原复核文件SHA256</th><th>字节数</th></tr></thead><tbody><tr><td>cpt-formal</td><td><code>b27f39d0e9ce7c4bcb268c5f4697fd85f11beb5b2566d9d41b0cbf8735b5c973</code></td><td>8284</td></tr><tr><td>sft-formal</td><td><code>0f2de8dd4c270422c7244044c97d96507a9ba24a67df9ab15760a7411b146495</code></td><td>8506</td></tr><tr><td>bi-correctness</td><td><code>3c19a695ede3a6bf8596a948915dee7c64484fd5633211fac6dd5864f60763de</code></td><td>7669</td></tr><tr><td>bi-trace</td><td><code>04080c4ebfdd5fc85dc716fa4ac119c1abc0ed1ccc16de808016ded2a45cf652</code></td><td>7760</td></tr><tr><td>bi-numeric-failure</td><td><code>212e20a5baa51d6bd6a7f1c6d21fa098a8fd41ad4a12c57ef8eeab35f4f6cbbe</code></td><td>10197</td></tr><tr><td>operator-validation</td><td><code>5be93d3c8979a35b39dc69b6384bb89791e94fc2d81f62945aef41d451e17b0e</code></td><td>3065</td></tr><tr><td>peer-review</td><td><code>b1386e6084efe04e57081d3cb353687b00ef601dbb3af9b7e420fa1171da1587</code></td><td>15049</td></tr></tbody></table></div></main></body></html>

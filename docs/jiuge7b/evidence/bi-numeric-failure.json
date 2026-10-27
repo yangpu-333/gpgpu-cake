@@ -1,0 +1,373 @@
+{
+  "local_failed_keys_review_passed": true,
+  "both_ends_ZIP_and_key_SHA_verified": true,
+  "key_receipt": {
+    "ZIP_SHA256": "782251e48fb54d240e3bf73adfd74c7c2e06628ece77a90b4162ea421293f947",
+    "ZIP_bytes": 2213323,
+    "expanded_bytes": 13455807,
+    "key_count": 32,
+    "failed_partial_case_only": true,
+    "no_raw_tensor_payload_downloaded": true
+  },
+  "original_NUMA16_guard_correctly_stopped": true,
+  "stop": {
+    "RSS_bytes": 181257265152,
+    "host_available": 882955321344,
+    "node1_MemFree_bytes": 16996687872,
+    "epoch": 1793091408.9477134
+  },
+  "comparisons": [
+    {
+      "rank": 0,
+      "closed_fields": 1831,
+      "per_step_phase": {
+        "step-1/gradient": {
+          "fields": 199,
+          "failed": 0,
+          "SHA_different": 1,
+          "max_abs": 9.597133612260222e-06
+        },
+        "step-1/updated_parameter": {
+          "fields": 199,
+          "failed": 0,
+          "SHA_different": 1,
+          "max_abs": 1.52587890625e-05
+        },
+        "step-1/master_param": {
+          "fields": 199,
+          "failed": 0,
+          "SHA_different": 1,
+          "max_abs": 1.9613653421401978e-05
+        },
+        "step-1/exp_avg": {
+          "fields": 199,
+          "failed": 0,
+          "SHA_different": 1,
+          "max_abs": 9.597133612260222e-07
+        },
+        "step-1/exp_avg_sq": {
+          "fields": 199,
+          "failed": 0,
+          "SHA_different": 1,
+          "max_abs": 1.6924273094076625e-10
+        },
+        "step-1/step": {
+          "fields": 199,
+          "failed": 0,
+          "SHA_different": 0,
+          "max_abs": 0.0
+        },
+        "step-1/lm loss": {
+          "fields": 1,
+          "failed": 0,
+          "SHA_different": 0,
+          "max_abs": 0.0
+        },
+        "step-2/gradient": {
+          "fields": 199,
+          "failed": 24,
+          "SHA_different": 199,
+          "max_abs": 0.0017784093506634235
+        },
+        "step-2/updated_parameter": {
+          "fields": 88,
+          "failed": 0,
+          "SHA_different": 88,
+          "max_abs": 3.0517578125e-05
+        },
+        "step-2/master_param": {
+          "fields": 88,
+          "failed": 0,
+          "SHA_different": 88,
+          "max_abs": 1.7212238162755966e-05
+        },
+        "step-2/exp_avg": {
+          "fields": 87,
+          "failed": 0,
+          "SHA_different": 87,
+          "max_abs": 0.00017784094234229997
+        },
+        "step-2/exp_avg_sq": {
+          "fields": 87,
+          "failed": 0,
+          "SHA_different": 87,
+          "max_abs": 4.92474646307528e-06
+        },
+        "step-2/step": {
+          "fields": 87,
+          "failed": 0,
+          "SHA_different": 0,
+          "max_abs": 0.0
+        }
+      },
+      "failed_fields": [
+        {
+          "field": "step-2/0/gradient",
+          "max_abs": 0.00031440809834748507
+        },
+        {
+          "field": "step-2/3/gradient",
+          "max_abs": 0.0017784093506634235
+        },
+        {
+          "field": "step-2/6/gradient",
+          "max_abs": 0.0003581121563911438
+        },
+        {
+          "field": "step-2/7/gradient",
+          "max_abs": 0.0007656477391719818
+        },
+        {
+          "field": "step-2/15/gradient",
+          "max_abs": 0.0005323805380612612
+        },
+        {
+          "field": "step-2/39/gradient",
+          "max_abs": 0.0004611470067175105
+        },
+        {
+          "field": "step-2/43/gradient",
+          "max_abs": 0.0005700588226318359
+        },
+        {
+          "field": "step-2/47/gradient",
+          "max_abs": 0.0003679213114082813
+        },
+        {
+          "field": "step-2/51/gradient",
+          "max_abs": 0.001479336991906166
+        },
+        {
+          "field": "step-2/55/gradient",
+          "max_abs": 0.0003939089656341821
+        },
+        {
+          "field": "step-2/59/gradient",
+          "max_abs": 0.0003328805323690176
+        },
+        {
+          "field": "step-2/67/gradient",
+          "max_abs": 0.0005953796207904816
+        },
+        {
+          "field": "step-2/74/gradient",
+          "max_abs": 0.0003711602184921503
+        },
+        {
+          "field": "step-2/79/gradient",
+          "max_abs": 0.0005403314717113972
+        },
+        {
+          "field": "step-2/86/gradient",
+          "max_abs": 0.000524252318427898
+        },
+        {
+          "field": "step-2/87/gradient",
+          "max_abs": 0.0007179213571362197
+        },
+        {
+          "field": "step-2/90/gradient",
+          "max_abs": 0.00042681791819632053
+        },
+        {
+          "field": "step-2/91/gradient",
+          "max_abs": 0.0006246936973184347
+        },
+        {
+          "field": "step-2/94/gradient",
+          "max_abs": 0.0006553097628057003
+        },
+        {
+          "field": "step-2/98/gradient",
+          "max_abs": 0.000535621540620923
+        },
+        {
+          "field": "step-2/102/gradient",
+          "max_abs": 0.0007324641337618232
+        },
+        {
+          "field": "step-2/106/gradient",
+          "max_abs": 0.0008764492231421173
+        },
+        {
+          "field": "step-2/107/gradient",
+          "max_abs": 0.0004175463691353798
+        },
+        {
+          "field": "step-2/183/gradient",
+          "max_abs": 0.0006536913570016623
+        }
+      ],
+      "complete_three_step_gate_passed": false
+    },
+    {
+      "rank": 1,
+      "closed_fields": 1819,
+      "per_step_phase": {
+        "step-1/gradient": {
+          "fields": 199,
+          "failed": 0,
+          "SHA_different": 1,
+          "max_abs": 1.1996398825431243e-06
+        },
+        "step-1/updated_parameter": {
+          "fields": 199,
+          "failed": 0,
+          "SHA_different": 1,
+          "max_abs": 3.0517578125e-05
+        },
+        "step-1/master_param": {
+          "fields": 199,
+          "failed": 0,
+          "SHA_different": 1,
+          "max_abs": 1.6383826732635498e-05
+        },
+        "step-1/exp_avg": {
+          "fields": 199,
+          "failed": 0,
+          "SHA_different": 1,
+          "max_abs": 1.1996417015325278e-07
+        },
+        "step-1/exp_avg_sq": {
+          "fields": 199,
+          "failed": 0,
+          "SHA_different": 1,
+          "max_abs": 7.57360840708543e-12
+        },
+        "step-1/step": {
+          "fields": 199,
+          "failed": 0,
+          "SHA_different": 0,
+          "max_abs": 0.0
+        },
+        "step-1/lm loss": {
+          "fields": 1,
+          "failed": 0,
+          "SHA_different": 0,
+          "max_abs": 0.0
+        },
+        "step-2/gradient": {
+          "fields": 199,
+          "failed": 18,
+          "SHA_different": 199,
+          "max_abs": 0.0013362369500100613
+        },
+        "step-2/updated_parameter": {
+          "fields": 85,
+          "failed": 0,
+          "SHA_different": 85,
+          "max_abs": 3.0517578125e-05
+        },
+        "step-2/master_param": {
+          "fields": 85,
+          "failed": 0,
+          "SHA_different": 85,
+          "max_abs": 1.703668385744095e-05
+        },
+        "step-2/exp_avg": {
+          "fields": 85,
+          "failed": 0,
+          "SHA_different": 85,
+          "max_abs": 7.956300396472216e-05
+        },
+        "step-2/exp_avg_sq": {
+          "fields": 85,
+          "failed": 0,
+          "SHA_different": 85,
+          "max_abs": 5.046128990215948e-07
+        },
+        "step-2/step": {
+          "fields": 85,
+          "failed": 0,
+          "SHA_different": 0,
+          "max_abs": 0.0
+        }
+      },
+      "failed_fields": [
+        {
+          "field": "step-2/35/gradient",
+          "max_abs": 0.0003128617536276579
+        },
+        {
+          "field": "step-2/43/gradient",
+          "max_abs": 0.00035820365883409977
+        },
+        {
+          "field": "step-2/47/gradient",
+          "max_abs": 0.0003736679209396243
+        },
+        {
+          "field": "step-2/51/gradient",
+          "max_abs": 0.00045449123717844486
+        },
+        {
+          "field": "step-2/55/gradient",
+          "max_abs": 0.0003031713713426143
+        },
+        {
+          "field": "step-2/63/gradient",
+          "max_abs": 0.0005680056056007743
+        },
+        {
+          "field": "step-2/67/gradient",
+          "max_abs": 0.0003699129447340965
+        },
+        {
+          "field": "step-2/74/gradient",
+          "max_abs": 0.0007956298068165779
+        },
+        {
+          "field": "step-2/83/gradient",
+          "max_abs": 0.00030204118229448795
+        },
+        {
+          "field": "step-2/86/gradient",
+          "max_abs": 0.0006420603021979332
+        },
+        {
+          "field": "step-2/90/gradient",
+          "max_abs": 0.00038238835986703634
+        },
+        {
+          "field": "step-2/94/gradient",
+          "max_abs": 0.0005819958169013262
+        },
+        {
+          "field": "step-2/95/gradient",
+          "max_abs": 0.00034148678241763264
+        },
+        {
+          "field": "step-2/98/gradient",
+          "max_abs": 0.0005733107682317495
+        },
+        {
+          "field": "step-2/102/gradient",
+          "max_abs": 0.0013362369500100613
+        },
+        {
+          "field": "step-2/106/gradient",
+          "max_abs": 0.0009331400506198406
+        },
+        {
+          "field": "step-2/107/gradient",
+          "max_abs": 0.0003070463426411152
+        },
+        {
+          "field": "step-2/183/gradient",
+          "max_abs": 0.0006536913570016623
+        }
+      ],
+      "complete_three_step_gate_passed": false
+    }
+  ],
+  "native_full_case_exit0": false,
+  "control_optimized_not_started": true,
+  "native_against_accepted_prior_reference_passed": false,
+  "three_arm_numeric_SFT_accepted": false,
+  "native_resume_accepted": false,
+  "long_loss_accepted": false,
+  "formal_performance_accepted": false,
+  "max_points": 0,
+  "deadline_epoch": 1793109373,
+  "epoch": 1793091974.8066723
+}

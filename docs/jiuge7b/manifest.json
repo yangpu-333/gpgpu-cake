@@ -1,0 +1,57 @@
+{
+  "schema": "jiuge7b-public-report-evidence-v1",
+  "date": "2026-10-27",
+  "files": [
+    {
+      "id": "cpt-formal",
+      "source": "results/pinning-driver-20261016-05/formal-independent-review.json",
+      "published_path": "docs/jiuge7b/evidence/cpt-formal.json",
+      "SHA256": "b27f39d0e9ce7c4bcb268c5f4697fd85f11beb5b2566d9d41b0cbf8735b5c973",
+      "bytes": 8284
+    },
+    {
+      "id": "sft-formal",
+      "source": "results/sft-pinning-independent-review-20261020-continuation-v2.json",
+      "published_path": "docs/jiuge7b/evidence/sft-formal.json",
+      "SHA256": "0f2de8dd4c270422c7244044c97d96507a9ba24a67df9ab15760a7411b146495",
+      "bytes": 8506
+    },
+    {
+      "id": "bi-correctness",
+      "source": "results/datathinking-short-loop-correctness-independent-review-20261026-05.json",
+      "published_path": "docs/jiuge7b/evidence/bi-correctness.json",
+      "SHA256": "3c19a695ede3a6bf8596a948915dee7c64484fd5633211fac6dd5864f60763de",
+      "bytes": 7669
+    },
+    {
+      "id": "bi-trace",
+      "source": "results/datathinking-ssh-20261025-01/NUMA-deliverable-trace-bottleneck-summary-20261027-59.json",
+      "published_path": "docs/jiuge7b/evidence/bi-trace.json",
+      "SHA256": "04080c4ebfdd5fc85dc716fa4ac119c1abc0ed1ccc16de808016ded2a45cf652",
+      "bytes": 7760
+    },
+    {
+      "id": "bi-numeric-failure",
+      "source": "results/datathinking-NUMA-followup-failed-native-independent-review-20261027-01.json",
+      "published_path": "docs/jiuge7b/evidence/bi-numeric-failure.json",
+      "SHA256": "212e20a5baa51d6bd6a7f1c6d21fa098a8fd41ad4a12c57ef8eeab35f4f6cbbe",
+      "bytes": 10197
+    },
+    {
+      "id": "operator-validation",
+      "source": "results/resource-minimal-attention-independent-review-20261027.json",
+      "published_path": "docs/jiuge7b/evidence/operator-validation.json",
+      "SHA256": "5be93d3c8979a35b39dc69b6384bb89791e94fc2d81f62945aef41d451e17b0e",
+      "bytes": 3065
+    },
+    {
+      "id": "peer-review",
+      "source": "results/peer-reference-review-20261027.json",
+      "published_path": "docs/jiuge7b/evidence/peer-review.json",
+      "SHA256": "b1386e6084efe04e57081d3cb353687b00ef601dbb3af9b7e420fa1171da1587",
+      "bytes": 15049
+    }
+  ],
+  "original_evidence_byte_identical": true,
+  "raw_large_files_published": false
+}

@@ -1,0 +1,409 @@
+{
+  "scope": "offline independent audit of supplied colleague evidence; no model training or GPU work",
+  "source_authorship": "third-party supplied work; not claimed as our experiment",
+  "four_SFT_rank_traces_recomputed": [
+    {
+      "model": "7B",
+      "rank": 0,
+      "raw_trace_SHA256": "f6d850723c264c72c89ce7c3515b1b238456dc09fe35ad5c5b7e29da24a45935",
+      "analyzer_SHA256": "47fc7e21a243d0a02df3c7011fa42825b3fbb01380fd914eaab9e555db18863f",
+      "selected_step_names": [
+        "ProfilerStep#4",
+        "ProfilerStep#5",
+        "ProfilerStep#6",
+        "ProfilerStep#7"
+      ],
+      "published_kernel_sum_us": 17608057.323999964,
+      "recomputed_kernel_sum_us": 17609869.417,
+      "selected_kernel_count": 25468,
+      "raw_kernel_count": 25468,
+      "selection_status_counts": {
+        "correlated": 29664
+      },
+      "attribution_coverage_percent": 89.77252366072992,
+      "top_ops": [
+        {
+          "op": "aten::mm",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 1580,
+          "device_self_us": 4931079.515000006,
+          "selected_kernel_duration_share_pct": 28.001794892582797
+        },
+        {
+          "op": "aten::copy_",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 4196,
+          "device_self_us": 2480272.3809999856,
+          "selected_kernel_duration_share_pct": 14.08455862032464
+        },
+        {
+          "op": "aten::mul",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 6344,
+          "device_self_us": 1615954.9659999756,
+          "selected_kernel_duration_share_pct": 9.176416518114467
+        },
+        {
+          "op": "aten::masked_fill_",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 356,
+          "device_self_us": 1250923.1749999986,
+          "selected_kernel_duration_share_pct": 7.103534645137106
+        },
+        {
+          "op": "aten::bmm",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 672,
+          "device_self_us": 835429.4930000001,
+          "selected_kernel_duration_share_pct": 4.744098171412353
+        },
+        {
+          "op": "aten::_softmax",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 224,
+          "device_self_us": 725832.0079999999,
+          "selected_kernel_duration_share_pct": 4.1217341867356785
+        },
+        {
+          "op": "aten::div",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 568,
+          "device_self_us": 604240.5269999999,
+          "selected_kernel_duration_share_pct": 3.43126069076177
+        }
+      ],
+      "devices": [
+        {
+          "device": "0",
+          "window_start_us": 1560521239508.596,
+          "window_end_us": 1560557083048.4111,
+          "host_step_envelope_us": 35843539.81518555,
+          "wall_window_with_device_completion_us": 35843539.81518555,
+          "device_completion_tail_us": 0.0,
+          "kernel_duration_sum_us": 17609869.417,
+          "activity_duration_sum_us": 25512270.833,
+          "activity_union_us": 25512232.75366211,
+          "activity_window_coverage_pct": 71.17665522213169,
+          "recognized_compute_union_us": 15430116.25415039,
+          "communication_union_us": 1801045.2219238281,
+          "recognized_compute_communication_overlap_us": 0.0,
+          "communication_not_overlapped_with_recognized_compute_us": 1801045.2219238281,
+          "unknown_kernel_union_us": 378707.67236328125
+        }
+      ]
+    },
+    {
+      "model": "7B",
+      "rank": 1,
+      "raw_trace_SHA256": "e194af76a4c0ff4d5c5476080c6eb7491b93691716ff8f9d9e20b596fa8b9c0b",
+      "analyzer_SHA256": "47fc7e21a243d0a02df3c7011fa42825b3fbb01380fd914eaab9e555db18863f",
+      "selected_step_names": [
+        "ProfilerStep#4",
+        "ProfilerStep#5",
+        "ProfilerStep#6",
+        "ProfilerStep#7"
+      ],
+      "published_kernel_sum_us": 17213806.33399996,
+      "recomputed_kernel_sum_us": 17213863.843,
+      "selected_kernel_count": 25236,
+      "raw_kernel_count": 25236,
+      "selection_status_counts": {
+        "correlated": 29196
+      },
+      "attribution_coverage_percent": 91.8122987618891,
+      "top_ops": [
+        {
+          "op": "aten::mm",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 1580,
+          "device_self_us": 4931321.673999998,
+          "selected_kernel_duration_share_pct": 28.647383986398356
+        },
+        {
+          "op": "aten::copy_",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 4196,
+          "device_self_us": 2479230.9189999867,
+          "selected_kernel_duration_share_pct": 14.402524277012704
+        },
+        {
+          "op": "aten::mul",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 6344,
+          "device_self_us": 1616546.726999978,
+          "selected_kernel_duration_share_pct": 9.390958019325483
+        },
+        {
+          "op": "aten::masked_fill_",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 356,
+          "device_self_us": 1250908.3299999994,
+          "selected_kernel_duration_share_pct": 7.266865483594957
+        },
+        {
+          "op": "aten::bmm",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 672,
+          "device_self_us": 836198.6469999993,
+          "selected_kernel_duration_share_pct": 4.857704549231919
+        },
+        {
+          "op": "aten::_softmax",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 224,
+          "device_self_us": 725884.4210000001,
+          "selected_kernel_duration_share_pct": 4.216859315377822
+        },
+        {
+          "op": "aten::div",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 568,
+          "device_self_us": 604162.3180000003,
+          "selected_kernel_duration_share_pct": 3.5097426325100294
+        }
+      ],
+      "devices": [
+        {
+          "device": "1",
+          "window_start_us": 1560521239610.146,
+          "window_end_us": 1560557083222.593,
+          "host_step_envelope_us": 35843612.447021484,
+          "wall_window_with_device_completion_us": 35843612.447021484,
+          "device_completion_tail_us": 0.0,
+          "kernel_duration_sum_us": 17213863.843,
+          "activity_duration_sum_us": 25117532.789,
+          "activity_union_us": 25117492.545166016,
+          "activity_window_coverage_pct": 70.07522632460896,
+          "recognized_compute_union_us": 15426357.74243164,
+          "communication_union_us": 1409419.7348632812,
+          "recognized_compute_communication_overlap_us": 0.0,
+          "communication_not_overlapped_with_recognized_compute_us": 1409419.7348632812,
+          "unknown_kernel_union_us": 378086.10498046875
+        }
+      ]
+    },
+    {
+      "model": "8B",
+      "rank": 0,
+      "raw_trace_SHA256": "39fe3f5e7886171d2eb01ade45e8fb3da68a948e0d6f03712411a97588fbd6a5",
+      "analyzer_SHA256": "47fc7e21a243d0a02df3c7011fa42825b3fbb01380fd914eaab9e555db18863f",
+      "selected_step_names": [
+        "ProfilerStep#4",
+        "ProfilerStep#5",
+        "ProfilerStep#6",
+        "ProfilerStep#7"
+      ],
+      "published_kernel_sum_us": 21401672.148999963,
+      "recomputed_kernel_sum_us": 21403994.006,
+      "selected_kernel_count": 30412,
+      "raw_kernel_count": 30412,
+      "selection_status_counts": {
+        "correlated": 34656
+      },
+      "attribution_coverage_percent": 87.29652586223939,
+      "top_ops": [
+        {
+          "op": "aten::mm",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 2060,
+          "device_self_us": 5606448.7289999975,
+          "selected_kernel_duration_share_pct": 26.193469907664845
+        },
+        {
+          "op": "aten::copy_",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 5684,
+          "device_self_us": 3319326.08200001,
+          "selected_kernel_duration_share_pct": 15.507975198785475
+        },
+        {
+          "op": "aten::mul",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 7888,
+          "device_self_us": 1976212.8599999542,
+          "selected_kernel_duration_share_pct": 9.232916340034384
+        },
+        {
+          "op": "aten::masked_fill_",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 404,
+          "device_self_us": 1635523.9109999973,
+          "selected_kernel_duration_share_pct": 7.641208975023655
+        },
+        {
+          "op": "aten::bmm",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 768,
+          "device_self_us": 1088172.0789999997,
+          "selected_kernel_duration_share_pct": 5.083967406713726
+        },
+        {
+          "op": "aten::_softmax",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 256,
+          "device_self_us": 947381.3989999995,
+          "selected_kernel_duration_share_pct": 4.4261897977285365
+        },
+        {
+          "op": "aten::div",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 656,
+          "device_self_us": 785784.4930000006,
+          "selected_kernel_duration_share_pct": 3.6712049759485463
+        }
+      ],
+      "devices": [
+        {
+          "device": "0",
+          "window_start_us": 1563806409578.872,
+          "window_end_us": 1563846662517.842,
+          "host_step_envelope_us": 40252938.9699707,
+          "wall_window_with_device_completion_us": 40252938.9699707,
+          "device_completion_tail_us": 0.0,
+          "kernel_duration_sum_us": 21403994.006,
+          "activity_duration_sum_us": 30016027.212,
+          "activity_union_us": 30015985.205810547,
+          "activity_window_coverage_pct": 74.56843145839096,
+          "recognized_compute_union_us": 18419535.583007812,
+          "communication_union_us": 2719050.8359375,
+          "recognized_compute_communication_overlap_us": 0.0,
+          "communication_not_overlapped_with_recognized_compute_us": 2719050.8359375,
+          "unknown_kernel_union_us": 265407.2666015625
+        }
+      ]
+    },
+    {
+      "model": "8B",
+      "rank": 1,
+      "raw_trace_SHA256": "8565f78459ad2e15fc1eae153c4264a75d2506169dae86c84fae29cc42ce830e",
+      "analyzer_SHA256": "47fc7e21a243d0a02df3c7011fa42825b3fbb01380fd914eaab9e555db18863f",
+      "selected_step_names": [
+        "ProfilerStep#4",
+        "ProfilerStep#5",
+        "ProfilerStep#6",
+        "ProfilerStep#7"
+      ],
+      "published_kernel_sum_us": 20236372.03399996,
+      "recomputed_kernel_sum_us": 20236431.311,
+      "selected_kernel_count": 30148,
+      "raw_kernel_count": 30148,
+      "selection_status_counts": {
+        "correlated": 34124
+      },
+      "attribution_coverage_percent": 92.31183603427972,
+      "top_ops": [
+        {
+          "op": "aten::mm",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 2060,
+          "device_self_us": 5606624.800000004,
+          "selected_kernel_duration_share_pct": 27.705600428433186
+        },
+        {
+          "op": "aten::copy_",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 5684,
+          "device_self_us": 3317624.7650000043,
+          "selected_kernel_duration_share_pct": 16.39431732805887
+        },
+        {
+          "op": "aten::mul",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 7888,
+          "device_self_us": 1977868.0119999566,
+          "selected_kernel_duration_share_pct": 9.773798460822677
+        },
+        {
+          "op": "aten::masked_fill_",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 404,
+          "device_self_us": 1635472.1099999992,
+          "selected_kernel_duration_share_pct": 8.08182077593394
+        },
+        {
+          "op": "aten::bmm",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 768,
+          "device_self_us": 1088246.7479999992,
+          "selected_kernel_duration_share_pct": 5.377661363683509
+        },
+        {
+          "op": "aten::_softmax",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 256,
+          "device_self_us": 947343.7899999998,
+          "selected_kernel_duration_share_pct": 4.681377736226882
+        },
+        {
+          "op": "aten::div",
+          "cpu_event_category": "cpu_op",
+          "kernel_count": 656,
+          "device_self_us": 786013.4159999993,
+          "selected_kernel_duration_share_pct": 3.8841503421245163
+        }
+      ],
+      "devices": [
+        {
+          "device": "1",
+          "window_start_us": 1563806409803.324,
+          "window_end_us": 1563846662869.167,
+          "host_step_envelope_us": 40253065.84301758,
+          "wall_window_with_device_completion_us": 40253065.84301758,
+          "device_completion_tail_us": 0.0,
+          "kernel_duration_sum_us": 20236431.311,
+          "activity_duration_sum_us": 28727039.21,
+          "activity_union_us": 28726996.739257812,
+          "activity_window_coverage_pct": 71.36598452224699,
+          "recognized_compute_union_us": 18415659.967773438,
+          "communication_union_us": 1555810.0095214844,
+          "recognized_compute_communication_overlap_us": 0.0,
+          "communication_not_overlapped_with_recognized_compute_us": 1555810.0095214844,
+          "unknown_kernel_union_us": 264961.00537109375
+        }
+      ]
+    }
+  ],
+  "artifact_manifest_checks": [
+    {
+      "model": "7B",
+      "checked": 81,
+      "manifest_entries": 81,
+      "failures": []
+    },
+    {
+      "model": "8B",
+      "checked": 91,
+      "manifest_entries": 91,
+      "failures": []
+    }
+  ],
+  "provided_4B_analyzer_unit_tests_observed": {
+    "tests": 9,
+    "passed": 9,
+    "source_SHA256": "3cf77d3c078e00416ded40e092630692e51892f809de9c47aa18bcd79b8cf7a7"
+  },
+  "formal_speedup_accepted": false,
+  "epoch": 1793108137.140385,
+  "max_kernel_sum_difference_percent": 0.010848951352366742,
+  "scope_difference": "Recomputation selects runtime launches enclosed by ProfilerStep; supplied 7B/8B analyzer selects device starts in explicit train_step envelope. Small boundary differences are retained, not called exact reproduction.",
+  "source_manifest_items_verified": 172,
+  "installed_ixsys_proof": "results/peer-ixsys-capability-20261027.json",
+  "screenshotted_shapes_match_8B_not_7B": true,
+  "next_GPU_target": {
+    "task": "7B attention mask/scale/softmax semantic-preserving fusion",
+    "shapes": [
+      "[1,14,2048,2048]",
+      "[1,14,4096,4096]"
+    ],
+    "status": "proposal only; no kernel or training launched",
+    "preserve": [
+      "mask semantics",
+      "cast boundaries",
+      "scale rounding",
+      "backward",
+      "recomputation",
+      "original tolerances"
+    ]
+  },
+  "no_old_reference_gate_removed": true
+}

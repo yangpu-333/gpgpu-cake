@@ -1,0 +1,99 @@
+{
+  "passed_resource_and_isolated_operator_validation": true,
+  "full_model_training_accepted": false,
+  "TP2_communication_validated": false,
+  "optimization_speedup_accepted": false,
+  "scope": "synthetic-input actual7B attention shapes; sampled CPU float64 rows, not complete tensor/full model gate",
+  "closed_cases": 8,
+  "closed_GPU_traces": 8,
+  "raw_traces_remain_DT": true,
+  "double_end_key_SHA256": "ef8f6166ec326d6b2fa8423c6f2170df56ca95723fc5d7ae4bea07346c29858c",
+  "key_evidence": "results/datathinking-ssh-20261025-01/resource-minimal-attention-closed-keys-20261027-02.json",
+  "source_end_SHA_equal": true,
+  "all_own_probe_processes_ended": true,
+  "post_GPU_idle": true,
+  "summary": [
+    {
+      "device": 0,
+      "S": 2048,
+      "dtype": "torch.bfloat16",
+      "median_ms": 11.540129780769348,
+      "kernels": 13,
+      "forward_error": 1.807562036246907e-10,
+      "backward_error": 0.0,
+      "max_GPU_reserved_GiB": 1.060546875
+    },
+    {
+      "device": 0,
+      "S": 2048,
+      "dtype": "torch.float32",
+      "median_ms": 9.846318513154984,
+      "kernels": 9,
+      "forward_error": 2.466347000761038e-10,
+      "backward_error": 5.820766091346741e-11,
+      "max_GPU_reserved_GiB": 1.279296875
+    },
+    {
+      "device": 0,
+      "S": 4096,
+      "dtype": "torch.bfloat16",
+      "median_ms": 44.397871010005474,
+      "kernels": 13,
+      "forward_error": 8.982778724412471e-11,
+      "backward_error": 0.0,
+      "max_GPU_reserved_GiB": 4.189453125
+    },
+    {
+      "device": 0,
+      "S": 4096,
+      "dtype": "torch.float32",
+      "median_ms": 36.78358066827059,
+      "kernels": 9,
+      "forward_error": 1.2461759846694315e-10,
+      "backward_error": 2.9103830456733704e-11,
+      "max_GPU_reserved_GiB": 5.064453125
+    },
+    {
+      "device": 1,
+      "S": 2048,
+      "dtype": "torch.bfloat16",
+      "median_ms": 11.5959532558918,
+      "kernels": 13,
+      "forward_error": 1.807562036246907e-10,
+      "backward_error": 0.0,
+      "max_GPU_reserved_GiB": 1.060546875
+    },
+    {
+      "device": 1,
+      "S": 2048,
+      "dtype": "torch.float32",
+      "median_ms": 9.596055373549461,
+      "kernels": 9,
+      "forward_error": 2.466347000761038e-10,
+      "backward_error": 5.820766091346741e-11,
+      "max_GPU_reserved_GiB": 1.279296875
+    },
+    {
+      "device": 1,
+      "S": 4096,
+      "dtype": "torch.bfloat16",
+      "median_ms": 44.655460864305496,
+      "kernels": 13,
+      "forward_error": 8.982778724412471e-11,
+      "backward_error": 0.0,
+      "max_GPU_reserved_GiB": 4.189453125
+    },
+    {
+      "device": 1,
+      "S": 4096,
+      "dtype": "torch.float32",
+      "median_ms": 36.57521586865187,
+      "kernels": 9,
+      "forward_error": 1.2461759846694315e-10,
+      "backward_error": 2.9103830456733704e-11,
+      "max_GPU_reserved_GiB": 5.064453125
+    }
+  ],
+  "minimal_validation_elapsed_seconds": 20.970463037490845,
+  "private_source_guard_byte_identical_to_prior_control": true
+}

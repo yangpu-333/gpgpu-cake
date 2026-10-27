@@ -1,0 +1,242 @@
+{
+  "passed": true,
+  "utc": "2026-10-26T14:05:38.646955+00:00",
+  "rows": [
+    {
+      "arm": "native",
+      "rank": 0,
+      "complete_fields": 3585,
+      "max_abs": 0.0,
+      "manifest_SHA256_matches_remote_raw_gate": true
+    },
+    {
+      "arm": "native",
+      "rank": 1,
+      "complete_fields": 3585,
+      "max_abs": 0.0,
+      "manifest_SHA256_matches_remote_raw_gate": true
+    },
+    {
+      "arm": "control",
+      "rank": 0,
+      "complete_fields": 3585,
+      "max_abs": 0.0,
+      "manifest_SHA256_matches_remote_raw_gate": true
+    },
+    {
+      "arm": "control",
+      "rank": 1,
+      "complete_fields": 3585,
+      "max_abs": 0.0,
+      "manifest_SHA256_matches_remote_raw_gate": true
+    },
+    {
+      "arm": "optimized",
+      "rank": 0,
+      "complete_fields": 3585,
+      "max_abs": 0.0,
+      "manifest_SHA256_matches_remote_raw_gate": true
+    },
+    {
+      "arm": "optimized",
+      "rank": 1,
+      "complete_fields": 3585,
+      "max_abs": 0.0,
+      "manifest_SHA256_matches_remote_raw_gate": true
+    },
+    {
+      "arm": "resume-restored",
+      "rank": 0,
+      "complete_fields": 995,
+      "max_abs": 0.0,
+      "manifest_SHA256_matches_remote_raw_gate": true
+    },
+    {
+      "arm": "resume-restored",
+      "rank": 1,
+      "complete_fields": 995,
+      "max_abs": 0.0,
+      "manifest_SHA256_matches_remote_raw_gate": true
+    },
+    {
+      "arm": "resume-next-step",
+      "rank": 0,
+      "complete_fields": 1195,
+      "max_abs": 0.0,
+      "manifest_SHA256_matches_remote_raw_gate": true
+    },
+    {
+      "arm": "resume-next-step",
+      "rank": 1,
+      "complete_fields": 1195,
+      "max_abs": 0.0,
+      "manifest_SHA256_matches_remote_raw_gate": true
+    }
+  ],
+  "source_reconstruction": [
+    {
+      "arm": "native",
+      "source_reconstructed_batches": 3,
+      "both_ranks": true
+    },
+    {
+      "arm": "control",
+      "source_reconstructed_batches": 3,
+      "both_ranks": true
+    },
+    {
+      "arm": "optimized",
+      "source_reconstructed_batches": 3,
+      "both_ranks": true
+    }
+  ],
+  "resume_policy_recomputed_locally": {
+    "passed": true,
+    "GPU_used": false,
+    "ranks": [
+      {
+        "rank": 0,
+        "native_initialization_plus_real_update": 2,
+        "actual_training_updates": 1,
+        "real_optimizer_iteration": 3,
+        "initialization_moment_events": 398,
+        "resume_copy_events": 398,
+        "final_moment_objects": 398,
+        "final_sampled_moment_pages_local": true,
+        "resume_max_abs": 0.0,
+        "passed": true
+      },
+      {
+        "rank": 1,
+        "native_initialization_plus_real_update": 2,
+        "actual_training_updates": 1,
+        "real_optimizer_iteration": 3,
+        "initialization_moment_events": 398,
+        "resume_copy_events": 398,
+        "final_moment_objects": 398,
+        "final_sampled_moment_pages_local": true,
+        "resume_max_abs": 0.0,
+        "passed": true
+      }
+    ],
+    "negative_gate_regressions_rejected": 12,
+    "native_CoreX_no_dist_API_used_without_redirect": true,
+    "real_training_updates_per_resume": 1,
+    "optimizer_iteration": 3,
+    "formal_performance_passed": false
+  },
+  "full_raw_SHA_verified_on_DataThinking": true,
+  "raw_chunk_count": 18603,
+  "local_review_scope": "independent key/coverage/policy/source/SHA recomputation; tensor originals remain Data Thinking",
+  "full_raw_local_copy_verified": false,
+  "raw_tensors_downloaded": false,
+  "full_model_correctness_and_native_resume_passed": true,
+  "formal_performance_passed": false,
+  "key_review_source_parent_SHA256": "d2116ab8cc6fef112871eeec5ef0919109f9ed27941f7d5e0bd59f67be79963d",
+  "key_review_derived_SHA256": "c2a761cd42281dba5b24e70ec8bcb422744c1ee7c8fdabfe244d9c64a34efbdb",
+  "same_window_raw_reuse_locally_recomputed": true,
+  "raw_reuse_regression_negative_cases": 12,
+  "original_resume_archive_AST_unchanged": true,
+  "cross_Python_AST_serialization_proof": {
+    "passed": true,
+    "same_original_verifier_SHA256": "079624580909b92008a382ec4ca69c153d4e575cb150faffc3d13d53e43cece8",
+    "Python313_compact_AST_SHA256": "e0df4e1b5b3f819d3fac5f64625d84db053240b0c89cb3f4c35873b0e961bf06",
+    "Python312_expanded_AST_SHA256": "cc6493201290e222dfedd443dd0f1a365cbf1b911eeb18f529b827912eea6d26",
+    "only_empty_AST_field_serialization_differs": true
+  },
+  "corrupt_AST_proof_negative_cases_rejected": 2,
+  "versioned_local_review_SHA256": "21a9ba9bc5bf2ac70b366c0814da73a4ecfd463eb568083d931c392cfcbc21ba",
+  "host_cache_actual_7B_reclamation": [
+    {
+      "rank": 0,
+      "record_SHA256": "4561a99cd1fc0acde922335bc3be9082e273bf2ac93bb487b4d84cd5051735ca",
+      "records": [
+        {
+          "label": "before-HDO-call-0",
+          "reserved_before": 56643584011,
+          "reserved_after": 28321792000,
+          "RSS_before": 58613854208,
+          "RSS_after": 30199865344
+        },
+        {
+          "label": "resume-restored:after",
+          "reserved_before": 113287168009,
+          "reserved_after": 56643584000,
+          "RSS_before": 145886392320,
+          "RSS_after": 89218527232
+        },
+        {
+          "label": "resume-next-step:before",
+          "reserved_before": 56647835660,
+          "reserved_after": 56647835648,
+          "RSS_before": 89754091520,
+          "RSS_after": 89691160576
+        },
+        {
+          "label": "before-HDO-call-1",
+          "reserved_before": 56647835648,
+          "reserved_after": 56647835648,
+          "RSS_before": 89691160576,
+          "RSS_after": 89691160576
+        },
+        {
+          "label": "resume-next-step:after",
+          "reserved_before": 84969627648,
+          "reserved_after": 56647835648,
+          "RSS_before": 118072897536,
+          "RSS_after": 89693855744
+        }
+      ]
+    },
+    {
+      "rank": 1,
+      "record_SHA256": "83aa18bbc567b04143c5943844837391889839bc48a68c0e05faaae8a6fc37fd",
+      "records": [
+        {
+          "label": "before-HDO-call-0",
+          "reserved_before": 56643584011,
+          "reserved_after": 28321792000,
+          "RSS_before": 58612621312,
+          "RSS_after": 30198616064
+        },
+        {
+          "label": "resume-restored:after",
+          "reserved_before": 113287168009,
+          "reserved_after": 56643584000,
+          "RSS_before": 145885093888,
+          "RSS_after": 89217196032
+        },
+        {
+          "label": "resume-next-step:before",
+          "reserved_before": 56643584012,
+          "reserved_after": 56643584000,
+          "RSS_before": 89722871808,
+          "RSS_after": 89658060800
+        },
+        {
+          "label": "before-HDO-call-1",
+          "reserved_before": 56643584000,
+          "reserved_after": 56643584000,
+          "RSS_before": 89658060800,
+          "RSS_after": 89658060800
+        },
+        {
+          "label": "resume-next-step:after",
+          "reserved_before": 84965376000,
+          "reserved_after": 56643584000,
+          "RSS_before": 118042738688,
+          "RSS_after": 89660956672
+        }
+      ]
+    }
+  ],
+  "host_cache_small_probe_and_original_guard_regressions_passed": true,
+  "bundle_SHA256": "fb77e04ff66f66964b3b4de2971ec5e5ae8d8687323bb6452e90d46c3b30a97c",
+  "key_zip_bytes": 5186022,
+  "key_file_count": 134,
+  "key_uncompressed_bytes": 31620664,
+  "max_points": 0,
+  "campaign_start_epoch": 1793005196,
+  "deadline_epoch": 1793026796,
+  "existing_key_bundle_reused_without_GPU_or_raw_verifier_rerun": true
+}
