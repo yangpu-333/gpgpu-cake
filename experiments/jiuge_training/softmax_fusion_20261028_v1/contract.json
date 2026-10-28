@@ -1,0 +1,51 @@
+{
+  "schema": "jiuge7b-isolated-scale-mask-softmax-fusion-contract-v1",
+  "user_instruction": "就按这个做，先把scale/mask/softmax前后向融合实现出来，在现有BI-V150上跑正确性和配对测速。有费用用抵扣券，不动他人、不放宽门禁，结果更新到GitHub报告。",
+  "task_start_UTC": "2026-10-28T01:35:02Z",
+  "absolute_deadline_epoch": 1793156702,
+  "safety_cap_scope": "task-local90minute GPU execution cap; no full model or earlier authorization extended",
+  "target_lengths": [
+    2048,
+    4096
+  ],
+  "target_shape": "[1,14,S,S]",
+  "dtypes": [
+    "bfloat16",
+    "float32"
+  ],
+  "intermediate_and_output_dtype": "float32",
+  "scale": 0.08838834764831843,
+  "mask_fill": -10000.0,
+  "supported_mask": "None means causal; explicit boolean mask broadcast to X; fully masked rows retain finite-fill uniform semantics",
+  "source_SHA256": {
+    "corex_process_guard_data.py": "a8f86db9e75eb353121c346011428400c4d4d1208e35a5d6c12ce48009dfd058",
+    "full_reference.py": "7043fab97c80736e68c4dd343956383964bdb4fef3a053b4bf4901ada8c3873e",
+    "fused_scale_mask_softmax.py": "093e3a90fc652b7652938ced212107ada5861bceaccbe8d8bdcc008b29e6cd58",
+    "fusion_worker.py": "4d702947378763a70cd32c5f64e58ea20ab6785cf38b3b3cc7ea281c22d33b40",
+    "supervise_fusion.py": "78fb06879af2025c40fc75dad5bd0f9a6263a2d1e6dd4951f7e6214c8f3b090d"
+  },
+  "seeds": [
+    63100,
+    63101,
+    63102
+  ],
+  "warmup_pairs": 5,
+  "paired_rounds": 15,
+  "measurement_order": "alternating ABBA and BAAB, baseline/candidate same inputs and GPU, no profiler in performance workers",
+  "full_correctness_targets": 24,
+  "full_boundary_cases": 76,
+  "negative_controls": 30,
+  "numeric_atol": 0.0003,
+  "numeric_rtol": 0.001,
+  "additional_relative_L2_limit_FP32": 1e-05,
+  "additional_relative_L2_limit_BF16_gradient": 0.001,
+  "original_tolerance_not_relaxed": true,
+  "trace_phase_after_all_primary_timing": true,
+  "confirmation_if_any_baseline_or_candidate_seed_mean_CV_ge": 0.1,
+  "operator_acceptance": "all target seed paired ratios >1.01 and everyABBAround faster; independent recomputation; full repeat if required; never full7B promotion",
+  "guard": "original144GiB RLIMIT_DATA/host8GiB, tighter8GiB own RSS, runtimeNUMA16GiB, initialNode0>=252689747968/Node1>=32GiB for isolated operator; full-modelNode1>=80GiB unchanged",
+  "cost_policy": "coupons preferred; no zero-charge gate",
+  "other_environment_tianshu_untouched": true,
+  "no_other_PID_stop": true,
+  "no_parallel_GPU": true
+}

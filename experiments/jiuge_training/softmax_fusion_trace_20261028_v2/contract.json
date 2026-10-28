@@ -1,0 +1,59 @@
+{
+  "schema": "jiuge7b-fusion-trace-accounting-v2",
+  "user_instruction": "\u5c31\u6309\u8fd9\u4e2a\u505a\uff0c\u5148\u628ascale/mask/softmax\u524d\u540e\u5411\u878d\u5408\u5b9e\u73b0\u51fa\u6765\uff0c\u5728\u73b0\u6709BI-V150\u4e0a\u8dd1\u6b63\u786e\u6027\u548c\u914d\u5bf9\u6d4b\u901f\u3002\u6709\u8d39\u7528\u7528\u62b5\u6263\u5238\uff0c\u4e0d\u52a8\u4ed6\u4eba\u3001\u4e0d\u653e\u5bbd\u95e8\u7981\uff0c\u7ed3\u679c\u66f4\u65b0\u5230GitHub\u62a5\u544a\u3002",
+  "task_start_UTC": "2026-10-28T01:35:02Z",
+  "absolute_deadline_epoch": 1793156702,
+  "safety_cap_scope": "task-local90minute GPU execution cap; no full model or earlier authorization extended",
+  "target_lengths": [
+    2048,
+    4096
+  ],
+  "target_shape": "[1,14,S,S]",
+  "dtypes": [
+    "bfloat16",
+    "float32"
+  ],
+  "intermediate_and_output_dtype": "float32",
+  "scale": 0.08838834764831843,
+  "mask_fill": -10000.0,
+  "supported_mask": "None means causal; explicit boolean mask broadcast to X; fully masked rows retain finite-fill uniform semantics",
+  "source_SHA256": {
+    "corex_process_guard_data.py": "a8f86db9e75eb353121c346011428400c4d4d1208e35a5d6c12ce48009dfd058",
+    "full_reference.py": "7043fab97c80736e68c4dd343956383964bdb4fef3a053b4bf4901ada8c3873e",
+    "fused_scale_mask_softmax.py": "093e3a90fc652b7652938ced212107ada5861bceaccbe8d8bdcc008b29e6cd58",
+    "fusion_worker.py": "b9f4c61f06a3a76566eae5adbf686f2f55f8b5b856e69e6a94502695aa7050f1",
+    "supervise_fusion.py": "628bf8c4e3c691adc4a92370cb5868835d4574fbeb064791b2475ea2fc111414"
+  },
+  "seeds": [
+    63100,
+    63101,
+    63102
+  ],
+  "warmup_pairs": 5,
+  "paired_rounds": 15,
+  "measurement_order": "alternating ABBA and BAAB, baseline/candidate same inputs and GPU, no profiler in performance workers",
+  "full_correctness_targets": 24,
+  "full_boundary_cases": 76,
+  "negative_controls": 30,
+  "numeric_atol": 0.0003,
+  "numeric_rtol": 0.001,
+  "additional_relative_L2_limit_FP32": 1e-05,
+  "additional_relative_L2_limit_BF16_gradient": 0.001,
+  "original_tolerance_not_relaxed": true,
+  "trace_phase_after_all_primary_timing": true,
+  "confirmation_if_any_baseline_or_candidate_seed_mean_CV_ge": 0.1,
+  "operator_acceptance": "all target seed paired ratios >1.01 and everyABBAround faster; independent recomputation; full repeat if required; never full7B promotion",
+  "guard": "original144GiB RLIMIT_DATA/host8GiB, tighter8GiB own RSS, runtimeNUMA16GiB, initialNode0>=252689747968/Node1>=32GiB for isolated operator; full-modelNode1>=80GiB unchanged",
+  "cost_policy": "coupons preferred; no zero-charge gate",
+  "other_environment_tianshu_untouched": true,
+  "no_other_PID_stop": true,
+  "no_parallel_GPU": true,
+  "trace_accounting": {
+    "original_total_two_launch_assertion_failed_and_preserved": true,
+    "strict_expected_total": 4,
+    "fused_math": 2,
+    "protected_allocation_fills": 2,
+    "math_and_numeric_and_resource_gates_unchanged": true,
+    "no_correctness_or_performance_rerun": true
+  }
+}

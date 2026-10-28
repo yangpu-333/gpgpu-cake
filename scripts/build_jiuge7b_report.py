@@ -15,8 +15,10 @@ SOURCES=[
  ('bi-trace','results/datathinking-ssh-20261025-01/NUMA-deliverable-trace-bottleneck-summary-20261027-59.json'),
  ('bi-numeric-failure','results/datathinking-NUMA-followup-failed-native-independent-review-20261027-01.json'),
  ('operator-validation','results/resource-minimal-attention-independent-review-20261027.json'),
- ('peer-review','results/peer-reference-review-20261027.json')]
+ ('peer-review','results/peer-reference-review-20261027.json'),
+ ('softmax-fusion','results/softmax-fusion-public-review-20261028.json')]
 ANCHORS={'cpt-formal':'appendix-cpt','sft-formal':'appendix-sft','bi-correctness':'appendix-bi','bi-trace':'appendix-trace','bi-numeric-failure':'appendix-failures','operator-validation':'appendix-operator','peer-review':'appendix-peer'}
+ANCHORS['softmax-fusion']='appendix-fusion'
 EVID.mkdir(parents=True,exist_ok=True)
 (EVID/'.gitattributes').write_text('*.json -text\n',encoding='utf8')
 data={};manifest=[]
@@ -36,16 +38,16 @@ brief=(BASE/'BRIEF.md').read_text(encoding='utf8')
 # Keep the original compact BRIEF text, replacing machine-local links with anchors.
 brief=brief[:brief.rfind('\n[算子基准复核]')].rstrip()
 intro='<a id="report-top"></a>\n\n'+brief
-intro+='\n\n[算子基准复核](#appendix-operator) · [详细计划与验收标准](#appendix-plan) · [CPT正式结果](#appendix-cpt) · [SFT正式结果](#appendix-sft)\n\n[下载离线单文件HTML](docs/jiuge7b/report.html) · [其他项目历史概览](docs/project-overview-20261027.md)\n'
+intro+='\n\n[融合实测与代码](#appendix-fusion) · [算子基准复核](#appendix-operator) · [详细计划与验收标准](#appendix-plan) · [CPT正式结果](#appendix-cpt) · [SFT正式结果](#appendix-sft)\n\n[下载离线单文件HTML](docs/jiuge7b/report.html) · [其他项目历史概览](docs/project-overview-20261027.md)\n'
 parts=[intro,'\n---\n\n## 完整内容与复核证据\n\n以下内容均在本文件内。表格用于阅读，折叠区保留完整关键复核JSON；也可从GitHub下载对应JSON。\n']
 def section(anchor,title,text):parts.append(f'\n<a id="{anchor}"></a>\n\n## {title}\n\n{text.rstrip()}\n')
 def evidence(name):
- return '\n[独立JSON文件](docs/jiuge7b/evidence/'+name+'.json)\n\n<details>\n<summary>展开完整复核数据</summary>\n\n```json\n'+json.dumps(data[name],ensure_ascii=False,indent=2)+'\n```\n\n</details>\n'
+ return '\n[独立JSON文件](docs/jiuge7b/evidence/'+name+'.json)\n\n<details>\n<summary>展开完整复核数据</summary>\n\n```json\n'+json.dumps(data[name],ensure_ascii=False,indent=1 if name=='softmax-fusion'else 2)+'\n```\n\n</details>\n'
 plan='''| 顺序 | 要做什么 | 交付与准入 |
 |---|---|---|
 | P0 数值与内存 | 固定初始权重、实际输入和RNG，沿embedding梯度→首步更新→次步前向定位跨独立进程差异；为新增自有审计pack做有界写回/退缓存 | 可复现的分歧证据；内容SHA、inode和驻留检查。保留旧参考、原容差与内存保护 |
 | P1 同口径分析 | 复用runtime关联、exclusive归因和区间并集方法分析现有trace；必要时用ixSYS采短CUDA/NVTX窗口 | 算子/shape热点、搬运及同步依赖表，明确分母与未归因项 |
-| P2 单一候选 | 端到端优先研究offload回传/批次/同步；GPU方向验证7B真实shape的mask/scale/softmax前后向融合 | 保留mask、cast、缩放舍入、重计算和梯度语义；先通过边界正确性与隔离微基准 |
+| P2 单一候选 | 已完成scale/mask/softmax隔离融合；下一步接入真实attention，核对重计算、反向和mask调用点；端到端继续研究offload回传与同步 | 先做接入前后逐层输出/梯度比较，再进入模型完整验收 |
 | P3 模型验收 | 三臂完整数值/SFT、原生恢复通过后，补必要的新trace与无profiler正式对照 | 分别报告step延迟、有效输入tokens/s及答案targets/s |
 
 真实7B配置：官方9G7B_MHA，7,668,831,744参数、28层、hidden=3584、FFN=18944、28个MHA头；TP2、BF16、S2048、micro/global batch=1、CPU AdamW offload。数据为48,818条中文Alpaca；CPT监督全文，SFT只监督答案及结束标记。
@@ -74,6 +76,24 @@ section('appendix-trace','BI-V150十二窗口瓶颈分析',table+'\n单位为秒
 o=data['operator-validation'];table='| GPU | S | 输入 | 无profiler中位毫秒 | kernel数 | 抽样前向最大差 | 抽样反向最大差 |\n|---|---:|---|---:|---:|---:|---:|\n'
 for x in o['summary']:table+=f"| {x['device']} | {x['S']} | {x['dtype'].replace('torch.','')} | {x['median_ms']:.3f} | {x['kernels']} | {x['forward_error']:.3g} | {x['backward_error']:.3g} |\n"
 section('appendix-operator','新增八例算子基准与GPU trace',table+'\n子链为BF16/FP32输入→FP32缩放→有限值-10000因果mask→FP32 softmax及反向；合成输入，shape为`[1,14,S,S]`。每例2次预热、7次无profiler同步计时，另采1次GPU trace。全输出/梯度有限，每例12行CPU float64抽样比较通过原容差。BF16输入路径记录13次kernel启动，FP32为9次，支持进一步研究cast和中间矩阵搬运；不能把两条精度路径的差异称为优化收益。未包含QK/PV矩阵乘、整模型更新或TP通信。\n'+evidence('operator-validation'))
+
+fusion=data['softmax-fusion'];table='| S | 输入dtype | 原生→融合毫秒 | 配对加速比 | 总GPU启动：原生→融合 |\n|---|---|---:|---:|---:|\n'
+for x in fusion['summary']:
+ table+=f"| {x['S']} | {x['dtype'].replace('torch.','')} | {x['native_pooled_median_ms']:.3f}→{x['candidate_pooled_median_ms']:.3f} | {x['paired_geomean_ratio']:.3f}× | {x['native_total_GPU_launches']}→{x['candidate_total_GPU_launches']} |\n"
+trace_status='两卡16份独立trace全部闭合，并独立核对原始及压缩SHA。'if fusion['all_expected_traces_passed']else'当前取得同一卡S2048 BF16的原生与候选2份trace；其余14份补采被原32GiB NUMA准入拒绝，完整trace验收仍待补。'
+explanation=trace_status+'\n\n'+'''融合前向在一行内完成FP32缩放、有限值-10000遮罩、max/exp/sum归一化；融合反向完成softmax导数、遮罩梯度归零、缩放及输入dtype转换。未生成整块缩放与遮罩中间矩阵，保留原生FP32舍入边界。
+
+两卡×三种子×S2048/S4096×BF16/FP32，共24个目标用例；另有76个边界用例、30项负例控制。输出与输入梯度全部元素对照原生实现及独立CPU float64参考，原容差`atol=3e-4, rtol=1e-3`不变，并增加前向/FP32相对L2≤1e-5、BF16梯度≤1e-3约束。全遮罩行保留有限填充值对应的均匀softmax语义，输入梯度为0。
+
+计时使用同卡同输入的15轮交替ABBA/BAAB，每臂每组30次同步调用、5对预热；包含dispatch、输出分配、前后向及GPU同步，输入/mask预先建立。表内时间是两卡三种子的180次调用合并中位数，加速比为逐轮配对比的几何平均，二者口径不同。全部360轮更快，种子中位数最大CV为2.53%，未触发10%完整确认阈值。Profiler在全部计时结束后独立运行。
+
+严格确定性及未初始化内存填充均保留。候选实际为2次融合数学kernel加2次保护性填充，总共4次启动。最初“总计2次”的trace断言失败已保留；后续版本化trace观察器，严格核对4个事件的类型与顺序。补trace首次重试被32GiB保守启动线拒绝；用户明确要求实际尝试后，仅该启动线改为16GiB，两卡补采成功。数学实现、原数值/实时内存保护及已完成计时均未变。
+
+S4096的独立trace中，融合BF16前向、反向和保护性填充的两卡平均设备时间分别约2.426、4.308、2.107毫秒；FP32约3.263、4.810、2.804毫秒。反向是候选的主要数学耗时，填充约占kernel累计时间24%–26%。这些是设备事件归因，未混入上述无profiler配对加速比；现有证据没有测得硬件带宽饱和度。
+
+该结果限于合成输入的独立attention子链，未包含QK/PV矩阵乘、dropout、重计算、TP通信及整模型更新。不能将算子加速比称为7B训练加速。下一步为真实attention接入与逐层前反向对齐，再过三臂全状态、SFT及原生恢复门禁。
+'''
+section('appendix-fusion','BI-V150融合前后向：正确性与配对测速',table+'\n'+explanation+'\n[融合实现](experiments/jiuge_training/softmax_fusion_20261028_v1/fused_scale_mask_softmax.py) · [完整CPU参考](experiments/jiuge_training/softmax_fusion_20261028_v1/full_reference.py) · [冻结实验契约](experiments/jiuge_training/softmax_fusion_20261028_v1/contract.json)\n\n算法参考：[Triton fused softmax](https://triton-lang.org/main/getting-started/tutorials/02-fused-softmax.html)；保护性填充：[PyTorch 2.7确定性文档](https://docs.pytorch.org/docs/2.7/deterministic.html)。本结果来自实际CoreX 4.4构建。\n'+evidence('softmax-fusion'))
 failure='''| 问题 | 已确定的事实 | 目前结论 |
 |---|---|---|
 | NUMA工作集 | 两rank约28.57GiB延后分配的FP32梯度未完整纳入早期预算；新增审计pack也形成大量文件缓存 | 公共预分配与容量探针有证据；新增完整路径仍须通过原保护 |
@@ -103,11 +123,13 @@ for x in manifest:prov+=f"| {x['id']} | `{x['SHA256']}` | {x['bytes']} |\n"
 section('appendix-provenance','来源与复核范围',prov)
 md='\n'.join(parts).rstrip()+'\n';(ROOT/'README.md').write_text(md,encoding='utf8')
 # GitHub links for the short project BRIEF now resolve without ignored local results.
-footer='\n\n[算子基准复核](../../README.md#appendix-operator) · [详细计划与验收标准](../../README.md#appendix-plan) · [CPT正式结果](../../README.md#appendix-cpt) · [SFT正式结果](../../README.md#appendix-sft)\n'
+footer='\n\n[算子基准复核](../../README.md#appendix-operator) · [融合实测与代码](../../README.md#appendix-fusion) · [详细计划与验收标准](../../README.md#appendix-plan) · [CPT正式结果](../../README.md#appendix-cpt) · [SFT正式结果](../../README.md#appendix-sft)\n'
 (BASE/'BRIEF.md').write_text(brief+footer,encoding='utf8')
 # Build a zero-dependency HTML rendition; all research links stay inside one file.
 linkmap={'docs/jiuge7b/evidence/'+n+'.json':'#'+ANCHORS[n]for n,_ in SOURCES}
 linkmap['docs/jiuge7b/report.html']='#report-top';linkmap['docs/project-overview-20261027.md']='https://github.com/yangpu-333/gpgpu-cake/blob/main/docs/project-overview-20261027.md'
+for path in ('fused_scale_mask_softmax.py','full_reference.py','contract.json'):
+ target='experiments/jiuge_training/softmax_fusion_20261028_v1/'+path;linkmap[target]='https://github.com/yangpu-333/gpgpu-cake/blob/main/'+target
 def inline(s):
  tokens={}
  def keep(value):
@@ -141,7 +163,7 @@ while i<len(lines):
 css='''html{scroll-behavior:smooth}body{margin:0;background:#f6f7f9;color:#18232f;font:16px/1.75 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1100px;margin:24px auto;padding:36px 44px;background:#fff;border:1px solid #e5e9ed;border-radius:12px}h1{font-size:30px;line-height:1.35}h2{font-size:22px;margin-top:36px;border-bottom:1px solid #e5e9ed;padding-bottom:8px}a{color:#145ac7}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:9px 12px;border:1px solid #dbe2ea;text-align:left}th{background:#eef3f8}.table-wrap{overflow-x:auto;margin:18px 0}code{background:#f1f4f7;padding:2px 4px;font-size:13px}pre{padding:18px;background:#101923;color:#d9e5f2;overflow:auto;max-height:640px}pre code{background:transparent;padding:0;color:inherit}summary{cursor:pointer;font-weight:600;color:#145ac7}details{margin:14px 0;padding:12px 16px;border:1px solid #dbe2ea;border-radius:7px}hr{border:0;border-top:1px solid #dbe2ea;margin:32px 0}@media(max-width:700px){main{margin:0;padding:20px 16px;border:0;border-radius:0}h1{font-size:25px}}'''
 page='<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>九格7B研究报告</title><style>'+css+'</style></head><body><main>'+''.join(out)+'</main></body></html>'
 (DOC/'report.html').write_text(page,encoding='utf8')
-manifest_record={'schema':'jiuge7b-public-report-evidence-v1','date':'2026-10-27','files':manifest,'original_evidence_byte_identical':True,'raw_large_files_published':False}
+manifest_record={'schema':'jiuge7b-public-report-evidence-v2','date':'2026-10-28','files':manifest,'original_evidence_byte_identical':True,'raw_large_files_published':False}
 (DOC/'manifest.json').write_text(json.dumps(manifest_record,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
 # Verify every report link and anchor and enforce standalone HTML assets.
 anchors=set(re.findall(r'<a id="([a-z0-9-]+)"></a>',md))
@@ -152,9 +174,12 @@ assert not re.search(r'<(?:script|link|img)\b',page,re.I)
 for href in re.findall(r'href="([^"]+)"',page):assert href.startswith(('#','https://')),href
 for x in manifest:assert hashlib.sha256((ROOT/x['published_path']).read_bytes()).hexdigest()==x['SHA256']
 publish=['README.md','experiments/jiuge_training/BRIEF.md','docs/project-overview-20261027.md','docs/jiuge7b/report.html','docs/jiuge7b/manifest.json','docs/jiuge7b/evidence/.gitattributes','scripts/build_jiuge7b_report.py']+[x['published_path']for x in manifest]
+publish += ['experiments/jiuge_training/softmax_fusion_20261028_v1/'+p for p in ('fused_scale_mask_softmax.py','full_reference.py','fusion_worker.py','supervise_fusion.py','corex_process_guard_data.py','contract.json','README.md','.gitattributes')]
+publish += ['experiments/jiuge_training/softmax_fusion_trace_20261028_v2/'+p for p in ('fused_scale_mask_softmax.py','full_reference.py','fusion_worker.py','supervise_fusion.py','corex_process_guard_data.py','contract.json','.gitattributes')]
+publish += ['experiments/jiuge_training/softmax_fusion_trace_20261028_v3/'+p for p in ('fused_scale_mask_softmax.py','full_reference.py','fusion_worker.py','supervise_fusion.py','corex_process_guard_data.py','contract.json','.gitattributes')]
 qa={'passed':True,'self_contained_Markdown':'README.md','self_contained_HTML':'docs/jiuge7b/report.html','research_anchor_count':len(anchors),'embedded_evidence_records':len(manifest),'all_report_links_resolve':True,'evidence_copies_SHA_equal':True,'HTML_external_assets':0,'publication_paths':publish,'README_bytes':len(md.encode()),'HTML_bytes':len(page.encode())}
 (BASE/'results').mkdir(exist_ok=True)
-(BASE/'results/public-report-build-review-20261027.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2),encoding='utf8')
+(BASE/'results/public-report-build-review-20261028.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2),encoding='utf8')
 if '--publication-json'in sys.argv:
  print(json.dumps({'files':[{'path':p,'mode':'100644','type':'blob','content':(ROOT/p).read_text(encoding='utf8')}for p in publish]},ensure_ascii=False))
 else:print(json.dumps(qa,ensure_ascii=False))
