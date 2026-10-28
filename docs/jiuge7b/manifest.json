@@ -57,6 +57,13 @@
       "published_path": "docs/jiuge7b/evidence/softmax-fusion.json",
       "SHA256": "725d2ad52bd5dd4a4e5c875acefcc14410c61a3e3b62eb5b361e2b48773bc4f5",
       "bytes": 460320
+    },
+    {
+      "id": "attention-integration",
+      "source": "results/attention-component-public-review-20261028.json",
+      "published_path": "docs/jiuge7b/evidence/attention-integration.json",
+      "SHA256": "148451f4b6ab65c6ce48fa8f6f0d950694edd165dacab35cdf3fdda5b56f2ea4",
+      "bytes": 63195
     }
   ],
   "original_evidence_byte_identical": true,

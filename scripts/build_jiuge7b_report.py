@@ -16,9 +16,11 @@ SOURCES=[
  ('bi-numeric-failure','results/datathinking-NUMA-followup-failed-native-independent-review-20261027-01.json'),
  ('operator-validation','results/resource-minimal-attention-independent-review-20261027.json'),
  ('peer-review','results/peer-reference-review-20261027.json'),
- ('softmax-fusion','results/softmax-fusion-public-review-20261028.json')]
+ ('softmax-fusion','results/softmax-fusion-public-review-20261028.json'),
+ ('attention-integration','results/attention-component-public-review-20261028.json')]
 ANCHORS={'cpt-formal':'appendix-cpt','sft-formal':'appendix-sft','bi-correctness':'appendix-bi','bi-trace':'appendix-trace','bi-numeric-failure':'appendix-failures','operator-validation':'appendix-operator','peer-review':'appendix-peer'}
 ANCHORS['softmax-fusion']='appendix-fusion'
+ANCHORS['attention-integration']='appendix-attention-integration'
 EVID.mkdir(parents=True,exist_ok=True)
 (EVID/'.gitattributes').write_text('*.json -text\n',encoding='utf8')
 data={};manifest=[]
@@ -38,11 +40,11 @@ brief=(BASE/'BRIEF.md').read_text(encoding='utf8')
 # Keep the original compact BRIEF text, replacing machine-local links with anchors.
 brief=brief[:brief.rfind('\n[算子基准复核]')].rstrip()
 intro='<a id="report-top"></a>\n\n'+brief
-intro+='\n\n[融合实测与代码](#appendix-fusion) · [算子基准复核](#appendix-operator) · [详细计划与验收标准](#appendix-plan) · [CPT正式结果](#appendix-cpt) · [SFT正式结果](#appendix-sft)\n\n[下载离线单文件HTML](docs/jiuge7b/report.html) · [其他项目历史概览](docs/project-overview-20261027.md)\n'
+intro+='\n\n[真实attention接入](#appendix-attention-integration) · [融合实测与代码](#appendix-fusion) · [算子基准复核](#appendix-operator) · [详细计划与验收标准](#appendix-plan) · [CPT正式结果](#appendix-cpt) · [SFT正式结果](#appendix-sft)\n\n[下载离线单文件HTML](docs/jiuge7b/report.html) · [其他项目历史概览](docs/project-overview-20261027.md)\n'
 parts=[intro,'\n---\n\n## 完整内容与复核证据\n\n以下内容均在本文件内。表格用于阅读，折叠区保留完整关键复核JSON；也可从GitHub下载对应JSON。\n']
 def section(anchor,title,text):parts.append(f'\n<a id="{anchor}"></a>\n\n## {title}\n\n{text.rstrip()}\n')
 def evidence(name):
- return '\n[独立JSON文件](docs/jiuge7b/evidence/'+name+'.json)\n\n<details>\n<summary>展开完整复核数据</summary>\n\n```json\n'+json.dumps(data[name],ensure_ascii=False,indent=1 if name=='softmax-fusion'else 2)+'\n```\n\n</details>\n'
+ return '\n[独立JSON文件](docs/jiuge7b/evidence/'+name+'.json)\n\n<details>\n<summary>展开完整复核数据</summary>\n\n```json\n'+json.dumps(data[name],ensure_ascii=False,indent=1 if name in('softmax-fusion','attention-integration')else 2)+'\n```\n\n</details>\n'
 plan='''| 顺序 | 要做什么 | 交付与准入 |
 |---|---|---|
 | P0 数值与内存 | 固定初始权重、实际输入和RNG，沿embedding梯度→首步更新→次步前向定位跨独立进程差异；为新增自有审计pack做有界写回/退缓存 | 可复现的分歧证据；内容SHA、inode和驻留检查。保留旧参考、原容差与内存保护 |
@@ -94,6 +96,28 @@ S4096的独立trace中，融合BF16前向、反向和保护性填充的两卡平
 该结果限于合成输入的独立attention子链，未包含QK/PV矩阵乘、dropout、重计算、TP通信及整模型更新。不能将算子加速比称为7B训练加速。下一步为真实attention接入与逐层前反向对齐，再过三臂全状态、SFT及原生恢复门禁。
 '''
 section('appendix-fusion','BI-V150融合前后向：正确性与配对测速',table+'\n'+explanation+'\n[融合实现](experiments/jiuge_training/softmax_fusion_20261028_v1/fused_scale_mask_softmax.py) · [完整CPU参考](experiments/jiuge_training/softmax_fusion_20261028_v1/full_reference.py) · [冻结实验契约](experiments/jiuge_training/softmax_fusion_20261028_v1/contract.json)\n\n算法参考：[Triton fused softmax](https://triton-lang.org/main/getting-started/tutorials/02-fused-softmax.html)；保护性填充：[PyTorch 2.7确定性文档](https://docs.pytorch.org/docs/2.7/deterministic.html)。本结果来自实际CoreX 4.4构建。\n'+evidence('softmax-fusion'))
+
+integration=data['attention-integration'];assert integration['component_accepted']and not integration['full_model_accepted']
+text='''| 实现/阶段 | 检查对象 | 实际结果 |
+|---|---|---|
+| 原全融合直接接入 | MCore原生QK→FP32 softmax→BF16→PV及反向 | 未过原容差；输出最大差0.001953125，Q/K/V梯度最大差至0.00390625 |
+| 原生softmax保真边界融合 | 两卡×层1/14/28×层缩放开关×重计算开关，共24组 | 输出与Q/K/V共96项全元素比较及SHA均相同，最大差0 |
+| 共同Node0状态布局 | 两rank小型CPU AdamW各3步、每步4项状态 | 与原生逐值相同；moment页位于Node0，训练亲和性恢复；不是完整容量证明 |
+| 本轮完整7B更新、原生恢复与端到端 | 完整权重与实际SFT、三臂及原生保存恢复 | 尚未开始，等待新布局容量证明与内存准入确认 |
+
+真实MCore调用已在QK `baddbmm`中应用缩放，并将softmax概率转回BF16；适配器只使用原实例的附加层系数，不重复乘`1/√128`，保留输出dtype、dropout/RNG及重计算边界。
+
+在固定首例中，原全融合与原生QK分数逐值相同；FP32概率最大差约1.19e-7，经BF16转换后有528/58,720,256个概率值不同，后续attention输出和Q/K/V梯度超原门槛。差异发生位置有完整元素计数与SHA，不据此指认某条硬件指令。
+
+因此当前候选保留已安装原生softmax规约算法，以两个Triton kernel融合前后的cast/scale/mask及相应反向。它保留了真实attention组件的逐值结果；其性能尚未测定，不能继承前一节独立FP32输出子链的4.16–4.66×加速。
+
+本阶段是实际MCore模块、真实TP2分组与7B形状的合成QKV检查，没有加载完整7B权重或执行CPU offload更新。`atol=3e-4, rtol=1e-3`保持不变。完整验收仍要求三臂各3更新、每rank3585字段、完整SFT语义、原生iteration2保存和真实step3恢复；这些通过后才进行端到端配对计时。
+
+仅绑CPU不足以保证内存页归属：小型CPU检查捕获了分配器复用其他节点页面的问题，随后使用已有源码绑定的两处moment零值工厂实现定点分配。完整容量仍须单独验证，整模型原80GiB Node1启动要求当前保留。
+
+[MCore适配器](experiments/jiuge_training/attention_integration_20261028_v2/attention_fusion_adapter.py) · [边界融合实现](experiments/jiuge_training/attention_integration_20261028_v2/fused_scale_mask.py) · [真实attention检查入口](experiments/jiuge_training/attention_integration_20261028_v2/actual_attention_probe.py)
+'''
+section('appendix-attention-integration','真实attention接入：精度边界与保真候选',text+evidence('attention-integration'))
 failure='''| 问题 | 已确定的事实 | 目前结论 |
 |---|---|---|
 | NUMA工作集 | 两rank约28.57GiB延后分配的FP32梯度未完整纳入早期预算；新增审计pack也形成大量文件缓存 | 公共预分配与容量探针有证据；新增完整路径仍须通过原保护 |
@@ -123,13 +147,15 @@ for x in manifest:prov+=f"| {x['id']} | `{x['SHA256']}` | {x['bytes']} |\n"
 section('appendix-provenance','来源与复核范围',prov)
 md='\n'.join(parts).rstrip()+'\n';(ROOT/'README.md').write_text(md,encoding='utf8')
 # GitHub links for the short project BRIEF now resolve without ignored local results.
-footer='\n\n[算子基准复核](../../README.md#appendix-operator) · [融合实测与代码](../../README.md#appendix-fusion) · [详细计划与验收标准](../../README.md#appendix-plan) · [CPT正式结果](../../README.md#appendix-cpt) · [SFT正式结果](../../README.md#appendix-sft)\n'
+footer='\n\n[算子基准复核](../../README.md#appendix-operator) · [真实attention接入](../../README.md#appendix-attention-integration) · [融合实测与代码](../../README.md#appendix-fusion) · [详细计划与验收标准](../../README.md#appendix-plan) · [CPT正式结果](../../README.md#appendix-cpt) · [SFT正式结果](../../README.md#appendix-sft)\n'
 (BASE/'BRIEF.md').write_text(brief+footer,encoding='utf8')
 # Build a zero-dependency HTML rendition; all research links stay inside one file.
 linkmap={'docs/jiuge7b/evidence/'+n+'.json':'#'+ANCHORS[n]for n,_ in SOURCES}
 linkmap['docs/jiuge7b/report.html']='#report-top';linkmap['docs/project-overview-20261027.md']='https://github.com/yangpu-333/gpgpu-cake/blob/main/docs/project-overview-20261027.md'
 for path in ('fused_scale_mask_softmax.py','full_reference.py','contract.json'):
  target='experiments/jiuge_training/softmax_fusion_20261028_v1/'+path;linkmap[target]='https://github.com/yangpu-333/gpgpu-cake/blob/main/'+target
+for path in('attention_fusion_adapter.py','fused_scale_mask.py','actual_attention_probe.py'):
+ target='experiments/jiuge_training/attention_integration_20261028_v2/'+path;linkmap[target]='https://github.com/yangpu-333/gpgpu-cake/blob/main/'+target
 def inline(s):
  tokens={}
  def keep(value):
@@ -177,9 +203,12 @@ publish=['README.md','experiments/jiuge_training/BRIEF.md','docs/project-overvie
 publish += ['experiments/jiuge_training/softmax_fusion_20261028_v1/'+p for p in ('fused_scale_mask_softmax.py','full_reference.py','fusion_worker.py','supervise_fusion.py','corex_process_guard_data.py','contract.json','README.md','.gitattributes')]
 publish += ['experiments/jiuge_training/softmax_fusion_trace_20261028_v2/'+p for p in ('fused_scale_mask_softmax.py','full_reference.py','fusion_worker.py','supervise_fusion.py','corex_process_guard_data.py','contract.json','.gitattributes')]
 publish += ['experiments/jiuge_training/softmax_fusion_trace_20261028_v3/'+p for p in ('fused_scale_mask_softmax.py','full_reference.py','fusion_worker.py','supervise_fusion.py','corex_process_guard_data.py','contract.json','.gitattributes')]
+for folder in('attention_integration_20261028_v1','attention_integration_20261028_v2'):
+ publish += ['experiments/jiuge_training/'+folder+'/'+p.name for p in sorted((BASE/folder).glob('*'))if p.suffix in('.py','.json')or p.name=='.gitattributes']
+publish += ['experiments/jiuge_training/attention_fullmodel_20261028_v2/'+p for p in('node0_optimizer_state.py','corex_adamw_local_moments.py','.gitattributes')]
 qa={'passed':True,'self_contained_Markdown':'README.md','self_contained_HTML':'docs/jiuge7b/report.html','research_anchor_count':len(anchors),'embedded_evidence_records':len(manifest),'all_report_links_resolve':True,'evidence_copies_SHA_equal':True,'HTML_external_assets':0,'publication_paths':publish,'README_bytes':len(md.encode()),'HTML_bytes':len(page.encode())}
 (BASE/'results').mkdir(exist_ok=True)
-(BASE/'results/public-report-build-review-20261028.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2),encoding='utf8')
+(BASE/'results/public-report-build-review-attention-20261028.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2),encoding='utf8')
 if '--publication-json'in sys.argv:
  print(json.dumps({'files':[{'path':p,'mode':'100644','type':'blob','content':(ROOT/p).read_text(encoding='utf8')}for p in publish]},ensure_ascii=False))
 else:print(json.dumps(qa,ensure_ascii=False))

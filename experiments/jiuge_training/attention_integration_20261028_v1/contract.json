@@ -1,0 +1,25 @@
+{
+  "schema": "real-attention-integration-v1",
+  "new_user_authorization": "继续，把融合算子接入真实7B attention，补齐数值和原生恢复验证，再做端到端配对测速，结果更新到GitHub报告。仍用现有BI-V150，费用用抵扣券，不动他人、不放宽数值门禁。",
+  "start_epoch": 1793155038,
+  "deadline_epoch": 1793176638,
+  "deadline_scope": "assistant bounded6h attempt for this new task; old windows not extended",
+  "scope": "first actual MCore TP2 attention component including QK/PV, BF16 output and recomputation; no full model claim",
+  "source_SHA256": {
+    "actual_attention_probe.py": "4c4e38751b160969959ec8264b1a7be931fd2f7c97d9defc43ba1b0130cc4dc1",
+    "attention_fusion_adapter.py": "6472b930359803620c53b25a6ed938527c37af242c74f96f90bb81a078444f21",
+    "corex_process_guard_data.py": "a8f86db9e75eb353121c346011428400c4d4d1208e35a5d6c12ce48009dfd058",
+    "fused_scale_mask_softmax.py": "093e3a90fc652b7652938ced212107ada5861bceaccbe8d8bdcc008b29e6cd58",
+    "supervise_component.py": "cd0caaef6d001a0e7a6a3e4306edb2408b1b0ab80af84254d686e76743c01eaf"
+  },
+  "atol": 0.0003,
+  "rtol": 0.001,
+  "numerical_gate_unchanged": true,
+  "same_isolated_kernel_SHA256": "093e3a90fc652b7652938ced212107ada5861bceaccbe8d8bdcc008b29e6cd58",
+  "full_model_accepted": false,
+  "native_resume_accepted": false,
+  "e2e_performance_accepted": false,
+  "runtime_NUMA_minimum_GiB": 16,
+  "own_component_RSS_cap_GiB": 8,
+  "other_jobs_untouched": true
+}
