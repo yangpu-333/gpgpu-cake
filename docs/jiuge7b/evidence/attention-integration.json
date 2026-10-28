@@ -1635,10 +1635,13 @@
     "original_numeric_gate_unchanged": true,
     "full_model_Node0_initial_admission_GiB": 291,
     "explicit_capacity_based_admission_authorized": true,
-    "current_blocker": "Node1 MemFree17107935232bytes fell below original16GiB runtime reserve",
-    "current_stage": "stopped by physical Node1 reserve guard at2026-10-28 15:41; control/optimized not started",
+    "current_blocker": null,
+    "current_stage": "native three actual updates completed and original fullstate checks passed; control running; optimized pending",
     "direct_launch_user_authorized": true,
-    "full_three_updates_completed": false
+    "full_three_updates_completed": true,
+    "full_three_arm_completed": false,
+    "NUMA_free_stop_threshold_enabled": false,
+    "native_resume_started": false
   },
   "measured_CPU_state_capacity": {
     "capacity_passed": true,
@@ -1696,5 +1699,35 @@
     ],
     "cache_reclaim_did_not_increase_free_memory": true,
     "specific_source_of_Node1_decrease_not_proven": true
+  },
+  "new_native_three_step_review": {
+    "native_three_real_updates_closed": true,
+    "native_original_fullstate_checks_passed": true,
+    "ranks": {
+      "0": {
+        "manifest_SHA256": "3006507aa08803234994018f75ccb3af3d7f7412bbce5043665bfe747bcd8ea2",
+        "fields": 3585,
+        "max_abs": 0.0,
+        "failed_fields": 0,
+        "SHA_different_fields": 0,
+        "HDO_updates": 3,
+        "CPU_state_groups": 199,
+        "factory_events": 398
+      },
+      "1": {
+        "manifest_SHA256": "e735a04a94e8b81711686d22b162e4ee5099a9a55c730337876c77ed171ee43d",
+        "fields": 3585,
+        "max_abs": 1.52587890625e-05,
+        "failed_fields": 0,
+        "SHA_different_fields": 9,
+        "HDO_updates": 3,
+        "CPU_state_groups": 199,
+        "factory_events": 398
+      }
+    },
+    "complete_three_arm_SFT_raw_acceptance": false,
+    "native_resume_accepted": false,
+    "e2e_accepted": false,
+    "both_ends_summary_SHA256": "51186cc05e5c8ea2dbf0db57e107230db662330f4b92dfb930229dc6a7eb00d0"
   }
 }
