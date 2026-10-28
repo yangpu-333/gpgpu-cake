@@ -1789,5 +1789,37 @@
       "raw_tensors_downloaded": false
     },
     "both_ends_key_ZIP_SHA_verified": true
+  },
+  "native_checkpoint_progress": {
+    "native_iteration2_save_passed": true,
+    "ranks": [
+      {
+        "rank": 0,
+        "status": "passed",
+        "HDO_updates": 2,
+        "policy_SHA256": "4210bb3629f561c32eb73825566b12f8d7b534a2d0653f9849d9b311465b382f"
+      },
+      {
+        "rank": 1,
+        "status": "passed",
+        "HDO_updates": 2,
+        "policy_SHA256": "4a2c10a55cc81a97df83745f1737824a9de76cdc344c056c932bd60f2d3c6cbb"
+      }
+    ],
+    "native_resume_accepted": false,
+    "end_to_end_accepted": false,
+    "resume_issue": "Original placement assertion after native checkpoint loading; Node0 allocation scope repair under validation.",
+    "previous_peak_reduced_in_observed_workers": true,
+    "worker_before_after_preload_RSS_bytes": [
+      [
+        117562617856,
+        89189363712
+      ],
+      [
+        117562322944,
+        89189056512
+      ]
+    ],
+    "scope": "Worker snapshots at matching load stages; not a complete successful restore or total-run peak claim."
   }
 }

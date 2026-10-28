@@ -103,7 +103,8 @@ text='''| 实现/阶段 | 检查对象 | 实际结果 |
 | 原全融合直接接入 | MCore原生QK→FP32 softmax→BF16→PV及反向 | 未过原容差；输出最大差0.001953125，Q/K/V梯度最大差至0.00390625 |
 | 原生softmax保真边界融合 | 两卡×层1/14/28×层缩放开关×重计算开关，共24组 | 输出与Q/K/V共96项全元素比较及SHA均相同，最大差0 |
 | 共同Node0状态布局 | 两rank小型CPU AdamW各3步、每步4项状态 | 与原生逐值相同；moment页位于Node0，训练亲和性恢复；不是完整容量证明 |
-| 本轮完整7B更新、原生恢复与端到端 | 完整权重与实际SFT、三臂及原生保存恢复 | 尚未开始，等待新布局容量证明与内存准入确认 |
+| 真实7B三臂更新与SFT | 每臂3更新、每rank3585字段，共21510字段 | 独立验收通过，最大差1.53×10⁻⁵；27个新原块解压/SHA通过 |
+| 原生保存、恢复与端到端 | iteration2保存、恢复后真实step3、配对测速 | 保存已完成；恢复加载后页面放置正在修复，完整恢复与训练收益尚未验收 |
 
 真实MCore调用已在QK `baddbmm`中应用缩放，并将softmax概率转回BF16；适配器只使用原实例的附加层系数，不重复乘`1/√128`，保留输出dtype、dropout/RNG及重计算边界。
 
@@ -111,9 +112,9 @@ text='''| 实现/阶段 | 检查对象 | 实际结果 |
 
 因此当前候选保留已安装原生softmax规约算法，以两个Triton kernel融合前后的cast/scale/mask及相应反向。它保留了真实attention组件的逐值结果；其性能尚未测定，不能继承前一节独立FP32输出子链的4.16–4.66×加速。
 
-本阶段是实际MCore模块、真实TP2分组与7B形状的合成QKV检查，没有加载完整7B权重或执行CPU offload更新。`atol=3e-4, rtol=1e-3`保持不变。完整验收仍要求三臂各3更新、每rank3585字段、完整SFT语义、原生iteration2保存和真实step3恢复；这些通过后才进行端到端配对计时。
+组件阶段使用实际MCore模块与合成QKV；后续已加载完整7B权重，完成三臂真实更新与SFT独立验收。`atol=3e-4, rtol=1e-3`保持不变。完整验收仍要求三臂各3更新、每rank3585字段、完整SFT语义、原生iteration2保存和真实step3恢复；这些通过后才进行端到端配对计时。
 
-仅绑CPU不足以保证内存页归属：小型CPU检查捕获了分配器复用其他节点页面的问题，随后使用已有源码绑定的两处moment零值工厂实现定点分配。完整容量仍须单独验证，整模型原80GiB Node1启动要求当前保留。
+仅绑CPU不足以保证内存页归属：小型CPU检查捕获了分配器复用其他节点页面的问题，随后使用已有源码绑定的两处moment零值工厂实现定点分配。完整199组容量已验证，三臂整模型更新已完成；已按用户要求取消人为NUMA空闲停止线，数值标准保持不变。
 
 [MCore适配器](experiments/jiuge_training/attention_integration_20261028_v2/attention_fusion_adapter.py) · [边界融合实现](experiments/jiuge_training/attention_integration_20261028_v2/fused_scale_mask.py) · [真实attention检查入口](experiments/jiuge_training/attention_integration_20261028_v2/actual_attention_probe.py)
 '''
@@ -206,7 +207,7 @@ publish += ['experiments/jiuge_training/softmax_fusion_trace_20261028_v3/'+p for
 for folder in('attention_integration_20261028_v1','attention_integration_20261028_v2'):
  publish += ['experiments/jiuge_training/'+folder+'/'+p.name for p in sorted((BASE/folder).glob('*'))if p.suffix in('.py','.json')or p.name=='.gitattributes']
 publish += ['experiments/jiuge_training/attention_fullmodel_20261028_v2/'+p for p in('node0_optimizer_state.py','corex_adamw_local_moments.py','.gitattributes')]
-for folder in('attention_fullmodel_20261028_v6','attention_CPU_recovery_20261028_v1','attention_closed_CPU_reviews_20261028_v4','attention_restore_20261028_v1'):
+for folder in('attention_fullmodel_20261028_v6','attention_CPU_recovery_20261028_v1','attention_closed_CPU_reviews_20261028_v4','attention_restore_20261028_v1','attention_restore_recovery_20261028_v6','attention_restore_recovery_20261028_v7'):
  publish += ['experiments/jiuge_training/'+folder+'/'+p.name for p in sorted((BASE/folder).glob('*'))if p.suffix in('.py','.json')or p.name=='.gitattributes']
 publish += ['experiments/jiuge_training/collect_attention_fullstate_SFT_keys_v3_20261028.py']
 qa={'passed':True,'self_contained_Markdown':'README.md','self_contained_HTML':'docs/jiuge7b/report.html','research_anchor_count':len(anchors),'embedded_evidence_records':len(manifest),'all_report_links_resolve':True,'evidence_copies_SHA_equal':True,'HTML_external_assets':0,'publication_paths':publish,'README_bytes':len(md.encode()),'HTML_bytes':len(page.encode())}

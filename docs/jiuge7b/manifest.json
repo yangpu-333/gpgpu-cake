@@ -62,8 +62,8 @@
       "id": "attention-integration",
       "source": "results/attention-component-public-review-20261028.json",
       "published_path": "docs/jiuge7b/evidence/attention-integration.json",
-      "SHA256": "7d571a6ac1f54d731a2fc278e40abd6fce52cde09be310fa6a307755efb29713",
-      "bytes": 69281
+      "SHA256": "62babdfe191b17a627566e7d555aea86c8510c6c74eced5ba9bf2370a640eea7",
+      "bytes": 70326
     }
   ],
   "original_evidence_byte_identical": true,

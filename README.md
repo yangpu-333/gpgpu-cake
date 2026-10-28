@@ -42,7 +42,7 @@ SFT配对时间线中，HtoD主机调用范围由约2.90秒/步降至4.33毫秒/
 **真实attention接入：BF16输出边界。** 直接移植全融合版未通过原容差：QK分数相同，FP32概率微差经BF16转换及PV/反向传播后，输出和Q/K/V梯度超限。修正版保留原生softmax规约，融合前后的cast/scale/mask；两卡24组真实MCore attention组件检查通过，覆盖第1/14/28层、层缩放开关及重计算，输出与Q/K/V梯度逐值相同，最大差0。该组件阶段使用合成QKV，随后已完成下述真实7B三臂验证。前述4.16–4.66×不能继承到该保真候选；完整更新与SFT已通过下述独立验收，原生恢复与端到端测速继续进行。
 
 
-**真实7B三臂数值与SFT已通过独立验收（20:30）。** 原生、绑核对照及保真融合候选各完成3次真实更新，两rank每臂各3585字段，共21510字段，最大差1.53×10⁻⁵，保留原容差。实际输入、答案mask、逐token loss、RNG、scheduler及TP语义复核通过；27个新原始数据块完成解压与SHA核验，已验收旧块按同inode及manifest证明复用。当前正在原生保存恢复验证，尚无该候选端到端加速结论。
+**真实7B三臂数值与SFT已通过独立验收（20:30）。** 原生、绑核对照及保真融合候选各完成3次真实更新，两rank每臂各3585字段，共21510字段，最大差1.53×10⁻⁵，保留原容差。实际输入、答案mask、逐token loss、RNG、scheduler及TP语义复核通过；27个新原始数据块完成解压与SHA核验，已验收旧块按同inode及manifest证明复用。原生iteration2保存已完成；恢复加载的内存重叠已定位，减少临时梯度驻留后已越过原峰值，当前修复加载后的Node0页面放置。完整恢复和端到端测速仍未通过，尚无该候选训练加速结论。
 
 公共CPU状态采用Node0布局，已完成实际199组容量验证。此前16GiB人为NUMA停止线已按用户要求取消，后续按实际运行错误处理；原数值标准保留。失败历史与来源证明放在折叠证据中。
 
@@ -17728,7 +17728,8 @@ S4096的独立trace中，融合BF16前向、反向和保护性填充的两卡平
 | 原全融合直接接入 | MCore原生QK→FP32 softmax→BF16→PV及反向 | 未过原容差；输出最大差0.001953125，Q/K/V梯度最大差至0.00390625 |
 | 原生softmax保真边界融合 | 两卡×层1/14/28×层缩放开关×重计算开关，共24组 | 输出与Q/K/V共96项全元素比较及SHA均相同，最大差0 |
 | 共同Node0状态布局 | 两rank小型CPU AdamW各3步、每步4项状态 | 与原生逐值相同；moment页位于Node0，训练亲和性恢复；不是完整容量证明 |
-| 本轮完整7B更新、原生恢复与端到端 | 完整权重与实际SFT、三臂及原生保存恢复 | 尚未开始，等待新布局容量证明与内存准入确认 |
+| 真实7B三臂更新与SFT | 每臂3更新、每rank3585字段，共21510字段 | 独立验收通过，最大差1.53×10⁻⁵；27个新原块解压/SHA通过 |
+| 原生保存、恢复与端到端 | iteration2保存、恢复后真实step3、配对测速 | 保存已完成；恢复加载后页面放置正在修复，完整恢复与训练收益尚未验收 |
 
 真实MCore调用已在QK `baddbmm`中应用缩放，并将softmax概率转回BF16；适配器只使用原实例的附加层系数，不重复乘`1/√128`，保留输出dtype、dropout/RNG及重计算边界。
 
@@ -17736,9 +17737,9 @@ S4096的独立trace中，融合BF16前向、反向和保护性填充的两卡平
 
 因此当前候选保留已安装原生softmax规约算法，以两个Triton kernel融合前后的cast/scale/mask及相应反向。它保留了真实attention组件的逐值结果；其性能尚未测定，不能继承前一节独立FP32输出子链的4.16–4.66×加速。
 
-本阶段是实际MCore模块、真实TP2分组与7B形状的合成QKV检查，没有加载完整7B权重或执行CPU offload更新。`atol=3e-4, rtol=1e-3`保持不变。完整验收仍要求三臂各3更新、每rank3585字段、完整SFT语义、原生iteration2保存和真实step3恢复；这些通过后才进行端到端配对计时。
+组件阶段使用实际MCore模块与合成QKV；后续已加载完整7B权重，完成三臂真实更新与SFT独立验收。`atol=3e-4, rtol=1e-3`保持不变。完整验收仍要求三臂各3更新、每rank3585字段、完整SFT语义、原生iteration2保存和真实step3恢复；这些通过后才进行端到端配对计时。
 
-仅绑CPU不足以保证内存页归属：小型CPU检查捕获了分配器复用其他节点页面的问题，随后使用已有源码绑定的两处moment零值工厂实现定点分配。完整容量仍须单独验证，整模型原80GiB Node1启动要求当前保留。
+仅绑CPU不足以保证内存页归属：小型CPU检查捕获了分配器复用其他节点页面的问题，随后使用已有源码绑定的两处moment零值工厂实现定点分配。完整199组容量已验证，三臂整模型更新已完成；已按用户要求取消人为NUMA空闲停止线，数值标准保持不变。
 
 [MCore适配器](experiments/jiuge_training/attention_integration_20261028_v2/attention_fusion_adapter.py) · [边界融合实现](experiments/jiuge_training/attention_integration_20261028_v2/fused_scale_mask.py) · [真实attention检查入口](experiments/jiuge_training/attention_integration_20261028_v2/actual_attention_probe.py)
 
@@ -19539,6 +19540,38 @@ S4096的独立trace中，融合BF16前向、反向和保护性填充的两卡平
 "raw_tensors_downloaded": false
 },
 "both_ends_key_ZIP_SHA_verified": true
+},
+"native_checkpoint_progress": {
+"native_iteration2_save_passed": true,
+"ranks": [
+{
+"rank": 0,
+"status": "passed",
+"HDO_updates": 2,
+"policy_SHA256": "4210bb3629f561c32eb73825566b12f8d7b534a2d0653f9849d9b311465b382f"
+},
+{
+"rank": 1,
+"status": "passed",
+"HDO_updates": 2,
+"policy_SHA256": "4a2c10a55cc81a97df83745f1737824a9de76cdc344c056c932bd60f2d3c6cbb"
+}
+],
+"native_resume_accepted": false,
+"end_to_end_accepted": false,
+"resume_issue": "Original placement assertion after native checkpoint loading; Node0 allocation scope repair under validation.",
+"previous_peak_reduced_in_observed_workers": true,
+"worker_before_after_preload_RSS_bytes": [
+[
+117562617856,
+89189363712
+],
+[
+117562322944,
+89189056512
+]
+],
+"scope": "Worker snapshots at matching load stages; not a complete successful restore or total-run peak claim."
 }
 }
 ```
@@ -20396,4 +20429,4 @@ S4096的独立trace中，融合BF16前向、反向和保护性填充的两卡平
 | operator-validation | `5be93d3c8979a35b39dc69b6384bb89791e94fc2d81f62945aef41d451e17b0e` | 3065 |
 | peer-review | `b1386e6084efe04e57081d3cb353687b00ef601dbb3af9b7e420fa1171da1587` | 15049 |
 | softmax-fusion | `725d2ad52bd5dd4a4e5c875acefcc14410c61a3e3b62eb5b361e2b48773bc4f5` | 460320 |
-| attention-integration | `7d571a6ac1f54d731a2fc278e40abd6fce52cde09be310fa6a307755efb29713` | 69281 |
+| attention-integration | `62babdfe191b17a627566e7d555aea86c8510c6c74eced5ba9bf2370a640eea7` | 70326 |
