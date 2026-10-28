@@ -1,0 +1,10 @@
+{
+  "prepared_only": true,
+  "GPU_cases_reused": true,
+  "original_source_SHA_and_exact_live_path_derivation_both_checked": true,
+  "original_source_semantics_or_numeric_gate_not_relaxed": true,
+  "source_SHA256": {
+    "fresh_SFT_review.py": "8b56801718a24570d1be21c05e359dfb464fdcdaa9cb5e99096a6fcf8455429c",
+    "incremental_raw_review.py": "401c95c4424673fa52c8b6237a0e43ee4b7a0d88e602aac43a9dd03756140c8e"
+  }
+}

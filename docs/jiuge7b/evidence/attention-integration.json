@@ -1628,7 +1628,7 @@
   },
   "full_model_validation_status": {
     "weights_and_three_real_updates_started": true,
-    "native_checkpoint_resume_started": false,
+    "native_checkpoint_resume_started": true,
     "e2e_measurement_started": false,
     "full_model_Node1_initial_admission_GiB": 28,
     "resource_layout_capacity_and_admission_review_pending": false,
@@ -1636,12 +1636,14 @@
     "full_model_Node0_initial_admission_GiB": 291,
     "explicit_capacity_based_admission_authorized": true,
     "current_blocker": null,
-    "current_stage": "native three actual updates completed and original fullstate checks passed; control running; optimized pending",
+    "current_stage": "Three arms, fresh SFT and raw verification independently passed; native save/resume running",
     "direct_launch_user_authorized": true,
     "full_three_updates_completed": true,
-    "full_three_arm_completed": false,
+    "full_three_arm_completed": true,
     "NUMA_free_stop_threshold_enabled": false,
-    "native_resume_started": false
+    "native_resume_started": false,
+    "three_arm_numeric_SFT_passed": true,
+    "full_checkpoint_resume_accepted": false
   },
   "measured_CPU_state_capacity": {
     "capacity_passed": true,
@@ -1729,5 +1731,63 @@
     "native_resume_accepted": false,
     "e2e_accepted": false,
     "both_ends_summary_SHA256": "51186cc05e5c8ea2dbf0db57e107230db662330f4b92dfb930229dc6a7eb00d0"
+  },
+  "three_arm_fullstate_SFT_independent_review": {
+    "three_arm_numerical_and_SFT_semantics_passed": true,
+    "local_independent_review_passed": true,
+    "rows": [
+      {
+        "arm": "native",
+        "rank": 0,
+        "fields": 3585,
+        "max_abs": 0.0,
+        "manifest_SHA256": "3006507aa08803234994018f75ccb3af3d7f7412bbce5043665bfe747bcd8ea2"
+      },
+      {
+        "arm": "native",
+        "rank": 1,
+        "fields": 3585,
+        "max_abs": 1.52587890625e-05,
+        "manifest_SHA256": "e735a04a94e8b81711686d22b162e4ee5099a9a55c730337876c77ed171ee43d"
+      },
+      {
+        "arm": "control",
+        "rank": 0,
+        "fields": 3585,
+        "max_abs": 0.0,
+        "manifest_SHA256": "61ac5f849468eabbe2dff17fbd3e501beef1a819cb8ad41ea592b0b6f9e2a744"
+      },
+      {
+        "arm": "control",
+        "rank": 1,
+        "fields": 3585,
+        "max_abs": 1.52587890625e-05,
+        "manifest_SHA256": "2833247da15d38245d9fc49aa91c4f8a6c12b1dfd7ce7e1d23be0f8fd585a2f3"
+      },
+      {
+        "arm": "optimized",
+        "rank": 0,
+        "fields": 3585,
+        "max_abs": 0.0,
+        "manifest_SHA256": "4b2ec0a39fda297ee1c96777e464a064fb0efc266fad4c355e7132ef86ea770f"
+      },
+      {
+        "arm": "optimized",
+        "rank": 1,
+        "fields": 3585,
+        "max_abs": 1.52587890625e-05,
+        "manifest_SHA256": "d4d058b1f5aa0867370adbad3785a63265e88b7445c2fee1c22c677d7a7ef696"
+      }
+    ],
+    "prior_window_raw_reference_reused": true,
+    "new_raw_chunks_independently_verified": 27,
+    "key_receipt": {
+      "ZIP_SHA256": "3ed7166f1077ace44cbed8d21218ebbb362581ce5974dac99748403e8e97b980",
+      "ZIP_bytes": 4965901,
+      "expanded_bytes": 37464126,
+      "key_count": 182,
+      "raw_tensors_downloaded": false
+    },
+    "both_ends_key_ZIP_SHA_verified": true
   }
 }

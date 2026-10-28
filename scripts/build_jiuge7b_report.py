@@ -44,7 +44,7 @@ intro+='\n\n[真实attention接入](#appendix-attention-integration) · [融合�
 parts=[intro,'\n---\n\n## 完整内容与复核证据\n\n以下内容均在本文件内。表格用于阅读，折叠区保留完整关键复核JSON；也可从GitHub下载对应JSON。\n']
 def section(anchor,title,text):parts.append(f'\n<a id="{anchor}"></a>\n\n## {title}\n\n{text.rstrip()}\n')
 def evidence(name):
- return '\n[独立JSON文件](docs/jiuge7b/evidence/'+name+'.json)\n\n<details>\n<summary>展开完整复核数据</summary>\n\n```json\n'+json.dumps(data[name],ensure_ascii=False,indent=0 if name=='attention-integration'else 1 if name=='softmax-fusion'else 2)+'\n```\n\n</details>\n'
+ return '\n[独立JSON文件](docs/jiuge7b/evidence/'+name+'.json)\n\n<details>\n<summary>展开完整复核数据</summary>\n\n```json\n'+json.dumps(data[name],ensure_ascii=False,indent=0 if name=='attention-integration'else 1)+'\n```\n\n</details>\n'
 plan='''| 顺序 | 要做什么 | 交付与准入 |
 |---|---|---|
 | P0 数值与内存 | 固定初始权重、实际输入和RNG，沿embedding梯度→首步更新→次步前向定位跨独立进程差异；为新增自有审计pack做有界写回/退缓存 | 可复现的分歧证据；内容SHA、inode和驻留检查。保留旧参考、原容差与内存保护 |
@@ -206,6 +206,9 @@ publish += ['experiments/jiuge_training/softmax_fusion_trace_20261028_v3/'+p for
 for folder in('attention_integration_20261028_v1','attention_integration_20261028_v2'):
  publish += ['experiments/jiuge_training/'+folder+'/'+p.name for p in sorted((BASE/folder).glob('*'))if p.suffix in('.py','.json')or p.name=='.gitattributes']
 publish += ['experiments/jiuge_training/attention_fullmodel_20261028_v2/'+p for p in('node0_optimizer_state.py','corex_adamw_local_moments.py','.gitattributes')]
+for folder in('attention_fullmodel_20261028_v6','attention_CPU_recovery_20261028_v1','attention_closed_CPU_reviews_20261028_v4','attention_restore_20261028_v1'):
+ publish += ['experiments/jiuge_training/'+folder+'/'+p.name for p in sorted((BASE/folder).glob('*'))if p.suffix in('.py','.json')or p.name=='.gitattributes']
+publish += ['experiments/jiuge_training/collect_attention_fullstate_SFT_keys_v3_20261028.py']
 qa={'passed':True,'self_contained_Markdown':'README.md','self_contained_HTML':'docs/jiuge7b/report.html','research_anchor_count':len(anchors),'embedded_evidence_records':len(manifest),'all_report_links_resolve':True,'evidence_copies_SHA_equal':True,'HTML_external_assets':0,'publication_paths':publish,'README_bytes':len(md.encode()),'HTML_bytes':len(page.encode())}
 (BASE/'results').mkdir(exist_ok=True)
 (BASE/'results/public-report-build-review-attention-20261028.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2),encoding='utf8')

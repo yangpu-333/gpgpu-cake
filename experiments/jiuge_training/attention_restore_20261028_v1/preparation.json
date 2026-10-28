@@ -1,0 +1,15 @@
+{
+  "prepared_only": true,
+  "executed": false,
+  "requires_new_independent_three_arm_numeric_SFT_raw_admission": true,
+  "native_HDO_save_load_methods_and_AdamW_math_unchanged": true,
+  "same_common_Node0_and_default_GPU_policy_as_validated_recipe": true,
+  "candidate_same_native_softmax_boundary_fusion": true,
+  "NUMA_MemFree_stop_thresholds_enabled": false,
+  "deadline_epoch": 1793204291,
+  "source_SHA256": {
+    "restore_entry.py": "415745d86b7eb51e44cf20d3548b215cce773e869761aea61de216c5d3cf7cf8",
+    "restore_prepare.py": "d4446916c28e0d605308afb53ca865c012180c75278ff547142e8b691654dc53",
+    "restore_runner.py": "c3dad4d22bf02084d382bab3fe56698ac01813af76610ef69b814b45fe892646"
+  }
+}

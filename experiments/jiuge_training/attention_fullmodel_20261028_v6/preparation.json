@@ -1,0 +1,22 @@
+{
+  "source_SHA256": {
+    "attention_fusion_adapter.py": "c1d30f33be782757ae5118511c9cfd84514078cba3735b1317319076a8d4133b",
+    "corex_adamw_local_moments.py": "beacd9b0a3004e99407cd1d60cb681c4fb426bad7fc132f85bbff2f4f8ae490d",
+    "corex_audit_heap_release.py": "4243c867c3da38ae35ccccf291c117b977527663e45640644477a5e617f4de58",
+    "corex_fullstate_reference_v6.py": "72d1c0c949dbf3b1117e3978296b239cbcba0c493b32a3841d6e8a68cc24f22d",
+    "corex_own_audit_cache.py": "19c3f943dccb66a1832218a5aa41d020b7c1eac9a7fc74c6b55b5effe1147f2d",
+    "corex_process_guard_data.py": "a8f86db9e75eb353121c346011428400c4d4d1208e35a5d6c12ce48009dfd058",
+    "corex_setup_gradients_v3.py": "c946367b0624aa8ec4f15fc21ff39d81fcea933b192858d5d5fb4c292cc9626c",
+    "fullstate_entry.py": "550e5f73defb7e7eb5ea22461cd1ba594652591bf7b5713d5fd85758f80a0a77",
+    "fullstate_prepare.py": "5da4f8b73e8df710c085481030c5221f449688e851bf99a3381e57516b6a32cf",
+    "fullstate_runner.py": "278d8313426067ac33ecb4dd0e602ef0199b391698576b5d1fded4d1d25b4919",
+    "fused_scale_mask.py": "d1c9b7ea0f5b4e019854d20beb3f3e47d52ace2cd93254fbac771510978c178b",
+    "fused_scale_mask_softmax.py": "093e3a90fc652b7652938ced212107ada5861bceaccbe8d8bdcc008b29e6cd58",
+    "node0_optimizer_state.py": "339516d4e2624a445caea89880b0fe6933c85e0acb4b3d529422c66eddb51dc6",
+    "owned_controller_measured.py": "7e048850b33bc57c65037e55998ed944db3235217d0b8bbe40e7da17bbff7ffb"
+  },
+  "explicit_instruction": "以后不要再设这种线，正常运行，运行失败再解决。现在重新尝试，并预估差不多结束时查看",
+  "NUMA_MemFree_cutoffs_removed_from_supervisor_and_allocators": true,
+  "numeric_tolerances_and_old_native_reference_retained": true,
+  "actual_process_RLIMIT_DATA_and_own_RSS_shared_host_protections_retained": true
+}
