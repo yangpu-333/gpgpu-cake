@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>九格7B研究报告</title><style>html{scroll-behavior:smooth}body{margin:0;background:#f6f7f9;color:#18232f;font:16px/1.75 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1100px;margin:24px auto;padding:36px 44px;background:#fff;border:1px solid #e5e9ed;border-radius:12px}h1{font-size:30px;line-height:1.35}h2{font-size:22px;margin-top:36px;border-bottom:1px solid #e5e9ed;padding-bottom:8px}a{color:#145ac7}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:9px 12px;border:1px solid #dbe2ea;text-align:left}th{background:#eef3f8}.table-wrap{overflow-x:auto;margin:18px 0}code{background:#f1f4f7;padding:2px 4px;font-size:13px}pre{padding:18px;background:#101923;color:#d9e5f2;overflow:auto;max-height:640px}pre code{background:transparent;padding:0;color:inherit}summary{cursor:pointer;font-weight:600;color:#145ac7}details{margin:14px 0;padding:12px 16px;border:1px solid #dbe2ea;border-radius:7px}hr{border:0;border-top:1px solid #dbe2ea;margin:32px 0}@media(max-width:700px){main{margin:0;padding:20px 16px;border:0;border-radius:0}h1{font-size:25px}}</style></head><body><main><a id="report-top"></a><h1>九格7B训练与微调性能优化研究报告</h1><p>截至2026年10月28日。研究对象为官方九格7B，采用Megatron、TP2、BF16、S2048及CPU AdamW offload，覆盖继续预训练（CPT）与全参数指令微调（SFT）。</p><h2>已验证成果：双A100</h2><p>定位并修复FP32主参数在CPU复制、转换后丢失pinned属性的问题，改善主机到GPU的搬运与重叠，保持模型、数据和AdamW更新公式不变。</p><div class="table-wrap"><table><thead><tr><th>任务</th><th>step耗时：原生→修复</th><th>输入吞吐：原生→修复</th><th>配对吞吐提升</th></tr></thead><tbody><tr><td>CPT</td><td>6.581→3.592秒</td><td>311.2→570.2 tokens/s</td><td><strong>84.4%</strong></td></tr><tr><td>SFT</td><td>6.563→3.413秒</td><td>312.0→600.1 tokens/s</td><td><strong>92.9%</strong></td></tr></tbody></table></div><p>SFT配对时间线中，HtoD主机调用范围由约2.90秒/步降至4.33毫秒/步，CPU AdamW与HtoD重叠由0增至1.58秒/步，搬运量相同。三步全状态、原生保存恢复及真实下一步比较均通过，受检状态最大误差为0。</p><p>正式测量为三种子×三臂，每例120步、剔除前20步，关闭profiler，使用GPU同步计时及两rank慢端。提升为逐种子配对比的几何平均，与表内合并吞吐口径不同；CPT/SFT修复组种子均值CV分别为13.6%/9.24%。SFT答案监督吞吐为263.3→506.4 targets/s。</p><h2>国产GPU研究：双BI-V150</h2><p>完成CoreX 4.4真实7B迁移及三臂各35步采集，获得12个rank/window观测。现有证据支持三个研究判断：</p><p>- <strong>CPU offload与同步是端到端优先方向。</strong> GPU计算区间约1.70秒/步；本地moment候选optimizer范围仍约3.45秒，其中AdamW数学之外约2.11秒。12窗口未记录到CPU AdamW与HtoD重叠。</p><p>- <strong>NUMA预算必须覆盖完整工作集。</strong> 识别两rank约28.57GiB延后分配的FP32梯度及新增审计文件缓存，建立节点预算、实际页位置与容量验证方法。</p><p>- <strong>重复前反向不能替代连续训练验证。</strong> 输入与RNG一致时，捕获到embedding梯度微差及后续传播；严格模式固定权重16次重复通过，连续更新与旧参考的兼容检查仍未通过。</p><p>上述时间来自profiler窗口，仅用于归因；范围存在重叠，不可相加或换算正式加速比。BI-V150原执行配置已通过完整数值和原生恢复；新增NUMA/严格路径尚未完成验收，<strong>目前没有新增BI-V150正式端到端加速结论</strong>。</p><p><strong>独立算子结果：FP32输出口径。</strong> 在现有两张BI-V150顺序完成24个目标用例、76个边界用例及30项负例控制；输出与输入梯度的全部元素对照原生及独立CPU双精度参考，保留原容差并增加相对L2约束。</p><div class="table-wrap"><table><thead><tr><th>S</th><th>输入</th><th>原生→融合毫秒</th><th>配对加速比</th></tr></thead><tbody><tr><td>2048</td><td>bfloat16</td><td>11.440→2.752</td><td><strong>4.16×</strong></td></tr><tr><td>2048</td><td>float32</td><td>9.399→3.241</td><td><strong>2.90×</strong></td></tr><tr><td>4096</td><td>bfloat16</td><td>44.226→9.466</td><td><strong>4.66×</strong></td></tr><tr><td>4096</td><td>float32</td><td>36.398→11.485</td><td><strong>3.16×</strong></td></tr></tbody></table></div><p>采用两卡、三种子、15轮ABBA/BAAB配对；24组共360轮均更快，种子间最大CV为2.53%。时间为180次调用合并中位数，加速比为配对几何平均。无profiler计时包含分配、前后向与同步。候选保留严格确定性填充，实际为2次融合计算加2次填充，总共4次GPU启动；原生BF16/FP32分别为13/9次。两卡16份独立trace已核验。算子使用合成输入，不含QK/PV、dropout、重计算及TP通信，不能换算整模型收益。</p><p><strong>真实attention接入：BF16输出边界。</strong> 直接移植全融合版未通过原容差：QK分数相同，FP32概率微差经BF16转换及PV/反向传播后，输出和Q/K/V梯度超限。修正版保留原生softmax规约，融合前后的cast/scale/mask；两卡24组真实MCore attention组件检查通过，覆盖第1/14/28层、层缩放开关及重计算，输出与Q/K/V梯度逐值相同，最大差0。这里使用合成QKV，尚未加载本轮完整7B权重。前述4.16–4.66×不能继承到该保真候选；完整更新、原生恢复与端到端测速仍待验收。</p><h2>下一阶段目标</h2><div class="table-wrap"><table><thead><tr><th>优先级</th><th>研究任务</th><th>交付与验收</th></tr></thead><tbody><tr><td>1</td><td>定位跨独立进程的embedding及连续更新差异；控制新增审计文件缓存</td><td>可复现的首个分歧证据；缓存写回前后内容与驻留验证，保留原数值标准</td></tr><tr><td>2</td><td>统一现有trace的算子、shape、搬运及同步归因；必要时用ixSYS补充短时间线</td><td>CPU offload关键路径与GPU热点表，明确统计分母和未归因项</td></tr><tr><td>3</td><td>保真融合已通过MCore组件检查；继续加载完整7B，验证连续更新与断点恢复</td><td>原三臂全状态与原生恢复门禁通过后，才做端到端计时</td></tr><tr><td>4</td><td>完成三臂全状态、SFT语义、原生保存恢复，再做正式对照</td><td>无profiler的step延迟、有效输入tokens/s、答案targets/s，沿用原三种子协议</td></tr></tbody></table></div><p>同组提供的7B/8B/4B原始trace、分析器及ixSYS资料用于交叉分析，既有工作归原作者。已独立核验172项文件哈希、复算四份SFT trace并通过分析器9项测试；7B/4B的BF16对齐未通过，8B仅通过短前向检查，不能直接继承其训练正确性或性能结论。截图中的8B GEMM形状不作为7B目标。</p><p><a href="#appendix-attention-integration">真实attention接入</a> · <a href="#appendix-fusion">融合实测与代码</a> · <a href="#appendix-operator">算子基准复核</a> · <a href="#appendix-plan">详细计划与验收标准</a> · <a href="#appendix-cpt">CPT正式结果</a> · <a href="#appendix-sft">SFT正式结果</a></p><p><a href="#report-top">下载离线单文件HTML</a> · <a href="https://github.com/yangpu-333/gpgpu-cake/blob/main/docs/project-overview-20261027.md">其他项目历史概览</a></p><hr><h2>完整内容与复核证据</h2><p>以下内容均在本文件内。表格用于阅读，折叠区保留完整关键复核JSON；也可从GitHub下载对应JSON。</p><a id="appendix-plan"></a><h2>详细研究计划与验收标准</h2><div class="table-wrap"><table><thead><tr><th>顺序</th><th>要做什么</th><th>交付与准入</th></tr></thead><tbody><tr><td>P0 数值与内存</td><td>固定初始权重、实际输入和RNG，沿embedding梯度→首步更新→次步前向定位跨独立进程差异；为新增自有审计pack做有界写回/退缓存</td><td>可复现的分歧证据；内容SHA、inode和驻留检查。保留旧参考、原容差与内存保护</td></tr><tr><td>P1 同口径分析</td><td>复用runtime关联、exclusive归因和区间并集方法分析现有trace；必要时用ixSYS采短CUDA/NVTX窗口</td><td>算子/shape热点、搬运及同步依赖表，明确分母与未归因项</td></tr><tr><td>P2 单一候选</td><td>已完成scale/mask/softmax隔离融合；下一步接入真实attention，核对重计算、反向和mask调用点；端到端继续研究offload回传与同步</td><td>先做接入前后逐层输出/梯度比较，再进入模型完整验收</td></tr><tr><td>P3 模型验收</td><td>三臂完整数值/SFT、原生恢复通过后，补必要的新trace与无profiler正式对照</td><td>分别报告step延迟、有效输入tokens/s及答案targets/s</td></tr></tbody></table></div><p>真实7B配置：官方9G7B_MHA，7,668,831,744参数、28层、hidden=3584、FFN=18944、28个MHA头；TP2、BF16、S2048、micro/global batch=1、CPU AdamW offload。数据为48,818条中文Alpaca；CPT监督全文，SFT只监督答案及结束标记。</p><p>attention目标为每rank <code>[1,14,S,S]</code>，覆盖S2048/S4096。GEMM先对FC1 <code>[S,3584]×[3584,18944]</code>、FC2 <code>[S,9472]×[9472,3584]</code>及对应反向建基准，再决定是否优化。</p><p>验收标准：</p><p>1. 三臂各3次真实S2048 BF16更新，每rank199组、3585字段；原FullAudit逐块有限性/CPU float64比较，<code>atol=3e-4, rtol=1e-3</code>。覆盖source、answer mask、逐token loss、RNG、scheduler和TP；新增raw独立核验。</p><p>2. 原生iteration2保存，native与optimized恢复并真实执行step3；995项恢复、1195项下一步字段，以及HDO调用、398个moment恢复和原12项负例均须通过。</p><p>3. 三种子×三臂轮换，每例120步、剔除20步，GPU同步计时取两rank慢端，13条loss精确一致。native/control种子CV≥10%须完整九例确认；两baseline所有配对更快且各几何平均收益&gt;1%，才接受收益。</p><p>4. GPU实验先核对资源与他人占用，保留NUMA/RSS/host保护。费用优先抵扣券；正式实验保留初始3小时，诊断与微基准不替代正式结果。</p><a id="appendix-cpt"></a><h2>CPT正式结果：双A100</h2><div class="table-wrap"><table><thead><tr><th>seed</th><th>arm</th><th>秒/步</th><th>有效输入tokens/s</th><th>保留步数</th></tr></thead><tbody><tr><td>63100</td><td>native</td><td>6.596589</td><td>310.463</td><td>100</td></tr><tr><td>63100</td><td>control</td><td>6.617616</td><td>309.477</td><td>100</td></tr><tr><td>63100</td><td>optimized</td><td>3.031859</td><td>675.493</td><td>100</td></tr><tr><td>63101</td><td>native</td><td>6.528131</td><td>313.719</td><td>100</td></tr><tr><td>63101</td><td>control</td><td>6.522060</td><td>314.011</td><td>100</td></tr><tr><td>63101</td><td>optimized</td><td>3.922645</td><td>522.097</td><td>100</td></tr><tr><td>63102</td><td>native</td><td>6.617288</td><td>309.492</td><td>100</td></tr><tr><td>63102</td><td>control</td><td>6.730243</td><td>304.298</td><td>100</td></tr><tr><td>63102</td><td>optimized</td><td>3.821173</td><td>535.961</td><td>100</td></tr></tbody></table></div><p>配对吞吐提升为84.4%。合并吞吐与逐种子几何平均是不同统计量；修复组种子均值CV为13.6%。该结果不外推到BI-V150。</p><p><a href="#appendix-cpt">独立JSON文件</a></p><details><summary>展开完整复核数据</summary><pre><code>{
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>九格7B研究报告</title><style>html{scroll-behavior:smooth}body{margin:0;background:#f6f7f9;color:#18232f;font:16px/1.75 system-ui,"Microsoft YaHei",sans-serif}main{max-width:1100px;margin:24px auto;padding:36px 44px;background:#fff;border:1px solid #e5e9ed;border-radius:12px}h1{font-size:30px;line-height:1.35}h2{font-size:22px;margin-top:36px;border-bottom:1px solid #e5e9ed;padding-bottom:8px}a{color:#145ac7}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:9px 12px;border:1px solid #dbe2ea;text-align:left}th{background:#eef3f8}.table-wrap{overflow-x:auto;margin:18px 0}code{background:#f1f4f7;padding:2px 4px;font-size:13px}pre{padding:18px;background:#101923;color:#d9e5f2;overflow:auto;max-height:640px}pre code{background:transparent;padding:0;color:inherit}summary{cursor:pointer;font-weight:600;color:#145ac7}details{margin:14px 0;padding:12px 16px;border:1px solid #dbe2ea;border-radius:7px}hr{border:0;border-top:1px solid #dbe2ea;margin:32px 0}@media(max-width:700px){main{margin:0;padding:20px 16px;border:0;border-radius:0}h1{font-size:25px}}</style></head><body><main><a id="report-top"></a><h1>九格7B训练与微调性能优化研究报告</h1><p>截至2026年10月28日。研究对象为官方九格7B，采用Megatron、TP2、BF16、S2048及CPU AdamW offload，覆盖继续预训练（CPT）与全参数指令微调（SFT）。</p><h2>已验证成果：双A100</h2><p>定位并修复FP32主参数在CPU复制、转换后丢失pinned属性的问题，改善主机到GPU的搬运与重叠，保持模型、数据和AdamW更新公式不变。</p><div class="table-wrap"><table><thead><tr><th>任务</th><th>step耗时：原生→修复</th><th>输入吞吐：原生→修复</th><th>配对吞吐提升</th></tr></thead><tbody><tr><td>CPT</td><td>6.581→3.592秒</td><td>311.2→570.2 tokens/s</td><td><strong>84.4%</strong></td></tr><tr><td>SFT</td><td>6.563→3.413秒</td><td>312.0→600.1 tokens/s</td><td><strong>92.9%</strong></td></tr></tbody></table></div><p>SFT配对时间线中，HtoD主机调用范围由约2.90秒/步降至4.33毫秒/步，CPU AdamW与HtoD重叠由0增至1.58秒/步，搬运量相同。三步全状态、原生保存恢复及真实下一步比较均通过，受检状态最大误差为0。</p><p>正式测量为三种子×三臂，每例120步、剔除前20步，关闭profiler，使用GPU同步计时及两rank慢端。提升为逐种子配对比的几何平均，与表内合并吞吐口径不同；CPT/SFT修复组种子均值CV分别为13.6%/9.24%。SFT答案监督吞吐为263.3→506.4 targets/s。</p><h2>国产GPU研究：双BI-V150</h2><p>完成CoreX 4.4真实7B迁移及三臂各35步采集，获得12个rank/window观测。现有证据支持三个研究判断：</p><p>- <strong>CPU offload与同步是端到端优先方向。</strong> GPU计算区间约1.70秒/步；本地moment候选optimizer范围仍约3.45秒，其中AdamW数学之外约2.11秒。12窗口未记录到CPU AdamW与HtoD重叠。</p><p>- <strong>NUMA预算必须覆盖完整工作集。</strong> 识别两rank约28.57GiB延后分配的FP32梯度及新增审计文件缓存，建立节点预算、实际页位置与容量验证方法。</p><p>- <strong>重复前反向不能替代连续训练验证。</strong> 输入与RNG一致时，捕获到embedding梯度微差及后续传播；严格模式固定权重16次重复通过，连续更新与旧参考的兼容检查仍未通过。</p><p>上述时间来自profiler窗口，仅用于归因；范围存在重叠，不可相加或换算正式加速比。BI-V150原执行配置已通过完整数值和原生恢复；新增NUMA/严格路径尚未完成验收，<strong>目前没有新增BI-V150正式端到端加速结论</strong>。</p><p><strong>独立算子结果：FP32输出口径。</strong> 在现有两张BI-V150顺序完成24个目标用例、76个边界用例及30项负例控制；输出与输入梯度的全部元素对照原生及独立CPU双精度参考，保留原容差并增加相对L2约束。</p><div class="table-wrap"><table><thead><tr><th>S</th><th>输入</th><th>原生→融合毫秒</th><th>配对加速比</th></tr></thead><tbody><tr><td>2048</td><td>bfloat16</td><td>11.440→2.752</td><td><strong>4.16×</strong></td></tr><tr><td>2048</td><td>float32</td><td>9.399→3.241</td><td><strong>2.90×</strong></td></tr><tr><td>4096</td><td>bfloat16</td><td>44.226→9.466</td><td><strong>4.66×</strong></td></tr><tr><td>4096</td><td>float32</td><td>36.398→11.485</td><td><strong>3.16×</strong></td></tr></tbody></table></div><p>采用两卡、三种子、15轮ABBA/BAAB配对；24组共360轮均更快，种子间最大CV为2.53%。时间为180次调用合并中位数，加速比为配对几何平均。无profiler计时包含分配、前后向与同步。候选保留严格确定性填充，实际为2次融合计算加2次填充，总共4次GPU启动；原生BF16/FP32分别为13/9次。两卡16份独立trace已核验。算子使用合成输入，不含QK/PV、dropout、重计算及TP通信，不能换算整模型收益。</p><p><strong>真实attention接入：BF16输出边界。</strong> 直接移植全融合版未通过原容差：QK分数相同，FP32概率微差经BF16转换及PV/反向传播后，输出和Q/K/V梯度超限。修正版保留原生softmax规约，融合前后的cast/scale/mask；两卡24组真实MCore attention组件检查通过，覆盖第1/14/28层、层缩放开关及重计算，输出与Q/K/V梯度逐值相同，最大差0。这里使用合成QKV，尚未加载本轮完整7B权重。前述4.16–4.66×不能继承到该保真候选；完整更新、原生恢复与端到端测速仍待验收。</p><p><strong>整模型内存布局已完成容量实测。</strong> 两rank各199组、38.35亿元素的master/梯度和398个moment采样均在Node0，一次真实CPU AdamW更新完成，自有RSS峰值164GiB。依据实测与历史整模型峰值，启动预算改为Node0空闲291GiB、Node1空闲28GiB，运行保护和数值容差保留。按最新授权已直接启动真实7B，当前native初始化和全状态审计进行中，运行16GiB余量等保护保留；三臂连续更新、原生恢复和端到端收益仍未验收。</p><h2>下一阶段目标</h2><div class="table-wrap"><table><thead><tr><th>优先级</th><th>研究任务</th><th>交付与验收</th></tr></thead><tbody><tr><td>1</td><td>定位跨独立进程的embedding及连续更新差异；控制新增审计文件缓存</td><td>可复现的首个分歧证据；缓存写回前后内容与驻留验证，保留原数值标准</td></tr><tr><td>2</td><td>统一现有trace的算子、shape、搬运及同步归因；必要时用ixSYS补充短时间线</td><td>CPU offload关键路径与GPU热点表，明确统计分母和未归因项</td></tr><tr><td>3</td><td>保真融合已通过MCore组件检查；继续加载完整7B，验证连续更新与断点恢复</td><td>原三臂全状态与原生恢复门禁通过后，才做端到端计时</td></tr><tr><td>4</td><td>完成三臂全状态、SFT语义、原生保存恢复，再做正式对照</td><td>无profiler的step延迟、有效输入tokens/s、答案targets/s，沿用原三种子协议</td></tr></tbody></table></div><p>同组提供的7B/8B/4B原始trace、分析器及ixSYS资料用于交叉分析，既有工作归原作者。已独立核验172项文件哈希、复算四份SFT trace并通过分析器9项测试；7B/4B的BF16对齐未通过，8B仅通过短前向检查，不能直接继承其训练正确性或性能结论。截图中的8B GEMM形状不作为7B目标。</p><p><a href="#appendix-attention-integration">真实attention接入</a> · <a href="#appendix-fusion">融合实测与代码</a> · <a href="#appendix-operator">算子基准复核</a> · <a href="#appendix-plan">详细计划与验收标准</a> · <a href="#appendix-cpt">CPT正式结果</a> · <a href="#appendix-sft">SFT正式结果</a></p><p><a href="#report-top">下载离线单文件HTML</a> · <a href="https://github.com/yangpu-333/gpgpu-cake/blob/main/docs/project-overview-20261027.md">其他项目历史概览</a></p><hr><h2>完整内容与复核证据</h2><p>以下内容均在本文件内。表格用于阅读，折叠区保留完整关键复核JSON；也可从GitHub下载对应JSON。</p><a id="appendix-plan"></a><h2>详细研究计划与验收标准</h2><div class="table-wrap"><table><thead><tr><th>顺序</th><th>要做什么</th><th>交付与准入</th></tr></thead><tbody><tr><td>P0 数值与内存</td><td>固定初始权重、实际输入和RNG，沿embedding梯度→首步更新→次步前向定位跨独立进程差异；为新增自有审计pack做有界写回/退缓存</td><td>可复现的分歧证据；内容SHA、inode和驻留检查。保留旧参考、原容差与内存保护</td></tr><tr><td>P1 同口径分析</td><td>复用runtime关联、exclusive归因和区间并集方法分析现有trace；必要时用ixSYS采短CUDA/NVTX窗口</td><td>算子/shape热点、搬运及同步依赖表，明确分母与未归因项</td></tr><tr><td>P2 单一候选</td><td>已完成scale/mask/softmax隔离融合；下一步接入真实attention，核对重计算、反向和mask调用点；端到端继续研究offload回传与同步</td><td>先做接入前后逐层输出/梯度比较，再进入模型完整验收</td></tr><tr><td>P3 模型验收</td><td>三臂完整数值/SFT、原生恢复通过后，补必要的新trace与无profiler正式对照</td><td>分别报告step延迟、有效输入tokens/s及答案targets/s</td></tr></tbody></table></div><p>真实7B配置：官方9G7B_MHA，7,668,831,744参数、28层、hidden=3584、FFN=18944、28个MHA头；TP2、BF16、S2048、micro/global batch=1、CPU AdamW offload。数据为48,818条中文Alpaca；CPT监督全文，SFT只监督答案及结束标记。</p><p>attention目标为每rank <code>[1,14,S,S]</code>，覆盖S2048/S4096。GEMM先对FC1 <code>[S,3584]×[3584,18944]</code>、FC2 <code>[S,9472]×[9472,3584]</code>及对应反向建基准，再决定是否优化。</p><p>验收标准：</p><p>1. 三臂各3次真实S2048 BF16更新，每rank199组、3585字段；原FullAudit逐块有限性/CPU float64比较，<code>atol=3e-4, rtol=1e-3</code>。覆盖source、answer mask、逐token loss、RNG、scheduler和TP；新增raw独立核验。</p><p>2. 原生iteration2保存，native与optimized恢复并真实执行step3；995项恢复、1195项下一步字段，以及HDO调用、398个moment恢复和原12项负例均须通过。</p><p>3. 三种子×三臂轮换，每例120步、剔除20步，GPU同步计时取两rank慢端，13条loss精确一致。native/control种子CV≥10%须完整九例确认；两baseline所有配对更快且各几何平均收益&gt;1%，才接受收益。</p><p>4. GPU实验先核对资源与他人占用，保留NUMA/RSS/host保护。费用优先抵扣券；正式实验保留初始3小时，诊断与微基准不替代正式结果。</p><a id="appendix-cpt"></a><h2>CPT正式结果：双A100</h2><div class="table-wrap"><table><thead><tr><th>seed</th><th>arm</th><th>秒/步</th><th>有效输入tokens/s</th><th>保留步数</th></tr></thead><tbody><tr><td>63100</td><td>native</td><td>6.596589</td><td>310.463</td><td>100</td></tr><tr><td>63100</td><td>control</td><td>6.617616</td><td>309.477</td><td>100</td></tr><tr><td>63100</td><td>optimized</td><td>3.031859</td><td>675.493</td><td>100</td></tr><tr><td>63101</td><td>native</td><td>6.528131</td><td>313.719</td><td>100</td></tr><tr><td>63101</td><td>control</td><td>6.522060</td><td>314.011</td><td>100</td></tr><tr><td>63101</td><td>optimized</td><td>3.922645</td><td>522.097</td><td>100</td></tr><tr><td>63102</td><td>native</td><td>6.617288</td><td>309.492</td><td>100</td></tr><tr><td>63102</td><td>control</td><td>6.730243</td><td>304.298</td><td>100</td></tr><tr><td>63102</td><td>optimized</td><td>3.821173</td><td>535.961</td><td>100</td></tr></tbody></table></div><p>配对吞吐提升为84.4%。合并吞吐与逐种子几何平均是不同统计量；修复组种子均值CV为13.6%。该结果不外推到BI-V150。</p><p><a href="#appendix-cpt">独立JSON文件</a></p><details><summary>展开完整复核数据</summary><pre><code>{
   &quot;schema&quot;: &quot;jiuge7b-pinning-local-formal-review-v1&quot;,
   &quot;all_9_cases_and_both_actual_ranks_verified&quot;: true,
   &quot;all_adamw_states_reached_120&quot;: true,
@@ -17460,1641 +17460,1675 @@
   &quot;Full-model latency and effective-token/answer-target throughput&quot;
  ]
 }</code></pre></details><a id="appendix-attention-integration"></a><h2>真实attention接入：精度边界与保真候选</h2><div class="table-wrap"><table><thead><tr><th>实现/阶段</th><th>检查对象</th><th>实际结果</th></tr></thead><tbody><tr><td>原全融合直接接入</td><td>MCore原生QK→FP32 softmax→BF16→PV及反向</td><td>未过原容差；输出最大差0.001953125，Q/K/V梯度最大差至0.00390625</td></tr><tr><td>原生softmax保真边界融合</td><td>两卡×层1/14/28×层缩放开关×重计算开关，共24组</td><td>输出与Q/K/V共96项全元素比较及SHA均相同，最大差0</td></tr><tr><td>共同Node0状态布局</td><td>两rank小型CPU AdamW各3步、每步4项状态</td><td>与原生逐值相同；moment页位于Node0，训练亲和性恢复；不是完整容量证明</td></tr><tr><td>本轮完整7B更新、原生恢复与端到端</td><td>完整权重与实际SFT、三臂及原生保存恢复</td><td>尚未开始，等待新布局容量证明与内存准入确认</td></tr></tbody></table></div><p>真实MCore调用已在QK <code>baddbmm</code>中应用缩放，并将softmax概率转回BF16；适配器只使用原实例的附加层系数，不重复乘<code>1/√128</code>，保留输出dtype、dropout/RNG及重计算边界。</p><p>在固定首例中，原全融合与原生QK分数逐值相同；FP32概率最大差约1.19e-7，经BF16转换后有528/58,720,256个概率值不同，后续attention输出和Q/K/V梯度超原门槛。差异发生位置有完整元素计数与SHA，不据此指认某条硬件指令。</p><p>因此当前候选保留已安装原生softmax规约算法，以两个Triton kernel融合前后的cast/scale/mask及相应反向。它保留了真实attention组件的逐值结果；其性能尚未测定，不能继承前一节独立FP32输出子链的4.16–4.66×加速。</p><p>本阶段是实际MCore模块、真实TP2分组与7B形状的合成QKV检查，没有加载完整7B权重或执行CPU offload更新。<code>atol=3e-4, rtol=1e-3</code>保持不变。完整验收仍要求三臂各3更新、每rank3585字段、完整SFT语义、原生iteration2保存和真实step3恢复；这些通过后才进行端到端配对计时。</p><p>仅绑CPU不足以保证内存页归属：小型CPU检查捕获了分配器复用其他节点页面的问题，随后使用已有源码绑定的两处moment零值工厂实现定点分配。完整容量仍须单独验证，整模型原80GiB Node1启动要求当前保留。</p><p><a href="https://github.com/yangpu-333/gpgpu-cake/blob/main/experiments/jiuge_training/attention_integration_20261028_v2/attention_fusion_adapter.py">MCore适配器</a> · <a href="https://github.com/yangpu-333/gpgpu-cake/blob/main/experiments/jiuge_training/attention_integration_20261028_v2/fused_scale_mask.py">边界融合实现</a> · <a href="https://github.com/yangpu-333/gpgpu-cake/blob/main/experiments/jiuge_training/attention_integration_20261028_v2/actual_attention_probe.py">真实attention检查入口</a></p><p><a href="#appendix-attention-integration">独立JSON文件</a></p><details><summary>展开完整复核数据</summary><pre><code>{
- &quot;schema&quot;: &quot;real-MCore-attention-component-independent-review-v1&quot;,
- &quot;date&quot;: &quot;2026-10-28&quot;,
- &quot;component_accepted&quot;: true,
- &quot;full_model_accepted&quot;: false,
- &quot;native_resume_accepted&quot;: false,
- &quot;formal_e2e_performance_accepted&quot;: false,
- &quot;scope&quot;: &quot;actual MCore DotProductAttention on TP2 with syntheticQKV at real7B shape [2048,1,14,128]; no full7B weights or CPUoptimizer updates&quot;,
- &quot;candidate&quot;: &quot;native-softmax with fused cast/scale/mask forward/backward boundaries&quot;,
- &quot;full_fusion_initial_candidate_accepted&quot;: false,
- &quot;full_fusion_failure_preserved&quot;: true,
- &quot;atol&quot;: 0.0003,
- &quot;rtol&quot;: 0.001,
- &quot;numerical_tolerances_not_relaxed&quot;: true,
- &quot;closed_cases&quot;: 24,
- &quot;checked_output_QKV_fields&quot;: 96,
- &quot;checked_elements&quot;: 352321536,
- &quot;max_abs&quot;: 0.0,
- &quot;all_output_QKV_SHA_equal&quot;: true,
- &quot;details&quot;: [
-  {
-   &quot;rank&quot;: 0,
-   &quot;cases&quot;: 12,
-   &quot;output_and_QKV_exact&quot;: true
-  },
-  {
-   &quot;rank&quot;: 1,
-   &quot;cases&quot;: 12,
-   &quot;output_and_QKV_exact&quot;: true
-  }
- ],
- &quot;boundary_diagnostic&quot;: [
-  {
-   &quot;rank&quot;: 0,
-   &quot;full_fusion&quot;: {
-    &quot;boundaries&quot;: {
-     &quot;QK_scores&quot;: {
-      &quot;elements&quot;: 58720256,
-      &quot;exact_different_elements&quot;: 0,
-      &quot;max_abs&quot;: 0.0,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
-      &quot;fused_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
-      &quot;passed&quot;: true
-     },
-     &quot;FP32_probabilities&quot;: {
-      &quot;elements&quot;: 58720256,
-      &quot;exact_different_elements&quot;: 20744589,
-      &quot;max_abs&quot;: 1.1920928955078125e-07,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;4a790cb6fea166e9ab5b3d7d55e1321cca6e58fbcb9ce956999aba2e39848dbc&quot;,
-      &quot;fused_SHA256&quot;: &quot;631716ba35b3d66eecdd05ad643c54e30550cc7ed429c3b975163d205f2df96e&quot;,
-      &quot;passed&quot;: true
-     },
-     &quot;BF16_probabilities&quot;: {
-      &quot;elements&quot;: 58720256,
-      &quot;exact_different_elements&quot;: 528,
-      &quot;max_abs&quot;: 6.103515625e-05,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;cb7847ae94fd41c3728b598a9401c96c73e180d79a8f3f589f3e7bc63fb04f1f&quot;,
-      &quot;fused_SHA256&quot;: &quot;6d3edb15abde560ad69b69f30b2a1f48ef98d982be96054f6d8d22c9aa3a98b2&quot;,
-      &quot;passed&quot;: true
-     }
-    },
-    &quot;attention_output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 2121,
-     &quot;max_abs&quot;: 0.001953125,
-     &quot;bad_original_tolerance&quot;: 106,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;786718ee172201d4bc7882837cdf419aba6e43754603e4f8a384e5555fa90231&quot;,
-     &quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;passed&quot;: false
-    },
-    &quot;QKV_gradients&quot;: {
-     &quot;dq&quot;: {
-      &quot;elements&quot;: 3670016,
-      &quot;exact_different_elements&quot;: 1964,
-      &quot;max_abs&quot;: 0.001953125,
-      &quot;bad_original_tolerance&quot;: 108,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;8948319caaebc0a30749e14565cc45e7f7ff29631239575757777a9a08d05e03&quot;,
-      &quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-      &quot;passed&quot;: false
-     },
-     &quot;dk&quot;: {
-      &quot;elements&quot;: 3670016,
-      &quot;exact_different_elements&quot;: 1752,
-      &quot;max_abs&quot;: 0.00390625,
-      &quot;bad_original_tolerance&quot;: 124,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;776385bd8a519ed9b506aa5a0b2336be19cbca11f6305f14465ce420814244e5&quot;,
-      &quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-      &quot;passed&quot;: false
-     },
-     &quot;dv&quot;: {
-      &quot;elements&quot;: 3670016,
-      &quot;exact_different_elements&quot;: 2717,
-      &quot;max_abs&quot;: 0.00390625,
-      &quot;bad_original_tolerance&quot;: 124,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;b29f2ee8f1d0ec69cd1bdef7df0f56df7e8185a560e2a97430463118206efaed&quot;,
-      &quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-      &quot;passed&quot;: false
-     }
-    },
-    &quot;RNG_equal&quot;: true
-   },
-   &quot;native_softmax_boundary_fusion&quot;: {
-    &quot;boundaries&quot;: {
-     &quot;QK_scores&quot;: {
-      &quot;elements&quot;: 58720256,
-      &quot;exact_different_elements&quot;: 0,
-      &quot;max_abs&quot;: 0.0,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
-      &quot;fused_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
-      &quot;passed&quot;: true
-     },
-     &quot;FP32_probabilities&quot;: {
-      &quot;elements&quot;: 58720256,
-      &quot;exact_different_elements&quot;: 0,
-      &quot;max_abs&quot;: 0.0,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;631716ba35b3d66eecdd05ad643c54e30550cc7ed429c3b975163d205f2df96e&quot;,
-      &quot;fused_SHA256&quot;: &quot;631716ba35b3d66eecdd05ad643c54e30550cc7ed429c3b975163d205f2df96e&quot;,
-      &quot;passed&quot;: true
-     },
-     &quot;BF16_probabilities&quot;: {
-      &quot;elements&quot;: 58720256,
-      &quot;exact_different_elements&quot;: 0,
-      &quot;max_abs&quot;: 0.0,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;6d3edb15abde560ad69b69f30b2a1f48ef98d982be96054f6d8d22c9aa3a98b2&quot;,
-      &quot;fused_SHA256&quot;: &quot;6d3edb15abde560ad69b69f30b2a1f48ef98d982be96054f6d8d22c9aa3a98b2&quot;,
-      &quot;passed&quot;: true
-     }
-    },
-    &quot;attention_output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;QKV_gradients&quot;: {
-     &quot;dq&quot;: {
-      &quot;elements&quot;: 3670016,
-      &quot;exact_different_elements&quot;: 0,
-      &quot;max_abs&quot;: 0.0,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-      &quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-      &quot;passed&quot;: true
-     },
-     &quot;dk&quot;: {
-      &quot;elements&quot;: 3670016,
-      &quot;exact_different_elements&quot;: 0,
-      &quot;max_abs&quot;: 0.0,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-      &quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-      &quot;passed&quot;: true
-     },
-     &quot;dv&quot;: {
-      &quot;elements&quot;: 3670016,
-      &quot;exact_different_elements&quot;: 0,
-      &quot;max_abs&quot;: 0.0,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-      &quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-      &quot;passed&quot;: true
-     }
-    },
-    &quot;RNG_equal&quot;: true
-   }
-  },
-  {
-   &quot;rank&quot;: 1,
-   &quot;full_fusion&quot;: {
-    &quot;boundaries&quot;: {
-     &quot;QK_scores&quot;: {
-      &quot;elements&quot;: 58720256,
-      &quot;exact_different_elements&quot;: 0,
-      &quot;max_abs&quot;: 0.0,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
-      &quot;fused_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
-      &quot;passed&quot;: true
-     },
-     &quot;FP32_probabilities&quot;: {
-      &quot;elements&quot;: 58720256,
-      &quot;exact_different_elements&quot;: 20744589,
-      &quot;max_abs&quot;: 1.1920928955078125e-07,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;4a790cb6fea166e9ab5b3d7d55e1321cca6e58fbcb9ce956999aba2e39848dbc&quot;,
-      &quot;fused_SHA256&quot;: &quot;631716ba35b3d66eecdd05ad643c54e30550cc7ed429c3b975163d205f2df96e&quot;,
-      &quot;passed&quot;: true
-     },
-     &quot;BF16_probabilities&quot;: {
-      &quot;elements&quot;: 58720256,
-      &quot;exact_different_elements&quot;: 528,
-      &quot;max_abs&quot;: 6.103515625e-05,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;cb7847ae94fd41c3728b598a9401c96c73e180d79a8f3f589f3e7bc63fb04f1f&quot;,
-      &quot;fused_SHA256&quot;: &quot;6d3edb15abde560ad69b69f30b2a1f48ef98d982be96054f6d8d22c9aa3a98b2&quot;,
-      &quot;passed&quot;: true
-     }
-    },
-    &quot;attention_output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 2121,
-     &quot;max_abs&quot;: 0.001953125,
-     &quot;bad_original_tolerance&quot;: 106,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;786718ee172201d4bc7882837cdf419aba6e43754603e4f8a384e5555fa90231&quot;,
-     &quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;passed&quot;: false
-    },
-    &quot;QKV_gradients&quot;: {
-     &quot;dq&quot;: {
-      &quot;elements&quot;: 3670016,
-      &quot;exact_different_elements&quot;: 1964,
-      &quot;max_abs&quot;: 0.001953125,
-      &quot;bad_original_tolerance&quot;: 108,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;8948319caaebc0a30749e14565cc45e7f7ff29631239575757777a9a08d05e03&quot;,
-      &quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-      &quot;passed&quot;: false
-     },
-     &quot;dk&quot;: {
-      &quot;elements&quot;: 3670016,
-      &quot;exact_different_elements&quot;: 1752,
-      &quot;max_abs&quot;: 0.00390625,
-      &quot;bad_original_tolerance&quot;: 124,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;776385bd8a519ed9b506aa5a0b2336be19cbca11f6305f14465ce420814244e5&quot;,
-      &quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-      &quot;passed&quot;: false
-     },
-     &quot;dv&quot;: {
-      &quot;elements&quot;: 3670016,
-      &quot;exact_different_elements&quot;: 2717,
-      &quot;max_abs&quot;: 0.00390625,
-      &quot;bad_original_tolerance&quot;: 124,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;b29f2ee8f1d0ec69cd1bdef7df0f56df7e8185a560e2a97430463118206efaed&quot;,
-      &quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-      &quot;passed&quot;: false
-     }
-    },
-    &quot;RNG_equal&quot;: true
-   },
-   &quot;native_softmax_boundary_fusion&quot;: {
-    &quot;boundaries&quot;: {
-     &quot;QK_scores&quot;: {
-      &quot;elements&quot;: 58720256,
-      &quot;exact_different_elements&quot;: 0,
-      &quot;max_abs&quot;: 0.0,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
-      &quot;fused_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
-      &quot;passed&quot;: true
-     },
-     &quot;FP32_probabilities&quot;: {
-      &quot;elements&quot;: 58720256,
-      &quot;exact_different_elements&quot;: 0,
-      &quot;max_abs&quot;: 0.0,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;631716ba35b3d66eecdd05ad643c54e30550cc7ed429c3b975163d205f2df96e&quot;,
-      &quot;fused_SHA256&quot;: &quot;631716ba35b3d66eecdd05ad643c54e30550cc7ed429c3b975163d205f2df96e&quot;,
-      &quot;passed&quot;: true
-     },
-     &quot;BF16_probabilities&quot;: {
-      &quot;elements&quot;: 58720256,
-      &quot;exact_different_elements&quot;: 0,
-      &quot;max_abs&quot;: 0.0,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;6d3edb15abde560ad69b69f30b2a1f48ef98d982be96054f6d8d22c9aa3a98b2&quot;,
-      &quot;fused_SHA256&quot;: &quot;6d3edb15abde560ad69b69f30b2a1f48ef98d982be96054f6d8d22c9aa3a98b2&quot;,
-      &quot;passed&quot;: true
-     }
-    },
-    &quot;attention_output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;QKV_gradients&quot;: {
-     &quot;dq&quot;: {
-      &quot;elements&quot;: 3670016,
-      &quot;exact_different_elements&quot;: 0,
-      &quot;max_abs&quot;: 0.0,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-      &quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-      &quot;passed&quot;: true
-     },
-     &quot;dk&quot;: {
-      &quot;elements&quot;: 3670016,
-      &quot;exact_different_elements&quot;: 0,
-      &quot;max_abs&quot;: 0.0,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-      &quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-      &quot;passed&quot;: true
-     },
-     &quot;dv&quot;: {
-      &quot;elements&quot;: 3670016,
-      &quot;exact_different_elements&quot;: 0,
-      &quot;max_abs&quot;: 0.0,
-      &quot;bad_original_tolerance&quot;: 0,
-      &quot;nonfinite&quot;: 0,
-      &quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-      &quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-      &quot;passed&quot;: true
-     }
-    },
-    &quot;RNG_equal&quot;: true
-   }
-  }
- ],
- &quot;source_SHA256&quot;: {
-  &quot;actual_attention_probe.py&quot;: &quot;eb4b7094ced682760f1ee81eaef2d85f7c73c1a46bbb352480410c644e608e24&quot;,
-  &quot;attention_fusion_adapter.py&quot;: &quot;c1d30f33be782757ae5118511c9cfd84514078cba3735b1317319076a8d4133b&quot;,
-  &quot;corex_process_guard_data.py&quot;: &quot;a8f86db9e75eb353121c346011428400c4d4d1208e35a5d6c12ce48009dfd058&quot;,
-  &quot;fused_scale_mask.py&quot;: &quot;d1c9b7ea0f5b4e019854d20beb3f3e47d52ace2cd93254fbac771510978c178b&quot;,
-  &quot;fused_scale_mask_softmax.py&quot;: &quot;093e3a90fc652b7652938ced212107ada5861bceaccbe8d8bdcc008b29e6cd58&quot;,
-  &quot;supervise_component.py&quot;: &quot;9a420a085e05d50143ea53a028c0c8790946acb649372e817997ee0982852d41&quot;
- },
- &quot;both_ends_key_SHA256&quot;: &quot;4301f21b7c20609388de96ac1bfb2856f1ffdbd8ec73fc6571184fa371f02576&quot;,
- &quot;all_expected_recomputation_and_layer_scaling_cases_passed&quot;: true,
- &quot;first_observed_divergence_in_captured_component&quot;: &quot;QK scores identical; FP32 softmax probabilities differ; BF16 probabilities differ; downstream attention output and QKV gradients exceed original tolerance. Does not identify a specific hardware instruction.&quot;,
- &quot;raw_tensor_values_downloaded&quot;: false,
- &quot;local_independent_review_scope&quot;: &quot;coverage,source bindings,all comparison summaries/SHA and original thresholds; numeric full arrays compared remotely on CPU float64&quot;,
- &quot;scope_note&quot;: &quot;Actual unmodified MCore attention module and TP2 groups, syntheticQKV; complete official7B weights not loaded in this stage.&quot;,
- &quot;case_details&quot;: [
-  {
-   &quot;rank&quot;: 0,
-   &quot;layer_scaling&quot;: false,
-   &quot;layer&quot;: 1,
-   &quot;recompute&quot;: false,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: null,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 0,
-   &quot;layer_scaling&quot;: false,
-   &quot;layer&quot;: 1,
-   &quot;recompute&quot;: true,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: null,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 0,
-   &quot;layer_scaling&quot;: false,
-   &quot;layer&quot;: 14,
-   &quot;recompute&quot;: false,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: null,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
-     &quot;fused_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
-     &quot;fused_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
-     &quot;fused_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
-     &quot;fused_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 0,
-   &quot;layer_scaling&quot;: false,
-   &quot;layer&quot;: 14,
-   &quot;recompute&quot;: true,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: null,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
-     &quot;fused_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
-     &quot;fused_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
-     &quot;fused_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
-     &quot;fused_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 0,
-   &quot;layer_scaling&quot;: false,
-   &quot;layer&quot;: 28,
-   &quot;recompute&quot;: false,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: null,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
-     &quot;fused_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
-     &quot;fused_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
-     &quot;fused_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
-     &quot;fused_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 0,
-   &quot;layer_scaling&quot;: false,
-   &quot;layer&quot;: 28,
-   &quot;recompute&quot;: true,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: null,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
-     &quot;fused_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
-     &quot;fused_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
-     &quot;fused_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
-     &quot;fused_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 0,
-   &quot;layer_scaling&quot;: true,
-   &quot;layer&quot;: 1,
-   &quot;recompute&quot;: false,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: 1,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 0,
-   &quot;layer_scaling&quot;: true,
-   &quot;layer&quot;: 1,
-   &quot;recompute&quot;: true,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: 1,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 0,
-   &quot;layer_scaling&quot;: true,
-   &quot;layer&quot;: 14,
-   &quot;recompute&quot;: false,
-   &quot;actual_QK_alpha&quot;: 0.006313453403451317,
-   &quot;additional_softmax_scale&quot;: 14,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
-     &quot;fused_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
-     &quot;fused_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
-     &quot;fused_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
-     &quot;fused_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 0,
-   &quot;layer_scaling&quot;: true,
-   &quot;layer&quot;: 14,
-   &quot;recompute&quot;: true,
-   &quot;actual_QK_alpha&quot;: 0.006313453403451317,
-   &quot;additional_softmax_scale&quot;: 14,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
-     &quot;fused_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
-     &quot;fused_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
-     &quot;fused_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
-     &quot;fused_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 0,
-   &quot;layer_scaling&quot;: true,
-   &quot;layer&quot;: 28,
-   &quot;recompute&quot;: false,
-   &quot;actual_QK_alpha&quot;: 0.0031567267017256584,
-   &quot;additional_softmax_scale&quot;: 28,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
-     &quot;fused_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
-     &quot;fused_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
-     &quot;fused_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
-     &quot;fused_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 0,
-   &quot;layer_scaling&quot;: true,
-   &quot;layer&quot;: 28,
-   &quot;recompute&quot;: true,
-   &quot;actual_QK_alpha&quot;: 0.0031567267017256584,
-   &quot;additional_softmax_scale&quot;: 28,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
-     &quot;fused_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
-     &quot;fused_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
-     &quot;fused_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
-     &quot;fused_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 1,
-   &quot;layer_scaling&quot;: false,
-   &quot;layer&quot;: 1,
-   &quot;recompute&quot;: false,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: null,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 1,
-   &quot;layer_scaling&quot;: false,
-   &quot;layer&quot;: 1,
-   &quot;recompute&quot;: true,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: null,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 1,
-   &quot;layer_scaling&quot;: false,
-   &quot;layer&quot;: 14,
-   &quot;recompute&quot;: false,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: null,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
-     &quot;fused_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
-     &quot;fused_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
-     &quot;fused_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
-     &quot;fused_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 1,
-   &quot;layer_scaling&quot;: false,
-   &quot;layer&quot;: 14,
-   &quot;recompute&quot;: true,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: null,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
-     &quot;fused_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
-     &quot;fused_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
-     &quot;fused_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
-     &quot;fused_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 1,
-   &quot;layer_scaling&quot;: false,
-   &quot;layer&quot;: 28,
-   &quot;recompute&quot;: false,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: null,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
-     &quot;fused_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
-     &quot;fused_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
-     &quot;fused_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
-     &quot;fused_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 1,
-   &quot;layer_scaling&quot;: false,
-   &quot;layer&quot;: 28,
-   &quot;recompute&quot;: true,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: null,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
-     &quot;fused_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
-     &quot;fused_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
-     &quot;fused_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
-     &quot;fused_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 1,
-   &quot;layer_scaling&quot;: true,
-   &quot;layer&quot;: 1,
-   &quot;recompute&quot;: false,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: 1,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 1,
-   &quot;layer_scaling&quot;: true,
-   &quot;layer&quot;: 1,
-   &quot;recompute&quot;: true,
-   &quot;actual_QK_alpha&quot;: 0.08838834764831843,
-   &quot;additional_softmax_scale&quot;: 1,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 1,
-   &quot;layer_scaling&quot;: true,
-   &quot;layer&quot;: 14,
-   &quot;recompute&quot;: false,
-   &quot;actual_QK_alpha&quot;: 0.006313453403451317,
-   &quot;additional_softmax_scale&quot;: 14,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
-     &quot;fused_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
-     &quot;fused_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
-     &quot;fused_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
-     &quot;fused_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 1,
-   &quot;layer_scaling&quot;: true,
-   &quot;layer&quot;: 14,
-   &quot;recompute&quot;: true,
-   &quot;actual_QK_alpha&quot;: 0.006313453403451317,
-   &quot;additional_softmax_scale&quot;: 14,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
-     &quot;fused_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
-     &quot;fused_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
-     &quot;fused_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
-     &quot;fused_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 1,
-   &quot;layer_scaling&quot;: true,
-   &quot;layer&quot;: 28,
-   &quot;recompute&quot;: false,
-   &quot;actual_QK_alpha&quot;: 0.0031567267017256584,
-   &quot;additional_softmax_scale&quot;: 28,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
-     &quot;fused_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
-     &quot;fused_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
-     &quot;fused_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
-     &quot;fused_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  },
-  {
-   &quot;rank&quot;: 1,
-   &quot;layer_scaling&quot;: true,
-   &quot;layer&quot;: 28,
-   &quot;recompute&quot;: true,
-   &quot;actual_QK_alpha&quot;: 0.0031567267017256584,
-   &quot;additional_softmax_scale&quot;: 28,
-   &quot;metrics&quot;: {
-    &quot;output&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
-     &quot;fused_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dq&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
-     &quot;fused_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dk&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
-     &quot;fused_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
-     &quot;passed&quot;: true
-    },
-    &quot;dv&quot;: {
-     &quot;elements&quot;: 3670016,
-     &quot;exact_different_elements&quot;: 0,
-     &quot;max_abs&quot;: 0.0,
-     &quot;bad_original_tolerance&quot;: 0,
-     &quot;nonfinite&quot;: 0,
-     &quot;native_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
-     &quot;fused_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
-     &quot;passed&quot;: true
-    }
-   },
-   &quot;RNG_equal&quot;: true,
-   &quot;passed&quot;: true
-  }
- ],
- &quot;memory_placement_fixture&quot;: {
-  &quot;CPU_rank_fixtures&quot;: 2,
-  &quot;parameter_elements&quot;: 131072,
-  &quot;steps_each&quot;: 3,
-  &quot;fields_each_step&quot;: 4,
-  &quot;max_abs&quot;: 0,
-  &quot;moments_sampled_on_node0&quot;: true,
-  &quot;affinity_restored&quot;: true,
-  &quot;CUDA_initialized&quot;: false,
-  &quot;both_ends_key_SHA256&quot;: &quot;7a0d415aa9a5e8118b237116f78228c632ae0113cf971e46355b0d4f96b10ee6&quot;,
-  &quot;source_SHA256&quot;: {
-   &quot;node0_optimizer_state.py&quot;: &quot;0f45bb906ceacbf1df1e3d3f785595238aa1edd75f57d50c56d04293fd0d45da&quot;,
-   &quot;corex_process_guard_data.py&quot;: &quot;a8f86db9e75eb353121c346011428400c4d4d1208e35a5d6c12ce48009dfd058&quot;,
-   &quot;corex_adamw_local_moments.py&quot;: &quot;beacd9b0a3004e99407cd1d60cb681c4fb426bad7fc132f85bbff2f4f8ae490d&quot;
-  },
-  &quot;scope&quot;: &quot;small native-AdamW API/math/locality fixture; not7B or full-capacity acceptance&quot;
- },
- &quot;full_model_validation_status&quot;: {
-  &quot;weights_and_three_real_updates_started&quot;: false,
-  &quot;native_checkpoint_resume_started&quot;: false,
-  &quot;e2e_measurement_started&quot;: false,
-  &quot;full_model_Node1_initial_admission_GiB&quot;: 80,
-  &quot;resource_layout_capacity_and_admission_review_pending&quot;: true,
-  &quot;original_numeric_gate_unchanged&quot;: true
- }
+&quot;schema&quot;: &quot;real-MCore-attention-component-independent-review-v1&quot;,
+&quot;date&quot;: &quot;2026-10-28&quot;,
+&quot;component_accepted&quot;: true,
+&quot;full_model_accepted&quot;: false,
+&quot;native_resume_accepted&quot;: false,
+&quot;formal_e2e_performance_accepted&quot;: false,
+&quot;scope&quot;: &quot;actual MCore DotProductAttention on TP2 with syntheticQKV at real7B shape [2048,1,14,128]; no full7B weights or CPUoptimizer updates&quot;,
+&quot;candidate&quot;: &quot;native-softmax with fused cast/scale/mask forward/backward boundaries&quot;,
+&quot;full_fusion_initial_candidate_accepted&quot;: false,
+&quot;full_fusion_failure_preserved&quot;: true,
+&quot;atol&quot;: 0.0003,
+&quot;rtol&quot;: 0.001,
+&quot;numerical_tolerances_not_relaxed&quot;: true,
+&quot;closed_cases&quot;: 24,
+&quot;checked_output_QKV_fields&quot;: 96,
+&quot;checked_elements&quot;: 352321536,
+&quot;max_abs&quot;: 0.0,
+&quot;all_output_QKV_SHA_equal&quot;: true,
+&quot;details&quot;: [
+{
+&quot;rank&quot;: 0,
+&quot;cases&quot;: 12,
+&quot;output_and_QKV_exact&quot;: true
+},
+{
+&quot;rank&quot;: 1,
+&quot;cases&quot;: 12,
+&quot;output_and_QKV_exact&quot;: true
+}
+],
+&quot;boundary_diagnostic&quot;: [
+{
+&quot;rank&quot;: 0,
+&quot;full_fusion&quot;: {
+&quot;boundaries&quot;: {
+&quot;QK_scores&quot;: {
+&quot;elements&quot;: 58720256,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
+&quot;fused_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
+&quot;passed&quot;: true
+},
+&quot;FP32_probabilities&quot;: {
+&quot;elements&quot;: 58720256,
+&quot;exact_different_elements&quot;: 20744589,
+&quot;max_abs&quot;: 1.1920928955078125e-07,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4a790cb6fea166e9ab5b3d7d55e1321cca6e58fbcb9ce956999aba2e39848dbc&quot;,
+&quot;fused_SHA256&quot;: &quot;631716ba35b3d66eecdd05ad643c54e30550cc7ed429c3b975163d205f2df96e&quot;,
+&quot;passed&quot;: true
+},
+&quot;BF16_probabilities&quot;: {
+&quot;elements&quot;: 58720256,
+&quot;exact_different_elements&quot;: 528,
+&quot;max_abs&quot;: 6.103515625e-05,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;cb7847ae94fd41c3728b598a9401c96c73e180d79a8f3f589f3e7bc63fb04f1f&quot;,
+&quot;fused_SHA256&quot;: &quot;6d3edb15abde560ad69b69f30b2a1f48ef98d982be96054f6d8d22c9aa3a98b2&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;attention_output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 2121,
+&quot;max_abs&quot;: 0.001953125,
+&quot;bad_original_tolerance&quot;: 106,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;786718ee172201d4bc7882837cdf419aba6e43754603e4f8a384e5555fa90231&quot;,
+&quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;passed&quot;: false
+},
+&quot;QKV_gradients&quot;: {
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 1964,
+&quot;max_abs&quot;: 0.001953125,
+&quot;bad_original_tolerance&quot;: 108,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;8948319caaebc0a30749e14565cc45e7f7ff29631239575757777a9a08d05e03&quot;,
+&quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;passed&quot;: false
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 1752,
+&quot;max_abs&quot;: 0.00390625,
+&quot;bad_original_tolerance&quot;: 124,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;776385bd8a519ed9b506aa5a0b2336be19cbca11f6305f14465ce420814244e5&quot;,
+&quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;passed&quot;: false
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 2717,
+&quot;max_abs&quot;: 0.00390625,
+&quot;bad_original_tolerance&quot;: 124,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;b29f2ee8f1d0ec69cd1bdef7df0f56df7e8185a560e2a97430463118206efaed&quot;,
+&quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;passed&quot;: false
+}
+},
+&quot;RNG_equal&quot;: true
+},
+&quot;native_softmax_boundary_fusion&quot;: {
+&quot;boundaries&quot;: {
+&quot;QK_scores&quot;: {
+&quot;elements&quot;: 58720256,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
+&quot;fused_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
+&quot;passed&quot;: true
+},
+&quot;FP32_probabilities&quot;: {
+&quot;elements&quot;: 58720256,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;631716ba35b3d66eecdd05ad643c54e30550cc7ed429c3b975163d205f2df96e&quot;,
+&quot;fused_SHA256&quot;: &quot;631716ba35b3d66eecdd05ad643c54e30550cc7ed429c3b975163d205f2df96e&quot;,
+&quot;passed&quot;: true
+},
+&quot;BF16_probabilities&quot;: {
+&quot;elements&quot;: 58720256,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;6d3edb15abde560ad69b69f30b2a1f48ef98d982be96054f6d8d22c9aa3a98b2&quot;,
+&quot;fused_SHA256&quot;: &quot;6d3edb15abde560ad69b69f30b2a1f48ef98d982be96054f6d8d22c9aa3a98b2&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;attention_output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;passed&quot;: true
+},
+&quot;QKV_gradients&quot;: {
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true
+}
+},
+{
+&quot;rank&quot;: 1,
+&quot;full_fusion&quot;: {
+&quot;boundaries&quot;: {
+&quot;QK_scores&quot;: {
+&quot;elements&quot;: 58720256,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
+&quot;fused_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
+&quot;passed&quot;: true
+},
+&quot;FP32_probabilities&quot;: {
+&quot;elements&quot;: 58720256,
+&quot;exact_different_elements&quot;: 20744589,
+&quot;max_abs&quot;: 1.1920928955078125e-07,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4a790cb6fea166e9ab5b3d7d55e1321cca6e58fbcb9ce956999aba2e39848dbc&quot;,
+&quot;fused_SHA256&quot;: &quot;631716ba35b3d66eecdd05ad643c54e30550cc7ed429c3b975163d205f2df96e&quot;,
+&quot;passed&quot;: true
+},
+&quot;BF16_probabilities&quot;: {
+&quot;elements&quot;: 58720256,
+&quot;exact_different_elements&quot;: 528,
+&quot;max_abs&quot;: 6.103515625e-05,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;cb7847ae94fd41c3728b598a9401c96c73e180d79a8f3f589f3e7bc63fb04f1f&quot;,
+&quot;fused_SHA256&quot;: &quot;6d3edb15abde560ad69b69f30b2a1f48ef98d982be96054f6d8d22c9aa3a98b2&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;attention_output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 2121,
+&quot;max_abs&quot;: 0.001953125,
+&quot;bad_original_tolerance&quot;: 106,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;786718ee172201d4bc7882837cdf419aba6e43754603e4f8a384e5555fa90231&quot;,
+&quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;passed&quot;: false
+},
+&quot;QKV_gradients&quot;: {
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 1964,
+&quot;max_abs&quot;: 0.001953125,
+&quot;bad_original_tolerance&quot;: 108,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;8948319caaebc0a30749e14565cc45e7f7ff29631239575757777a9a08d05e03&quot;,
+&quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;passed&quot;: false
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 1752,
+&quot;max_abs&quot;: 0.00390625,
+&quot;bad_original_tolerance&quot;: 124,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;776385bd8a519ed9b506aa5a0b2336be19cbca11f6305f14465ce420814244e5&quot;,
+&quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;passed&quot;: false
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 2717,
+&quot;max_abs&quot;: 0.00390625,
+&quot;bad_original_tolerance&quot;: 124,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;b29f2ee8f1d0ec69cd1bdef7df0f56df7e8185a560e2a97430463118206efaed&quot;,
+&quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;passed&quot;: false
+}
+},
+&quot;RNG_equal&quot;: true
+},
+&quot;native_softmax_boundary_fusion&quot;: {
+&quot;boundaries&quot;: {
+&quot;QK_scores&quot;: {
+&quot;elements&quot;: 58720256,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
+&quot;fused_SHA256&quot;: &quot;d684621d85bc202fe9ebf7501d49f78a67ae695240aed49ec4d0bf7c10f5c39e&quot;,
+&quot;passed&quot;: true
+},
+&quot;FP32_probabilities&quot;: {
+&quot;elements&quot;: 58720256,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;631716ba35b3d66eecdd05ad643c54e30550cc7ed429c3b975163d205f2df96e&quot;,
+&quot;fused_SHA256&quot;: &quot;631716ba35b3d66eecdd05ad643c54e30550cc7ed429c3b975163d205f2df96e&quot;,
+&quot;passed&quot;: true
+},
+&quot;BF16_probabilities&quot;: {
+&quot;elements&quot;: 58720256,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;6d3edb15abde560ad69b69f30b2a1f48ef98d982be96054f6d8d22c9aa3a98b2&quot;,
+&quot;fused_SHA256&quot;: &quot;6d3edb15abde560ad69b69f30b2a1f48ef98d982be96054f6d8d22c9aa3a98b2&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;attention_output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;passed&quot;: true
+},
+&quot;QKV_gradients&quot;: {
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true
+}
+}
+],
+&quot;source_SHA256&quot;: {
+&quot;actual_attention_probe.py&quot;: &quot;eb4b7094ced682760f1ee81eaef2d85f7c73c1a46bbb352480410c644e608e24&quot;,
+&quot;attention_fusion_adapter.py&quot;: &quot;c1d30f33be782757ae5118511c9cfd84514078cba3735b1317319076a8d4133b&quot;,
+&quot;corex_process_guard_data.py&quot;: &quot;a8f86db9e75eb353121c346011428400c4d4d1208e35a5d6c12ce48009dfd058&quot;,
+&quot;fused_scale_mask.py&quot;: &quot;d1c9b7ea0f5b4e019854d20beb3f3e47d52ace2cd93254fbac771510978c178b&quot;,
+&quot;fused_scale_mask_softmax.py&quot;: &quot;093e3a90fc652b7652938ced212107ada5861bceaccbe8d8bdcc008b29e6cd58&quot;,
+&quot;supervise_component.py&quot;: &quot;9a420a085e05d50143ea53a028c0c8790946acb649372e817997ee0982852d41&quot;
+},
+&quot;both_ends_key_SHA256&quot;: &quot;4301f21b7c20609388de96ac1bfb2856f1ffdbd8ec73fc6571184fa371f02576&quot;,
+&quot;all_expected_recomputation_and_layer_scaling_cases_passed&quot;: true,
+&quot;first_observed_divergence_in_captured_component&quot;: &quot;QK scores identical; FP32 softmax probabilities differ; BF16 probabilities differ; downstream attention output and QKV gradients exceed original tolerance. Does not identify a specific hardware instruction.&quot;,
+&quot;raw_tensor_values_downloaded&quot;: false,
+&quot;local_independent_review_scope&quot;: &quot;coverage,source bindings,all comparison summaries/SHA and original thresholds; numeric full arrays compared remotely on CPU float64&quot;,
+&quot;scope_note&quot;: &quot;Actual unmodified MCore attention module and TP2 groups, syntheticQKV; complete official7B weights not loaded in this stage.&quot;,
+&quot;case_details&quot;: [
+{
+&quot;rank&quot;: 0,
+&quot;layer_scaling&quot;: false,
+&quot;layer&quot;: 1,
+&quot;recompute&quot;: false,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: null,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 0,
+&quot;layer_scaling&quot;: false,
+&quot;layer&quot;: 1,
+&quot;recompute&quot;: true,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: null,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 0,
+&quot;layer_scaling&quot;: false,
+&quot;layer&quot;: 14,
+&quot;recompute&quot;: false,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: null,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
+&quot;fused_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
+&quot;fused_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
+&quot;fused_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
+&quot;fused_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 0,
+&quot;layer_scaling&quot;: false,
+&quot;layer&quot;: 14,
+&quot;recompute&quot;: true,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: null,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
+&quot;fused_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
+&quot;fused_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
+&quot;fused_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
+&quot;fused_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 0,
+&quot;layer_scaling&quot;: false,
+&quot;layer&quot;: 28,
+&quot;recompute&quot;: false,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: null,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
+&quot;fused_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
+&quot;fused_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
+&quot;fused_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
+&quot;fused_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 0,
+&quot;layer_scaling&quot;: false,
+&quot;layer&quot;: 28,
+&quot;recompute&quot;: true,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: null,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
+&quot;fused_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
+&quot;fused_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
+&quot;fused_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
+&quot;fused_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 0,
+&quot;layer_scaling&quot;: true,
+&quot;layer&quot;: 1,
+&quot;recompute&quot;: false,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: 1,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 0,
+&quot;layer_scaling&quot;: true,
+&quot;layer&quot;: 1,
+&quot;recompute&quot;: true,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: 1,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 0,
+&quot;layer_scaling&quot;: true,
+&quot;layer&quot;: 14,
+&quot;recompute&quot;: false,
+&quot;actual_QK_alpha&quot;: 0.006313453403451317,
+&quot;additional_softmax_scale&quot;: 14,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
+&quot;fused_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
+&quot;fused_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
+&quot;fused_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
+&quot;fused_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 0,
+&quot;layer_scaling&quot;: true,
+&quot;layer&quot;: 14,
+&quot;recompute&quot;: true,
+&quot;actual_QK_alpha&quot;: 0.006313453403451317,
+&quot;additional_softmax_scale&quot;: 14,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
+&quot;fused_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
+&quot;fused_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
+&quot;fused_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
+&quot;fused_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 0,
+&quot;layer_scaling&quot;: true,
+&quot;layer&quot;: 28,
+&quot;recompute&quot;: false,
+&quot;actual_QK_alpha&quot;: 0.0031567267017256584,
+&quot;additional_softmax_scale&quot;: 28,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
+&quot;fused_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
+&quot;fused_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
+&quot;fused_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
+&quot;fused_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 0,
+&quot;layer_scaling&quot;: true,
+&quot;layer&quot;: 28,
+&quot;recompute&quot;: true,
+&quot;actual_QK_alpha&quot;: 0.0031567267017256584,
+&quot;additional_softmax_scale&quot;: 28,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
+&quot;fused_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
+&quot;fused_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
+&quot;fused_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
+&quot;fused_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 1,
+&quot;layer_scaling&quot;: false,
+&quot;layer&quot;: 1,
+&quot;recompute&quot;: false,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: null,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 1,
+&quot;layer_scaling&quot;: false,
+&quot;layer&quot;: 1,
+&quot;recompute&quot;: true,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: null,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 1,
+&quot;layer_scaling&quot;: false,
+&quot;layer&quot;: 14,
+&quot;recompute&quot;: false,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: null,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
+&quot;fused_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
+&quot;fused_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
+&quot;fused_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
+&quot;fused_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 1,
+&quot;layer_scaling&quot;: false,
+&quot;layer&quot;: 14,
+&quot;recompute&quot;: true,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: null,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
+&quot;fused_SHA256&quot;: &quot;0c38e6541f6bdae19b7458455d2911b76276e24b00df9194c3e51f0f731744da&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
+&quot;fused_SHA256&quot;: &quot;f1d5ed7eb70599c4b4a628eaedcc77afe8593d4a7a5588ab9c8da9e2802253e6&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
+&quot;fused_SHA256&quot;: &quot;4a5aeb1536d7096d5fbdf9c92ffb57d743b70bb2d4c6e8218ee631ad07581167&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
+&quot;fused_SHA256&quot;: &quot;489a962c4a272bedd3c5f67dcb42b50a98d681d407a21fba6ac57fa1cf2574a4&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 1,
+&quot;layer_scaling&quot;: false,
+&quot;layer&quot;: 28,
+&quot;recompute&quot;: false,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: null,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
+&quot;fused_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
+&quot;fused_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
+&quot;fused_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
+&quot;fused_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 1,
+&quot;layer_scaling&quot;: false,
+&quot;layer&quot;: 28,
+&quot;recompute&quot;: true,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: null,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
+&quot;fused_SHA256&quot;: &quot;2ac030de6d99dc9a2b41ae17664b9b80e666eb6a2765f78d5354e23703b36043&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
+&quot;fused_SHA256&quot;: &quot;947e7acfcca64f108fe4059436b5814309c640f19cb138ba42fa4a021a87c2b7&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
+&quot;fused_SHA256&quot;: &quot;0312b9819b4dd7310abf5da3d397604a38c733c891c3ce2dd5c5d69be31a0049&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
+&quot;fused_SHA256&quot;: &quot;9f6284554fb1c9cfda1b05714dc4f1459b6c50a18f56151e55abd4aa59f57858&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 1,
+&quot;layer_scaling&quot;: true,
+&quot;layer&quot;: 1,
+&quot;recompute&quot;: false,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: 1,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 1,
+&quot;layer_scaling&quot;: true,
+&quot;layer&quot;: 1,
+&quot;recompute&quot;: true,
+&quot;actual_QK_alpha&quot;: 0.08838834764831843,
+&quot;additional_softmax_scale&quot;: 1,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;fused_SHA256&quot;: &quot;4f6ba59ed2a20d1c93fb9c1879520e050efcb25c1f261656711a79194c1b56b3&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;fused_SHA256&quot;: &quot;64a7795df7bc962254ae008bbce26086d44944422a26171f9c2f28150f4b1fd5&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;fused_SHA256&quot;: &quot;6c583fba0b161dd4348f4e41f11179af06fdbbdf15f6341934fc9614ee11a7d9&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;fused_SHA256&quot;: &quot;1349d3122df8d20c7e7ca2c72a449cf0e6f874f69163c65466574fd4739bdb46&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 1,
+&quot;layer_scaling&quot;: true,
+&quot;layer&quot;: 14,
+&quot;recompute&quot;: false,
+&quot;actual_QK_alpha&quot;: 0.006313453403451317,
+&quot;additional_softmax_scale&quot;: 14,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
+&quot;fused_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
+&quot;fused_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
+&quot;fused_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
+&quot;fused_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 1,
+&quot;layer_scaling&quot;: true,
+&quot;layer&quot;: 14,
+&quot;recompute&quot;: true,
+&quot;actual_QK_alpha&quot;: 0.006313453403451317,
+&quot;additional_softmax_scale&quot;: 14,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
+&quot;fused_SHA256&quot;: &quot;5c84777c8bc3664e72c28d370af9583542d7ae17c1108fbecb054376836bb2a4&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
+&quot;fused_SHA256&quot;: &quot;f0dddab72f9f36a2b0f0920c8aeff683915b06f564b588eccfa242feeeff5cd2&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
+&quot;fused_SHA256&quot;: &quot;c8ccc59c99f2ce2c6459aad46a4587c712570fa29bef4eca7b7b65cf4e4bdf2e&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
+&quot;fused_SHA256&quot;: &quot;99a4df03fb5d918c0ef4606e31423c921872c0fa27579c9886fb3de1b1cb2877&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 1,
+&quot;layer_scaling&quot;: true,
+&quot;layer&quot;: 28,
+&quot;recompute&quot;: false,
+&quot;actual_QK_alpha&quot;: 0.0031567267017256584,
+&quot;additional_softmax_scale&quot;: 28,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
+&quot;fused_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
+&quot;fused_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
+&quot;fused_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
+&quot;fused_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+},
+{
+&quot;rank&quot;: 1,
+&quot;layer_scaling&quot;: true,
+&quot;layer&quot;: 28,
+&quot;recompute&quot;: true,
+&quot;actual_QK_alpha&quot;: 0.0031567267017256584,
+&quot;additional_softmax_scale&quot;: 28,
+&quot;metrics&quot;: {
+&quot;output&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
+&quot;fused_SHA256&quot;: &quot;7200f1a4b77894b4c8ffa1dbd92fc96f8b3ebfebcf7d04e50c353cfbac1439c4&quot;,
+&quot;passed&quot;: true
+},
+&quot;dq&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
+&quot;fused_SHA256&quot;: &quot;b4ece9962c2b979d1f767ed2a80c62041d168ad9184d60e858a289fdcd5f20bb&quot;,
+&quot;passed&quot;: true
+},
+&quot;dk&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
+&quot;fused_SHA256&quot;: &quot;a94ecac04fa895c26a7cbb943b6f68a15145a9e3dcc9254791a530a3bc3a8a60&quot;,
+&quot;passed&quot;: true
+},
+&quot;dv&quot;: {
+&quot;elements&quot;: 3670016,
+&quot;exact_different_elements&quot;: 0,
+&quot;max_abs&quot;: 0.0,
+&quot;bad_original_tolerance&quot;: 0,
+&quot;nonfinite&quot;: 0,
+&quot;native_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
+&quot;fused_SHA256&quot;: &quot;c1adbed7eccbe91bd4266e7fd42f13341cf28831148e3676f165a0e2ce2ee13a&quot;,
+&quot;passed&quot;: true
+}
+},
+&quot;RNG_equal&quot;: true,
+&quot;passed&quot;: true
+}
+],
+&quot;memory_placement_fixture&quot;: {
+&quot;CPU_rank_fixtures&quot;: 2,
+&quot;parameter_elements&quot;: 131072,
+&quot;steps_each&quot;: 3,
+&quot;fields_each_step&quot;: 4,
+&quot;max_abs&quot;: 0,
+&quot;moments_sampled_on_node0&quot;: true,
+&quot;affinity_restored&quot;: true,
+&quot;CUDA_initialized&quot;: false,
+&quot;both_ends_key_SHA256&quot;: &quot;7a0d415aa9a5e8118b237116f78228c632ae0113cf971e46355b0d4f96b10ee6&quot;,
+&quot;source_SHA256&quot;: {
+&quot;node0_optimizer_state.py&quot;: &quot;0f45bb906ceacbf1df1e3d3f785595238aa1edd75f57d50c56d04293fd0d45da&quot;,
+&quot;corex_process_guard_data.py&quot;: &quot;a8f86db9e75eb353121c346011428400c4d4d1208e35a5d6c12ce48009dfd058&quot;,
+&quot;corex_adamw_local_moments.py&quot;: &quot;beacd9b0a3004e99407cd1d60cb681c4fb426bad7fc132f85bbff2f4f8ae490d&quot;
+},
+&quot;scope&quot;: &quot;small native-AdamW API/math/locality fixture; not7B or full-capacity acceptance&quot;
+},
+&quot;full_model_validation_status&quot;: {
+&quot;weights_and_three_real_updates_started&quot;: true,
+&quot;native_checkpoint_resume_started&quot;: false,
+&quot;e2e_measurement_started&quot;: false,
+&quot;full_model_Node1_initial_admission_GiB&quot;: 28,
+&quot;resource_layout_capacity_and_admission_review_pending&quot;: false,
+&quot;original_numeric_gate_unchanged&quot;: true,
+&quot;full_model_Node0_initial_admission_GiB&quot;: 291,
+&quot;explicit_capacity_based_admission_authorized&quot;: true,
+&quot;current_blocker&quot;: null,
+&quot;current_stage&quot;: &quot;native real7B initialization and full-state audit running; three-arm completion pending&quot;,
+&quot;direct_launch_user_authorized&quot;: true
+},
+&quot;measured_CPU_state_capacity&quot;: {
+&quot;capacity_passed&quot;: true,
+&quot;groups_per_rank&quot;: 199,
+&quot;elements_per_rank&quot;: 3834518016,
+&quot;actual_CPU_AdamW_updates_per_rank&quot;: 1,
+&quot;all_sampled_master_gradient_398_moment_pages_node0&quot;: true,
+&quot;peak_own_RSS_bytes&quot;: 176126173184,
+&quot;startup_required_GiB&quot;: {
+&quot;0&quot;: 291,
+&quot;1&quot;: 28
+},
+&quot;derivation&quot;: {
+&quot;node0&quot;: &quot;max(prior actual full-model own RSS peak, new capacity own RSS peak) +16GiB reserve +4*largest FP32 group, rounded up GiB&quot;,
+&quot;node1&quot;: &quot;16GiB reserve +2*(sum rank node1 mapped milestones peak +coordinator entire RSS +64MiB supervisor) +4*largest FP32 group +8GiB allowance for later model/driver transients, rounded up GiB&quot;
+},
+&quot;runtime_NUMA_reserve_GiB&quot;: 16,
+&quot;own_RSS_cap_GiB&quot;: 292,
+&quot;per_rank_DATA_GiB&quot;: 144,
+&quot;host_reserve_GiB&quot;: 8,
+&quot;both_ends_key_SHA256&quot;: &quot;63a8ff0857b8c07568a53875d50df3bd3e4e5dd567936d8e8cfe192462c0f6a0&quot;,
+&quot;source_SHA256&quot;: {
+&quot;corex_adamw_local_moments.py&quot;: &quot;beacd9b0a3004e99407cd1d60cb681c4fb426bad7fc132f85bbff2f4f8ae490d&quot;,
+&quot;corex_process_guard_data.py&quot;: &quot;a8f86db9e75eb353121c346011428400c4d4d1208e35a5d6c12ce48009dfd058&quot;,
+&quot;node0_capacity_worker.py&quot;: &quot;f6a5e83d9bfd38955a6f0a86b47375d2ec755b2cdfe5607786b0a5a0b15eed89&quot;,
+&quot;node0_optimizer_state.py&quot;: &quot;0f45bb906ceacbf1df1e3d3f785595238aa1edd75f57d50c56d04293fd0d45da&quot;,
+&quot;supervise_component.py&quot;: &quot;f9d27959aeced06bad0cb0ad21cbaa31b3c4c869b6a58aeb7224452d57924e70&quot;
+},
+&quot;scope&quot;: &quot;Full optimizer state capacity, no official7B model forward/backward or performance acceptance&quot;
+}
 }</code></pre></details><a id="appendix-failures"></a><h2>失败原因与未完成项</h2><div class="table-wrap"><table><thead><tr><th>问题</th><th>已确定的事实</th><th>目前结论</th></tr></thead><tbody><tr><td>NUMA工作集</td><td>两rank约28.57GiB延后分配的FP32梯度未完整纳入早期预算；新增审计pack也形成大量文件缓存</td><td>公共预分配与容量探针有证据；新增完整路径仍须通过原保护</td></tr><tr><td>连续更新差异</td><td>实际输入/RNG相同，已捕获embedding梯度微差；严格固定权重重复通过，真实连续更新对旧参考仍失败</td><td>不能指认具体kernel或声称长训练修好，保留原数值标准</td></tr><tr><td>审计布局与入口</td><td>出现过参考符号链接越界、整块缓冲峰值及模块路径错误</td><td>失败保留，CPU修复版本化；不把编排修复当训练优化</td></tr><tr><td>检查器断档</td><td>Windows关机导致本机观察器中断；远端持久监督与故障终态探针随后通过</td><td>与NUMA拒绝、数值失败分别记录</td></tr><tr><td>资源准入</td><td>当前新增GPU配额为0，现有GPU本地节点余量不足整模型80GiB准入；ACT暂不可达</td><td>先在现有卡做独立算子研究；不动不明归属环境</td></tr></tbody></table></div><p>最近严格native尝试在原NUMA16GiB保护下停止。首步受检字段在原容差内，第二步部分梯度和逐token loss超原容差；三臂完整数值、原生恢复、长loss与正式性能均未接受。预算结束和安全停止是执行边界，不替代数值失败的结论。</p><p><a href="#appendix-failures">独立JSON文件</a></p><details><summary>展开完整复核数据</summary><pre><code>{
   &quot;local_failed_keys_review_passed&quot;: true,
   &quot;both_ends_ZIP_and_key_SHA_verified&quot;: true,
@@ -19875,4 +19909,4 @@
     ]
   },
   &quot;no_old_reference_gate_removed&quot;: true
-}</code></pre></details><a id="appendix-provenance"></a><h2>来源与复核范围</h2><p>模型权重、完整数值张量、检查点及全量原trace继续保留在实验原存储；本文件内嵌的是关键复核结果与SHA，不宣称这些大型原件已上传GitHub。</p><div class="table-wrap"><table><thead><tr><th>证据</th><th>原复核文件SHA256</th><th>字节数</th></tr></thead><tbody><tr><td>cpt-formal</td><td><code>b27f39d0e9ce7c4bcb268c5f4697fd85f11beb5b2566d9d41b0cbf8735b5c973</code></td><td>8284</td></tr><tr><td>sft-formal</td><td><code>0f2de8dd4c270422c7244044c97d96507a9ba24a67df9ab15760a7411b146495</code></td><td>8506</td></tr><tr><td>bi-correctness</td><td><code>3c19a695ede3a6bf8596a948915dee7c64484fd5633211fac6dd5864f60763de</code></td><td>7669</td></tr><tr><td>bi-trace</td><td><code>04080c4ebfdd5fc85dc716fa4ac119c1abc0ed1ccc16de808016ded2a45cf652</code></td><td>7760</td></tr><tr><td>bi-numeric-failure</td><td><code>212e20a5baa51d6bd6a7f1c6d21fa098a8fd41ad4a12c57ef8eeab35f4f6cbbe</code></td><td>10197</td></tr><tr><td>operator-validation</td><td><code>5be93d3c8979a35b39dc69b6384bb89791e94fc2d81f62945aef41d451e17b0e</code></td><td>3065</td></tr><tr><td>peer-review</td><td><code>b1386e6084efe04e57081d3cb353687b00ef601dbb3af9b7e420fa1171da1587</code></td><td>15049</td></tr><tr><td>softmax-fusion</td><td><code>725d2ad52bd5dd4a4e5c875acefcc14410c61a3e3b62eb5b361e2b48773bc4f5</code></td><td>460320</td></tr><tr><td>attention-integration</td><td><code>148451f4b6ab65c6ce48fa8f6f0d950694edd165dacab35cdf3fdda5b56f2ea4</code></td><td>63195</td></tr></tbody></table></div></main></body></html>
+}</code></pre></details><a id="appendix-provenance"></a><h2>来源与复核范围</h2><p>模型权重、完整数值张量、检查点及全量原trace继续保留在实验原存储；本文件内嵌的是关键复核结果与SHA，不宣称这些大型原件已上传GitHub。</p><div class="table-wrap"><table><thead><tr><th>证据</th><th>原复核文件SHA256</th><th>字节数</th></tr></thead><tbody><tr><td>cpt-formal</td><td><code>b27f39d0e9ce7c4bcb268c5f4697fd85f11beb5b2566d9d41b0cbf8735b5c973</code></td><td>8284</td></tr><tr><td>sft-formal</td><td><code>0f2de8dd4c270422c7244044c97d96507a9ba24a67df9ab15760a7411b146495</code></td><td>8506</td></tr><tr><td>bi-correctness</td><td><code>3c19a695ede3a6bf8596a948915dee7c64484fd5633211fac6dd5864f60763de</code></td><td>7669</td></tr><tr><td>bi-trace</td><td><code>04080c4ebfdd5fc85dc716fa4ac119c1abc0ed1ccc16de808016ded2a45cf652</code></td><td>7760</td></tr><tr><td>bi-numeric-failure</td><td><code>212e20a5baa51d6bd6a7f1c6d21fa098a8fd41ad4a12c57ef8eeab35f4f6cbbe</code></td><td>10197</td></tr><tr><td>operator-validation</td><td><code>5be93d3c8979a35b39dc69b6384bb89791e94fc2d81f62945aef41d451e17b0e</code></td><td>3065</td></tr><tr><td>peer-review</td><td><code>b1386e6084efe04e57081d3cb353687b00ef601dbb3af9b7e420fa1171da1587</code></td><td>15049</td></tr><tr><td>softmax-fusion</td><td><code>725d2ad52bd5dd4a4e5c875acefcc14410c61a3e3b62eb5b361e2b48773bc4f5</code></td><td>460320</td></tr><tr><td>attention-integration</td><td><code>c2f7b8f99d44adce01eaa9e945874f00a970da936110a66ba42392da1193ed3d</code></td><td>65112</td></tr></tbody></table></div></main></body></html>

@@ -1627,11 +1627,45 @@
     "scope": "small native-AdamW API/math/locality fixture; not7B or full-capacity acceptance"
   },
   "full_model_validation_status": {
-    "weights_and_three_real_updates_started": false,
+    "weights_and_three_real_updates_started": true,
     "native_checkpoint_resume_started": false,
     "e2e_measurement_started": false,
-    "full_model_Node1_initial_admission_GiB": 80,
-    "resource_layout_capacity_and_admission_review_pending": true,
-    "original_numeric_gate_unchanged": true
+    "full_model_Node1_initial_admission_GiB": 28,
+    "resource_layout_capacity_and_admission_review_pending": false,
+    "original_numeric_gate_unchanged": true,
+    "full_model_Node0_initial_admission_GiB": 291,
+    "explicit_capacity_based_admission_authorized": true,
+    "current_blocker": null,
+    "current_stage": "native real7B initialization and full-state audit running; three-arm completion pending",
+    "direct_launch_user_authorized": true
+  },
+  "measured_CPU_state_capacity": {
+    "capacity_passed": true,
+    "groups_per_rank": 199,
+    "elements_per_rank": 3834518016,
+    "actual_CPU_AdamW_updates_per_rank": 1,
+    "all_sampled_master_gradient_398_moment_pages_node0": true,
+    "peak_own_RSS_bytes": 176126173184,
+    "startup_required_GiB": {
+      "0": 291,
+      "1": 28
+    },
+    "derivation": {
+      "node0": "max(prior actual full-model own RSS peak, new capacity own RSS peak) +16GiB reserve +4*largest FP32 group, rounded up GiB",
+      "node1": "16GiB reserve +2*(sum rank node1 mapped milestones peak +coordinator entire RSS +64MiB supervisor) +4*largest FP32 group +8GiB allowance for later model/driver transients, rounded up GiB"
+    },
+    "runtime_NUMA_reserve_GiB": 16,
+    "own_RSS_cap_GiB": 292,
+    "per_rank_DATA_GiB": 144,
+    "host_reserve_GiB": 8,
+    "both_ends_key_SHA256": "63a8ff0857b8c07568a53875d50df3bd3e4e5dd567936d8e8cfe192462c0f6a0",
+    "source_SHA256": {
+      "corex_adamw_local_moments.py": "beacd9b0a3004e99407cd1d60cb681c4fb426bad7fc132f85bbff2f4f8ae490d",
+      "corex_process_guard_data.py": "a8f86db9e75eb353121c346011428400c4d4d1208e35a5d6c12ce48009dfd058",
+      "node0_capacity_worker.py": "f6a5e83d9bfd38955a6f0a86b47375d2ec755b2cdfe5607786b0a5a0b15eed89",
+      "node0_optimizer_state.py": "0f45bb906ceacbf1df1e3d3f785595238aa1edd75f57d50c56d04293fd0d45da",
+      "supervise_component.py": "f9d27959aeced06bad0cb0ad21cbaa31b3c4c869b6a58aeb7224452d57924e70"
+    },
+    "scope": "Full optimizer state capacity, no official7B model forward/backward or performance acceptance"
   }
 }

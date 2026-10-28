@@ -44,7 +44,7 @@ intro+='\n\n[真实attention接入](#appendix-attention-integration) · [融合�
 parts=[intro,'\n---\n\n## 完整内容与复核证据\n\n以下内容均在本文件内。表格用于阅读，折叠区保留完整关键复核JSON；也可从GitHub下载对应JSON。\n']
 def section(anchor,title,text):parts.append(f'\n<a id="{anchor}"></a>\n\n## {title}\n\n{text.rstrip()}\n')
 def evidence(name):
- return '\n[独立JSON文件](docs/jiuge7b/evidence/'+name+'.json)\n\n<details>\n<summary>展开完整复核数据</summary>\n\n```json\n'+json.dumps(data[name],ensure_ascii=False,indent=1 if name in('softmax-fusion','attention-integration')else 2)+'\n```\n\n</details>\n'
+ return '\n[独立JSON文件](docs/jiuge7b/evidence/'+name+'.json)\n\n<details>\n<summary>展开完整复核数据</summary>\n\n```json\n'+json.dumps(data[name],ensure_ascii=False,indent=0 if name=='attention-integration'else 1 if name=='softmax-fusion'else 2)+'\n```\n\n</details>\n'
 plan='''| 顺序 | 要做什么 | 交付与准入 |
 |---|---|---|
 | P0 数值与内存 | 固定初始权重、实际输入和RNG，沿embedding梯度→首步更新→次步前向定位跨独立进程差异；为新增自有审计pack做有界写回/退缓存 | 可复现的分歧证据；内容SHA、inode和驻留检查。保留旧参考、原容差与内存保护 |
