@@ -1635,9 +1635,10 @@
     "original_numeric_gate_unchanged": true,
     "full_model_Node0_initial_admission_GiB": 291,
     "explicit_capacity_based_admission_authorized": true,
-    "current_blocker": null,
-    "current_stage": "native real7B initialization and full-state audit running; three-arm completion pending",
-    "direct_launch_user_authorized": true
+    "current_blocker": "Node1 MemFree17107935232bytes fell below original16GiB runtime reserve",
+    "current_stage": "stopped by physical Node1 reserve guard at2026-10-28 15:41; control/optimized not started",
+    "direct_launch_user_authorized": true,
+    "full_three_updates_completed": false
   },
   "measured_CPU_state_capacity": {
     "capacity_passed": true,
@@ -1667,5 +1668,33 @@
       "supervise_component.py": "f9d27959aeced06bad0cb0ad21cbaa31b3c4c869b6a58aeb7224452d57924e70"
     },
     "scope": "Full optimizer state capacity, no official7B model forward/backward or performance acceptance"
+  },
+  "failed_native_partial_review": {
+    "key_ZIP_SHA256": "fe5bf97b1c848a1eca7343a184f1e8bb6c9d53471a003535b6de36491f0e525a",
+    "key_count": 38,
+    "stop": {
+      "RSS_bytes": 180457279488,
+      "host_available": 853794816000,
+      "node1_MemFree_bytes": 17107935232,
+      "node0_MemFree_bytes": 142626267136,
+      "epoch": 1793173270.8740375
+    },
+    "complete_first_step_fields_per_rank": 1195,
+    "first_step_all_fields_max_abs": 0,
+    "second_step_199_gradients_each_rank_max_abs": 0,
+    "closed_fields_per_rank": [
+      1445,
+      1450
+    ],
+    "all_closed_fields_SHA_equal_to_accepted_reference": true,
+    "full_three_arm_accepted": false,
+    "resource_failure_is_not_numerical_failure": true,
+    "selected_pair_idle_after_cleanup": true,
+    "private_new_raw_packs_bytes": [
+      0,
+      0
+    ],
+    "cache_reclaim_did_not_increase_free_memory": true,
+    "specific_source_of_Node1_decrease_not_proven": true
   }
 }

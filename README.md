@@ -42,7 +42,7 @@ SFT配对时间线中，HtoD主机调用范围由约2.90秒/步降至4.33毫秒/
 **真实attention接入：BF16输出边界。** 直接移植全融合版未通过原容差：QK分数相同，FP32概率微差经BF16转换及PV/反向传播后，输出和Q/K/V梯度超限。修正版保留原生softmax规约，融合前后的cast/scale/mask；两卡24组真实MCore attention组件检查通过，覆盖第1/14/28层、层缩放开关及重计算，输出与Q/K/V梯度逐值相同，最大差0。这里使用合成QKV，尚未加载本轮完整7B权重。前述4.16–4.66×不能继承到该保真候选；完整更新、原生恢复与端到端测速仍待验收。
 
 
-**整模型内存布局已完成容量实测。** 两rank各199组、38.35亿元素的master/梯度和398个moment采样均在Node0，一次真实CPU AdamW更新完成，自有RSS峰值164GiB。依据实测与历史整模型峰值，启动预算改为Node0空闲291GiB、Node1空闲28GiB，运行保护和数值容差保留。按最新授权已直接启动真实7B，当前native初始化和全状态审计进行中，运行16GiB余量等保护保留；三臂连续更新、原生恢复和端到端收益仍未验收。
+**整模型内存布局已完成容量实测。** 两rank各199组、38.35亿元素的master/梯度和398个moment采样均在Node0，一次真实CPU AdamW更新完成，自有RSS峰值164GiB。依据实测与历史整模型峰值，启动预算改为Node0空闲291GiB、Node1空闲28GiB，运行保护和数值容差保留。直接启动后，native首步1195字段/rank及第二步199组梯度/rank均与旧参考逐值相同，最大差0；15:41因Node1空闲降至15.93GiB触发16GiB运行保护而停止。第二步审计未完成，control/融合候选未启动。新私有raw包为0字节，缓存回收无收益，Node1下降的具体来源尚未证实。三臂连续更新、原生恢复和端到端收益仍未验收。
 
 ## 下一阶段目标
 
@@ -19383,9 +19383,10 @@ S4096的独立trace中，融合BF16前向、反向和保护性填充的两卡平
 "original_numeric_gate_unchanged": true,
 "full_model_Node0_initial_admission_GiB": 291,
 "explicit_capacity_based_admission_authorized": true,
-"current_blocker": null,
-"current_stage": "native real7B initialization and full-state audit running; three-arm completion pending",
-"direct_launch_user_authorized": true
+"current_blocker": "Node1 MemFree17107935232bytes fell below original16GiB runtime reserve",
+"current_stage": "stopped by physical Node1 reserve guard at2026-10-28 15:41; control/optimized not started",
+"direct_launch_user_authorized": true,
+"full_three_updates_completed": false
 },
 "measured_CPU_state_capacity": {
 "capacity_passed": true,
@@ -19415,6 +19416,34 @@ S4096的独立trace中，融合BF16前向、反向和保护性填充的两卡平
 "supervise_component.py": "f9d27959aeced06bad0cb0ad21cbaa31b3c4c869b6a58aeb7224452d57924e70"
 },
 "scope": "Full optimizer state capacity, no official7B model forward/backward or performance acceptance"
+},
+"failed_native_partial_review": {
+"key_ZIP_SHA256": "fe5bf97b1c848a1eca7343a184f1e8bb6c9d53471a003535b6de36491f0e525a",
+"key_count": 38,
+"stop": {
+"RSS_bytes": 180457279488,
+"host_available": 853794816000,
+"node1_MemFree_bytes": 17107935232,
+"node0_MemFree_bytes": 142626267136,
+"epoch": 1793173270.8740375
+},
+"complete_first_step_fields_per_rank": 1195,
+"first_step_all_fields_max_abs": 0,
+"second_step_199_gradients_each_rank_max_abs": 0,
+"closed_fields_per_rank": [
+1445,
+1450
+],
+"all_closed_fields_SHA_equal_to_accepted_reference": true,
+"full_three_arm_accepted": false,
+"resource_failure_is_not_numerical_failure": true,
+"selected_pair_idle_after_cleanup": true,
+"private_new_raw_packs_bytes": [
+0,
+0
+],
+"cache_reclaim_did_not_increase_free_memory": true,
+"specific_source_of_Node1_decrease_not_proven": true
 }
 }
 ```
@@ -20272,4 +20301,4 @@ S4096的独立trace中，融合BF16前向、反向和保护性填充的两卡平
 | operator-validation | `5be93d3c8979a35b39dc69b6384bb89791e94fc2d81f62945aef41d451e17b0e` | 3065 |
 | peer-review | `b1386e6084efe04e57081d3cb353687b00ef601dbb3af9b7e420fa1171da1587` | 15049 |
 | softmax-fusion | `725d2ad52bd5dd4a4e5c875acefcc14410c61a3e3b62eb5b361e2b48773bc4f5` | 460320 |
-| attention-integration | `c2f7b8f99d44adce01eaa9e945874f00a970da936110a66ba42392da1193ed3d` | 65112 |
+| attention-integration | `762db87fd7b79316d69594b65ecfa9e42fa720490755dfaade6d2aa11b675850` | 66198 |
